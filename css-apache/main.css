@@ -1,0 +1,92 @@
+/* @font-face {
+    font-family: 'Conv_framd';
+    src: url('../fonts/framd.eot');
+    src: url('../fonts/framd.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/framd.woff') format('woff'),
+         url('../fonts/framd.ttf') format('truetype'),
+         url('../fonts/framd.svg#heroregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+} */
+
+html, body {
+	position:relative;
+	height:100%;
+	min-height:100%;
+	height:100%;	
+	color:#444;
+        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+        font-weight: 400;
+	 /* font:400 14px/26px 'Open Sans', Arial, Helvetica, sans-serif; */
+	margin:0;
+	word-wrap:break-word;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+  font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+  font-weight: 300;
+}
+
+body {
+  background-color: #EEE;
+}
+
+.druid-masthead {
+  padding: 44px 0 24px;
+  text-align: center;
+  margin: 0 auto 20px;
+}
+
+.druid-masthead .lead {
+  font-size: 1.5em;
+  font-weight: 400;
+  margin-top: 8px;
+  margin-bottom: 26px;
+}
+
+.druid-footer {
+  padding: 40px 0;
+  /* background-color: #eee; */
+  background-color: #f3f3f3;
+  border-top: 1px solid white;
+  margin-top: 50px;
+}
+
+.druid-masthead .btn-lg {
+  min-width: 145px;
+  margin: 3px 6px;
+  font-size: 1.2em;
+  padding: 8px;
+  color: white;
+  background: #1776BB;
+  transition: background-color 0.1s ease;
+}
+
+.druid-masthead .btn-lg:hover,
+.druid-masthead .btn-lg:active {
+  background: #0C62A0;
+}
+
+a {
+  color: #2576CC;
+}
+
+a:hover, a:focus {
+  /* color: #1a5491; */
+  color: #b1bac6;
+  text-decoration: none;
+}
+
+p {
+  line-height: 1.7em;
+}
+
+footer {
+   font-size: 14px;
+   color: #000000;
+   font-weight: 300;
+}
+
+td {
+  text-align: left;
+}

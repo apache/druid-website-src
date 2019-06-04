@@ -1,122 +1,46 @@
----
-published: true
-title: Interactive Analytics at Scale
-layout: html_page
-id: home
----
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Apache Druid (incubating)</title>
+<link rel="canonical" href="https://druid.apache.org/" />
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-131010415-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-131010415-1');
+</script>
 
-<link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css-apache/bootstrap.min.css">
+<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700,300italic|Open+Sans:300italic,400italic,600italic,400,300,600,700' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="/css-apache/main.css">
+</head>
+<body>
 
 <main class="druid-masthead">
   <div class="container">
   <div class="row">
-    <div class="text-center">
-    <p class="lead">Apache Druid (incubating) is a high performance real-time analytics database.</p>
-    <p><a class="button" href="/downloads.html"><span class="fa fa-download"></span> Download</a>
-    <a class="button" href="https://github.com/apache/incubator-druid/"><span class="fab fa-github"></span> GitHub</a></p>
+    <div class="col-md-8 col-md-offset-2 text-center">
+    <p class="lead"><b>Apache Druid (incubating)</b> is a high-performance, column-oriented, distributed data store.</p>
+    <p>Druid is an open source data store designed for real-time exploratory analytics on large data sets. Druid's key features are a column-oriented storage layout, a distributed shared-nothing architecture, and ability to generate and leverage indexing and caching structures. Druid is typically deployed in clusters of tens to hundreds of nodes, and has the ability to load data from Apache Kafka and Apache Hadoop, among other data sources. Druid offers two query languages: a SQL dialect (powered by Apache Calcite) and a JSON-over-HTTP API.</p>
+    <p>After years of development as an independent project and deployment at hundreds of sites, Druid has recently begun incubation at Apache! We have migrated our <a href="https://github.com/apache/incubator-druid">GitHub repo</a> and will soon be migrating our <a href="http://druid.io/">project web site</a>. To join the Druid development community, subscribe to our Apache dev list (<a href="https://lists.apache.org/list.html?dev@druid.apache.org">dev@druid.apache.org</a>) by sending a mail to <a href="mailto:dev-subscribe@druid.apache.org">dev-subscribe@druid.apache.org</a>. For usage-oriented discussion, please keep using the existing <a href="https://groups.google.com/forum/#!forum/druid-user">druid-user@googlegroups.com</a> list until we migrate that one too.</p>
+    <p>This web site is a placeholder until we have migrated our current community site from <a href="http://druid.io">http://druid.io/</a>. For downloads of pre-Apache releases and for detailed project information, please visit that website.</p>
+    <br />
+    <p><a class="btn btn-lg" href="downloads.html"><span class="fa"></span> Download</a>
+    <p><a class="btn btn-lg" href="http://druid.io/"><span class="fa fa-external-link"></span> Go to the current community site</a>
   </div>
   </div>
   </div>
 </main>
 
+<footer class="druid-footer">
 <div class="container">
-  <div class="row">
-
-    <div class="col-md-9">
-      <h2>
-        Overview
-      </h2>
-      <div class="features">
-        <div class="feature">
-          <span class="fa fa-chart-line fa"></span>
-          <h5>Analyze event streams</h5>
-          <p>
-            Druid provides fast analytical queries, at high concurrency, on event-driven data. Druid can instantaneously ingest streaming data and provide sub-second queries to power interactive UIs.
-          </p>
-        </div>
-        <div class="feature">
-          <span class="fa fa-lightbulb fa"></span>
-          <h5>Utilize reimagined architecture</h5>
-          <p>
-            Druid is a new type of database that combines ideas from <a href='https://en.wikipedia.org/wiki/Online_analytical_processing'>OLAP/analytic databases</a>, <a href='https://en.wikipedia.org/wiki/Time_series_database'>timeseries databases</a>, and <a href='https://en.wikipedia.org/wiki/Full-text_search'>search systems</a> to enable new use cases in streaming architectures.
-          </p>
-        </div>
-        <div class="feature">
-          <span class="fa fa-forward fa"></span>
-          <h5>Build event-driven data stacks</h5>
-          <p>
-            Druid integrates natively with message buses (Kafka, AWS Kinesis, etc) and data lakes (HDFS, AWS S3, etc). Druid works especially well as a query layer for stream hubs and stream processors.
-          </p>
-        </div>
-        <div class="feature">
-          <span class="fa fa-unlock fa"></span>
-          <h5>Unlock new workflows</h5>
-          <p>
-            Druid is designed for rapid, ad-hoc analytics on both real-time and historical data. Explain trends, explore data, and quickly iterate on queries to answer questions.
-          </p>
-        </div>
-        <div class="feature">
-          <span class="fa fa-globe fa"></span>
-          <h5>Deploy anywhere</h5>
-          <p>
-            Druid can be deployed in any *NIX environment on commodity hardware, both in the cloud and on premise. Druid is cloud-native: scaling up and down is as simple as adding and removing processes.
-          </p>
-        </div>
-      </div>
-
-      <h2>
-        Learn more
-      </h2>
-      <div class="features">
-        <div class="feature">
-          <span class="fa fa-power-off fa"></span>
-          <h5>Powered By</h5>
-          <p>
-            Druid is proven in production at the <a href='/druid-powered'>world’s leading companies</a> at massive scale.
-          </p>
-        </div>
-        <div class="feature">
-          <span class="fa fa-info fa"></span>
-          <h5>FAQ</h5>
-          <p>
-            Learn about some of the <a href='faq'>most common questions about Druid</a>.
-          </p>
-        </div>
-        <div class="feature">
-          <span class="fa fa-flag-checkered fa"></span>
-          <h5>Quickstart</h5>
-          <p>
-            <a href="/docs/latest/tutorials/quickstart">Get started with Druid</a> in minutes. Load your own data and query it.
-          </p>
-        </div>
-        <div class="feature">
-          <span class="fa fa-question-circle fa"></span>
-          <h5>Get Help</h5>
-          <p>
-            Get help from a <a href='/community'>wide network of community members</a> about using Druid.
-          </p>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="col-md-3">
-      {% include event-list.html %}
-      {% include featured-list.html %}
-      <div class="bottom-news">
-        {% include news-list.html %}
-      </div>
-    </div>
-
-  </div>
-
-  <div class="row disclaimer">
-    <div class="col-md-2"></div>
-    <div class="offset-md-2 col-md-8">
-      Disclaimer: Apache Druid is an effort undergoing incubation at The Apache Software Foundation (ASF), sponsored by the Apache Incubator.
-      Incubation is required of all newly accepted projects until a further review indicates that the infrastructure, communications, and decision making process have stabilized in a manner consistent with other successful ASF projects.
-      While incubation status is not necessarily a reflection of the completeness or stability of the code, it does indicate that the project has yet to be fully endorsed by the ASF.
-    </div>
+  <div class="text-center">
+    <p><i>Disclaimer:</i> Apache Druid is an effort undergoing incubation at <a href="https://www.apache.org/">The Apache Software Foundation (ASF)</a>, sponsored by the <a href="https://incubator.apache.org/">Apache Incubator</a>. Incubation is required of all newly accepted projects until a further review indicates that the infrastructure, communications, and decision making process have stabilized in a manner consistent with other successful ASF projects. While incubation status is not necessarily a reflection of the completeness or stability of the code, it does indicate that the project has yet to be fully endorsed by the ASF.</p>
   </div>
 </div>
+</footer>
 
+</body>
+</html>
