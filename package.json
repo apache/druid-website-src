@@ -11,7 +11,8 @@
     "run": "bundle exec jekyll serve --future --port 4001 --safe",
     "start": "bundle exec jekyll serve --future --port 4001 --safe",
     "watch": "gulp watch",
-    "compile": "gulp all; bundle exec jekyll build"
+    "compile": "gulp all; bundle exec jekyll build",
+    "build": "npm run compile && rm -r ../incubator-druid-website/* && cp -r ./_site/* ../incubator-druid-website/"
   },
   "dependencies": {
     "broken-link-checker": "0.7.8",
