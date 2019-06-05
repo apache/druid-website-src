@@ -1,0 +1,71 @@
+name: Druid
+
+permalink: /blog/:year/:month/:day/:title.html
+markdown: redcarpet
+
+redcarpet:
+  extensions: ["tables", "no_intra_emphasis", "fenced_code_blocks", "with_toc_data"]
+
+exclude:
+  - CNAME
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - node_modules
+  - package.json
+  - package-lock.json
+  - scss
+  - private
+
+highlighter: pygments
+
+title: 'Druid'
+description: 'Real²time Exploratory Analytics on Large Datasets'
+
+
+druid_versions:
+  - release: 0.14
+    versions:
+      - version: 0.14.2-incubating
+        date: 2019-05-27
+      - version: 0.14.1-incubating
+        date: 2019-05-09
+      - version: 0.14.0-incubating
+        date: 2019-04-09
+  - release: 0.13
+    versions:
+      - version: 0.13.0-incubating
+        date: 2018-12-18
+
+
+tranquility_stable_version: 0.8.3
+
+gems:
+  - jekyll-textile-converter
+
+prose:
+  metadata:
+    siteurl: 'http://druid.io'
+
+    _posts:
+      - name: "author"
+        field:
+          element: "text"
+          label: "Author"
+          value: ""
+      - name: "tags"
+        field:
+          element: "text"
+          label: "Tags"
+          value: ""
+      - name: "image"
+        field:
+          element: "text"
+          label: "Image"
+          value: ""
+      - name: "layout"
+        field:
+          element: "text"
+          label: "Layout"
+          value: "post"
+

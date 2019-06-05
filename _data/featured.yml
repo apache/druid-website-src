@@ -1,0 +1,47 @@
+  - date: 2019-05-29
+    title: "Monitoring at eBay with Druid"
+    name: "Mohan Garadi"
+    link: https://www.ebayinc.com/stories/blogs/tech/monitoring-at-ebay-with-druid/
+    company: ebay
+    
+  - date: 2019-05-22
+    title: "Setting the stage for fast analytics with Druid"
+    name: "Surekha Saharan and Benjamin Hopp"
+    link: https://speakerdeck.com/implydatainc/setting-the-stage-for-fast-analytics-with-druid
+    company: Imply
+    
+  - date: 2019-03-15
+    title: "Data Engineering At Booking.com Case Study | #064"
+    name: "Andreas Kretz"
+    link: https://youtu.be/9GE3yiVo1FM
+    company: Booking.com
+  
+  - date: 2018-11-14
+    title: "How Druid enables analytics at Airbnb"
+    name: "Pala Muthiah and Jinyang Li"
+    link: https://medium.com/airbnb-engineering/druid-airbnb-data-platform-601c312f2a4c
+    company: Airbnb
+
+  - date: 2018-09-25
+    title: "Data Analytics and Processing at Snap"
+    name: "Charles Allen"
+    link: https://www.slideshare.net/CharlesAllen9/data-analytics-and-processing-at-snap-druid-meetup-la-september-2018
+    company: Snap, Inc.
+
+  - date: 2018-09-13
+    title: "Securing Druid"
+    name: "Jon Wei"
+    link: https://imply.io/post/securing-druid
+    company: Imply
+
+  - date: 2018-08-30
+    title: "Streaming SQL and Druid"
+    name: "Arup Malakar"
+    link: https://youtu.be/ovZ9iAkQllo
+    company: Lyft
+
+  - date: 2018-06-19
+    title: "PayPal merchant ecosystem using Apache Spark, Hive, Druid, and HBase"
+    name: "Deepika Khera & Kasi Natarajan"
+    link: https://dataworkssummit.com/san-jose-2018/session/paypal-merchant-ecosystem-using-apache-spark-hive-druid-and-hbase/
+    company: Paypal
