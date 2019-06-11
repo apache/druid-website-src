@@ -35,14 +35,6 @@ To get started with Druid, visit the [quickstart](/docs/latest/tutorials/index.h
 Due to licensing considerations, the MySQL metadata store extension does not include the required MySQL JDBC driver which
 must be downloaded separately. Please see the [documentation](/docs/latest/development/extensions-core/mysql.html) for instructions on how to include this library.
 
-### Tranquility
-
-Tranquility is a library to load streaming data into Druid. It is commonly deployed as the final stage in a series of jobs in a stream processor such as Apache Flink or Kafka Streams.
-
-The latest version of Tranquility is available here: [tranquility-distribution-{{ site.tranquility_stable_version }}.tgz](http://static.druid.io/tranquility/releases/tranquility-distribution-{{ site.tranquility_stable_version }}.tgz).
-
-Note that Tranquility is not required in order to load streaming data: you can also use Druid's [Kafka indexing service](/docs/latest/development/extensions-core/kafka-ingestion.html) to load directly from Kafka.
-
 ## Release candidates
 
 Release candidates are announced on the [Druid dev mailing list](https://lists.apache.org/list.html?dev@druid.apache.org).
