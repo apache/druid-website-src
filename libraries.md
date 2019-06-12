@@ -90,4 +90,4 @@ Add Your Software
 -----------------
 
 If you've written software that uses Druid and want it included on this page,
-[edit it on GitHub](https://github.com/druid-io/druid-io.github.io/blob/src/libraries.md) to create a pull request!
+[edit it on GitHub](https://github.com/apache/incubator-druid-website-src/blob/master/libraries.md) to create a pull request!

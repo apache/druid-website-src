@@ -1,6 +1,6 @@
 ---
 title: Powered by Apache Druid (incubating)
-subtitle: <a href="https://github.com/druid-io/druid-io.github.io/blob/src/druid-powered.md"><span class="fa fa-plus"></span> Add Your Company</a>
+subtitle: <a href="https://github.com/apache/incubator-druid-website-src/blob/master/druid-powered.md"><span class="fa fa-plus"></span> Add Your Company</a>
 layout: simple_page
 sectionid: powered-by
 ---
@@ -108,7 +108,7 @@ eBay uses Druid to aggregate multiple data streams for real-time user behavior a
 
 ## Glia
 
-[Glia](https://www.glia.com/) uses Druid to provide application usage insights to its clients. 
+[Glia](https://www.glia.com/) uses Druid to provide application usage insights to its clients.
 
 ## GumGum
 
@@ -413,7 +413,7 @@ TWC uses Druid for exploratory analytics.
 
 ## TrafficGuard
 
-TrafficGuard detects, mitigates and reports on ad fraud before it hits digital advertising budgets. Three formidable layers of protection block both general invalid traffic (GIVT) and sophisticated invalid traffic (SIVT) to ensure that digital advertising results in legitimate advertising engagement. With visibility of traffic across thousands of campaigns, TrafficGuard’s machine learning can identify emerging patterns, trends and indicators of fraud quickly and reliably. 
+TrafficGuard detects, mitigates and reports on ad fraud before it hits digital advertising budgets. Three formidable layers of protection block both general invalid traffic (GIVT) and sophisticated invalid traffic (SIVT) to ensure that digital advertising results in legitimate advertising engagement. With visibility of traffic across thousands of campaigns, TrafficGuard’s machine learning can identify emerging patterns, trends and indicators of fraud quickly and reliably.
 
 Druid is a key component of our Big Data Operation Insight Platform.We use imply.io
 Learn more about TrafficGuard’s comprehensive fraud mitigation at (https://www.trafficguard.ai)
@@ -450,7 +450,7 @@ Druid powers Virool’s real time analytics of over 1 billion raw events per day
 
 ## WeQ
 
-[WeQ](http://weq.com) is a leading mobile performance and branding ad-tech company headquartered in Berlin. Druid is one of the core services that helps WeQ drive user acquisition and engagement to deliver mobile performance and branding campaigns. 
+[WeQ](http://weq.com) is a leading mobile performance and branding ad-tech company headquartered in Berlin. Druid is one of the core services that helps WeQ drive user acquisition and engagement to deliver mobile performance and branding campaigns.
 
 We are using Druid for real-time analytics that delivers business insights and power our anti-fraud tools. We are ingesting several billions of events per day using the Kafka real-time connector. Druid is a rock-solid and flexible foundation for our data system delivering blazing-fast analytics
 
@@ -496,4 +496,4 @@ China Youzan is a SaaS company which principally engaged in retail science and t
 
 [Zuoyebang](http://www.zuoyebang.com/) is the most used K12 education platform, 7 out of every 10 K12 users are using Zuoyebang. At Zuoyebang Data Platform Group, we use the Druid in the advertising scene,  mainly related to advertising display, click, billing, and other functions. The performance and timeliness of druid can meet our OLAP queries very well.
 
-[Add Your Company](https://github.com/druid-io/druid-io.github.io/blob/src/druid-powered.md)
+[Add Your Company](https://github.com/apache/incubator-druid-website-src/blob/master/druid-powered.md)
