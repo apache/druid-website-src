@@ -15,7 +15,7 @@
   <div class="text-center">
     <a title="Join the user group" href="https://groups.google.com/forum/#!forum/druid-user" target="_blank"><span class="fa fa-comments"></span></a>&ensp;·&ensp;
     <a title="Follow Druid" href="https://twitter.com/druidio" target="_blank"><span class="fab fa-twitter"></span></a>&ensp;·&ensp;
-    <a title="Download via Apache" href="https://www.apache.org/dyn/closer.cgi?path=/incubator/druid/{{ site.druid_versions[0].version }}/apache-druid-{{ site.druid_versions[0].version }}-bin.tar.gz" target="_blank"><span class="fas fa-feather"></span></a>&ensp;·&ensp;
+    <a title="Download via Apache" href="https://www.apache.org/dyn/closer.cgi?path=/incubator/druid/{{ site.druid_versions[0].versions[0].version }}/apache-druid-{{ site.druid_versions[0].versions[0].version }}-bin.tar.gz" target="_blank"><span class="fas fa-feather"></span></a>&ensp;·&ensp;
     <a title="GitHub" href="https://github.com/apache/incubator-druid" target="_blank"><span class="fab fa-github"></span></a>
   </div>
   <div class="text-center license">
@@ -24,16 +24,12 @@
 </div>
 </footer>
 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-131010415-1"></script>
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-40280432-1', 'auto');
-  ga('set', 'anonymizeIp', true);
-  ga('send', 'pageview');
-
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-131010415-1');
 </script>
 <script>
   function trackDownload(type, url) {
