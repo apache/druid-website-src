@@ -76,6 +76,18 @@
       margin-right: 6px; }
     .top-navigator .action-button:hover {
       color: white; }
+  .top-navigator .header-dropdown .header-dropdown-menu {
+    display: none;
+    z-index: 100;
+    position: absolute;
+    top: 54px;
+    left: 0;
+    width: 200px;
+    background: #3a3a52;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.18);
+    overflow: visible; }
+  .top-navigator .header-dropdown:hover .header-dropdown-menu {
+    display: block; }
 
 @media (max-width: 840px) {
   body {
