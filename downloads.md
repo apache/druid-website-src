@@ -22,6 +22,8 @@ The latest Apache Druid (incubating) stable release is {{ release.version }}.
 {% endfor %}
 {% endfor %}
 
+You should verify your download by following these [procedures](https://www.apache.org/info/verification.html) and using these [KEYS](https://www.apache.org/dist/incubator/druid/KEYS).
+
 To learn more about releases, please visit the [versioning page](/docs/latest/development/versioning.html).
 
 ## Get started
