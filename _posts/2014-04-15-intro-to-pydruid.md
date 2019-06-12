@@ -6,7 +6,7 @@ layout: post
 tags: #druid #analytics #querying #python #pandas #scipi #matplotlib
 ---
 
-We've already written about pairing [R with RDruid](http://druid.io/blog/2014/02/03/rdruid-and-twitterstream.html), but Python has powerful and free open-source analysis tools too. Collectively, these are often referred to as the [SciPy Stack](http://www.scipy.org/stackspec.html). To pair SciPy's analytic power with the advantages of querying time-series data in Druid, we created the pydruid connector. This allows Python users to query Druid&mdash;and export the results to useful formats&mdash;in a way that makes sense to them.
+We've already written about pairing [R with RDruid](/blog/2014/02/03/rdruid-and-twitterstream.html), but Python has powerful and free open-source analysis tools too. Collectively, these are often referred to as the [SciPy Stack](http://www.scipy.org/stackspec.html). To pair SciPy's analytic power with the advantages of querying time-series data in Druid, we created the pydruid connector. This allows Python users to query Druid&mdash;and export the results to useful formats&mdash;in a way that makes sense to them.
 
 ## Getting Started
 pydruid should run with Python 2.x, and is known to run with Python 2.7.5.
@@ -26,7 +26,7 @@ pip install pandas
 When you import pydruid into your example, it will try to load Pandas as well.
 
 ## Run the Druid Wikipedia Example
-[Download Druid](http://druid.io/downloads.html) and unpack Druid. If you are not familiar with Druid, see this [introductory tutorial](http://druid.io/docs/latest/Tutorial:-A-First-Look-at-Druid.html).
+[Download Druid](/downloads.html) and unpack Druid. If you are not familiar with Druid, see this [introductory tutorial](/docs/latest/Tutorial:-A-First-Look-at-Druid.html).
 
 From the Druid home directory, start the Druid Realtime node:
 
@@ -37,7 +37,7 @@ $DRUID_HOME/run_example_server.sh
 When prompted, choose the "wikipedia" example. After the Druid realtime node is done starting up, messages should appear that start with the following:
 
     2014-04-03 18:01:32,852 INFO [wikipedia-incremental-persist] ...
-    
+
 These messages confirm that the realtime node is ingesting data from the Wikipedia edit stream, and that data can be queried.
 
 ## Write, Execute, and Submit a pydruid Query

@@ -23,7 +23,7 @@ committers from diverse organizations. If you are a Druid user who is
 passionate about druid and wants to get involved more, then please send your
 pull requests to improve documentation, bug fixes, tests and proposed/accepted
 features. Also, feel free to let us know about your interest by contacting
-[existing committers](http://druid.io/community/) or post in the [development
+[existing committers](/community/) or post in the [development
 list](https://groups.google.com/forum/#!forum/druid-development).
 
 To get started developing on Druid, we’ve created and tagged a set of [beginner

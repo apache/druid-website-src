@@ -1,7 +1,7 @@
 ---
 title: Batch-Loading Sensor Data into Druid
 published: true
-layout: post 
+layout: post
 author: Igal Levy
 tags: #sensors #usgs #druid #analytics #querying #bigdata, #datastore
 ---
@@ -18,7 +18,7 @@ We used this map to get the sensor info for the Napa River in Napa County, Calif
 We decided to first import the data into [R (the statistical programming language)](http://www.r-project.org/) for two reasons:
 
 * The R package `waterData` from USGS. This package allows us to retrieve and analyze hydrologic data from USGS. We can then export that data from within the R environment, then set up Druid to ingest it.
-* The R package `RDruid` which we've [blogged about before](http://druid.io/blog/2014/02/03/rdruid-and-twitterstream.html). This package allows us to query Druid from within the R environment.
+* The R package `RDruid` which we've [blogged about before](/blog/2014/02/03/rdruid-and-twitterstream.html). This package allows us to query Druid from within the R environment.
 
 ## Extracting the Streamflow Data
 In R, load the waterData package, then run `importDVs()`:
@@ -35,7 +35,7 @@ The last line uses the function `waterData.importDVs()` to get sensor (or "strea
 * staid, or site identification number, which is entered as a string due to the fact that some IDs have leading 0s. This value was obtained from the interactive map discussed above.
 * code, which specifies the type of sensor data we're interested in (if available). Our chosen code specifies measurement of discharge, in cubic feet per second. You can learn about codes at the [USGS Water Resources site](http://nwis.waterdata.usgs.gov/usa/nwis/pmcodes).
 * stat, which specifies the type of statistic we're looking for&mdash;in this case, the mean daily flow (mean is the default statistic). The USGS provides [a page summarizing various types of codes and parameters](http://help.waterdata.usgs.gov/codes-and-parameters).
-* start and end dates. 
+* start and end dates.
 
 The information on the specific site and sensor should provide information on the type of data available and the start-end dates for the full historical record.
 
@@ -83,7 +83,7 @@ write.table(napa_flow_subset, file="~/napa-flow.tsv", sep="\t", col.names = F, r
 And here's our file:
 
 ```bash
-$ head ~/napa-flow.tsv 
+$ head ~/napa-flow.tsv
 "11458000"	90	1963-01-01
 "11458000"	87	1963-01-02
 "11458000"	85	1963-01-03
@@ -100,7 +100,7 @@ $ head ~/napa-flow.tsv
 Loading the data into Druid involves setting up Druid's indexing service to ingest the data into the Druid cluster, where specialized nodes will manage it.
 
 ### Configure the Indexing Task
-Druid has an indexing service that can load data. Since there's a relatively small amount of data to ingest, we're going to use the [basic Druid indexing service](http://druid.io/docs/latest/Batch-ingestion.html) to ingest it. (Another option to ingest data uses a Hadoop cluster and is set up in a similar way, but that is more than we need for this job.) We must create a task (in JSON format) that specifies the work the indexing service will do:
+Druid has an indexing service that can load data. Since there's a relatively small amount of data to ingest, we're going to use the [basic Druid indexing service](/docs/latest/Batch-ingestion.html) to ingest it. (Another option to ingest data uses a Hadoop cluster and is set up in a similar way, but that is more than we need for this job.) We must create a task (in JSON format) that specifies the work the indexing service will do:
 
 ```json
 {
@@ -135,20 +135,20 @@ Druid has an indexing service that can load data. Since there's a relatively sma
     }
   }
 }
-``` 
+```
 
 The taks is saved to a file, `usgs_index_task.json`. Note a few things about this task:
 
-* granularitySpec sets [segment](http://druid.io/docs/latest/Concepts-and-Terminology.html) granularity to MONTH, rather than using the default DAY, even though each row of our data is a daily reading. We do this to avoid having Druid create a segment per row of data. That's a lot of extra work (note the interval is "1963-01-01/2013-12-31"), and we simply don't need that much granularity to make sense of this data for a broad view. Setting the granularity to MONTH causes Druid to roll up data into monthly segments that each provide a monthly average of the flow value.
+* granularitySpec sets [segment](/docs/latest/Concepts-and-Terminology.html) granularity to MONTH, rather than using the default DAY, even though each row of our data is a daily reading. We do this to avoid having Druid create a segment per row of data. That's a lot of extra work (note the interval is "1963-01-01/2013-12-31"), and we simply don't need that much granularity to make sense of this data for a broad view. Setting the granularity to MONTH causes Druid to roll up data into monthly segments that each provide a monthly average of the flow value.
 
-    A different granularity setting for the data itself ([indexGranularity](http://druid.io/docs/latest/Tasks.html)) controls how the data is rolled up before it is chunked into segments. This granularity, which defaults to "MINUTE", won't affect our data, which consists of daily values.
+    A different granularity setting for the data itself ([indexGranularity](/docs/latest/Tasks.html)) controls how the data is rolled up before it is chunked into segments. This granularity, which defaults to "MINUTE", won't affect our data, which consists of daily values.
 * We specify aggregators that Druid will use as *metrics* to summarize the data. "count" is a built-in metric that counts the raw number of rows on ingestion, and the Druid rows (after rollups) after processing. We've added a metric to summarize "val" from our water data.
 * The firehose section specifies out data source, which in this case is a file. If our data existed in multiple files, we could have set "filter" to "*.tsv".
 * We have to specify the timestamp column so Druid knows.
 * We also specify the format of the data ("tsv"), what the columns are, and which to treat as dimensions. Dimensions are the values that describe our data.
 
 ## Start a Druid Cluster and Post the Task
-Before submitting this task, we must start a small Druid cluster consisting of the indexing service, a Coordinator node, and a Historical node. Instructions on how to set up and start a Druid cluster are in the [Druid documentation](http://druid.io/docs/latest/Tutorial:-Loading-Your-Data-Part-1.html).
+Before submitting this task, we must start a small Druid cluster consisting of the indexing service, a Coordinator node, and a Historical node. Instructions on how to set up and start a Druid cluster are in the [Druid documentation](/docs/latest/Tutorial:-Loading-Your-Data-Part-1.html).
 
 Once the cluster is ready, the task is submitted to the indexer's REST service (showing the relative path to the task file):
 
@@ -171,7 +171,7 @@ We can also verify the data by querying Druid. Here's a simple time-boundary que
 
 ```json
 {
-    "queryType": "timeBoundary", 
+    "queryType": "timeBoundary",
     "dataSource": "usgs"
 }
 ```
@@ -194,8 +194,8 @@ The response should be:
 } ]
 ```
 
-You can learn about submitting more complex queries in the [Druid documentation](http://druid.io/docs/latest/Tutorial:-All-About-Queries.html).
- 
+You can learn about submitting more complex queries in the [Druid documentation](/docs/latest/Tutorial:-All-About-Queries.html).
+
 ## What to Try Next: Something More Akin to a Production System
 For the purposes of demonstration, we've cobbled together a simple system for manually fetching, mutating, loading, analyzing, storing, and then querying (for yet more analysis) data. But this would hardly be anyone's idea of a production system.
 

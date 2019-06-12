@@ -51,10 +51,10 @@ extract a probability distribution for the likelihood of a specific
 phenomenon.  The phenomenon we care about is the maximum index of a 1 bit. 
 Specifically, we expect the following to be true:
 
-50% of hashed values will look like this: 1xxxxxxx…x  
-25% of hashed values will look like this: 01xxxxxx…x  
-12.5% of hashed values will look like this: 001xxxxxxxx…x  
-6.25% of hashed values will look like this: 0001xxxxxxxx…x  
+50% of hashed values will look like this: 1xxxxxxx…x
+25% of hashed values will look like this: 01xxxxxx…x
+12.5% of hashed values will look like this: 001xxxxxxxx…x
+6.25% of hashed values will look like this: 0001xxxxxxxx…x
 …
 
 So, naively speaking, we expect that if we were to hash 8 unique things, one of
@@ -94,7 +94,7 @@ ability to compute cardinalities.  We wanted to be able to take advantage of
 the space savings and row reduction of summarization while still being able to
 compute cardinalities:  this is where HyperLogLog comes in.
 
-In [Druid](http://druid.io/), our summarization process applies the hash
+In [Druid](/), our summarization process applies the hash
 function ([Murmur 128](http://sites.google.com/site/murmurhash/)) and computes
 the intermediate HyperLogLog format (i.e. the list of buckets of
 `max(index of 1)`) and stores that in a column.  Thus, for every row in our

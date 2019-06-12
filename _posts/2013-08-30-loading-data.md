@@ -11,7 +11,7 @@ In our last post, we got a realtime node working with example Twitter data. Now 
 ## About Druid ##
 Druid is a rockin' exploratory analytical data store capable of offering interactive query of big data in realtime - as data is ingested. Druid drives 10's of billions of events per day for the [Metamarkets](http://www.metamarkets.com) platform, and Metamarkets is committed to building Druid in open source.
 
-To learn more check out the first blog in this series [Understanding Druid Via Twitter Data](http://druid.io/blog/2013/08/06/twitter-tutorial.html)
+To learn more check out the first blog in this series [Understanding Druid Via Twitter Data](/blog/2013/08/06/twitter-tutorial.html)
 
 Checkout Druid at XLDB on Sept 9th [XLDB](https://conf-slac.stanford.edu/xldb-2013/tutorials#amC)
 
@@ -139,7 +139,7 @@ In a new console, launch the kafka console producer (so you can type in JSON kaf
     {"utcdt": "2010-01-01T01:01:03", "wp": 3000, "gender": "male", "age": 20}
     {"utcdt": "2010-01-01T01:01:04", "wp": 4000, "gender": "female", "age": 30}
     {"utcdt": "2010-01-01T01:01:05", "wp": 5000, "gender": "male", "age": 40}
-    
+
 **Watch the events as they are ingested** in the Druid realtime node console
 
     ...

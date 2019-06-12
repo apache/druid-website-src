@@ -184,6 +184,6 @@ Martin][image-credits].
 [durand-thesis]: http://algo.inria.fr/durand/Articles/these.ps
 [google-40671]: http://static.googleusercontent.com/media/research.google.com/en/us/pubs/archive/40671.pdf
 [strata-talk]: http://strataconf.com/stratany2013/public/schedule/detail/30045
-[druid-part-deux]: http://druid.io/blog/2011/05/20/druid-part-deux.html
+[druid-part-deux]: /blog/2011/05/20/druid-part-deux.html
 [hamming-weight]: http://en.wikipedia.org/wiki/Hamming_weight
 [image-credits]: http://donasdays.blogspot.com/2012/10/are-you-sprinter-or-long-distance-runner.html

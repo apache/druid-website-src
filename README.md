@@ -1,7 +1,7 @@
 Druid Project Website
 =====================
 
-http://druid.io/
+http://apache.druid.org/
 
 ## Building
 

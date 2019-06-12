@@ -16,7 +16,7 @@ organized a panel that same night to continue the conversation.
 
 The discussion featured key contributors to several open source technologies:
 Andy Feng ([Storm](http://storm.incubator.apache.org/)), Eric Tschetter
-([Druid](http://druid.io/)), Jun Rao ([Kafka](http://kafka.apache.org/)), and
+([Druid](/)), Jun Rao ([Kafka](http://kafka.apache.org/)), and
 Matei Zaharia ([Spark](http://spark.apache.org/)). It was moderated by
 VentureBeat Staff Writer Jordan Novet and hosted by Zack Bogue of the [Founders
 Den](http://www.foundersden.com/) and [Data Collective](http://dcvc.com/).
