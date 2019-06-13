@@ -7,22 +7,22 @@ layout: post
 ---
 
 In a [previous blog
-post](http://druid.io/blog/2011/04/30/introducing-druid.html) we introduced the
+post](/blog/2011/04/30/introducing-druid.html) we introduced the
 distributed indexing and query processing infrastructure we call Druid. In that
 post, we characterized the performance and scaling challenges that motivated us
 to build this system in the first place. Here, we discuss three design
 principles underpinning its architecture.
 
-**1. Partial Aggregates + In-Memory + Indexes => Fast Queries** 
+**1. Partial Aggregates + In-Memory + Indexes => Fast Queries**
 
 We work with two representations of our data: *alpha* represents the raw,
 unaggregated event logs, while *beta* is its partially aggregated derivative.
 This *beta* is the basis against which all further queries are evaluated:
 
-    2011-01-01T01:00:00Z  ultratrimfast.com  google.com  Male    USA  1800  25  15.70 
-    2011-01-01T01:00:00Z  bieberfever.com    google.com  Male    USA  2912  42  29.18 
-    2011-01-01T02:00:00Z  ultratrimfast.com  google.com  Male    UK   1953  17  17.31 
-    2011-01-01T02:00:00Z  bieberfever.com    google.com  Male    UK   3194  170 34.01 
+    2011-01-01T01:00:00Z  ultratrimfast.com  google.com  Male    USA  1800  25  15.70
+    2011-01-01T01:00:00Z  bieberfever.com    google.com  Male    USA  2912  42  29.18
+    2011-01-01T02:00:00Z  ultratrimfast.com  google.com  Male    UK   1953  17  17.31
+    2011-01-01T02:00:00Z  bieberfever.com    google.com  Male    UK   3194  170 34.01
 
 This is the most compact representation that preserves the finest grain of data,
 while enabling on-the-fly computation of all O(2^n) possible dimensional
@@ -38,7 +38,7 @@ calculation (using AND & OR operations) of rows matching a search query. The
 inverted index enables us to scan a limited subset of rows to compute final
 query results – and these scans are themselves distributed, as we discuss next.
 
-**2. Distributed Data + Parallelizable Queries => Horizontal Scalability** 
+**2. Distributed Data + Parallelizable Queries => Horizontal Scalability**
 
 Druid’s performance depends on having memory — lots of it. We achieve the requisite
 memory scale by dynamically distributing data across a cluster of nodes. As the
@@ -69,14 +69,14 @@ This architecture provides a number of extra benefits:
 
 * Segments are read-only, so they can simultaneously serve multiple servers. If
   we have a hotspot in a particular index, we can replicate that index to
-multiple servers and load balance across them.  
+multiple servers and load balance across them.
 * We can provide tiered classes of service for our data, with servers occupying
-  different points in the “query latency vs. data size” spectrum 
+  different points in the “query latency vs. data size” spectrum
 * Our clusters can span data center boundaries
 
 
 
-**3. Real-Time Analytics: Immutable Past, Append-Only Future** 
+**3. Real-Time Analytics: Immutable Past, Append-Only Future**
 
 Our system for real-time analytics is centered, naturally, on time. Because past events
 happen once and never change, they need not be re-writable. We need only be
@@ -96,7 +96,7 @@ provides access to long-range data while maintaining the high-performance that
 our customers expect for near-term data.
 
 
-##Summary## 
+##Summary##
 Druid’s power resides in providing users fast, arbitrarily deep
 exploration of large-scale transaction data. Queries over billions of rows,
 that previously took minutes or hours to run, can now be investigated directly

@@ -1,4 +1,4 @@
-# robots.txt for http://druid.io
+# robots.txt for http://apache.druid.org
 
 # Keep robots from crawling old Druid doc versions
 

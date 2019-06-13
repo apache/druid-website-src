@@ -41,7 +41,7 @@ gems:
 
 prose:
   metadata:
-    siteurl: 'http://druid.io'
+    siteurl: 'https://druid.apache.org'
 
     _posts:
       - name: "author"

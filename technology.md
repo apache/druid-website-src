@@ -94,7 +94,7 @@ Druid converts raw data stored in a source to a more read-optimized format (call
   <img src="img/diagram-4.png" style="max-width: 580px;">
 </div>
 
-For more information, please visit [our docs page](http://druid.io/docs/latest/ingestion/index.html).
+For more information, please visit [our docs page](/docs/latest/ingestion/index.html).
 
 ## Storage
 
@@ -112,7 +112,7 @@ This pre-aggregation step is known as [rollup](/docs/latest/tutorials/tutorial-r
   <img src="img/diagram-5.png" style="max-width: 800px;">
 </div>
 
-For more information, please visit [our docs page](http://druid.io/docs/latest/design/segments.html).
+For more information, please visit [our docs page](/docs/latest/design/segments.html).
 
 ## Querying
 
@@ -123,7 +123,7 @@ In addition to standard SQL operators, Druid supports unique operators that leve
   <img src="img/diagram-6.png" style="max-width: 580px;">
 </div>
 
-For more information, please visit [our docs page](http://druid.io/docs/latest/querying/querying.html).
+For more information, please visit [our docs page](/docs/latest/querying/querying.html).
 
 ## Architecture
 
@@ -139,7 +139,7 @@ Druid processes can independently fail without impacting the operations of other
   <img src="img/diagram-7.png" style="max-width: 620px;">
 </div>
 
-For more information, please visit [our docs page](http://druid.io/docs/latest/design/index.html).
+For more information, please visit [our docs page](/docs/latest/design/index.html).
 
 ## Operations
 
@@ -181,4 +181,4 @@ As such, Druid possesses several features to ensure uptime and no data loss.
   </div>
 </div>
 
-For more information, please visit [our docs page](http://druid.io/docs/latest/operations/recommendations.html).
+For more information, please visit [our docs page](/docs/latest/operations/recommendations.html).
