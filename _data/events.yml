@@ -1,13 +1,13 @@
-- date: 2019-06-12
-  name: "Druid NYC Meetup @ Tumblr"
-  info: "Inside Apache Druid: Deep Dive, Personalized Related Blog Recommendation with User Feedback"
-  link: https://www.meetup.com/Apache-Druid-NYC/events/260925189/
+- date: 2019-06-20
+  name: "Bangalore Apache Druid"
+  info: "Sub-second Slice and Dice your Data! Thursday, June 20, 2019 3:30 PM to 6:00 PM"
+  link: https://www.meetup.com/Bangalore-Druid-Meetup-Group/events/262039931
 
 - date: 2019-09-09
   name: "ApacheCon North America, Las Vegas"
   info: "2019-09-09 to 2019-09-13 Flamingo Las Vegas, 3555 S Las Vegas Blvd, Las Vegas, NV 89109, USA"
   link: https://apachecon.com/acna19/
-  
+
 - date: 2019-10-22
   name: "ApacheCon Europe, Berlin"
   info: "2019-10-22 to 2019-10-25 Kulturbrauerei, Schönhauser Allee 36, 10435 Berlin, Germany"
