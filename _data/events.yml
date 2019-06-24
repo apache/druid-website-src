@@ -1,7 +1,7 @@
-- date: 2019-06-20
-  name: "Bangalore Apache Druid meetup"
-  info: "Sub-second Slice and Dice your Data! Thursday, June 20, 2019 3:30 PM to 6:00 PM"
-  link: https://www.meetup.com/Bangalore-Druid-Meetup-Group/events/262039931
+- date: 2019-07-09
+  name: "Apache Druid Bay Area Meetup @ Intuit"
+  info: "Our July Bay Area Druid meetup will be hosted by Intuit in Mountain View. Tuesday, July 9, 2019 6:30 PM to 8:30 PM"
+  link: https://www.meetup.com/druidio/events/262422453/
 
 - date: 2019-09-09
   name: "ApacheCon North America, Las Vegas"
