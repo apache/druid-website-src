@@ -2,6 +2,16 @@
   name: "Artificial Intelligence and Big Data Sciences Meetup"
   info: "Gaurav Bhatnagar, Enterprise Big Data Solutions Architect @ Imply, will be speaking in Fremont. 4:00 PM to 6:00 PM"
   link: https://www.meetup.com/Big-Data-Science/events/rqwdbqyzkblc/
+  
+- date: 2019-08-06
+  name: "Stuttgart Data Engineers Meetup"
+  info: "Peter Marshall from Imply will talk about "Streaming analytics with Druid" in Stuttgart. 7:00 PM to 9:00 PM"
+  link: https://www.meetup.com/Stuttgart-Data-Engineers/events/263254445/
+
+- date: 2019-08-28
+  name: "SF Big Data Analytics Meetup"
+  info: "Gian Merlino, CTO @ Imply, will be presenting on real-time analytics with Apache Druid. 6:00 Pm to 9:00 PM"
+  link: https://www.meetup.com/SF-Big-Analytics/events/263274680/
 
 - date: 2019-09-09
   name: "ApacheCon North America, Las Vegas"
