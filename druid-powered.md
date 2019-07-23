@@ -57,6 +57,10 @@ Branch uses Druid as their trusted analytics engine to power all of their data a
 
 * [Druid at Charter](https://speakerdeck.com/implydatainc/druid-at-charter)
 
+## CircleHD
+
+[CircleHD](https://www.circlehd.com) is an enterprise video enablement platform, used by businesses for training, sales enablement and digital learning experience. CircleHD uses Druid to power the analytics system that provides real-time insight into adoption, usage and engagement.
+
 ## Cisco
 
 Cisco uses Druid to power a real-time analytics platform for network flow data.
