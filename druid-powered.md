@@ -277,6 +277,10 @@ Ona <https://ona.io> is a software engineering and design firm based in Nairobi,
 
 OneAPM <http://oneapm.com> is an IT service compmay focusing on Application Performance Management (APM). In OneAPM, Druid is used to power clients' interactive queries on performance data collected from their applications in realtime.
 
+## Oppo
+
+Oppo is one of the world largest mobile phone manufacturer. Druid is used to realtime data analyze.
+
 ## Optimizely
 
 Optimizely uses Druid to power the results dashboard for Optimizely Personalization. Druid enables Optimizely to provide our customers with in-depth, customizable metrics in real time, allowing them to monitor, test and improve their Personalization campaigns with greater ease and flexibility than before.
