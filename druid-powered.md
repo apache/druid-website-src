@@ -330,6 +330,10 @@ is what they have to say:
 
 PubNative uses Druid for its real-time reports and analysis of millions of daily ad views, clicks, conversions and other events.
 
+## Quantiply
+
+Quantiply uses Druid for its feature learning, and governance layer for Compliance and Regulatory (CoRe) platform.
+
 ## Raygun
 
 Raygun is a full stack software intelligence platform that monitors your applications for errors, crashes and performance issues. They use Druid to complete complex queries with large data sets. Having seen similar stories from others, including those who invested in other technologies such as the Hadoop ecosystem or key-value stores, Raygun began researching other more purpose-built analytics databases. Druid happens to be the one they settled on, as it offers several nice properties one wants in an analytics database.
