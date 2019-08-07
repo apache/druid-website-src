@@ -1,7 +1,7 @@
-- date: 2019-08-06
-  name: "Stuttgart Data Engineers Meetup Event - Streaming analytics with Druid"
-  info: "Z-Up - ADWEKO Consulting GmbH. Heilbronnerstr. 35 · Stuttgart"
-  link: https://www.meetup.com/Stuttgart-Data-Engineers/events/263254445/
+- date: 2019-08-28
+  name: "SF Big Analytics Meetup - Apache Druid and YuniKorn: Universal Resource scheduler for both K8s and Yarn"
+  info: "2019-08-28, from 6:00 - 9:00 PM @ Workday, 160 Spear St Suite 1700 · San Francisco, CA"
+  link: https://www.meetup.com/SF-Big-Analytics/events/263274680/
 
 - date: 2019-09-09
   name: "ApacheCon North America, Las Vegas"
