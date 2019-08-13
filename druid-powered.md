@@ -53,6 +53,11 @@ Billy Mobile is a mobile advertising platform, excelling in the performance-base
 
 Branch uses Druid as their trusted analytics engine to power all of their data analysis needs. This ranges from the user-facing Branch Dashboard analytics that our partners rely on to gain insight into the performance of their links; to the data-driven business decisions that we need to make internally to build a sustainable business.
 
+## Central Bank of the Republic of Turkey
+
+The Central Bank of the Republic of Turkey addresses the challenge of analyzing and interpreting real-time tick data related to money market instruments using Apache Druid and Superset
+* [Observing Intraday Indicators Using Real-Time Tick Data on Apache Superset and Druid](https://www.youtube.com/watch?v=o0JsVwFEdtA)
+
 ## Charter Communications
 
 * [Druid at Charter](https://speakerdeck.com/implydatainc/druid-at-charter)
