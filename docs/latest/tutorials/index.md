@@ -53,14 +53,14 @@ configuration than `micro-quickstart`.
 
 ## Getting started
 
-[Download](https://www.apache.org/dyn/closer.cgi?path=/incubator/druid/0.15.0-incubating/apache-druid-0.15.0-incubating-bin.tar.gz)
-the 0.15.0-incubating release.
+[Download](https://www.apache.org/dyn/closer.cgi?path=/incubator/druid/0.15.1-incubating/apache-druid-0.15.1-incubating-bin.tar.gz)
+the 0.15.1-incubating release.
 
 Extract Druid by running the following commands in your terminal:
 
 ```bash
-tar -xzf apache-druid-0.15.0-incubating-bin.tar.gz
-cd apache-druid-0.15.0-incubating
+tar -xzf apache-druid-0.15.1-incubating-bin.tar.gz
+cd apache-druid-0.15.1-incubating
 ```
 
 In the package, you should find:
@@ -87,7 +87,7 @@ mv zookeeper-3.4.11 zk
 ```
 
 The startup scripts for the tutorial will expect the contents of the Zookeeper tarball to be located at `zk` under the
-apache-druid-0.15.0-incubating package root.
+apache-druid-0.15.1-incubating package root.
 
 ## Start up Druid services
 
@@ -95,7 +95,7 @@ The following commands will assume that you are using the `micro-quickstart` sin
 using a different configuration, the `bin` directory has equivalent scripts for each configuration, such as
 `bin/start-single-server-small`.
 
-From the apache-druid-0.15.0-incubating package root, run the following command:
+From the apache-druid-0.15.1-incubating package root, run the following command:
 
 ```bash
 ./bin/start-micro-quickstart
@@ -105,15 +105,15 @@ This will bring up instances of Zookeeper and the Druid services, all running on
 
 ```bash
 $ ./bin/start-micro-quickstart 
-[Fri May  3 11:40:50 2019] Running command[zk], logging to[/apache-druid-0.15.0-incubating/var/sv/zk.log]: bin/run-zk conf
-[Fri May  3 11:40:50 2019] Running command[coordinator-overlord], logging to[/apache-druid-0.15.0-incubating/var/sv/coordinator-overlord.log]: bin/run-druid coordinator-overlord conf/druid/single-server/micro-quickstart
-[Fri May  3 11:40:50 2019] Running command[broker], logging to[/apache-druid-0.15.0-incubating/var/sv/broker.log]: bin/run-druid broker conf/druid/single-server/micro-quickstart
-[Fri May  3 11:40:50 2019] Running command[router], logging to[/apache-druid-0.15.0-incubating/var/sv/router.log]: bin/run-druid router conf/druid/single-server/micro-quickstart
-[Fri May  3 11:40:50 2019] Running command[historical], logging to[/apache-druid-0.15.0-incubating/var/sv/historical.log]: bin/run-druid historical conf/druid/single-server/micro-quickstart
-[Fri May  3 11:40:50 2019] Running command[middleManager], logging to[/apache-druid-0.15.0-incubating/var/sv/middleManager.log]: bin/run-druid middleManager conf/druid/single-server/micro-quickstart
+[Fri May  3 11:40:50 2019] Running command[zk], logging to[/apache-druid-0.15.1-incubating/var/sv/zk.log]: bin/run-zk conf
+[Fri May  3 11:40:50 2019] Running command[coordinator-overlord], logging to[/apache-druid-0.15.1-incubating/var/sv/coordinator-overlord.log]: bin/run-druid coordinator-overlord conf/druid/single-server/micro-quickstart
+[Fri May  3 11:40:50 2019] Running command[broker], logging to[/apache-druid-0.15.1-incubating/var/sv/broker.log]: bin/run-druid broker conf/druid/single-server/micro-quickstart
+[Fri May  3 11:40:50 2019] Running command[router], logging to[/apache-druid-0.15.1-incubating/var/sv/router.log]: bin/run-druid router conf/druid/single-server/micro-quickstart
+[Fri May  3 11:40:50 2019] Running command[historical], logging to[/apache-druid-0.15.1-incubating/var/sv/historical.log]: bin/run-druid historical conf/druid/single-server/micro-quickstart
+[Fri May  3 11:40:50 2019] Running command[middleManager], logging to[/apache-druid-0.15.1-incubating/var/sv/middleManager.log]: bin/run-druid middleManager conf/druid/single-server/micro-quickstart
 ```
 
-All persistent state such as the cluster metadata store and segments for the services will be kept in the `var` directory under the apache-druid-0.15.0-incubating package root. Logs for the services are located at `var/sv`.
+All persistent state such as the cluster metadata store and segments for the services will be kept in the `var` directory under the apache-druid-0.15.1-incubating package root. Logs for the services are located at `var/sv`.
 
 Later on, if you'd like to stop the services, CTRL-C to exit the `bin/start-micro-quickstart` script, which will terminate the Druid processes.
 

@@ -74,7 +74,7 @@ Community extensions are not maintained by Druid committers, although we accept 
 A number of community members have contributed their own extensions to Druid that are not packaged with the default Druid tarball.
 If you'd like to take on maintenance for a community extension, please post on [dev@druid.apache.org](https://lists.apache.org/list.html?dev@druid.apache.org) to let us know!
 
-All of these community extensions can be downloaded using *pull-deps* with the coordinate org.apache.druid.extensions.contrib:EXTENSION_NAME:LATEST_DRUID_STABLE_VERSION.
+All of these community extensions can be downloaded using [pull-deps](../operations/pull-deps.html) while specifying a `-c` coordinate option to pull `org.apache.druid.extensions.contrib:{EXTENSION_NAME}:{DRUID_VERSION}`.
 
 |Name|Description|Docs|
 |----|-----------|----|
@@ -95,6 +95,7 @@ All of these community extensions can be downloaded using *pull-deps* with the c
 |kafka-emitter|Kafka metrics emitter|[link](../development/extensions-contrib/kafka-emitter.html)|
 |druid-thrift-extensions|Support thrift ingestion |[link](../development/extensions-contrib/thrift.html)|
 |druid-opentsdb-emitter|OpenTSDB metrics emitter |[link](../development/extensions-contrib/opentsdb-emitter.html)|
+|materialized-view-selection, materialized-view-maintenance|Materialized View|[link](../development/extensions-contrib/materialized-view.html)|
 |druid-moving-average-query|Support for [Moving Average](https://en.wikipedia.org/wiki/Moving_average) and other Aggregate [Window Functions](https://en.wikibooks.org/wiki/Structured_Query_Language/Window_functions) in Druid queries.|[link](../development/extensions-contrib/moving-average-query.html)|
 
 ## Promoting Community Extension to Core Extension
