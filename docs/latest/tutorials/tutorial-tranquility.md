@@ -44,17 +44,17 @@ tar -xzf tranquility-distribution-0.8.3.tgz
 mv tranquility-distribution-0.8.3 tranquility
 ```
 
-The startup scripts for the tutorial will expect the contents of the Tranquility tarball to be located at `tranquility` under the apache-druid-0.15.0-incubating package root.
+The startup scripts for the tutorial will expect the contents of the Tranquility tarball to be located at `tranquility` under the apache-druid-0.15.1-incubating package root.
 
 ## Enable Tranquility Server
 
 - In your `conf/supervise/single-server/micro-quickstart.conf`, uncomment the `tranquility-server` line.
-- Stop your *bin/supervise* command (CTRL-C) and then restart it by again running `bin/supervise -c conf/supervise/single-server/micro-quickstart.conf`.
+- Stop *micro-quickstart* cluster command (CTRL-C) then restart it again by running `bin/start-micro-quickstart`
 
 As part of the output of *supervise* you should see something like:
 
 ```bash
-Running command[tranquility-server], logging to[/stage/apache-druid-0.15.0-incubating/var/sv/tranquility-server.log]: tranquility/bin/tranquility server -configFile conf/tranquility/server.json -Ddruid.extensions.loadList=[]
+Running command[tranquility-server], logging to[/stage/apache-druid-0.15.1-incubating/var/sv/tranquility-server.log]: tranquility/bin/tranquility server -configFile conf/tranquility/server.json -Ddruid.extensions.loadList=[]
 ```
 
 You can check the log file in `var/sv/tranquility-server.log` to confirm that the server is starting up properly.
