@@ -1,14 +1,29 @@
 - date: 2019-08-28
-  name: "SF Big Analytics Meetup - Apache Druid and YuniKorn: Universal Resource scheduler for both K8s and Yarn"
+  name: "Meetup: SF Big Analytics - Apache Druid and YuniKorn: Universal Resource scheduler for both K8s and Yarn"
   info: "2019-08-28, from 6:00 - 9:00 PM @ Workday, 160 Spear St Suite 1700 · San Francisco, CA"
   link: https://www.meetup.com/SF-Big-Analytics/events/263274680/
+  
+- date: 2019-08-21
+  name: "Meetup: Utah Data Engineering - Two Talks About Real Time w/ Jon King (Imply) and Thor Sigurjonsson (Overstock)
+  info: "2019-08-21, from 6:30 - 8:30 PM @ Overstock, 799 Coliseum Way · Midvale, UT"
+  link: https://www.meetup.com/utah-data-engineering-meetup/events/263761070/
 
 - date: 2019-09-09
   name: "ApacheCon North America, Las Vegas"
-  info: "2019-09-09 to 2019-09-13 Flamingo Las Vegas, 3555 S Las Vegas Blvd, Las Vegas, NV 89109, USA"
+  info: "2019-09-09 to 2019-09-13, Flamingo Las Vegas, 3555 S Las Vegas Blvd, Las Vegas, NV 89109, USA"
   link: https://apachecon.com/acna19/
+  
+- date: 2019-09-17
+  name: "Meetup: Denver Apache Druid Meetup by Imply - Real-time Analytics with Apache Druid at Fullcontact"
+  info: "2019-09-17, from 6:00 - 9:00 PM @ FullContact, 1200 17th St · Denver, CO. 13th Floor
+  link: https://www.meetup.com/Denver-Apache-Druid-Meetup-by-Imply/events/264007236/
+
+- date: 2019-09-19
+  name: "Meetup: Big Data and Cloud - Rethinking Druid's user experience"
+  info: "2019-09-19, from 6:00 - 8:30 PM @ Hacker Dojo, 3350 Thomas Road · Santa Clara, CA"
+  link: https://www.meetup.com/datariders/events/263980371/
 
 - date: 2019-10-22
   name: "ApacheCon Europe, Berlin"
-  info: "2019-10-22 to 2019-10-25 Kulturbrauerei, Schönhauser Allee 36, 10435 Berlin, Germany"
+  info: "2019-10-22 to 2019-10-25, Kulturbrauerei, Schönhauser Allee 36, 10435 Berlin, Germany"
   link: https://aceu19.apachecon.com/
