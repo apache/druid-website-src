@@ -293,6 +293,10 @@ Optimizely uses Druid to power the results dashboard for Optimizely Personalizat
 * [Slicing and dicing data with druid](https://medium.com/engineers-optimizely/slicing-and-dicing-data-with-druid-f61cca8a63d2)
 * [The anatomy of a Druid segment file](https://medium.com/engineers-optimizely/the-anatomy-of-a-druid-segment-file-bed89a93af1e)
 
+## Outbrain
+
+* [Understanding Spark Streaming with Kafka and Druid](https://medium.com/outbrain-engineering/understanding-spark-streaming-with-kafka-and-druid-25b69e28dcb7)
+
 ## Paypal
 
 The Druid production deployment at PayPal processes a very large volume of data
