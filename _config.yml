@@ -16,6 +16,7 @@ exclude:
   - package-lock.json
   - scss
   - private
+  - _staging
   - release.sh
 
 highlighter: pygments
