@@ -30,7 +30,7 @@ mkdir -p _staging/
 cd _staging/
 git clone git@github.com:apache/incubator-druid.git
 cd incubator-druid/
-git checkout $1
+git checkout druid-$1
 mvn -Pwebsite-docs -pl website compile -Dwebsite.src=$baseDir
 popd
 
