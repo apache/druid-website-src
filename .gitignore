@@ -6,3 +6,4 @@ Gemfile.lock
 node_modules
 private
 css/
+_staging
