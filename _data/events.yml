@@ -1,13 +1,3 @@
-- date: 2019-08-28
-  name: "Meetup: SF Big Analytics - Apache Druid and YuniKorn: Universal Resource scheduler for both K8s and Yarn"
-  info: "2019-08-28, from 6:00 - 9:00 PM @ Workday, 160 Spear St Suite 1700 · San Francisco, CA"
-  link: https://www.meetup.com/SF-Big-Analytics/events/263274680/
-  
-- date: 2019-08-21
-  name: "Meetup: Utah Data Engineering - Two Talks About Real Time w/ Jon King (Imply) and Thor Sigurjonsson (Overstock)"
-  info: "2019-08-21, from 6:30 - 8:30 PM @ Overstock, 799 Coliseum Way · Midvale, UT"
-  link: https://www.meetup.com/utah-data-engineering-meetup/events/263761070/
-
 - date: 2019-09-09
   name: "ApacheCon North America, Las Vegas"
   info: "2019-09-09 to 2019-09-13, Flamingo Las Vegas, 3555 S Las Vegas Blvd, Las Vegas, NV 89109, USA"
