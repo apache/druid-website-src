@@ -449,6 +449,10 @@ Learn more about TrafficGuard’s comprehensive fraud mitigation at (https://www
 
 TripleLift uses Druid to provide insights into performance aspects of its native programmatic exchange for sales/business development opportunities, and to provide reporting used by advertisers and publishers.
 
+
+## Twitter
+* [Interactive Analytics at MoPub: Querying Terabytes of Data in Seconds](https://blog.twitter.com/engineering/en_us/topics/infrastructure/2019/interactive-analytics-at-mopub.html)
+
 ## VideoAmp
 
 At VideoAmp, Druid is a key component of our Big Data stack. It powers our real-time video advertising analytics at low granularity and huge scale. Druid has helped us minimized the time between event, insight and action.
@@ -513,9 +517,16 @@ Youku Tudou employs Druid for real-time advertising analysis of huge volumes of 
 
 China Youzan is a SaaS company which principally engaged in retail science and technology. We use Druid for business intelligence (BI) analytics and application performance management (APM) metrics
 
+## Zeotap
+
+* [Apache Druid helps Zeotap Master Multi-Channel Attribution at Scale](https://imply.io/post/apache-druid-helps-zeotap-master-multi-channel-attribution)
+
 ## Zhihu
 
 [Zhihu](https://www.zhihu.com/) is a Chinese question-and-answer website. In Zhihu, Druid is used to power clients' interactive queries, data reports, A/B testing and performance monitoring. Almost 1T per day data is ingested into druid cluster, and we are strongly depending on thetaSketch aggregator for computing cardinality and retention, looking forward to more improvement on DataSketch.
+
+## Zscaler
+* [Druid @ Zscaler - A Retrospective](https://imply.io/post/druid-at-zscaler-security-log-analytics)
 
 ## Zuoyebang
 
