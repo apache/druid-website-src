@@ -55,7 +55,8 @@ Branch uses Druid as their trusted analytics engine to power all of their data a
 
 ## Central Bank of the Republic of Turkey
 
-The Central Bank of the Republic of Turkey addresses the challenge of analyzing and interpreting real-time tick data related to money market instruments using Apache Druid and Superset
+The Central Bank of the Republic of Turkey addresses the challenge of analyzing and interpreting real-time tick data related to money market instruments using Apache Druid and Superset.
+
 * [Observing Intraday Indicators Using Real-Time Tick Data on Apache Superset and Druid](https://www.youtube.com/watch?v=o0JsVwFEdtA)
 
 ## Charter Communications
