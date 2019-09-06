@@ -32,7 +32,6 @@ mkdir -p _staging/
 cd _staging/
 git clone git@github.com:apache/incubator-druid.git
 cd incubator-druid/
-git checkout $commitish
 
 if [ "$#" -gt 1 ]; then
   git checkout $2
