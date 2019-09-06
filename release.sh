@@ -16,10 +16,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-if [ "$#" -ne 1 ]; then
-  echo "Illegal number of parameters, should be just one: the version";
+
+if [ "$#" -ne 1 ] && [ "$#" -ne 2 ]; then
+  echo "Illegal number of parameters, should one or two: the version, or the version and commitish";
   exit 1;
 fi
+
 echo "Building to docs for '$1'..."
 
 baseDir=$(pwd)
@@ -30,8 +32,15 @@ mkdir -p _staging/
 cd _staging/
 git clone git@github.com:apache/incubator-druid.git
 cd incubator-druid/
-git checkout druid-$1
-mvn -Pwebsite-docs -pl website compile -Dwebsite.src=$baseDir
+
+if [ "$#" -gt 1 ]; then
+  git checkout $2
+  mvn -Pwebsite-docs -pl website compile -Dwebsite.src=$baseDir -Dwebsite.version=$1
+else
+  git checkout druid-$1
+  mvn -Pwebsite-docs -pl website compile -Dwebsite.src=$baseDir
+fi
+
 popd
 
 git add .
