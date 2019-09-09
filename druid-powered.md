@@ -186,7 +186,7 @@ LifeBuzz is a popular web property that serves tens of millions of pageviews per
 
 LiquidM uses Druid for real-time drill-down reporting. LiquidM is also contributing back to the community by creating and maintaining a ruby client library for interacting with Druid located at <http://github.com/liquidm/ruby-druid>.
 
-* [Reporting at LiquidM](http://liquidm.com/reporting-at-liquidm/)
+* Reporting at LiquidM
 
 ## Lyft
 
@@ -201,7 +201,7 @@ which they can do that is in a big part thanks to Druid!
 
 ## Mafengwo
 
-* [Real-time Analytics with Kafka, Spark, and Druid](https://jini.site/jin-yumafengwobig-data-in-travel-real-time-analytics-with-kafka-spark-and-druid_269053)
+* Real-time Analytics with Kafka, Spark, and Druid
 
 ## MakeMyTrip
 
