@@ -35,10 +35,10 @@ cd incubator-druid/
 
 if [ "$#" -gt 1 ]; then
   git checkout $2
-  mvn -Pwebsite-docs -pl website compile -Dwebsite.src=$baseDir -Dwebsite.version=$1
+  mvn -Pwebsite-docs -pl website compile -Dwebsite.src=$baseDir -Dwebsite.version=$1 -Dcheckstyle.skip=true
 else
   git checkout druid-$1
-  mvn -Pwebsite-docs -pl website compile -Dwebsite.src=$baseDir
+  mvn -Pwebsite-docs -pl website compile -Dwebsite.src=$baseDir -Dcheckstyle.skip=true
 fi
 
 popd
