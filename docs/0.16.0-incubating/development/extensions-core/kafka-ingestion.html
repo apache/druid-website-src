@@ -81,14 +81,15 @@
 Kafka by managing the creation and lifetime of Kafka indexing tasks. These indexing tasks read events using Kafka's own
 partition and offset mechanism and are therefore able to provide guarantees of exactly-once ingestion. They are also
 able to read non-recent events from Kafka and are not subject to the window period considerations imposed on other
-ingestion mechanisms using Tranquility. The supervisor oversees the state of the indexing tasks to coordinate handoffs, manage failures,
-and ensure that the scalability and replication requirements are maintained.</p>
+ingestion mechanisms using Tranquility. The supervisor oversees the state of the indexing tasks to coordinate handoffs,
+manage failures, and ensure that the scalability and replication requirements are maintained.</p>
 <p>This service is provided in the <code>druid-kafka-indexing-service</code> core Apache Druid (incubating) extension (see
 <a href="/docs/0.16.0-incubating/development/extensions.html#loading-extensions">Including Extensions</a>).</p>
 <blockquote>
-<p>The Kafka indexing service uses the Java consumer that was introduced in Kafka 0.10.x. As there were protocol changes
-made in this version, Kafka 0.10.x consumers might not be compatible with older brokers. Ensure that your Kafka brokers are
-version 0.10.x or better before using this functionality. Refer <a href="https://kafka.apache.org/documentation/#upgrade">Kafka upgrade guide</a> if you are using older version of Kafka brokers.</p>
+<p>The Kafka indexing service supports transactional topics which were introduced in Kafka 0.11.x. These changes make the
+Kafka consumer that Druid uses incompatible with older brokers. Ensure that your Kafka brokers are version 0.11.x or
+better before using this functionality. Refer <a href="https://kafka.apache.org/documentation/#upgrade">Kafka upgrade guide</a>
+if you are using older version of Kafka brokers.</p>
 </blockquote>
 <h2><a class="anchor" aria-hidden="true" id="tutorial"></a><a href="#tutorial" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Tutorial</h2>
 <p>This page contains reference documentation for Apache Kafka-based ingestion.
