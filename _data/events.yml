@@ -12,6 +12,11 @@
   name: "Meetup: Big Data and Cloud - Rethinking Druid's user experience"
   info: "2019-09-19, from 6:00 - 8:30 PM @ Hacker Dojo, 3350 Thomas Road · Santa Clara, CA"
   link: https://www.meetup.com/datariders/events/263980371/
+  
+- date: 2019-09-23
+  name: "Meetup: Apache Druid: the fast, real-time, open source analytics data store"
+  info: "2019-09-23, from 6:30 - 8:30 PM @ Skills Matter, 10 South Pl · London"
+  link: https://www.meetup.com/London-Data-Science-ODSC/events/264154284/
 
 - date: 2019-10-22
   name: "ApacheCon Europe, Berlin"
