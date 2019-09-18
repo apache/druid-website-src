@@ -99,6 +99,7 @@ You don't need to be a committer to contribute- pull requests are welcome from a
 | [Egor Rashin](https://github.com/egor-ryashin)        | [Snap](https://www.snap.com/en-US/)                |
 | [Eric Tschetter](https://github.com/cheddar)          | [Splunk](https://www.splunk.com/)                  |
 | [Fangjin Yang](https://github.com/fjy)                | [Imply](https://imply.io/)                         |
+| [Furkan Kamaci](https://github.com/kamaci)            | [Lagom](https://lagom.ai/)                         |
 | [Gian Merlino](https://github.com/gianm)              | [Imply](https://imply.io/)                         |
 | [Himanshu Gupta](https://github.com/himanshug)        | [Splunk](https://www.splunk.com/)                  |
 | [Jihoon Son](https://github.com/jihoonson)            | [Imply](https://imply.io/)                         |
