@@ -1,17 +1,12 @@
-- date: 2019-09-17
-  name: "Meetup: Denver Apache Druid Meetup by Imply - Real-time Analytics with Apache Druid at Fullcontact"
-  info: "2019-09-17, from 6:00 - 9:00 PM @ FullContact, 1200 17th St · Denver, CO. 13th Floor"
-  link: https://www.meetup.com/Denver-Apache-Druid-Meetup-by-Imply/events/264007236/
-
-- date: 2019-09-19
-  name: "Meetup: Big Data and Cloud - Rethinking Druid's user experience"
-  info: "2019-09-19, from 6:00 - 8:30 PM @ Hacker Dojo, 3350 Thomas Road · Santa Clara, CA"
-  link: https://www.meetup.com/datariders/events/263980371/
-  
 - date: 2019-09-23
   name: "Meetup: Apache Druid: the fast, real-time, open source analytics data store"
   info: "2019-09-23, from 6:30 - 8:30 PM @ Skills Matter, 10 South Pl · London"
   link: https://www.meetup.com/London-Data-Science-ODSC/events/264154284/
+  
+- date: 2019-10-7
+  name: "Bay Area Druid Meetup @ Pinterest"
+  info: "Monday, October 7, 2019 6:00 PM to 8:30 PM. Pinterest HQ 505 Brannan St. San Francisco"
+  link: https://www.meetup.com/druidio/events/264755005/
 
 - date: 2019-10-22
   name: "ApacheCon Europe, Berlin"
