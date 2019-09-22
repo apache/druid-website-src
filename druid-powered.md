@@ -220,6 +220,11 @@ service for the RTB (real time bidding) space. Ingesting over 200 billion events
 per day, Metamarkets is able to provide insight to its customers using complex
 ad-hoc queries at a 95th percentile query time of around 1 second.
 
+## Millersoft
+
+Druid is the [Millersoft](https://www.millersoft.ltd.uk/) platform of choice for operational analytics. The seamless integration of real time and historical data sets within Druid has been a real boon for our data processing clients. 
+The flexibility of the API via Rest/SQL/Native against a single data source also means that our dashboards, ad-hoc queries and pivot tables are all consistent. The ability to drill down in Druid to the transactions underpinning the aggregations also means that we can reconcile the results directly against operational systems. Druid destroys legacy database cubes at the end of long data integration pipelines.
+
 ## Monetate
 
 Druid is a critical component in Monetate's personalization platform, where it
@@ -269,7 +274,9 @@ You can learn more about the AOC at http://netsil.com/download/
 
 Nielsen Marketing Cloud uses Druid as it's core real-time analytics tool to help its clients monitor, test and improve its audience targeting capabilities.  With Druid, Nielsen provides its clients with in-depth consumer insights leveraging world-class Nielsen audience data.
 
-* [Our journey with Druid - from initial research to full production scale](https://www.slideshare.net/ItaiYaffe/our-journey-with-druid-from-initial-research-to-full-production-scale)
+* [Counting Unique Users in Real-Time: Here’s a Challenge for You! video] (https://youtu.be/MLUhzuQ0DHY)
+* [Counting Unique Users in Real-Time: Here’s a Challenge for You! slides](https://www.slideshare.net/Hadoop_Summit/counting-unique-users-in-realtime-heres-a-challenge-for-you-139142580)
+* [Data Retention and Deletion in Apache Druid](https://medium.com/nmc-techblog/data-retention-and-deletion-in-apache-druid-74ffd12398a8)
 
 ## NTT Com
 
