@@ -1,3 +1,9 @@
+  - date: 2019-09-15
+    title: "Data Retention and Deletion in Apache Druid"
+    name: "Dana Assa and Itai Yaffe"
+    link: https://medium.com/nmc-techblog/data-retention-and-deletion-in-apache-druid-74ffd12398a8
+    company: Nielsen
+
   - date: 2019-08-11
     title: "Understanding Spark Streaming with Kafka and Druid"
     name: "Daria Litvinov"
