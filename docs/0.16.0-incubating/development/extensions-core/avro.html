@@ -59,7 +59,7 @@
                 };
               }
             });
-        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/apache/incubator-druid/edit/master/docs/0.16.0-incubating/development/extensions-core/avro.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 class="postHeaderTitle">Apache Avro</h1></header><article><div><span><!--
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/apache/incubator-druid/edit/master/docs/development/extensions-core/avro.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 class="postHeaderTitle">Apache Avro</h1></header><article><div><span><!--
   ~ Licensed to the Apache Software Foundation (ASF) under one
   ~ or more contributor license agreements.  See the NOTICE file
   ~ distributed with this work for additional information
@@ -210,7 +210,7 @@ remaining bytes contain serialized avro message.</p>
 </table>
 <h5><a class="anchor" aria-hidden="true" id="confluent-schema-registry-based-avro-bytes-decoder"></a><a href="#confluent-schema-registry-based-avro-bytes-decoder" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Confluent Schema Registry-based Avro Bytes Decoder</h5>
 <p>This Avro bytes decoder first extract unique <code>id</code> from input message bytes, then use them it lookup in the Schema Registry for the related schema, with which to decode Avro record from bytes.
-Details can be found in Schema Registry <a href="http://docs.confluent.io/current/schema-registry/docs/0.16.0-incubating/">documentation</a> and <a href="https://github.com/confluentinc/schema-registry">repository</a>.</p>
+Details can be found in Schema Registry <a href="http://docs.confluent.io/current/schema-registry/docs/">documentation</a> and <a href="https://github.com/confluentinc/schema-registry">repository</a>.</p>
 <table>
 <thead>
 <tr><th>Field</th><th>Type</th><th>Description</th><th>Required</th></tr>
@@ -229,7 +229,7 @@ Details can be found in Schema Registry <a href="http://docs.confluent.io/curren
 ...
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="avro-hadoop-parser"></a><a href="#avro-hadoop-parser" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Avro Hadoop Parser</h3>
-<p>This is for batch ingestion using the <code>HadoopDruidIndexer</code>. The <code>inputFormat</code> of <code>inputSpec</code> in <code>ioConfig</code> must be set to <code>&quot;org.apache.druid.data.input.avro.AvroValueInputFormat&quot;</code>. You may want to set Avro reader's schema in <code>jobProperties</code> in <code>tuningConfig</code>, e.g.: <code>&quot;avro.schema.input.value.path&quot;: &quot;/path/to/your/schema.avsc&quot;</code> or <code>&quot;avro.schema.input.value&quot;: &quot;your_schema_JSON_object&quot;</code>, if reader's schema is not set, the schema in Avro object container file will be used, see <a href="http://avro.apache.org/docs/0.16.0-incubating/1.7.7/spec.html#Schema+Resolution">Avro specification</a>. Make sure to include &quot;org.apache.druid.extensions:druid-avro-extensions&quot; as an extension.</p>
+<p>This is for batch ingestion using the <code>HadoopDruidIndexer</code>. The <code>inputFormat</code> of <code>inputSpec</code> in <code>ioConfig</code> must be set to <code>&quot;org.apache.druid.data.input.avro.AvroValueInputFormat&quot;</code>. You may want to set Avro reader's schema in <code>jobProperties</code> in <code>tuningConfig</code>, e.g.: <code>&quot;avro.schema.input.value.path&quot;: &quot;/path/to/your/schema.avsc&quot;</code> or <code>&quot;avro.schema.input.value&quot;: &quot;your_schema_JSON_object&quot;</code>, if reader's schema is not set, the schema in Avro object container file will be used, see <a href="http://avro.apache.org/docs/1.7.7/spec.html#Schema+Resolution">Avro specification</a>. Make sure to include &quot;org.apache.druid.extensions:druid-avro-extensions&quot; as an extension.</p>
 <table>
 <thead>
 <tr><th>Field</th><th>Type</th><th>Description</th><th>Required</th></tr>

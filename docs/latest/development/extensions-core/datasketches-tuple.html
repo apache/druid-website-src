@@ -59,7 +59,7 @@
                 };
               }
             });
-        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/apache/incubator-druid/edit/master/docs/latest/development/extensions-core/datasketches-tuple.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 class="postHeaderTitle">DataSketches Tuple Sketch module</h1></header><article><div><span><!--
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/apache/incubator-druid/edit/master/docs/development/extensions-core/datasketches-tuple.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 class="postHeaderTitle">DataSketches Tuple Sketch module</h1></header><article><div><span><!--
   ~ Licensed to the Apache Software Foundation (ASF) under one
   ~ or more contributor license agreements.  See the NOTICE file
   ~ distributed with this work for additional information
@@ -99,7 +99,7 @@
 <tr><td>type</td><td>This String should always be &quot;arrayOfDoublesSketch&quot;</td><td>yes</td></tr>
 <tr><td>name</td><td>A String for the output (result) name of the calculation.</td><td>yes</td></tr>
 <tr><td>fieldName</td><td>A String for the name of the input field.</td><td>yes</td></tr>
-<tr><td>nominalEntries</td><td>Parameter that determines the accuracy and size of the sketch. Higher k means higher accuracy but more space to store sketches. Must be a power of 2. See the <a href="https://datasketches.github.io/docs/latest/Theta/ThetaErrorTable.html">Theta sketch accuracy</a> for details.</td><td>no, defaults to 16384</td></tr>
+<tr><td>nominalEntries</td><td>Parameter that determines the accuracy and size of the sketch. Higher k means higher accuracy but more space to store sketches. Must be a power of 2. See the <a href="https://datasketches.github.io/docs/Theta/ThetaErrorTable.html">Theta sketch accuracy</a> for details.</td><td>no, defaults to 16384</td></tr>
 <tr><td>numberOfValues</td><td>Number of values associated with each distinct key.</td><td>no, defaults to 1</td></tr>
 <tr><td>metricColumns</td><td>If building sketches from raw data, an array of names of the input columns containing numeric values to be associated with each distinct key.</td><td>no, defaults to empty array</td></tr>
 </tbody>
