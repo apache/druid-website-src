@@ -59,7 +59,7 @@
                 };
               }
             });
-        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/apache/incubator-druid/edit/master/docs/0.16.0-incubating/operations/high-availability.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 class="postHeaderTitle">High availability</h1></header><article><div><span><!--
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/apache/incubator-druid/edit/master/docs/operations/high-availability.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 class="postHeaderTitle">High availability</h1></header><article><div><span><!--
   ~ Licensed to the Apache Software Foundation (ASF) under one
   ~ or more contributor license agreements.  See the NOTICE file
   ~ distributed with this work for additional information
@@ -84,7 +84,7 @@ We recommend either installing ZooKeeper on its own hardware, or running 3 or 5 
 and configuring ZooKeeper on them appropriately. See the <a href="https://zookeeper.apache.org/doc/current/zookeeperAdmin.html">ZooKeeper admin guide</a> for more details.</li>
 <li>For highly-available metadata storage, we recommend MySQL or PostgreSQL with replication and failover enabled.
 See <a href="https://dev.mysql.com/doc/mysql-ha-scalability/en/">MySQL HA/Scalability Guide</a>
-and <a href="https://www.postgresql.org/docs/0.16.0-incubating/9.5/high-availability.html">PostgreSQL's High Availability, Load Balancing, and Replication</a> for MySQL and PostgreSQL, respectively.</li>
+and <a href="https://www.postgresql.org/docs/9.5/high-availability.html">PostgreSQL's High Availability, Load Balancing, and Replication</a> for MySQL and PostgreSQL, respectively.</li>
 <li>For highly-available Apache Druid (incubating) Coordinators and Overlords, we recommend to run multiple servers.
 If they are all configured to use the same ZooKeeper cluster and metadata storage,
 then they will automatically failover between each other as necessary.

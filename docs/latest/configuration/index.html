@@ -59,7 +59,7 @@
                 };
               }
             });
-        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/apache/incubator-druid/edit/master/docs/latest/configuration/index.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 class="postHeaderTitle">Configuration reference</h1></header><article><div><span><!--
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/apache/incubator-druid/edit/master/docs/configuration/index.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 class="postHeaderTitle">Configuration reference</h1></header><article><div><span><!--
   ~ Licensed to the Apache Software Foundation (ASF) under one
   ~ or more contributor license agreements.  See the NOTICE file
   ~ distributed with this work for additional information
@@ -244,9 +244,9 @@ and <code>druid.tlsPort</code> properties on each process. Please see <code>Conf
 <h4><a class="anchor" aria-hidden="true" id="jetty-server-tls-configuration"></a><a href="#jetty-server-tls-configuration" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Jetty Server TLS Configuration</h4>
 <p>Druid uses Jetty as an embedded web server. To get familiar with TLS/SSL in general and related concepts like Certificates etc.
 reading this <a href="http://www.eclipse.org/jetty/documentation/9.4.x/configuring-ssl.html">Jetty documentation</a> might be helpful.
-To get more in depth knowledge of TLS/SSL support in Java in general, please refer to this <a href="http://docs.oracle.com/javase/8/docs/latest/technotes/guides/security/jsse/JSSERefGuide.html">guide</a>.
+To get more in depth knowledge of TLS/SSL support in Java in general, please refer to this <a href="http://docs.oracle.com/javase/8/docs/technotes/guides/security/jsse/JSSERefGuide.html">guide</a>.
 The documentation <a href="http://www.eclipse.org/jetty/documentation/9.4.x/configuring-ssl.html#configuring-sslcontextfactory">here</a>
-can help in understanding TLS/SSL configurations listed below. This <a href="http://docs.oracle.com/javase/8/docs/latest/technotes/guides/security/StandardNames.html">document</a> lists all the possible
+can help in understanding TLS/SSL configurations listed below. This <a href="http://docs.oracle.com/javase/8/docs/technotes/guides/security/StandardNames.html">document</a> lists all the possible
 values for the below mentioned configs among others provided by Java implementation.</p>
 <table>
 <thead>
@@ -265,7 +265,7 @@ values for the below mentioned configs among others provided by Java implementat
 <tr><th>Property</th><th>Description</th><th>Default</th><th>Required</th></tr>
 </thead>
 <tbody>
-<tr><td><code>druid.server.https.keyManagerFactoryAlgorithm</code></td><td>Algorithm to use for creating KeyManager, more details <a href="https://docs.oracle.com/javase/7/docs/latest/technotes/guides/security/jsse/JSSERefGuide.html#KeyManager">here</a>.</td><td><code>javax.net.ssl.KeyManagerFactory.getDefaultAlgorithm()</code></td><td>no</td></tr>
+<tr><td><code>druid.server.https.keyManagerFactoryAlgorithm</code></td><td>Algorithm to use for creating KeyManager, more details <a href="https://docs.oracle.com/javase/7/docs/technotes/guides/security/jsse/JSSERefGuide.html#KeyManager">here</a>.</td><td><code>javax.net.ssl.KeyManagerFactory.getDefaultAlgorithm()</code></td><td>no</td></tr>
 <tr><td><code>druid.server.https.keyManagerPassword</code></td><td>The <a href="/docs/latest/operations/password-provider.html">Password Provider</a> or String password for the Key Manager.</td><td>none</td><td>no</td></tr>
 <tr><td><code>druid.server.https.includeCipherSuites</code></td><td>List of cipher suite names to include. You can either use the exact cipher suite name or a regular expression.</td><td>Jetty's default include cipher list</td><td>no</td></tr>
 <tr><td><code>druid.server.https.excludeCipherSuites</code></td><td>List of cipher suite names to exclude. You can either use the exact cipher suite name or a regular expression.</td><td>Jetty's default exclude cipher list</td><td>no</td></tr>
@@ -287,7 +287,7 @@ values for the below mentioned configs among others provided by Java implementat
 <tr><td><code>druid.client.https.trustStorePassword</code></td><td>The <a href="/docs/latest/operations/password-provider.html">Password Provider</a> or String password for the Trust Store.</td><td>none</td><td>yes</td></tr>
 </tbody>
 </table>
-<p>This <a href="http://docs.oracle.com/javase/8/docs/latest/technotes/guides/security/StandardNames.html">document</a> lists all the possible
+<p>This <a href="http://docs.oracle.com/javase/8/docs/technotes/guides/security/StandardNames.html">document</a> lists all the possible
 values for the above mentioned configs among others provided by Java implementation.</p>
 <h3><a class="anchor" aria-hidden="true" id="authentication-and-authorization"></a><a href="#authentication-and-authorization" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Authentication and Authorization</h3>
 <table>
@@ -393,7 +393,7 @@ For native query, only request logs where query/time is above the threshold are 
 <tbody>
 <tr><td><code>druid.request.logging.queryTimeThresholdMs</code></td><td>Threshold value for query/time in milliseconds.</td><td>0, i.e., no filtering</td></tr>
 <tr><td><code>druid.request.logging.sqlQueryTimeThresholdMs</code></td><td>Threshold value for sqlQuery/time in milliseconds.</td><td>0, i.e., no filtering</td></tr>
-<tr><td><code>druid.request.logging.mutedQueryTypes</code></td><td>Query requests of these types are not logged. Query types are defined as string objects corresponding to the &quot;queryType&quot; value for the specified query in the Druid's <a href="http://druid.apache.org/docs/latest/latest/querying/querying.html">native JSON query API</a>. Misspelled query types will be ignored. Example to ignore scan and timeBoundary queries: [&quot;scan&quot;, &quot;timeBoundary&quot;]</td><td>[]</td></tr>
+<tr><td><code>druid.request.logging.mutedQueryTypes</code></td><td>Query requests of these types are not logged. Query types are defined as string objects corresponding to the &quot;queryType&quot; value for the specified query in the Druid's <a href="http://druid.apache.org/docs/latest/querying/querying.html">native JSON query API</a>. Misspelled query types will be ignored. Example to ignore scan and timeBoundary queries: [&quot;scan&quot;, &quot;timeBoundary&quot;]</td><td>[]</td></tr>
 <tr><td><code>druid.request.logging.delegate.type</code></td><td>Type of delegate request logger to log requests.</td><td>none</td></tr>
 </tbody>
 </table>

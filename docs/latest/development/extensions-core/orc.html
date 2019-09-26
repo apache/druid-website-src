@@ -59,7 +59,7 @@
                 };
               }
             });
-        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/apache/incubator-druid/edit/master/docs/latest/development/extensions-core/orc.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 class="postHeaderTitle">ORC Extension</h1></header><article><div><span><!--
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/apache/incubator-druid/edit/master/docs/development/extensions-core/orc.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 class="postHeaderTitle">ORC Extension</h1></header><article><div><span><!--
   ~ Licensed to the Apache Software Foundation (ASF) under one
   ~ or more contributor license agreements.  See the NOTICE file
   ~ distributed with this work for additional information
@@ -97,7 +97,7 @@ If no <code>flattenSpec</code> is specified, <code>useFieldDiscovery</code> will
 optional if <code>useFieldDiscovery</code> is enabled: if a <code>dimensionSpec</code> is supplied, the list of <code>dimensions</code> it defines will be
 the set of ingested dimensions, if missing the discovered fields will make up the list.</p>
 <p><code>timeAndDims</code> parse spec must specify which fields will be extracted as dimensions through the <code>dimensionSpec</code>.</p>
-<p><a href="https://orc.apache.org/docs/latest/types.html">All column types</a> are supported, with the exception of <code>union</code> types. Columns of
+<p><a href="https://orc.apache.org/docs/types.html">All column types</a> are supported, with the exception of <code>union</code> types. Columns of
 <code>list</code> type, if filled with primitives, may be used as a multi-value dimension, or specific elements can be extracted with
 <code>flattenSpec</code> expressions. Likewise, primitive fields may be extracted from <code>map</code> and <code>struct</code> types in the same manner.
 Auto field discovery will automatically create a string dimension for every (non-timestamp) primitive or <code>list</code> of
