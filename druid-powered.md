@@ -7,15 +7,15 @@ sectionid: powered-by
 
 There are numerous companies of various sizes in production with Druid. Some of them are listed below.
 
-## Airbridge
-
-[Airbridge](https://airbridge.io) is an people-based attribution and omni-channel campaign analytics platform helping marketers measure and optimize their marketing campaigns. Thanks to Druid's data aggregation technology, marketers using Airbridge are able to receive real-time granular reports regarding their campaign's performance executed across a variety of devices, platforms, and channels.
-
 ## Airbnb
 
 Druid powers slice and dice analytics on both historical and realtime-time metrics. It significantly reduces latency of analytic queries and help people to get insights more interactively.
 
 * [How Druid enables analytics at Airbnb](https://medium.com/airbnb-engineering/druid-airbnb-data-platform-601c312f2a4c)
+
+## Airbridge
+
+[Airbridge](https://airbridge.io) is an people-based attribution and omni-channel campaign analytics platform helping marketers measure and optimize their marketing campaigns. Thanks to Druid's data aggregation technology, marketers using Airbridge are able to receive real-time granular reports regarding their campaign's performance executed across a variety of devices, platforms, and channels.
 
 ## Alibaba
 
@@ -73,13 +73,6 @@ Cisco uses Druid to power a real-time analytics platform for network flow data.
 
 * [Under the hood of Cisco’s Tetration Analytics platform](http://www.networkworld.com/article/3086250/cisco-subnet/under-the-hood-of-cisco-s-tetration-analytics-platform.html)
 
-## Criteo
-
-Criteo is using druid to provide its customers with user-centric analytics & reporting.
-With more than 1 billion unique users reached per month, 3 billion ads displayed per day, and a 70% growth in 2014, Criteo's previous stack was hard pressed keeping with the load. Replacing it with druid helped us achieved linear scalability while letting our customers explore their data in new and interactive ways.
-
-* [Real Time Metrics on Tracker Calls](http://labs.criteo.com/2016/02/real-time-metrics-on-tracker-calls/)
-
 ## Condé Nast
 
 Condé Nast uses Druid to track billions of events across our two dozen brands, both in real time and historically. Druid helps power dashboards, site performance trackers, and many other internal applications.
@@ -88,7 +81,15 @@ Condé Nast uses Druid to track billions of events across our two dozen brands, 
 
 [Contiamo](https://www.contiamo.com) uses cutting edge technology to enable agile development and deployment of data-driven frontends and automations. Druid powers various dashboards and frontends that deal with large amounts of event based data.
 
+## Criteo
+
+Criteo is using druid to provide its customers with user-centric analytics & reporting.
+With more than 1 billion unique users reached per month, 3 billion ads displayed per day, and a 70% growth in 2014, Criteo's previous stack was hard pressed keeping with the load. Replacing it with druid helped us achieved linear scalability while letting our customers explore their data in new and interactive ways.
+
+* [Real Time Metrics on Tracker Calls](http://labs.criteo.com/2016/02/real-time-metrics-on-tracker-calls/)
+
 ## Delta Projects
+
 [Delta Projects](https://www.deltaprojects.com) uses Druid to power real-time audience and advertising analytics interfaces.
 
 ## Didi Chuxing
@@ -148,6 +149,10 @@ Imply uses Druid to power public demos and to power our internal monitoring and 
 * [Building a Streaming Analytics Stack with Apache Kafka and Druid](http://www.confluent.io/blog/building-a-streaming-analytics-stack-with-apache-kafka-and-druid)
 * [Compressing Longs in Druid](https://imply.io/post/compressing-longs)
 * [Securing Druid](https://imply.io/post/securing-druid)
+
+## Inke
+
+[Inke](https://www.inke.cn) is a online live company which principally engaged in online live and technology. We use Druid for business intelligence (BI) analytics.
 
 ## Inmobi
 
@@ -222,7 +227,7 @@ ad-hoc queries at a 95th percentile query time of around 1 second.
 
 ## Millersoft
 
-Druid is the [Millersoft](https://www.millersoft.ltd.uk/) platform of choice for operational analytics. The seamless integration of real time and historical data sets within Druid has been a real boon for our data processing clients. 
+Druid is the [Millersoft](https://www.millersoft.ltd.uk/) platform of choice for operational analytics. The seamless integration of real time and historical data sets within Druid has been a real boon for our data processing clients.
 The flexibility of the API via Rest/SQL/Native against a single data source also means that our dashboards, ad-hoc queries and pivot tables are all consistent. The ability to drill down in Druid to the transactions underpinning the aggregations also means that we can reconcile the results directly against operational systems. Druid destroys legacy database cubes at the end of long data integration pipelines.
 
 ## Monetate
@@ -539,9 +544,5 @@ China Youzan is a SaaS company which principally engaged in retail science and t
 ## Zuoyebang
 
 [Zuoyebang](http://www.zuoyebang.com/) is the most used K12 education platform, 7 out of every 10 K12 users are using Zuoyebang. At Zuoyebang Data Platform Group, we use the Druid in the advertising scene,  mainly related to advertising display, click, billing, and other functions. The performance and timeliness of druid can meet our OLAP queries very well.
-
-## Inke
-
-[Inke](https://www.inke.cn) is a online live company which principally engaged in online live and technology. We use Druid for business intelligence (BI) analytics.
 
 [Add Your Company](https://github.com/apache/incubator-druid-website-src/blob/master/druid-powered.md)
