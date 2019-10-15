@@ -76,10 +76,6 @@ In general please follow the [contributing guidelines](https://github.com/apache
 when sending in pull requests. This will help review proceed as quickly as
 possible.
 
-For code contributions, we require that you agree to a Contributor License
-Agreement (CLA) before we can accept your code. You can find our CLA on and
-sign it directly on our [CLA page](/community/cla.html)
-
 ### Committers
 
 Committers are collectively responsible for Druid's technical management. This involves
