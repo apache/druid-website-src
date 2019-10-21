@@ -1,14 +1,20 @@
-- date: 2019-10-16
-  name: "Utah Data Engineering Meetup @ Overstock"
-  info: "Overstock, 799 Coliseum Way · Midvale, UT"
-  link: https://www.meetup.com/utah-data-engineering-meetup/events/265027325/
-
 - date: 2019-10-19
   name: "Bangalore Apache Druid Meetup @ Zeotap"
-  info: "Zeoptap, 974, 80 Feet Rd · Bengaluru"
+  info: "Zeoptap, 974, 80 Feet Rd, Bengaluru"
   link: https://www.meetup.com/Bangalore-Druid-Meetup-Group/events/265037528/
 
 - date: 2019-10-22
   name: "ApacheCon Europe, Berlin"
-  info: "2019-10-22 to 2019-10-25, Kulturbrauerei, Schönhauser Allee 36, 10435 Berlin, Germany"
+  info: "Kulturbrauerei, Schönhauser Allee 36, 10435 Berlin, Germany"
   link: https://aceu19.apachecon.com/
+
+- date: 2019-11-12
+  name: "Bay Area Apache Druid Meetup @ Apollo GraphQL"
+  info: "Apollo GraphQL, 140 10th St, San Francisc, CA"
+  link: https://www.meetup.com/druidio/events/265783126/
+
+
+- date: 2019-11-14
+  name: "Munich Aoache Druid Meetup @ Ippen Digital"
+  info: "Ippen Digital, Paul-Heyse-Straße 2, 80336 München, Germany"
+  link: https://www.meetup.com/Apache-Druid-Munich/events/265710003/
