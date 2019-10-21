@@ -49,6 +49,10 @@ Atomx is a new media exchange that connects networks, DSPs, SSPs, and other part
 
 Billy Mobile is a mobile advertising platform, excelling in the performance-based optimisation segment. We use Druid to power our real-time analytics dashboards, in which our publishers, advertisers and staff can get insights on how their campaigns, offers and traffic are performing, with sub-second query time and minute granularity . We are using a lambda-architecture aproach, ingesting the traffic in real time with Tranquility and Storm, and a batch layer via a tight integration with Hive and Hadoop, our Master Data Set. This way we can provide crucial fast access to data, while making sure to have the right numbers.
 
+## Booking.com
+
+* [Data Engineering At Booking.com Case Study](https://www.youtube.com/watch?v=9GE3yiVo1FM)
+
 ## Branch
 
 Branch uses Druid as their trusted analytics engine to power all of their data analysis needs. This ranges from the user-facing Branch Dashboard analytics that our partners rely on to gain insight into the performance of their links; to the data-driven business decisions that we need to make internally to build a sustainable business.
