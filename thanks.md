@@ -1,6 +1,7 @@
 ---
 title: Thanks
 layout: simple_page
+canonical: 'https://druid.apache.org/thanks'
 ---
 
 ![YourKit Logo](/img/yklogo.png)

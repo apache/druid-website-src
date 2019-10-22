@@ -1,6 +1,7 @@
 ---
 title: Community and Third Party Software
 layout: simple_page
+canonical: 'https://druid.apache.org/libraries'
 ---
 
 Query Libraries

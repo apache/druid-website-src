@@ -1,6 +1,7 @@
 ---
 title: License
 layout: simple_page
+canonical: 'https://druid.apache.org/licensing'
 ---
 
 ## License
