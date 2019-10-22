@@ -3,6 +3,7 @@ title: Frequently Asked Questions
 subtitle: Don't see your question here? <a href='/community'>Ask us</a>
 layout: simple_page
 sectionid: faq
+canonical: 'https://druid.apache.org/faq'
 ---
 
 ### Is Druid a data warehouse? When should I use Druid over Redshift/BigQuery/Snowflake?

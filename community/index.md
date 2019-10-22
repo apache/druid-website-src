@@ -2,6 +2,7 @@
 title: Apache Druid (incubating) Community
 sectionid: community
 layout: simple_page
+canonical: 'https://druid.apache.org/community/'
 ---
 
 ## Community

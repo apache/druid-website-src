@@ -2,6 +2,7 @@
 title: Technology
 layout: simple_page
 sectionid: technology
+canonical: 'https://druid.apache.org/technology'
 ---
 
 Apache Druid (incubating) is an open source distributed data store.

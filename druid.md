@@ -2,6 +2,7 @@
 title: About Druid
 layout: simple_page
 sectionid: druid
+canonical: 'https://druid.apache.org/druid'
 ---
 
 Apache Druid (incubating) is an open-source data store designed for sub-second queries on real-time
@@ -60,7 +61,7 @@ Google's
 search infrastructure. Druid indexes all ingested data in a custom column
 format optimized for aggregations and filters. A Druid cluster is composed of
 various types of processes (called nodes), each designed to do a small set of
-things very well. 
+things very well.
 
 ## Comprehensive Architecture
 

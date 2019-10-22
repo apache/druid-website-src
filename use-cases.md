@@ -2,6 +2,7 @@
 title: Use Cases
 layout: simple_page
 sectionid: use-cases
+canonical: 'https://druid.apache.org/use-cases'
 ---
 
 ## Streaming and operational data

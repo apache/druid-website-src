@@ -3,6 +3,7 @@ title: Powered by Apache Druid (incubating)
 subtitle: <a href="https://github.com/apache/incubator-druid-website-src/blob/master/druid-powered.md"><span class="fa fa-plus"></span> Add Your Company</a>
 layout: simple_page
 sectionid: powered-by
+canonical: 'https://druid.apache.org/druid-powered'
 ---
 
 There are numerous companies of various sizes in production with Druid. Some of them are listed below.
