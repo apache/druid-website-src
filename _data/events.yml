@@ -1,13 +1,3 @@
-- date: 2019-10-19
-  name: "Bangalore Apache Druid Meetup @ Zeotap"
-  info: "Zeoptap, 974, 80 Feet Rd, Bengaluru"
-  link: https://www.meetup.com/Bangalore-Druid-Meetup-Group/events/265037528/
-
-- date: 2019-10-22
-  name: "ApacheCon Europe, Berlin"
-  info: "Kulturbrauerei, Schönhauser Allee 36, 10435 Berlin, Germany"
-  link: https://aceu19.apachecon.com/
-
 - date: 2019-11-12
   name: "Bay Area Apache Druid Meetup @ Apollo GraphQL"
   info: "Apollo GraphQL, 140 10th St, San Francisco, CA"
