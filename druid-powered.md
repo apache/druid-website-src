@@ -342,6 +342,10 @@ is what they have to say:
 
 * [PayPal merchant ecosystem using Apache Spark, Hive, Druid, and HBase](https://dataworkssummit.com/san-jose-2018/session/paypal-merchant-ecosystem-using-apache-spark-hive-druid-and-hbase/)
 
+## Pinterest
+
+* [Powering Ad Analytics with Apache Druid](https://www.youtube.com/watch?v=LBXtK0DSQIw)
+
 ## Plumbr
 
 * [Introduction to Druid, fast distributed data store](https://youtu.be/rx6c7D9QmyU)
