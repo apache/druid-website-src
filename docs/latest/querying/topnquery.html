@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>TopN queries · Apache Druid</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="&lt;!--"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="TopN queries · Apache Druid"/><meta property="og:type" content="website"/><meta property="og:url" content="https://druid.apache.org/index.html"/><meta property="og:description" content="&lt;!--"/><meta property="og:image" content="https://druid.apache.org/img/druid_nav.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://druid.apache.org/img/druid_nav.png"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-131010415-1"></script><script>
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>TopN queries · Apache Druid</title><meta name="viewport" content="width=device-width"/><link rel="canonical" href="https://druid.apache.org/docs/querying/topnquery.html"/><meta name="generator" content="Docusaurus"/><meta name="description" content="&lt;!--"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="TopN queries · Apache Druid"/><meta property="og:type" content="website"/><meta property="og:url" content="https://druid.apache.org/index.html"/><meta property="og:description" content="&lt;!--"/><meta property="og:image" content="https://druid.apache.org/img/druid_nav.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://druid.apache.org/img/druid_nav.png"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-131010415-1"></script><script>
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments); }
               gtag('js', new Date());
@@ -197,7 +197,7 @@ The format of the results would look like so:</p>
   }
 ]
 </code></pre>
-<h3><a class="anchor" aria-hidden="true" id="behavior-on-multi-value-dimensions"></a><a href="#behavior-on-multi-value-dimensions" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Behavior on multi-value dimensions</h3>
+<h2><a class="anchor" aria-hidden="true" id="behavior-on-multi-value-dimensions"></a><a href="#behavior-on-multi-value-dimensions" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Behavior on multi-value dimensions</h2>
 <p>topN queries can group on multi-value dimensions. When grouping on a multi-value dimension, <em>all</em> values
 from matching rows will be used to generate one group per value. It's possible for a query to return more groups than
 there are rows. For example, a topN on the dimension <code>tags</code> with filter <code>&quot;t1&quot; AND &quot;t3&quot;</code> would match only row1, and
@@ -205,7 +205,7 @@ generate a result with three groups: <code>t1</code>, <code>t2</code>, and <code
 your filter, you can use a <a href="dimensionspecs.html#filtered-dimensionspecs">filtered dimensionSpec</a>. This can also
 improve performance.</p>
 <p>See <a href="multi-value-dimensions.html">Multi-value dimensions</a> for more details.</p>
-<h3><a class="anchor" aria-hidden="true" id="aliasing"></a><a href="#aliasing" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Aliasing</h3>
+<h2><a class="anchor" aria-hidden="true" id="aliasing"></a><a href="#aliasing" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Aliasing</h2>
 <p>The current TopN algorithm is an approximate algorithm. The top 1000 local results from each segment are returned for merging to determine the global topN. As such, the topN algorithm is approximate in both rank and results. Approximate results <em>ONLY APPLY WHEN THERE ARE MORE THAN 1000 DIM VALUES</em>. A topN over a dimension with fewer than 1000 unique dimension values can be considered accurate in rank and accurate in aggregates.</p>
 <p>The threshold can be modified from it's default 1000 via the server parameter <code>druid.query.topN.minTopNThreshold</code> which need to restart servers to take effect or set <code>minTopNThreshold</code> in query context which take effect per query.</p>
 <p>If you are wanting the top 100 of a high cardinality, uniformly distributed dimension ordered by some low-cardinality, uniformly distributed dimension, you are potentially going to get aggregates back that are missing data.</p>
@@ -213,14 +213,14 @@ improve performance.</p>
 <p>Before continuing in this section, please consider if you really need exact results. Getting exact results is a very resource intensive process. For the vast majority of &quot;useful&quot; data results, an approximate topN algorithm supplies plenty of accuracy.</p>
 <p>Users wishing to get an <em>exact rank and exact aggregates</em> topN over a dimension with greater than 1000 unique values should issue a groupBy query and sort the results themselves. This is very computationally expensive for high-cardinality dimensions.</p>
 <p>Users who can tolerate <em>approximate rank</em> topN over a dimension with greater than 1000 unique values, but require <em>exact aggregates</em> can issue two queries. One to get the approximate topN dimension values, and another topN with dimension selection filters which only use the topN results of the first.</p>
-<h4><a class="anchor" aria-hidden="true" id="example-first-query"></a><a href="#example-first-query" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example First query:</h4>
+<h3><a class="anchor" aria-hidden="true" id="example-first-query"></a><a href="#example-first-query" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example First query</h3>
 <pre><code class="hljs css language-json">{
     <span class="hljs-attr">"aggregations"</span>: [
-             {
-                 <span class="hljs-attr">"fieldName"</span>: <span class="hljs-string">"L_QUANTITY_longSum"</span>,
-                 <span class="hljs-attr">"name"</span>: <span class="hljs-string">"L_QUANTITY_"</span>,
-                 <span class="hljs-attr">"type"</span>: <span class="hljs-string">"longSum"</span>
-             }
+         {
+             <span class="hljs-attr">"fieldName"</span>: <span class="hljs-string">"L_QUANTITY_longSum"</span>,
+             <span class="hljs-attr">"name"</span>: <span class="hljs-string">"L_QUANTITY_"</span>,
+             <span class="hljs-attr">"type"</span>: <span class="hljs-string">"longSum"</span>
+         }
     ],
     <span class="hljs-attr">"dataSource"</span>: <span class="hljs-string">"tpch_year"</span>,
     <span class="hljs-attr">"dimension"</span>:<span class="hljs-string">"l_orderkey"</span>,
@@ -233,33 +233,33 @@ improve performance.</p>
     <span class="hljs-attr">"threshold"</span>: <span class="hljs-number">2</span>
 }
 </code></pre>
-<h4><a class="anchor" aria-hidden="true" id="example-second-query"></a><a href="#example-second-query" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example second query:</h4>
+<h3><a class="anchor" aria-hidden="true" id="example-second-query"></a><a href="#example-second-query" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example second query</h3>
 <pre><code class="hljs css language-json">{
     <span class="hljs-attr">"aggregations"</span>: [
-             {
-                 <span class="hljs-attr">"fieldName"</span>: <span class="hljs-string">"L_TAX_doubleSum"</span>,
-                 <span class="hljs-attr">"name"</span>: <span class="hljs-string">"L_TAX_"</span>,
-                 <span class="hljs-attr">"type"</span>: <span class="hljs-string">"doubleSum"</span>
-             },
-             {
-                 <span class="hljs-attr">"fieldName"</span>: <span class="hljs-string">"L_DISCOUNT_doubleSum"</span>,
-                 <span class="hljs-attr">"name"</span>: <span class="hljs-string">"L_DISCOUNT_"</span>,
-                 <span class="hljs-attr">"type"</span>: <span class="hljs-string">"doubleSum"</span>
-             },
-             {
-                 <span class="hljs-attr">"fieldName"</span>: <span class="hljs-string">"L_EXTENDEDPRICE_doubleSum"</span>,
-                 <span class="hljs-attr">"name"</span>: <span class="hljs-string">"L_EXTENDEDPRICE_"</span>,
-                 <span class="hljs-attr">"type"</span>: <span class="hljs-string">"doubleSum"</span>
-             },
-             {
-                 <span class="hljs-attr">"fieldName"</span>: <span class="hljs-string">"L_QUANTITY_longSum"</span>,
-                 <span class="hljs-attr">"name"</span>: <span class="hljs-string">"L_QUANTITY_"</span>,
-                 <span class="hljs-attr">"type"</span>: <span class="hljs-string">"longSum"</span>
-             },
-             {
-                 <span class="hljs-attr">"name"</span>: <span class="hljs-string">"count"</span>,
-                 <span class="hljs-attr">"type"</span>: <span class="hljs-string">"count"</span>
-             }
+         {
+             <span class="hljs-attr">"fieldName"</span>: <span class="hljs-string">"L_TAX_doubleSum"</span>,
+             <span class="hljs-attr">"name"</span>: <span class="hljs-string">"L_TAX_"</span>,
+             <span class="hljs-attr">"type"</span>: <span class="hljs-string">"doubleSum"</span>
+         },
+         {
+             <span class="hljs-attr">"fieldName"</span>: <span class="hljs-string">"L_DISCOUNT_doubleSum"</span>,
+             <span class="hljs-attr">"name"</span>: <span class="hljs-string">"L_DISCOUNT_"</span>,
+             <span class="hljs-attr">"type"</span>: <span class="hljs-string">"doubleSum"</span>
+         },
+         {
+             <span class="hljs-attr">"fieldName"</span>: <span class="hljs-string">"L_EXTENDEDPRICE_doubleSum"</span>,
+             <span class="hljs-attr">"name"</span>: <span class="hljs-string">"L_EXTENDEDPRICE_"</span>,
+             <span class="hljs-attr">"type"</span>: <span class="hljs-string">"doubleSum"</span>
+         },
+         {
+             <span class="hljs-attr">"fieldName"</span>: <span class="hljs-string">"L_QUANTITY_longSum"</span>,
+             <span class="hljs-attr">"name"</span>: <span class="hljs-string">"L_QUANTITY_"</span>,
+             <span class="hljs-attr">"type"</span>: <span class="hljs-string">"longSum"</span>
+         },
+         {
+             <span class="hljs-attr">"name"</span>: <span class="hljs-string">"count"</span>,
+             <span class="hljs-attr">"type"</span>: <span class="hljs-string">"count"</span>
+         }
     ],
     <span class="hljs-attr">"dataSource"</span>: <span class="hljs-string">"tpch_year"</span>,
     <span class="hljs-attr">"dimension"</span>:<span class="hljs-string">"l_orderkey"</span>,
@@ -287,4 +287,4 @@ improve performance.</p>
     <span class="hljs-attr">"threshold"</span>: <span class="hljs-number">2</span>
 }
 </code></pre>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/latest/querying/timeseriesquery.html"><span class="arrow-prev">← </span><span>Timeseries</span></a><a class="docs-next button" href="/docs/latest/querying/groupbyquery.html"><span class="function-name-prevnext">GroupBy</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"></nav></div><footer class="nav-footer druid-footer" id="footer"><div class="container"><div class="text-center"><p><a href="/technology">Technology</a> · <a href="/use-cases">Use Cases</a> · <a href="/druid-powered">Powered by Druid</a> · <a href="/docs/latest/latest">Docs</a> · <a href="/community/">Community</a> · <a href="/downloads.html">Download</a> · <a href="/faq">FAQ</a></p></div><div class="text-center"><a title="Join the user group" href="https://groups.google.com/forum/#!forum/druid-user" target="_blank"><span class="fa fa-comments"></span></a> · <a title="Follow Druid" href="https://twitter.com/druidio" target="_blank"><span class="fab fa-twitter"></span></a> · <a title="Download via Apache" href="https://www.apache.org/dyn/closer.cgi?path=/incubator/druid/{{ site.druid_versions[0].versions[0].version }}/apache-druid-{{ site.druid_versions[0].versions[0].version }}-bin.tar.gz" target="_blank"><span class="fas fa-feather"></span></a> · <a title="GitHub" href="https://github.com/apache/incubator-druid" target="_blank"><span class="fab fa-github"></span></a></div><div class="text-center license">Copyright © 2019 <a href="https://www.apache.org/" target="_blank">Apache Software Foundation</a>.<br/>Except where otherwise noted, licensed under <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.<br/>Apache Druid, Druid, and the Druid logo are either registered trademarks or trademarks of The Apache Software Foundation in the United States and other countries.</div></div></footer></div></body></html>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/latest/querying/timeseriesquery.html"><span class="arrow-prev">← </span><span>Timeseries</span></a><a class="docs-next button" href="/docs/latest/querying/groupbyquery.html"><span class="function-name-prevnext">GroupBy</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#behavior-on-multi-value-dimensions">Behavior on multi-value dimensions</a></li><li><a href="#aliasing">Aliasing</a><ul class="toc-headings"><li><a href="#example-first-query">Example First query</a></li><li><a href="#example-second-query">Example second query</a></li></ul></li></ul></nav></div><footer class="nav-footer druid-footer" id="footer"><div class="container"><div class="text-center"><p><a href="/technology">Technology</a> · <a href="/use-cases">Use Cases</a> · <a href="/druid-powered">Powered by Druid</a> · <a href="/docs/latest/latest">Docs</a> · <a href="/community/">Community</a> · <a href="/downloads.html">Download</a> · <a href="/faq">FAQ</a></p></div><div class="text-center"><a title="Join the user group" href="https://groups.google.com/forum/#!forum/druid-user" target="_blank"><span class="fa fa-comments"></span></a> · <a title="Follow Druid" href="https://twitter.com/druidio" target="_blank"><span class="fab fa-twitter"></span></a> · <a title="Download via Apache" href="https://www.apache.org/dyn/closer.cgi?path=/incubator/druid/{{ site.druid_versions[0].versions[0].version }}/apache-druid-{{ site.druid_versions[0].versions[0].version }}-bin.tar.gz" target="_blank"><span class="fas fa-feather"></span></a> · <a title="GitHub" href="https://github.com/apache/incubator-druid" target="_blank"><span class="fab fa-github"></span></a></div><div class="text-center license">Copyright © 2019 <a href="https://www.apache.org/" target="_blank">Apache Software Foundation</a>.<br/>Except where otherwise noted, licensed under <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.<br/>Apache Druid, Druid, and the Druid logo are either registered trademarks or trademarks of The Apache Software Foundation in the United States and other countries.</div></div></footer></div></body></html>
