@@ -45,6 +45,7 @@ Some great folks have written their own libraries to interact with Apache Druid 
 
 * [pixelfederation/druid-php](https://github.com/pixelfederation/druid-php) - A PHP client for Druid
 * [Neeke/PHP-Druid](https://github.com/Neeke/PHP-Druid) - A Druid driver for PHP with PECL extension
+* [level23/druid-client](https://github.com/level23/druid-client) - Druid-client library with a query-builder. This library also allows you to query metadata, reindex datasources and more. 
 
 #### Scala
 
