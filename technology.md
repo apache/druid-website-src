@@ -128,7 +128,7 @@ For more information, please visit [our docs page](/docs/latest/querying/queryin
 
 ## Architecture
 
-Druid can be thought of as a disassembled database.
+Druid has a microservice-based architecture can be thought of as a disassembled database.
 Each core process in Druid (ingestion, querying, and coordination) can be separately or jointly deployed on commodity hardware.
 
 Druid explicitly names every main process to allow the operator to fine tune each process based on the use case and workload.
