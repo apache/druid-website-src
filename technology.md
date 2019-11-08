@@ -129,12 +129,12 @@ For more information, please visit [our docs page](/docs/latest/querying/queryin
 ## Architecture
 
 Druid has a microservice-based architecture can be thought of as a disassembled database.
-Each core process in Druid (ingestion, querying, and coordination) can be separately or jointly deployed on commodity hardware.
+Each core service in Druid (ingestion, querying, and coordination) can be separately or jointly deployed on commodity hardware.
 
-Druid explicitly names every main process to allow the operator to fine tune each process based on the use case and workload.
-For example, an operator can dedicate more resources to Druid’s ingestion process while giving less resources to Druid’s query process if the workload requires it.
+Druid explicitly names every main service to allow the operator to fine tune each service based on the use case and workload.
+For example, an operator can dedicate more resources to Druid’s ingestion service while giving less resources to Druid’s query service if the workload requires it.
 
-Druid processes can independently fail without impacting the operations of other processes.
+Druid services can independently fail without impacting the operations of other services.
 
 <div class="image-large">
   <img src="img/diagram-7.png" style="max-width: 620px;">
@@ -157,11 +157,11 @@ As such, Druid possesses several features to ensure uptime and no data loss.
   </div>
   <div class="feature">
     <span class="fa fa-th-large fa"></span>
-    <h5>Independent processes</h5>
+    <h5>Independent services</h5>
     <p>
-      Druid explicitly names all of its main processes and each process can be fine tuned based on use case.
-      Processes can independently fail without impacting other processes.
-      For example, if the ingestion process fails, no new data is loaded in the system, but existing data remains queryable.
+      Druid explicitly names all of its main services and each service can be fine tuned based on use case.
+      Services can independently fail without impacting other services.
+      For example, if the ingestion services fails, no new data is loaded in the system, but existing data remains queryable.
     </p>
   </div>
   <div class="feature">
