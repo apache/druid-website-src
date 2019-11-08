@@ -35,6 +35,7 @@ new features, on [GitHub](https://github.com/apache/druid).
 Third party companies also provide commercial support and services for Druid, including:
 
 * [Cloudera](https://www.cloudera.com/)
+* [Datumo](https://datumo.io/)
 * [Imply](https://imply.io/)
 
 ## Contributing
