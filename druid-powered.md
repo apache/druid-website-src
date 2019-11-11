@@ -93,6 +93,14 @@ With more than 1 billion unique users reached per month, 3 billion ads displayed
 
 * [Real Time Metrics on Tracker Calls](http://labs.criteo.com/2016/02/real-time-metrics-on-tracker-calls/)
 
+
+## Datumo
+
+[Datumo](https://datumo.io/) is a 100% remote Big Data software house from Poland. 
+We are co-authors of [Turnilo](https://allegro.tech/2018/10/turnilo-lets-change-the-way-people-explore-big-data.html) - an open-source data exploration tool for Druid. 
+Our analytics platform [Storyteller](https://datumo.io/#product) uses power of Apache Druid and Turnilo to help our clients analyze large datasets in interactive manner. 
+Our biggest Druid deployment is responsible for real-time monitoring and data processing of a large video streaming platform (60 000 Events Per Second).
+
 ## Delta Projects
 
 [Delta Projects](https://www.deltaprojects.com) uses Druid to power real-time audience and advertising analytics interfaces.
