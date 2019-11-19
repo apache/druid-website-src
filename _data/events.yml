@@ -1,18 +1,3 @@
-- date: 2019-11-12
-  name: "Bay Area Apache Druid Meetup @ Apollo GraphQL"
-  info: "Apollo GraphQL, 140 10th St, San Francisco, CA"
-  link: https://www.meetup.com/druidio/events/265783126/
-
-- date: 2019-11-14
-  name: "Munich Apache Druid Meetup @ Ippen Digital"
-  info: "Ippen Digital, Paul-Heyse-Straße 2, 80336 München, Germany"
-  link: https://www.meetup.com/Apache-Druid-Munich/events/265710003/
-
-- date: 2019-11-18
-  name: "DFW Data Engineering Meetup"
-  info: "5445 Legacy Dr Suite 100, Plano, TX"
-  link: https://www.meetup.com/DFW-Data-Engineering-Meetup/events/266235119/
-
 - date: 2019-11-19
   name: "Israel Apache Druid Meetup @ Outbrain"
   info: "ToHa Building Yigal Alon 114, Tel Aviv, Israel"
