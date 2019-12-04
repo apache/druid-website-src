@@ -162,6 +162,7 @@ Imply uses Druid to power public demos and to power our internal monitoring and 
 * [Building a Streaming Analytics Stack with Apache Kafka and Druid](http://www.confluent.io/blog/building-a-streaming-analytics-stack-with-apache-kafka-and-druid)
 * [Compressing Longs in Druid](https://imply.io/post/compressing-longs)
 * [Securing Druid](https://imply.io/post/securing-druid)
+* [Druid query view: An elegant SQL interface for a more civilized age](https://imply.io/post/druid-console-query-view)
 
 ## Inke
 
@@ -286,6 +287,7 @@ You can learn more about the AOC at http://netsil.com/download/
 
 Nielsen Marketing Cloud uses Druid as it's core real-time analytics tool to help its clients monitor, test and improve its audience targeting capabilities.  With Druid, Nielsen provides its clients with in-depth consumer insights leveraging world-class Nielsen audience data.
 
+* [How Nielsen Marketing Cloud Uses Druid for Audience and Marketing Performance Analysis](https://imply.io/post/nielsen-marketing-audience-analysis)
 * [Counting Unique Users in Real-Time: Here’s a Challenge for You! video] (https://youtu.be/MLUhzuQ0DHY)
 * [Counting Unique Users in Real-Time: Here’s a Challenge for You! slides](https://www.slideshare.net/Hadoop_Summit/counting-unique-users-in-realtime-heres-a-challenge-for-you-139142580)
 * [Data Retention and Deletion in Apache Druid](https://medium.com/nmc-techblog/data-retention-and-deletion-in-apache-druid-74ffd12398a8)
