@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Clustered deployment · Apache Druid</title><meta name="viewport" content="width=device-width"/><link rel="canonical" href="https://druid.apache.org/docs/0.16.1-incubating/tutorials/cluster.html"/><meta name="generator" content="Docusaurus"/><meta name="description" content="&lt;!--"/><meta name="docsearch:language" content="en"/><meta name="docsearch:version" content="../../incubator-druid-website-src/" /><meta property="og:title" content="Clustered deployment · Apache Druid"/><meta property="og:type" content="website"/><meta property="og:url" content="https://druid.apache.org/index.html"/><meta property="og:description" content="&lt;!--"/><meta property="og:image" content="https://druid.apache.org/img/druid_nav.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://druid.apache.org/img/druid_nav.png"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-131010415-1"></script><script>
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Clustered deployment · Apache Druid</title><meta name="viewport" content="width=device-width"/><link rel="canonical" href="https://druid.apache.org/docs/0.16.1-incubating/tutorials/cluster.html"/><meta name="generator" content="Docusaurus"/><meta name="description" content="&lt;!--"/><meta name="docsearch:language" content="en"/><meta name="docsearch:version" content="0.16.1-incubating" /><meta property="og:title" content="Clustered deployment · Apache Druid"/><meta property="og:type" content="website"/><meta property="og:url" content="https://druid.apache.org/index.html"/><meta property="og:description" content="&lt;!--"/><meta property="og:image" content="https://druid.apache.org/img/druid_nav.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://druid.apache.org/img/druid_nav.png"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-131010415-1"></script><script>
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments); }
               gtag('js', new Date());
@@ -145,8 +145,11 @@ in-memory query cache. These servers benefit greatly from CPU and RAM.</p>
 <h2><a class="anchor" aria-hidden="true" id="select-os"></a><a href="#select-os" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Select OS</h2>
 <p>We recommend running your favorite Linux distribution. You will also need:</p>
 <ul>
-<li>Java 8</li>
+<li><strong>Java 8</strong></li>
 </ul>
+<blockquote>
+<p><strong>Warning:</strong> Java 8 is required to run Druid. While Druid will start with a higher version of Java it will not function correctly.</p>
+</blockquote>
 <p>Your OS package manager should be able to help for both Java. If your Ubuntu-based OS
 does not have a recent enough version of Java, WebUpd8 offers <a href="http://www.webupd8.org/2012/09/install-oracle-java-8-in-ubuntu-via-ppa.html">packages for those
 OSes</a>.</p>
@@ -154,11 +157,11 @@ OSes</a>.</p>
 <p>First, download and unpack the release archive. It's best to do this on a single machine at first,
 since you will be editing the configurations and then copying the modified distribution out to all
 of your servers.</p>
-<p><a href="https://www.apache.org/dyn/closer.cgi?path=/incubator/druid/../../incubator-druid-website-src//apache-druid-../../incubator-druid-website-src/-bin.tar.gz">Download</a>
-the ../../incubator-druid-website-src/ release.</p>
+<p><a href="https://www.apache.org/dyn/closer.cgi?path=/incubator/druid/0.16.1-incubating/apache-druid-0.16.1-incubating-bin.tar.gz">Download</a>
+the 0.16.1-incubating release.</p>
 <p>Extract Druid by running the following commands in your terminal:</p>
-<pre><code class="hljs css language-bash">tar -xzf apache-druid-../../incubator-druid-website-src/-bin.tar.gz
-<span class="hljs-built_in">cd</span> apache-druid-../../incubator-druid-website-src/
+<pre><code class="hljs css language-bash">tar -xzf apache-druid-0.16.1-incubating-bin.tar.gz
+<span class="hljs-built_in">cd</span> apache-druid-0.16.1-incubating
 </code></pre>
 <p>In the package, you should find:</p>
 <ul>
@@ -360,7 +363,7 @@ rather than on the Master server.</p>
 <h2><a class="anchor" aria-hidden="true" id="start-master-server"></a><a href="#start-master-server" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Start Master Server</h2>
 <p>Copy the Druid distribution and your edited configurations to your Master server.</p>
 <p>If you have been editing the configurations on your local machine, you can use <em>rsync</em> to copy them:</p>
-<pre><code class="hljs css language-bash">rsync -az apache-druid-../../incubator-druid-website-src// MASTER_SERVER:apache-druid-../../incubator-druid-website-src//
+<pre><code class="hljs css language-bash">rsync -az apache-druid-0.16.1-incubating/ MASTER_SERVER:apache-druid-0.16.1-incubating/
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="no-zookeeper-on-master"></a><a href="#no-zookeeper-on-master" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>No Zookeeper on Master</h3>
 <p>From the distribution root, run the following command to start the Master server:</p>
@@ -420,6 +423,6 @@ Druid based on your use case. Read more about <a href="/docs/0.16.1-incubating/i
                 apiKey: '2de99082a9f38e49dfaa059bbe4c901d',
                 indexName: 'apache_druid',
                 inputSelector: '#search_input_react',
-                algoliaOptions: {"facetFilters":["language:en","version:../../incubator-druid-website-src/"]}
+                algoliaOptions: {"facetFilters":["language:en","version:0.16.1-incubating"]}
               });
             </script></body></html>
