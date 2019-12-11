@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Quickstart · Apache Druid</title><meta name="viewport" content="width=device-width"/><link rel="canonical" href="https://druid.apache.org/docs/0.16.1-incubating/tutorials/index.html"/><meta name="generator" content="Docusaurus"/><meta name="description" content="&lt;!--"/><meta name="docsearch:language" content="en"/><meta name="docsearch:version" content="../../incubator-druid-website-src/" /><meta property="og:title" content="Quickstart · Apache Druid"/><meta property="og:type" content="website"/><meta property="og:url" content="https://druid.apache.org/index.html"/><meta property="og:description" content="&lt;!--"/><meta property="og:image" content="https://druid.apache.org/img/druid_nav.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://druid.apache.org/img/druid_nav.png"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-131010415-1"></script><script>
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Quickstart · Apache Druid</title><meta name="viewport" content="width=device-width"/><link rel="canonical" href="https://druid.apache.org/docs/0.16.1-incubating/tutorials/index.html"/><meta name="generator" content="Docusaurus"/><meta name="description" content="&lt;!--"/><meta name="docsearch:language" content="en"/><meta name="docsearch:version" content="0.16.1-incubating" /><meta property="og:title" content="Quickstart · Apache Druid"/><meta property="og:type" content="website"/><meta property="og:url" content="https://druid.apache.org/index.html"/><meta property="og:description" content="&lt;!--"/><meta property="og:image" content="https://druid.apache.org/img/druid_nav.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://druid.apache.org/img/druid_nav.png"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-131010415-1"></script><script>
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments); }
               gtag('js', new Date());
@@ -85,9 +85,12 @@ after completing this initial setup.</p>
 <h3><a class="anchor" aria-hidden="true" id="software"></a><a href="#software" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Software</h3>
 <p>You will need:</p>
 <ul>
-<li>Java 8 (8u92+)</li>
+<li><strong>Java 8 (8u92+)</strong></li>
 <li>Linux, Mac OS X, or other Unix-like OS (Windows is not supported)</li>
 </ul>
+<blockquote>
+<p><strong>Warning:</strong> Java 8 is required to run Druid. While Druid will start with a higher version of Java it will not function correctly.</p>
+</blockquote>
 <h3><a class="anchor" aria-hidden="true" id="hardware"></a><a href="#hardware" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Hardware</h3>
 <p>Druid includes several example <a href="/docs/0.16.1-incubating/operations/single-server.html">single-server configurations</a>, along with scripts to
 start the Druid processes using these configurations.</p>
@@ -96,11 +99,11 @@ a good choice, sized for a 4CPU/16GB RAM environment.</p>
 <p>If you plan to use the single-machine deployment for further evaluation beyond the tutorials, we recommend a larger
 configuration than <code>micro-quickstart</code>.</p>
 <h2><a class="anchor" aria-hidden="true" id="getting-started"></a><a href="#getting-started" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Getting started</h2>
-<p><a href="https://www.apache.org/dyn/closer.cgi?path=/incubator/druid/../../incubator-druid-website-src//apache-druid-../../incubator-druid-website-src/-bin.tar.gz">Download</a>
-the ../../incubator-druid-website-src/ release.</p>
+<p><a href="https://www.apache.org/dyn/closer.cgi?path=/incubator/druid/0.16.1-incubating/apache-druid-0.16.1-incubating-bin.tar.gz">Download</a>
+the 0.16.1-incubating release.</p>
 <p>Extract Druid by running the following commands in your terminal:</p>
-<pre><code class="hljs css language-bash">tar -xzf apache-druid-../../incubator-druid-website-src/-bin.tar.gz
-<span class="hljs-built_in">cd</span> apache-druid-../../incubator-druid-website-src/
+<pre><code class="hljs css language-bash">tar -xzf apache-druid-0.16.1-incubating-bin.tar.gz
+<span class="hljs-built_in">cd</span> apache-druid-0.16.1-incubating
 </code></pre>
 <p>In the package, you should find:</p>
 <ul>
@@ -116,19 +119,19 @@ the ../../incubator-druid-website-src/ release.</p>
 <p>The following commands will assume that you are using the <code>micro-quickstart</code> single-machine configuration. If you are
 using a different configuration, the <code>bin</code> directory has equivalent scripts for each configuration, such as
 <code>bin/start-single-server-small</code>.</p>
-<p>From the apache-druid-../../incubator-druid-website-src/ package root, run the following command:</p>
+<p>From the apache-druid-0.16.1-incubating package root, run the following command:</p>
 <pre><code class="hljs css language-bash">./bin/start-micro-quickstart
 </code></pre>
 <p>This will bring up instances of ZooKeeper and the Druid services, all running on the local machine, e.g.:</p>
 <pre><code class="hljs css language-bash">$ ./bin/start-micro-quickstart
-[Fri May  3 11:40:50 2019] Running <span class="hljs-built_in">command</span>[zk], logging to[/apache-druid-../../incubator-druid-website-src//var/sv/zk.log]: bin/run-zk conf
-[Fri May  3 11:40:50 2019] Running <span class="hljs-built_in">command</span>[coordinator-overlord], logging to[/apache-druid-../../incubator-druid-website-src//var/sv/coordinator-overlord.log]: bin/run-druid coordinator-overlord conf/druid/single-server/micro-quickstart
-[Fri May  3 11:40:50 2019] Running <span class="hljs-built_in">command</span>[broker], logging to[/apache-druid-../../incubator-druid-website-src//var/sv/broker.log]: bin/run-druid broker conf/druid/single-server/micro-quickstart
-[Fri May  3 11:40:50 2019] Running <span class="hljs-built_in">command</span>[router], logging to[/apache-druid-../../incubator-druid-website-src//var/sv/router.log]: bin/run-druid router conf/druid/single-server/micro-quickstart
-[Fri May  3 11:40:50 2019] Running <span class="hljs-built_in">command</span>[historical], logging to[/apache-druid-../../incubator-druid-website-src//var/sv/historical.log]: bin/run-druid historical conf/druid/single-server/micro-quickstart
-[Fri May  3 11:40:50 2019] Running <span class="hljs-built_in">command</span>[middleManager], logging to[/apache-druid-../../incubator-druid-website-src//var/sv/middleManager.log]: bin/run-druid middleManager conf/druid/single-server/micro-quickstart
+[Fri May  3 11:40:50 2019] Running <span class="hljs-built_in">command</span>[zk], logging to[/apache-druid-0.16.1-incubating/var/sv/zk.log]: bin/run-zk conf
+[Fri May  3 11:40:50 2019] Running <span class="hljs-built_in">command</span>[coordinator-overlord], logging to[/apache-druid-0.16.1-incubating/var/sv/coordinator-overlord.log]: bin/run-druid coordinator-overlord conf/druid/single-server/micro-quickstart
+[Fri May  3 11:40:50 2019] Running <span class="hljs-built_in">command</span>[broker], logging to[/apache-druid-0.16.1-incubating/var/sv/broker.log]: bin/run-druid broker conf/druid/single-server/micro-quickstart
+[Fri May  3 11:40:50 2019] Running <span class="hljs-built_in">command</span>[router], logging to[/apache-druid-0.16.1-incubating/var/sv/router.log]: bin/run-druid router conf/druid/single-server/micro-quickstart
+[Fri May  3 11:40:50 2019] Running <span class="hljs-built_in">command</span>[historical], logging to[/apache-druid-0.16.1-incubating/var/sv/historical.log]: bin/run-druid historical conf/druid/single-server/micro-quickstart
+[Fri May  3 11:40:50 2019] Running <span class="hljs-built_in">command</span>[middleManager], logging to[/apache-druid-0.16.1-incubating/var/sv/middleManager.log]: bin/run-druid middleManager conf/druid/single-server/micro-quickstart
 </code></pre>
-<p>All persistent state such as the cluster metadata store and segments for the services will be kept in the <code>var</code> directory under the apache-druid-../../incubator-druid-website-src/ package root. Logs for the services are located at <code>var/sv</code>.</p>
+<p>All persistent state such as the cluster metadata store and segments for the services will be kept in the <code>var</code> directory under the apache-druid-0.16.1-incubating package root. Logs for the services are located at <code>var/sv</code>.</p>
 <p>Later on, if you'd like to stop the services, CTRL-C to exit the <code>bin/start-micro-quickstart</code> script, which will terminate the Druid processes.</p>
 <p>Once the cluster has started, you can navigate to <a href="http://localhost:8888">http://localhost:8888</a>.
 The <a href="/docs/0.16.1-incubating/design/router.html">Druid router process</a>, which serves the <a href="/docs/0.16.1-incubating/operations/druid-console.html">Druid console</a>, resides at this address.</p>
@@ -217,6 +220,6 @@ All tutorials assume that you are using the <code>micro-quickstart</code> single
                 apiKey: '2de99082a9f38e49dfaa059bbe4c901d',
                 indexName: 'apache_druid',
                 inputSelector: '#search_input_react',
-                algoliaOptions: {"facetFilters":["language:en","version:../../incubator-druid-website-src/"]}
+                algoliaOptions: {"facetFilters":["language:en","version:0.16.1-incubating"]}
               });
             </script></body></html>
