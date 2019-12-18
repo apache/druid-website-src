@@ -1,5 +1,5 @@
 ---
-title: Apache Druid (incubating) Community
+title: Apache Druid Community
 sectionid: community
 layout: simple_page
 canonical: 'https://druid.apache.org/community/'
