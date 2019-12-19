@@ -7,7 +7,7 @@ canonical: 'https://druid.apache.org/libraries'
 Query Libraries
 ---------------
 
-Some great folks have written their own libraries to interact with Apache Druid (incubating).
+Some great folks have written their own libraries to interact with Apache Druid.
 
 #### Python
 

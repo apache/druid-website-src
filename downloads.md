@@ -9,7 +9,7 @@ canonical: 'https://druid.apache.org/downloads.html'
 
 {% for branch in site.druid_versions limit:1 %}
 {% for release in branch.versions limit:1 %}
-The latest Apache Druid (incubating) stable release is {{ release.version }}.
+The latest Apache Druid stable release is {{ release.version }}.
 
 <p>
 <a class="large-button download" href="https://www.apache.org/dyn/closer.cgi?path=/incubator/druid/{{ release.version }}/apache-druid-{{ release.version }}-bin.tar.gz" download onclick="trackDownload('button', 'https://www.apache.org/dyn/closer.cgi?path=/incubator/druid/{{ release.version }}/apache-druid-{{ release.version }}-bin.tar.gz');"><span class="fa fa-download"></span> Download {{release.version}} release</a><br>
