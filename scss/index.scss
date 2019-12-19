@@ -59,19 +59,6 @@
   display: block;
 }
 
-.disclaimer {
-  margin-top: 42px;
-  font-size: 11px;
-  line-height: 170%;
-  color: #aaa;
-
-  a {
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-}
-
 @media (max-width: 500px) {
   .druid-masthead {
     .lead {
