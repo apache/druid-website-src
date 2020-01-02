@@ -1,12 +1,22 @@
 - date: 2020-01-10
   name: "Delhi Apache Druid Meetup"
-  info: "Venue coming soon"
+  info: "DLF Cyber City, Building No. 5, Tower A, Phase III Gurgaon 122002, India"
   link: https://www.meetup.com/Delhi-Apache-Druid-Meetup-Group/events/267001583/
+
+- date: 2020-01-15
+  name: "Game Analytics' Migration to Apache Druid + Performance Optimizations & Roadmap"
+  info: "Holden House, 57 Rathbone Pl, London, UK"
+  link: https://www.meetup.com/Apache-Druid-London/events/267380924/
 
 - date: 2020-01-28
   name: "Athens Big Data Meetup"
   info: "Alba Graduate Business School, 6-8 Xenias Str, Athens"
   link: https://www.meetup.com/Athens-Big-Data/events/266900242/
+
+- date: 2020-01-29
+  name: "Implementing, optimizing and using Apache Druid at scale"
+  info: "Nielsen R&D Israel, Derech Menachem Begin 121 Azrieli Sarona Azrieli Sarona, 18th floor, Tel Aviv-Yafo"
+  link: https://www.meetup.com/Big-things-are-happening-here/events/267578817/
 
 - date: 2020-04-13
   name: "Druid Summit"
