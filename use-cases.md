@@ -5,47 +5,21 @@ sectionid: use-cases
 canonical: 'https://druid.apache.org/use-cases'
 ---
 
-## Streaming and operational data
+## Real-time analytics and intelligence
 
-Apache Druid generally works well with any event-oriented, clickstream, timeseries, or telemetry data, especially streaming datasets from [Apache Kafka](https://kafka.apache.org/).
-Druid provides [exactly once consumption semantics](/docs/latest/development/extensions-core/kafka-ingestion) from Apache Kafka and is commonly used as a sink for event-oriented Kafka topics.
+Apache Druid is a database that is most often used for powering use cases where real-time ingest, fast query performance, and high uptime are important. As such, Druid is commonly used for powering GUIs of analytical applications, or as a backend for highly-concurrent APIs that need fast aggregations. Druid works best with event-oriented data.
 
-Druid also works well for batch data sets.
-Organizations have deployed Druid to accelerate queries and power applications where the input data is one or more static files.
-Druid is a great fit if you are developing a user-facing application and you want your users to be able to self service their own questions.
+Common application areas for Druid include:
 
-Some common high level use cases of Druid include:
+* Clickstream analytics (web and mobile analytics)
+* Risk/fraud analysis
+* Network telemetry analytics (network performance monitoring)
+* Server metrics storage
+* Supply chain analytics (manufacturing metrics)
+* Application performance metrics
+* Business intelligence / OLAP
 
-<div class="features">
-  <div class="feature">
-    <span class="fa fa-rocket fa"></span>
-    <h5>Analyze performance</h5>
-    <p>
-      Create interactive dashboards with full drill down capabilities. Analyze performance of digital products, track mobile app usage, or monitor site reliability.
-    </p>
-  </div>
-  <div class="feature">
-    <span class="fa fa-exclamation-triangle fa"></span>
-    <h5>Diagnose problems</h5>
-    <p>
-      Find the root cause of issues. Troubleshoot netflow bottlenecks, analyze security threats, or diagnose software crashes.
-    </p>
-  </div>
-  <div class="feature">
-    <span class="fa fa-users fa"></span>
-    <h5>Find commonalities</h5>
-    <p>
-      Find common attributes among events. Identify shared components in defective products, or determine patterns in top performing products.
-    </p>
-  </div>
-  <div class="feature">
-    <span class="fa fa-money-bill-wave-alt fa"></span>
-    <h5>Increase efficiency</h5>
-    <p>
-      Improve product engagement. Optimize ad-spend in digital marketing campaigns or increase user engagement in online products.
-    </p>
-  </div>
-</div>
+Some of these use cases are described in more detail below. For an overview of technical differentiation, please see the [FAQ](/faq).
 
 ## User activity and behavior
 

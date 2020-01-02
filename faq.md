@@ -17,37 +17,38 @@ traditional data warehouses cannot.
 
 Druid offers the following advantages over traditional data warehouses:
 
-* Low latency streaming ingest, and direct integration with messages buses such as
-Apache Kafka.
-* Time-based partitioning, which enables performant time-based
-queries.
-* Fast search and filter, for fast ad-hoc slice and dice.
-* Minimal schema design, and native support for semi-structured and nested data.
+* Much lower latency for OLAP-style queries
+* Much lower latency for data ingest (both streaming and batch)
+* Out-of-the-box integration with Apache Kakfa, AWS Kinesis, HDFS, AWS S3, and more
+* Time-based partitioning, which enables performant time-based queries
+* Fast search and filter, for fast slice and dice
+* Minimal schema design and native support for semi-structured and nested data
 
-Consider using Druid over a data warehouse if you have streaming data, and
-require low-latency ingest as well as low-latency queries. Also consider Druid
-if you need ad-hoc analytics. Druid is great for slice and dice and drill
-downs. Druid is also often used over a data warehouse to power interactive
-applications, where support for high concurrency queries is required.
+Consider using Druid to augment your data warehouse if your use case requires:
 
-### Is Druid a SQL-on-Hadoop solution? When should I use Druid over Presto/Hive?
+* Powering an user-facing application
+* Low-latency query response with high concurrency
+* Instant data visibility
+* Fast ad-hoc slice and dice
+* Streaming data
 
-Druid supports SQL and can load data from Hadoop, but is not a SQL-on-Hadoop
-system. Modern SQL-on-Hadoop solutions are used for the same use cases as data
-warehouses, except they are designed for architectures where compute and
-storage are separated systems, and data is loaded from storage into the compute
-layer as needed by queries.
-
-The previous section on Druid vs data warehouses also applies to Druid versus
-SQL-on-Hadoop solutions.
+To summarize, Druid shines when the use cases involves real-time analytics and
+where the end-user (technical or not) wants to apply numerous queries in rapid
+succession to explore or better understand data trends. 
 
 ### Is Druid a log aggregation/log search system? When should I use Druid over Elastic/Splunk?
 
-Druid uses inverted indexes (in particular, compressed bitmaps) for fast searching and filtering, but it is not generally considered a search system.
-While Druid contains many features commonly found in search systems, such as the ability to stream in structured and semi-structured data and the ability to search and filter the data, Druid isn’t commonly used to ingest text logs and run full text search queries over the text logs.
-However, Druid is often used to ingest and analyze semi-structured data such as JSON.
+Druid uses inverted indexes (in particular, compressed bitmaps) for fast
+searching and filtering, but it is not generally considered a search system.
+While Druid contains many features commonly found in search systems, such as
+the ability to stream in structured and semi-structured data and the ability to
+search and filter the data, Druid isn’t commonly used to ingest text logs and
+run full text search queries over the text logs.  However, Druid is often used
+to ingest and analyze semi-structured data such as JSON.
 
-Druid at its core is an analytics engine and as such, it can support numerical aggregations, groupBys (including multi-dimensional groupBys), and other analytic workloads faster and more efficiently than search systems.
+Druid at its core is an analytics engine and as such, it can support numerical
+aggregations, groupBys (including multi-dimensional groupBys), and other
+analytic workloads faster and more efficiently than search systems.
 
 ### Is Druid a timeseries database? When should I use Druid over InfluxDB/OpenTSDB/Prometheus?
 
@@ -62,17 +63,22 @@ from analytics databases and search systems, it can significantly
 outperformance TSDBs when grouping, searching, and filtering on tags that are
 not time, or when computing complex metrics such as histograms and quantiles.
 
+### Does Druid separate storage and compute?
+
+Druid creates an indexed copy of raw data that is highly optimized for
+analytic queries. Druid runs queries over this indexed data, called a ['segment'](/docs/latest/design/segments.html)
+in Druid, and does not pull raw data from an external storage system as needed
+by queries. 
 
 ### How is Druid deployed?
 
 Druid can be deployed on commodity hardware in any *NIX based environment.
-A Druid cluster consists of several different processes, each designed to do a small set of things very well (ingestion, querying, coordination, etc).
-Many of these processes can be co-located and deployed together on the same hardware as described [here](/docs/latest/tutorials/quickstart).
+A Druid cluster consists of several different services, each designed to do a small set of things very well (ingestion, querying, coordination, etc).
+Many of these services can be co-located and deployed together on the same hardware as described [here](/docs/latest/tutorials/quickstart).
 
-Druid was initially created in the cloud, and runs well in AWS, GCP, Azure, and other cloud environments.
+Druid was designed for the cloud, and runs well in AWS, GCP, Azure, and other cloud environments.
 
-
-### Where does Druid fit in my existing Hadoop-based data stack?
+### Where does Druid fit in my big data stack?
 
 Druid typically connects to a source of raw data such as a message bus such as Apache Kafka, or a filesystem such as HDFS.
 Druid ingests an optimized, column-oriented, indexed copy of your data and serves analytics workloads on top of it.
@@ -96,7 +102,7 @@ disk and memory and extend the amount of data a single node can load up to the
 size of its disks.
 
 Individual Historicals can be configured with the maximum amount of data
-they should be given.  Coupled with the Coordinator’s ability to assign data to
+they should be given. Coupled with the Coordinator’s ability to assign data to
 different “tiers” based on different query requirements, Druid is essentially a
 system that can be configured across a wide spectrum of performance
 requirements. All data can be in memory and processed, or data can be heavily
