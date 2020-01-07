@@ -32,5 +32,5 @@ Druid *embeds*
 - Joda Time
 - Ning Compress
 
-See the [NOTICE file](https://github.com/apache/incubator-druid/blob/master/NOTICE)
+See the [NOTICE file](https://github.com/apache/druid/blob/master/NOTICE)
 for other software included as part of Druid.
