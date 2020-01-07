@@ -9,6 +9,6 @@ When submitting a pull request (PR), please use the following guidelines:
 - First verify your changes by running `bundle exec jekyll serve -w`.
 - For most webpage changes, please submit pull requests to this repository based off the "src" branch.
 - For any documentation changes (in the "docs" folder), please submit pull requests to the [main Druid
-  repo](https://github.com/apache/incubator-druid-website-src). All Druid
+  repo](https://github.com/apache/druid-website-src). All Druid
   documentation is hosted under
-  [https://github.com/apache/incubator-druid/tree/master/docs/content](https://github.com/apache/incubator-druid/tree/master/docs/content).
+  [https://github.com/apache/druid/tree/master/docs/content](https://github.com/apache/druid/tree/master/docs/content).

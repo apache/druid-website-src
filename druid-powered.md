@@ -1,6 +1,6 @@
 ---
 title: Powered by Apache Druid
-subtitle: <a href="https://github.com/apache/incubator-druid-website-src/blob/master/druid-powered.md"><span class="fa fa-plus"></span> Add Your Company</a>
+subtitle: <a href="https://github.com/apache/druid-website-src/blob/master/druid-powered.md"><span class="fa fa-plus"></span> Add Your Company</a>
 layout: simple_page
 sectionid: powered-by
 canonical: 'https://druid.apache.org/druid-powered'
@@ -558,4 +558,4 @@ China Youzan is a SaaS company which principally engaged in retail science and t
 
 [Zuoyebang](http://www.zuoyebang.com/) is the most used K12 education platform, 7 out of every 10 K12 users are using Zuoyebang. At Zuoyebang Data Platform Group, we use the Druid in the advertising scene,  mainly related to advertising display, click, billing, and other functions. The performance and timeliness of druid can meet our OLAP queries very well.
 
-[Add Your Company](https://github.com/apache/incubator-druid-website-src/blob/master/druid-powered.md)
+[Add Your Company](https://github.com/apache/druid-website-src/blob/master/druid-powered.md)

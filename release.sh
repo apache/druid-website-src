@@ -30,8 +30,8 @@ pushd $baseDir
 rm -rf _staging/
 mkdir -p _staging/
 cd _staging/
-git clone git@github.com:apache/incubator-druid.git
-cd incubator-druid/
+git clone git@github.com:apache/druid.git
+cd druid/
 
 if [ "$#" -gt 1 ]; then
   git checkout $2
@@ -48,6 +48,6 @@ git add .
 echo "Building Website..."
 npm run build
 pushd $(pwd)
-cd ../incubator-druid-website/
+cd ../druid-website/
 git add .
 popd

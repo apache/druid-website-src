@@ -12,17 +12,17 @@ canonical: 'https://druid.apache.org/downloads.html'
 The latest Apache Druid stable release is {{ release.version }}.
 
 <p>
-<a class="large-button download" href="https://www.apache.org/dyn/closer.cgi?path=/incubator/druid/{{ release.version }}/apache-druid-{{ release.version }}-bin.tar.gz" download onclick="trackDownload('button', 'https://www.apache.org/dyn/closer.cgi?path=/incubator/druid/{{ release.version }}/apache-druid-{{ release.version }}-bin.tar.gz');"><span class="fa fa-download"></span> Download {{release.version}} release</a><br>
+<a class="large-button download" href="https://www.apache.org/dyn/closer.cgi?path=/druid/{{ release.version }}/apache-druid-{{ release.version }}-bin.tar.gz" download onclick="trackDownload('button', 'https://www.apache.org/dyn/closer.cgi?path=/druid/{{ release.version }}/apache-druid-{{ release.version }}-bin.tar.gz');"><span class="fa fa-download"></span> Download {{release.version}} release</a><br>
 </p>
 
 * Release date: {{ release.date | date: "%b %e %Y" }}
-* Binary download: [apache-druid-{{ release.version }}-bin.tar.gz](https://www.apache.org/dyn/closer.cgi?path=/incubator/druid/{{ release.version }}/apache-druid-{{ release.version }}-bin.tar.gz) ([sha512](https://www.apache.org/dist/incubator/druid/{{ release.version }}/apache-druid-{{ release.version }}-bin.tar.gz.sha512), [pgp](https://www.apache.org/dist/incubator/druid/{{ release.version }}/apache-druid-{{ release.version }}-bin.tar.gz.asc))
-* Source download: [apache-druid-{{ release.version }}-src.tar.gz](https://www.apache.org/dyn/closer.cgi?path=/incubator/druid/{{ release.version }}/apache-druid-{{ release.version }}-src.tar.gz) ([sha512](https://www.apache.org/dist/incubator/druid/{{ release.version }}/apache-druid-{{ release.version }}-src.tar.gz.sha512), [pgp](https://www.apache.org/dist/incubator/druid/{{ release.version }}/apache-druid-{{ release.version }}-src.tar.gz.asc))
-* Release notes: [{{ release.version }}](https://github.com/apache/incubator-druid/releases/tag/druid-{{ release.version }})
+* Binary download: [apache-druid-{{ release.version }}-bin.tar.gz](https://www.apache.org/dyn/closer.cgi?path=/druid/{{ release.version }}/apache-druid-{{ release.version }}-bin.tar.gz) ([sha512](https://www.apache.org/dist/druid/{{ release.version }}/apache-druid-{{ release.version }}-bin.tar.gz.sha512), [pgp](https://www.apache.org/dist/druid/{{ release.version }}/apache-druid-{{ release.version }}-bin.tar.gz.asc))
+* Source download: [apache-druid-{{ release.version }}-src.tar.gz](https://www.apache.org/dyn/closer.cgi?path=/druid/{{ release.version }}/apache-druid-{{ release.version }}-src.tar.gz) ([sha512](https://www.apache.org/dist/druid/{{ release.version }}/apache-druid-{{ release.version }}-src.tar.gz.sha512), [pgp](https://www.apache.org/dist/druid/{{ release.version }}/apache-druid-{{ release.version }}-src.tar.gz.asc))
+* Release notes: [{{ release.version }}](https://github.com/apache/druid/releases/tag/druid-{{ release.version }})
 {% endfor %}
 {% endfor %}
 
-You should verify your download by following these [procedures](https://www.apache.org/info/verification.html) and using these [KEYS](https://www.apache.org/dist/incubator/druid/KEYS).
+You should verify your download by following these [procedures](https://www.apache.org/info/verification.html) and using these [KEYS](https://www.apache.org/dist/druid/KEYS).
 
 To learn more about releases, please visit the [versioning page](/docs/latest/development/versioning.html).
 
@@ -54,10 +54,13 @@ The previous major release branch of Apache Druid was {{ branch.release }}.
 ##### {{ release.version }}
 
 * Release date: {{ release.date | date: "%b %e %Y" }}
-* Binary download: [apache-druid-{{ release.version }}-bin.tar.gz](https://www.apache.org/dyn/closer.cgi?path=/incubator/druid/{{ release.version }}/apache-druid-{{ release.version }}-bin.tar.gz) ([sha512](https://www.apache.org/dist/incubator/druid/{{ release.version }}/apache-druid-{{ release.version }}-bin.tar.gz.sha512), [pgp](https://www.apache.org/dist/incubator/druid/{{ release.version }}/apache-druid-{{ release.version }}-bin.tar.gz.asc))
-* Source download: [apache-druid-{{ release.version }}-src.tar.gz](https://www.apache.org/dyn/closer.cgi?path=/incubator/druid/{{ release.version }}/apache-druid-{{ release.version }}-src.tar.gz) ([sha512](https://www.apache.org/dist/incubator/druid/{{ release.version }}/apache-druid-{{ release.version }}-src.tar.gz.sha512), [pgp](https://www.apache.org/dist/incubator/druid/{{ release.version }}/apache-druid-{{ release.version }}-src.tar.gz.asc))
-* Release notes: [{{ release.version }}](https://github.com/apache/incubator-druid/releases/tag/druid-{{ release.version }})
+* Binary download: [apache-druid-{{ release.version }}-bin.tar.gz](https://www.apache.org/dyn/closer.cgi?path=/druid/{{ release.version }}/apache-druid-{{ release.version }}-bin.tar.gz) ([sha512](https://www.apache.org/dist/druid/{{ release.version }}/apache-druid-{{ release.version }}-bin.tar.gz.sha512), [pgp](https://www.apache.org/dist/druid/{{ release.version }}/apache-druid-{{ release.version }}-bin.tar.gz.asc))
+* Source download: [apache-druid-{{ release.version }}-src.tar.gz](https://www.apache.org/dyn/closer.cgi?path=/druid/{{ release.version }}/apache-druid-{{ release.version }}-src.tar.gz) ([sha512](https://www.apache.org/dist/druid/{{ release.version }}/apache-druid-{{ release.version }}-src.tar.gz.sha512), [pgp](https://www.apache.org/dist/druid/{{ release.version }}/apache-druid-{{ release.version }}-src.tar.gz.asc))
+* Release notes: [{{ release.version }}](https://github.com/apache/druid/releases/tag/druid-{{ release.version }})
 {% endfor %}
 {% endfor %}
 
-All other releases of Apache Druid are available at the [Apache release archives](https://archive.apache.org/dist/incubator/druid/).
+All other releases of Apache Druid are available at the [Apache Druid release archives](https://archive.apache.org/dist/druid/).
+
+Archived versions of releases made while Druid was under the Apache Incubator are available at [Apache Druid (incubating) release archives](https://archive.apache.org/dist/incubator/druid/).
+
