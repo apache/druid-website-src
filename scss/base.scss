@@ -1,8 +1,6 @@
 @import "variables";
 @import "reset";
 
- //comment
-
 body {
   margin-top: $header-height;
 }
@@ -127,8 +125,8 @@ html, body {
 }
 
 .druid-header {
-  padding: 24px 0 34px;
-  margin-bottom: 14px;
+  padding: 34px 0 44px;
+  margin-bottom: 24px;
   color: #1c1c26;
   text-align: center;
   background-image: url('/img/watermark-light.png');
@@ -146,7 +144,7 @@ html, body {
   h4 {
     font-weight: 400;
     font-size: 15px;
-    margin-top: -5px;
+    margin-top: 0;
     margin-bottom: 0;
 
     a {
@@ -207,6 +205,30 @@ html, body {
   }
 }
 
+.fancy-list {
+  margin-top: 22px;
+  margin-bottom: 22px;
+
+  li {
+    list-style: none;
+    font-weight: 600;
+    margin-left: 0;
+    padding-left: 30px;
+    margin-bottom: 8px;
+
+    &:before {
+      content: "";
+      position: absolute;
+      top: 5px;
+      left: 0;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #9caeff;
+    }
+  }
+}
+
 .features {
   margin-bottom: 28px;
   margin-top: 38px;
@@ -217,18 +239,21 @@ html, body {
 
     &:nth-child(3n-2) {
       .fa {
+        //color: $medium-1;
         background: $light-1;
       }
     }
 
     &:nth-child(3n-1) {
       .fa {
+        //color: $medium-2;
         background: $light-2;
       }
     }
 
     &:nth-child(3n) {
       .fa {
+        //color: $medium-3;
         background: $light-3;
       }
     }
@@ -254,6 +279,99 @@ html, body {
     h5 {
       margin-bottom: 0;
       font-size: 1.2em;
+    }
+  }
+}
+
+.zigzag-features {
+  margin-bottom: 100px;
+
+  .zigzag-feature {
+    margin-top: 100px;
+
+    .fa {
+        top: 0;
+        position: absolute;
+        width: 220px;
+        height: 220px;
+        line-height: 220px;
+        border-radius: 50%;
+        text-align: center;
+        font-size: 70px;
+        background: $light-1;
+        color: $medium-1;
+      }
+
+    &:nth-child(2n-1) {
+      padding-right: 300px;
+
+      .fa {
+        right: 0;
+      }
+    }
+
+    &:nth-child(2n) {
+      padding-left: 300px;
+
+      .fa {
+        left: 0;
+      }
+    }
+
+    &:nth-child(3n-2) {
+      .fa {
+        background: $light-1;
+        color: $medium-1;
+      }
+    }
+
+    &:nth-child(3n-1) {
+      .fa {
+        background: $light-2;
+        color: $medium-2;
+      }
+    }
+
+    &:nth-child(3n) {
+      .fa {
+        background: $light-3;
+        color: $medium-3;
+      }
+    }
+  }
+
+  @media (max-width: 840px) {
+    .zigzag-feature {
+      .fa {
+        position: relative;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 40px;
+      }
+
+      &:nth-child(2n-1) {
+      padding-right: 0;
+    }
+
+      &:nth-child(2n) {
+        padding-left: 0;
+      }
+    }
+  }
+
+  @media (max-width: 440px) {
+    margin-bottom: 70px;
+
+    .zigzag-feature {
+      margin-top: 70px;
+
+      .fa {
+        width: 180px;
+        height: 180px;
+        line-height: 180px;
+        font-size: 60px;
+      }
     }
   }
 }
