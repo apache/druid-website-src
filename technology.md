@@ -137,7 +137,7 @@ For example, an operator can dedicate more resources to Druid’s ingestion serv
 Druid services can independently fail without impacting the operations of other services.
 
 <div class="image-large">
-  <img src="img/diagram-7.png" style="max-width: 620px;">
+  <img src="img/diagram-7.png" style="max-width: 800px;">
 </div>
 
 For more information, please visit [our docs page](/docs/latest/design/index.html).
