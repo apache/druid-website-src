@@ -1,13 +1,9 @@
-- date: 2020-01-10
-  name: "Delhi Apache Druid Meetup"
-  info: "DLF Cyber City, Building No. 5, Tower A, Phase III Gurgaon 122002, India"
-  link: https://www.meetup.com/Delhi-Apache-Druid-Meetup-Group/events/267001583/
 
-- date: 2020-01-15
-  name: "Game Analytics' Migration to Apache Druid + Performance Optimizations & Roadmap"
-  info: "Holden House, 57 Rathbone Pl, London, UK"
-  link: https://www.meetup.com/Apache-Druid-London/events/267380924/
-
+- date: 2020-01-25
+  name: "Data Day Texas"
+  info: "AT&T Executive Education & Conference Center - 1900 University Avenue - Austin, TX 78705"
+  link:  https://datadaytexas.com/2020/sessions#merlino
+  
 - date: 2020-01-28
   name: "Athens Big Data Meetup"
   info: "Alba Graduate Business School, 6-8 Xenias Str, Athens"
