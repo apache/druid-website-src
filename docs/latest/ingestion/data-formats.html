@@ -155,7 +155,7 @@ If your data is formatted in some format not listed in this section, please cons
 </thead>
 <tbody>
 <tr><td>type</td><td>String</td><td>This should say <code>csv</code>.</td><td>yes</td></tr>
-<tr><td>listDelimiter</td><td>String</td><td>A custom delimiter for multi-value dimensions.</td><td>no (default == ctrl+A)</td></tr>
+<tr><td>listDelimiter</td><td>String</td><td>A custom delimiter for multi-value dimensions.</td><td>no (default = ctrl+A)</td></tr>
 <tr><td>columns</td><td>JSON array</td><td>Specifies the columns of the data. The columns should be in the same order with the columns of your data.</td><td>yes if <code>findColumnsFromHeader</code> is false or missing</td></tr>
 <tr><td>findColumnsFromHeader</td><td>Boolean</td><td>If this is set, the task will find the column names from the header row. Note that <code>skipHeaderRows</code> will be applied before finding column names from the header. For example, if you set <code>skipHeaderRows</code> to 2 and <code>findColumnsFromHeader</code> to true, the task will skip the first two lines and then extract column information from the third line. <code>columns</code> will be ignored if this is set to true.</td><td>no (default = false if <code>columns</code> is set; otherwise null)</td></tr>
 <tr><td>skipHeaderRows</td><td>Integer</td><td>If this is set, the task will skip the first <code>skipHeaderRows</code> rows.</td><td>no (default = 0)</td></tr>
@@ -178,8 +178,8 @@ If your data is formatted in some format not listed in this section, please cons
 </thead>
 <tbody>
 <tr><td>type</td><td>String</td><td>This should say <code>tsv</code>.</td><td>yes</td></tr>
-<tr><td>delimiter</td><td>String</td><td>A custom delimiter for data values.</td><td>no (default == <code>\t</code>)</td></tr>
-<tr><td>listDelimiter</td><td>String</td><td>A custom delimiter for multi-value dimensions.</td><td>no (default == ctrl+A)</td></tr>
+<tr><td>delimiter</td><td>String</td><td>A custom delimiter for data values.</td><td>no (default = <code>\t</code>)</td></tr>
+<tr><td>listDelimiter</td><td>String</td><td>A custom delimiter for multi-value dimensions.</td><td>no (default = ctrl+A)</td></tr>
 <tr><td>columns</td><td>JSON array</td><td>Specifies the columns of the data. The columns should be in the same order with the columns of your data.</td><td>yes if <code>findColumnsFromHeader</code> is false or missing</td></tr>
 <tr><td>findColumnsFromHeader</td><td>Boolean</td><td>If this is set, the task will find the column names from the header row. Note that <code>skipHeaderRows</code> will be applied before finding column names from the header. For example, if you set <code>skipHeaderRows</code> to 2 and <code>findColumnsFromHeader</code> to true, the task will skip the first two lines and then extract column information from the third line. <code>columns</code> will be ignored if this is set to true.</td><td>no (default = false if <code>columns</code> is set; otherwise null)</td></tr>
 <tr><td>skipHeaderRows</td><td>Integer</td><td>If this is set, the task will skip the first <code>skipHeaderRows</code> rows.</td><td>no (default = 0)</td></tr>
@@ -219,9 +219,9 @@ please read <a href="/docs/latest/development/extensions-core/orc.html#migration
 <tr><th>Field</th><th>Type</th><th>Description</th><th>Required</th></tr>
 </thead>
 <tbody>
-<tr><td>type</td><td>String</td><td>This should say <code>json</code>.</td><td>yes</td></tr>
-<tr><td>flattenSpec</td><td>JSON Object</td><td>Specifies flattening configuration for nested JSON data. See <a href="#flattenspec"><code>flattenSpec</code></a> for more info.</td><td>no</td></tr>
-<tr><td>binaryAsString</td><td>Boolean</td><td>Specifies if the binary orc column which is not logically marked as a string should be treated as a UTF-8 encoded string.</td><td>no (default == false)</td></tr>
+<tr><td>type</td><td>String</td><td>This should say <code>orc</code>.</td><td>yes</td></tr>
+<tr><td>flattenSpec</td><td>JSON Object</td><td>Specifies flattening configuration for nested ORC data. See <a href="#flattenspec"><code>flattenSpec</code></a> for more info.</td><td>no</td></tr>
+<tr><td>binaryAsString</td><td>Boolean</td><td>Specifies if the binary orc column which is not logically marked as a string should be treated as a UTF-8 encoded string.</td><td>no (default = false)</td></tr>
 </tbody>
 </table>
 <h3><a class="anchor" aria-hidden="true" id="parquet"></a><a href="#parquet" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parquet</h3>
@@ -255,7 +255,7 @@ please read <a href="/docs/latest/development/extensions-core/orc.html#migration
 <tbody>
 <tr><td>type</td><td>String</td><td>This should be set to <code>parquet</code> to read Parquet file</td><td>yes</td></tr>
 <tr><td>flattenSpec</td><td>JSON Object</td><td>Define a <a href="#flattenspec"><code>flattenSpec</code></a> to extract nested values from a Parquet file. Note that only 'path' expression are supported ('jq' is unavailable).</td><td>no (default will auto-discover 'root' level properties)</td></tr>
-<tr><td>binaryAsString</td><td>Boolean</td><td>Specifies if the bytes parquet column which is not logically marked as a string or enum type should be treated as a UTF-8 encoded string.</td><td>no (default == false)</td></tr>
+<tr><td>binaryAsString</td><td>Boolean</td><td>Specifies if the bytes parquet column which is not logically marked as a string or enum type should be treated as a UTF-8 encoded string.</td><td>no (default = false)</td></tr>
 </tbody>
 </table>
 <h3><a class="anchor" aria-hidden="true" id="flattenspec"></a><a href="#flattenspec" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>FlattenSpec</h3>
@@ -338,9 +338,9 @@ Each line can be further parsed using <a href="#parsespec"><code>parseSpec</code
 The <code>inputFormat</code> of <code>inputSpec</code> in <code>ioConfig</code> must be set to <code>&quot;org.apache.druid.data.input.avro.AvroValueInputFormat&quot;</code>.
 You may want to set Avro reader's schema in <code>jobProperties</code> in <code>tuningConfig</code>,
 e.g.: <code>&quot;avro.schema.input.value.path&quot;: &quot;/path/to/your/schema.avsc&quot;</code> or
-<code>&quot;avro.schema.input.value&quot;: &quot;your_schema_JSON_object&quot;</code>,
-if reader's schema is not set, the schema in Avro object container file will be used,
-see <a href="http://avro.apache.org/docs/1.7.7/spec.html#Schema+Resolution">Avro specification</a>.</p>
+<code>&quot;avro.schema.input.value&quot;: &quot;your_schema_JSON_object&quot;</code>.
+If the Avro reader's schema is not set, the schema in Avro object container file will be used.
+See <a href="http://avro.apache.org/docs/1.7.7/spec.html#Schema+Resolution">Avro specification</a> for more information.</p>
 <table>
 <thead>
 <tr><th>Field</th><th>Type</th><th>Description</th><th>Required</th></tr>
@@ -624,14 +624,14 @@ JSON path expressions for all supported types.</p>
 <tbody>
 <tr><td>type</td><td>String</td><td>This should say <code>parquet</code>.</td><td>yes</td></tr>
 <tr><td>parseSpec</td><td>JSON Object</td><td>Specifies the timestamp and dimensions of the data, and optionally, a flatten spec. Valid parseSpec formats are <code>timeAndDims</code> and <code>parquet</code></td><td>yes</td></tr>
-<tr><td>binaryAsString</td><td>Boolean</td><td>Specifies if the bytes parquet column which is not logically marked as a string or enum type should be treated as a UTF-8 encoded string.</td><td>no(default == false)</td></tr>
+<tr><td>binaryAsString</td><td>Boolean</td><td>Specifies if the bytes parquet column which is not logically marked as a string or enum type should be treated as a UTF-8 encoded string.</td><td>no(default = false)</td></tr>
 </tbody>
 </table>
 <p>When the time dimension is a <a href="https://github.com/apache/parquet-format/blob/master/LogicalTypes.md">DateType column</a>,
 a format should not be supplied. When the format is UTF8 (String), either <code>auto</code> or a explicitly defined
 <a href="http://www.joda.org/joda-time/apidocs/org/joda/time/format/DateTimeFormat.html">format</a> is required.</p>
 <h4><a class="anchor" aria-hidden="true" id="parquet-hadoop-parser-vs-parquet-avro-hadoop-parser"></a><a href="#parquet-hadoop-parser-vs-parquet-avro-hadoop-parser" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parquet Hadoop Parser vs Parquet Avro Hadoop Parser</h4>
-<p>Both parsers are to read Parquet files, but slightly different. The main
+<p>Both parsers read from Parquet files, but slightly differently. The main
 differences are:</p>
 <ul>
 <li>The Parquet Hadoop Parser uses a simple conversion while the Parquet Avro Hadoop Parser
@@ -768,7 +768,7 @@ list elements into multi-value dimensions.</p>
 <tbody>
 <tr><td>type</td><td>String</td><td>This should say <code>parquet-avro</code>.</td><td>yes</td></tr>
 <tr><td>parseSpec</td><td>JSON Object</td><td>Specifies the timestamp and dimensions of the data, and optionally, a flatten spec. Should be <code>avro</code>.</td><td>yes</td></tr>
-<tr><td>binaryAsString</td><td>Boolean</td><td>Specifies if the bytes parquet column which is not logically marked as a string or enum type should be treated as a UTF-8 encoded string.</td><td>no(default == false)</td></tr>
+<tr><td>binaryAsString</td><td>Boolean</td><td>Specifies if the bytes parquet column which is not logically marked as a string or enum type should be treated as a UTF-8 encoded string.</td><td>no(default = false)</td></tr>
 </tbody>
 </table>
 <p>When the time dimension is a <a href="https://github.com/apache/parquet-format/blob/master/LogicalTypes.md">DateType column</a>,
@@ -873,7 +873,7 @@ field types, which can be used to read nested Avro records. The &quot;jq&quot; f
 may need to migrate schemas in the future, consider one of the other decoders, all of which use a message header that
 allows the parser to identify the proper Avro schema for reading records.</p>
 </blockquote>
-<p>This decoder can be used if all the input events can be read using the same schema. In that case schema can be specified in the input task JSON itself as described below.</p>
+<p>This decoder can be used if all the input events can be read using the same schema. In this case, specify the schema in the input task JSON itself, as described below.</p>
 <pre><code class="hljs"><span class="hljs-string">...</span>
 <span class="hljs-string">"avroBytesDecoder"</span>: {
   <span class="hljs-string">"type"</span>: <span class="hljs-string">"schema_inline"</span>,
@@ -891,7 +891,7 @@ allows the parser to identify the proper Avro schema for reading records.</p>
 <span class="hljs-string">...</span>
 </code></pre>
 <h5><a class="anchor" aria-hidden="true" id="multiple-inline-schemas-based-avro-bytes-decoder"></a><a href="#multiple-inline-schemas-based-avro-bytes-decoder" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Multiple Inline Schemas Based Avro Bytes Decoder</h5>
-<p>This decoder can be used if different input events can have different read schema. In that case schema can be specified in the input task JSON itself as described below.</p>
+<p>Use this decoder if different input events can have different read schemas. In this case, specify the schema in the input task JSON itself, as described below.</p>
 <pre><code class="hljs">...
 <span class="hljs-string">"avroBytesDecoder"</span>: {
   <span class="hljs-string">"type"</span>: <span class="hljs-string">"multiple_schemas_inline"</span>,
@@ -926,15 +926,15 @@ first 1 byte is version and must always be 1.
 next 4 bytes are integer schema ID serialized using big-endian byte order.
 remaining bytes contain serialized avro message.</p>
 <h5><a class="anchor" aria-hidden="true" id="schemarepo-based-avro-bytes-decoder"></a><a href="#schemarepo-based-avro-bytes-decoder" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>SchemaRepo Based Avro Bytes Decoder</h5>
-<p>This Avro bytes decoder first extract <code>subject</code> and <code>id</code> from input message bytes, then use them to lookup the Avro schema with which to decode Avro record from bytes. Details can be found in <a href="https://github.com/schema-repo/schema-repo">schema repo</a> and <a href="https://issues.apache.org/jira/browse/AVRO-1124">AVRO-1124</a>. You will need an http service like schema repo to hold the avro schema. Towards schema registration on the message producer side, you can refer to <code>org.apache.druid.data.input.AvroStreamInputRowParserTest#testParse()</code>.</p>
+<p>This Avro bytes decoder first extracts <code>subject</code> and <code>id</code> from the input message bytes, and then uses them to look up the Avro schema used to decode the Avro record from bytes. For details, see the <a href="https://github.com/schema-repo/schema-repo">schema repo</a> and <a href="https://issues.apache.org/jira/browse/AVRO-1124">AVRO-1124</a>. You will need an http service like schema repo to hold the avro schema. For information on registering a schema on the message producer side, see <code>org.apache.druid.data.input.AvroStreamInputRowParserTest#testParse()</code>.</p>
 <table>
 <thead>
 <tr><th>Field</th><th>Type</th><th>Description</th><th>Required</th></tr>
 </thead>
 <tbody>
 <tr><td>type</td><td>String</td><td>This should say <code>schema_repo</code>.</td><td>no</td></tr>
-<tr><td>subjectAndIdConverter</td><td>JSON Object</td><td>Specifies the how to extract subject and id from message bytes.</td><td>yes</td></tr>
-<tr><td>schemaRepository</td><td>JSON Object</td><td>Specifies the how to lookup Avro schema from subject and id.</td><td>yes</td></tr>
+<tr><td>subjectAndIdConverter</td><td>JSON Object</td><td>Specifies how to extract the subject and id from message bytes.</td><td>yes</td></tr>
+<tr><td>schemaRepository</td><td>JSON Object</td><td>Specifies how to look up the Avro schema from subject and id.</td><td>yes</td></tr>
 </tbody>
 </table>
 <h6><a class="anchor" aria-hidden="true" id="avro-1124-subject-and-id-converter"></a><a href="#avro-1124-subject-and-id-converter" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Avro-1124 Subject And Id Converter</h6>
@@ -960,8 +960,8 @@ remaining bytes contain serialized avro message.</p>
 </tbody>
 </table>
 <h5><a class="anchor" aria-hidden="true" id="confluent-schema-registry-based-avro-bytes-decoder"></a><a href="#confluent-schema-registry-based-avro-bytes-decoder" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Confluent Schema Registry-based Avro Bytes Decoder</h5>
-<p>This Avro bytes decoder first extract unique <code>id</code> from input message bytes, then use them it lookup in the Schema Registry for the related schema, with which to decode Avro record from bytes.
-Details can be found in Schema Registry <a href="http://docs.confluent.io/current/schema-registry/docs/">documentation</a> and <a href="https://github.com/confluentinc/schema-registry">repository</a>.</p>
+<p>This Avro bytes decoder first extracts a unique <code>id</code> from input message bytes, and then uses it to look up the schema in the Schema Registry used to decode the Avro record from bytes.
+For details, see the Schema Registry <a href="http://docs.confluent.io/current/schema-registry/docs/">documentation</a> and <a href="https://github.com/confluentinc/schema-registry">repository</a>.</p>
 <table>
 <thead>
 <tr><th>Field</th><th>Type</th><th>Description</th><th>Required</th></tr>
@@ -969,7 +969,7 @@ Details can be found in Schema Registry <a href="http://docs.confluent.io/curren
 <tbody>
 <tr><td>type</td><td>String</td><td>This should say <code>schema_registry</code>.</td><td>no</td></tr>
 <tr><td>url</td><td>String</td><td>Specifies the url endpoint of the Schema Registry.</td><td>yes</td></tr>
-<tr><td>capacity</td><td>Integer</td><td>Specifies the max size of the cache (default == Integer.MAX_VALUE).</td><td>no</td></tr>
+<tr><td>capacity</td><td>Integer</td><td>Specifies the max size of the cache (default = Integer.MAX_VALUE).</td><td>no</td></tr>
 </tbody>
 </table>
 <pre><code class="hljs css language-json">...
@@ -992,7 +992,7 @@ Details can be found in Schema Registry <a href="http://docs.confluent.io/curren
 <tr><td>type</td><td>String</td><td>This should say <code>protobuf</code>.</td><td>yes</td></tr>
 <tr><td>descriptor</td><td>String</td><td>Protobuf descriptor file name in the classpath or URL.</td><td>yes</td></tr>
 <tr><td>protoMessageType</td><td>String</td><td>Protobuf message type in the descriptor.  Both short name and fully qualified name are accepted.  The parser uses the first message type found in the descriptor if not specified.</td><td>no</td></tr>
-<tr><td>parseSpec</td><td>JSON Object</td><td>Specifies the timestamp and dimensions of the data.  The format must be JSON. See <a href="/docs/latest/ingestion/index.html">JSON ParseSpec</a> for more configuration options.  Please note timeAndDims parseSpec is no longer supported.</td><td>yes</td></tr>
+<tr><td>parseSpec</td><td>JSON Object</td><td>Specifies the timestamp and dimensions of the data.  The format must be JSON. See <a href="/docs/latest/ingestion/index.html">JSON ParseSpec</a> for more configuration options.  Note that timeAndDims parseSpec is no longer supported.</td><td>yes</td></tr>
 </tbody>
 </table>
 <p>Sample spec:</p>
@@ -1033,7 +1033,7 @@ Consider using the <a href="#input-format">input format</a> instead for these ty
 </blockquote>
 <p>ParseSpecs serve two purposes:</p>
 <ul>
-<li>The String Parser use them to determine the format (i.e. JSON, CSV, TSV) of incoming rows.</li>
+<li>The String Parser use them to determine the format (i.e., JSON, CSV, TSV) of incoming rows.</li>
 <li>All Parsers use them to determine the timestamp and dimensions of incoming rows.</li>
 </ul>
 <p>If <code>format</code> is not included, the parseSpec defaults to <code>tsv</code>.</p>
@@ -1086,7 +1086,7 @@ Consider using the <a href="#input-format">input format</a> instead for these ty
 <tr><td>format</td><td>String</td><td>This should say <code>csv</code>.</td><td>yes</td></tr>
 <tr><td>timestampSpec</td><td>JSON Object</td><td>Specifies the column and format of the timestamp.</td><td>yes</td></tr>
 <tr><td>dimensionsSpec</td><td>JSON Object</td><td>Specifies the dimensions of the data.</td><td>yes</td></tr>
-<tr><td>listDelimiter</td><td>String</td><td>A custom delimiter for multi-value dimensions.</td><td>no (default == ctrl+A)</td></tr>
+<tr><td>listDelimiter</td><td>String</td><td>A custom delimiter for multi-value dimensions.</td><td>no (default = ctrl+A)</td></tr>
 <tr><td>columns</td><td>JSON array</td><td>Specifies the columns of the data.</td><td>yes</td></tr>
 </tbody>
 </table>
@@ -1124,8 +1124,8 @@ the delimiter is a tab, so this will load TSV.</p>
 <tr><td>format</td><td>String</td><td>This should say <code>tsv</code>.</td><td>yes</td></tr>
 <tr><td>timestampSpec</td><td>JSON Object</td><td>Specifies the column and format of the timestamp.</td><td>yes</td></tr>
 <tr><td>dimensionsSpec</td><td>JSON Object</td><td>Specifies the dimensions of the data.</td><td>yes</td></tr>
-<tr><td>delimiter</td><td>String</td><td>A custom delimiter for data values.</td><td>no (default == \t)</td></tr>
-<tr><td>listDelimiter</td><td>String</td><td>A custom delimiter for multi-value dimensions.</td><td>no (default == ctrl+A)</td></tr>
+<tr><td>delimiter</td><td>String</td><td>A custom delimiter for data values.</td><td>no (default = \t)</td></tr>
+<tr><td>listDelimiter</td><td>String</td><td>A custom delimiter for multi-value dimensions.</td><td>no (default = ctrl+A)</td></tr>
 <tr><td>columns</td><td>JSON String array</td><td>Specifies the columns of the data.</td><td>yes</td></tr>
 </tbody>
 </table>
@@ -1144,7 +1144,7 @@ the delimiter is a tab, so this will load TSV.</p>
 </code></pre>
 <p>Be sure to change the <code>delimiter</code> to the appropriate delimiter for your data. Like CSV, you must specify the columns and which subset of the columns you want indexed.</p>
 <h4><a class="anchor" aria-hidden="true" id="tsv-delimited-index-tasks"></a><a href="#tsv-delimited-index-tasks" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>TSV (Delimited) Index Tasks</h4>
-<p>If your input files contain a header, the <code>columns</code> field is optional and you don't need to set.
+<p>If your input files contain a header, the <code>columns</code> field is optional and doesn't need to be set.
 Instead, you can set the <code>hasHeaderRow</code> field to true, which makes Druid automatically extract the column information from the header.
 Otherwise, you must set the <code>columns</code> field and ensure that field must match the columns of your input data in the same order.</p>
 <p>Also, you can skip some header rows by setting <code>skipHeaderRows</code> in your parseSpec. If both <code>skipHeaderRows</code> and <code>hasHeaderRow</code> options are set,
