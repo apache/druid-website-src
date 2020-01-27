@@ -26,14 +26,14 @@ description: 'Real²time Exploratory Analytics on Large Datasets'
 
 
 druid_versions:
+  - release: 0.17
+    versions:
+      - version: 0.17.0
+        date: 2020-01-26
   - release: 0.16
     versions:
       - version: 0.16.1-incubating
         date: 2019-12-10
-  - release: 0.15
-    versions:
-      - version: 0.15.1-incubating
-        date: 2019-08-15
 
 tranquility_stable_version: 0.8.3
 
