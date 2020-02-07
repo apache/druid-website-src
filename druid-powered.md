@@ -471,6 +471,10 @@ Learn more about TrafficGuard’s comprehensive fraud mitigation at (https://www
 
 * [Using Druid to fight ad fraud](https://imply.io/post/using-druid-to-fight-ad-fraud)
 
+## Trendyol.com - Alibaba Group Company
+
+Trendyol, which is the largest e-commerce company in Turkey, uses Druid for real-time analytics. It is mostly used for providing insights to their suppliers.
+
 ## TripleLift
 
 TripleLift uses Druid to provide insights into performance aspects of its native programmatic exchange for sales/business development opportunities, and to provide reporting used by advertisers and publishers.
