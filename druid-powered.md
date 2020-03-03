@@ -126,6 +126,10 @@ eBay uses Druid to aggregate multiple data streams for real-time user behavior a
 * [Druid and Pulsar](http://blog.csdn.net/ebay/article/details/50205611)
 * [embedded-druid: Leveraging Druid Capabilities in Stand-alone Applications](http://www.ebaytechblog.com/2016/02/05/embedded-druid-leveraging-druid-capabilities-in-stand-alone-applications/)
 
+## FacilityConneX
+
+One of our key goals at [FacilityConneX](https://www.facilityconnex.com/) is to offer real-time insights that help our customers optimize their equipment or processes, reduce cost, or prevent incidents, to ultimately improve our customers business. This *real-time* requirement has always been a major technical challenge to scale within our SaaS environment. FacilityConneX has looked to **Druid** to help solve many of these challenging performance and growth issues.
+
 ## FullContact
 
 * [Enrich API Brings Higher Match Rates with Multi-Field Enrichment Capabilities](https://www.fullcontact.com/blog/enrich-api-brings-higher-match-rates-with-multi-field-enrichment-capabilities/)
