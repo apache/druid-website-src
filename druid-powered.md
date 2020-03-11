@@ -297,6 +297,10 @@ Nielsen Marketing Cloud uses Druid as it's core real-time analytics tool to help
 * [Counting Unique Users in Real-Time: Here’s a Challenge for You! slides](https://www.slideshare.net/Hadoop_Summit/counting-unique-users-in-realtime-heres-a-challenge-for-you-139142580)
 * [Data Retention and Deletion in Apache Druid](https://medium.com/nmc-techblog/data-retention-and-deletion-in-apache-druid-74ffd12398a8)
 
+## Nodex
+
+[Nodex](https://www.nodex.co.uk) uses Druid in its real time analytics pipeline to deliver insights and analytics across a wide range of recruitment CRM software, Job boards and recruitment career portals. We ingest large amounts of data and needed something capable of real time metrics to offer KPI's to our clients to allow them to make better business decisions based on actual usage data.
+
 ## NTT Com
 
 * [Kappa architecture at NTT Com: Building a streaming analytics stack with Druid and Kafka](https://imply.io/post/kappa-architecture-at-ntt)
