@@ -1,9 +1,9 @@
-- date: 2020-03-04
-  name: "Analytics at speed - the rise of the Druid"
-  info: "Castlereagh Boutique Hotel, 169 Castlereagh St, Sydney"
-  link: https://www.meetup.com/Big-Data-Analytics/events/268442945/
+- date: 2020-03-24
+  name: "Virtual Meetup- AGA (*Ask Gian Anything*)"
+  info: "Hosted by the Bay Area Apache Druid Meetup Group"
+  link: https://www.meetup.com/druidio/events/269554006/
 
 - date: 2020-04-13
-  name: "Druid Summit"
-  info: "San Francisco Airport Marriott Waterfront, 1800 Old Bayshore Highway, Burlingame, CA"
+  name: "Virtual Druid Summit"
+  info: "The comfort of your own laptop"
   link: https://druidsummit.org/
