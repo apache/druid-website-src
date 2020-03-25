@@ -101,6 +101,14 @@ We are co-authors of [Turnilo](https://allegro.tech/2018/10/turnilo-lets-change-
 Our analytics platform [Storyteller](https://datumo.io/#product) uses power of Apache Druid and Turnilo to help our clients analyze large datasets in interactive manner. 
 Our biggest Druid deployment is responsible for real-time monitoring and data processing of a large video streaming platform (60 000 Events Per Second).
 
+## Deep.BI
+
+At [Deep.BI](www.deep.bi) we track user habits, engagement, product and content performance — processing up to terabytes or billions of events of data daily. Our goal is to provide real-time insights based on custom metrics from a variety of self-created dimensions. To accomplish this, our system collects every user interaction. We use Apache Flink for event enrichment, custom transformations, aggregations and serving machine learning models. The processed data is then indexed by Apache Druid for real-time analytics and our custom UI built on top of Druid and Apache Cassandra for delivery of the scores.
+
+Our talk from FlinkForward conference in Berlin 2019:
+
+[Real-time Stream Analytics and User Scoring Using Apache Druid, Flink & Cassandra at Deep.BI] (https://medium.com/deep-bi/real-time-stream-analytics-and-user-scoring-using-apache-druid-flink-cassandra-at-deep-bi-38e5dc40958d?source=friends_link&sk=d9c85da0cb060280bfeb8f3c1c166e84)
+
 ## Delta Projects
 
 [Delta Projects](https://www.deltaprojects.com) uses Druid to power real-time audience and advertising analytics interfaces.
