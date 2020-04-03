@@ -1,3 +1,15 @@
+  - date: 2020-03-03
+    title: "How Netflix uses Druid for Real-time Insights to Ensure a High-Quality Experience"
+    name: "Ben Sykes"
+    link: https://netflixtechblog.com/how-netflix-uses-druid-for-real-time-insights-to-ensure-a-high-quality-experience-19e1e8568d06
+    company: Netflix
+
+  - date: 2020-01-30
+    title: "Introducing Druid 0.17.0"
+    name: "Gian Merlino"
+    link: https://imply.io/post/announcing-druid-0.17.0
+    company: Imply
+
   - date: 2019-12-10
     title: "Druid: Reflections at a Milestone"
     name: "Gian Merlino"
