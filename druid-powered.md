@@ -536,6 +536,7 @@ We're serving pageview data via Druid and Pivot.  Our internal customers are lov
 
 * [Analytics at Wikipedia](https://www.oreilly.com/library/view/strata-data-conference/9781491976326/video316954.html)
 * [Analytics at Wikipedia with Druid](https://speakerdeck.com/druidio/analytics-at-wikipedia-with-druid)
+
 ## Xiaomi
 
 Xiaomi uses Druid as an analytics tool to analyze online advertising data.
