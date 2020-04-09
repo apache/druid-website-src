@@ -535,7 +535,7 @@ We are using Druid for real-time analytics that delivers business insights and p
 We're serving pageview data via Druid and Pivot.  Our internal customers are loving it and we're working on allowing public access to sanitized data, both editing and pageview.  We like Druid because it's open source, the folks that work on it have built a good community, and it's about five times faster than Hive for us right now, without any tuning or optimization (and the Hadoop cluster is beefier than the Druid one), just dumped lots of data into it and Pivot was immediately useful to our analysts.  We wrote a [puppet](https://github.com/wikimedia/operations-puppet/tree/production/modules/druid) module that others might find helpful.
 
 * [Analytics at Wikipedia](https://www.oreilly.com/library/view/strata-data-conference/9781491976326/video316954.html)
-
+* [Analytics at Wikipedia with Druid](https://speakerdeck.com/druidio/analytics-at-wikipedia-with-druid)
 ## Xiaomi
 
 Xiaomi uses Druid as an analytics tool to analyze online advertising data.
