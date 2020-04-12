@@ -20,7 +20,6 @@
     "glob": "7.1.2",
     "gulp": "3.9.1",
     "gulp-sass": "4.0.1",
-    "jekyll": "^3.0.0-beta1",
     "natives": "^1.1.6",
     "node-sass": "4.9.2"
   }
