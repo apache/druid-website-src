@@ -433,7 +433,7 @@ strategy perform the outer query on the Broker in a single-threaded fashion.</p>
 <tr><td><code>druid.query.groupBy.forceHashAggregation</code></td><td>Force to use hash-based aggregation.</td><td>false</td></tr>
 <tr><td><code>druid.query.groupBy.intermediateCombineDegree</code></td><td>Number of intermediate nodes combined together in the combining tree. Higher degrees will need less threads which might be helpful to improve the query performance by reducing the overhead of too many threads if the server has sufficiently powerful cpu cores.</td><td>8</td></tr>
 <tr><td><code>druid.query.groupBy.numParallelCombineThreads</code></td><td>Hint for the number of parallel combining threads. This should be larger than 1 to turn on the parallel combining feature. The actual number of threads used for parallel combining is min(<code>druid.query.groupBy.numParallelCombineThreads</code>, <code>druid.processing.numThreads</code>).</td><td>1 (disabled)</td></tr>
-<tr><td><code>druid.query.groupBy.applyLimitPushDownToSegment</code></td><td>If Broker pushes limit down to queryable nodes (historicals, peons) then limit results during segment scan.</td><td>true (enabled)</td></tr>
+<tr><td><code>druid.query.groupBy.applyLimitPushDownToSegment</code></td><td>If Broker pushes limit down to queryable data server (historicals, peons) then limit results during segment scan. If typically there are a large number of segments taking part in a query on a data server, this setting may counterintuitively reduce performance if enabled.</td><td>false (disabled)</td></tr>
 </tbody>
 </table>
 <p>Supported query contexts:</p>
