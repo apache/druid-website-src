@@ -1,3 +1,45 @@
+  - date: 2020-04-15
+    title: "Apache Druid Vision and Roadmap"
+    name: "Gian Merlino"
+    link: https://imply.io/virtual-druid-summit/apache-druid-vision-and-roadmap-gian-merlino
+    company: Imply
+
+  - date: 2020-04-15
+    title: "Automating CI/CD for Druid Clusters at Athena Health"
+    name: "Shyam Mudambi, Ramesh Kempanna and Karthik Urs"
+    link: https://imply.io/virtual-druid-summit/automating-ci-cd-for-druid-clusters-at-athena-health
+    company: Athena Health
+
+  - date: 2020-04-15
+    title: "Apache Druid for Anti-Money Laundering (AML) at DBS Bank"
+    name: "Arpit Dubey"
+    link: https://imply.io/virtual-druid-summit/apache-druid-anti-money-laundering-dbs-bank
+    company: DBS
+
+  - date: 2020-04-15
+    title: "How Apache Druid Powers Real-Time Analytics at BT"
+    name: "Pankaj Tiwari"
+    link: https://imply.io/virtual-druid-summit/how-druid-powers-real-time-analytics-at-bt
+    company: BT
+
+  - date: 2020-04-15
+    title: "Analytics over Terabytes of Data at Twitter using Apache Druid"
+    name: "Swapnesh Gandhi"
+    link: https://imply.io/virtual-druid-summit/analytics-over-terabytes-of-data-at-twitter-apache-druid
+    company: MoPub
+
+  - date: 2020-04-15
+    title: "Using Druid for Network Monitoring and Trust Analytics at Cisco"
+    name: "TJ Giuli and Abhishek Balaji Radhakrishnan"
+    link: https://imply.io/virtual-druid-summit/apache-druid-network-monitoring-trust-analytics-cisco
+    company: Cisco
+
+  - date: 2020-04-15
+    title: "Apache Druid Fireside Chat (Ask Us Anything"
+    name: "Fangjin Yang, Gian Merlino and Vadim Ogievetsky"
+    link: https://imply.io/virtual-druid-summit/apache-druid-ask-me-anything-merlino-yang-ogievetsky
+    company: Imply
+
   - date: 2020-03-03
     title: "How Netflix uses Druid for Real-time Insights to Ensure a High-Quality Experience"
     name: "Ben Sykes"
