@@ -584,4 +584,8 @@ China Youzan is a SaaS company which principally engaged in retail science and t
 
 [Zuoyebang](http://www.zuoyebang.com/) is the most used K12 education platform, 7 out of every 10 K12 users are using Zuoyebang. At Zuoyebang Data Platform Group, we use the Druid in the advertising scene,  mainly related to advertising display, click, billing, and other functions. The performance and timeliness of druid can meet our OLAP queries very well.
 
+## BIGO
+
+BIGO selects Druid as an OLAP engine to analyze app(Like, Bigolive, IMO, etc.) data in bigdata team. Typical analysis in Druid includes apm, A/B testing, push, funnel model, etc. Besides, Superset is used as dashboard for deep integration with Druid.
+
 [Add Your Company](https://github.com/apache/druid-website-src/blob/master/druid-powered.md)
