@@ -1,14 +1,4 @@
-- date: 2020-04-08
-  name: "Virtual Meetup- AGA v2.0 (*Ask Gian Anything*)"
+- date: 2020-05-06
+  name: "Virtual Apache Druid Meetup: AVABA (Ask Vadim and Ben Anything)"
   info: "Hosted by the Bay Area Apache Druid Meetup Group"
-  link: https://bit.ly/3dMtdtl
-  
-- date: 2020-04-09
-  name: "Virtual Meetup- Apache Druid 101: Analytics for Real-time Intelligence"
-  info: "Hosted by the Chicago Apache Druid Meetup Group"
-  link: https://bit.ly/39GE453
-  
-- date: 2020-04-13
-  name: "Virtual Druid Summit"
-  info: "The comfort of your own laptop"
-  link: https://druidsummit.org/
+  link: https://www.meetup.com/druidio/events/270339721/
