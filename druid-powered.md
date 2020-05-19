@@ -103,7 +103,7 @@ Our biggest Druid deployment is responsible for real-time monitoring and data pr
 
 ## Deep.BI
 
-At [Deep.BI] (https://www.deep.bi) we track user habits, engagement, product and content performance — processing up to terabytes or billions of events of data daily. Our goal is to provide real-time insights based on custom metrics from a variety of self-created dimensions. To accomplish this, our system collects every user interaction. We use Apache Flink for event enrichment, custom transformations, aggregations and serving machine learning models. The processed data is then indexed by Apache Druid for real-time analytics and our custom UI built on top of Druid and Apache Cassandra for delivery of the scores.
+At [Deep.BI](https://www.deep.bi) we track user habits, engagement, product and content performance — processing up to terabytes or billions of events of data daily. Our goal is to provide real-time insights based on custom metrics from a variety of self-created dimensions. To accomplish this, our system collects every user interaction. We use Apache Flink for event enrichment, custom transformations, aggregations and serving machine learning models. The processed data is then indexed by Apache Druid for real-time analytics and our custom UI built on top of Druid and Apache Cassandra for delivery of the scores.
 
 Our talk from FlinkForward conference in Berlin 2019:
 
