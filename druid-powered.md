@@ -159,6 +159,7 @@ Druid powers our applications related metrics and helps us slice and dice analyt
 Druid powers a dashboard used internally to visualize real-time analytics on GumGum's Real Time Bidding platform. GumGum runs Druid on Amazon EC2 and can ingest up to 300,000 events per second at peak time.
 
 * [Lambda Architecture with Druid at GumGum](http://whynosql.com/2015/11/06/lambda-architecture-with-druid-at-gumgum/)
+* [Optimized Real-time Analytics using Spark Streaming and Apache Druid](https://medium.com/gumgum-tech/optimized-real-time-analytics-using-spark-streaming-and-apache-druid-d872a86ed99d)
 
 ## Hulu
 
