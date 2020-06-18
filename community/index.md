@@ -113,10 +113,10 @@ You don't need to be a committer to contribute- pull requests are welcome from a
 | [Lijin Bin](https://github.com/binlijin)                  | [Alibaba](https://www.alibaba.com/)                |
 | [Maxime Beauchemin](https://github.com/mistercrunch)      | [Lyft](http://lyft.com/)                           |
 | [Mingming Qiu](https://github.com/QiuMM)                  | [Bytedance](https://bytedance.com/)                |
-| [Mohamed Slim Bouguerra](https://github.com/b-slim)       | [Hortonworks](https://hortonworks.com/)            |
+| [Mohamed Slim Bouguerra](https://github.com/b-slim)       | [LinkedIn](https://www.linkedin.com/)              |
 | [Navis Ryu](https://github.com/navis)                     | [SK Telecom](https://www.sktelecom.com/index.html) |
 | [Niketh Sabbineni](https://github.com/niketh)             | [Oath](https://www.oath.com/)                      |
-| [Nishant Bangarwa](https://github.com/nishantmonu51)      | [Hortonworks](https://hortonworks.com/)            |
+| [Nishant Bangarwa](https://github.com/nishantmonu51)      | Independent                                        |
 | [Parag Jain](https://github.com/pjain1)                   | [Lyft](http://lyft.com/)                           |
 | [P. Taylor Goetz](https://github.com/ptgoetz)             | [EPAM](https://www.epam.com/)                      |
 | [Roman Leventov](https://github.com/leventov)             | [Snap](https://www.snap.com/en-US/)                |
