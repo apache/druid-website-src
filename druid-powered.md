@@ -118,6 +118,12 @@ Our talk from FlinkForward conference in Berlin 2019:
 Didi Chuxing is the world’s largest mobile transportation platform, offering a full range of commuting options to 400 cities in China.
 Didi uses Druid as a core component of our real-time bigdata processing pipeline. Druid powers Didi's real-time monitor system which has hundreds of key business metrics. We are deep impressed by Druid's fast aggregations and sub-second OLAP queries. With Druid, we can get insights from data in real-time.
 
+## Dream11
+
+Dream11 is consuming data from Apache Druid, Amazon Redshift, and Athena and building models on Looker to report user concurrency, to track user journeys, and to build interaction events based funnels.
+
+* [Data Highway — Dream11’s Inhouse Analytics Platform — The Burden and Benefits](https://medium.com/@D11Engg/data-highway-dream11s-inhouse-analytics-platform-the-burden-and-benefits-90b8777d282)
+
 ## DripStat
 
 DripStat uses Druid as a timeseries database to power the DripStat GUI. DripStat ingests transactional data for Java, Scala, and Groovy applications into Druid.
