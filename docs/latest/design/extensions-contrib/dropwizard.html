@@ -1,9 +1,9 @@
-<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Dropwizard metrics emitter · Apache Druid</title><meta name="viewport" content="width=device-width"/><link rel="canonical" href="https://druid.apache.org/docs/latest/design/extensions-contrib/dropwizard.html"/><meta name="generator" content="Docusaurus"/><meta name="description" content="&lt;!--"/><meta name="docsearch:language" content="en"/><meta name="docsearch:version" content="0.18.1" /><meta property="og:title" content="Dropwizard metrics emitter · Apache Druid"/><meta property="og:type" content="website"/><meta property="og:url" content="https://druid.apache.org/index.html"/><meta property="og:description" content="&lt;!--"/><meta property="og:image" content="https://druid.apache.org/img/druid_nav.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://druid.apache.org/img/druid_nav.png"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-131010415-1"></script><script>
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Dropwizard metrics emitter · Apache Druid</title><meta name="viewport" content="width=device-width"/><link rel="canonical" href="https://druid.apache.org/docs/latest/design/extensions-contrib/dropwizard.html"/><meta name="generator" content="Docusaurus"/><meta name="description" content="&lt;!--"/><meta name="docsearch:language" content="en"/><meta name="docsearch:version" content="0.19.0" /><meta property="og:title" content="Dropwizard metrics emitter · Apache Druid"/><meta property="og:type" content="website"/><meta property="og:url" content="https://druid.apache.org/index.html"/><meta property="og:description" content="&lt;!--"/><meta property="og:image" content="https://druid.apache.org/img/druid_nav.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://druid.apache.org/img/druid_nav.png"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-131010415-1"></script><script>
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments); }
               gtag('js', new Date());
               gtag('config', 'UA-131010415-1');
-            </script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"/><link rel="stylesheet" href="/css/code-block-buttons.css"/><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script><script type="text/javascript" src="/js/code-block-buttons.js"></script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/druid_nav.png" alt="Apache Druid"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/technology" target="_self">Technology</a></li><li class=""><a href="/use-cases" target="_self">Use Cases</a></li><li class=""><a href="/druid-powered" target="_self">Powered By</a></li><li class=""><a href="/docs/latest/design/index.html" target="_self">Docs</a></li><li class=""><a href="/community/" target="_self">Community</a></li><li class=""><a href="https://www.apache.org" target="_self">Apache</a></li><li class=""><a href="/downloads.html" target="_self">Download</a></li><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/apache/druid/edit/master/docs/design/extensions-contrib/dropwizard.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 class="postHeaderTitle">Dropwizard metrics emitter</h1></header><article><div><span><!--
+            </script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"/><link rel="stylesheet" href="/css/code-block-buttons.css"/><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script><script type="text/javascript" src="/js/code-block-buttons.js"></script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/druid_nav.png" alt="Apache Druid"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/technology" target="_self">Technology</a></li><li class=""><a href="/use-cases" target="_self">Use Cases</a></li><li class=""><a href="/druid-powered" target="_self">Powered By</a></li><li class=""><a href="/docs/latest/design/index.html" target="_self">Docs</a></li><li class=""><a href="/community/" target="_self">Community</a></li><li class=""><a href="https://www.apache.org" target="_self">Apache</a></li><li class=""><a href="/downloads.html" target="_self">Download</a></li><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/apache/druid/edit/master/docs/design/extensions-contrib/dropwizard.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">Dropwizard metrics emitter</h1></header><article><div><span><!--
   ~ Licensed to the Apache Software Foundation (ASF) under one
   ~ or more contributor license agreements.  See the NOTICE file
   ~ distributed with this work for additional information
@@ -62,7 +62,7 @@ Dropwizard metric path is organized using the following schema:</p>
 <h4><a class="anchor" aria-hidden="true" id="jmx-reporter"></a><a href="#jmx-reporter" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>JMX Reporter</h4>
 <p>Used to report druid metrics via JMX.</p>
 <pre><code class="hljs">
-druid<span class="hljs-selector-class">.emitter</span><span class="hljs-selector-class">.dropwizard</span><span class="hljs-selector-class">.reporters</span>=[{<span class="hljs-string">"type"</span>:<span class="hljs-string">"jmx"</span>}]
+<span class="hljs-attr">druid.emitter.dropwizard.reporters</span>=[{<span class="hljs-string">"type"</span>:<span class="hljs-string">"jmx"</span>}]
 
 </code></pre>
 <h4><a class="anchor" aria-hidden="true" id="console-reporter"></a><a href="#console-reporter" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Console Reporter</h4>
@@ -445,19 +445,19 @@ druid.emitter.dropwizard.reporters=[{<span class="hljs-string">"type"</span>:<sp
   },
   <span class="hljs-attr">"jvm/bufferpool/counter"</span>: {
     <span class="hljs-attr">"dimensions"</span>: [
-      <span class="hljs-string">"bufferPoolName"</span>
+      <span class="hljs-string">"bufferpoolName"</span>
     ],
     <span class="hljs-attr">"type"</span>: <span class="hljs-string">"gauge"</span>
   },
   <span class="hljs-attr">"jvm/bufferpool/used"</span>: {
     <span class="hljs-attr">"dimensions"</span>: [
-      <span class="hljs-string">"bufferPoolName"</span>
+      <span class="hljs-string">"bufferpoolName"</span>
     ],
     <span class="hljs-attr">"type"</span>: <span class="hljs-string">"gauge"</span>
   },
   <span class="hljs-attr">"jvm/bufferpool/capacity"</span>: {
     <span class="hljs-attr">"dimensions"</span>: [
-      <span class="hljs-string">"bufferPoolName"</span>
+      <span class="hljs-string">"bufferpoolName"</span>
     ],
     <span class="hljs-attr">"type"</span>: <span class="hljs-string">"gauge"</span>
   },
@@ -487,20 +487,23 @@ druid.emitter.dropwizard.reporters=[{<span class="hljs-string">"type"</span>:<sp
   },
   <span class="hljs-attr">"jvm/gc/counter"</span>: {
     <span class="hljs-attr">"dimensions"</span>: [
-      <span class="hljs-string">"gcName"</span>
+      <span class="hljs-string">"gcName"</span>,
+      <span class="hljs-string">"gcGen"</span>
     ],
     <span class="hljs-attr">"type"</span>: <span class="hljs-string">"counter"</span>
   },
   <span class="hljs-attr">"jvm/gc/cpu"</span>: {
     <span class="hljs-attr">"dimensions"</span>: [
-      <span class="hljs-string">"gcName"</span>
+      <span class="hljs-string">"gcName"</span>,
+      <span class="hljs-string">"gcGen"</span>
     ],
     <span class="hljs-attr">"type"</span>: <span class="hljs-string">"timer"</span>,
     <span class="hljs-attr">"timeUnit"</span>: <span class="hljs-string">"NANOSECONDS"</span>
   },
   <span class="hljs-attr">"ingest/events/buffered"</span>: {
     <span class="hljs-attr">"dimensions"</span>: [
-      <span class="hljs-string">"serviceName, bufferCapacity"</span>
+      <span class="hljs-string">"serviceName"</span>,
+      <span class="hljs-string">"bufferCapacity"</span>
     ],
     <span class="hljs-attr">"type"</span>: <span class="hljs-string">"gauge"</span>
   },
@@ -626,6 +629,6 @@ druid.emitter.dropwizard.reporters=[{<span class="hljs-string">"type"</span>:<sp
                 apiKey: '2de99082a9f38e49dfaa059bbe4c901d',
                 indexName: 'apache_druid',
                 inputSelector: '#search_input_react',
-                algoliaOptions: {"facetFilters":["language:en","version:0.18.1"]}
+                algoliaOptions: {"facetFilters":["language:en","version:0.19.0"]}
               });
             </script></body></html>
