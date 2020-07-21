@@ -19,7 +19,7 @@ Druid offers the following advantages over traditional data warehouses:
 
 * Much lower latency for OLAP-style queries
 * Much lower latency for data ingest (both streaming and batch)
-* Out-of-the-box integration with Apache Kakfa, AWS Kinesis, HDFS, AWS S3, and more
+* Out-of-the-box integration with Apache Kafka, AWS Kinesis, HDFS, AWS S3, and more
 * Time-based partitioning, which enables performant time-based queries
 * Fast search and filter, for fast slice and dice
 * Minimal schema design and native support for semi-structured and nested data
