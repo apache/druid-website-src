@@ -595,4 +595,10 @@ China Youzan is a SaaS company which principally engaged in retail science and t
 
 BIGO selects Druid as an OLAP engine to analyze app(Like, Bigolive, IMO, etc.) data in bigdata team. Typical analysis in Druid includes apm, A/B testing, push, funnel model, etc. Besides, Superset is used as dashboard for deep integration with Druid.
 
+
+## MAKESENS
+
+[MAKESENS](http://www.battery-doctor.cn/) use Druid to store and analyze battery data.
+
+
 [Add Your Company](https://github.com/apache/druid-website-src/blob/master/druid-powered.md)
