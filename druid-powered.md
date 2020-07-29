@@ -212,6 +212,15 @@ Jolata leverages Druid as the analytics data store for the realtime network perf
 
 * [Realtime Analytics Powered by Druid](https://www.linkedin.com/pulse/realtime-analytics-powered-druid-kiran-patchigolla)
 
+## Kering
+
+Thanks to Druid, Kering empowers its sales teams (more than 20,000 people worldwide) to quickly understand their sales performance, compare them to their objectives and identify new sales opportunities within their customer portfolio.  
+Kering was already providing data on demand via a search engine (Apache Solr), and the implementation of Apache Druid has enabled us to enrich the offer by :
+- Adding access to real-time updated KPIs (based on streaming ingestion)
+- Providing a sub-second response time
+- Offering linear scalability that allows the service to be deployed to tens of thousands of end users
+- Allowing massive data updates in a very short period of time (using parquet and mapReduce files) without any impact on the quality of service
+
 ## KT NexR
 
 KT NexR is the leading provider of the data analytics platform. We use Druid as a real-time analysis tool to help our customers to analyze multidimensional data in interactive ways.
