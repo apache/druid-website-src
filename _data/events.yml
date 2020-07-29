@@ -8,6 +8,12 @@
   info: "Bucharest Big Data Meetup"
   link: https://www.meetup.com/Bucharest-Big-Data-Meetup/events/271918292/
   
+- date: 2020-08-19
+  name: "Apache Druid: Lightning Fast Analytics on Real-time and Historical Data"
+  info: "Big Data ATL Meetup"
+  link: https://www.meetup.com/BigDataATL/events/272228743
+  
+  
 - date: 2020-09-01
   name: "Apache Druid: the open source, performant, real-time, analytical datastore"
   info: "DataOps Polska"
