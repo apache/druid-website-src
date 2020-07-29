@@ -1,8 +1,3 @@
-- date: 2020-07-23
-  name: "Virtual Apache Druid AGA (Ask Gian Anything) / July Office Hours"
-  info: "Bay Area Apache Druid Meetup by Imply"
-  link: https://www.meetup.com/druidio/events/271672988/
-
 - date: 2020-07-30
   name: "Virtual Apache Druid Meetup featuring SuperAwesome"
   info: "London Apache Druid Meetup by Imply"
@@ -12,6 +7,12 @@
   name: "August Meetup - All About Apache Druid"
   info: "Bucharest Big Data Meetup"
   link: https://www.meetup.com/Bucharest-Big-Data-Meetup/events/271918292/
+  
+- date: 2020-08-19
+  name: "Apache Druid: Lightning Fast Analytics on Real-time and Historical Data"
+  info: "Big Data ATL Meetup"
+  link: https://www.meetup.com/BigDataATL/events/272228743
+  
   
 - date: 2020-09-01
   name: "Apache Druid: the open source, performant, real-time, analytical datastore"
