@@ -1,8 +1,3 @@
-- date: 2020-07-30
-  name: "Virtual Apache Druid Meetup featuring SuperAwesome"
-  info: "London Apache Druid Meetup by Imply"
-  link: https://www.meetup.com/Apache-Druid-London/events/271166791/
-  
 - date: 2020-08-11
   name: "August Meetup - All About Apache Druid"
   info: "Bucharest Big Data Meetup"
@@ -13,11 +8,15 @@
   info: "Big Data ATL Meetup"
   link: https://www.meetup.com/BigDataATL/events/272228743
   
-  
 - date: 2020-09-01
   name: "Apache Druid: the open source, performant, real-time, analytical datastore"
   info: "DataOps Polska"
   link: https://www.meetup.com/DataOps-Polska/events/271935936/
+  
+- date: 2020-09-02
+  name: "Virtual Druid Summit II"
+  info: "Free Online Half-Day Event"
+  link: "https://go.imply.io/Virtual-Druid-Summit-II-Registration.html"
   
 - date: 2020-11-02
   name: "Druid Summit"
