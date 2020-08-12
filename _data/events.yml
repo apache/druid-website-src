@@ -1,12 +1,12 @@
-- date: 2020-08-11
-  name: "August Meetup - All About Apache Druid"
-  info: "Bucharest Big Data Meetup"
-  link: https://www.meetup.com/Bucharest-Big-Data-Meetup/events/271918292/
-  
 - date: 2020-08-19
   name: "Apache Druid: Lightning Fast Analytics on Real-time and Historical Data"
   info: "Big Data ATL Meetup"
   link: https://www.meetup.com/BigDataATL/events/272228743
+  
+- date: 2020-08-20
+  name: "August Office Hours: All About Apache Druid"
+  info: "Bay Area Apache Druid Meetup"
+  link: https://www.meetup.com/druidio/events/272423800/
   
 - date: 2020-09-01
   name: "Apache Druid: the open source, performant, real-time, analytical datastore"
@@ -16,7 +16,7 @@
 - date: 2020-09-02
   name: "Virtual Druid Summit II"
   info: "Free Online Half-Day Event"
-  link: "https://go.imply.io/Virtual-Druid-Summit-II-Registration.html"
+  link: https://go.imply.io/Virtual-Druid-Summit-II-Registration.html
   
 - date: 2020-11-02
   name: "Druid Summit"
