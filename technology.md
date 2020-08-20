@@ -182,4 +182,4 @@ As such, Druid possesses several features to ensure uptime and no data loss.
   </div>
 </div>
 
-For more information, please visit [our docs page](/docs/latest/operations/recommendations.html).
+For more information, please visit [our docs page](/docs/latest/operations/basic-cluster-tuning.html).
