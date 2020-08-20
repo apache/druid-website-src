@@ -1,6 +1,6 @@
 ---
 title: Frequently Asked Questions
-subtitle: Don't see your question here? <a href='/community'>Ask us</a>
+subtitle: Don't see your question here? <a href='/community/'>Ask us</a>
 layout: simple_page
 sectionid: faq
 canonical: 'https://druid.apache.org/faq'
