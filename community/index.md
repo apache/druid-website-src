@@ -52,9 +52,9 @@ If you're looking for some starter projects, we maintain a [list of issues](http
 for new developers.
 
 There are plenty of ways to help outside writing Druid code. *Code review of pull requests*
-(even if you are not a committer), feature suggestions, reporting bugs, [documentation](/docs/{{ site.druid_stable_version }}/)
+(even if you are not a committer), feature suggestions, reporting bugs, [documentation](https://druid.apache.org/docs/latest/design/index.html)
 and usability feedback all matter immensely. Another big way to help is
-through [client libraries](/docs/latest/development/libraries.html), which are
+through [client libraries](https://druid.apache.org/docs/latest/development/libraries.html), which are
 avaialble in a variety of languages. If you develop a new one, we'll be happy
 to include it in the list.
 
