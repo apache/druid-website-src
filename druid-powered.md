@@ -46,6 +46,10 @@ Atomx is a new media exchange that connects networks, DSPs, SSPs, and other part
 
 [Bannerflow](https://www.bannerflow.com) is the leading display ad production platform. We use Druid to power our customer facing analytics system and for internal reporting, monitoring and ad-hoc data exploration.
 
+## BIGO
+
+BIGO selects Druid as an OLAP engine to analyze app(Like, Bigolive, IMO, etc.) data in bigdata team. Typical analysis in Druid includes apm, A/B testing, push, funnel model, etc. Besides, Superset is used as dashboard for deep integration with Druid.
+
 ## Billy Mobile
 
 Billy Mobile is a mobile advertising platform, excelling in the performance-based optimisation segment. We use Druid to power our real-time analytics dashboards, in which our publishers, advertisers and staff can get insights on how their campaigns, offers and traffic are performing, with sub-second query time and minute granularity . We are using a lambda-architecture aproach, ingesting the traffic in real time with Tranquility and Storm, and a batch layer via a tight integration with Hive and Hadoop, our Master Data Set. This way we can provide crucial fast access to data, while making sure to have the right numbers.
@@ -251,6 +255,10 @@ which they can do that is in a big part thanks to Druid!
 ## MakeMyTrip
 
 * [Data Insights Engine @ MakeMyTrip](https://medium.com/makemytrip-engineering/data-insights-engine-makemytrip-900bd353d99c)
+
+## MAKESENS
+
+[MAKESENS](http://www.battery-doctor.cn/) use Druid to store and analyze battery data.
 
 ## Marchex
 
@@ -599,15 +607,6 @@ China Youzan is a SaaS company which principally engaged in retail science and t
 ## Zuoyebang
 
 [Zuoyebang](http://www.zuoyebang.com/) is the most used K12 education platform, 7 out of every 10 K12 users are using Zuoyebang. At Zuoyebang Data Platform Group, we use the Druid in the advertising scene,  mainly related to advertising display, click, billing, and other functions. The performance and timeliness of druid can meet our OLAP queries very well.
-
-## BIGO
-
-BIGO selects Druid as an OLAP engine to analyze app(Like, Bigolive, IMO, etc.) data in bigdata team. Typical analysis in Druid includes apm, A/B testing, push, funnel model, etc. Besides, Superset is used as dashboard for deep integration with Druid.
-
-
-## MAKESENS
-
-[MAKESENS](http://www.battery-doctor.cn/) use Druid to store and analyze battery data.
 
 
 [Add Your Company](https://github.com/apache/druid-website-src/blob/master/druid-powered.md)
