@@ -1,13 +1,4 @@
-- date: 2020-08-19
-  name: "Apache Druid: Lightning Fast Analytics on Real-time and Historical Data"
-  info: "Big Data ATL Meetup"
-  link: https://www.meetup.com/BigDataATL/events/272228743
-  
-- date: 2020-08-20
-  name: "August Office Hours: All About Apache Druid"
-  info: "Bay Area Apache Druid Meetup"
-  link: https://www.meetup.com/druidio/events/272423800/
-  
+
 - date: 2020-09-01
   name: "Apache Druid: the open source, performant, real-time, analytical datastore"
   info: "DataOps Polska"
