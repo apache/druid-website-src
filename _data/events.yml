@@ -1,13 +1,8 @@
 
-- date: 2020-09-01
-  name: "Apache Druid: the open source, performant, real-time, analytical datastore"
-  info: "DataOps Polska"
-  link: https://www.meetup.com/DataOps-Polska/events/271935936/
-  
-- date: 2020-09-02
-  name: "Virtual Druid Summit II"
-  info: "Free Online Half-Day Event"
-  link: https://go.imply.io/Virtual-Druid-Summit-II-Registration.html
+- date: 2020-09-17
+  name: "September Virtual Apache Druid AGA (Ask Gian Anything)"
+  info: "Bay Area Apache Druid Meetup"
+  link: https://www.meetup.com/druidio/events/273011362/
   
 - date: 2020-09-23
   name: "Benchmarking Apache Druid 2: What's Under the Hood?" 
