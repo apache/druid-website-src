@@ -59,6 +59,10 @@ Some great folks have written their own libraries to interact with Apache Druid.
 
 * [raygun/druid4net](https://github.com/MindscapeHQ/druid4net) - A .NET client for Druid written in C#. Supports the .NET full framework and .NET Core.
 
+#### Rust
+
+* [bugzmanov/druid-io-rs](https://github.com/bugzmanov/druid-io-rs) - Fully asynchronous, future-enabled Apache Druid client library for rust programming language.
+
 Other Druid Distributions
 -------------------------
 * [eBay/embedded-druid](https://github.com/eBay/embedded-druid) - Leveraging Druid capabilities in stand alone application
