@@ -38,6 +38,11 @@ Druid is the major player in the real-time analytics pipeline at Appsflyer, and 
 
 Druid is used to power dynamic analytics and charting in Archive-It Reports. Reports help Archive-It partners understand what content they captured, why some content did not get captured, and assists with quality assurance and crawl scoping to ensure they are building the highest quality collections.
 
+## Athena Health
+At [Athena Health](https://www.athenahealth.com/), we are creating a new performance management application for our clients, and one of its key components is Apache Druid. 
+
+* [Automating CI/CD for Druid Clusters at Athena Health](https://imply.io/virtual-druid-summit/automating-ci-cd-for-druid-clusters-at-athena-health)
+
 ## Atomx
 
 Atomx is a new media exchange that connects networks, DSPs, SSPs, and other parties. Atomx uses Druid for it's advanced realtime reporting system. Using the Google Cloud modifications Atomx contributed to Druid, it can easily scale Druid with the fast growing platform.
@@ -61,6 +66,11 @@ Billy Mobile is a mobile advertising platform, excelling in the performance-base
 ## Branch
 
 Branch uses Druid as their trusted analytics engine to power all of their data analysis needs. This ranges from the user-facing Branch Dashboard analytics that our partners rely on to gain insight into the performance of their links; to the data-driven business decisions that we need to make internally to build a sustainable business.
+
+## British Telecom (BT)
+
+* [British Telecom's Apache Druid Architecture](https://imply.io/videos/british-telecoms-apache-druid-architecture)
+* [Why British Telecom Chose Druid Over Cassandra](https://imply.io/videos/why-british-telecom-chose-druid-over-cassandra)
 
 ## Central Bank of the Republic of Turkey
 
@@ -97,6 +107,11 @@ With more than 1 billion unique users reached per month, 3 billion ads displayed
 
 * [Real Time Metrics on Tracker Calls](http://labs.criteo.com/2016/02/real-time-metrics-on-tracker-calls/)
 
+## DBS Bank
+
+[DBS](https://www.dbs.com) is using Apache Druid to handle the AML investigation for the compliance team. The AML (anti-money laundering) workflow generates alerts which are tracked within Druid. The transactional data is ingested from RDBMS to S3 and ingested back to Druid at regular intervals. Investigators can now slice and dice over millions of data with low latency.
+
+* [Apache Druid for Anti-Money Laundering (AML) at DBS Bank](https://imply.io/virtual-druid-summit/apache-druid-anti-money-laundering-dbs-bank
 
 ## Datumo
 
@@ -506,6 +521,12 @@ Sugo is a company that focus on realtime multi-dimension analytics and mining on
 
 [TalkingData](http://www.talkingdata.com/) is China’s largest independent Big Data service platform. TalkingData uses Druid with Atomcube, an extension for enhancement, to power analyze online application and advertising data.
 
+## Target
+
+Apache Druid’s speed and flexibility allow us to provide interactive analytics to front-line, edge-of-business consumers to address hundreds of unique use-cases across several business units.
+
+* [Enterprise Scale Analytics Platform Powered by Druid at Target](https://imply.io/virtual-druid-summit/enterprise-scale-analytics-platform-powered-by-druid-at-target) 
+
 ## Tencent
 
 Tencent SCRM product use Druid for customer behavior analysis.
@@ -535,8 +556,14 @@ Trendyol, which is the largest e-commerce company in Turkey, uses Druid for real
 
 TripleLift uses Druid to provide insights into performance aspects of its native programmatic exchange for sales/business development opportunities, and to provide reporting used by advertisers and publishers.
 
+## Twitch
+
+In order to continue empowering decision making as Twitch scaled, we turned to using Druid and Imply to provide self service analytics to both our technical and non technical staff allowing them to drill into high level metrics in lieu of reading generated reports.
+
+* [Self Service Analytics at Twitch](https://imply.io/virtual-druid-summit/self-service-analytics-at-twitch)
 
 ## Twitter
+
 * [Interactive Analytics at MoPub: Querying Terabytes of Data in Seconds](https://blog.twitter.com/engineering/en_us/topics/infrastructure/2019/interactive-analytics-at-mopub.html)
 
 ## VideoAmp
