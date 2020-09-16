@@ -111,7 +111,7 @@ With more than 1 billion unique users reached per month, 3 billion ads displayed
 
 [DBS](https://www.dbs.com) is using Apache Druid to handle the AML investigation for the compliance team. The AML (anti-money laundering) workflow generates alerts which are tracked within Druid. The transactional data is ingested from RDBMS to S3 and ingested back to Druid at regular intervals. Investigators can now slice and dice over millions of data with low latency.
 
-* [Apache Druid for Anti-Money Laundering (AML) at DBS Bank](https://imply.io/virtual-druid-summit/apache-druid-anti-money-laundering-dbs-bank
+* [Apache Druid for Anti-Money Laundering (AML) at DBS Bank](https://imply.io/virtual-druid-summit/apache-druid-anti-money-laundering-dbs-bank)
 
 ## Datumo
 
