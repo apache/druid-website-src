@@ -179,6 +179,12 @@ At Hulu, we use Druid to power our analytics platform that enables us to interac
 
 [ICSOC Co., Ltd.](https://www.icsoc.net) is the leading call center service provider in China. In our big data department, as traditional ways cannot meet our requirements, eventually we found that Druid, designed in lambda, fully satisfies our requires. It simplified developing statistics or real-time products and highly speeded up OLAP queries.
 
+## Ibotta
+
+[Ibotta](https://home.ibotta.com/) is a free cash back rewards and payments app. The company has partnered with more than 1,500 brands and retailers to pay consumers cash for their purchases. Ibotta has paid out over $600 million in cash rewards to more than 35 million users since its founding in 2012.
+
+* [Combatting fraud at Ibotta with Imply](https://imply.io/post/combating-fraud-at-ibotta-with-imply)
+
 ## Imply
 
 Imply uses Druid to power public demos and to power our internal monitoring and metrics.
@@ -486,6 +492,11 @@ Streamlyzer uses Druid as a next generation online video analytics for online vi
 ## Sugo
 
 Sugo is a company that focus on realtime multi-dimension analytics and mining on big data. We build our platform based on Druid, and developed our own extensions to make it more powerful.
+
+## SuperAwesome
+[SuperAwesome](https://www.superawesome.com)’s mission is to make the internet safer for kids. At the core of SuperAwesome’s analytics is Apache Druid, which helps us relay key insights and data points back to our stakeholders and customers, as well as use this data to power our products themselves. This all happens in a kid-safe way and enables us to deliver the best level of service to billions of children and teens every month.
+
+* [How we use Apache Druid’s real-time analytics to power kidtech at SuperAwesome](https://medium.com/superawesome-engineering/how-we-use-apache-druids-real-time-analytics-to-power-kidtech-at-superawesome-8da6a0fb28b1)
 
 ## Sweet Couch
 
