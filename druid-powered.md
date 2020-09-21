@@ -142,6 +142,7 @@ Didi uses Druid as a core component of our real-time bigdata processing pipeline
 Dream11 is consuming data from Apache Druid, Amazon Redshift, and Athena and building models on Looker to report user concurrency, to track user journeys, and to build interaction events based funnels.
 
 * [Data Highway — Dream11’s Inhouse Analytics Platform — The Burden and Benefits](https://medium.com/@D11Engg/data-highway-dream11s-inhouse-analytics-platform-the-burden-and-benefits-90b8777d282)
+* [Real-Time data and analytics for fantasy sports](https://imply.io/post/real-time-analytics-for-fantasy-sports)
 
 ## DripStat
 
@@ -441,6 +442,12 @@ Raygun is a full stack software intelligence platform that monitors your applica
 
 * [Using the Druid GroupBy V2 engine for real-time analytics](https://raygun.com/blog/2016/12/druid-groupby-v2-engine/)
 
+## Razorpay
+
+We have successfully deployed Druid at [Razorpay](https://razorpay.com/) for our use cases and see continued growth in its footprint. We were able to achieve p90, p95 values of less than 5s and 10s respectively and our dashboard performances have improved by at least 10x when compared to Presto.
+
+* [How Razorpay uses Druid for seamless analytics and product insights?](https://medium.com/@birendra.sahu_77409/how-razorpay-uses-druid-for-seamless-analytics-and-product-insights-364c01b87f1e)
+
 ## Redborder
 
 redBorder is an open source, scale out, cybersecurity analytics platform based on Druid. We hope its full-blown web interface, dashboard and report systems, and ready-to-use real-time pipeline foster other Druid users to create a strong community around it. To see more, please visit redborder.org
@@ -448,6 +455,10 @@ redBorder is an open source, scale out, cybersecurity analytics platform based o
 ## Retargetly
 
 Retargetly is a Data Management Platform that enables publishers and advertisers to manage their first party user data, mix it with second and third party data from others providers and activate it into advertising campaigns (direct, programmatic, etc.). Druid enables us to show real time audience insights. It also provides a lot of flexibility on ad-hoc queries with low latency. We provide default graphs and metrics to our clients but they also have the possibility to make their own interactive queries on real-time.
+
+## Sage + Archer
+
+We are using Druid as our single source of truth for both realtime statistics and data analysis. Our clients can see and filter detailed metrics in our [self-service DSP](https://www.sage-archer.com). The DSP is used for mobile and digital-out-of-home advertising campaigns. Druid is powering both the front-end and the optimization algorithms within the system.
 
 ## Sift Science
 
@@ -512,6 +523,7 @@ Sugo is a company that focus on realtime multi-dimension analytics and mining on
 [SuperAwesome](https://www.superawesome.com)’s mission is to make the internet safer for kids. At the core of SuperAwesome’s analytics is Apache Druid, which helps us relay key insights and data points back to our stakeholders and customers, as well as use this data to power our products themselves. This all happens in a kid-safe way and enables us to deliver the best level of service to billions of children and teens every month.
 
 * [How we use Apache Druid’s real-time analytics to power kidtech at SuperAwesome](https://medium.com/superawesome-engineering/how-we-use-apache-druids-real-time-analytics-to-power-kidtech-at-superawesome-8da6a0fb28b1)
+* [Virtual Apache Druid Meetup featuring SuperAwesome](https://imply.io/videos/virtual-apache-druid-meetup-featuring-superswesome)
 
 ## Sweet Couch
 
