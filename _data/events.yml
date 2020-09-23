@@ -1,13 +1,13 @@
 
-- date: 2020-09-23
-  name: "Benchmarking Apache Druid 2: What's Under the Hood?" 
-  info: "Bay Area Apache Druid Meetup"
-  link: https://www.meetup.com/druidio/events/272938350/
-  
 - date: 2020-09-28
   name: "September Office Hours: All About Apache Druid"
   info: "Bay Area Apache Druid Meetup"
   link: https://www.meetup.com/druidio/events/273120070/
+  
+- date: 2020-10-01
+  name: "Benchmarking Apache Druid 2: What's Under the Hood?" 
+  info: "Bay Area Apache Druid Meetup"
+  link: https://www.meetup.com/druidio/events/272938350/
   
 - date: 2020-10-07
   name: "Virtual Druid Summit III"
