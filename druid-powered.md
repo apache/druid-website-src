@@ -428,6 +428,10 @@ is what they have to say:
 * [Introduction to Druid, fast distributed data store](https://youtu.be/rx6c7D9QmyU)
 * [Storing and accessing trillions of events](https://plumbr.eu/blog/programming/storing-and-querying-trillions-of-events)
 
+## Pollfish
+
+The [Pollfish](https://www.pollfish.com/) real-time analytics platform enables researchers to analyze survey data from over half-a-billion consumers across the world, informing advertising, branding, market research, content, and product strategies. Druid is used alongside Apache Kafka, Spark, Flink, Akka Streams, Finatra / Finagle microservices, Cassandra, PostgreSQL, Hive, and Scruid – an open source Scala library for Apache Druid.
+
 ## PubNative
 
 PubNative uses Druid for its real-time reports and analysis of millions of daily ad views, clicks, conversions and other events.
@@ -577,6 +581,12 @@ In order to continue empowering decision making as Twitch scaled, we turned to u
 ## Twitter
 
 * [Interactive Analytics at MoPub: Querying Terabytes of Data in Seconds](https://blog.twitter.com/engineering/en_us/topics/infrastructure/2019/interactive-analytics-at-mopub.html)
+
+## Unity
+
+Unity's monetization business generates billions of in-game events in a multi-sided marketplace, which creates complexity, slowness, and overhead for reporting. To work around these issues, Unity deploys a Kafka, Spark, and Druid-based ingestion and aggregation pipeline.
+
+* [Getting Started with Druid (Imply)](https://medium.com/@linda0511ny/getting-started-with-druid-imply-17d194762574)
 
 ## VideoAmp
 
