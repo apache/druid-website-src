@@ -1,8 +1,3 @@
-
-- date: 2020-09-28
-  name: "September Office Hours: All About Apache Druid"
-  info: "Bay Area Apache Druid Meetup"
-  link: https://www.meetup.com/druidio/events/273120070/
   
 - date: 2020-10-01
   name: "Benchmarking Apache Druid 2: What's Under the Hood?" 
@@ -13,3 +8,8 @@
   name: "Virtual Druid Summit III"
   info: "A free half-day online event."
   link: https://go.imply.io/Virtual-Druid-Summit-III-Registration.html
+  
+- date: 2020-10-28
+  name: "SuperAwesome Returns for a SuperAwesome Apache Druid Meetup!"
+  info: "London Apache Druid Meetup"
+  link: https://www.meetup.com/Apache-Druid-London/events/273589627/
