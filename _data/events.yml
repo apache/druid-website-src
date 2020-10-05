@@ -1,13 +1,23 @@
   
-- date: 2020-10-01
-  name: "Benchmarking Apache Druid 2: What's Under the Hood?" 
-  info: "Bay Area Apache Druid Meetup"
-  link: https://www.meetup.com/druidio/events/272938350/
-  
 - date: 2020-10-07
   name: "Virtual Druid Summit III"
   info: "A free half-day online event."
   link: https://go.imply.io/Virtual-Druid-Summit-III-Registration.html
+  
+- date: 2020-10-19
+  name: "October Office Hours: All About Apache Druid"
+  info: "Bay Area Druid Meetup"
+  link: https://www.meetup.com/druidio/events/273666882
+  
+- date: 2020-10-20
+  name: "Apache Druid: Why Speed in Analytics Matters"
+  info: "All Things Open"
+  link: https://www.eventbrite.com/e/all-things-open-2020-tickets-112261031768
+  
+- date: 2020-10-23
+  name: "Apache Druid 1010"
+  info: "Data Con LA"
+  link: https://www.dataconla.com/registration/  
   
 - date: 2020-10-28
   name: "SuperAwesome Returns for a SuperAwesome Apache Druid Meetup!"
