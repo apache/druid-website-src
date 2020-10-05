@@ -96,6 +96,10 @@ Cisco uses Druid to power a real-time analytics platform for network flow data.
 
 Condé Nast uses Druid to track billions of events across our two dozen brands, both in real time and historically. Druid helps power dashboards, site performance trackers, and many other internal applications.
 
+## Confluent
+
+Druid has helped push operational visibility to the next level. Operating multi-tenant services requires fine-grained visibility down to the individual tenant, user, or application behavior, where most traditional monitoring stacks fail to scale or become cost-prohibitive. Leveraging Druid as part of our stack means we don't shy away from high-cardinality data. As a result, our teams can not only quickly troubleshoot issues but also glean detailed understanding to help improve the product.	
+
 ## Contiamo
 
 [Contiamo](https://www.contiamo.com) uses cutting edge technology to enable agile development and deployment of data-driven frontends and automations. Druid powers various dashboards and frontends that deal with large amounts of event based data.
@@ -126,7 +130,7 @@ At [Deep.BI](https://www.deep.bi) we track user habits, engagement, product and 
 
 Our talk from FlinkForward conference in Berlin 2019:
 
-[Real-time Stream Analytics and User Scoring Using Apache Druid, Flink & Cassandra at Deep.BI] (https://medium.com/deep-bi/real-time-stream-analytics-and-user-scoring-using-apache-druid-flink-cassandra-at-deep-bi-38e5dc40958d?source=friends_link&sk=d9c85da0cb060280bfeb8f3c1c166e84)
+* [Real-time Stream Analytics and User Scoring Using Apache Druid, Flink & Cassandra at Deep.BI](https://medium.com/deep-bi/real-time-stream-analytics-and-user-scoring-using-apache-druid-flink-cassandra-at-deep-bi-38e5dc40958d?source=friends_link&sk=d9c85da0cb060280bfeb8f3c1c166e84)
 
 ## Delta Projects
 
@@ -220,6 +224,12 @@ Imply uses Druid to power public demos and to power our internal monitoring and 
 ## Inmobi
 
 Inmobi is a mobile advertising and discovery platform. We use Druid majorly for internal realtime reporting and analysis. We also use Caravel backed by Druid, which allows users to build interactive dashboards. Apart from that, we use Druid as a Datastore for faster ingestion of large amount of data and to query this data at sub second latencies.
+
+## Innowatts
+
+Innowatts uses Druid to quickly work with massive data sets, and differentiates its platform with the intended direction to read meters and forecast usage on the fly.
+
+* [Innowatts provides AI-driven analytics for the power industry](https://imply.io/post/innowatts-innovates-power-utilities-analytics)
 
 ## Interactive Intelligence
 
@@ -660,6 +670,10 @@ China Youzan is a SaaS company which principally engaged in retail science and t
 ## Zhihu
 
 [Zhihu](https://www.zhihu.com/) is a Chinese question-and-answer website. In Zhihu, Druid is used to power clients' interactive queries, data reports, A/B testing and performance monitoring. Almost 1T per day data is ingested into druid cluster, and we are strongly depending on thetaSketch aggregator for computing cardinality and retention, looking forward to more improvement on DataSketch.
+
+## Zilingo
+
+Zilingo's data collection infrastructure, processing pipeline and analytics stack is based on Druid. Data is collected from various IOT devices/sensors, mobile and tablet devices and 3p data and is streamed in near realtime. This allows our customers to get a view of the supply chain with thousands of data points via dashboards, reports and the ability to slice and dice data.
 
 ## Zscaler
 * [Druid @ Zscaler - A Retrospective](https://imply.io/post/druid-at-zscaler-security-log-analytics)
