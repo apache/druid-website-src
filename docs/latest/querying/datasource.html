@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Datasources · Apache Druid</title><meta name="viewport" content="width=device-width"/><link rel="canonical" href="https://druid.apache.org/docs/latest/querying/datasource.html"/><meta name="generator" content="Docusaurus"/><meta name="description" content="&lt;!--"/><meta name="docsearch:language" content="en"/><meta name="docsearch:version" content="0.19.0" /><meta property="og:title" content="Datasources · Apache Druid"/><meta property="og:type" content="website"/><meta property="og:url" content="https://druid.apache.org/index.html"/><meta property="og:description" content="&lt;!--"/><meta property="og:image" content="https://druid.apache.org/img/druid_nav.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://druid.apache.org/img/druid_nav.png"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-131010415-1"></script><script>
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Datasources · Apache Druid</title><meta name="viewport" content="width=device-width"/><link rel="canonical" href="https://druid.apache.org/docs/latest/querying/datasource.html"/><meta name="generator" content="Docusaurus"/><meta name="description" content="&lt;!--"/><meta name="docsearch:language" content="en"/><meta name="docsearch:version" content="0.20.0" /><meta property="og:title" content="Datasources · Apache Druid"/><meta property="og:type" content="website"/><meta property="og:url" content="https://druid.apache.org/index.html"/><meta property="og:description" content="&lt;!--"/><meta property="og:image" content="https://druid.apache.org/img/druid_nav.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://druid.apache.org/img/druid_nav.png"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-131010415-1"></script><script>
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments); }
               gtag('js', new Date());
@@ -128,6 +128,8 @@ use table datasources.</p>
 <p>Union datasources allow you to treat two or more table datasources as a single datasource. The datasources being unioned
 do not need to have identical schemas. If they do not fully match up, then columns that exist in one table but not
 another will be treated as if they contained all null values in the tables where they do not exist.</p>
+<p>The list of &quot;dataSources&quot; must be nonempty. If you want to query an empty dataset, use an <a href="#inline"><code>inline</code> datasource</a>
+instead.</p>
 <p>Union datasources are not available in Druid SQL.</p>
 <p>Refer to the <a href="/docs/latest/querying/query-execution.html#union">Query execution</a> page for more details on how queries are executed when you
 use union datasources.</p>
@@ -167,7 +169,7 @@ page for more details on how subqueries are executed and what limits will apply.
 </span></div></div></div></div>
 <p>Join datasources allow you to do a SQL-style join of two datasources. Stacking joins on top of each other allows
 you to join arbitrarily many datasources.</p>
-<p>In Druid 0.19.0, joins are implemented with a broadcast hash-join algorithm. This means that all tables
+<p>In Druid 0.20.0, joins are implemented with a broadcast hash-join algorithm. This means that all tables
 other than the leftmost &quot;base&quot; table must fit in memory. It also means that the join condition must be an equality. This
 feature is intended mainly to allow joining regular Druid tables with <a href="#lookup">lookup</a>, <a href="#inline">inline</a>, and
 <a href="#query">query</a> datasources.</p>
@@ -218,7 +220,7 @@ and how to detect it.</li>
 <li>One common reason for implicit subquery generation is if the types of the two halves of an equality do not match.
 For example, since lookup keys are always strings, the condition <code>druid.d JOIN lookup.l ON d.field = l.field</code> will
 perform best if <code>d.field</code> is a string.</li>
-<li>As of Druid 0.19.0, the join operator must evaluate the condition for each row. In the future, we expect
+<li>As of Druid 0.20.0, the join operator must evaluate the condition for each row. In the future, we expect
 to implement both early and deferred condition evaluation, which we expect to improve performance considerably for
 common use cases.</li>
 <li>Currently, Druid does not support pushing down predicates (condition and filter) past a Join (i.e. into
@@ -256,6 +258,6 @@ always be correct.</li>
                 apiKey: '2de99082a9f38e49dfaa059bbe4c901d',
                 indexName: 'apache_druid',
                 inputSelector: '#search_input_react',
-                algoliaOptions: {"facetFilters":["language:en","version:0.19.0"]}
+                algoliaOptions: {"facetFilters":["language:en","version:0.20.0"]}
               });
             </script></body></html>

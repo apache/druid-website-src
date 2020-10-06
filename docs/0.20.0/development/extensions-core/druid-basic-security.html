@@ -1,0 +1,542 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Basic Security · Apache Druid</title><meta name="viewport" content="width=device-width"/><link rel="canonical" href="https://druid.apache.org/docs/0.20.0/development/extensions-core/druid-basic-security.html"/><meta name="generator" content="Docusaurus"/><meta name="description" content="&lt;!--"/><meta name="docsearch:language" content="en"/><meta name="docsearch:version" content="0.20.0" /><meta property="og:title" content="Basic Security · Apache Druid"/><meta property="og:type" content="website"/><meta property="og:url" content="https://druid.apache.org/index.html"/><meta property="og:description" content="&lt;!--"/><meta property="og:image" content="https://druid.apache.org/img/druid_nav.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://druid.apache.org/img/druid_nav.png"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-131010415-1"></script><script>
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments); }
+              gtag('js', new Date());
+              gtag('config', 'UA-131010415-1');
+            </script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"/><link rel="stylesheet" href="/css/code-block-buttons.css"/><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script><script type="text/javascript" src="/js/code-block-buttons.js"></script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/druid_nav.png" alt="Apache Druid"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/technology" target="_self">Technology</a></li><li class=""><a href="/use-cases" target="_self">Use Cases</a></li><li class=""><a href="/druid-powered" target="_self">Powered By</a></li><li class="siteNavGroupActive"><a href="/docs/0.20.0/design/index.html" target="_self">Docs</a></li><li class=""><a href="/community/" target="_self">Community</a></li><li class=""><a href="https://www.apache.org" target="_self">Apache</a></li><li class=""><a href="/downloads.html" target="_self">Download</a></li><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Hidden</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Getting started<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.0/design/index.html">Introduction to Apache Druid</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/tutorials/index.html">Quickstart</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/tutorials/docker.html">Docker</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/single-server.html">Single server deployment</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/tutorials/cluster.html">Clustered deployment</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Tutorials<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.0/tutorials/tutorial-batch.html">Loading files natively</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/tutorials/tutorial-kafka.html">Load from Apache Kafka</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/tutorials/tutorial-batch-hadoop.html">Load from Apache Hadoop</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/tutorials/tutorial-query.html">Querying data</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/tutorials/tutorial-rollup.html">Roll-up</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/tutorials/tutorial-retention.html">Configuring data retention</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/tutorials/tutorial-update-data.html">Updating existing data</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/tutorials/tutorial-compaction.html">Compacting segments</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/tutorials/tutorial-delete-data.html">Deleting data</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/tutorials/tutorial-ingestion-spec.html">Writing an ingestion spec</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/tutorials/tutorial-transform-spec.html">Transforming input data</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/tutorials/tutorial-kerberos-hadoop.html">Kerberized HDFS deep storage</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Design<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.0/design/architecture.html">Design</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/design/segments.html">Segments</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/design/processes.html">Processes and servers</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/dependencies/deep-storage.html">Deep storage</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/dependencies/metadata-storage.html">Metadata storage</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/dependencies/zookeeper.html">ZooKeeper</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Ingestion<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.0/ingestion/index.html">Ingestion</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/ingestion/data-formats.html">Data formats</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/ingestion/schema-design.html">Schema design tips</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/ingestion/data-management.html">Data management</a></li><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Stream ingestion</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/kafka-ingestion.html">Apache Kafka</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/kinesis-ingestion.html">Amazon Kinesis</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/ingestion/tranquility.html">Tranquility</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Batch ingestion</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.20.0/ingestion/native-batch.html">Native batch</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/ingestion/hadoop.html">Hadoop-based</a></li></ul></div><li class="navListItem"><a class="navItem" href="/docs/0.20.0/ingestion/tasks.html">Task reference</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/ingestion/faq.html">Troubleshooting FAQ</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Querying<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/sql.html">Druid SQL</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/querying.html">Native queries</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/query-execution.html">Query execution</a></li><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Concepts</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/datasource.html">Datasources</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/joins.html">Joins</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/lookups.html">Lookups</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/multi-value-dimensions.html">Multi-value dimensions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/multitenancy.html">Multitenancy</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/caching.html">Query caching</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/query-context.html">Context parameters</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Native query types</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/timeseriesquery.html">Timeseries</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/topnquery.html">TopN</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/groupbyquery.html">GroupBy</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/scan-query.html">Scan</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/searchquery.html">Search</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/timeboundaryquery.html">TimeBoundary</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/segmentmetadataquery.html">SegmentMetadata</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/datasourcemetadataquery.html">DatasourceMetadata</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Native query components</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/filters.html">Filters</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/granularities.html">Granularities</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/dimensionspecs.html">Dimensions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/aggregations.html">Aggregations</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/post-aggregations.html">Post-aggregations</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/misc/math-expr.html">Expressions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/having.html">Having filters (groupBy)</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/limitspec.html">Sorting and limiting (groupBy)</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/topnmetricspec.html">Sorting (topN)</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/sorting-orders.html">String comparators</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/virtual-columns.html">Virtual columns</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/geo.html">Spatial filters</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Configuration<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.0/configuration/index.html">Configuration reference</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions.html">Extensions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/configuration/logging.html">Logging</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Operations<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/druid-console.html">Web console</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/getting-started.html">Getting started with Apache Druid</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/basic-cluster-tuning.html">Basic cluster tuning</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/api-reference.html">API reference</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/high-availability.html">High availability</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/rolling-updates.html">Rolling updates</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/rule-configuration.html">Retaining or automatically dropping data</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/metrics.html">Metrics</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/alerts.html">Alerts</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/other-hadoop.html">Working with different versions of Apache Hadoop</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/http-compression.html">HTTP compression</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/tls-support.html">TLS support</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/password-provider.html">Password providers</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/dump-segment.html">dump-segment tool</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/reset-cluster.html">reset-cluster tool</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/insert-segment-to-db.html">insert-segment-to-db tool</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/pull-deps.html">pull-deps tool</a></li><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Misc</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/management-uis.html">Legacy Management UIs</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/deep-storage-migration.html">Deep storage migration</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/export-metadata.html">Export Metadata Tool</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/metadata-migration.html">Metadata Migration</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/segment-optimization.html">Segment Size Optimization</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/use_sbt_to_build_fat_jar.html">Content for build.sbt</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Development<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/overview.html">Developing on Druid</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/modules.html">Creating extensions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/javascript.html">JavaScript functionality</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/build.html">Build from source</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/versioning.html">Versioning</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/experimental.html">Experimental features</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Misc<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.0/misc/papers-and-talks.html">Papers</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Hidden<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.0/comparisons/druid-vs-elasticsearch.html">Apache Druid vs Elasticsearch</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/comparisons/druid-vs-key-value.html">Apache Druid vs. Key/Value Stores (HBase/Cassandra/OpenTSDB)</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/comparisons/druid-vs-kudu.html">Apache Druid vs Kudu</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/comparisons/druid-vs-redshift.html">Apache Druid vs Redshift</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/comparisons/druid-vs-spark.html">Apache Druid vs Spark</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/comparisons/druid-vs-sql-on-hadoop.html">Apache Druid vs SQL-on-Hadoop</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/design/auth.html">Authentication and Authorization</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/design/broker.html">Broker</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/design/coordinator.html">Coordinator Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/design/historical.html">Historical Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/design/indexer.html">Indexer Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/design/indexing-service.html">Indexing Service</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/design/middlemanager.html">MiddleManager Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/design/overlord.html">Overlord Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/design/router.html">Router Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/design/peons.html">Peons</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/approximate-histograms.html">Approximate Histogram aggregators</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/avro.html">Apache Avro</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/azure.html">Microsoft Azure</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/bloom-filter.html">Bloom Filter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/datasketches-extension.html">DataSketches extension</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/datasketches-hll.html">DataSketches HLL Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/datasketches-quantiles.html">DataSketches Quantiles Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/datasketches-theta.html">DataSketches Theta Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/datasketches-tuple.html">DataSketches Tuple Sketch module</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/0.20.0/development/extensions-core/druid-basic-security.html">Basic Security</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/druid-kerberos.html">Kerberos</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/druid-lookups.html">Cached Lookup Module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/druid-ranger-security.html">Apache Ranger Security</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/google.html">Google Cloud Storage</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/hdfs.html">HDFS</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/kafka-extraction-namespace.html">Apache Kafka Lookups</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/lookups-cached-global.html">Globally Cached Lookups</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/mysql.html">MySQL Metadata Store</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/orc.html">ORC Extension</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/druid-pac4j.html">Druid pac4j based Security extension</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/parquet.html">Apache Parquet Extension</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/postgresql.html">PostgreSQL Metadata Store</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/protobuf.html">Protobuf</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/s3.html">S3-compatible</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/simple-client-sslcontext.html">Simple SSLContext Provider Module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/stats.html">Stats aggregator</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/test-stats.html">Test Stats Aggregators</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-contrib/ambari-metrics-emitter.html">Ambari Metrics Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-contrib/cassandra.html">Apache Cassandra</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-contrib/cloudfiles.html">Rackspace Cloud Files</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-contrib/distinctcount.html">DistinctCount Aggregator</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-contrib/graphite.html">Graphite Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-contrib/influx.html">InfluxDB Line Protocol Parser</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-contrib/influxdb-emitter.html">InfluxDB Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-contrib/kafka-emitter.html">Kafka Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-contrib/materialized-view.html">Materialized View</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-contrib/momentsketch-quantiles.html">Moment Sketches for Approximate Quantiles module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-contrib/moving-average-query.html">Moving Average Query</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-contrib/opentsdb-emitter.html">OpenTSDB Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-contrib/redis-cache.html">Druid Redis Cache</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-contrib/sqlserver.html">Microsoft SQLServer</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-contrib/statsd.html">StatsD Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-contrib/tdigestsketch-quantiles.html">T-Digest Quantiles Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-contrib/thrift.html">Thrift</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-contrib/time-min-max.html">Timestamp Min/Max aggregators</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-contrib/gce-extensions.html">GCE Extensions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-contrib/aliyun-oss.html">Aliyun OSS</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/hll-old.html">Cardinality/HyperUnique aggregators</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/select-query.html">Select</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/ingestion/standalone-realtime.html">Realtime Process</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/apache/druid/edit/master/docs/development/extensions-core/druid-basic-security.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">Basic Security</h1></header><article><div><span><!--
+  ~ Licensed to the Apache Software Foundation (ASF) under one
+  ~ or more contributor license agreements.  See the NOTICE file
+  ~ distributed with this work for additional information
+  ~ regarding copyright ownership.  The ASF licenses this file
+  ~ to you under the Apache License, Version 2.0 (the
+  ~ "License"); you may not use this file except in compliance
+  ~ with the License.  You may obtain a copy of the License at
+  ~
+  ~   http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an
+  ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~ KIND, either express or implied.  See the License for the
+  ~ specific language governing permissions and limitations
+  ~ under the License.
+  -->
+<p>This Apache Druid extension adds:</p>
+<ul>
+<li>an Authenticator which supports <a href="https://en.wikipedia.org/wiki/Basic_access_authentication">HTTP Basic authentication</a> using the Druid metadata store or LDAP as its credentials store</li>
+<li>an Authorizer which implements basic role-based access control for Druid metadata store or LDAP users and groups</li>
+</ul>
+<p>Make sure to <a href="/docs/0.20.0/development/extensions.html#loading-extensions">include</a> <code>druid-basic-security</code> as an extension.</p>
+<p>Please see <a href="/docs/0.20.0/design/auth.html">Authentication and Authorization</a> for more information on the extension interfaces being implemented.</p>
+<h2><a class="anchor" aria-hidden="true" id="configuration"></a><a href="#configuration" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Configuration</h2>
+<p>The examples in the section will use &quot;MyBasicMetadataAuthenticator&quot;, &quot;MyBasicLDAPAuthenticator&quot;, &quot;MyBasicMetadataAuthorizer&quot;, and &quot;MyBasicLDAPAuthorizer&quot; as names for the Authenticators and Authorizer.</p>
+<p>These properties are not tied to specific Authenticator or Authorizer instances.</p>
+<p>These configuration properties should be added to the common runtime properties file.</p>
+<h3><a class="anchor" aria-hidden="true" id="properties"></a><a href="#properties" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Properties</h3>
+<table>
+<thead>
+<tr><th>Property</th><th>Description</th><th>Default</th><th>required</th></tr>
+</thead>
+<tbody>
+<tr><td><code>druid.auth.basic.common.pollingPeriod</code></td><td>Defines in milliseconds how often processes should poll the Coordinator for the current Druid metadata store authenticator/authorizer state.</td><td>60000</td><td>No</td></tr>
+<tr><td><code>druid.auth.basic.common.maxRandomDelay</code></td><td>Defines in milliseconds the amount of random delay to add to the pollingPeriod, to spread polling requests across time.</td><td>6000</td><td>No</td></tr>
+<tr><td><code>druid.auth.basic.common.maxSyncRetries</code></td><td>Determines how many times a service will retry if the authentication/authorization Druid metadata store state sync with the Coordinator fails.</td><td>10</td><td>No</td></tr>
+<tr><td><code>druid.auth.basic.common.cacheDirectory</code></td><td>If defined, snapshots of the basic Authenticator and Authorizer Druid metadata store caches will be stored on disk in this directory. If this property is defined, when a service is starting, it will attempt to initialize its caches from these on-disk snapshots, if the service is unable to initialize its state by communicating with the Coordinator.</td><td>null</td><td>No</td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="creating-an-authenticator-that-uses-the-druid-metadata-store-to-lookup-and-validate-credentials"></a><a href="#creating-an-authenticator-that-uses-the-druid-metadata-store-to-lookup-and-validate-credentials" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Creating an Authenticator that uses the Druid metadata store to lookup and validate credentials</h3>
+<pre><code class="hljs">druid<span class="hljs-selector-class">.auth</span>.authenticatorChain=[<span class="hljs-string">"MyBasicMetadataAuthenticator"</span>]
+
+druid<span class="hljs-selector-class">.auth</span><span class="hljs-selector-class">.authenticator</span><span class="hljs-selector-class">.MyBasicMetadataAuthenticator</span>.type=basic
+druid<span class="hljs-selector-class">.auth</span><span class="hljs-selector-class">.authenticator</span><span class="hljs-selector-class">.MyBasicMetadataAuthenticator</span>.initialAdminPassword=password1
+druid<span class="hljs-selector-class">.auth</span><span class="hljs-selector-class">.authenticator</span><span class="hljs-selector-class">.MyBasicMetadataAuthenticator</span>.initialInternalClientPassword=password2
+druid<span class="hljs-selector-class">.auth</span><span class="hljs-selector-class">.authenticator</span><span class="hljs-selector-class">.MyBasicMetadataAuthenticator</span><span class="hljs-selector-class">.credentialsValidator</span>.type=metadata
+druid<span class="hljs-selector-class">.auth</span><span class="hljs-selector-class">.authenticator</span><span class="hljs-selector-class">.MyBasicMetadataAuthenticator</span>.skipOnFailure=false
+druid<span class="hljs-selector-class">.auth</span><span class="hljs-selector-class">.authenticator</span><span class="hljs-selector-class">.MyBasicMetadataAuthenticator</span>.authorizerName=MyBasicMetadataAuthorizer
+</code></pre>
+<p>To use the Basic authenticator, add an authenticator with type <code>basic</code> to the authenticatorChain.
+The authenticator needs to also define a credentialsValidator with type 'metadata' or 'ldap'.
+If credentialsValidator is not specified, type 'metadata' will be used as default.</p>
+<p>Configuration of the named authenticator is assigned through properties with the form:</p>
+<pre><code class="hljs">druid.auth.authenticator.<span class="hljs-tag">&lt;<span class="hljs-name">authenticatorName</span>&gt;</span>.<span class="hljs-tag">&lt;<span class="hljs-name">authenticatorProperty</span>&gt;</span>
+</code></pre>
+<p>The authenticator configuration examples in the rest of this document will use &quot;MyBasicMetadataAuthenticator&quot; or &quot;MyBasicLDAPAuthenticator&quot; as the name of the authenticators being configured.</p>
+<h4><a class="anchor" aria-hidden="true" id="properties-for-druid-metadata-store-user-authentication"></a><a href="#properties-for-druid-metadata-store-user-authentication" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Properties for Druid metadata store user authentication</h4>
+<table>
+<thead>
+<tr><th>Property</th><th>Description</th><th>Default</th><th>required</th></tr>
+</thead>
+<tbody>
+<tr><td><code>druid.auth.authenticator.MyBasicMetadataAuthenticator.initialAdminPassword</code></td><td>Initial <a href="/docs/0.20.0/operations/password-provider.html">Password Provider</a> for the automatically created default admin user. If no password is specified, the default admin user will not be created. If the default admin user already exists, setting this property will not affect its password.</td><td>null</td><td>No</td></tr>
+<tr><td><code>druid.auth.authenticator.MyBasicMetadataAuthenticator.initialInternalClientPassword</code></td><td>Initial <a href="/docs/0.20.0/operations/password-provider.html">Password Provider</a> for the default internal system user, used for internal process communication. If no password is specified, the default internal system user will not be created. If the default internal system user already exists, setting this property will not affect its password.</td><td>null</td><td>No</td></tr>
+<tr><td><code>druid.auth.authenticator.MyBasicMetadataAuthenticator.enableCacheNotifications</code></td><td>If true, the Coordinator will notify Druid processes whenever a configuration change to this Authenticator occurs, allowing them to immediately update their state without waiting for polling.</td><td>true</td><td>No</td></tr>
+<tr><td><code>druid.auth.authenticator.MyBasicMetadataAuthenticator.cacheNotificationTimeout</code></td><td>The timeout in milliseconds for the cache notifications.</td><td>5000</td><td>No</td></tr>
+<tr><td><code>druid.auth.authenticator.MyBasicMetadataAuthenticator.credentialIterations</code></td><td>Number of iterations to use for password hashing.</td><td>10000</td><td>No</td></tr>
+<tr><td><code>druid.auth.authenticator.MyBasicMetadataAuthenticator.credentialsValidator.type</code></td><td>The type of credentials store (metadata) to validate requests credentials.</td><td>metadata</td><td>No</td></tr>
+<tr><td><code>druid.auth.authenticator.MyBasicMetadataAuthenticator.skipOnFailure</code></td><td>If true and the request credential doesn't exists or isn't fully configured in the credentials store, the request will proceed to next Authenticator in the chain.</td><td>false</td><td>No</td></tr>
+<tr><td><code>druid.auth.authenticator.MyBasicMetadataAuthenticator.authorizerName</code></td><td>Authorizer that requests should be directed to</td><td>N/A</td><td>Yes</td></tr>
+</tbody>
+</table>
+<h4><a class="anchor" aria-hidden="true" id="properties-for-ldap-user-authentication"></a><a href="#properties-for-ldap-user-authentication" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Properties for LDAP user authentication</h4>
+<table>
+<thead>
+<tr><th>Property</th><th>Description</th><th>Default</th><th>required</th></tr>
+</thead>
+<tbody>
+<tr><td><code>druid.auth.authenticator.MyBasicLDAPAuthenticator.initialAdminPassword</code></td><td>Initial <a href="/docs/0.20.0/operations/password-provider.html">Password Provider</a> for the automatically created default admin user. If no password is specified, the default admin user will not be created. If the default admin user already exists, setting this property will not affect its password.</td><td>null</td><td>No</td></tr>
+<tr><td><code>druid.auth.authenticator.MyBasicLDAPAuthenticator.initialInternalClientPassword</code></td><td>Initial <a href="/docs/0.20.0/operations/password-provider.html">Password Provider</a> for the default internal system user, used for internal process communication. If no password is specified, the default internal system user will not be created. If the default internal system user already exists, setting this property will not affect its password.</td><td>null</td><td>No</td></tr>
+<tr><td><code>druid.auth.authenticator.MyBasicLDAPAuthenticator.enableCacheNotifications</code></td><td>If true, the Coordinator will notify Druid processes whenever a configuration change to this Authenticator occurs, allowing them to immediately update their state without waiting for polling.</td><td>true</td><td>No</td></tr>
+<tr><td><code>druid.auth.authenticator.MyBasicLDAPAuthenticator.cacheNotificationTimeout</code></td><td>The timeout in milliseconds for the cache notifications.</td><td>5000</td><td>No</td></tr>
+<tr><td><code>druid.auth.authenticator.MyBasicLDAPAuthenticator.credentialIterations</code></td><td>Number of iterations to use for password hashing.</td><td>10000</td><td>No</td></tr>
+<tr><td><code>druid.auth.authenticator.MyBasicLDAPAuthenticator.credentialsValidator.type</code></td><td>The type of credentials store (ldap) to validate requests credentials.</td><td>metadata</td><td>No</td></tr>
+<tr><td><code>druid.auth.authenticator.MyBasicLDAPAuthenticator.credentialsValidator.url</code></td><td>URL of the LDAP server.</td><td>null</td><td>Yes</td></tr>
+<tr><td><code>druid.auth.authenticator.MyBasicLDAPAuthenticator.credentialsValidator.bindUser</code></td><td>LDAP bind user username.</td><td>null</td><td>Yes</td></tr>
+<tr><td><code>druid.auth.authenticator.MyBasicLDAPAuthenticator.credentialsValidator.bindPassword</code></td><td><a href="/docs/0.20.0/operations/password-provider.html">Password Provider</a> LDAP bind user password.</td><td>null</td><td>Yes</td></tr>
+<tr><td><code>druid.auth.authenticator.MyBasicLDAPAuthenticator.credentialsValidator.baseDn</code></td><td>The point from where the LDAP server will search for users.</td><td>null</td><td>Yes</td></tr>
+<tr><td><code>druid.auth.authenticator.MyBasicLDAPAuthenticator.credentialsValidator.userSearch</code></td><td>The filter/expression to use for the search. For example, (&amp;(sAMAccountName=%s)(objectClass=user))</td><td>null</td><td>Yes</td></tr>
+<tr><td><code>druid.auth.authenticator.MyBasicLDAPAuthenticator.credentialsValidator.userAttribute</code></td><td>The attribute id identifying the attribute that will be returned as part of the search. For example, sAMAccountName.</td><td>null</td><td>Yes</td></tr>
+<tr><td><code>druid.auth.authenticator.MyBasicLDAPAuthenticator.credentialsValidator.credentialVerifyDuration</code></td><td>The duration in seconds for how long valid credentials are verifiable within the cache when not requested.</td><td>600</td><td>No</td></tr>
+<tr><td><code>druid.auth.authenticator.MyBasicLDAPAuthenticator.credentialsValidator.credentialMaxDuration</code></td><td>The max duration in seconds for valid credentials that can reside in cache regardless of how often they are requested.</td><td>3600</td><td>No</td></tr>
+<tr><td><code>druid.auth.authenticator.MyBasicLDAPAuthenticator.credentialsValidator.credentialCacheSize</code></td><td>The valid credentials cache size. The cache uses a LRU policy.</td><td>100</td><td>No</td></tr>
+<tr><td><code>druid.auth.authenticator.MyBasicLDAPAuthenticator.skipOnFailure</code></td><td>If true and the request credential doesn't exists or isn't fully configured in the credentials store, the request will proceed to next Authenticator in the chain.</td><td>false</td><td>No</td></tr>
+<tr><td><code>druid.auth.authenticator.MyBasicLDAPAuthenticator.authorizerName</code></td><td>Authorizer that requests should be directed to.</td><td>N/A</td><td>Yes</td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="creating-an-escalator"></a><a href="#creating-an-escalator" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Creating an Escalator</h3>
+<pre><code class="hljs"><span class="hljs-comment"># Escalator</span>
+<span class="hljs-attr">druid.escalator.type</span>=basic
+<span class="hljs-attr">druid.escalator.internalClientUsername</span>=druid_system
+<span class="hljs-attr">druid.escalator.internalClientPassword</span>=password2
+<span class="hljs-attr">druid.escalator.authorizerName</span>=MyBasicMetadataAuthorizer
+</code></pre>
+<h4><a class="anchor" aria-hidden="true" id="properties-1"></a><a href="#properties-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Properties</h4>
+<table>
+<thead>
+<tr><th>Property</th><th>Description</th><th>Default</th><th>required</th></tr>
+</thead>
+<tbody>
+<tr><td><code>druid.escalator.internalClientUsername</code></td><td>The escalator will use this username for requests made as the internal system user.</td><td>n/a</td><td>Yes</td></tr>
+<tr><td><code>druid.escalator.internalClientPassword</code></td><td>The escalator will use this <a href="/docs/0.20.0/operations/password-provider.html">Password Provider</a> for requests made as the internal system user.</td><td>n/a</td><td>Yes</td></tr>
+<tr><td><code>druid.escalator.authorizerName</code></td><td>Authorizer that requests should be directed to.</td><td>n/a</td><td>Yes</td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="creating-an-authorizer"></a><a href="#creating-an-authorizer" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Creating an Authorizer</h3>
+<pre><code class="hljs"><span class="hljs-attr">druid.auth.authorizers</span>=[<span class="hljs-string">"MyBasicMetadataAuthorizer"</span>]
+
+<span class="hljs-attr">druid.auth.authorizer.MyBasicMetadataAuthorizer.type</span>=basic
+</code></pre>
+<p>To use the Basic authorizer, add an authorizer with type <code>basic</code> to the authorizers list.</p>
+<p>Configuration of the named authorizer is assigned through properties with the form:</p>
+<pre><code class="hljs">druid.auth.authorizer.<span class="hljs-tag">&lt;<span class="hljs-name">authorizerName</span>&gt;</span>.<span class="hljs-tag">&lt;<span class="hljs-name">authorizerProperty</span>&gt;</span>
+</code></pre>
+<p>The authorizer configuration examples in the rest of this document will use &quot;MyBasicMetadataAuthorizer&quot; or &quot;MyBasicLDAPAuthorizer&quot; as the name of the authenticators being configured.</p>
+<h4><a class="anchor" aria-hidden="true" id="properties-for-druid-metadata-store-user-authorization"></a><a href="#properties-for-druid-metadata-store-user-authorization" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Properties for Druid metadata store user authorization</h4>
+<table>
+<thead>
+<tr><th>Property</th><th>Description</th><th>Default</th><th>required</th></tr>
+</thead>
+<tbody>
+<tr><td><code>druid.auth.authorizer.MyBasicMetadataAuthorizer.enableCacheNotifications</code></td><td>If true, the Coordinator will notify Druid processes whenever a configuration change to this Authorizer occurs, allowing them to immediately update their state without waiting for polling.</td><td>true</td><td>No</td></tr>
+<tr><td><code>druid.auth.authorizer.MyBasicMetadataAuthorizer.cacheNotificationTimeout</code></td><td>The timeout in milliseconds for the cache notifications.</td><td>5000</td><td>No</td></tr>
+<tr><td><code>druid.auth.authorizer.MyBasicMetadataAuthorizer.initialAdminUser</code></td><td>The initial admin user with role defined in initialAdminRole property if specified, otherwise the default admin role will be assigned.</td><td>admin</td><td>No</td></tr>
+<tr><td><code>druid.auth.authorizer.MyBasicMetadataAuthorizer.initialAdminRole</code></td><td>The initial admin role to create if it doesn't already exists.</td><td>admin</td><td>No</td></tr>
+<tr><td><code>druid.auth.authorizer.MyBasicMetadataAuthorizer.roleProvider.type</code></td><td>The type of role provider to authorize requests credentials.</td><td>metadata</td><td>No</td></tr>
+</tbody>
+</table>
+<h4><a class="anchor" aria-hidden="true" id="properties-for-ldap-user-authorization"></a><a href="#properties-for-ldap-user-authorization" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Properties for LDAP user authorization</h4>
+<table>
+<thead>
+<tr><th>Property</th><th>Description</th><th>Default</th><th>required</th></tr>
+</thead>
+<tbody>
+<tr><td><code>druid.auth.authorizer.MyBasicLDAPAuthorizer.enableCacheNotifications</code></td><td>If true, the Coordinator will notify Druid processes whenever a configuration change to this Authorizer occurs, allowing them to immediately update their state without waiting for polling.</td><td>true</td><td>No</td></tr>
+<tr><td><code>druid.auth.authorizer.MyBasicLDAPAuthorizer.cacheNotificationTimeout</code></td><td>The timeout in milliseconds for the cache notifications.</td><td>5000</td><td>No</td></tr>
+<tr><td><code>druid.auth.authorizer.MyBasicLDAPAuthorizer.initialAdminUser</code></td><td>The initial admin user with role defined in initialAdminRole property if specified, otherwise the default admin role will be assigned.</td><td>admin</td><td>No</td></tr>
+<tr><td><code>druid.auth.authorizer.MyBasicLDAPAuthorizer.initialAdminRole</code></td><td>The initial admin role to create if it doesn't already exists.</td><td>admin</td><td>No</td></tr>
+<tr><td><code>druid.auth.authorizer.MyBasicLDAPAuthorizer.initialAdminGroupMapping</code></td><td>The initial admin group mapping with role defined in initialAdminRole property if specified, otherwise the default admin role will be assigned. The name of this initial admin group mapping will be set to adminGroupMapping</td><td>null</td><td>No</td></tr>
+<tr><td><code>druid.auth.authorizer.MyBasicLDAPAuthorizer.roleProvider.type</code></td><td>The type of role provider (ldap) to authorize requests credentials.</td><td>metadata</td><td>No</td></tr>
+<tr><td><code>druid.auth.authorizer.MyBasicLDAPAuthorizer.roleProvider.groupFilters</code></td><td>Array of LDAP group filters used to filter out the allowed set of groups returned from LDAP search. Filters can be begin with <em>, or end with ,</em> to provide configurational flexibility to limit or filter allowed set of groups available to LDAP Authorizer.</td><td>null</td><td>No</td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="usage"></a><a href="#usage" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Usage</h2>
+<h3><a class="anchor" aria-hidden="true" id="coordinator-security-api"></a><a href="#coordinator-security-api" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Coordinator Security API</h3>
+<p>To use these APIs, a user needs read/write permissions for the CONFIG resource type with name &quot;security&quot;.</p>
+<h4><a class="anchor" aria-hidden="true" id="authentication-api"></a><a href="#authentication-api" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Authentication API</h4>
+<p>Root path: <code>/druid-ext/basic-security/authentication</code></p>
+<p>Each API endpoint includes {authenticatorName}, specifying which Authenticator instance is being configured.</p>
+<h5><a class="anchor" aria-hidden="true" id="usercredential-management"></a><a href="#usercredential-management" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>User/Credential Management</h5>
+<p><code>GET(/druid-ext/basic-security/authentication/db/{authenticatorName}/users)</code>
+Return a list of all user names.</p>
+<p><code>GET(/druid-ext/basic-security/authentication/db/{authenticatorName}/users/{userName})</code>
+Return the name and credentials information of the user with name {userName}</p>
+<p><code>POST(/druid-ext/basic-security/authentication/db/{authenticatorName}/users/{userName})</code>
+Create a new user with name {userName}</p>
+<p><code>DELETE(/druid-ext/basic-security/authentication/db/{authenticatorName}/users/{userName})</code>
+Delete the user with name {userName}</p>
+<p><code>POST(/druid-ext/basic-security/authentication/db/{authenticatorName}/users/{userName}/credentials)</code>
+Assign a password used for HTTP basic authentication for {userName}
+Content: JSON password request object</p>
+<p>Example request body:</p>
+<pre><code class="hljs">{
+  <span class="hljs-attr">"password"</span>: <span class="hljs-string">"helloworld"</span>
+}
+</code></pre>
+<h5><a class="anchor" aria-hidden="true" id="cache-load-status"></a><a href="#cache-load-status" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Cache Load Status</h5>
+<p><code>GET(/druid-ext/basic-security/authentication/loadStatus)</code>
+Return the current load status of the local caches of the authentication Druid metadata store.</p>
+<h4><a class="anchor" aria-hidden="true" id="authorization-api"></a><a href="#authorization-api" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Authorization API</h4>
+<p>Root path: <code>/druid-ext/basic-security/authorization</code></p>
+<p>Each API endpoint includes {authorizerName}, specifying which Authorizer instance is being configured.</p>
+<h5><a class="anchor" aria-hidden="true" id="user-creationdeletion"></a><a href="#user-creationdeletion" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>User Creation/Deletion</h5>
+<p><code>GET(/druid-ext/basic-security/authorization/db/{authorizerName}/users)</code>
+Return a list of all user names.</p>
+<p><code>GET(/druid-ext/basic-security/authorization/db/{authorizerName}/users/{userName})</code>
+Return the name and role information of the user with name {userName}</p>
+<p>Example output:</p>
+<pre><code class="hljs css language-json">{
+  <span class="hljs-attr">"name"</span>: <span class="hljs-string">"druid2"</span>,
+  <span class="hljs-attr">"roles"</span>: [
+    <span class="hljs-string">"druidRole"</span>
+  ]
+}
+</code></pre>
+<p>This API supports the following flags:</p>
+<ul>
+<li><code>?full</code>: The response will also include the full information for each role currently assigned to the user.</li>
+</ul>
+<p>Example output:</p>
+<pre><code class="hljs css language-json">{
+  <span class="hljs-attr">"name"</span>: <span class="hljs-string">"druid2"</span>,
+  <span class="hljs-attr">"roles"</span>: [
+    {
+      <span class="hljs-attr">"name"</span>: <span class="hljs-string">"druidRole"</span>,
+      <span class="hljs-attr">"permissions"</span>: [
+        {
+          <span class="hljs-attr">"resourceAction"</span>: {
+            <span class="hljs-attr">"resource"</span>: {
+              <span class="hljs-attr">"name"</span>: <span class="hljs-string">"A"</span>,
+              <span class="hljs-attr">"type"</span>: <span class="hljs-string">"DATASOURCE"</span>
+            },
+            <span class="hljs-attr">"action"</span>: <span class="hljs-string">"READ"</span>
+          },
+          <span class="hljs-attr">"resourceNamePattern"</span>: <span class="hljs-string">"A"</span>
+        },
+        {
+          <span class="hljs-attr">"resourceAction"</span>: {
+            <span class="hljs-attr">"resource"</span>: {
+              <span class="hljs-attr">"name"</span>: <span class="hljs-string">"C"</span>,
+              <span class="hljs-attr">"type"</span>: <span class="hljs-string">"CONFIG"</span>
+            },
+            <span class="hljs-attr">"action"</span>: <span class="hljs-string">"WRITE"</span>
+          },
+          <span class="hljs-attr">"resourceNamePattern"</span>: <span class="hljs-string">"C"</span>
+        }
+      ]
+    }
+  ]
+}
+</code></pre>
+<p>The output format of this API when <code>?full</code> is specified is deprecated and in later versions will be switched to the output format used when both <code>?full</code> and <code>?simplifyPermissions</code> flag is set.</p>
+<p>The <code>resourceNamePattern</code> is a compiled version of the resource name regex. It is redundant and complicates the use of this API for clients such as frontends that edit the authorization configuration, as the permission format in this output does not match the format used for adding permissions to a role.</p>
+<ul>
+<li><code>?full?simplifyPermissions</code>: When both <code>?full</code> and <code>?simplifyPermissions</code> are set, the permissions in the output will contain only a list of <code>resourceAction</code> objects, without the extraneous <code>resourceNamePattern</code> field.</li>
+</ul>
+<pre><code class="hljs css language-json">{
+  <span class="hljs-attr">"name"</span>: <span class="hljs-string">"druid2"</span>,
+  <span class="hljs-attr">"roles"</span>: [
+    {
+      <span class="hljs-attr">"name"</span>: <span class="hljs-string">"druidRole"</span>,
+      <span class="hljs-attr">"users"</span>: <span class="hljs-literal">null</span>,
+      <span class="hljs-attr">"permissions"</span>: [
+        {
+          <span class="hljs-attr">"resource"</span>: {
+            <span class="hljs-attr">"name"</span>: <span class="hljs-string">"A"</span>,
+            <span class="hljs-attr">"type"</span>: <span class="hljs-string">"DATASOURCE"</span>
+          },
+          <span class="hljs-attr">"action"</span>: <span class="hljs-string">"READ"</span>
+        },
+        {
+          <span class="hljs-attr">"resource"</span>: {
+            <span class="hljs-attr">"name"</span>: <span class="hljs-string">"C"</span>,
+            <span class="hljs-attr">"type"</span>: <span class="hljs-string">"CONFIG"</span>
+          },
+          <span class="hljs-attr">"action"</span>: <span class="hljs-string">"WRITE"</span>
+        }
+      ]
+    }
+  ]
+}
+</code></pre>
+<p><code>POST(/druid-ext/basic-security/authorization/db/{authorizerName}/users/{userName})</code>
+Create a new user with name {userName}</p>
+<p><code>DELETE(/druid-ext/basic-security/authorization/db/{authorizerName}/users/{userName})</code>
+Delete the user with name {userName}</p>
+<h5><a class="anchor" aria-hidden="true" id="group-mapping-creationdeletion"></a><a href="#group-mapping-creationdeletion" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Group mapping Creation/Deletion</h5>
+<p><code>GET(/druid-ext/basic-security/authorization/db/{authorizerName}/groupMappings)</code>
+Return a list of all group mappings.</p>
+<p><code>GET(/druid-ext/basic-security/authorization/db/{authorizerName}/groupMappings/{groupMappingName})</code>
+Return the group mapping and role information of the group mapping with name {groupMappingName}</p>
+<p><code>POST(/druid-ext/basic-security/authorization/db/{authorizerName}/groupMappings/{groupMappingName})</code>
+Create a new group mapping with name {groupMappingName}
+Content: JSON group mapping object
+Example request body:</p>
+<pre><code class="hljs">{
+    <span class="hljs-attr">"name"</span>: <span class="hljs-string">"user"</span>,
+    <span class="hljs-attr">"groupPattern"</span>: <span class="hljs-string">"CN=aaa,OU=aaa,OU=Groupings,DC=corp,DC=company,DC=com"</span>,
+    <span class="hljs-attr">"roles"</span>: [
+        <span class="hljs-string">"user"</span>
+    ]
+}
+</code></pre>
+<p><code>DELETE(/druid-ext/basic-security/authorization/db/{authorizerName}/groupMappings/{groupMappingName})</code>
+Delete the group mapping with name {groupMappingName}</p>
+<h4><a class="anchor" aria-hidden="true" id="role-creationdeletion"></a><a href="#role-creationdeletion" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Role Creation/Deletion</h4>
+<p><code>GET(/druid-ext/basic-security/authorization/db/{authorizerName}/roles)</code>
+Return a list of all role names.</p>
+<p><code>GET(/druid-ext/basic-security/authorization/db/{authorizerName}/roles/{roleName})</code>
+Return name and permissions for the role named {roleName}.</p>
+<p>Example output:</p>
+<pre><code class="hljs css language-json">{
+  <span class="hljs-attr">"name"</span>: <span class="hljs-string">"druidRole2"</span>,
+  <span class="hljs-attr">"permissions"</span>: [
+    {
+      <span class="hljs-attr">"resourceAction"</span>: {
+        <span class="hljs-attr">"resource"</span>: {
+          <span class="hljs-attr">"name"</span>: <span class="hljs-string">"E"</span>,
+          <span class="hljs-attr">"type"</span>: <span class="hljs-string">"DATASOURCE"</span>
+        },
+        <span class="hljs-attr">"action"</span>: <span class="hljs-string">"WRITE"</span>
+      },
+      <span class="hljs-attr">"resourceNamePattern"</span>: <span class="hljs-string">"E"</span>
+    }
+  ]
+}
+</code></pre>
+<p>The default output format of this API is deprecated and in later versions will be switched to the output format used when the <code>?simplifyPermissions</code> flag is set. The <code>resourceNamePattern</code> is a compiled version of the resource name regex. It is redundant and complicates the use of this API for clients such as frontends that edit the authorization configuration, as the permission format in this output does not match the format used for adding permissions to a role.</p>
+<p>This API supports the following flags:</p>
+<ul>
+<li><code>?full</code>: The output will contain an extra <code>users</code> list, containing the users that currently have this role.</li>
+</ul>
+<pre><code class="hljs css language-json">{<span class="hljs-attr">"users"</span>:[<span class="hljs-string">"druid"</span>]}
+</code></pre>
+<ul>
+<li><code>?simplifyPermissions</code>: The permissions in the output will contain only a list of <code>resourceAction</code> objects, without the extraneous <code>resourceNamePattern</code> field. The <code>users</code> field will be null when <code>?full</code> is not specified.</li>
+</ul>
+<p>Example output:</p>
+<pre><code class="hljs css language-json">{
+  <span class="hljs-attr">"name"</span>: <span class="hljs-string">"druidRole2"</span>,
+  <span class="hljs-attr">"users"</span>: <span class="hljs-literal">null</span>,
+  <span class="hljs-attr">"permissions"</span>: [
+    {
+      <span class="hljs-attr">"resource"</span>: {
+        <span class="hljs-attr">"name"</span>: <span class="hljs-string">"E"</span>,
+        <span class="hljs-attr">"type"</span>: <span class="hljs-string">"DATASOURCE"</span>
+      },
+      <span class="hljs-attr">"action"</span>: <span class="hljs-string">"WRITE"</span>
+    }
+  ]
+}
+</code></pre>
+<p><code>POST(/druid-ext/basic-security/authorization/db/{authorizerName}/roles/{roleName})</code>
+Create a new role with name {roleName}.
+Content: username string</p>
+<p><code>DELETE(/druid-ext/basic-security/authorization/db/{authorizerName}/roles/{roleName})</code>
+Delete the role with name {roleName}.</p>
+<h4><a class="anchor" aria-hidden="true" id="role-assignment"></a><a href="#role-assignment" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Role Assignment</h4>
+<p><code>POST(/druid-ext/basic-security/authorization/db/{authorizerName}/users/{userName}/roles/{roleName})</code>
+Assign role {roleName} to user {userName}.</p>
+<p><code>DELETE(/druid-ext/basic-security/authorization/db/{authorizerName}/users/{userName}/roles/{roleName})</code>
+Unassign role {roleName} from user {userName}</p>
+<p><code>POST(/druid-ext/basic-security/authorization/db/{authorizerName}/groupMappings/{groupMappingName}/roles/{roleName})</code>
+Assign role {roleName} to group mapping {groupMappingName}.</p>
+<p><code>DELETE(/druid-ext/basic-security/authorization/db/{authorizerName}/groupMappings/{groupMappingName}/roles/{roleName})</code>
+Unassign role {roleName} from group mapping {groupMappingName}</p>
+<h4><a class="anchor" aria-hidden="true" id="permissions"></a><a href="#permissions" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Permissions</h4>
+<p><code>POST(/druid-ext/basic-security/authorization/db/{authorizerName}/roles/{roleName}/permissions)</code>
+Set the permissions of {roleName}. This replaces the previous set of permissions on the role.</p>
+<p>Content: List of JSON Resource-Action objects, e.g.:</p>
+<pre><code class="hljs">[
+{
+  <span class="hljs-attr">"resource"</span>: {
+    <span class="hljs-attr">"name"</span>: <span class="hljs-string">"wiki.*"</span>,
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"DATASOURCE"</span>
+  },
+  <span class="hljs-attr">"action"</span>: <span class="hljs-string">"READ"</span>
+},
+{
+  <span class="hljs-attr">"resource"</span>: {
+    <span class="hljs-attr">"name"</span>: <span class="hljs-string">"wikiticker"</span>,
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"DATASOURCE"</span>
+  },
+  <span class="hljs-attr">"action"</span>: <span class="hljs-string">"WRITE"</span>
+}
+]
+</code></pre>
+<p>The &quot;name&quot; field for resources in the permission definitions are regexes used to match resource names during authorization checks.</p>
+<p>Please see <a href="#defining-permissions">Defining permissions</a> for more details.</p>
+<h5><a class="anchor" aria-hidden="true" id="cache-load-status-1"></a><a href="#cache-load-status-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Cache Load Status</h5>
+<p><code>GET(/druid-ext/basic-security/authorization/loadStatus)</code>
+Return the current load status of the local caches of the authorization Druid metadata store.</p>
+<h2><a class="anchor" aria-hidden="true" id="default-user-accounts"></a><a href="#default-user-accounts" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Default user accounts</h2>
+<h3><a class="anchor" aria-hidden="true" id="authenticator"></a><a href="#authenticator" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Authenticator</h3>
+<p>If <code>druid.auth.authenticator.&lt;authenticator-name&gt;.initialAdminPassword</code> is set, a default admin user named &quot;admin&quot; will be created, with the specified initial password. If this configuration is omitted, the &quot;admin&quot; user will not be created.</p>
+<p>If <code>druid.auth.authenticator.&lt;authenticator-name&gt;.initialInternalClientPassword</code> is set, a default internal system user named &quot;druid_system&quot; will be created, with the specified initial password. If this configuration is omitted, the &quot;druid_system&quot; user will not be created.</p>
+<h3><a class="anchor" aria-hidden="true" id="authorizer"></a><a href="#authorizer" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Authorizer</h3>
+<p>Each Authorizer will always have a default &quot;admin&quot; and &quot;druid_system&quot; user with full privileges.</p>
+<h2><a class="anchor" aria-hidden="true" id="defining-permissions"></a><a href="#defining-permissions" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Defining permissions</h2>
+<p>There are two action types in Druid: READ and WRITE</p>
+<p>There are three resource types in Druid: DATASOURCE, CONFIG, and STATE.</p>
+<h3><a class="anchor" aria-hidden="true" id="datasource"></a><a href="#datasource" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>DATASOURCE</h3>
+<p>Resource names for this type are datasource names. Specifying a datasource permission allows the administrator to grant users access to specific datasources.</p>
+<h3><a class="anchor" aria-hidden="true" id="config"></a><a href="#config" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>CONFIG</h3>
+<p>There are two possible resource names for the &quot;CONFIG&quot; resource type, &quot;CONFIG&quot; and &quot;security&quot;. Granting a user access to CONFIG resources allows them to access the following endpoints.</p>
+<p>&quot;CONFIG&quot; resource name covers the following endpoints:</p>
+<table>
+<thead>
+<tr><th>Endpoint</th><th>Process Type</th></tr>
+</thead>
+<tbody>
+<tr><td><code>/druid/coordinator/v1/config</code></td><td>coordinator</td></tr>
+<tr><td><code>/druid/indexer/v1/worker</code></td><td>overlord</td></tr>
+<tr><td><code>/druid/indexer/v1/worker/history</code></td><td>overlord</td></tr>
+<tr><td><code>/druid/worker/v1/disable</code></td><td>middleManager</td></tr>
+<tr><td><code>/druid/worker/v1/enable</code></td><td>middleManager</td></tr>
+</tbody>
+</table>
+<p>&quot;security&quot; resource name covers the following endpoint:</p>
+<table>
+<thead>
+<tr><th>Endpoint</th><th>Process Type</th></tr>
+</thead>
+<tbody>
+<tr><td><code>/druid-ext/basic-security/authentication</code></td><td>coordinator</td></tr>
+<tr><td><code>/druid-ext/basic-security/authorization</code></td><td>coordinator</td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="state"></a><a href="#state" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>STATE</h3>
+<p>There is only one possible resource name for the &quot;STATE&quot; config resource type, &quot;STATE&quot;. Granting a user access to STATE resources allows them to access the following endpoints.</p>
+<p>&quot;STATE&quot; resource name covers the following endpoints:</p>
+<table>
+<thead>
+<tr><th>Endpoint</th><th>Process Type</th></tr>
+</thead>
+<tbody>
+<tr><td><code>/druid/coordinator/v1</code></td><td>coordinator</td></tr>
+<tr><td><code>/druid/coordinator/v1/rules</code></td><td>coordinator</td></tr>
+<tr><td><code>/druid/coordinator/v1/rules/history</code></td><td>coordinator</td></tr>
+<tr><td><code>/druid/coordinator/v1/servers</code></td><td>coordinator</td></tr>
+<tr><td><code>/druid/coordinator/v1/tiers</code></td><td>coordinator</td></tr>
+<tr><td><code>/druid/broker/v1</code></td><td>broker</td></tr>
+<tr><td><code>/druid/v2/candidates</code></td><td>broker</td></tr>
+<tr><td><code>/druid/indexer/v1/leader</code></td><td>overlord</td></tr>
+<tr><td><code>/druid/indexer/v1/isLeader</code></td><td>overlord</td></tr>
+<tr><td><code>/druid/indexer/v1/action</code></td><td>overlord</td></tr>
+<tr><td><code>/druid/indexer/v1/workers</code></td><td>overlord</td></tr>
+<tr><td><code>/druid/indexer/v1/scaling</code></td><td>overlord</td></tr>
+<tr><td><code>/druid/worker/v1/enabled</code></td><td>middleManager</td></tr>
+<tr><td><code>/druid/worker/v1/tasks</code></td><td>middleManager</td></tr>
+<tr><td><code>/druid/worker/v1/task/{taskid}/shutdown</code></td><td>middleManager</td></tr>
+<tr><td><code>/druid/worker/v1/task/{taskid}/log</code></td><td>middleManager</td></tr>
+<tr><td><code>/druid/historical/v1</code></td><td>historical</td></tr>
+<tr><td><code>/druid-internal/v1/segments/</code></td><td>historical</td></tr>
+<tr><td><code>/druid-internal/v1/segments/</code></td><td>peon</td></tr>
+<tr><td><code>/druid-internal/v1/segments/</code></td><td>realtime</td></tr>
+<tr><td><code>/status</code></td><td>all process types</td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="http-methods"></a><a href="#http-methods" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>HTTP methods</h3>
+<p>For information on what HTTP methods are supported on a particular request endpoint, please refer to the <a href="/docs/0.20.0/operations/api-reference.html">API documentation</a>.</p>
+<p>GET requires READ permission, while POST and DELETE require WRITE permission.</p>
+<h3><a class="anchor" aria-hidden="true" id="sql-permissions"></a><a href="#sql-permissions" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>SQL Permissions</h3>
+<p>Queries on Druid datasources require DATASOURCE READ permissions for the specified datasource.</p>
+<p>Queries on the <a href="../../querying/sql.html#information-schema">INFORMATION_SCHEMA tables</a> will
+return information about datasources that the caller has DATASOURCE READ access to. Other
+datasources will be omitted.</p>
+<p>Queries on the <a href="../../querying/sql.html#system-schema">system schema tables</a> require the following permissions:</p>
+<ul>
+<li><code>segments</code>: Segments will be filtered based on DATASOURCE READ permissions.</li>
+<li><code>servers</code>: The user requires STATE READ permissions.</li>
+<li><code>server_segments</code>: The user requires STATE READ permissions and segments will be filtered based on DATASOURCE READ permissions.</li>
+<li><code>tasks</code>: Tasks will be filtered based on DATASOURCE READ permissions.</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="configuration-propagation"></a><a href="#configuration-propagation" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Configuration Propagation</h2>
+<p>To prevent excessive load on the Coordinator, the Authenticator and Authorizer user/role Druid metadata store state is cached on each Druid process.</p>
+<p>Each process will periodically poll the Coordinator for the latest Druid metadata store state, controlled by the <code>druid.auth.basic.common.pollingPeriod</code> and <code>druid.auth.basic.common.maxRandomDelay</code> properties.</p>
+<p>When a configuration update occurs, the Coordinator can optionally notify each process with the updated Druid metadata store state. This behavior is controlled by the <code>enableCacheNotifications</code> and <code>cacheNotificationTimeout</code> properties on Authenticators and Authorizers.</p>
+<p>Note that because of the caching, changes made to the user/role Druid metadata store may not be immediately reflected at each Druid process.</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/0.20.0/development/extensions-core/datasketches-tuple.html"><span class="arrow-prev">← </span><span class="function-name-prevnext">DataSketches Tuple Sketch module</span></a><a class="docs-next button" href="/docs/0.20.0/development/extensions-core/druid-kerberos.html"><span>Kerberos</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#configuration">Configuration</a><ul class="toc-headings"><li><a href="#properties">Properties</a></li><li><a href="#creating-an-authenticator-that-uses-the-druid-metadata-store-to-lookup-and-validate-credentials">Creating an Authenticator that uses the Druid metadata store to lookup and validate credentials</a></li><li><a href="#creating-an-escalator">Creating an Escalator</a></li><li><a href="#creating-an-authorizer">Creating an Authorizer</a></li></ul></li><li><a href="#usage">Usage</a><ul class="toc-headings"><li><a href="#coordinator-security-api">Coordinator Security API</a></li></ul></li><li><a href="#default-user-accounts">Default user accounts</a><ul class="toc-headings"><li><a href="#authenticator">Authenticator</a></li><li><a href="#authorizer">Authorizer</a></li></ul></li><li><a href="#defining-permissions">Defining permissions</a><ul class="toc-headings"><li><a href="#datasource">DATASOURCE</a></li><li><a href="#config">CONFIG</a></li><li><a href="#state">STATE</a></li><li><a href="#http-methods">HTTP methods</a></li><li><a href="#sql-permissions">SQL Permissions</a></li></ul></li><li><a href="#configuration-propagation">Configuration Propagation</a></li></ul></nav></div><footer class="nav-footer druid-footer" id="footer"><div class="container"><div class="text-center"><p><a href="/technology">Technology</a> · <a href="/use-cases">Use Cases</a> · <a href="/druid-powered">Powered by Druid</a> · <a href="/docs/0.20.0/latest">Docs</a> · <a href="/community/">Community</a> · <a href="/downloads.html">Download</a> · <a href="/faq">FAQ</a></p></div><div class="text-center"><a title="Join the user group" href="https://groups.google.com/forum/#!forum/druid-user" target="_blank"><span class="fa fa-comments"></span></a> · <a title="Follow Druid" href="https://twitter.com/druidio" target="_blank"><span class="fab fa-twitter"></span></a> · <a title="Download via Apache" href="https://www.apache.org/dyn/closer.cgi?path=/incubator/druid/{{ site.druid_versions[0].versions[0].version }}/apache-druid-{{ site.druid_versions[0].versions[0].version }}-bin.tar.gz" target="_blank"><span class="fas fa-feather"></span></a> · <a title="GitHub" href="https://github.com/apache/druid" target="_blank"><span class="fab fa-github"></span></a></div><div class="text-center license">Copyright © 2019 <a href="https://www.apache.org/" target="_blank">Apache Software Foundation</a>.<br/>Except where otherwise noted, licensed under <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.<br/>Apache Druid, Druid, and the Druid logo are either registered trademarks or trademarks of The Apache Software Foundation in the United States and other countries.</div></div></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '2de99082a9f38e49dfaa059bbe4c901d',
+                indexName: 'apache_druid',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["language:en","version:0.20.0"]}
+              });
+            </script></body></html>

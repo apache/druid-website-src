@@ -1,0 +1,598 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Hadoop-based ingestion · Apache Druid</title><meta name="viewport" content="width=device-width"/><link rel="canonical" href="https://druid.apache.org/docs/0.20.0/ingestion/hadoop.html"/><meta name="generator" content="Docusaurus"/><meta name="description" content="&lt;!--"/><meta name="docsearch:language" content="en"/><meta name="docsearch:version" content="0.20.0" /><meta property="og:title" content="Hadoop-based ingestion · Apache Druid"/><meta property="og:type" content="website"/><meta property="og:url" content="https://druid.apache.org/index.html"/><meta property="og:description" content="&lt;!--"/><meta property="og:image" content="https://druid.apache.org/img/druid_nav.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://druid.apache.org/img/druid_nav.png"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-131010415-1"></script><script>
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments); }
+              gtag('js', new Date());
+              gtag('config', 'UA-131010415-1');
+            </script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"/><link rel="stylesheet" href="/css/code-block-buttons.css"/><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script><script type="text/javascript" src="/js/code-block-buttons.js"></script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/druid_nav.png" alt="Apache Druid"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/technology" target="_self">Technology</a></li><li class=""><a href="/use-cases" target="_self">Use Cases</a></li><li class=""><a href="/druid-powered" target="_self">Powered By</a></li><li class="siteNavGroupActive"><a href="/docs/0.20.0/design/index.html" target="_self">Docs</a></li><li class=""><a href="/community/" target="_self">Community</a></li><li class=""><a href="https://www.apache.org" target="_self">Apache</a></li><li class=""><a href="/downloads.html" target="_self">Download</a></li><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Batch ingestion</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Getting started<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.0/design/index.html">Introduction to Apache Druid</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/tutorials/index.html">Quickstart</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/tutorials/docker.html">Docker</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/single-server.html">Single server deployment</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/tutorials/cluster.html">Clustered deployment</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Tutorials<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.0/tutorials/tutorial-batch.html">Loading files natively</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/tutorials/tutorial-kafka.html">Load from Apache Kafka</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/tutorials/tutorial-batch-hadoop.html">Load from Apache Hadoop</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/tutorials/tutorial-query.html">Querying data</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/tutorials/tutorial-rollup.html">Roll-up</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/tutorials/tutorial-retention.html">Configuring data retention</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/tutorials/tutorial-update-data.html">Updating existing data</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/tutorials/tutorial-compaction.html">Compacting segments</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/tutorials/tutorial-delete-data.html">Deleting data</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/tutorials/tutorial-ingestion-spec.html">Writing an ingestion spec</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/tutorials/tutorial-transform-spec.html">Transforming input data</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/tutorials/tutorial-kerberos-hadoop.html">Kerberized HDFS deep storage</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Design<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.0/design/architecture.html">Design</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/design/segments.html">Segments</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/design/processes.html">Processes and servers</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/dependencies/deep-storage.html">Deep storage</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/dependencies/metadata-storage.html">Metadata storage</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/dependencies/zookeeper.html">ZooKeeper</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Ingestion<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.0/ingestion/index.html">Ingestion</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/ingestion/data-formats.html">Data formats</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/ingestion/schema-design.html">Schema design tips</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/ingestion/data-management.html">Data management</a></li><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Stream ingestion</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/kafka-ingestion.html">Apache Kafka</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/kinesis-ingestion.html">Amazon Kinesis</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/ingestion/tranquility.html">Tranquility</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Batch ingestion</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.20.0/ingestion/native-batch.html">Native batch</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/0.20.0/ingestion/hadoop.html">Hadoop-based</a></li></ul></div><li class="navListItem"><a class="navItem" href="/docs/0.20.0/ingestion/tasks.html">Task reference</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/ingestion/faq.html">Troubleshooting FAQ</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Querying<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/sql.html">Druid SQL</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/querying.html">Native queries</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/query-execution.html">Query execution</a></li><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Concepts</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/datasource.html">Datasources</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/joins.html">Joins</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/lookups.html">Lookups</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/multi-value-dimensions.html">Multi-value dimensions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/multitenancy.html">Multitenancy</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/caching.html">Query caching</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/query-context.html">Context parameters</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Native query types</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/timeseriesquery.html">Timeseries</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/topnquery.html">TopN</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/groupbyquery.html">GroupBy</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/scan-query.html">Scan</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/searchquery.html">Search</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/timeboundaryquery.html">TimeBoundary</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/segmentmetadataquery.html">SegmentMetadata</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/datasourcemetadataquery.html">DatasourceMetadata</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Native query components</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/filters.html">Filters</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/granularities.html">Granularities</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/dimensionspecs.html">Dimensions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/aggregations.html">Aggregations</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/post-aggregations.html">Post-aggregations</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/misc/math-expr.html">Expressions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/having.html">Having filters (groupBy)</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/limitspec.html">Sorting and limiting (groupBy)</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/topnmetricspec.html">Sorting (topN)</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/sorting-orders.html">String comparators</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/virtual-columns.html">Virtual columns</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/geo.html">Spatial filters</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Configuration<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.0/configuration/index.html">Configuration reference</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions.html">Extensions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/configuration/logging.html">Logging</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Operations<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/druid-console.html">Web console</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/getting-started.html">Getting started with Apache Druid</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/basic-cluster-tuning.html">Basic cluster tuning</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/api-reference.html">API reference</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/high-availability.html">High availability</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/rolling-updates.html">Rolling updates</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/rule-configuration.html">Retaining or automatically dropping data</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/metrics.html">Metrics</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/alerts.html">Alerts</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/other-hadoop.html">Working with different versions of Apache Hadoop</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/http-compression.html">HTTP compression</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/tls-support.html">TLS support</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/password-provider.html">Password providers</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/dump-segment.html">dump-segment tool</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/reset-cluster.html">reset-cluster tool</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/insert-segment-to-db.html">insert-segment-to-db tool</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/pull-deps.html">pull-deps tool</a></li><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Misc</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/management-uis.html">Legacy Management UIs</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/deep-storage-migration.html">Deep storage migration</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/export-metadata.html">Export Metadata Tool</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/metadata-migration.html">Metadata Migration</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/segment-optimization.html">Segment Size Optimization</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/use_sbt_to_build_fat_jar.html">Content for build.sbt</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Development<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/overview.html">Developing on Druid</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/modules.html">Creating extensions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/javascript.html">JavaScript functionality</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/build.html">Build from source</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/versioning.html">Versioning</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/experimental.html">Experimental features</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Misc<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.0/misc/papers-and-talks.html">Papers</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Hidden<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.0/comparisons/druid-vs-elasticsearch.html">Apache Druid vs Elasticsearch</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/comparisons/druid-vs-key-value.html">Apache Druid vs. Key/Value Stores (HBase/Cassandra/OpenTSDB)</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/comparisons/druid-vs-kudu.html">Apache Druid vs Kudu</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/comparisons/druid-vs-redshift.html">Apache Druid vs Redshift</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/comparisons/druid-vs-spark.html">Apache Druid vs Spark</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/comparisons/druid-vs-sql-on-hadoop.html">Apache Druid vs SQL-on-Hadoop</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/design/auth.html">Authentication and Authorization</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/design/broker.html">Broker</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/design/coordinator.html">Coordinator Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/design/historical.html">Historical Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/design/indexer.html">Indexer Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/design/indexing-service.html">Indexing Service</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/design/middlemanager.html">MiddleManager Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/design/overlord.html">Overlord Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/design/router.html">Router Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/design/peons.html">Peons</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/approximate-histograms.html">Approximate Histogram aggregators</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/avro.html">Apache Avro</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/azure.html">Microsoft Azure</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/bloom-filter.html">Bloom Filter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/datasketches-extension.html">DataSketches extension</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/datasketches-hll.html">DataSketches HLL Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/datasketches-quantiles.html">DataSketches Quantiles Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/datasketches-theta.html">DataSketches Theta Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/datasketches-tuple.html">DataSketches Tuple Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/druid-basic-security.html">Basic Security</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/druid-kerberos.html">Kerberos</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/druid-lookups.html">Cached Lookup Module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/druid-ranger-security.html">Apache Ranger Security</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/google.html">Google Cloud Storage</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/hdfs.html">HDFS</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/kafka-extraction-namespace.html">Apache Kafka Lookups</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/lookups-cached-global.html">Globally Cached Lookups</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/mysql.html">MySQL Metadata Store</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/orc.html">ORC Extension</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/druid-pac4j.html">Druid pac4j based Security extension</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/parquet.html">Apache Parquet Extension</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/postgresql.html">PostgreSQL Metadata Store</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/protobuf.html">Protobuf</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/s3.html">S3-compatible</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/simple-client-sslcontext.html">Simple SSLContext Provider Module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/stats.html">Stats aggregator</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/test-stats.html">Test Stats Aggregators</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-contrib/ambari-metrics-emitter.html">Ambari Metrics Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-contrib/cassandra.html">Apache Cassandra</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-contrib/cloudfiles.html">Rackspace Cloud Files</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-contrib/distinctcount.html">DistinctCount Aggregator</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-contrib/graphite.html">Graphite Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-contrib/influx.html">InfluxDB Line Protocol Parser</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-contrib/influxdb-emitter.html">InfluxDB Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-contrib/kafka-emitter.html">Kafka Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-contrib/materialized-view.html">Materialized View</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-contrib/momentsketch-quantiles.html">Moment Sketches for Approximate Quantiles module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-contrib/moving-average-query.html">Moving Average Query</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-contrib/opentsdb-emitter.html">OpenTSDB Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-contrib/redis-cache.html">Druid Redis Cache</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-contrib/sqlserver.html">Microsoft SQLServer</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-contrib/statsd.html">StatsD Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-contrib/tdigestsketch-quantiles.html">T-Digest Quantiles Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-contrib/thrift.html">Thrift</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-contrib/time-min-max.html">Timestamp Min/Max aggregators</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-contrib/gce-extensions.html">GCE Extensions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-contrib/aliyun-oss.html">Aliyun OSS</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/hll-old.html">Cardinality/HyperUnique aggregators</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/select-query.html">Select</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/ingestion/standalone-realtime.html">Realtime Process</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/apache/druid/edit/master/docs/ingestion/hadoop.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">Hadoop-based ingestion</h1></header><article><div><span><!--
+  ~ Licensed to the Apache Software Foundation (ASF) under one
+  ~ or more contributor license agreements.  See the NOTICE file
+  ~ distributed with this work for additional information
+  ~ regarding copyright ownership.  The ASF licenses this file
+  ~ to you under the Apache License, Version 2.0 (the
+  ~ "License"); you may not use this file except in compliance
+  ~ with the License.  You may obtain a copy of the License at
+  ~
+  ~   http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an
+  ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~ KIND, either express or implied.  See the License for the
+  ~ specific language governing permissions and limitations
+  ~ under the License.
+  -->
+<p>Apache Hadoop-based batch ingestion in Apache Druid is supported via a Hadoop-ingestion task. These tasks can be posted to a running
+instance of a Druid <a href="/docs/0.20.0/design/overlord.html">Overlord</a>. Please refer to our <a href="/docs/0.20.0/ingestion/index.html#batch">Hadoop-based vs. native batch comparison table</a> for
+comparisons between Hadoop-based, native batch (simple), and native batch (parallel) ingestion.</p>
+<p>To run a Hadoop-based ingestion task, write an ingestion spec as specified below. Then POST it to the
+<a href="../operations/api-reference.html#tasks"><code>/druid/indexer/v1/task</code></a> endpoint on the Overlord, or use the
+<code>bin/post-index-task</code> script included with Druid.</p>
+<h2><a class="anchor" aria-hidden="true" id="tutorial"></a><a href="#tutorial" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Tutorial</h2>
+<p>This page contains reference documentation for Hadoop-based ingestion.
+For a walk-through instead, check out the <a href="/docs/0.20.0/tutorials/tutorial-batch-hadoop.html">Loading from Apache Hadoop</a> tutorial.</p>
+<h2><a class="anchor" aria-hidden="true" id="task-syntax"></a><a href="#task-syntax" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Task syntax</h2>
+<p>A sample task is shown below:</p>
+<pre><code class="hljs css language-json">{
+  <span class="hljs-attr">"type"</span> : <span class="hljs-string">"index_hadoop"</span>,
+  <span class="hljs-attr">"spec"</span> : {
+    <span class="hljs-attr">"dataSchema"</span> : {
+      <span class="hljs-attr">"dataSource"</span> : <span class="hljs-string">"wikipedia"</span>,
+      <span class="hljs-attr">"parser"</span> : {
+        <span class="hljs-attr">"type"</span> : <span class="hljs-string">"hadoopyString"</span>,
+        <span class="hljs-attr">"parseSpec"</span> : {
+          <span class="hljs-attr">"format"</span> : <span class="hljs-string">"json"</span>,
+          <span class="hljs-attr">"timestampSpec"</span> : {
+            <span class="hljs-attr">"column"</span> : <span class="hljs-string">"timestamp"</span>,
+            <span class="hljs-attr">"format"</span> : <span class="hljs-string">"auto"</span>
+          },
+          <span class="hljs-attr">"dimensionsSpec"</span> : {
+            <span class="hljs-attr">"dimensions"</span>: [<span class="hljs-string">"page"</span>,<span class="hljs-string">"language"</span>,<span class="hljs-string">"user"</span>,<span class="hljs-string">"unpatrolled"</span>,<span class="hljs-string">"newPage"</span>,<span class="hljs-string">"robot"</span>,<span class="hljs-string">"anonymous"</span>,<span class="hljs-string">"namespace"</span>,<span class="hljs-string">"continent"</span>,<span class="hljs-string">"country"</span>,<span class="hljs-string">"region"</span>,<span class="hljs-string">"city"</span>],
+            <span class="hljs-attr">"dimensionExclusions"</span> : [],
+            <span class="hljs-attr">"spatialDimensions"</span> : []
+          }
+        }
+      },
+      <span class="hljs-attr">"metricsSpec"</span> : [
+        {
+          <span class="hljs-attr">"type"</span> : <span class="hljs-string">"count"</span>,
+          <span class="hljs-attr">"name"</span> : <span class="hljs-string">"count"</span>
+        },
+        {
+          <span class="hljs-attr">"type"</span> : <span class="hljs-string">"doubleSum"</span>,
+          <span class="hljs-attr">"name"</span> : <span class="hljs-string">"added"</span>,
+          <span class="hljs-attr">"fieldName"</span> : <span class="hljs-string">"added"</span>
+        },
+        {
+          <span class="hljs-attr">"type"</span> : <span class="hljs-string">"doubleSum"</span>,
+          <span class="hljs-attr">"name"</span> : <span class="hljs-string">"deleted"</span>,
+          <span class="hljs-attr">"fieldName"</span> : <span class="hljs-string">"deleted"</span>
+        },
+        {
+          <span class="hljs-attr">"type"</span> : <span class="hljs-string">"doubleSum"</span>,
+          <span class="hljs-attr">"name"</span> : <span class="hljs-string">"delta"</span>,
+          <span class="hljs-attr">"fieldName"</span> : <span class="hljs-string">"delta"</span>
+        }
+      ],
+      <span class="hljs-attr">"granularitySpec"</span> : {
+        <span class="hljs-attr">"type"</span> : <span class="hljs-string">"uniform"</span>,
+        <span class="hljs-attr">"segmentGranularity"</span> : <span class="hljs-string">"DAY"</span>,
+        <span class="hljs-attr">"queryGranularity"</span> : <span class="hljs-string">"NONE"</span>,
+        <span class="hljs-attr">"intervals"</span> : [ <span class="hljs-string">"2013-08-31/2013-09-01"</span> ]
+      }
+    },
+    <span class="hljs-attr">"ioConfig"</span> : {
+      <span class="hljs-attr">"type"</span> : <span class="hljs-string">"hadoop"</span>,
+      <span class="hljs-attr">"inputSpec"</span> : {
+        <span class="hljs-attr">"type"</span> : <span class="hljs-string">"static"</span>,
+        <span class="hljs-attr">"paths"</span> : <span class="hljs-string">"/MyDirectory/example/wikipedia_data.json"</span>
+      }
+    },
+    <span class="hljs-attr">"tuningConfig"</span> : {
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"hadoop"</span>
+    }
+  },
+  <span class="hljs-attr">"hadoopDependencyCoordinates"</span>: &lt;my_hadoop_version&gt;
+}
+</code></pre>
+<table>
+<thead>
+<tr><th>property</th><th>description</th><th>required?</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td>The task type, this should always be &quot;index_hadoop&quot;.</td><td>yes</td></tr>
+<tr><td>spec</td><td>A Hadoop Index Spec. See <a href="/docs/0.20.0/ingestion/index.html">Ingestion</a></td><td>yes</td></tr>
+<tr><td>hadoopDependencyCoordinates</td><td>A JSON array of Hadoop dependency coordinates that Druid will use, this property will override the default Hadoop coordinates. Once specified, Druid will look for those Hadoop dependencies from the location specified by <code>druid.extensions.hadoopDependenciesDir</code></td><td>no</td></tr>
+<tr><td>classpathPrefix</td><td>Classpath that will be prepended for the Peon process.</td><td>no</td></tr>
+</tbody>
+</table>
+<p>Also note that Druid automatically computes the classpath for Hadoop job containers that run in the Hadoop cluster. But in case of conflicts between Hadoop and Druid's dependencies, you can manually specify the classpath by setting <code>druid.extensions.hadoopContainerDruidClasspath</code> property. See the extensions config in <a href="../configuration/index.html#extensions">base druid configuration</a>.</p>
+<h2><a class="anchor" aria-hidden="true" id="dataschema"></a><a href="#dataschema" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>dataSchema</code></h2>
+<p>This field is required. See the <a href="/docs/0.20.0/ingestion/index.html#legacy-dataschema-spec"><code>dataSchema</code></a> section of the main ingestion page for details on
+what it should contain.</p>
+<h2><a class="anchor" aria-hidden="true" id="ioconfig"></a><a href="#ioconfig" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>ioConfig</code></h2>
+<p>This field is required.</p>
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th><th>Required</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td>String</td><td>This should always be 'hadoop'.</td><td>yes</td></tr>
+<tr><td>inputSpec</td><td>Object</td><td>A specification of where to pull the data in from. See below.</td><td>yes</td></tr>
+<tr><td>segmentOutputPath</td><td>String</td><td>The path to dump segments into.</td><td>Only used by the <a href="#cli">Command-line Hadoop indexer</a>. This field must be null otherwise.</td></tr>
+<tr><td>metadataUpdateSpec</td><td>Object</td><td>A specification of how to update the metadata for the druid cluster these segments belong to.</td><td>Only used by the <a href="#cli">Command-line Hadoop indexer</a>. This field must be null otherwise.</td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="inputspec"></a><a href="#inputspec" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>inputSpec</code></h3>
+<p>There are multiple types of inputSpecs:</p>
+<h4><a class="anchor" aria-hidden="true" id="static"></a><a href="#static" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>static</code></h4>
+<p>A type of inputSpec where a static path to the data files is provided.</p>
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th><th>Required</th></tr>
+</thead>
+<tbody>
+<tr><td>inputFormat</td><td>String</td><td>Specifies the Hadoop InputFormat class to use. e.g. <code>org.apache.hadoop.mapreduce.lib.input.SequenceFileInputFormat</code></td><td>no</td></tr>
+<tr><td>paths</td><td>Array of String</td><td>A String of input paths indicating where the raw data is located.</td><td>yes</td></tr>
+</tbody>
+</table>
+<p>For example, using the static input paths:</p>
+<pre><code class="hljs"><span class="hljs-string">"paths"</span> : "<span class="hljs-type">hdfs</span>://path/to/data/<span class="hljs-keyword">is</span>/here/data.gz,hdfs://path/to/data/<span class="hljs-keyword">is</span>/here/moredata.gz,hdfs://path/to/data/<span class="hljs-keyword">is</span>/here/evenmoredata.gz<span class="hljs-string">"
+</span></code></pre>
+<p>You can also read from cloud storage such as AWS S3 or Google Cloud Storage.
+To do so, you need to install the necessary library under Druid's classpath in <em>all MiddleManager or Indexer processes</em>.
+For S3, you can run the below command to install the <a href="https://hadoop.apache.org/docs/current/hadoop-aws/tools/hadoop-aws/index.html">Hadoop AWS module</a>.</p>
+<pre><code class="hljs css language-bash">java -classpath <span class="hljs-string">"<span class="hljs-variable">${DRUID_HOME}</span>lib/*"</span> org.apache.druid.cli.Main tools pull-deps -h <span class="hljs-string">"org.apache.hadoop:hadoop-aws:<span class="hljs-variable">${HADOOP_VERSION}</span>"</span>;
+cp <span class="hljs-variable">${DRUID_HOME}</span>/hadoop-dependencies/hadoop-aws/<span class="hljs-variable">${HADOOP_VERSION}</span>/hadoop-aws-<span class="hljs-variable">${HADOOP_VERSION}</span>.jar <span class="hljs-variable">${DRUID_HOME}</span>/extensions/druid-hdfs-storage/
+</code></pre>
+<p>Once you install the Hadoop AWS module in all MiddleManager and Indexer processes, you can put
+your S3 paths in the inputSpec with the below job properties.
+For more configurations, see the <a href="https://hadoop.apache.org/docs/current/hadoop-aws/tools/hadoop-aws/index.html">Hadoop AWS module</a>.</p>
+<pre><code class="hljs"><span class="hljs-string">"paths"</span> : "<span class="hljs-type">s3a</span>://billy-bucket/the/data/<span class="hljs-keyword">is</span>/here/data.gz,s3a://billy-bucket/the/data/<span class="hljs-keyword">is</span>/here/moredata.gz,s3a://billy-bucket/the/data/<span class="hljs-keyword">is</span>/here/evenmoredata.gz<span class="hljs-string">"
+</span></code></pre>
+<pre><code class="hljs css language-json">"jobProperties" : {
+  "fs.s3a.impl" : "org.apache.hadoop.fs.s3a.S3AFileSystem",
+  "fs.AbstractFileSystem.s3a.impl" : "org.apache.hadoop.fs.s3a.S3A",
+  "fs.s3a.access.key" : "YOUR_ACCESS_KEY",
+  "fs.s3a.secret.key" : "YOUR_SECRET_KEY"
+}
+</code></pre>
+<p>For Google Cloud Storage, you need to install <a href="https://github.com/GoogleCloudPlatform/bigdata-interop/blob/master/gcs/INSTALL.md">GCS connector jar</a>
+under <code>${DRUID_HOME}/hadoop-dependencies</code> in <em>all MiddleManager or Indexer processes</em>.
+Once you install the GCS Connector jar in all MiddleManager and Indexer processes, you can put
+your Google Cloud Storage paths in the inputSpec with the below job properties.
+For more configurations, see the <a href="https://github.com/GoogleCloudPlatform/bigdata-interop/blob/master/gcs/INSTALL.md#configure-hadoop">instructions to configure Hadoop</a>,
+<a href="https://github.com/GoogleCloudPlatform/bigdata-interop/blob/master/gcs/conf/gcs-core-default.xml">GCS core default</a>
+and <a href="https://github.com/GoogleCloudPlatform/bdutil/blob/master/conf/hadoop2/gcs-core-template.xml">GCS core template</a>.</p>
+<pre><code class="hljs"><span class="hljs-string">"paths"</span> : "<span class="hljs-type">gs</span>://billy-bucket/the/data/<span class="hljs-keyword">is</span>/here/data.gz,gs://billy-bucket/the/data/<span class="hljs-keyword">is</span>/here/moredata.gz,gs://billy-bucket/the/data/<span class="hljs-keyword">is</span>/here/evenmoredata.gz<span class="hljs-string">"
+</span></code></pre>
+<pre><code class="hljs css language-json">"jobProperties" : {
+  "fs.gs.impl" : "com.google.cloud.hadoop.fs.gcs.GoogleHadoopFileSystem",
+  "fs.AbstractFileSystem.gs.impl" : "com.google.cloud.hadoop.fs.gcs.GoogleHadoopFS"
+}
+</code></pre>
+<h4><a class="anchor" aria-hidden="true" id="granularity"></a><a href="#granularity" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>granularity</code></h4>
+<p>A type of inputSpec that expects data to be organized in directories according to datetime using the path format: <code>y=XXXX/m=XX/d=XX/H=XX/M=XX/S=XX</code> (where date is represented by lowercase and time is represented by uppercase).</p>
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th><th>Required</th></tr>
+</thead>
+<tbody>
+<tr><td>dataGranularity</td><td>String</td><td>Specifies the granularity to expect the data at, e.g. hour means to expect directories <code>y=XXXX/m=XX/d=XX/H=XX</code>.</td><td>yes</td></tr>
+<tr><td>inputFormat</td><td>String</td><td>Specifies the Hadoop InputFormat class to use. e.g. <code>org.apache.hadoop.mapreduce.lib.input.SequenceFileInputFormat</code></td><td>no</td></tr>
+<tr><td>inputPath</td><td>String</td><td>Base path to append the datetime path to.</td><td>yes</td></tr>
+<tr><td>filePattern</td><td>String</td><td>Pattern that files should match to be included.</td><td>yes</td></tr>
+<tr><td>pathFormat</td><td>String</td><td>Joda datetime format for each directory. Default value is <code>&quot;'y'=yyyy/'m'=MM/'d'=dd/'H'=HH&quot;</code>, or see <a href="http://www.joda.org/joda-time/apidocs/org/joda/time/format/DateTimeFormat.html">Joda documentation</a></td><td>no</td></tr>
+</tbody>
+</table>
+<p>For example, if the sample config were run with the interval 2012-06-01/2012-06-02, it would expect data at the paths:</p>
+<pre><code class="hljs">s3n:<span class="hljs-regexp">//</span>billy-bucket<span class="hljs-regexp">/the/</span>data<span class="hljs-regexp">/is/</span>here<span class="hljs-regexp">/y=2012/m</span>=<span class="hljs-number">06</span><span class="hljs-regexp">/d=01/</span>H=<span class="hljs-number">00</span>
+s3n:<span class="hljs-regexp">//</span>billy-bucket<span class="hljs-regexp">/the/</span>data<span class="hljs-regexp">/is/</span>here<span class="hljs-regexp">/y=2012/m</span>=<span class="hljs-number">06</span><span class="hljs-regexp">/d=01/</span>H=<span class="hljs-number">01</span>
+...
+s3n:<span class="hljs-regexp">//</span>billy-bucket<span class="hljs-regexp">/the/</span>data<span class="hljs-regexp">/is/</span>here<span class="hljs-regexp">/y=2012/m</span>=<span class="hljs-number">06</span><span class="hljs-regexp">/d=01/</span>H=<span class="hljs-number">23</span>
+</code></pre>
+<h4><a class="anchor" aria-hidden="true" id="datasource"></a><a href="#datasource" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>dataSource</code></h4>
+<p>This is a type of <code>inputSpec</code> that reads data already stored inside Druid. This is used to allow &quot;re-indexing&quot; data and for &quot;delta-ingestion&quot; described later in <code>multi</code> type inputSpec.</p>
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th><th>Required</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td>String.</td><td>This should always be 'dataSource'.</td><td>yes</td></tr>
+<tr><td>ingestionSpec</td><td>JSON object.</td><td>Specification of Druid segments to be loaded. See below.</td><td>yes</td></tr>
+<tr><td>maxSplitSize</td><td>Number</td><td>Enables combining multiple segments into single Hadoop InputSplit according to size of segments. With -1, druid calculates max split size based on user specified number of map task(mapred.map.tasks or mapreduce.job.maps). By default, one split is made for one segment. maxSplitSize is specified in bytes.</td><td>no</td></tr>
+<tr><td>useNewAggs</td><td>Boolean</td><td>If &quot;false&quot;, then list of aggregators in &quot;metricsSpec&quot; of hadoop indexing task must be same as that used in original indexing task while ingesting raw data. Default value is &quot;false&quot;. This field can be set to &quot;true&quot; when &quot;inputSpec&quot; type is &quot;dataSource&quot; and not &quot;multi&quot; to enable arbitrary aggregators while reindexing. See below for &quot;multi&quot; type support for delta-ingestion.</td><td>no</td></tr>
+</tbody>
+</table>
+<p>Here is what goes inside <code>ingestionSpec</code>:</p>
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th><th>Required</th></tr>
+</thead>
+<tbody>
+<tr><td>dataSource</td><td>String</td><td>Druid dataSource name from which you are loading the data.</td><td>yes</td></tr>
+<tr><td>intervals</td><td>List</td><td>A list of strings representing ISO-8601 Intervals.</td><td>yes</td></tr>
+<tr><td>segments</td><td>List</td><td>List of segments from which to read data from, by default it is obtained automatically. You can obtain list of segments to put here by making a POST query to Coordinator at url /druid/coordinator/v1/metadata/datasources/segments?full with list of intervals specified in the request payload, e.g. [&quot;2012-01-01T00:00:00.000/2012-01-03T00:00:00.000&quot;, &quot;2012-01-05T00:00:00.000/2012-01-07T00:00:00.000&quot;]. You may want to provide this list manually in order to ensure that segments read are exactly same as they were at the time of task submission, task would fail if the list provided by the user does not match with state of database when the task actually runs.</td><td>no</td></tr>
+<tr><td>filter</td><td>JSON</td><td>See <a href="/docs/0.20.0/querying/filters.html">Filters</a></td><td>no</td></tr>
+<tr><td>dimensions</td><td>Array of String</td><td>Name of dimension columns to load. By default, the list will be constructed from parseSpec. If parseSpec does not have an explicit list of dimensions then all the dimension columns present in stored data will be read.</td><td>no</td></tr>
+<tr><td>metrics</td><td>Array of String</td><td>Name of metric columns to load. By default, the list will be constructed from the &quot;name&quot; of all the configured aggregators.</td><td>no</td></tr>
+<tr><td>ignoreWhenNoSegments</td><td>boolean</td><td>Whether to ignore this ingestionSpec if no segments were found. Default behavior is to throw error when no segments were found.</td><td>no</td></tr>
+</tbody>
+</table>
+<p>For example</p>
+<pre><code class="hljs css language-json">"ioConfig" : {
+  "type" : "hadoop",
+  "inputSpec" : {
+    "type" : "dataSource",
+    "ingestionSpec" : {
+      "dataSource": "wikipedia",
+      "intervals": ["2014-10-20T00:00:00Z/P2W"]
+    }
+  },
+  ...
+}
+</code></pre>
+<h4><a class="anchor" aria-hidden="true" id="multi"></a><a href="#multi" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>multi</code></h4>
+<p>This is a composing inputSpec to combine other inputSpecs. This inputSpec is used for delta ingestion. You can also use a <code>multi</code> inputSpec to combine data from multiple dataSources. However, each particular dataSource can only be specified one time.
+Note that, &quot;useNewAggs&quot; must be set to default value false to support delta-ingestion.</p>
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th><th>Required</th></tr>
+</thead>
+<tbody>
+<tr><td>children</td><td>Array of JSON objects</td><td>List of JSON objects containing other inputSpecs.</td><td>yes</td></tr>
+</tbody>
+</table>
+<p>For example:</p>
+<pre><code class="hljs css language-json">"ioConfig" : {
+  "type" : "hadoop",
+  "inputSpec" : {
+    "type" : "multi",
+    "children": [
+      {
+        "type" : "dataSource",
+        "ingestionSpec" : {
+          "dataSource": "wikipedia",
+          "intervals": ["2012-01-01T00:00:00.000/2012-01-03T00:00:00.000", "2012-01-05T00:00:00.000/2012-01-07T00:00:00.000"],
+          "segments": [
+            {
+              "dataSource": "test1",
+              "interval": "2012-01-01T00:00:00.000/2012-01-03T00:00:00.000",
+              "version": "v2",
+              "loadSpec": {
+                "type": "local",
+                "path": "/tmp/index1.zip"
+              },
+              "dimensions": "host",
+              "metrics": "visited_sum,unique_hosts",
+              "shardSpec": {
+                "type": "none"
+              },
+              "binaryVersion": 9,
+              "size": 2,
+              "identifier": "test1_2000-01-01T00:00:00.000Z_3000-01-01T00:00:00.000Z_v2"
+            }
+          ]
+        }
+      },
+      {
+        "type" : "static",
+        "paths": "/path/to/more/wikipedia/data/"
+      }
+    ]
+  },
+  ...
+}
+</code></pre>
+<p>It is STRONGLY RECOMMENDED to provide list of segments in <code>dataSource</code> inputSpec explicitly so that your delta ingestion task is idempotent. You can obtain that list of segments by making following call to the Coordinator.
+POST <code>/druid/coordinator/v1/metadata/datasources/{dataSourceName}/segments?full</code>
+Request Body: [interval1, interval2,...] for example [&quot;2012-01-01T00:00:00.000/2012-01-03T00:00:00.000&quot;, &quot;2012-01-05T00:00:00.000/2012-01-07T00:00:00.000&quot;]</p>
+<h2><a class="anchor" aria-hidden="true" id="tuningconfig"></a><a href="#tuningconfig" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>tuningConfig</code></h2>
+<p>The tuningConfig is optional and default parameters will be used if no tuningConfig is specified.</p>
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th><th>Required</th></tr>
+</thead>
+<tbody>
+<tr><td>workingPath</td><td>String</td><td>The working path to use for intermediate results (results between Hadoop jobs).</td><td>Only used by the <a href="#cli">Command-line Hadoop indexer</a>. The default is '/tmp/druid-indexing'. This field must be null otherwise.</td></tr>
+<tr><td>version</td><td>String</td><td>The version of created segments. Ignored for HadoopIndexTask unless useExplicitVersion is set to true</td><td>no (default == datetime that indexing starts at)</td></tr>
+<tr><td>partitionsSpec</td><td>Object</td><td>A specification of how to partition each time bucket into segments. Absence of this property means no partitioning will occur. See <a href="#partitionsspec"><code>partitionsSpec</code></a> below.</td><td>no (default == 'hashed')</td></tr>
+<tr><td>maxRowsInMemory</td><td>Integer</td><td>The number of rows to aggregate before persisting. Note that this is the number of post-aggregation rows which may not be equal to the number of input events due to roll-up. This is used to manage the required JVM heap size. Normally user does not need to set this, but depending on the nature of data, if rows are short in terms of bytes, user may not want to store a million rows in memory and this value should be set.</td><td>no (default == 1000000)</td></tr>
+<tr><td>maxBytesInMemory</td><td>Long</td><td>The number of bytes to aggregate in heap memory before persisting. Normally this is computed internally and user does not need to set it. This is based on a rough estimate of memory usage and not actual usage. The maximum heap memory usage for indexing is maxBytesInMemory * (2 + maxPendingPersists).</td><td>no (default == One-sixth of max JVM memory)</td></tr>
+<tr><td>leaveIntermediate</td><td>Boolean</td><td>Leave behind intermediate files (for debugging) in the workingPath when a job completes, whether it passes or fails.</td><td>no (default == false)</td></tr>
+<tr><td>cleanupOnFailure</td><td>Boolean</td><td>Clean up intermediate files when a job fails (unless leaveIntermediate is on).</td><td>no (default == true)</td></tr>
+<tr><td>overwriteFiles</td><td>Boolean</td><td>Override existing files found during indexing.</td><td>no (default == false)</td></tr>
+<tr><td>ignoreInvalidRows</td><td>Boolean</td><td>DEPRECATED. Ignore rows found to have problems. If false, any exception encountered during parsing will be thrown and will halt ingestion; if true, unparseable rows and fields will be skipped. If <code>maxParseExceptions</code> is defined, this property is ignored.</td><td>no (default == false)</td></tr>
+<tr><td>combineText</td><td>Boolean</td><td>Use CombineTextInputFormat to combine multiple files into a file split. This can speed up Hadoop jobs when processing a large number of small files.</td><td>no (default == false)</td></tr>
+<tr><td>useCombiner</td><td>Boolean</td><td>Use Hadoop combiner to merge rows at mapper if possible.</td><td>no (default == false)</td></tr>
+<tr><td>jobProperties</td><td>Object</td><td>A map of properties to add to the Hadoop job configuration, see below for details.</td><td>no (default == null)</td></tr>
+<tr><td>indexSpec</td><td>Object</td><td>Tune how data is indexed. See <a href="/docs/0.20.0/ingestion/index.html#indexspec"><code>indexSpec</code></a> on the main ingestion page for more information.</td><td>no</td></tr>
+<tr><td>indexSpecForIntermediatePersists</td><td>Object</td><td>defines segment storage format options to be used at indexing time for intermediate persisted temporary segments. this can be used to disable dimension/metric compression on intermediate segments to reduce memory required for final merging. however, disabling compression on intermediate segments might increase page cache use while they are used before getting merged into final segment published, see <a href="/docs/0.20.0/ingestion/index.html#indexspec"><code>indexSpec</code></a> for possible values.</td><td>no (default = same as indexSpec)</td></tr>
+<tr><td>numBackgroundPersistThreads</td><td>Integer</td><td>The number of new background threads to use for incremental persists. Using this feature causes a notable increase in memory pressure and CPU usage but will make the job finish more quickly. If changing from the default of 0 (use current thread for persists), we recommend setting it to 1.</td><td>no (default == 0)</td></tr>
+<tr><td>forceExtendableShardSpecs</td><td>Boolean</td><td>Forces use of extendable shardSpecs. Hash-based partitioning always uses an extendable shardSpec. For single-dimension partitioning, this option should be set to true to use an extendable shardSpec. For partitioning, please check <a href="#partitionsspec">Partitioning specification</a>. This option can be useful when you need to append more data to existing dataSource.</td><td>no (default = false)</td></tr>
+<tr><td>useExplicitVersion</td><td>Boolean</td><td>Forces HadoopIndexTask to use version.</td><td>no (default = false)</td></tr>
+<tr><td>logParseExceptions</td><td>Boolean</td><td>If true, log an error message when a parsing exception occurs, containing information about the row where the error occurred.</td><td>no(default = false)</td></tr>
+<tr><td>maxParseExceptions</td><td>Integer</td><td>The maximum number of parse exceptions that can occur before the task halts ingestion and fails. Overrides <code>ignoreInvalidRows</code> if <code>maxParseExceptions</code> is defined.</td><td>no(default = unlimited)</td></tr>
+<tr><td>useYarnRMJobStatusFallback</td><td>Boolean</td><td>If the Hadoop jobs created by the indexing task are unable to retrieve their completion status from the JobHistory server, and this parameter is true, the indexing task will try to fetch the application status from <code>http://&lt;yarn-rm-address&gt;/ws/v1/cluster/apps/&lt;application-id&gt;</code>, where <code>&lt;yarn-rm-address&gt;</code> is the value of <code>yarn.resourcemanager.webapp.address</code> in your Hadoop configuration. This flag is intended as a fallback for cases where an indexing task's jobs succeed, but the JobHistory server is unavailable, causing the indexing task to fail because it cannot determine the job statuses.</td><td>no (default = true)</td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="jobproperties"></a><a href="#jobproperties" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>jobProperties</code></h3>
+<pre><code class="hljs css language-json">   "tuningConfig" : {
+     "type": "hadoop",
+     "jobProperties": {
+       "&lt;hadoop-property-a&gt;": "&lt;value-a&gt;",
+       "&lt;hadoop-property-b&gt;": "&lt;value-b&gt;"
+     }
+   }
+</code></pre>
+<p>Hadoop's <a href="https://hadoop.apache.org/docs/stable/hadoop-mapreduce-client/hadoop-mapreduce-client-core/mapred-default.xml">MapReduce documentation</a> lists the possible configuration parameters.</p>
+<p>With some Hadoop distributions, it may be necessary to set <code>mapreduce.job.classpath</code> or <code>mapreduce.job.user.classpath.first</code>
+to avoid class loading issues. See the <a href="/docs/0.20.0/operations/other-hadoop.html">working with different Hadoop versions documentation</a>
+for more details.</p>
+<h2><a class="anchor" aria-hidden="true" id="partitionsspec"></a><a href="#partitionsspec" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>partitionsSpec</code></h2>
+<p>Segments are always partitioned based on timestamp (according to the granularitySpec) and may be further partitioned in
+some other way depending on partition type. Druid supports two types of partitioning strategies: <code>hashed</code> (based on the
+hash of all dimensions in each row), and <code>single_dim</code> (based on ranges of a single dimension).</p>
+<p>Hashed partitioning is recommended in most cases, as it will improve indexing performance and create more uniformly
+sized data segments relative to single-dimension partitioning.</p>
+<h3><a class="anchor" aria-hidden="true" id="hash-based-partitioning"></a><a href="#hash-based-partitioning" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Hash-based partitioning</h3>
+<pre><code class="hljs css language-json">  "partitionsSpec": {
+     "type": "hashed",
+     "targetRowsPerSegment": 5000000
+   }
+</code></pre>
+<p>Hashed partitioning works by first selecting a number of segments, and then partitioning rows across those segments
+according to the hash of all dimensions in each row. The number of segments is determined automatically based on the
+cardinality of the input set and a target partition size.</p>
+<p>The configuration options are:</p>
+<table>
+<thead>
+<tr><th>Field</th><th>Description</th><th>Required</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td>Type of partitionSpec to be used.</td><td>&quot;hashed&quot;</td></tr>
+<tr><td>targetRowsPerSegment</td><td>Target number of rows to include in a partition, should be a number that targets segments of 500MB~1GB. Defaults to 5000000 if <code>numShards</code> is not set.</td><td>either this or <code>numShards</code></td></tr>
+<tr><td>targetPartitionSize</td><td>Deprecated. Renamed to <code>targetRowsPerSegment</code>. Target number of rows to include in a partition, should be a number that targets segments of 500MB~1GB.</td><td>either this or <code>numShards</code></td></tr>
+<tr><td>maxRowsPerSegment</td><td>Deprecated. Renamed to <code>targetRowsPerSegment</code>. Target number of rows to include in a partition, should be a number that targets segments of 500MB~1GB.</td><td>either this or <code>numShards</code></td></tr>
+<tr><td>numShards</td><td>Specify the number of partitions directly, instead of a target partition size. Ingestion will run faster, since it can skip the step necessary to select a number of partitions automatically.</td><td>either this or <code>maxRowsPerSegment</code></td></tr>
+<tr><td>partitionDimensions</td><td>The dimensions to partition on. Leave blank to select all dimensions. Only used with <code>numShards</code>, will be ignored when <code>targetRowsPerSegment</code> is set.</td><td>no</td></tr>
+<tr><td>partitionFunction</td><td>A function to compute hash of partition dimensions. See <a href="#hash-partition-function">Hash partition function</a></td><td><code>murmur3_32_abs</code></td><td>no</td></tr>
+</tbody>
+</table>
+<h5><a class="anchor" aria-hidden="true" id="hash-partition-function"></a><a href="#hash-partition-function" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Hash partition function</h5>
+<p>In hash partitioning, the partition function is used to compute hash of partition dimensions. The partition dimension
+values are first serialized into a byte array as a whole, and then the partition function is applied to compute hash of
+the byte array.
+Druid currently supports only one partition function.</p>
+<table>
+<thead>
+<tr><th>name</th><th>description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>murmur3_32_abs</code></td><td>Applies an absolute value function to the result of <a href="https://guava.dev/releases/16.0/api/docs/com/google/common/hash/Hashing.html#murmur3_32()"><code>murmur3_32</code></a>.</td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="single-dimension-range-partitioning"></a><a href="#single-dimension-range-partitioning" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Single-dimension range partitioning</h3>
+<pre><code class="hljs css language-json">  "partitionsSpec": {
+     "type": "single_dim",
+     "targetRowsPerSegment": 5000000
+   }
+</code></pre>
+<p>Single-dimension range partitioning works by first selecting a dimension to partition on, and then separating that dimension
+into contiguous ranges. Each segment will contain all rows with values of that dimension in that range. For example,
+your segments may be partitioned on the dimension &quot;host&quot; using the ranges &quot;a.example.com&quot; to &quot;f.example.com&quot; and
+&quot;f.example.com&quot; to &quot;z.example.com&quot;. By default, the dimension to use is determined automatically, although you can
+override it with a specific dimension.</p>
+<p>The configuration options are:</p>
+<table>
+<thead>
+<tr><th>Field</th><th>Description</th><th>Required</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td>Type of partitionSpec to be used.</td><td>&quot;single_dim&quot;</td></tr>
+<tr><td>targetRowsPerSegment</td><td>Target number of rows to include in a partition, should be a number that targets segments of 500MB~1GB.</td><td>yes</td></tr>
+<tr><td>targetPartitionSize</td><td>Deprecated. Renamed to <code>targetRowsPerSegment</code>. Target number of rows to include in a partition, should be a number that targets segments of 500MB~1GB.</td><td>no</td></tr>
+<tr><td>maxRowsPerSegment</td><td>Maximum number of rows to include in a partition. Defaults to 50% larger than the <code>targetRowsPerSegment</code>.</td><td>no</td></tr>
+<tr><td>maxPartitionSize</td><td>Deprecated. Use <code>maxRowsPerSegment</code> instead. Maximum number of rows to include in a partition. Defaults to 50% larger than the <code>targetPartitionSize</code>.</td><td>no</td></tr>
+<tr><td>partitionDimension</td><td>The dimension to partition on. Leave blank to select a dimension automatically.</td><td>no</td></tr>
+<tr><td>assumeGrouped</td><td>Assume that input data has already been grouped on time and dimensions. Ingestion will run faster, but may choose sub-optimal partitions if this assumption is violated.</td><td>no</td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="remote-hadoop-clusters"></a><a href="#remote-hadoop-clusters" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Remote Hadoop clusters</h2>
+<p>If you have a remote Hadoop cluster, make sure to include the folder holding your configuration <code>*.xml</code> files in your Druid <code>_common</code> configuration folder.</p>
+<p>If you are having dependency problems with your version of Hadoop and the version compiled with Druid, please see <a href="/docs/0.20.0/operations/other-hadoop.html">these docs</a>.</p>
+<h2><a class="anchor" aria-hidden="true" id="elastic-mapreduce"></a><a href="#elastic-mapreduce" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Elastic MapReduce</h2>
+<p>If your cluster is running on Amazon Web Services, you can use Elastic MapReduce (EMR) to index data
+from S3. To do this:</p>
+<ul>
+<li>Create a persistent, <a href="http://docs.aws.amazon.com/ElasticMapReduce/latest/ManagementGuide/emr-plan-longrunning-transient.html">long-running cluster</a>.</li>
+<li>When creating your cluster, enter the following configuration. If you're using the wizard, this
+should be in advanced mode under &quot;Edit software settings&quot;:</li>
+</ul>
+<pre><code class="hljs"><span class="hljs-attribute">classification</span>=yarn-site,properties=[mapreduce.reduce.memory.<span class="hljs-attribute">mb</span>=6144,mapreduce.reduce.java.opts=-server -Xms2g -Xmx2g -Duser.<span class="hljs-attribute">timezone</span>=UTC -Dfile.<span class="hljs-attribute">encoding</span>=UTF-8 -XX:+PrintGCDetails -XX:+PrintGCTimeStamps,mapreduce.map.java.<span class="hljs-attribute">opts</span>=758,mapreduce.map.java.opts=-server -Xms512m -Xmx512m -Duser.<span class="hljs-attribute">timezone</span>=UTC -Dfile.<span class="hljs-attribute">encoding</span>=UTF-8 -XX:+PrintGCDetails -XX:+PrintGCTimeStamps,mapreduce.task.<span class="hljs-attribute">timeout</span>=1800000]
+</code></pre>
+<ul>
+<li>Follow the instructions under
+<a href="/docs/0.20.0/tutorials/cluster.html#hadoop">Configure for connecting to Hadoop</a> using the XML files from <code>/etc/hadoop/conf</code>
+on your EMR master.</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="kerberized-hadoop-clusters"></a><a href="#kerberized-hadoop-clusters" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Kerberized Hadoop clusters</h2>
+<p>By default druid can use the existing TGT kerberos ticket available in local kerberos key cache.
+Although TGT ticket has a limited life cycle,
+therefore you need to call <code>kinit</code> command periodically to ensure validity of TGT ticket.
+To avoid this extra external cron job script calling <code>kinit</code> periodically,
+you can provide the principal name and keytab location and druid will do the authentication transparently at startup and job launching time.</p>
+<table>
+<thead>
+<tr><th>Property</th><th>Possible Values</th><th>Description</th><th>Default</th></tr>
+</thead>
+<tbody>
+<tr><td><code>druid.hadoop.security.kerberos.principal</code></td><td><code>druid@EXAMPLE.COM</code></td><td>Principal user name</td><td>empty</td></tr>
+<tr><td><code>druid.hadoop.security.kerberos.keytab</code></td><td><code>/etc/security/keytabs/druid.headlessUser.keytab</code></td><td>Path to keytab file</td><td>empty</td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="loading-from-s3-with-emr"></a><a href="#loading-from-s3-with-emr" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Loading from S3 with EMR</h3>
+<ul>
+<li>In the <code>jobProperties</code> field in the <code>tuningConfig</code> section of your Hadoop indexing task, add:</li>
+</ul>
+<pre><code class="hljs"><span class="hljs-string">"jobProperties"</span> : {
+   <span class="hljs-string">"fs.s3.awsAccessKeyId"</span> : "<span class="hljs-type">YOUR_ACCESS_KEY</span><span class="hljs-string">",
+   "</span>fs.s3.awsSecretAccessKey<span class="hljs-string">" : "</span>YOUR_SECRET_KEY<span class="hljs-string">",
+   "</span>fs.s3.impl<span class="hljs-string">" : "</span>org.apache.hadoop.fs.s3native.NativeS3FileSystem<span class="hljs-string">",
+   "</span>fs.s3n.awsAccessKeyId<span class="hljs-string">" : "</span>YOUR_ACCESS_KEY<span class="hljs-string">",
+   "</span>fs.s3n.awsSecretAccessKey<span class="hljs-string">" : "</span>YOUR_SECRET_KEY<span class="hljs-string">",
+   "</span>fs.s3n.impl<span class="hljs-string">" : "</span>org.apache.hadoop.fs.s3native.NativeS3FileSystem<span class="hljs-string">",
+   "</span>io.compression.codecs<span class="hljs-string">" : "</span>org.apache.hadoop.io.compress.GzipCodec,org.apache.hadoop.io.compress.DefaultCodec,org.apache.hadoop.io.compress.BZip2Codec,org.apache.hadoop.io.compress.SnappyCodec<span class="hljs-string">"
+}
+</span></code></pre>
+<p>Note that this method uses Hadoop's built-in S3 filesystem rather than Amazon's EMRFS, and is not compatible
+with Amazon-specific features such as S3 encryption and consistent views. If you need to use these
+features, you will need to make the Amazon EMR Hadoop JARs available to Druid through one of the
+mechanisms described in the <a href="#using-other-hadoop-distributions">Using other Hadoop distributions</a> section.</p>
+<h2><a class="anchor" aria-hidden="true" id="using-other-hadoop-distributions"></a><a href="#using-other-hadoop-distributions" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Using other Hadoop distributions</h2>
+<p>Druid works out of the box with many Hadoop distributions.</p>
+<p>If you are having dependency conflicts between Druid and your version of Hadoop, you can try
+searching for a solution in the <a href="https://groups.google.com/forum/#!forum/druid-user">Druid user groups</a>, or reading the
+Druid <a href="/docs/0.20.0/operations/other-hadoop.html">Different Hadoop Versions</a> documentation.</p>
+<p><a name="cli"></a></p>
+<h2><a class="anchor" aria-hidden="true" id="command-line-non-task-version"></a><a href="#command-line-non-task-version" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Command line (non-task) version</h2>
+<p>To run:</p>
+<pre><code class="hljs">java -Xmx256m -Duser.timezone=UTC -Dfile.encoding=UTF-<span class="hljs-number">8</span> -classpath <span class="hljs-class"><span class="hljs-keyword">lib</span>/*:&lt;<span class="hljs-title">hadoop_config_dir</span>&gt; <span class="hljs-title">org</span>.<span class="hljs-title">apache</span>.<span class="hljs-title">druid</span>.<span class="hljs-title">cli</span>.<span class="hljs-title">Main</span> <span class="hljs-title">index</span> <span class="hljs-title">hadoop</span> &lt;<span class="hljs-title">spec_file</span>&gt;</span>
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="options"></a><a href="#options" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Options</h3>
+<ul>
+<li>&quot;--coordinate&quot; - provide a version of Apache Hadoop to use. This property will override the default Hadoop coordinates. Once specified, Apache Druid will look for those Hadoop dependencies from the location specified by <code>druid.extensions.hadoopDependenciesDir</code>.</li>
+<li>&quot;--no-default-hadoop&quot; - don't pull down the default hadoop version</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" id="spec-file"></a><a href="#spec-file" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Spec file</h3>
+<p>The spec file needs to contain a JSON object where the contents are the same as the &quot;spec&quot; field in the Hadoop index task. See <a href="/docs/0.20.0/ingestion/hadoop.html">Hadoop Batch Ingestion</a> for details on the spec format.</p>
+<p>In addition, a <code>metadataUpdateSpec</code> and <code>segmentOutputPath</code> field needs to be added to the ioConfig:</p>
+<pre><code class="hljs">      <span class="hljs-string">"ioConfig"</span> : {
+        ...
+        <span class="hljs-string">"metadataUpdateSpec"</span> : {
+          <span class="hljs-string">"type"</span>:<span class="hljs-string">"mysql"</span>,
+          <span class="hljs-string">"connectURI"</span> : "<span class="hljs-type">jdbc</span>:mysql://localhost:<span class="hljs-number">3306</span>/druid<span class="hljs-string">",
+          "</span>password<span class="hljs-string">" : "</span>diurd<span class="hljs-string">",
+          "</span>segmentTable<span class="hljs-string">" : "</span>druid_segments<span class="hljs-string">",
+          "</span>user<span class="hljs-string">" : "</span>druid<span class="hljs-string">"
+        },
+        "</span>segmentOutputPath<span class="hljs-string">" : "</span>/MyDirectory/data/index/output<span class="hljs-string">"
+      },
+</span></code></pre>
+<p>and a <code>workingPath</code> field needs to be added to the tuningConfig:</p>
+<pre><code class="hljs">  <span class="hljs-string">"tuningConfig"</span> : {
+   <span class="hljs-string">...</span>
+    <span class="hljs-string">"workingPath"</span>: <span class="hljs-string">"/tmp"</span>,
+    <span class="hljs-string">...</span>
+  }
+</code></pre>
+<h4><a class="anchor" aria-hidden="true" id="metadata-update-job-spec"></a><a href="#metadata-update-job-spec" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Metadata Update Job Spec</h4>
+<p>This is a specification of the properties that tell the job how to update metadata such that the Druid cluster will see the output segments and load them.</p>
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th><th>Required</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td>String</td><td>&quot;metadata&quot; is the only value available.</td><td>yes</td></tr>
+<tr><td>connectURI</td><td>String</td><td>A valid JDBC url to metadata storage.</td><td>yes</td></tr>
+<tr><td>user</td><td>String</td><td>Username for db.</td><td>yes</td></tr>
+<tr><td>password</td><td>String</td><td>password for db.</td><td>yes</td></tr>
+<tr><td>segmentTable</td><td>String</td><td>Table to use in DB.</td><td>yes</td></tr>
+</tbody>
+</table>
+<p>These properties should parrot what you have configured for your <a href="/docs/0.20.0/design/coordinator.html">Coordinator</a>.</p>
+<h4><a class="anchor" aria-hidden="true" id="segmentoutputpath-config"></a><a href="#segmentoutputpath-config" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>segmentOutputPath Config</h4>
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th><th>Required</th></tr>
+</thead>
+<tbody>
+<tr><td>segmentOutputPath</td><td>String</td><td>the path to dump segments into.</td><td>yes</td></tr>
+</tbody>
+</table>
+<h4><a class="anchor" aria-hidden="true" id="workingpath-config"></a><a href="#workingpath-config" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>workingPath Config</h4>
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th><th>Required</th></tr>
+</thead>
+<tbody>
+<tr><td>workingPath</td><td>String</td><td>the working path to use for intermediate results (results between Hadoop jobs).</td><td>no (default == '/tmp/druid-indexing')</td></tr>
+</tbody>
+</table>
+<p>Please note that the command line Hadoop indexer doesn't have the locking capabilities of the indexing service, so if you choose to use it,
+you have to take caution to not override segments created by real-time processing (if you that a real-time pipeline set up).</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/0.20.0/ingestion/native-batch.html"><span class="arrow-prev">← </span><span>Native batch</span></a><a class="docs-next button" href="/docs/0.20.0/ingestion/tasks.html"><span>Task reference</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#tutorial">Tutorial</a></li><li><a href="#task-syntax">Task syntax</a></li><li><a href="#dataschema"><code>dataSchema</code></a></li><li><a href="#ioconfig"><code>ioConfig</code></a><ul class="toc-headings"><li><a href="#inputspec"><code>inputSpec</code></a></li></ul></li><li><a href="#tuningconfig"><code>tuningConfig</code></a><ul class="toc-headings"><li><a href="#jobproperties"><code>jobProperties</code></a></li></ul></li><li><a href="#partitionsspec"><code>partitionsSpec</code></a><ul class="toc-headings"><li><a href="#hash-based-partitioning">Hash-based partitioning</a></li><li><a href="#single-dimension-range-partitioning">Single-dimension range partitioning</a></li></ul></li><li><a href="#remote-hadoop-clusters">Remote Hadoop clusters</a></li><li><a href="#elastic-mapreduce">Elastic MapReduce</a></li><li><a href="#kerberized-hadoop-clusters">Kerberized Hadoop clusters</a><ul class="toc-headings"><li><a href="#loading-from-s3-with-emr">Loading from S3 with EMR</a></li></ul></li><li><a href="#using-other-hadoop-distributions">Using other Hadoop distributions</a></li><li><a href="#command-line-non-task-version">Command line (non-task) version</a><ul class="toc-headings"><li><a href="#options">Options</a></li><li><a href="#spec-file">Spec file</a></li></ul></li></ul></nav></div><footer class="nav-footer druid-footer" id="footer"><div class="container"><div class="text-center"><p><a href="/technology">Technology</a> · <a href="/use-cases">Use Cases</a> · <a href="/druid-powered">Powered by Druid</a> · <a href="/docs/0.20.0/latest">Docs</a> · <a href="/community/">Community</a> · <a href="/downloads.html">Download</a> · <a href="/faq">FAQ</a></p></div><div class="text-center"><a title="Join the user group" href="https://groups.google.com/forum/#!forum/druid-user" target="_blank"><span class="fa fa-comments"></span></a> · <a title="Follow Druid" href="https://twitter.com/druidio" target="_blank"><span class="fab fa-twitter"></span></a> · <a title="Download via Apache" href="https://www.apache.org/dyn/closer.cgi?path=/incubator/druid/{{ site.druid_versions[0].versions[0].version }}/apache-druid-{{ site.druid_versions[0].versions[0].version }}-bin.tar.gz" target="_blank"><span class="fas fa-feather"></span></a> · <a title="GitHub" href="https://github.com/apache/druid" target="_blank"><span class="fab fa-github"></span></a></div><div class="text-center license">Copyright © 2019 <a href="https://www.apache.org/" target="_blank">Apache Software Foundation</a>.<br/>Except where otherwise noted, licensed under <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.<br/>Apache Druid, Druid, and the Druid logo are either registered trademarks or trademarks of The Apache Software Foundation in the United States and other countries.</div></div></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '2de99082a9f38e49dfaa059bbe4c901d',
+                indexName: 'apache_druid',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["language:en","version:0.20.0"]}
+              });
+            </script></body></html>

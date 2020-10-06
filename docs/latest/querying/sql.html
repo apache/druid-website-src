@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>SQL · Apache Druid</title><meta name="viewport" content="width=device-width"/><link rel="canonical" href="https://druid.apache.org/docs/latest/querying/sql.html"/><meta name="generator" content="Docusaurus"/><meta name="description" content="&lt;!--"/><meta name="docsearch:language" content="en"/><meta name="docsearch:version" content="0.19.0" /><meta property="og:title" content="SQL · Apache Druid"/><meta property="og:type" content="website"/><meta property="og:url" content="https://druid.apache.org/index.html"/><meta property="og:description" content="&lt;!--"/><meta property="og:image" content="https://druid.apache.org/img/druid_nav.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://druid.apache.org/img/druid_nav.png"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-131010415-1"></script><script>
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>SQL · Apache Druid</title><meta name="viewport" content="width=device-width"/><link rel="canonical" href="https://druid.apache.org/docs/latest/querying/sql.html"/><meta name="generator" content="Docusaurus"/><meta name="description" content="&lt;!--"/><meta name="docsearch:language" content="en"/><meta name="docsearch:version" content="0.20.0" /><meta property="og:title" content="SQL · Apache Druid"/><meta property="og:type" content="website"/><meta property="og:url" content="https://druid.apache.org/index.html"/><meta property="og:description" content="&lt;!--"/><meta property="og:image" content="https://druid.apache.org/img/druid_nav.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://druid.apache.org/img/druid_nav.png"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-131010415-1"></script><script>
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments); }
               gtag('js', new Date());
@@ -103,6 +103,7 @@ additional performance penalty versus native queries.</p>
 [ <span class="hljs-keyword">HAVING</span> expr ]
 [ <span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> expr [ <span class="hljs-keyword">ASC</span> | <span class="hljs-keyword">DESC</span> ], expr [ <span class="hljs-keyword">ASC</span> | <span class="hljs-keyword">DESC</span> ], ... ]
 [ <span class="hljs-keyword">LIMIT</span> <span class="hljs-keyword">limit</span> ]
+[ <span class="hljs-keyword">OFFSET</span> <span class="hljs-keyword">offset</span> ]
 [ <span class="hljs-keyword">UNION</span> <span class="hljs-keyword">ALL</span> &lt;another <span class="hljs-keyword">query</span>&gt; ]
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="from"></a><a href="#from" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>FROM</h3>
@@ -153,17 +154,59 @@ based on either grouping expressions or aggregated values. ORDER BY can refer to
 ordinal position (like <code>ORDER BY 2</code> to order by the second selected column). For non-aggregation queries, ORDER BY
 can only order by the <code>__time</code> column. For aggregation queries, ORDER BY can order by any column.</p>
 <h3><a class="anchor" aria-hidden="true" id="limit"></a><a href="#limit" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>LIMIT</h3>
-<p>The LIMIT clause can be used to limit the number of rows returned. It can be used with any query type. It is pushed down
-to Data processes for queries that run with the native TopN query type, but not the native GroupBy query type. Future
-versions of Druid will support pushing down limits using the native GroupBy query type as well. If you notice that
-adding a limit doesn't change performance very much, then it's likely that Druid didn't push down the limit for your
-query.</p>
+<p>The LIMIT clause limits the number of rows returned. In some situations Druid will push down this limit to data servers,
+which boosts performance. Limits are always pushed down for queries that run with the native Scan or TopN query types.
+With the native GroupBy query type, it is pushed down when ordering on a column that you are grouping by. If you notice
+that adding a limit doesn't change performance very much, then it's possible that Druid wasn't able to push down the
+limit for your query.</p>
+<h3><a class="anchor" aria-hidden="true" id="offset"></a><a href="#offset" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>OFFSET</h3>
+<p>The OFFSET clause skips a certain number of rows when returning results.</p>
+<p>If both LIMIT and OFFSET are provided, then OFFSET will be applied first, followed by LIMIT. For example, using
+LIMIT 100 OFFSET 10 will return 100 rows, starting from row number 10.</p>
+<p>Together, LIMIT and OFFSET can be used to implement pagination. However, note that if the underlying datasource is
+modified between page fetches, then the different pages will not necessarily align with each other.</p>
+<p>There are two important factors that can affect the performance of queries that use OFFSET:</p>
+<ul>
+<li>Skipped rows still need to be generated internally and then discarded, meaning that raising offsets to high values
+can cause queries to use additional resources.</li>
+<li>OFFSET is only supported by the Scan and GroupBy <a href="#query-types">native query types</a>. Therefore, a query with OFFSET
+will use one of those two types, even if it might otherwise have run as a Timeseries or TopN. Switching query engines
+in this way can affect performance.</li>
+</ul>
 <h3><a class="anchor" aria-hidden="true" id="union-all"></a><a href="#union-all" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>UNION ALL</h3>
-<p>The &quot;UNION ALL&quot; operator can be used to fuse multiple queries together. Their results will be concatenated, and each
-query will run separately, back to back (not in parallel). Druid does not currently support &quot;UNION&quot; without &quot;ALL&quot;.
-UNION ALL must appear at the very outer layer of a SQL query (it cannot appear in a subquery or in the FROM clause).</p>
-<p>Note that despite the similar name, UNION ALL is not the same thing as as <a href="/docs/latest/querying/datasource.html#union">union datasource</a>.
-UNION ALL allows unioning the results of queries, whereas union datasources allow unioning tables.</p>
+<p>The &quot;UNION ALL&quot; operator fuses multiple queries together. Druid SQL supports the UNION ALL operator in two situations:
+top-level and table-level. Queries that use UNION ALL in any other way will not be able to execute.</p>
+<h4><a class="anchor" aria-hidden="true" id="top-level"></a><a href="#top-level" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Top-level</h4>
+<p>UNION ALL can be used at the very top outer layer of a SQL query (not in a subquery, and not in the FROM clause). In
+this case, the underlying queries will be run separately, back to back, and their results will all be returned in
+one result set.</p>
+<p>For example:</p>
+<pre><code class="hljs"><span class="hljs-keyword">SELECT</span> COUNT<span class="hljs-comment">(*) FROM tbl WHERE my_column = 'value1'
+UNION ALL
+SELECT COUNT(*)</span> <span class="hljs-keyword">FROM</span> tbl <span class="hljs-keyword">WHERE</span> my_column = <span class="hljs-string">'value2'</span>
+</code></pre>
+<p>When UNION ALL occurs at the top level of a query like this, the results from the unioned queries are concatenated
+together and appear one after the other.</p>
+<h4><a class="anchor" aria-hidden="true" id="table-level"></a><a href="#table-level" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Table-level</h4>
+<p>UNION ALL can be used to query multiple tables at the same time. In this case, it must appear in the FROM clause,
+and the subqueries that are inputs to the UNION ALL operator must be simple table SELECTs (no expressions, column
+aliasing, etc). The query will run natively using a <a href="/docs/latest/querying/datasource.html#union">union datasource</a>.</p>
+<p>The same columns must be selected from each table in the same order, and those columns must either have the same types,
+or types that can be implicitly cast to each other (such as different numeric types). For this reason, it is generally
+more robust to write your queries to select specific columns. If you use <code>SELECT *</code>, you will need to modify your
+queries if a new column is added to one of the tables but not to the others.</p>
+<p>For example:</p>
+<pre><code class="hljs">SELECT col1, COUNT(*)
+<span class="hljs-keyword">FROM</span> (
+  SELECT col1, col2, col3 <span class="hljs-keyword">FROM</span> tbl1
+  UNION ALL
+  SELECT col1, col2, col3 <span class="hljs-keyword">FROM</span> tbl2
+)<span class="hljs-built_in">
+GROUP </span>BY col1
+</code></pre>
+<p>When UNION ALL occurs at the table level, the rows from the unioned tables are not guaranteed to be processed in
+any particular order. They may be processed in an interleaved fashion. If you need a particular result ordering,
+use <a href="#order-by">ORDER BY</a>.</p>
 <h3><a class="anchor" aria-hidden="true" id="explain-plan"></a><a href="#explain-plan" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>EXPLAIN PLAN</h3>
 <p>Add &quot;EXPLAIN PLAN FOR&quot; to the beginning of any query to get information about how it will be translated. In this case,
 the query will not actually be executed. Refer to the <a href="#query-translation">Query translation</a> documentation for help
@@ -227,6 +270,14 @@ applied to all values for each row individually. Multi-value string dimensions c
 <p>Grouping by a multi-value expression will observe the native Druid multi-value aggregation behavior, which is similar to
 the <code>UNNEST</code> functionality available in some other SQL dialects. Refer to the documentation on
 <a href="multi-value-dimensions.html">multi-value string dimensions</a> for additional details.</p>
+<blockquote>
+<p>Because multi-value dimensions are treated by the SQL planner as <code>VARCHAR</code>, there are some inconsistencies between how
+they are handled in Druid SQL and in native queries. For example, expressions involving multi-value dimensions may be
+incorrectly optimized by the Druid SQL planner: <code>multi_val_dim = 'a' AND multi_val_dim = 'b'</code> will be optimized to
+<code>false</code>, even though it is possible for a single row to have both &quot;a&quot; and &quot;b&quot; as values for <code>multi_val_dim</code>. The
+SQL behavior of multi-value dimensions will change in a future release to more closely align with their behavior
+in native queries.</p>
+</blockquote>
 <h3><a class="anchor" aria-hidden="true" id="null-values"></a><a href="#null-values" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>NULL values</h3>
 <p>The <code>druid.generic.useDefaultValueForNull</code> <a href="../configuration/index.html#sql-compatible-null-handling">runtime property</a>
 controls Druid's NULL handling mode.</p>
@@ -245,6 +296,13 @@ documentation for more details.</p>
 <code>AGG(expr) FILTER(WHERE whereExpr)</code>. Filtered aggregators will only aggregate rows that match their filter. It's
 possible for two aggregators in the same SQL query to have different filters.</p>
 <p>Only the COUNT aggregation can accept DISTINCT.</p>
+<blockquote>
+<p>The order of aggregation operations across segments is not deterministic. This means that non-commutative aggregation
+functions can produce inconsistent results across the same query.</p>
+<p>Functions that operate on an input type of &quot;float&quot; or &quot;double&quot; may also see these differences in aggregation
+results across multiple query runs because of this. If precisely the same value is desired across multiple query runs,
+consider using the <code>ROUND</code> function to smooth out the inconsistencies between queries.</p>
+</blockquote>
 <table>
 <thead>
 <tr><th>Function</th><th>Notes</th></tr>
@@ -342,6 +400,8 @@ to FLOAT. At runtime, Druid will widen 32-bit floats to 64-bit for most expressi
 <tr><td><code>POSITION(needle IN haystack [FROM fromIndex])</code></td><td>Returns the index of needle within haystack, with indexes starting from 1. The search will begin at fromIndex, or 1 if fromIndex is not specified. If the needle is not found, returns 0.</td></tr>
 <tr><td><code>REGEXP_EXTRACT(expr, pattern, [index])</code></td><td>Apply regular expression <code>pattern</code> to <code>expr</code> and extract a capture group, or <code>NULL</code> if there is no match. If index is unspecified or zero, returns the first substring that matched the pattern. The pattern may match anywhere inside <code>expr</code>; if you want to match the entire string instead, use the <code>^</code> and <code>$</code> markers at the start and end of your pattern. Note: when <code>druid.generic.useDefaultValueForNull = true</code>, it is not possible to differentiate an empty-string match from a non-match (both will return <code>NULL</code>).</td></tr>
 <tr><td><code>REGEXP_LIKE(expr, pattern)</code></td><td>Returns whether <code>expr</code> matches regular expression <code>pattern</code>. The pattern may match anywhere inside <code>expr</code>; if you want to match the entire string instead, use the <code>^</code> and <code>$</code> markers at the start and end of your pattern. Similar to <a href="#comparison-operators"><code>LIKE</code></a>, but uses regexps instead of LIKE patterns. Especially useful in WHERE clauses.</td></tr>
+<tr><td><code>CONTAINS_STRING(&lt;expr&gt;, str)</code></td><td>Returns true if the <code>str</code> is a substring of <code>expr</code>.</td></tr>
+<tr><td><code>ICONTAINS_STRING(&lt;expr&gt;, str)</code></td><td>Returns true if the <code>str</code> is a substring of <code>expr</code>. The match is case-insensitive.</td></tr>
 <tr><td><code>REPLACE(expr, pattern, replacement)</code></td><td>Replaces pattern with replacement in expr, and returns the result.</td></tr>
 <tr><td><code>STRPOS(haystack, needle)</code></td><td>Returns the index of needle within haystack, with indexes starting from 1. If the needle is not found, returns 0.</td></tr>
 <tr><td><code>SUBSTRING(expr, index, [length])</code></td><td>Returns a substring of expr starting at index, with a max length, both measured in UTF-16 code units.</td></tr>
@@ -706,22 +766,25 @@ approximate, regardless of configuration.</p></li>
 <h3><a class="anchor" aria-hidden="true" id="unsupported-features"></a><a href="#unsupported-features" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Unsupported features</h3>
 <p>Druid does not support all SQL features. In particular, the following features are not supported.</p>
 <ul>
-<li>JOIN between native datasources (table, lookup, subquery) and system tables.</li>
+<li>JOIN between native datasources (table, lookup, subquery) and <a href="#metadata-tables">system tables</a>.</li>
 <li>JOIN conditions that are not an equality between expressions from the left- and right-hand sides.</li>
 <li>JOIN conditions containing a constant value inside the condition.</li>
 <li>JOIN conditions on a column which contains a multi-value dimension.</li>
 <li>OVER clauses, and analytic functions such as <code>LAG</code> and <code>LEAD</code>.</li>
-<li>OFFSET clauses.</li>
+<li>ORDER BY for a non-aggregating query, except for <code>ORDER BY __time</code> or <code>ORDER BY __time DESC</code>, which are supported.
+This restriction only applies to non-aggregating queries; you can ORDER BY any column in an aggregating query.</li>
 <li>DDL and DML.</li>
-<li>Using Druid-specific functions like <code>TIME_PARSE</code> and <code>APPROX_QUANTILE_DS</code> on <a href="#metadata-tables">metadata tables</a>.</li>
+<li>Using Druid-specific functions like <code>TIME_PARSE</code> and <code>APPROX_QUANTILE_DS</code> on <a href="#metadata-tables">system tables</a>.</li>
 </ul>
 <p>Additionally, some Druid native query features are not supported by the SQL language. Some unsupported Druid features
 include:</p>
 <ul>
-<li><a href="datasource.html#union">Union datasources</a></li>
-<li><a href="datasource.html#inline">Inline datasources</a></li>
+<li><a href="datasource.html#inline">Inline datasources</a>.</li>
 <li><a href="../development/geo.html">Spatial filters</a>.</li>
 <li><a href="querying.html#query-cancellation">Query cancellation</a>.</li>
+<li><a href="#multi-value-strings">Multi-value dimensions</a> are only partially implemented in Druid SQL. There are known
+inconsistencies between their behavior in SQL queries and in native queries due to how they are currently treated by
+the SQL planner.</li>
 </ul>
 <h2><a class="anchor" aria-hidden="true" id="client-apis"></a><a href="#client-apis" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Client APIs</h2>
 <p><a name="json-over-http"></a></p>
@@ -808,9 +871,7 @@ trailer they all include: one blank line at the end of the result set. If you de
 through a JSON parsing error or through a missing trailing newline, you should assume the response was not fully
 delivered due to an error.</p>
 <h3><a class="anchor" aria-hidden="true" id="jdbc"></a><a href="#jdbc" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>JDBC</h3>
-<p>You can make Druid SQL queries using the <a href="https://calcite.apache.org/avatica/downloads/">Avatica JDBC driver</a>. Once
-you've downloaded the Avatica client jar, add it to your classpath and use the connect string
-<code>jdbc:avatica:remote:url=http://BROKER:8082/druid/v2/sql/avatica/</code>.</p>
+<p>You can make Druid SQL queries using the <a href="https://calcite.apache.org/avatica/downloads/">Avatica JDBC driver</a>. We recommend using Avatica JDBC driver version 1.17.0 or later. Note that as of the time of this writing, Avatica 1.17.0, the latest version, does not support passing connection string parameters from the URL to Druid, so you must pass them using a <code>Properties</code> object. Once you've downloaded the Avatica client jar, add it to your classpath and use the connect string <code>jdbc:avatica:remote:url=http://BROKER:8082/druid/v2/sql/avatica/</code>.</p>
 <p>Example code:</p>
 <pre><code class="hljs css language-java"><span class="hljs-comment">// Connect to /druid/v2/sql/avatica/ on your Broker.</span>
 String url = <span class="hljs-string">"jdbc:avatica:remote:url=http://localhost:8082/druid/v2/sql/avatica/"</span>;
@@ -825,7 +886,7 @@ Properties connectionProperties = <span class="hljs-keyword">new</span> Properti
       <span class="hljs-keyword">final</span> ResultSet resultSet = statement.executeQuery(query)
   ) {
     <span class="hljs-keyword">while</span> (resultSet.next()) {
-      <span class="hljs-comment">// Do something</span>
+      <span class="hljs-comment">// process result set</span>
     }
   }
 }
@@ -850,6 +911,17 @@ statement.setString(<span class="hljs-number">2</span>, <span class="hljs-string
 <p>Druid SQL supports setting connection parameters on the client. The parameters in the table below affect SQL planning.
 All other context parameters you provide will be attached to Druid queries and can affect how they run. See
 <a href="query-context.html">Query context</a> for details on the possible options.</p>
+<pre><code class="hljs css language-java">String url = <span class="hljs-string">"jdbc:avatica:remote:url=http://localhost:8082/druid/v2/sql/avatica/"</span>;
+
+<span class="hljs-comment">// Set any query context parameters you need here.</span>
+Properties connectionProperties = <span class="hljs-keyword">new</span> Properties();
+connectionProperties.setProperty(<span class="hljs-string">"sqlTimeZone"</span>, <span class="hljs-string">"America/Los_Angeles"</span>);
+connectionProperties.setProperty(<span class="hljs-string">"useCache"</span>, <span class="hljs-string">"false"</span>);
+
+<span class="hljs-keyword">try</span> (Connection connection = DriverManager.getConnection(url, connectionProperties)) {
+  <span class="hljs-comment">// create and execute statements, process result sets, etc</span>
+}
+</code></pre>
 <p>Note that to specify an unique identifier for SQL query, use <code>sqlQueryId</code> instead of <code>queryId</code>. Setting <code>queryId</code> for a SQL
 request has no effect, all native queries underlying SQL will use auto-generated queryId.</p>
 <p>Connection context can be specified as JDBC connection properties or as a &quot;context&quot; object in the JSON API.</p>
@@ -967,6 +1039,7 @@ datasource &quot;foo&quot;, use the query:</p>
 <tr><td>shardSpec</td><td>STRING</td><td>The toString of specific <code>ShardSpec</code></td></tr>
 <tr><td>dimensions</td><td>STRING</td><td>The dimensions of the segment</td></tr>
 <tr><td>metrics</td><td>STRING</td><td>The metrics of the segment</td></tr>
+<tr><td>last_compaction_state</td><td>STRING</td><td>The configurations of the compaction task which created this segment. May be null if segment was not created by compaction task.</td></tr>
 </tbody>
 </table>
 <p>For example to retrieve all segments for datasource &quot;wikipedia&quot;, use the query:</p>
@@ -983,6 +1056,12 @@ datasource &quot;foo&quot;, use the query:</p>
 <span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> <span class="hljs-number">1</span>
 <span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> <span class="hljs-number">2</span> <span class="hljs-keyword">DESC</span>
 </code></pre>
+<p>If you want to retrieve segment that was compacted (ANY compaction):</p>
+<pre><code class="hljs css language-sql"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> sys.segments <span class="hljs-keyword">WHERE</span> last_compaction_state <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">null</span>
+</code></pre>
+<p>or if you want to retrieve segment that was compacted only by a particular compaction spec (such as that of the auto compaction):</p>
+<pre><code class="hljs css language-sql"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> sys.segments <span class="hljs-keyword">WHERE</span> last_compaction_state == <span class="hljs-string">'SELECT * FROM sys.segments where last_compaction_state = '</span>CompactionState{partitionsSpec=DynamicPartitionsSpec{maxRowsPerSegment=<span class="hljs-number">5000000</span>, maxTotalRows=<span class="hljs-number">9223372036854775807</span>}, indexSpec={<span class="hljs-keyword">bitmap</span>={<span class="hljs-keyword">type</span>=roaring, compressRunOnSerialization=<span class="hljs-literal">true</span>}, dimensionCompression=lz4, metricCompression=lz4, longEncoding=longs, segmentLoader=<span class="hljs-literal">null</span>}}<span class="hljs-string">'
+</span></code></pre>
 <p><em>Caveat:</em> Note that a segment can be served by more than one stream ingestion tasks or Historical processes, in that case it would have multiple replicas. These replicas are weakly consistent with each other when served by multiple ingestion tasks, until a segment is eventually served by a Historical, at that point the segment is immutable. Broker prefers to query a segment from Historical over an ingestion task. But if a segment has multiple realtime replicas, for e.g.. Kafka index tasks, and one task is slower than other, then the sys.segments query results can vary for the duration of the tasks because only one of the ingestion tasks is queried by the Broker and it is not guaranteed that the same task gets picked every time. The <code>num_rows</code> column of segments table can have inconsistent values during this period. There is an open <a href="https://github.com/apache/druid/issues/5915">issue</a> about this inconsistency with stream ingestion tasks.</p>
 <h4><a class="anchor" aria-hidden="true" id="servers-table"></a><a href="#servers-table" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>SERVERS table</h4>
 <p>Servers table lists all discovered servers in the cluster.</p>
@@ -1078,7 +1157,7 @@ check out the documentation for <a href="../ingestion/tasks.html">ingestion task
 <h2><a class="anchor" aria-hidden="true" id="security"></a><a href="#security" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Security</h2>
 <p>Please see <a href="../development/extensions-core/druid-basic-security.html#sql-permissions">Defining SQL permissions</a> in the
 basic security documentation for information on what permissions are needed for making SQL queries.</p>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/latest/ingestion/faq.html"><span class="arrow-prev">← </span><span>Troubleshooting FAQ</span></a><a class="docs-next button" href="/docs/latest/querying/querying.html"><span>Native queries</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#query-syntax">Query syntax</a><ul class="toc-headings"><li><a href="#from">FROM</a></li><li><a href="#where">WHERE</a></li><li><a href="#group-by">GROUP BY</a></li><li><a href="#having">HAVING</a></li><li><a href="#order-by">ORDER BY</a></li><li><a href="#limit">LIMIT</a></li><li><a href="#union-all">UNION ALL</a></li><li><a href="#explain-plan">EXPLAIN PLAN</a></li><li><a href="#identifiers-and-literals">Identifiers and literals</a></li><li><a href="#dynamic-parameters">Dynamic parameters</a></li></ul></li><li><a href="#data-types">Data types</a><ul class="toc-headings"><li><a href="#standard-types">Standard types</a></li><li><a href="#multi-value-strings">Multi-value strings</a></li><li><a href="#null-values">NULL values</a></li></ul></li><li><a href="#aggregation-functions">Aggregation functions</a></li><li><a href="#scalar-functions">Scalar functions</a><ul class="toc-headings"><li><a href="#numeric-functions">Numeric functions</a></li><li><a href="#string-functions">String functions</a></li><li><a href="#time-functions">Time functions</a></li><li><a href="#reduction-functions">Reduction functions</a></li><li><a href="#ip-address-functions">IP address functions</a></li><li><a href="#comparison-operators">Comparison operators</a></li><li><a href="#sketch-functions">Sketch functions</a></li><li><a href="#other-scalar-functions">Other scalar functions</a></li></ul></li><li><a href="#multi-value-string-functions">Multi-value string functions</a></li><li><a href="#query-translation">Query translation</a><ul class="toc-headings"><li><a href="#best-practices">Best practices</a></li><li><a href="#interpreting-explain-plan-output">Interpreting EXPLAIN PLAN output</a></li><li><a href="#query-types">Query types</a></li><li><a href="#time-filters">Time filters</a></li><li><a href="#joins">Joins</a></li><li><a href="#subqueries">Subqueries</a></li><li><a href="#approximations">Approximations</a></li><li><a href="#unsupported-features">Unsupported features</a></li></ul></li><li><a href="#client-apis">Client APIs</a><ul class="toc-headings"><li><a href="#http-post">HTTP POST</a></li><li><a href="#jdbc">JDBC</a></li><li><a href="#dynamic-parameters-1">Dynamic Parameters</a></li><li><a href="#connection-context">Connection context</a></li></ul></li><li><a href="#metadata-tables">Metadata tables</a><ul class="toc-headings"><li><a href="#information-schema">INFORMATION SCHEMA</a></li><li><a href="#system-schema">SYSTEM SCHEMA</a></li></ul></li><li><a href="#server-configuration">Server configuration</a></li><li><a href="#security">Security</a></li></ul></nav></div><footer class="nav-footer druid-footer" id="footer"><div class="container"><div class="text-center"><p><a href="/technology">Technology</a> · <a href="/use-cases">Use Cases</a> · <a href="/druid-powered">Powered by Druid</a> · <a href="/docs/latest/latest">Docs</a> · <a href="/community/">Community</a> · <a href="/downloads.html">Download</a> · <a href="/faq">FAQ</a></p></div><div class="text-center"><a title="Join the user group" href="https://groups.google.com/forum/#!forum/druid-user" target="_blank"><span class="fa fa-comments"></span></a> · <a title="Follow Druid" href="https://twitter.com/druidio" target="_blank"><span class="fab fa-twitter"></span></a> · <a title="Download via Apache" href="https://www.apache.org/dyn/closer.cgi?path=/incubator/druid/{{ site.druid_versions[0].versions[0].version }}/apache-druid-{{ site.druid_versions[0].versions[0].version }}-bin.tar.gz" target="_blank"><span class="fas fa-feather"></span></a> · <a title="GitHub" href="https://github.com/apache/druid" target="_blank"><span class="fab fa-github"></span></a></div><div class="text-center license">Copyright © 2019 <a href="https://www.apache.org/" target="_blank">Apache Software Foundation</a>.<br/>Except where otherwise noted, licensed under <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.<br/>Apache Druid, Druid, and the Druid logo are either registered trademarks or trademarks of The Apache Software Foundation in the United States and other countries.</div></div></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/latest/ingestion/faq.html"><span class="arrow-prev">← </span><span>Troubleshooting FAQ</span></a><a class="docs-next button" href="/docs/latest/querying/querying.html"><span>Native queries</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#query-syntax">Query syntax</a><ul class="toc-headings"><li><a href="#from">FROM</a></li><li><a href="#where">WHERE</a></li><li><a href="#group-by">GROUP BY</a></li><li><a href="#having">HAVING</a></li><li><a href="#order-by">ORDER BY</a></li><li><a href="#limit">LIMIT</a></li><li><a href="#offset">OFFSET</a></li><li><a href="#union-all">UNION ALL</a></li><li><a href="#explain-plan">EXPLAIN PLAN</a></li><li><a href="#identifiers-and-literals">Identifiers and literals</a></li><li><a href="#dynamic-parameters">Dynamic parameters</a></li></ul></li><li><a href="#data-types">Data types</a><ul class="toc-headings"><li><a href="#standard-types">Standard types</a></li><li><a href="#multi-value-strings">Multi-value strings</a></li><li><a href="#null-values">NULL values</a></li></ul></li><li><a href="#aggregation-functions">Aggregation functions</a></li><li><a href="#scalar-functions">Scalar functions</a><ul class="toc-headings"><li><a href="#numeric-functions">Numeric functions</a></li><li><a href="#string-functions">String functions</a></li><li><a href="#time-functions">Time functions</a></li><li><a href="#reduction-functions">Reduction functions</a></li><li><a href="#ip-address-functions">IP address functions</a></li><li><a href="#comparison-operators">Comparison operators</a></li><li><a href="#sketch-functions">Sketch functions</a></li><li><a href="#other-scalar-functions">Other scalar functions</a></li></ul></li><li><a href="#multi-value-string-functions">Multi-value string functions</a></li><li><a href="#query-translation">Query translation</a><ul class="toc-headings"><li><a href="#best-practices">Best practices</a></li><li><a href="#interpreting-explain-plan-output">Interpreting EXPLAIN PLAN output</a></li><li><a href="#query-types">Query types</a></li><li><a href="#time-filters">Time filters</a></li><li><a href="#joins">Joins</a></li><li><a href="#subqueries">Subqueries</a></li><li><a href="#approximations">Approximations</a></li><li><a href="#unsupported-features">Unsupported features</a></li></ul></li><li><a href="#client-apis">Client APIs</a><ul class="toc-headings"><li><a href="#http-post">HTTP POST</a></li><li><a href="#jdbc">JDBC</a></li><li><a href="#dynamic-parameters-1">Dynamic Parameters</a></li><li><a href="#connection-context">Connection context</a></li></ul></li><li><a href="#metadata-tables">Metadata tables</a><ul class="toc-headings"><li><a href="#information-schema">INFORMATION SCHEMA</a></li><li><a href="#system-schema">SYSTEM SCHEMA</a></li></ul></li><li><a href="#server-configuration">Server configuration</a></li><li><a href="#security">Security</a></li></ul></nav></div><footer class="nav-footer druid-footer" id="footer"><div class="container"><div class="text-center"><p><a href="/technology">Technology</a> · <a href="/use-cases">Use Cases</a> · <a href="/druid-powered">Powered by Druid</a> · <a href="/docs/latest/latest">Docs</a> · <a href="/community/">Community</a> · <a href="/downloads.html">Download</a> · <a href="/faq">FAQ</a></p></div><div class="text-center"><a title="Join the user group" href="https://groups.google.com/forum/#!forum/druid-user" target="_blank"><span class="fa fa-comments"></span></a> · <a title="Follow Druid" href="https://twitter.com/druidio" target="_blank"><span class="fab fa-twitter"></span></a> · <a title="Download via Apache" href="https://www.apache.org/dyn/closer.cgi?path=/incubator/druid/{{ site.druid_versions[0].versions[0].version }}/apache-druid-{{ site.druid_versions[0].versions[0].version }}-bin.tar.gz" target="_blank"><span class="fas fa-feather"></span></a> · <a title="GitHub" href="https://github.com/apache/druid" target="_blank"><span class="fab fa-github"></span></a></div><div class="text-center license">Copyright © 2019 <a href="https://www.apache.org/" target="_blank">Apache Software Foundation</a>.<br/>Except where otherwise noted, licensed under <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.<br/>Apache Druid, Druid, and the Druid logo are either registered trademarks or trademarks of The Apache Software Foundation in the United States and other countries.</div></div></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
                 document.addEventListener('keyup', function(e) {
                   if (e.target !== document.body) {
                     return;
@@ -1095,6 +1174,6 @@ basic security documentation for information on what permissions are needed for 
                 apiKey: '2de99082a9f38e49dfaa059bbe4c901d',
                 indexName: 'apache_druid',
                 inputSelector: '#search_input_react',
-                algoliaOptions: {"facetFilters":["language:en","version:0.19.0"]}
+                algoliaOptions: {"facetFilters":["language:en","version:0.20.0"]}
               });
             </script></body></html>

@@ -1,0 +1,334 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Design · Apache Druid</title><meta name="viewport" content="width=device-width"/><link rel="canonical" href="https://druid.apache.org/docs/0.20.0/design/architecture.html"/><meta name="generator" content="Docusaurus"/><meta name="description" content="&lt;!--"/><meta name="docsearch:language" content="en"/><meta name="docsearch:version" content="0.20.0" /><meta property="og:title" content="Design · Apache Druid"/><meta property="og:type" content="website"/><meta property="og:url" content="https://druid.apache.org/index.html"/><meta property="og:description" content="&lt;!--"/><meta property="og:image" content="https://druid.apache.org/img/druid_nav.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://druid.apache.org/img/druid_nav.png"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-131010415-1"></script><script>
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments); }
+              gtag('js', new Date());
+              gtag('config', 'UA-131010415-1');
+            </script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"/><link rel="stylesheet" href="/css/code-block-buttons.css"/><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script><script type="text/javascript" src="/js/code-block-buttons.js"></script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/druid_nav.png" alt="Apache Druid"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/technology" target="_self">Technology</a></li><li class=""><a href="/use-cases" target="_self">Use Cases</a></li><li class=""><a href="/druid-powered" target="_self">Powered By</a></li><li class="siteNavGroupActive"><a href="/docs/0.20.0/design/index.html" target="_self">Docs</a></li><li class=""><a href="/community/" target="_self">Community</a></li><li class=""><a href="https://www.apache.org" target="_self">Apache</a></li><li class=""><a href="/downloads.html" target="_self">Download</a></li><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Design</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Getting started<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.0/design/index.html">Introduction to Apache Druid</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/tutorials/index.html">Quickstart</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/tutorials/docker.html">Docker</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/single-server.html">Single server deployment</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/tutorials/cluster.html">Clustered deployment</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Tutorials<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.0/tutorials/tutorial-batch.html">Loading files natively</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/tutorials/tutorial-kafka.html">Load from Apache Kafka</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/tutorials/tutorial-batch-hadoop.html">Load from Apache Hadoop</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/tutorials/tutorial-query.html">Querying data</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/tutorials/tutorial-rollup.html">Roll-up</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/tutorials/tutorial-retention.html">Configuring data retention</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/tutorials/tutorial-update-data.html">Updating existing data</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/tutorials/tutorial-compaction.html">Compacting segments</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/tutorials/tutorial-delete-data.html">Deleting data</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/tutorials/tutorial-ingestion-spec.html">Writing an ingestion spec</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/tutorials/tutorial-transform-spec.html">Transforming input data</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/tutorials/tutorial-kerberos-hadoop.html">Kerberized HDFS deep storage</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Design<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem navListItemActive"><a class="navItem" href="/docs/0.20.0/design/architecture.html">Design</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/design/segments.html">Segments</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/design/processes.html">Processes and servers</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/dependencies/deep-storage.html">Deep storage</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/dependencies/metadata-storage.html">Metadata storage</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/dependencies/zookeeper.html">ZooKeeper</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Ingestion<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.0/ingestion/index.html">Ingestion</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/ingestion/data-formats.html">Data formats</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/ingestion/schema-design.html">Schema design tips</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/ingestion/data-management.html">Data management</a></li><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Stream ingestion</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/kafka-ingestion.html">Apache Kafka</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/kinesis-ingestion.html">Amazon Kinesis</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/ingestion/tranquility.html">Tranquility</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Batch ingestion</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.20.0/ingestion/native-batch.html">Native batch</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/ingestion/hadoop.html">Hadoop-based</a></li></ul></div><li class="navListItem"><a class="navItem" href="/docs/0.20.0/ingestion/tasks.html">Task reference</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/ingestion/faq.html">Troubleshooting FAQ</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Querying<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/sql.html">Druid SQL</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/querying.html">Native queries</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/query-execution.html">Query execution</a></li><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Concepts</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/datasource.html">Datasources</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/joins.html">Joins</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/lookups.html">Lookups</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/multi-value-dimensions.html">Multi-value dimensions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/multitenancy.html">Multitenancy</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/caching.html">Query caching</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/query-context.html">Context parameters</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Native query types</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/timeseriesquery.html">Timeseries</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/topnquery.html">TopN</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/groupbyquery.html">GroupBy</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/scan-query.html">Scan</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/searchquery.html">Search</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/timeboundaryquery.html">TimeBoundary</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/segmentmetadataquery.html">SegmentMetadata</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/datasourcemetadataquery.html">DatasourceMetadata</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Native query components</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/filters.html">Filters</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/granularities.html">Granularities</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/dimensionspecs.html">Dimensions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/aggregations.html">Aggregations</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/post-aggregations.html">Post-aggregations</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/misc/math-expr.html">Expressions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/having.html">Having filters (groupBy)</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/limitspec.html">Sorting and limiting (groupBy)</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/topnmetricspec.html">Sorting (topN)</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/sorting-orders.html">String comparators</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/virtual-columns.html">Virtual columns</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/geo.html">Spatial filters</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Configuration<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.0/configuration/index.html">Configuration reference</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions.html">Extensions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/configuration/logging.html">Logging</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Operations<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/druid-console.html">Web console</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/getting-started.html">Getting started with Apache Druid</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/basic-cluster-tuning.html">Basic cluster tuning</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/api-reference.html">API reference</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/high-availability.html">High availability</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/rolling-updates.html">Rolling updates</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/rule-configuration.html">Retaining or automatically dropping data</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/metrics.html">Metrics</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/alerts.html">Alerts</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/other-hadoop.html">Working with different versions of Apache Hadoop</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/http-compression.html">HTTP compression</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/tls-support.html">TLS support</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/password-provider.html">Password providers</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/dump-segment.html">dump-segment tool</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/reset-cluster.html">reset-cluster tool</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/insert-segment-to-db.html">insert-segment-to-db tool</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/pull-deps.html">pull-deps tool</a></li><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Misc</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/management-uis.html">Legacy Management UIs</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/deep-storage-migration.html">Deep storage migration</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/export-metadata.html">Export Metadata Tool</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/metadata-migration.html">Metadata Migration</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/segment-optimization.html">Segment Size Optimization</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/operations/use_sbt_to_build_fat_jar.html">Content for build.sbt</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Development<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/overview.html">Developing on Druid</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/modules.html">Creating extensions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/javascript.html">JavaScript functionality</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/build.html">Build from source</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/versioning.html">Versioning</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/experimental.html">Experimental features</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Misc<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.0/misc/papers-and-talks.html">Papers</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Hidden<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.0/comparisons/druid-vs-elasticsearch.html">Apache Druid vs Elasticsearch</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/comparisons/druid-vs-key-value.html">Apache Druid vs. Key/Value Stores (HBase/Cassandra/OpenTSDB)</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/comparisons/druid-vs-kudu.html">Apache Druid vs Kudu</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/comparisons/druid-vs-redshift.html">Apache Druid vs Redshift</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/comparisons/druid-vs-spark.html">Apache Druid vs Spark</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/comparisons/druid-vs-sql-on-hadoop.html">Apache Druid vs SQL-on-Hadoop</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/design/auth.html">Authentication and Authorization</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/design/broker.html">Broker</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/design/coordinator.html">Coordinator Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/design/historical.html">Historical Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/design/indexer.html">Indexer Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/design/indexing-service.html">Indexing Service</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/design/middlemanager.html">MiddleManager Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/design/overlord.html">Overlord Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/design/router.html">Router Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/design/peons.html">Peons</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/approximate-histograms.html">Approximate Histogram aggregators</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/avro.html">Apache Avro</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/azure.html">Microsoft Azure</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/bloom-filter.html">Bloom Filter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/datasketches-extension.html">DataSketches extension</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/datasketches-hll.html">DataSketches HLL Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/datasketches-quantiles.html">DataSketches Quantiles Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/datasketches-theta.html">DataSketches Theta Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/datasketches-tuple.html">DataSketches Tuple Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/druid-basic-security.html">Basic Security</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/druid-kerberos.html">Kerberos</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/druid-lookups.html">Cached Lookup Module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/druid-ranger-security.html">Apache Ranger Security</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/google.html">Google Cloud Storage</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/hdfs.html">HDFS</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/kafka-extraction-namespace.html">Apache Kafka Lookups</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/lookups-cached-global.html">Globally Cached Lookups</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/mysql.html">MySQL Metadata Store</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/orc.html">ORC Extension</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/druid-pac4j.html">Druid pac4j based Security extension</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/parquet.html">Apache Parquet Extension</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/postgresql.html">PostgreSQL Metadata Store</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/protobuf.html">Protobuf</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/s3.html">S3-compatible</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/simple-client-sslcontext.html">Simple SSLContext Provider Module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/stats.html">Stats aggregator</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-core/test-stats.html">Test Stats Aggregators</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-contrib/ambari-metrics-emitter.html">Ambari Metrics Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-contrib/cassandra.html">Apache Cassandra</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-contrib/cloudfiles.html">Rackspace Cloud Files</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-contrib/distinctcount.html">DistinctCount Aggregator</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-contrib/graphite.html">Graphite Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-contrib/influx.html">InfluxDB Line Protocol Parser</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-contrib/influxdb-emitter.html">InfluxDB Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-contrib/kafka-emitter.html">Kafka Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-contrib/materialized-view.html">Materialized View</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-contrib/momentsketch-quantiles.html">Moment Sketches for Approximate Quantiles module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-contrib/moving-average-query.html">Moving Average Query</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-contrib/opentsdb-emitter.html">OpenTSDB Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-contrib/redis-cache.html">Druid Redis Cache</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-contrib/sqlserver.html">Microsoft SQLServer</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-contrib/statsd.html">StatsD Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-contrib/tdigestsketch-quantiles.html">T-Digest Quantiles Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-contrib/thrift.html">Thrift</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-contrib/time-min-max.html">Timestamp Min/Max aggregators</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-contrib/gce-extensions.html">GCE Extensions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/development/extensions-contrib/aliyun-oss.html">Aliyun OSS</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/hll-old.html">Cardinality/HyperUnique aggregators</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/querying/select-query.html">Select</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.0/ingestion/standalone-realtime.html">Realtime Process</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/apache/druid/edit/master/docs/design/architecture.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">Design</h1></header><article><div><span><!--
+  ~ Licensed to the Apache Software Foundation (ASF) under one
+  ~ or more contributor license agreements.  See the NOTICE file
+  ~ distributed with this work for additional information
+  ~ regarding copyright ownership.  The ASF licenses this file
+  ~ to you under the Apache License, Version 2.0 (the
+  ~ "License"); you may not use this file except in compliance
+  ~ with the License.  You may obtain a copy of the License at
+  ~
+  ~   http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an
+  ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~ KIND, either express or implied.  See the License for the
+  ~ specific language governing permissions and limitations
+  ~ under the License.
+  -->
+<p>Druid has a multi-process, distributed architecture that is designed to be cloud-friendly and easy to operate. Each
+Druid process type can be configured and scaled independently, giving you maximum flexibility over your cluster. This
+design also provides enhanced fault tolerance: an outage of one component will not immediately affect other components.</p>
+<h2><a class="anchor" aria-hidden="true" id="processes-and-servers"></a><a href="#processes-and-servers" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Processes and Servers</h2>
+<p>Druid has several process types, briefly described below:</p>
+<ul>
+<li><a href="/docs/0.20.0/design/coordinator.html"><strong>Coordinator</strong></a> processes manage data availability on the cluster.</li>
+<li><a href="/docs/0.20.0/design/overlord.html"><strong>Overlord</strong></a> processes control the assignment of data ingestion workloads.</li>
+<li><a href="/docs/0.20.0/design/broker.html"><strong>Broker</strong></a> processes handle queries from external clients.</li>
+<li><a href="/docs/0.20.0/design/router.html"><strong>Router</strong></a> processes are optional processes that can route requests to Brokers, Coordinators, and Overlords.</li>
+<li><a href="/docs/0.20.0/design/historical.html"><strong>Historical</strong></a> processes store queryable data.</li>
+<li><a href="/docs/0.20.0/design/middlemanager.html"><strong>MiddleManager</strong></a> processes are responsible for ingesting data.</li>
+</ul>
+<p>Druid processes can be deployed any way you like, but for ease of deployment we suggest organizing them into three server types: Master, Query, and Data.</p>
+<ul>
+<li><strong>Master</strong>: Runs Coordinator and Overlord processes, manages data availability and ingestion.</li>
+<li><strong>Query</strong>: Runs Broker and optional Router processes, handles queries from external clients.</li>
+<li><strong>Data</strong>: Runs Historical and MiddleManager processes, executes ingestion workloads and stores all queryable data.</li>
+</ul>
+<p>For more details on process and server organization, please see <a href="/docs/0.20.0/design/processes.html">Druid Processes and Servers</a>.</p>
+<h2><a class="anchor" aria-hidden="true" id="external-dependencies"></a><a href="#external-dependencies" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>External dependencies</h2>
+<p>In addition to its built-in process types, Druid also has three external dependencies. These are intended to be able to
+leverage existing infrastructure, where present.</p>
+<h3><a class="anchor" aria-hidden="true" id="deep-storage"></a><a href="#deep-storage" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Deep storage</h3>
+<p>Shared file storage accessible by every Druid server. In a clustered deployment, this is typically going to
+be a distributed object store like S3 or HDFS, or a network mounted filesystem. In a single-server deployment,
+this is typically going to be local disk. Druid uses deep storage to store any data that has been ingested into the
+system.</p>
+<p>Druid uses deep storage only as a backup of your data and as a way to transfer data in the background between
+Druid processes. To respond to queries, Historical processes do not read from deep storage, but instead read prefetched
+segments from their local disks before any queries are served. This means that Druid never needs to access deep storage
+during a query, helping it offer the best query latencies possible. It also means that you must have enough disk space
+both in deep storage and across your Historical processes for the data you plan to load.</p>
+<p>Deep storage is an important part of Druid's elastic, fault-tolerant design. Druid can bootstrap from deep storage even
+if every single data server is lost and re-provisioned.</p>
+<p>For more details, please see the <a href="/docs/0.20.0/dependencies/deep-storage.html">Deep storage</a> page.</p>
+<h3><a class="anchor" aria-hidden="true" id="metadata-storage"></a><a href="#metadata-storage" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Metadata storage</h3>
+<p>The metadata storage holds various shared system metadata such as segment usage information and task information. In a
+clustered deployment, this is typically going to be a traditional RDBMS like PostgreSQL or MySQL. In a single-server
+deployment, it is typically going to be a locally-stored Apache Derby database.</p>
+<p>For more details, please see the <a href="/docs/0.20.0/dependencies/metadata-storage.html">Metadata storage</a> page.</p>
+<h3><a class="anchor" aria-hidden="true" id="zookeeper"></a><a href="#zookeeper" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>ZooKeeper</h3>
+<p>Used for internal service discovery, coordination, and leader election.</p>
+<p>For more details, please see the <a href="/docs/0.20.0/dependencies/zookeeper.html">ZooKeeper</a> page.</p>
+<h2><a class="anchor" aria-hidden="true" id="architecture-diagram"></a><a href="#architecture-diagram" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Architecture diagram</h2>
+<p>The following diagram shows how queries and data flow through this architecture, using the suggested Master/Query/Data server organization:</p>
+<p><img src="../assets/druid-architecture.png" width="800"/></p>
+<h2><a class="anchor" aria-hidden="true" id="storage-design"></a><a href="#storage-design" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Storage design</h2>
+<h3><a class="anchor" aria-hidden="true" id="datasources-and-segments"></a><a href="#datasources-and-segments" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Datasources and segments</h3>
+<p>Druid data is stored in &quot;datasources&quot;, which are similar to tables in a traditional RDBMS. Each datasource is
+partitioned by time and, optionally, further partitioned by other attributes. Each time range is called a &quot;chunk&quot; (for
+example, a single day, if your datasource is partitioned by day). Within a chunk, data is partitioned into one or more
+<a href="/docs/0.20.0/design/segments.html">&quot;segments&quot;</a>. Each segment is a single file, typically comprising up to a few million rows of data. Since segments are
+organized into time chunks, it's sometimes helpful to think of segments as living on a timeline like the following:</p>
+<p><img src="../assets/druid-timeline.png" width="800" /></p>
+<p>A datasource may have anywhere from just a few segments, up to hundreds of thousands and even millions of segments. Each
+segment starts life off being created on a MiddleManager, and at that point, is mutable and uncommitted. The segment
+building process includes the following steps, designed to produce a data file that is compact and supports fast
+queries:</p>
+<ul>
+<li>Conversion to columnar format</li>
+<li>Indexing with bitmap indexes</li>
+<li>Compression using various algorithms
+<ul>
+<li>Dictionary encoding with id storage minimization for String columns</li>
+<li>Bitmap compression for bitmap indexes</li>
+<li>Type-aware compression for all columns</li>
+</ul></li>
+</ul>
+<p>Periodically, segments are committed and published. At this point, they are written to <a href="#deep-storage">deep storage</a>,
+become immutable, and move from MiddleManagers to the Historical processes. An entry about the segment is also written
+to the <a href="#metadata-storage">metadata store</a>. This entry is a self-describing bit of metadata about the segment, including
+things like the schema of the segment, its size, and its location on deep storage. These entries are what the
+Coordinator uses to know what data <em>should</em> be available on the cluster.</p>
+<p>For details on the segment file format, please see <a href="segments.html">segment files</a>.</p>
+<p>For details on modeling your data in Druid, see <a href="/docs/0.20.0/ingestion/schema-design.html">schema design</a>.</p>
+<h3><a class="anchor" aria-hidden="true" id="indexing-and-handoff"></a><a href="#indexing-and-handoff" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Indexing and handoff</h3>
+<p><em>Indexing</em> is the mechanism by which new segments are created, and <em>handoff</em> is the mechanism by which they are published
+and begin being served by Historical processes. The mechanism works like this on the indexing side:</p>
+<ol>
+<li>An <em>indexing task</em> starts running and building a new segment. It must determine the identifier of the segment before
+it starts building it. For a task that is appending (like a Kafka task, or an index task in append mode) this will be
+done by calling an &quot;allocate&quot; API on the Overlord to potentially add a new partition to an existing set of segments. For
+a task that is overwriting (like a Hadoop task, or an index task <em>not</em> in append mode) this is done by locking an
+interval and creating a new version number and new set of segments.</li>
+<li>If the indexing task is a realtime task (like a Kafka task) then the segment is immediately queryable at this point.
+It's available, but unpublished.</li>
+<li>When the indexing task has finished reading data for the segment, it pushes it to deep storage and then publishes it
+by writing a record into the metadata store.</li>
+<li>If the indexing task is a realtime task, at this point it waits for a Historical process to load the segment. If the
+indexing task is not a realtime task, it exits immediately.</li>
+</ol>
+<p>And like this on the Coordinator / Historical side:</p>
+<ol>
+<li>The Coordinator polls the metadata store periodically (by default, every 1 minute) for newly published segments.</li>
+<li>When the Coordinator finds a segment that is published and used, but unavailable, it chooses a Historical process
+to load that segment and instructs that Historical to do so.</li>
+<li>The Historical loads the segment and begins serving it.</li>
+<li>At this point, if the indexing task was waiting for handoff, it will exit.</li>
+</ol>
+<h3><a class="anchor" aria-hidden="true" id="segment-identifiers"></a><a href="#segment-identifiers" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Segment identifiers</h3>
+<p>Segments all have a four-part identifier with the following components:</p>
+<ul>
+<li>Datasource name.</li>
+<li>Time interval (for the time chunk containing the segment; this corresponds to the <code>segmentGranularity</code> specified
+at ingestion time).</li>
+<li>Version number (generally an ISO8601 timestamp corresponding to when the segment set was first started).</li>
+<li>Partition number (an integer, unique within a datasource+interval+version; may not necessarily be contiguous).</li>
+</ul>
+<p>For example, this is the identifier for a segment in datasource <code>clarity-cloud0</code>, time chunk
+<code>2018-05-21T16:00:00.000Z/2018-05-21T17:00:00.000Z</code>, version <code>2018-05-21T15:56:09.909Z</code>, and partition number 1:</p>
+<pre><code class="hljs">clarity-cloud0_2018<span class="hljs-number">-05</span><span class="hljs-number">-21</span>T16:<span class="hljs-number">00</span>:<span class="hljs-number">00.000</span>Z_2018<span class="hljs-number">-05</span><span class="hljs-number">-21</span>T17:<span class="hljs-number">00</span>:<span class="hljs-number">00.000</span>Z_2018<span class="hljs-number">-05</span><span class="hljs-number">-21</span>T15:<span class="hljs-number">56</span>:<span class="hljs-number">09.909</span>Z_1
+</code></pre>
+<p>Segments with partition number 0 (the first partition in a chunk) omit the partition number, like the following
+example, which is a segment in the same time chunk as the previous one, but with partition number 0 instead of 1:</p>
+<pre><code class="hljs">clarity-cloud0_2018<span class="hljs-number">-05</span><span class="hljs-number">-21</span>T16:<span class="hljs-number">00</span>:<span class="hljs-number">00.000</span>Z_2018<span class="hljs-number">-05</span><span class="hljs-number">-21</span>T17:<span class="hljs-number">00</span>:<span class="hljs-number">00.000</span>Z_2018<span class="hljs-number">-05</span><span class="hljs-number">-21</span>T15:<span class="hljs-number">56</span>:<span class="hljs-number">09.909</span>Z
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="segment-versioning"></a><a href="#segment-versioning" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Segment versioning</h3>
+<p>You may be wondering what the &quot;version number&quot; described in the previous section is for. Or, you might not be, in which
+case good for you and you can skip this section!</p>
+<p>It's there to support batch-mode overwriting. In Druid, if all you ever do is append data, then there will be just a
+single version for each time chunk. But when you overwrite data, what happens behind the scenes is that a new set of
+segments is created with the same datasource, same time interval, but a higher version number. This is a signal to the
+rest of the Druid system that the older version should be removed from the cluster, and the new version should replace
+it.</p>
+<p>The switch appears to happen instantaneously to a user, because Druid handles this by first loading the new data (but
+not allowing it to be queried), and then, as soon as the new data is all loaded, switching all new queries to use those
+new segments. Then it drops the old segments a few minutes later.</p>
+<h3><a class="anchor" aria-hidden="true" id="segment-lifecycle"></a><a href="#segment-lifecycle" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Segment lifecycle</h3>
+<p>Each segment has a lifecycle that involves the following three major areas:</p>
+<ol>
+<li><strong>Metadata store:</strong> Segment metadata (a small JSON payload generally no more than a few KB) is stored in the
+<a href="/docs/0.20.0/dependencies/metadata-storage.html">metadata store</a> once a segment is done being constructed. The act of inserting
+a record for a segment into the metadata store is called <em>publishing</em>. These metadata records have a boolean flag
+named <code>used</code>, which controls whether the segment is intended to be queryable or not. Segments created by realtime tasks will be
+available before they are published, since they are only published when the segment is complete and will not accept
+any additional rows of data.</li>
+<li><strong>Deep storage:</strong> Segment data files are pushed to deep storage once a segment is done being constructed. This
+happens immediately before publishing metadata to the metadata store.</li>
+<li><strong>Availability for querying:</strong> Segments are available for querying on some Druid data server, like a realtime task
+or a Historical process.</li>
+</ol>
+<p>You can inspect the state of currently active segments using the Druid SQL
+<a href="/docs/0.20.0/querying/sql.html#segments-table"><code>sys.segments</code> table</a>. It includes the following flags:</p>
+<ul>
+<li><code>is_published</code>: True if segment metadata has been published to the metadata store and <code>used</code> is true.</li>
+<li><code>is_available</code>: True if the segment is currently available for querying, either on a realtime task or Historical
+process.</li>
+<li><code>is_realtime</code>: True if the segment is <em>only</em> available on realtime tasks. For datasources that use realtime ingestion,
+this will generally start off <code>true</code> and then become <code>false</code> as the segment is published and handed off.</li>
+<li><code>is_overshadowed</code>: True if the segment is published (with <code>used</code> set to true) and is fully overshadowed by some other
+published segments. Generally this is a transient state, and segments in this state will soon have their <code>used</code> flag
+automatically set to false.</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" id="availability-and-consistency"></a><a href="#availability-and-consistency" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Availability and consistency</h3>
+<p>Druid has an architectural separation between ingestion and querying, as described above in
+<a href="#indexing-and-handoff">Indexing and handoff</a>. This means that when understanding Druid's availability and
+consistency properties, we must look at each function separately.</p>
+<p>On the <strong>ingestion side</strong>, Druid's primary <a href="/docs/0.20.0/ingestion/index.html#ingestion-methods">ingestion methods</a> are all
+pull-based and offer transactional guarantees. This means that you are guaranteed that ingestion using these will
+publish in an all-or-nothing manner:</p>
+<ul>
+<li>Supervised &quot;seekable-stream&quot; ingestion methods like <a href="/docs/0.20.0/development/extensions-core/kafka-ingestion.html">Kafka</a> and
+<a href="/docs/0.20.0/development/extensions-core/kinesis-ingestion.html">Kinesis</a>. With these methods, Druid commits stream offsets to its
+<a href="#metadata-storage">metadata store</a> alongside segment metadata, in the same transaction. Note that ingestion of data
+that has not yet been published can be rolled back if ingestion tasks fail. In this case, partially-ingested data is
+discarded, and Druid will resume ingestion from the last committed set of stream offsets. This ensures exactly-once
+publishing behavior.</li>
+<li><a href="../ingestion/hadoop.html">Hadoop-based batch ingestion</a>. Each task publishes all segment metadata in a single
+transaction.</li>
+<li><a href="../ingestion/native-batch.html">Native batch ingestion</a>. In parallel mode, the supervisor task publishes all segment
+metadata in a single transaction after the subtasks are finished. In simple (single-task) mode, the single task
+publishes all segment metadata in a single transaction after it is complete.</li>
+</ul>
+<p><a href="/docs/0.20.0/ingestion/tranquility.html">Tranquility</a>, a streaming ingestion method that is no longer recommended, does not perform
+transactional loading.</p>
+<p>Additionally, some ingestion methods offer an <em>idempotency</em> guarantee. This means that repeated executions of the same
+ingestion will not cause duplicate data to be ingested:</p>
+<ul>
+<li>Supervised &quot;seekable-stream&quot; ingestion methods like <a href="/docs/0.20.0/development/extensions-core/kafka-ingestion.html">Kafka</a> and
+<a href="/docs/0.20.0/development/extensions-core/kinesis-ingestion.html">Kinesis</a> are idempotent due to the fact that stream offsets and
+segment metadata are stored together and updated in lock-step.</li>
+<li><a href="../ingestion/hadoop.html">Hadoop-based batch ingestion</a> is idempotent unless one of your input sources
+is the same Druid datasource that you are ingesting into. In this case, running the same task twice is non-idempotent,
+because you are adding to existing data instead of overwriting it.</li>
+<li><a href="../ingestion/native-batch.html">Native batch ingestion</a> is idempotent unless
+<a href="../ingestion/native-batch.html"><code>appendToExisting</code></a> is true, or one of your input sources is the same Druid datasource
+that you are ingesting into. In either of these two cases, running the same task twice is non-idempotent, because you
+are adding to existing data instead of overwriting it.</li>
+</ul>
+<p>On the <strong>query side</strong>, the Druid Broker is responsible for ensuring that a consistent set of segments is involved in a
+given query. It selects the appropriate set of segments to use when the query starts based on what is currently
+available. This is supported by <em>atomic replacement</em>, a feature that ensures that from a user's perspective, queries
+flip instantaneously from an older set of data to a newer set of data, with no consistency or performance impact.
+This is used for Hadoop-based batch ingestion, native batch ingestion when <code>appendToExisting</code> is false, and compaction.</p>
+<p>Note that atomic replacement happens for each time chunk individually. If a batch ingestion task or compaction
+involves multiple time chunks, then each time chunk will undergo atomic replacement soon after the task finishes, but
+the replacements will not all happen simultaneously.</p>
+<p>Typically, atomic replacement in Druid is based on a <em>core set</em> concept that works in conjunction with segment versions.
+When a time chunk is overwritten, a new core set of segments is created with a higher version number. The core set
+must <em>all</em> be available before the Broker will use them instead of the older set. There can also only be one core set
+per version per time chunk. Druid will also only use a single version at a time per time chunk. Together, these
+properties provide Druid's atomic replacement guarantees.</p>
+<p>Druid also supports an experimental <em>segment locking</em> mode that is activated by setting
+<a href="/docs/0.20.0/ingestion/tasks.html#context"><code>forceTimeChunkLock</code></a> to false in the context of an ingestion task. In this case, Druid
+creates an <em>atomic update group</em> using the existing version for the time chunk, instead of creating a new core set
+with a new version number. There can be multiple atomic update groups with the same version number per time chunk. Each
+one replaces a specific set of earlier segments in the same time chunk and with the same version number. Druid will
+query the latest one that is fully available. This is a more powerful version of the core set concept, because it
+enables atomically replacing a subset of data for a time chunk, as well as doing atomic replacement and appending
+simultaneously.</p>
+<p>If segments become unavailable due to multiple Historicals going offline simultaneously (beyond your replication
+factor), then Druid queries will include only the segments that are still available. In the background, Druid will
+reload these unavailable segments on other Historicals as quickly as possible, at which point they will be included in
+queries again.</p>
+<h2><a class="anchor" aria-hidden="true" id="query-processing"></a><a href="#query-processing" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Query processing</h2>
+<p>Queries first enter the <a href="/docs/0.20.0/design/broker.html">Broker</a>, where the Broker will identify which segments have data that may pertain to that query.
+The list of segments is always pruned by time, and may also be pruned by other attributes depending on how your
+datasource is partitioned. The Broker will then identify which <a href="/docs/0.20.0/design/historical.html">Historicals</a> and
+<a href="/docs/0.20.0/design/middlemanager.html">MiddleManagers</a> are serving those segments and send a rewritten subquery to each of those processes. The Historical/MiddleManager processes will take in the
+queries, process them and return results. The Broker receives results and merges them together to get the final answer,
+which it returns to the original caller.</p>
+<p>Broker pruning is an important way that Druid limits the amount of data that must be scanned for each query, but it is
+not the only way. For filters at a more granular level than what the Broker can use for pruning, indexing structures
+inside each segment allow Druid to figure out which (if any) rows match the filter set before looking at any row of
+data. Once Druid knows which rows match a particular query, it only accesses the specific columns it needs for that
+query. Within those columns, Druid can skip from row to row, avoiding reading data that doesn't match the query filter.</p>
+<p>So Druid uses three different techniques to maximize query performance:</p>
+<ul>
+<li>Pruning which segments are accessed for each query.</li>
+<li>Within each segment, using indexes to identify which rows must be accessed.</li>
+<li>Within each segment, only reading the specific rows and columns that are relevant to a particular query.</li>
+</ul>
+<p>For more details about how Druid executes queries, refer to the <a href="/docs/0.20.0/querying/query-execution.html">Query execution</a>
+documentation.</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/0.20.0/tutorials/tutorial-kerberos-hadoop.html"><span class="arrow-prev">← </span><span>Kerberized HDFS deep storage</span></a><a class="docs-next button" href="/docs/0.20.0/design/segments.html"><span>Segments</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#processes-and-servers">Processes and Servers</a></li><li><a href="#external-dependencies">External dependencies</a><ul class="toc-headings"><li><a href="#deep-storage">Deep storage</a></li><li><a href="#metadata-storage">Metadata storage</a></li><li><a href="#zookeeper">ZooKeeper</a></li></ul></li><li><a href="#architecture-diagram">Architecture diagram</a></li><li><a href="#storage-design">Storage design</a><ul class="toc-headings"><li><a href="#datasources-and-segments">Datasources and segments</a></li><li><a href="#indexing-and-handoff">Indexing and handoff</a></li><li><a href="#segment-identifiers">Segment identifiers</a></li><li><a href="#segment-versioning">Segment versioning</a></li><li><a href="#segment-lifecycle">Segment lifecycle</a></li><li><a href="#availability-and-consistency">Availability and consistency</a></li></ul></li><li><a href="#query-processing">Query processing</a></li></ul></nav></div><footer class="nav-footer druid-footer" id="footer"><div class="container"><div class="text-center"><p><a href="/technology">Technology</a> · <a href="/use-cases">Use Cases</a> · <a href="/druid-powered">Powered by Druid</a> · <a href="/docs/0.20.0/latest">Docs</a> · <a href="/community/">Community</a> · <a href="/downloads.html">Download</a> · <a href="/faq">FAQ</a></p></div><div class="text-center"><a title="Join the user group" href="https://groups.google.com/forum/#!forum/druid-user" target="_blank"><span class="fa fa-comments"></span></a> · <a title="Follow Druid" href="https://twitter.com/druidio" target="_blank"><span class="fab fa-twitter"></span></a> · <a title="Download via Apache" href="https://www.apache.org/dyn/closer.cgi?path=/incubator/druid/{{ site.druid_versions[0].versions[0].version }}/apache-druid-{{ site.druid_versions[0].versions[0].version }}-bin.tar.gz" target="_blank"><span class="fas fa-feather"></span></a> · <a title="GitHub" href="https://github.com/apache/druid" target="_blank"><span class="fab fa-github"></span></a></div><div class="text-center license">Copyright © 2019 <a href="https://www.apache.org/" target="_blank">Apache Software Foundation</a>.<br/>Except where otherwise noted, licensed under <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.<br/>Apache Druid, Druid, and the Druid logo are either registered trademarks or trademarks of The Apache Software Foundation in the United States and other countries.</div></div></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '2de99082a9f38e49dfaa059bbe4c901d',
+                indexName: 'apache_druid',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["language:en","version:0.20.0"]}
+              });
+            </script></body></html>

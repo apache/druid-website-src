@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Tutorial: Load streaming data from Apache Kafka · Apache Druid</title><meta name="viewport" content="width=device-width"/><link rel="canonical" href="https://druid.apache.org/docs/latest/tutorials/tutorial-kafka.html"/><meta name="generator" content="Docusaurus"/><meta name="description" content="&lt;!--"/><meta name="docsearch:language" content="en"/><meta name="docsearch:version" content="0.19.0" /><meta property="og:title" content="Tutorial: Load streaming data from Apache Kafka · Apache Druid"/><meta property="og:type" content="website"/><meta property="og:url" content="https://druid.apache.org/index.html"/><meta property="og:description" content="&lt;!--"/><meta property="og:image" content="https://druid.apache.org/img/druid_nav.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://druid.apache.org/img/druid_nav.png"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-131010415-1"></script><script>
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Tutorial: Load streaming data from Apache Kafka · Apache Druid</title><meta name="viewport" content="width=device-width"/><link rel="canonical" href="https://druid.apache.org/docs/latest/tutorials/tutorial-kafka.html"/><meta name="generator" content="Docusaurus"/><meta name="description" content="&lt;!--"/><meta name="docsearch:language" content="en"/><meta name="docsearch:version" content="0.20.0" /><meta property="og:title" content="Tutorial: Load streaming data from Apache Kafka · Apache Druid"/><meta property="og:type" content="website"/><meta property="og:url" content="https://druid.apache.org/index.html"/><meta property="og:description" content="&lt;!--"/><meta property="og:image" content="https://druid.apache.org/img/druid_nav.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://druid.apache.org/img/druid_nav.png"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-131010415-1"></script><script>
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments); }
               gtag('js', new Date());
@@ -84,17 +84,17 @@ the <a href="index.html">quickstart</a> using the <code>micro-quickstart</code> 
 running on your local machine. You don't need to have loaded any data yet.</p>
 <h2><a class="anchor" aria-hidden="true" id="download-and-start-kafka"></a><a href="#download-and-start-kafka" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Download and start Kafka</h2>
 <p><a href="http://kafka.apache.org/">Apache Kafka</a> is a high throughput message bus that works well with
-Druid.  For this tutorial, we will use Kafka 2.1.0. To download Kafka, issue the following
+Druid.  For this tutorial, we will use Kafka 2.6.0. To download Kafka, issue the following
 commands in your terminal:</p>
-<pre><code class="hljs css language-bash">curl -O https://archive.apache.org/dist/kafka/2.1.0/kafka_2.12-2.1.0.tgz
-tar -xzf kafka_2.12-2.1.0.tgz
-<span class="hljs-built_in">cd</span> kafka_2.12-2.1.0
+<pre><code class="hljs css language-bash">curl -O https://archive.apache.org/dist/kafka/2.6.0/kafka_2.13-2.6.0.tgz
+tar -xzf kafka_2.13-2.6.0.tgz
+<span class="hljs-built_in">cd</span> kafka_2.13-2.6.0
 </code></pre>
 <p>Start a Kafka broker by running the following command in a new terminal:</p>
 <pre><code class="hljs css language-bash">./bin/kafka-server-start.sh config/server.properties
 </code></pre>
 <p>Run this command to create a Kafka topic called <em>wikipedia</em>, to which we'll send data:</p>
-<pre><code class="hljs css language-bash">./bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic wikipedia
+<pre><code class="hljs css language-bash">./bin/kafka-topics.sh --create --topic wikipedia --bootstrap-server localhost:9092
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="load-data-into-kafka"></a><a href="#load-data-into-kafka" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Load data into Kafka</h2>
 <p>Let's launch a producer for our topic and send some data!</p>
@@ -138,7 +138,7 @@ Since this is a small dataset, there are no adjustments that need to be made in 
 <p>Click <code>Next: Tune</code> to go to the tuning step.</p>
 <p><img src="../assets/tutorial-kafka-data-loader-07.png" alt="Data loader tune" title="Data loader tune"></p>
 <p>In the <code>Tune</code> step is it <em>very important</em> to set <code>Use earliest offset</code> to <code>True</code> since we want to consume the data from the start of the stream.
-There are no other changes that need to be made hear, so click <code>Next: Publish</code> to go to the <code>Publish</code> step.</p>
+There are no other changes that need to be made here, so click <code>Next: Publish</code> to go to the <code>Publish</code> step.</p>
 <p><img src="../assets/tutorial-kafka-data-loader-08.png" alt="Data loader publish" title="Data loader publish"></p>
 <p>Let's name this datasource <code>wikipedia-kafka</code>.</p>
 <p>Finally, click <code>Next</code> to review your spec.</p>
@@ -258,6 +258,6 @@ Similarly, you can also edit the spec directly and see it reflected in the previ
                 apiKey: '2de99082a9f38e49dfaa059bbe4c901d',
                 indexName: 'apache_druid',
                 inputSelector: '#search_input_react',
-                algoliaOptions: {"facetFilters":["language:en","version:0.19.0"]}
+                algoliaOptions: {"facetFilters":["language:en","version:0.20.0"]}
               });
             </script></body></html>
