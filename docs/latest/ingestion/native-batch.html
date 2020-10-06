@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Native batch ingestion · Apache Druid</title><meta name="viewport" content="width=device-width"/><link rel="canonical" href="https://druid.apache.org/docs/latest/ingestion/native-batch.html"/><meta name="generator" content="Docusaurus"/><meta name="description" content="&lt;!--"/><meta name="docsearch:language" content="en"/><meta name="docsearch:version" content="0.19.0" /><meta property="og:title" content="Native batch ingestion · Apache Druid"/><meta property="og:type" content="website"/><meta property="og:url" content="https://druid.apache.org/index.html"/><meta property="og:description" content="&lt;!--"/><meta property="og:image" content="https://druid.apache.org/img/druid_nav.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://druid.apache.org/img/druid_nav.png"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-131010415-1"></script><script>
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Native batch ingestion · Apache Druid</title><meta name="viewport" content="width=device-width"/><link rel="canonical" href="https://druid.apache.org/docs/latest/ingestion/native-batch.html"/><meta name="generator" content="Docusaurus"/><meta name="description" content="&lt;!--"/><meta name="docsearch:language" content="en"/><meta name="docsearch:version" content="0.20.0" /><meta property="og:title" content="Native batch ingestion · Apache Druid"/><meta property="og:type" content="website"/><meta property="og:url" content="https://druid.apache.org/index.html"/><meta property="og:description" content="&lt;!--"/><meta property="og:image" content="https://druid.apache.org/img/druid_nav.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://druid.apache.org/img/druid_nav.png"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-131010415-1"></script><script>
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments); }
               gtag('js', new Date());
@@ -114,6 +114,8 @@ The supported splittable input formats for now are:</p>
 <p>Some other cloud storage types are supported with the legacy <a href="#firehoses-deprecated"><code>firehose</code></a>.
 The below <code>firehose</code> types are also splittable. Note that only text formats are supported
 with the <code>firehose</code>.</p>
+<h3><a class="anchor" aria-hidden="true" id="compression-formats-supported"></a><a href="#compression-formats-supported" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Compression formats supported</h3>
+<p>The supported compression formats for native batch ingestion are <code>bz2</code>, <code>gz</code>, <code>xz</code>, <code>zip</code>, <code>sz</code> (Snappy), and <code>zst</code> (ZSTD).</p>
 <ul>
 <li><a href="/docs/latest/development/extensions-contrib/cloudfiles.html#firehose"><code>static-cloudfiles</code></a></li>
 </ul>
@@ -278,7 +280,8 @@ Note that each worker task processes a single input split. You can control the a
 </thead>
 <tbody>
 <tr><td>type</td><td>This should always be <code>maxSize</code>.</td><td>none</td><td>yes</td></tr>
-<tr><td>maxSplitSize</td><td>Maximum number of bytes of input files to process in a single task. If a single file is larger than this number, it will be processed by itself in a single task (Files are never split across tasks yet).</td><td>500MB</td><td>no</td></tr>
+<tr><td>maxSplitSize</td><td>Maximum number of bytes of input files to process in a single subtask. If a single file is larger than this number, it will be processed by itself in a single subtask (Files are never split across tasks yet). Note that one subtask will not process more files than <code>maxNumFiles</code> even when their total size is smaller than <code>maxSplitSize</code>. <a href="/docs/latest/configuration/human-readable-byte.html">Human-readable format</a> is supported.</td><td>1GiB</td><td>no</td></tr>
+<tr><td>maxNumFiles</td><td>Maximum number of input files to process in a single subtask. This limit is to avoid task failures when the ingestion spec is too long. There are two known limits on the max size of serialized ingestion spec, i.e., the max ZNode size in ZooKeeper (<code>jute.maxbuffer</code>) and the max packet size in MySQL (<code>max_allowed_packet</code>). These can make ingestion tasks fail if the serialized ingestion spec size hits one of them. Note that one subtask will not process more data than <code>maxSplitSize</code> even when the total number of files is smaller than <code>maxNumFiles</code>.</td><td>1000</td><td>no</td></tr>
 </tbody>
 </table>
 <h4><a class="anchor" aria-hidden="true" id="segments-split-hint-spec"></a><a href="#segments-split-hint-spec" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Segments Split Hint Spec</h4>
@@ -289,7 +292,8 @@ Note that each worker task processes a single input split. You can control the a
 </thead>
 <tbody>
 <tr><td>type</td><td>This should always be <code>segments</code>.</td><td>none</td><td>yes</td></tr>
-<tr><td>maxInputSegmentBytesPerTask</td><td>Maximum number of bytes of input segments to process in a single task. If a single segment is larger than this number, it will be processed by itself in a single task (input segments are never split across tasks).</td><td>500MB</td><td>no</td></tr>
+<tr><td>maxInputSegmentBytesPerTask</td><td>Maximum number of bytes of input segments to process in a single subtask. If a single segment is larger than this number, it will be processed by itself in a single subtask (input segments are never split across tasks). Note that one subtask will not process more segments than <code>maxNumSegments</code> even when their total size is smaller than <code>maxInputSegmentBytesPerTask</code>. <a href="/docs/latest/configuration/human-readable-byte.html">Human-readable format</a> is supported.</td><td>1GiB</td><td>no</td></tr>
+<tr><td>maxNumSegments</td><td>Maximum number of input segments to process in a single subtask. This limit is to avoid task failures when the ingestion spec is too long. There are two known limits on the max size of serialized ingestion spec, i.e., the max ZNode size in ZooKeeper (<code>jute.maxbuffer</code>) and the max packet size in MySQL (<code>max_allowed_packet</code>). These can make ingestion tasks fail if the serialized ingestion spec size hits one of them. Note that one subtask will not process more data than <code>maxInputSegmentBytesPerTask</code> even when the total number of segments is smaller than <code>maxNumSegments</code>.</td><td>1000</td><td>no</td></tr>
 </tbody>
 </table>
 <h3><a class="anchor" aria-hidden="true" id="partitionsspec"></a><a href="#partitionsspec" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>partitionsSpec</code></h3>
@@ -300,11 +304,11 @@ For perfect rollup, you should use either <code>hashed</code> (partitioning base
 <p>The three <code>partitionsSpec</code> types have different characteristics.</p>
 <table>
 <thead>
-<tr><th>PartitionsSpec</th><th>Ingestion speed</th><th>Partitioning method</th><th>Supported rollup mode</th><th>Segment pruning at query time</th></tr>
+<tr><th>PartitionsSpec</th><th>Ingestion speed</th><th>Partitioning method</th><th>Supported rollup mode</th><th>Secondary partition pruning at query time</th></tr>
 </thead>
 <tbody>
 <tr><td><code>dynamic</code></td><td>Fastest</td><td>Partitioning based on number of rows in segment.</td><td>Best-effort rollup</td><td>N/A</td></tr>
-<tr><td><code>hashed</code></td><td>Moderate</td><td>Partitioning based on the hash value of partition dimensions. This partitioning may reduce your datasource size and query latency by improving data locality. See <a href="/docs/latest/ingestion/index.html#partitioning">Partitioning</a> for more details.</td><td>Perfect rollup</td><td>N/A</td></tr>
+<tr><td><code>hashed</code></td><td>Moderate</td><td>Partitioning based on the hash value of partition dimensions. This partitioning may reduce your datasource size and query latency by improving data locality. See <a href="/docs/latest/ingestion/index.html#partitioning">Partitioning</a> for more details.</td><td>Perfect rollup</td><td>The broker can use the partition information to prune segments early to speed up queries. Since the broker knows how to hash <code>partitionDimensions</code> values to locate a segment, given a query including a filter on all the <code>partitionDimensions</code>, the broker can pick up only the segments holding the rows satisfying the filter on <code>partitionDimensions</code> for query processing.<br/><br/>Note that <code>partitionDimensions</code> must be set at ingestion time to enable secondary partition pruning at query time.</td></tr>
 <tr><td><code>single_dim</code></td><td>Slowest</td><td>Range partitioning based on the value of the partition dimension. Segment sizes may be skewed depending on the partition key distribution. This may reduce your datasource size and query latency by improving data locality. See <a href="/docs/latest/ingestion/index.html#partitioning">Partitioning</a> for more details.</td><td>Perfect rollup</td><td>The broker can use the partition information to prune segments early to speed up queries. Since the broker knows the range of <code>partitionDimension</code> values in each segment, given a query including a filter on the <code>partitionDimension</code>, the broker can pick up only the segments holding the rows satisfying the filter on <code>partitionDimension</code> for query processing.</td></tr>
 </tbody>
 </table>
@@ -312,7 +316,7 @@ For perfect rollup, you should use either <code>hashed</code> (partitioning base
 <ul>
 <li>If your data has a uniformly distributed column which is frequently used in your queries,
 consider using <code>single_dim</code> partitionsSpec to maximize the performance of most of your queries.</li>
-<li>If your data doesn't a uniformly distributed column, but is expected to have a <a href="/docs/latest/ingestion/index.html#maximizing-rollup-ratio">high rollup ratio</a>
+<li>If your data doesn't have a uniformly distributed column, but is expected to have a <a href="/docs/latest/ingestion/index.html#maximizing-rollup-ratio">high rollup ratio</a>
 when you roll up with some dimensions, consider using <code>hashed</code> partitionsSpec.
 It could reduce the size of datasource and query latency by improving data locality.</li>
 <li>If the above two scenarios are not the case or you don't need to roll up your datasource,
@@ -345,13 +349,21 @@ the task pushes all segments created so far to the deep storage and creates new 
 </thead>
 <tbody>
 <tr><td>type</td><td>This should always be <code>hashed</code></td><td>none</td><td>yes</td></tr>
-<tr><td>numShards</td><td>Directly specify the number of shards to create. If this is specified and <code>intervals</code> is specified in the <code>granularitySpec</code>, the index task can skip the determine intervals/partitions pass through the data.</td><td>null</td><td>yes</td></tr>
+<tr><td>numShards</td><td>Directly specify the number of shards to create. If this is specified and <code>intervals</code> is specified in the <code>granularitySpec</code>, the index task can skip the determine intervals/partitions pass through the data. This property and <code>targetRowsPerSegment</code> cannot both be set.</td><td>none</td><td>no</td></tr>
+<tr><td>targetRowsPerSegment</td><td>A target row count for each partition. If <code>numShards</code> is left unspecified, the Parallel task will determine a partition count automatically such that each partition has a row count close to the target, assuming evenly distributed keys in the input data. A target per-segment row count of 5 million is used if both <code>numShards</code> and <code>targetRowsPerSegment</code> are null.</td><td>null (or 5,000,000 if both <code>numShards</code> and <code>targetRowsPerSegment</code> are null)</td><td>no</td></tr>
 <tr><td>partitionDimensions</td><td>The dimensions to partition on. Leave blank to select all dimensions.</td><td>null</td><td>no</td></tr>
+<tr><td>partitionFunction</td><td>A function to compute hash of partition dimensions. See <a href="#hash-partition-function">Hash partition function</a></td><td><code>murmur3_32_abs</code></td><td>no</td></tr>
 </tbody>
 </table>
 <p>The Parallel task with hash-based partitioning is similar to <a href="https://en.wikipedia.org/wiki/MapReduce">MapReduce</a>.
-The task runs in 2 phases, i.e., <code>partial segment generation</code> and <code>partial segment merge</code>.</p>
+The task runs in up to 3 phases: <code>partial dimension cardinality</code>, <code>partial segment generation</code> and <code>partial segment merge</code>.</p>
 <ul>
+<li>The <code>partial dimension cardinality</code> phase is an optional phase that only runs if <code>numShards</code> is not specified.
+The Parallel task splits the input data and assigns them to worker tasks based on the split hint spec.
+Each worker task (type <code>partial_dimension_cardinality</code>) gathers estimates of partitioning dimensions cardinality for
+each time chunk. The Parallel task will aggregate these estimates from the worker tasks and determine the highest
+cardinality across all of the time chunks in the input data, dividing this cardinality by <code>targetRowsPerSegment</code> to
+automatically determine <code>numShards</code>.</li>
 <li>In the <code>partial segment generation</code> phase, just like the Map phase in MapReduce,
 the Parallel task splits the input data based on the split hint spec
 and assigns each split to a worker task. Each worker task (type <code>partial_index_generate</code>) reads the assigned split,
@@ -366,10 +378,23 @@ the time chunk and the hash value of <code>partitionDimensions</code> to be merg
 falling in the same time chunk and the same hash value from multiple MiddleManager/Indexer processes and merges
 them to create the final segments. Finally, they push the final segments to the deep storage at once.</li>
 </ul>
+<h5><a class="anchor" aria-hidden="true" id="hash-partition-function"></a><a href="#hash-partition-function" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Hash partition function</h5>
+<p>In hash partitioning, the partition function is used to compute hash of partition dimensions. The partition dimension
+values are first serialized into a byte array as a whole, and then the partition function is applied to compute hash of
+the byte array.
+Druid currently supports only one partition function.</p>
+<table>
+<thead>
+<tr><th>name</th><th>description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>murmur3_32_abs</code></td><td>Applies an absolute value function to the result of <a href="https://guava.dev/releases/16.0/api/docs/com/google/common/hash/Hashing.html#murmur3_32()"><code>murmur3_32</code></a>.</td></tr>
+</tbody>
+</table>
 <h4><a class="anchor" aria-hidden="true" id="single-dimension-range-partitioning"></a><a href="#single-dimension-range-partitioning" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Single-dimension range partitioning</h4>
 <blockquote>
 <p>Single dimension range partitioning is currently not supported in the sequential mode of the Parallel task.
-Try set <code>maxNumConcurrentSubTasks</code> to larger than 1 to use this partitioning.</p>
+The Parallel task will use one subtask when you set <code>maxNumConcurrentSubTasks</code> to 1.</p>
 </blockquote>
 <table>
 <thead>
@@ -784,6 +809,7 @@ For perfect rollup, you should use <code>hashed</code>.</p>
 <tr><td>maxRowsPerSegment</td><td>Used in sharding. Determines how many rows are in each segment.</td><td>5000000</td><td>no</td></tr>
 <tr><td>numShards</td><td>Directly specify the number of shards to create. If this is specified and <code>intervals</code> is specified in the <code>granularitySpec</code>, the index task can skip the determine intervals/partitions pass through the data. <code>numShards</code> cannot be specified if <code>maxRowsPerSegment</code> is set.</td><td>null</td><td>no</td></tr>
 <tr><td>partitionDimensions</td><td>The dimensions to partition on. Leave blank to select all dimensions.</td><td>null</td><td>no</td></tr>
+<tr><td>partitionFunction</td><td>A function to compute hash of partition dimensions. See <a href="#hash-partition-function">Hash partition function</a></td><td><code>murmur3_32_abs</code></td><td>no</td></tr>
 </tbody>
 </table>
 <p>For best-effort rollup, you should use <code>dynamic</code>.</p>
@@ -1379,6 +1405,45 @@ Each of the SQL queries will be run in its own sub-task and thus for the above e
 <li><p>Pagination may be used on the SQL queries to ensure that each query pulls a similar amount of data, thereby improving the efficiency of the sub-tasks.</p></li>
 <li><p>Similar to file-based input formats, any updates to existing data will replace the data in segments specific to the intervals specified in the <code>granularitySpec</code>.</p></li>
 </ul>
+<h3><a class="anchor" aria-hidden="true" id="combining-input-source"></a><a href="#combining-input-source" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Combining Input Source</h3>
+<p>The Combining input source is used to read data from multiple InputSources. This input source should be only used if all the delegate input sources are
+<em>splittable</em> and can be used by the <a href="#parallel-task">Parallel task</a>. This input source will identify the splits from its delegates and each split will be processed by a worker task. Similar to other input sources, this input source supports a single <code>inputFormat</code>. Therefore, please note that delegate input sources requiring an <code>inputFormat</code> must have the same format for input data.</p>
+<table>
+<thead>
+<tr><th>property</th><th>description</th><th>required?</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td>This should be &quot;combining&quot;.</td><td>Yes</td></tr>
+<tr><td>delegates</td><td>List of <em>splittable</em> InputSources to read data from.</td><td>Yes</td></tr>
+</tbody>
+</table>
+<p>Sample spec:</p>
+<pre><code class="hljs css language-json">...
+    "ioConfig": {
+      "type": "index_parallel",
+      "inputSource": {
+        "type": "combining",
+        "delegates" : [
+         {
+          "type": "local",
+          "filter" : "*.csv",
+          "baseDir": "/data/directory",
+          "files": ["/bar/foo", "/foo/bar"]
+         },
+         {
+          "type": "druid",
+          "dataSource": "wikipedia",
+          "interval": "2013-01-01/2013-01-02"
+         }
+        ]
+      },
+      "inputFormat": {
+        "type": "csv"
+      },
+      ...
+    },
+...
+</code></pre>
 <h3></h3>
 <h2><a class="anchor" aria-hidden="true" id="firehoses-deprecated"></a><a href="#firehoses-deprecated" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Firehoses (Deprecated)</h2>
 <p>Firehoses are deprecated in 0.17.0. It's highly recommended to use the <a href="#input-sources">Input source</a> instead.
@@ -1681,7 +1746,7 @@ A sample inline Firehose spec is shown below:</p>
 <tr><td>delegates</td><td>List of Firehoses to combine data from</td><td>yes</td></tr>
 </tbody>
 </table>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/latest/ingestion/standalone-realtime.html"><span class="arrow-prev">← </span><span>Realtime Process</span></a><a class="docs-next button" href="/docs/latest/ingestion/hadoop.html"><span>Hadoop-based</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#tutorial">Tutorial</a></li><li><a href="#parallel-task">Parallel task</a><ul class="toc-headings"><li><a href="#task-syntax">Task syntax</a></li><li><a href="#dataschema"><code>dataSchema</code></a></li><li><a href="#ioconfig"><code>ioConfig</code></a></li><li><a href="#tuningconfig"><code>tuningConfig</code></a></li><li><a href="#split-hint-spec">Split Hint Spec</a></li><li><a href="#partitionsspec"><code>partitionsSpec</code></a></li><li><a href="#http-status-endpoints">HTTP status endpoints</a></li><li><a href="#capacity-planning">Capacity planning</a></li></ul></li><li><a href="#simple-task">Simple task</a><ul class="toc-headings"><li><a href="#task-syntax-1">Task syntax</a></li><li><a href="#dataschema-1"><code>dataSchema</code></a></li><li><a href="#ioconfig-1"><code>ioConfig</code></a></li><li><a href="#tuningconfig-1"><code>tuningConfig</code></a></li><li><a href="#partitionsspec-1"><code>partitionsSpec</code></a></li><li><a href="#segmentwriteoutmediumfactory"><code>segmentWriteOutMediumFactory</code></a></li><li><a href="#segment-pushing-modes">Segment pushing modes</a></li></ul></li><li><a href="#input-sources">Input Sources</a><ul class="toc-headings"><li><a href="#s3-input-source">S3 Input Source</a></li><li><a href="#google-cloud-storage-input-source">Google Cloud Storage Input Source</a></li><li><a href="#azure-input-source">Azure Input Source</a></li><li><a href="#hdfs-input-source">HDFS Input Source</a></li><li><a href="#http-input-source">HTTP Input Source</a></li><li><a href="#inline-input-source">Inline Input Source</a></li><li><a href="#local-input-source">Local Input Source</a></li><li><a href="#druid-input-source">Druid Input Source</a></li><li><a href="#sql-input-source">SQL Input Source</a></li></ul></li><li><a href="#firehoses-deprecated">Firehoses (Deprecated)</a><ul class="toc-headings"><li><a href="#statics3firehose">StaticS3Firehose</a></li><li><a href="#hdfsfirehose">HDFSFirehose</a></li><li><a href="#localfirehose">LocalFirehose</a></li><li><a href="#httpfirehose">HttpFirehose</a></li><li><a href="#ingestsegmentfirehose">IngestSegmentFirehose</a></li><li><a href="#sqlfirehose">SqlFirehose</a></li><li><a href="#inlinefirehose">InlineFirehose</a></li><li><a href="#combiningfirehose">CombiningFirehose</a></li></ul></li></ul></nav></div><footer class="nav-footer druid-footer" id="footer"><div class="container"><div class="text-center"><p><a href="/technology">Technology</a> · <a href="/use-cases">Use Cases</a> · <a href="/druid-powered">Powered by Druid</a> · <a href="/docs/latest/latest">Docs</a> · <a href="/community/">Community</a> · <a href="/downloads.html">Download</a> · <a href="/faq">FAQ</a></p></div><div class="text-center"><a title="Join the user group" href="https://groups.google.com/forum/#!forum/druid-user" target="_blank"><span class="fa fa-comments"></span></a> · <a title="Follow Druid" href="https://twitter.com/druidio" target="_blank"><span class="fab fa-twitter"></span></a> · <a title="Download via Apache" href="https://www.apache.org/dyn/closer.cgi?path=/incubator/druid/{{ site.druid_versions[0].versions[0].version }}/apache-druid-{{ site.druid_versions[0].versions[0].version }}-bin.tar.gz" target="_blank"><span class="fas fa-feather"></span></a> · <a title="GitHub" href="https://github.com/apache/druid" target="_blank"><span class="fab fa-github"></span></a></div><div class="text-center license">Copyright © 2019 <a href="https://www.apache.org/" target="_blank">Apache Software Foundation</a>.<br/>Except where otherwise noted, licensed under <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.<br/>Apache Druid, Druid, and the Druid logo are either registered trademarks or trademarks of The Apache Software Foundation in the United States and other countries.</div></div></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/latest/ingestion/standalone-realtime.html"><span class="arrow-prev">← </span><span>Realtime Process</span></a><a class="docs-next button" href="/docs/latest/ingestion/hadoop.html"><span>Hadoop-based</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#tutorial">Tutorial</a></li><li><a href="#parallel-task">Parallel task</a><ul class="toc-headings"><li><a href="#compression-formats-supported">Compression formats supported</a></li><li><a href="#task-syntax">Task syntax</a></li><li><a href="#dataschema"><code>dataSchema</code></a></li><li><a href="#ioconfig"><code>ioConfig</code></a></li><li><a href="#tuningconfig"><code>tuningConfig</code></a></li><li><a href="#split-hint-spec">Split Hint Spec</a></li><li><a href="#partitionsspec"><code>partitionsSpec</code></a></li><li><a href="#http-status-endpoints">HTTP status endpoints</a></li><li><a href="#capacity-planning">Capacity planning</a></li></ul></li><li><a href="#simple-task">Simple task</a><ul class="toc-headings"><li><a href="#task-syntax-1">Task syntax</a></li><li><a href="#dataschema-1"><code>dataSchema</code></a></li><li><a href="#ioconfig-1"><code>ioConfig</code></a></li><li><a href="#tuningconfig-1"><code>tuningConfig</code></a></li><li><a href="#partitionsspec-1"><code>partitionsSpec</code></a></li><li><a href="#segmentwriteoutmediumfactory"><code>segmentWriteOutMediumFactory</code></a></li><li><a href="#segment-pushing-modes">Segment pushing modes</a></li></ul></li><li><a href="#input-sources">Input Sources</a><ul class="toc-headings"><li><a href="#s3-input-source">S3 Input Source</a></li><li><a href="#google-cloud-storage-input-source">Google Cloud Storage Input Source</a></li><li><a href="#azure-input-source">Azure Input Source</a></li><li><a href="#hdfs-input-source">HDFS Input Source</a></li><li><a href="#http-input-source">HTTP Input Source</a></li><li><a href="#inline-input-source">Inline Input Source</a></li><li><a href="#local-input-source">Local Input Source</a></li><li><a href="#druid-input-source">Druid Input Source</a></li><li><a href="#sql-input-source">SQL Input Source</a></li><li><a href="#combining-input-source">Combining Input Source</a></li></ul></li><li><a href="#firehoses-deprecated">Firehoses (Deprecated)</a><ul class="toc-headings"><li><a href="#statics3firehose">StaticS3Firehose</a></li><li><a href="#hdfsfirehose">HDFSFirehose</a></li><li><a href="#localfirehose">LocalFirehose</a></li><li><a href="#httpfirehose">HttpFirehose</a></li><li><a href="#ingestsegmentfirehose">IngestSegmentFirehose</a></li><li><a href="#sqlfirehose">SqlFirehose</a></li><li><a href="#inlinefirehose">InlineFirehose</a></li><li><a href="#combiningfirehose">CombiningFirehose</a></li></ul></li></ul></nav></div><footer class="nav-footer druid-footer" id="footer"><div class="container"><div class="text-center"><p><a href="/technology">Technology</a> · <a href="/use-cases">Use Cases</a> · <a href="/druid-powered">Powered by Druid</a> · <a href="/docs/latest/latest">Docs</a> · <a href="/community/">Community</a> · <a href="/downloads.html">Download</a> · <a href="/faq">FAQ</a></p></div><div class="text-center"><a title="Join the user group" href="https://groups.google.com/forum/#!forum/druid-user" target="_blank"><span class="fa fa-comments"></span></a> · <a title="Follow Druid" href="https://twitter.com/druidio" target="_blank"><span class="fab fa-twitter"></span></a> · <a title="Download via Apache" href="https://www.apache.org/dyn/closer.cgi?path=/incubator/druid/{{ site.druid_versions[0].versions[0].version }}/apache-druid-{{ site.druid_versions[0].versions[0].version }}-bin.tar.gz" target="_blank"><span class="fas fa-feather"></span></a> · <a title="GitHub" href="https://github.com/apache/druid" target="_blank"><span class="fab fa-github"></span></a></div><div class="text-center license">Copyright © 2019 <a href="https://www.apache.org/" target="_blank">Apache Software Foundation</a>.<br/>Except where otherwise noted, licensed under <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.<br/>Apache Druid, Druid, and the Druid logo are either registered trademarks or trademarks of The Apache Software Foundation in the United States and other countries.</div></div></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
                 document.addEventListener('keyup', function(e) {
                   if (e.target !== document.body) {
                     return;
@@ -1698,6 +1763,6 @@ A sample inline Firehose spec is shown below:</p>
                 apiKey: '2de99082a9f38e49dfaa059bbe4c901d',
                 indexName: 'apache_druid',
                 inputSelector: '#search_input_react',
-                algoliaOptions: {"facetFilters":["language:en","version:0.19.0"]}
+                algoliaOptions: {"facetFilters":["language:en","version:0.20.0"]}
               });
             </script></body></html>

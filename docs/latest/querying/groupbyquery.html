@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>GroupBy queries · Apache Druid</title><meta name="viewport" content="width=device-width"/><link rel="canonical" href="https://druid.apache.org/docs/latest/querying/groupbyquery.html"/><meta name="generator" content="Docusaurus"/><meta name="description" content="&lt;!--"/><meta name="docsearch:language" content="en"/><meta name="docsearch:version" content="0.19.0" /><meta property="og:title" content="GroupBy queries · Apache Druid"/><meta property="og:type" content="website"/><meta property="og:url" content="https://druid.apache.org/index.html"/><meta property="og:description" content="&lt;!--"/><meta property="og:image" content="https://druid.apache.org/img/druid_nav.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://druid.apache.org/img/druid_nav.png"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-131010415-1"></script><script>
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>GroupBy queries · Apache Druid</title><meta name="viewport" content="width=device-width"/><link rel="canonical" href="https://druid.apache.org/docs/latest/querying/groupbyquery.html"/><meta name="generator" content="Docusaurus"/><meta name="description" content="&lt;!--"/><meta name="docsearch:language" content="en"/><meta name="docsearch:version" content="0.20.0" /><meta property="og:title" content="GroupBy queries · Apache Druid"/><meta property="og:type" content="website"/><meta property="og:url" content="https://druid.apache.org/index.html"/><meta property="og:description" content="&lt;!--"/><meta property="og:image" content="https://druid.apache.org/img/druid_nav.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://druid.apache.org/img/druid_nav.png"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-131010415-1"></script><script>
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments); }
               gtag('js', new Date());
@@ -187,7 +187,8 @@ your filter, you can use a <a href="dimensionspecs.html#filtered-dimensionspecs"
 improve performance.</p>
 <p>See <a href="multi-value-dimensions.html">Multi-value dimensions</a> for more details.</p>
 <h2><a class="anchor" aria-hidden="true" id="more-on-subtotalsspec"></a><a href="#more-on-subtotalsspec" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>More on subtotalsSpec</h2>
-<p>The subtotals feature allows computation of multiple sub-groupings in a single query. To use this feature, add a &quot;subtotalsSpec&quot; to your query, which should be a list of subgroup dimension sets. It should contain the &quot;outputName&quot; from dimensions in your &quot;dimensions&quot; attribute, in the same order as they appear in the &quot;dimensions&quot; attribute (although, of course, you may skip some). For example, consider a groupBy query like this one:</p>
+<p>The subtotals feature allows computation of multiple sub-groupings in a single query. To use this feature, add a &quot;subtotalsSpec&quot; to your query as a list of subgroup dimension sets. It should contain the <code>outputName</code> from dimensions in your <code>dimensions</code> attribute, in the same order as they appear in the <code>dimensions</code> attribute (although, of course, you may skip some).</p>
+<p>For example, consider a groupBy query like this one:</p>
 <pre><code class="hljs css language-json">{
 "type": "groupBy",
  ...
@@ -218,8 +219,8 @@ improve performance.</p>
 
 }
 </code></pre>
-<p>Response returned would be equivalent to concatenating result of 3 groupBy queries with &quot;dimensions&quot; field being [&quot;D1&quot;, &quot;D2&quot;, D3&quot;], [&quot;D1&quot;, &quot;D3&quot;] and [&quot;D3&quot;] with appropriate <code>DimensionSpec</code> json blob as used in above query.
-Response for above query would look something like below...</p>
+<p>The result of the subtotalsSpec would be equivalent to concatenating the result of three groupBy queries, with the &quot;dimensions&quot; field being <code>[&quot;D1&quot;, &quot;D2&quot;, D3&quot;]</code>, <code>[&quot;D1&quot;, &quot;D3&quot;]</code> and <code>[&quot;D3&quot;]</code>, given the <code>DimensionSpec</code> shown above.
+The response for the query above would look something like:</p>
 <pre><code class="hljs css language-json">[
   {
     <span class="hljs-attr">"version"</span> : <span class="hljs-string">"v1"</span>,
@@ -239,13 +240,13 @@ Response for above query would look something like below...</p>
    {
     <span class="hljs-attr">"version"</span> : <span class="hljs-string">"v1"</span>,
     <span class="hljs-attr">"timestamp"</span> : <span class="hljs-string">"t1"</span>,
-    <span class="hljs-attr">"event"</span> : { <span class="hljs-attr">"D1"</span>: <span class="hljs-string">".."</span>, <span class="hljs-attr">"D3"</span>: <span class="hljs-string">".."</span> }
+    <span class="hljs-attr">"event"</span> : { <span class="hljs-attr">"D1"</span>: <span class="hljs-string">".."</span>, <span class="hljs-attr">"D2"</span>: <span class="hljs-literal">null</span>, <span class="hljs-attr">"D3"</span>: <span class="hljs-string">".."</span> }
     }
   },
     {
     <span class="hljs-attr">"version"</span> : <span class="hljs-string">"v1"</span>,
     <span class="hljs-attr">"timestamp"</span> : <span class="hljs-string">"t2"</span>,
-    <span class="hljs-attr">"event"</span> : { <span class="hljs-attr">"D1"</span>: <span class="hljs-string">".."</span>, <span class="hljs-attr">"D3"</span>: <span class="hljs-string">".."</span> }
+    <span class="hljs-attr">"event"</span> : { <span class="hljs-attr">"D1"</span>: <span class="hljs-string">".."</span>, <span class="hljs-attr">"D2"</span>: <span class="hljs-literal">null</span>, <span class="hljs-attr">"D3"</span>: <span class="hljs-string">".."</span> }
     }
   },
   ...
@@ -254,18 +255,21 @@ Response for above query would look something like below...</p>
   {
     <span class="hljs-attr">"version"</span> : <span class="hljs-string">"v1"</span>,
     <span class="hljs-attr">"timestamp"</span> : <span class="hljs-string">"t1"</span>,
-    <span class="hljs-attr">"event"</span> : { <span class="hljs-attr">"D3"</span>: <span class="hljs-string">".."</span> }
+    <span class="hljs-attr">"event"</span> : { <span class="hljs-attr">"D1"</span>: <span class="hljs-literal">null</span>, <span class="hljs-attr">"D2"</span>: <span class="hljs-literal">null</span>, <span class="hljs-attr">"D3"</span>: <span class="hljs-string">".."</span> }
     }
   },
     {
     <span class="hljs-attr">"version"</span> : <span class="hljs-string">"v1"</span>,
     <span class="hljs-attr">"timestamp"</span> : <span class="hljs-string">"t2"</span>,
-    <span class="hljs-attr">"event"</span> : { <span class="hljs-attr">"D3"</span>: <span class="hljs-string">".."</span> }
+    <span class="hljs-attr">"event"</span> : { <span class="hljs-attr">"D1"</span>: <span class="hljs-literal">null</span>, <span class="hljs-attr">"D2"</span>: <span class="hljs-literal">null</span>, <span class="hljs-attr">"D3"</span>: <span class="hljs-string">".."</span> }
     }
   },
 ...
 ]
 </code></pre>
+<blockquote>
+<p>Notice that dimensions that are not included in an individual subtotalsSpec grouping are returned with a <code>null</code> value. This response format represents a behavior change as of Apache Druid 0.18.0. In release 0.17.0 and earlier, such dimensions were entirely excluded from the result.</p>
+</blockquote>
 <h2><a class="anchor" aria-hidden="true" id="implementation-details"></a><a href="#implementation-details" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Implementation details</h2>
 <h3><a class="anchor" aria-hidden="true" id="strategies"></a><a href="#strategies" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Strategies</h3>
 <p>GroupBy queries can be executed using two different strategies. The default strategy for a cluster is determined by the
@@ -504,6 +508,6 @@ the results.</p>
                 apiKey: '2de99082a9f38e49dfaa059bbe4c901d',
                 indexName: 'apache_druid',
                 inputSelector: '#search_input_react',
-                algoliaOptions: {"facetFilters":["language:en","version:0.19.0"]}
+                algoliaOptions: {"facetFilters":["language:en","version:0.20.0"]}
               });
             </script></body></html>
