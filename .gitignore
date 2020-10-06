@@ -3,6 +3,7 @@ Gemfile.lock
 .DS_store
 .idea
 .jekyll-metadata
+package-lock.json
 node_modules
 private
 css/
