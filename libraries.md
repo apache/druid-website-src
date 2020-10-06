@@ -73,6 +73,7 @@ UIs
 ---
 
 * [airbnb/superset](https://github.com/airbnb/superset) - A web application to slice, dice and visualize data out of Druid. Formerly Caravel and Panoramix
+* [Deep.Explorer](https://www.deep.bi/solutions/apache-druid) - A UI built for slice & dice analytics, adhoc queries and powerful, easy data visualizations
 * [Grafana](https://github.com/societe-generale/druidplugin) - A plugin for [Grafana](http://grafana.org/)
 * [grafana](https://github.com/Quantiply/grafana-plugins/tree/master/features/druid) - A plugin for [Grafana](http://grafana.org/)
 * [Pivot](https://github.com/implydata/pivot) - An exploratory analytics UI for Druid
