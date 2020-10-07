@@ -5,7 +5,7 @@ sectionid: use-cases
 canonical: 'https://druid.apache.org/use-cases'
 ---
 
-## Real-time analytics and intelligence
+## Power real-time analytics, data applications, and more
 
 Apache Druid is a database that is most often used for powering use cases where real-time ingest, fast query performance, and high uptime are important. As such, Druid is commonly used for powering GUIs of analytical applications, or as a backend for highly-concurrent APIs that need fast aggregations. Druid works best with event-oriented data.
 

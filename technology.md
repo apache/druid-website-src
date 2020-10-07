@@ -6,7 +6,7 @@ canonical: 'https://druid.apache.org/technology'
 ---
 
 Apache Druid is an open source distributed data store.
-Druid’s core design combines ideas from [data warehouses](https://en.wikipedia.org/wiki/Data_warehouse), [timeseries databases](https://en.wikipedia.org/wiki/Time_series_database), and [search systems](https://en.wikipedia.org/wiki/Full-text_search) to create a unified system for real-time analytics for a broad range of [use cases](/use-cases). Druid merges key characteristics of each of the 3 systems into its ingestion layer, storage format, querying layer, and core architecture.
+Druid’s core design combines ideas from [data warehouses](https://en.wikipedia.org/wiki/Data_warehouse), [timeseries databases](https://en.wikipedia.org/wiki/Time_series_database), and [search systems](https://en.wikipedia.org/wiki/Full-text_search) to create a high performance real-time analytics database for a broad range of [use cases](/use-cases). Druid merges key characteristics of each of the 3 systems into its ingestion layer, storage format, querying layer, and core architecture.
 
 <div class="image-large">
   <img src="img/diagram-2.png" style="max-width: 360px">
