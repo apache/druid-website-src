@@ -36,6 +36,7 @@ Third party companies also provide commercial support and services for Druid, in
 
 * [Cloudera](https://www.cloudera.com/)
 * [Datumo](https://datumo.io/)
+* [Deep.BI](/https://www.deep.bi/solutions/apache-druid)
 * [Imply](https://imply.io/)
 
 ## Contributing
