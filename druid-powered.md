@@ -539,7 +539,7 @@ Smyte provides an API and UI for detecting and blocking bad actors on the intern
 
 We went through the journey of deploying Apache Druid clusters on Kubernetes and created a [druid-operator](https://github.com/druid-io/druid-operator). We use this operator to deploy Druid clusters at Splunk.
 
-* [https://imply.io/virtual-druid-summit/druid-on-kubernetes-with-druid-operator](https://imply.io/virtual-druid-summit/druid-on-kubernetes-with-druid-operator)
+* [Druid on Kubernetes with Druid-operator](https://imply.io/virtual-druid-summit/druid-on-kubernetes-with-druid-operator)
 
 ## SpotX
 
