@@ -306,6 +306,18 @@
 <tr><td><code>tier/replication/factor</code></td><td>Configured maximum replication factor in each tier.</td><td>tier.</td><td>Varies.</td></tr>
 <tr><td><code>tier/required/capacity</code></td><td>Total capacity in bytes required in each tier.</td><td>tier.</td><td>Varies.</td></tr>
 <tr><td><code>tier/total/capacity</code></td><td>Total capacity in bytes available in each tier.</td><td>tier.</td><td>Varies.</td></tr>
+<tr><td><code>compact/task/count</code></td><td>Number of tasks issued in the auto compaction run.</td><td></td><td>Varies.</td></tr>
+<tr><td><code>compactTask/maxSlot/count</code></td><td>Max number of task slots that can be used for auto compaction tasks in the auto compaction run.</td><td></td><td>Varies.</td></tr>
+<tr><td><code>compactTask/availableSlot/count</code></td><td>Number of available task slots that can be used for auto compaction tasks in the auto compaction run. (this is max slot minus any currently running compaction task)</td><td></td><td>Varies.</td></tr>
+<tr><td><code>segment/waitCompact/bytes</code></td><td>Total bytes of this datasource waiting to be compacted by the auto compaction (only consider intervals/segments that are eligible for auto compaction).</td><td>datasource.</td><td>Varies.</td></tr>
+<tr><td><code>segment/waitCompact/count</code></td><td>Total number of segments of this datasource waiting to be compacted by the auto compaction (only consider intervals/segments that are eligible for auto compaction).</td><td>datasource.</td><td>Varies.</td></tr>
+<tr><td><code>interval/waitCompact/count</code></td><td>Total number of intervals of this datasource waiting to be compacted by the auto compaction (only consider intervals/segments that are eligible for auto compaction).</td><td>datasource.</td><td>Varies.</td></tr>
+<tr><td><code>segment/compacted/bytes</code></td><td>Total bytes of this datasource that are already compacted with the spec set in the auto compaction config.</td><td>datasource.</td><td>Varies.</td></tr>
+<tr><td><code>segment/compacted/count</code></td><td>Total number of segments of this datasource that are already compacted with the spec set in the auto compaction config.</td><td>datasource.</td><td>Varies.</td></tr>
+<tr><td><code>interval/compacted/count</code></td><td>Total number of intervals of this datasource that are already compacted with the spec set in the auto compaction config.</td><td>datasource.</td><td>Varies.</td></tr>
+<tr><td><code>segment/skipCompact/bytes</code></td><td>Total bytes of this datasource that are skipped (not eligible for auto compaction) by the auto compaction.</td><td>datasource.</td><td>Varies.</td></tr>
+<tr><td><code>segment/skipCompact/count</code></td><td>Total number of segments of this datasource that are skipped (not eligible for auto compaction) by the auto compaction.</td><td>datasource.</td><td>Varies.</td></tr>
+<tr><td><code>interval/skipCompact/count</code></td><td>Total number of intervals of this datasource that are skipped (not eligible for auto compaction) by the auto compaction.</td><td>datasource.</td><td>Varies.</td></tr>
 </tbody>
 </table>
 <p>If <code>emitBalancingStats</code> is set to <code>true</code> in the Coordinator <a href="../configuration/index.html#dynamic-configuration">dynamic configuration</a>, then <a href="/docs/0.20.0/configuration/logging.html">log entries</a> for class
