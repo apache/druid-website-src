@@ -164,6 +164,10 @@ eBay uses Druid to aggregate multiple data streams for real-time user behavior a
 * [Druid and Pulsar](http://blog.csdn.net/ebay/article/details/50205611)
 * [embedded-druid: Leveraging Druid Capabilities in Stand-alone Applications](http://www.ebaytechblog.com/2016/02/05/embedded-druid-leveraging-druid-capabilities-in-stand-alone-applications/)
 
+## Expedia
+
+Expedia built real-time customer segmentation into the Expedia Data Platform using Druid as its core component. It helps business and data science teams identify customers using many different criteria. 
+
 ## FacilityConneX
 
 One of our key goals at [FacilityConneX](https://www.facilityconnex.com/) is to offer real-time insights that help our customers optimize their equipment or processes, reduce cost, or prevent incidents, to ultimately improve our customers business. This *real-time* requirement has always been a major technical challenge to scale within our SaaS environment. FacilityConneX has looked to **Druid** to help solve many of these challenging performance and growth issues.
@@ -309,6 +313,12 @@ ad-hoc queries at a 95th percentile query time of around 1 second.
 
 Druid is the [Millersoft](https://www.millersoft.ltd.uk/) platform of choice for operational analytics. The seamless integration of real time and historical data sets within Druid has been a real boon for our data processing clients.
 The flexibility of the API via Rest/SQL/Native against a single data source also means that our dashboards, ad-hoc queries and pivot tables are all consistent. The ability to drill down in Druid to the transactions underpinning the aggregations also means that we can reconcile the results directly against operational systems. Druid destroys legacy database cubes at the end of long data integration pipelines.
+
+## Mindhouse
+
+Mindhouse streams data from Apache Kafka into Druid and runs dashboards as well as ad-hoc SQL queries to gain insights from user behavior and pinpoint potential issues in their meditation app.
+
+* [Mindhouse Achieves Monitoring Nirvana with Apache Druid](https://imply.io/post/mindhouse-achieves-monitoring-nirvana-with-apache-druid)
 
 ## Monetate
 
@@ -470,6 +480,10 @@ redBorder is an open source, scale out, cybersecurity analytics platform based o
 
 Retargetly is a Data Management Platform that enables publishers and advertisers to manage their first party user data, mix it with second and third party data from others providers and activate it into advertising campaigns (direct, programmatic, etc.). Druid enables us to show real time audience insights. It also provides a lot of flexibility on ad-hoc queries with low latency. We provide default graphs and metrics to our clients but they also have the possibility to make their own interactive queries on real-time.
 
+## Roambee
+
+We introduced Druid to our technology stack while developing our new supply chain & logistics visibility and intelligence solution. Combining Druid with other data storage, streaming & processing platforms & solutions for the IoT sensor data and 3rd party data helped us design an effective solution for our customers worldwide.
+
 ## Sage + Archer
 
 We are using Druid as our single source of truth for both realtime statistics and data analysis. Our clients can see and filter detailed metrics in our [self-service DSP](https://www.sage-archer.com). The DSP is used for mobile and digital-out-of-home advertising campaigns. Druid is powering both the front-end and the optimization algorithms within the system.
@@ -520,6 +534,12 @@ Smyte provides an API and UI for detecting and blocking bad actors on the intern
 ## Snap, Inc.
 
 * [Data Analytics and Processing at Snap](https://www.slideshare.net/CharlesAllen9/data-analytics-and-processing-at-snap-druid-meetup-la-september-2018)
+
+## Splunk
+
+We went through the journey of deploying Apache Druid clusters on Kubernetes and created a [druid-operator](https://github.com/druid-io/druid-operator). We use this operator to deploy Druid clusters at Splunk.
+
+* [Druid on Kubernetes with Druid-operator](https://imply.io/virtual-druid-summit/druid-on-kubernetes-with-druid-operator)
 
 ## SpotX
 
@@ -597,6 +617,10 @@ In order to continue empowering decision making as Twitch scaled, we turned to u
 Unity's monetization business generates billions of in-game events in a multi-sided marketplace, which creates complexity, slowness, and overhead for reporting. To work around these issues, Unity deploys a Kafka, Spark, and Druid-based ingestion and aggregation pipeline.
 
 * [Getting Started with Druid (Imply)](https://medium.com/@linda0511ny/getting-started-with-druid-imply-17d194762574)
+
+## Verizon
+
+Verizon’s network analytics platform leverages Druid as a real-time analytics engine to enable interactive analytics and performance metrics, support use cases like traffic capacity management using Netflow and network statistics, and provide a feature store for machine learning and service key performance indicators to monitor and quantify the health of Verizon’s global networks. We chose Druid because it enables us to achieve our mission with sub-second latency on large datasets.
 
 ## VideoAmp
 
