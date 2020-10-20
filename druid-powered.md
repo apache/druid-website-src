@@ -47,6 +47,10 @@ At [Athena Health](https://www.athenahealth.com/), we are creating a new perform
 
 Atomx is a new media exchange that connects networks, DSPs, SSPs, and other parties. Atomx uses Druid for it's advanced realtime reporting system. Using the Google Cloud modifications Atomx contributed to Druid, it can easily scale Druid with the fast growing platform.
 
+## Avesta Technologies
+
+At [Avesta](https://avestatechnologies.com/), we use Druid as a central component in our cloud data platform to provide real-time analytics solutions to our clients. We are using Druid for Customer Data Analytics and extending it for Industrial IoT and Market Automation use cases. Druid has not only proven itself to be resilient and performant but has also helped our clients save enormous amounts in cloud and licensing costs.
+
 ## Bannerflow
 
 [Bannerflow](https://www.bannerflow.com) is the leading display ad production platform. We use Druid to power our customer facing analytics system and for internal reporting, monitoring and ad-hoc data exploration.
