@@ -492,6 +492,12 @@ We introduced Druid to our technology stack while developing our new supply chai
 
 We are using Druid as our single source of truth for both realtime statistics and data analysis. Our clients can see and filter detailed metrics in our [self-service DSP](https://www.sage-archer.com). The DSP is used for mobile and digital-out-of-home advertising campaigns. Druid is powering both the front-end and the optimization algorithms within the system.
 
+## Salesforce
+
+Salesforce's Edge Intelligence team uses Apache Druid as a real-time analytical database to store application performance metrics extracted from log lines. Our customers within Salesforce, including engineers, product owners, customer service representatives, etc., use our service to define the way they want to ingest and query their data and obtain insights such as performance analysis, trend analysis, release comparison, issue triage, and troubleshooting. We chose Druid because it gives us the flexibility to define pre-aggregations, the ability to easily manage ingestion tasks, the ability to query data effectively, and the means to create a highly scalable architecture.
+
+[Delivering High-Quality Insights Interactively Using Apache Druid at Salesforce](https://engineering.salesforce.com/delivering-high-quality-insights-interactively-using-apache-druid-at-salesforce-7a038f0fe3d1)
+
 ## Sift Science
 
 Sift Science provides an online trust platform that online businesses use to prevent fraud and abuse. We use Druid as a tool to gain real-time insights about our data and machine learning models.
