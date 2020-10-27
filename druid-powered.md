@@ -498,6 +498,10 @@ Salesforce's Edge Intelligence team uses Apache Druid as a real-time analytical 
 
 [Delivering High-Quality Insights Interactively Using Apache Druid at Salesforce](https://engineering.salesforce.com/delivering-high-quality-insights-interactively-using-apache-druid-at-salesforce-7a038f0fe3d1)
 
+## Shopee
+
+At [Shopee](http://shopee.com/) Data Engineer Group, we use Druid for real-time analytics of users'(including seller and buyer) interaction with its popular e-commerce site.
+
 ## Sift Science
 
 Sift Science provides an online trust platform that online businesses use to prevent fraud and abuse. We use Druid as a tool to gain real-time insights about our data and machine learning models.
@@ -507,10 +511,6 @@ Sift Science provides an online trust platform that online businesses use to pre
 Weibo Advertising Platform deploys Druid as realtime data tool for online advertising analytics and business intelligence(BI). Druid processes TBs of realtime data per day with latency in one minute.
 
 Weibo UVE(Unified Value Evaluation) team of Advertising Platform is using Druid as the realtime analysis tool of the data insight system, which processing billions events everyday.
-
-## Shopee
-
-At [Shopee](http://shopee.com/) Data Engineer Group, we use Druid for real-time analytics of users'(including seller and buyer) interaction with its popular e-commerce site.
 
 ## Singular
 
@@ -564,6 +564,7 @@ Streamlyzer uses Druid as a next generation online video analytics for online vi
 Sugo is a company that focus on realtime multi-dimension analytics and mining on big data. We build our platform based on Druid, and developed our own extensions to make it more powerful.
 
 ## SuperAwesome
+
 [SuperAwesome](https://www.superawesome.com)’s mission is to make the internet safer for kids. At the core of SuperAwesome’s analytics is Apache Druid, which helps us relay key insights and data points back to our stakeholders and customers, as well as use this data to power our products themselves. This all happens in a kid-safe way and enables us to deliver the best level of service to billions of children and teens every month.
 
 * [How we use Apache Druid’s real-time analytics to power kidtech at SuperAwesome](https://medium.com/superawesome-engineering/how-we-use-apache-druids-real-time-analytics-to-power-kidtech-at-superawesome-8da6a0fb28b1)
@@ -572,6 +573,10 @@ Sugo is a company that focus on realtime multi-dimension analytics and mining on
 ## Sweet Couch
 
 [Sweet Couch](https://www.sweetcouch.com) is a place to discover unique products which are buyable online. Druid powers [Sweet Couch harvest](https://www.sweetcouch.com/harvest/womens) which is an open analytics platform for tracking performance of online shops based out in India. All end user events are tracked and analysed using Druid for business insights.
+
+## Swisscom
+
+We are providing machine-learning driven, anomaly detection services to our operations teams, using Druid to cover all our storage and query needs. These anomalies currently help engineers during maintenance windows to correct for possible outages before they even happen. Our Dataset includes over 3000 core-network devices and over double that amount in wireless transmission equipment. We ingest and process over 25 million records every minute, but we’re just getting started with onboarding our platforms and services on Druid.
 
 ## TalkingData
 
