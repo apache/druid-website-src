@@ -697,6 +697,12 @@ Youku Tudou employs Druid for real-time advertising analysis of huge volumes of 
 
 China Youzan is a SaaS company which principally engaged in retail science and technology. We use Druid for business intelligence (BI) analytics and application performance management (APM) metrics
 
+## Zapr
+
+Zapr is leveraging Druid to analyze TV viewership data and powering analytical dashboards to report real time user behavior. 
+
+* [Apache Druid: Sub-second Slice and Dice your Data!](https://www.meetup.com/Delhi-Apache-Druid-Meetup-Group/events/267001583/)
+
 ## Zeotap
 
 * [Apache Druid helps Zeotap Master Multi-Channel Attribution at Scale](https://imply.io/post/apache-druid-helps-zeotap-master-multi-channel-attribution)
