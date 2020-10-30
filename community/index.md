@@ -38,6 +38,7 @@ Third party companies also provide commercial support and services for Druid, in
 * [Datumo](https://datumo.io/)
 * [Deep.BI](https://www.deep.bi/solutions/apache-druid)
 * [Imply](https://imply.io/)
+* [Rill Data](https://www.rilldata.com/)
 
 ## Contributing
 
@@ -98,7 +99,7 @@ You don't need to be a committer to contribute- pull requests are welcome from a
 | [David Lim](https://github.com/dclim)                     | [Imply](https://imply.io/)                         |
 | [Daoyue Gao](https://github.com/gaodayue)                 | [Meituan](http://www.meituan.com/)                 |
 | [Dylan Wylie](https://github.com/Dylan1312)               | [SpotX](https://www.spotx.tv/)                     |
-| [Egor Rashin](https://github.com/egor-ryashin)            | [Snap](https://www.snap.com/en-US/)                |
+| [Egor Rashin](https://github.com/egor-ryashin)            | [Rill Data](https://www.rilldata.com/)             |
 | [Eric Tschetter](https://github.com/cheddar)              | [Splunk](https://www.splunk.com/)                  |
 | [Fangjin Yang](https://github.com/fjy)                    | [Imply](https://imply.io/)                         |
 | [Fokko Driesprong](https://github.com/Fokko)              | [GoDataDriven](https://godatadriven.com/)          |
@@ -118,7 +119,7 @@ You don't need to be a committer to contribute- pull requests are welcome from a
 | [Navis Ryu](https://github.com/navis)                     | [SK Telecom](https://www.sktelecom.com/index.html) |
 | [Niketh Sabbineni](https://github.com/niketh)             | [Oath](https://www.oath.com/)                      |
 | [Nishant Bangarwa](https://github.com/nishantmonu51)      | Independent                                        |
-| [Parag Jain](https://github.com/pjain1)                   | [Lyft](http://lyft.com/)                           |
+| [Parag Jain](https://github.com/pjain1)                   | [Rill Data](https://www.rilldata.com/)             |
 | [P. Taylor Goetz](https://github.com/ptgoetz)             | [EPAM](https://www.epam.com/)                      |
 | [Roman Leventov](https://github.com/leventov)             | [Snap](https://www.snap.com/en-US/)                |
 | [Samarth Jain](https://github.com/samarthjain)            | [Netflix](https://www.netflix.com/)                |
