@@ -1,20 +1,11 @@
   
-- date: 2020-10-19
-  name: "October Office Hours: All About Apache Druid"
-  info: "Bay Area Druid Meetup"
-  link: https://www.meetup.com/druidio/events/273666882
-  
-- date: 2020-10-20
-  name: "Apache Druid: Why Speed in Analytics Matters"
-  info: "All Things Open"
-  link: https://www.eventbrite.com/e/all-things-open-2020-tickets-112261031768
-  
-- date: 2020-10-23
-  name: "Apache Druid 1010"
-  info: "Data Con LA"
-  link: https://www.dataconla.com/registration/  
-  
 - date: 2020-10-28
   name: "SuperAwesome Returns for a SuperAwesome Apache Druid Meetup!"
   info: "London Apache Druid Meetup"
   link: https://www.meetup.com/Apache-Druid-London/events/273589627/
+
+- date: 2020-11-11
+  name: "November Apache Druid Office Hours: EMEA + APAC Edition"
+  info: "London Apache Druid Meetup"
+  link: https://www.meetup.com/Apache-Druid-London/events/274105814/
+  
