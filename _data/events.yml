@@ -1,11 +1,15 @@
-  
-- date: 2020-10-28
-  name: "SuperAwesome Returns for a SuperAwesome Apache Druid Meetup!"
-  info: "London Apache Druid Meetup"
-  link: https://www.meetup.com/Apache-Druid-London/events/273589627/
 
 - date: 2020-11-11
   name: "November Apache Druid Office Hours: EMEA + APAC Edition"
   info: "London Apache Druid Meetup"
   link: https://www.meetup.com/Apache-Druid-London/events/274105814/
   
+- date: 2020-11-30
+  name: "November Virtual Apache Druid AGA (Ask Gian Anything)"
+  info: "Bay Area Druid Meetup" 
+  link: https://www.meetup.com/druidio/events/274195902/
+  
+- date: 2020-11-18
+  name: "Virtual Druid Summit IV"
+  info: "Register today"
+  link: https://go.imply.io/Virtual-Druid-Summit-IV-Registration.html
