@@ -184,6 +184,10 @@ Druid powers our applications related metrics and helps us slice and dice analyt
 
 * [Enrich API Brings Higher Match Rates with Multi-Field Enrichment Capabilities](https://www.fullcontact.com/blog/enrich-api-brings-higher-match-rates-with-multi-field-enrichment-capabilities/)
 
+## Fyber
+
+[Fyber](https://www.fyber.com) is an app monetization company, developing a next-generation monetization platform for app game developers. Fyber uses Apache Druid for customer data analysis.
+
 ## GameAnalytics
 
 * [Why GameAnalytics migrated to Apache Druid](https://imply.io/post/why-gameanalytics-migrated-to-druid)
