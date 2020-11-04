@@ -30,6 +30,12 @@ Our cluster (432 CPUs, 1300GB of RAM on historicals) processes billions of realt
 and hundreds batch indexing jobs on daily basis.
 It's a pleasure to work with Druid, extraordinarily efficient and exceptionally stable platform with vibrant community.
 
+## Amobee
+
+Today’s consumers move across screens with ease. But advertisers and media companies alike struggle to unify audiences and optimize media investment. Only [Amobee](https://www.amobee.com/) brings it all together. We give you the power to bridge these silos with end-to-end solutions that help brands, agencies, and media companies optimize the consumer experience across linear TV, connected TV and digital, including social. You are in control, finding the audiences you seek and getting the performance that you need to drive meaningful results for your business. Our loyal customers have achieved dramatic performance improvements and efficiencies by holistically optimizing their full portfolio of media against strategic, in-market audiences. Together, these beloved household brands and premium media providers have made Amobee a world leading advertising & premium media management platform. Why? Like us, they believe that when all media investment can be mapped to business outcomes, everyone wins -- including the consumer.
+
+Amobee provides advertising solutions across tv, digital and social platforms. Amobee has massive incoming data, with customers requiring reporting analytics across unbounded combinations of use cases. Amobee uses Druid to power such intense customer needs via quick response dashboards and offline reports in Amobee’s Platform UI, as well as queries from demanding automated systems. Specifically, we love that Druid allows convergence of many data streams via its robust ingestion, parallel aggregation, redundant storage and concurrent query mechanisms.
+
 ## Appsflyer
 
 Druid is the major player in the real-time analytics pipeline at Appsflyer, and it serves as customer facing analytics database for dashboard reporting.
@@ -446,6 +452,10 @@ is what they have to say:
 > issue related to Druid setup and tuning.
 
 * [PayPal merchant ecosystem using Apache Spark, Hive, Druid, and HBase](https://dataworkssummit.com/san-jose-2018/session/paypal-merchant-ecosystem-using-apache-spark-hive-druid-and-hbase/)
+
+## PayU
+
+[PayU](https://payu.in) is a payment service provider. We have several services that publish our transactional data into Kafka. We transform the data using Kafka streams and write it flattened and enriched to a different topic. Kafka indexing service then reads the data from the topic and writes it to Druid. We provide dashboards to our merchants that refresh in real-time.
 
 ## Pinterest
 
