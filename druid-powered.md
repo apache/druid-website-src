@@ -345,6 +345,10 @@ campaign performance and customer behavior.
 * [Druid : Vagrant Up (and Tranquility!)](http://brianoneill.blogspot.com/2015/09/druid-vagrant-up-and-tranquility.html)
 * [Kinesis -> Druid : Options Analysis (to Push? to Pull? to Firehose? to Nay Nay?)](http://brianoneill.blogspot.com/2015/09/kinesis-druid-options-analysis-to-push.html)
 
+## mParticle
+
+At [mParticle](https://www.mparticle.com/) we have deployed Druid across our entire reporting stack. Druid has enabled us to ingest over 8.5 billion events daily while supporting reliably low latency queries. We have also enabled our support team and customers even greater insight into their data by exposing (controlled) queries to Druid via Looker.
+
 ## MZ
 
 * [Druid Meetup @ MZ video](https://www.youtube.com/watch?v=zCk2BV9mQ0Y)
@@ -537,6 +541,10 @@ Druid is the primary data store used for ad-hoc analytics in Singular, enabling 
 SK Telecom is the leading telecommunication and platform solution company. Druid enable us to discover the business insight interactively from telecommunication, manufacturing big data.
 
 * [Apache Druid on Kubernetes: Elastic scalable cloud-based system for real-time OLAP on high velocity data](https://feathercast.apache.org/2018/09/27/apache-druid-on-kubernetes-elastic-scalable-cloud-based-system-for-real-time-olap-on-high-velocity-data-jinchul-kim-eui-heo/)
+
+## Skimlinks
+
+[Skimlinks](https://www.skimlinks.com) is the leading commerce content monetization platform. Its technology automatically monetizes product links in commerce-related content.
 
 ## Skyport Systems
 
