@@ -156,7 +156,6 @@ Didi uses Druid as a core component of our real-time bigdata processing pipeline
 Dream11 is consuming data from Apache Druid, Amazon Redshift, and Athena and building models on Looker to report user concurrency, to track user journeys, and to build interaction events based funnels.
 
 * [Data Highway — Dream11’s Inhouse Analytics Platform — The Burden and Benefits](https://medium.com/@D11Engg/data-highway-dream11s-inhouse-analytics-platform-the-burden-and-benefits-90b8777d282)
-* [Real-Time data and analytics for fantasy sports](https://imply.io/post/real-time-analytics-for-fantasy-sports)
 
 ## DripStat
 
