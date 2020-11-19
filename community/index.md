@@ -77,7 +77,7 @@ warrant additional design and compatibility review. Such pull requests require d
 committers (one of them could also be the author of the pull request). For those, it can help to discuss things
 on the Druid development list [dev@druid.apache.org](https://lists.apache.org/list.html?dev@druid.apache.org) or a github issue beforehand.
 
-In general please follow the [contributing guidelines](https://github.com/apache/incubator-druid/blob/master/CONTRIBUTING.md)
+In general please follow the [contributing guidelines](https://github.com/apache/druid/blob/master/CONTRIBUTING.md)
 when sending in pull requests. This will help review proceed as quickly as
 possible.
 
