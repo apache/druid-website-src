@@ -62,7 +62,7 @@ to include it in the list.
 
 ### Getting your changes accepted
 
-Patches to Druid are done through GitHub pull requests.
+Patches to Druid are done through [GitHub pull requests](https://github.com/apache/druid/pulls).
 
 Pull requests require one approval (+1) from an established committer on code and text (for documentation) levels. The
 exception is major architectural changes or API changes, and/or changes to
@@ -80,6 +80,10 @@ on the Druid development list [dev@druid.apache.org](https://lists.apache.org/li
 In general please follow the [contributing guidelines](https://github.com/apache/incubator-druid/blob/master/CONTRIBUTING.md)
 when sending in pull requests. This will help review proceed as quickly as
 possible.
+
+### Testing
+
+All Pull Requests are automatically tested on [Travis CI](https://travis-ci.com/apache/druid) on both AMD64 and ARM64 architectures.
 
 ### Committers
 
