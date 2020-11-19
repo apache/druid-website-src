@@ -50,7 +50,7 @@ of anything from minor fixes to big new features.
 If you have an itch to scratch, then by all means do that! Fixing bugs you run
 into, or adding features you need, are both immensely helpful.
 
-If you're looking for some starter projects, we maintain a [list of issues](https://github.com/apache/incubator-druid/issues?q=is%3Aopen+is%3Aissue+label%3AStarter) suitable
+If you're looking for some starter projects, we maintain a [list of issues](https://github.com/apache/druid/issues?q=is%3Aopen+is%3Aissue+label%3AStarter) suitable
 for new developers.
 
 There are plenty of ways to help outside writing Druid code. *Code review of pull requests*
@@ -77,7 +77,7 @@ warrant additional design and compatibility review. Such pull requests require d
 committers (one of them could also be the author of the pull request). For those, it can help to discuss things
 on the Druid development list [dev@druid.apache.org](https://lists.apache.org/list.html?dev@druid.apache.org) or a github issue beforehand.
 
-In general please follow the [contributing guidelines](https://github.com/apache/incubator-druid/blob/master/CONTRIBUTING.md)
+In general please follow the [contributing guidelines](https://github.com/apache/druid/blob/master/CONTRIBUTING.md)
 when sending in pull requests. This will help review proceed as quickly as
 possible.
 
