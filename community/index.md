@@ -50,7 +50,7 @@ of anything from minor fixes to big new features.
 If you have an itch to scratch, then by all means do that! Fixing bugs you run
 into, or adding features you need, are both immensely helpful.
 
-If you're looking for some starter projects, we maintain a [list of issues](https://github.com/apache/incubator-druid/issues?q=is%3Aopen+is%3Aissue+label%3AStarter) suitable
+If you're looking for some starter projects, we maintain a [list of issues](https://github.com/apache/druid/issues?q=is%3Aopen+is%3Aissue+label%3AStarter) suitable
 for new developers.
 
 There are plenty of ways to help outside writing Druid code. *Code review of pull requests*
