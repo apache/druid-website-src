@@ -1,13 +1,13 @@
 
-- date: 2020-11-18
-  name: "Virtual Druid Summit IV"
-  info: "Register today"
-  link: https://go.imply.io/Virtual-Druid-Summit-IV-Registration.html
-
 - date: 2020-11-30
   name: "November Virtual Apache Druid AGA (Ask Gian Anything)"
   info: "Bay Area Druid Meetup" 
   link: https://www.meetup.com/druidio/events/274195902/
+  
+- date: 2020-12-09
+  name: "December Druid Office Hours"
+  info: "Bay Area Druid Meetup"
+  link: https://www.meetup.com/druidio/events/274715318/
   
 - date: 2020-12-15
   name: Apache Druid Virtual Meetup Featuring Avesta Technologies
