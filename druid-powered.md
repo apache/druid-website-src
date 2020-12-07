@@ -674,6 +674,10 @@ ViralGains uses Druid for real-time analysis of millions of viral video views, s
 
 Druid powers Virool’s real time analytics of over 1 billion raw events per day. We query this data to gain a deep understanding of all of our inventory sources, from exchanges to direct partners, everything is available with lightning fast query times. Druid puts the power and flexibility of big data in each of our Viroolian’s hands.
 
+## Vserv
+
+[Vserv](https://www.vserv.com) is the leading authentic data platform for mobile marketing in India. We have successfully implemented Druid for analysis of digital marketing campaign data. 
+
 ## WalkMe
 
 * [How WalkMe uses Druid and Imply Cloud to Analyze Clickstreams and User Behavior](https://imply.io/post/how-walkme-uses-druid-and-imply-cloud)
@@ -694,6 +698,10 @@ We're serving pageview data via Druid and Pivot.  Our internal customers are lov
 
 * [Analytics at Wikipedia](https://www.oreilly.com/library/view/strata-data-conference/9781491976326/video316954.html)
 * [Analytics at Wikipedia with Druid](https://speakerdeck.com/druidio/analytics-at-wikipedia-with-druid)
+
+## Wipro
+
+Wipro Limited is an Indian multinational corporation that provides information technology, consulting and business process services. Wipro is using Druid to track and monitor the performance of internal applications and to gain insights from data in real-time. 
 
 ## Xiaomi
 
