@@ -1,5 +1,11 @@
 
-- date: 2020-12-15
-  name: Apache Druid Virtual Meetup Featuring Avesta Technologies
-  info: Bangalore Apache Druid Meetup by Imply
-  link: https://www.meetup.com/Bangalore-Druid-Meetup-Group/events/274628984/
+- date: 2021-01-21
+  name: The Superstars of Apache Druid
+  info: Bay Area Apache Druid Meetup by Imply
+  link: https://www.meetup.com/druidio/events/275628814/
+
+- date: 2021-01-27 
+  name: The January Apache Druid Drop In!
+  info: London Apache Druid Meetup by Imply
+  link: https://www.meetup.com/Apache-Druid-London/events/275627138
+  
