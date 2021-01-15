@@ -69,6 +69,12 @@ BIGO selects Druid as an OLAP engine to analyze app(Like, Bigolive, IMO, etc.) d
 
 Billy Mobile is a mobile advertising platform, excelling in the performance-based optimisation segment. We use Druid to power our real-time analytics dashboards, in which our publishers, advertisers and staff can get insights on how their campaigns, offers and traffic are performing, with sub-second query time and minute granularity . We are using a lambda-architecture aproach, ingesting the traffic in real time with Tranquility and Storm, and a batch layer via a tight integration with Hive and Hadoop, our Master Data Set. This way we can provide crucial fast access to data, while making sure to have the right numbers.
 
+## Blueshift
+
+Blueshift is an AI-powered customer data activation platform enabling CRM and product marketers to intelligently manage their audiences and orchestrate large-scale personalized messaging campaigns at scale. Blueshift offers real-time campaign analytics in the product powered by Druid. Additionally, we use the same analytics backend to power automatic traffic allocation capabilities using Bayesian bandits, perform cohort analysis over multiple dimensions, and generate internal reports to measure the impact of ROI of AI across different types of campaigns and industry verticals. 
+
+* [We operate a multi-tenant Druid cluster in AWS. Additionally, we have integrated our data lake (Hive/Hbase) with Druid to manage data backfills.](https://imply.io/post/blueshift-scaling-real-time-campaign-analytics-apache-druid)
+
 ## Booking.com
 
 * [Data Engineering At Booking.com Case Study](https://www.youtube.com/watch?v=9GE3yiVo1FM)
@@ -176,6 +182,8 @@ eBay uses Druid to aggregate multiple data streams for real-time user behavior a
 ## Expedia
 
 Expedia built real-time customer segmentation into the Expedia Data Platform using Druid as its core component. It helps business and data science teams identify customers using many different criteria. 
+
+* [Fast Approximate Counting Usind Druid and Datasketch](https://medium.com/expedia-group-tech/fast-approximate-counting-using-druid-and-datasketch-f5f163131acd)
 
 ## FacilityConneX
 
@@ -505,6 +513,12 @@ Retargetly is a Data Management Platform that enables publishers and advertisers
 
 We introduced Druid to our technology stack while developing our new supply chain & logistics visibility and intelligence solution. Combining Druid with other data storage, streaming & processing platforms & solutions for the IoT sensor data and 3rd party data helped us design an effective solution for our customers worldwide.
 
+## Rubicon Project
+
+Rubicon Project is the world’s largest independent sell-side advertising platform that helps premium websites and mobile apps sell ads easily and safely. Rubicon Project’s flagship reporting platform, Performance Analytics, is built on Apache Druid and is used by thousands of companies across the globe. Performance Analytics processed more than two trillion events per day during Black Friday. Druid delivers analytics from this data with an average response times under 600 ms, helping publishers maximize the yield of their digital ad inventory across the open internet and builds on our commitment to trust and transparency in the programmatic marketplace.
+
+* [Modernizing Rubicon Project’s Analytics Stack for Programmatic Advertising](https://imply.io/post/modernizing-rubicon-projects-analytics-stack)
+
 ## Sage + Archer
 
 We are using Druid as our single source of truth for both realtime statistics and data analysis. Our clients can see and filter detailed metrics in our [self-service DSP](https://www.sage-archer.com). The DSP is used for mobile and digital-out-of-home advertising campaigns. Druid is powering both the front-end and the optimization algorithms within the system.
@@ -612,10 +626,6 @@ Apache Druid’s speed and flexibility allow us to provide interactive analytics
 ## Tencent
 
 Tencent SCRM product use Druid for customer behavior analysis.
-
-## The Rubicon Project
-
-* [Modernizing Rubicon Project’s Analytics Stack for Programmatic Advertising](https://imply.io/post/modernizing-rubicon-projects-analytics-stack)
 
 ## Time Warner Cable
 
