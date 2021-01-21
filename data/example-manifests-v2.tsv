@@ -1,0 +1,2 @@
+name	description	spec
+Wikipedia Edits	Edits on Wikipedia from one day	{"type":"index_parallel","spec":{"ioConfig":{"type":"index_parallel","inputSource":{"type":"http","uris":["https://druid.apache.org/data/wikipedia.json.gz"]}},"dataSchema":{"granularitySpec":{"segmentGranularity":"day"}},"tuningConfig":{"type":"index_parallel"}}}
