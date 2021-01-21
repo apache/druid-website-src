@@ -36,6 +36,10 @@ Today’s consumers move across screens with ease. But advertisers and media com
 
 Amobee provides advertising solutions across tv, digital and social platforms. Amobee has massive incoming data, with customers requiring reporting analytics across unbounded combinations of use cases. Amobee uses Druid to power such intense customer needs via quick response dashboards and offline reports in Amobee’s Platform UI, as well as queries from demanding automated systems. Specifically, we love that Druid allows convergence of many data streams via its robust ingestion, parallel aggregation, redundant storage and concurrent query mechanisms.
 
+## Apollo GraphQL
+
+Apollo uses Druid to power our "Graph Manager" SaaS service, which helps application developers manage, validate and secure their organization’s data graph. In addition to managing the evolution of their GraphQL schema, users can draw insights from the operations metadata and execution trace data that are sent to our service, indexed, and stored in Druid.
+
 ## Appsflyer
 
 Druid is the major player in the real-time analytics pipeline at Appsflyer, and it serves as customer facing analytics database for dashboard reporting.
@@ -52,6 +56,10 @@ At [Athena Health](https://www.athenahealth.com/), we are creating a new perform
 ## Atomx
 
 Atomx is a new media exchange that connects networks, DSPs, SSPs, and other parties. Atomx uses Druid for it's advanced realtime reporting system. Using the Google Cloud modifications Atomx contributed to Druid, it can easily scale Druid with the fast growing platform.
+
+## Autonomic
+
+Autonomic Transportation Mobility Cloud (TMC) is the first industry open cloud platform for transportation and mobility data. One of our missions is to enable our customers to easily explore a tremendous amount of data and draw valuable insights in a timely fashion. To meet these needs, we deploy Apache Druid in our platform to aggregate and process time series data. Each component in Druid is running as an individual microservices, and can be easily deployed, managed, and scaled independently in our Kubernetes clusters. 
 
 ## Avesta Technologies
 
@@ -340,6 +348,10 @@ The flexibility of the API via Rest/SQL/Native against a single data source also
 Mindhouse streams data from Apache Kafka into Druid and runs dashboards as well as ad-hoc SQL queries to gain insights from user behavior and pinpoint potential issues in their meditation app.
 
 * [Mindhouse Achieves Monitoring Nirvana with Apache Druid](https://imply.io/post/mindhouse-achieves-monitoring-nirvana-with-apache-druid)
+
+## Mobiauto
+
+Druid has helped Mobiauto ingest and analyze millions of real time events generated on our online car sales website. We use this data to generate real time analytics used by the commercial team, and create APIs for our backend team that can be used to insert real time data to the website that helps our clients make informed decisions.
 
 ## Monetate
 
