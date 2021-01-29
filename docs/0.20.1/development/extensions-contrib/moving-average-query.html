@@ -1,0 +1,391 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Moving Average Query · Apache Druid</title><meta name="viewport" content="width=device-width"/><link rel="canonical" href="https://druid.apache.org/docs/0.20.1/development/extensions-contrib/moving-average-query.html"/><meta name="generator" content="Docusaurus"/><meta name="description" content="&lt;!--"/><meta name="docsearch:language" content="en"/><meta name="docsearch:version" content="0.20.1" /><meta property="og:title" content="Moving Average Query · Apache Druid"/><meta property="og:type" content="website"/><meta property="og:url" content="https://druid.apache.org/index.html"/><meta property="og:description" content="&lt;!--"/><meta property="og:image" content="https://druid.apache.org/img/druid_nav.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://druid.apache.org/img/druid_nav.png"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-131010415-1"></script><script>
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments); }
+              gtag('js', new Date());
+              gtag('config', 'UA-131010415-1');
+            </script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"/><link rel="stylesheet" href="/css/code-block-buttons.css"/><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script><script type="text/javascript" src="/js/code-block-buttons.js"></script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/druid_nav.png" alt="Apache Druid"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/technology" target="_self">Technology</a></li><li class=""><a href="/use-cases" target="_self">Use Cases</a></li><li class=""><a href="/druid-powered" target="_self">Powered By</a></li><li class="siteNavGroupActive"><a href="/docs/0.20.1/design/index.html" target="_self">Docs</a></li><li class=""><a href="/community/" target="_self">Community</a></li><li class=""><a href="https://www.apache.org" target="_self">Apache</a></li><li class=""><a href="/downloads.html" target="_self">Download</a></li><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Hidden</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Getting started<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.1/design/index.html">Introduction to Apache Druid</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/tutorials/index.html">Quickstart</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/tutorials/docker.html">Docker</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/operations/single-server.html">Single server deployment</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/tutorials/cluster.html">Clustered deployment</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Tutorials<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.1/tutorials/tutorial-batch.html">Loading files natively</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/tutorials/tutorial-kafka.html">Load from Apache Kafka</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/tutorials/tutorial-batch-hadoop.html">Load from Apache Hadoop</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/tutorials/tutorial-query.html">Querying data</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/tutorials/tutorial-rollup.html">Roll-up</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/tutorials/tutorial-retention.html">Configuring data retention</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/tutorials/tutorial-update-data.html">Updating existing data</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/tutorials/tutorial-compaction.html">Compacting segments</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/tutorials/tutorial-delete-data.html">Deleting data</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/tutorials/tutorial-ingestion-spec.html">Writing an ingestion spec</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/tutorials/tutorial-transform-spec.html">Transforming input data</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/tutorials/tutorial-kerberos-hadoop.html">Kerberized HDFS deep storage</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Design<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.1/design/architecture.html">Design</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/design/segments.html">Segments</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/design/processes.html">Processes and servers</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/dependencies/deep-storage.html">Deep storage</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/dependencies/metadata-storage.html">Metadata storage</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/dependencies/zookeeper.html">ZooKeeper</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Ingestion<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.1/ingestion/index.html">Ingestion</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/ingestion/data-formats.html">Data formats</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/ingestion/schema-design.html">Schema design tips</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/ingestion/data-management.html">Data management</a></li><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Stream ingestion</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.20.1/development/extensions-core/kafka-ingestion.html">Apache Kafka</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/development/extensions-core/kinesis-ingestion.html">Amazon Kinesis</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/ingestion/tranquility.html">Tranquility</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Batch ingestion</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.20.1/ingestion/native-batch.html">Native batch</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/ingestion/hadoop.html">Hadoop-based</a></li></ul></div><li class="navListItem"><a class="navItem" href="/docs/0.20.1/ingestion/tasks.html">Task reference</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/ingestion/faq.html">Troubleshooting FAQ</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Querying<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.1/querying/sql.html">Druid SQL</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/querying/querying.html">Native queries</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/querying/query-execution.html">Query execution</a></li><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Concepts</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.20.1/querying/datasource.html">Datasources</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/querying/joins.html">Joins</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/querying/lookups.html">Lookups</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/querying/multi-value-dimensions.html">Multi-value dimensions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/querying/multitenancy.html">Multitenancy</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/querying/caching.html">Query caching</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/querying/query-context.html">Context parameters</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Native query types</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.20.1/querying/timeseriesquery.html">Timeseries</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/querying/topnquery.html">TopN</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/querying/groupbyquery.html">GroupBy</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/querying/scan-query.html">Scan</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/querying/searchquery.html">Search</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/querying/timeboundaryquery.html">TimeBoundary</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/querying/segmentmetadataquery.html">SegmentMetadata</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/querying/datasourcemetadataquery.html">DatasourceMetadata</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Native query components</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.20.1/querying/filters.html">Filters</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/querying/granularities.html">Granularities</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/querying/dimensionspecs.html">Dimensions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/querying/aggregations.html">Aggregations</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/querying/post-aggregations.html">Post-aggregations</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/misc/math-expr.html">Expressions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/querying/having.html">Having filters (groupBy)</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/querying/limitspec.html">Sorting and limiting (groupBy)</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/querying/topnmetricspec.html">Sorting (topN)</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/querying/sorting-orders.html">String comparators</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/querying/virtual-columns.html">Virtual columns</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/development/geo.html">Spatial filters</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Configuration<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.1/configuration/index.html">Configuration reference</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/development/extensions.html">Extensions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/configuration/logging.html">Logging</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Operations<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.1/operations/druid-console.html">Web console</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/operations/getting-started.html">Getting started with Apache Druid</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/operations/basic-cluster-tuning.html">Basic cluster tuning</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/operations/api-reference.html">API reference</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/operations/high-availability.html">High availability</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/operations/rolling-updates.html">Rolling updates</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/operations/rule-configuration.html">Retaining or automatically dropping data</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/operations/metrics.html">Metrics</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/operations/alerts.html">Alerts</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/operations/other-hadoop.html">Working with different versions of Apache Hadoop</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/operations/http-compression.html">HTTP compression</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/operations/tls-support.html">TLS support</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/operations/password-provider.html">Password providers</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/operations/dump-segment.html">dump-segment tool</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/operations/reset-cluster.html">reset-cluster tool</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/operations/insert-segment-to-db.html">insert-segment-to-db tool</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/operations/pull-deps.html">pull-deps tool</a></li><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Misc</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.20.1/operations/management-uis.html">Legacy Management UIs</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/operations/deep-storage-migration.html">Deep storage migration</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/operations/export-metadata.html">Export Metadata Tool</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/operations/metadata-migration.html">Metadata Migration</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/operations/segment-optimization.html">Segment Size Optimization</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/operations/use_sbt_to_build_fat_jar.html">Content for build.sbt</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Development<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.1/development/overview.html">Developing on Druid</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/development/modules.html">Creating extensions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/development/javascript.html">JavaScript functionality</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/development/build.html">Build from source</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/development/versioning.html">Versioning</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/development/experimental.html">Experimental features</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Misc<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.1/misc/papers-and-talks.html">Papers</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Hidden<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.1/comparisons/druid-vs-elasticsearch.html">Apache Druid vs Elasticsearch</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/comparisons/druid-vs-key-value.html">Apache Druid vs. Key/Value Stores (HBase/Cassandra/OpenTSDB)</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/comparisons/druid-vs-kudu.html">Apache Druid vs Kudu</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/comparisons/druid-vs-redshift.html">Apache Druid vs Redshift</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/comparisons/druid-vs-spark.html">Apache Druid vs Spark</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/comparisons/druid-vs-sql-on-hadoop.html">Apache Druid vs SQL-on-Hadoop</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/design/auth.html">Authentication and Authorization</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/design/broker.html">Broker</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/design/coordinator.html">Coordinator Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/design/historical.html">Historical Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/design/indexer.html">Indexer Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/design/indexing-service.html">Indexing Service</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/design/middlemanager.html">MiddleManager Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/design/overlord.html">Overlord Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/design/router.html">Router Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/design/peons.html">Peons</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/development/extensions-core/approximate-histograms.html">Approximate Histogram aggregators</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/development/extensions-core/avro.html">Apache Avro</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/development/extensions-core/azure.html">Microsoft Azure</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/development/extensions-core/bloom-filter.html">Bloom Filter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/development/extensions-core/datasketches-extension.html">DataSketches extension</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/development/extensions-core/datasketches-hll.html">DataSketches HLL Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/development/extensions-core/datasketches-quantiles.html">DataSketches Quantiles Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/development/extensions-core/datasketches-theta.html">DataSketches Theta Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/development/extensions-core/datasketches-tuple.html">DataSketches Tuple Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/development/extensions-core/druid-basic-security.html">Basic Security</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/development/extensions-core/druid-kerberos.html">Kerberos</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/development/extensions-core/druid-lookups.html">Cached Lookup Module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/development/extensions-core/druid-ranger-security.html">Apache Ranger Security</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/development/extensions-core/google.html">Google Cloud Storage</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/development/extensions-core/hdfs.html">HDFS</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/development/extensions-core/kafka-extraction-namespace.html">Apache Kafka Lookups</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/development/extensions-core/lookups-cached-global.html">Globally Cached Lookups</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/development/extensions-core/mysql.html">MySQL Metadata Store</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/development/extensions-core/orc.html">ORC Extension</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/development/extensions-core/druid-pac4j.html">Druid pac4j based Security extension</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/development/extensions-core/parquet.html">Apache Parquet Extension</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/development/extensions-core/postgresql.html">PostgreSQL Metadata Store</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/development/extensions-core/protobuf.html">Protobuf</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/development/extensions-core/s3.html">S3-compatible</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/development/extensions-core/simple-client-sslcontext.html">Simple SSLContext Provider Module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/development/extensions-core/stats.html">Stats aggregator</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/development/extensions-core/test-stats.html">Test Stats Aggregators</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/development/extensions-contrib/ambari-metrics-emitter.html">Ambari Metrics Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/development/extensions-contrib/cassandra.html">Apache Cassandra</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/development/extensions-contrib/cloudfiles.html">Rackspace Cloud Files</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/development/extensions-contrib/distinctcount.html">DistinctCount Aggregator</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/development/extensions-contrib/graphite.html">Graphite Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/development/extensions-contrib/influx.html">InfluxDB Line Protocol Parser</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/development/extensions-contrib/influxdb-emitter.html">InfluxDB Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/development/extensions-contrib/kafka-emitter.html">Kafka Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/development/extensions-contrib/materialized-view.html">Materialized View</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/development/extensions-contrib/momentsketch-quantiles.html">Moment Sketches for Approximate Quantiles module</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/0.20.1/development/extensions-contrib/moving-average-query.html">Moving Average Query</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/development/extensions-contrib/opentsdb-emitter.html">OpenTSDB Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/development/extensions-contrib/redis-cache.html">Druid Redis Cache</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/development/extensions-contrib/sqlserver.html">Microsoft SQLServer</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/development/extensions-contrib/statsd.html">StatsD Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/development/extensions-contrib/tdigestsketch-quantiles.html">T-Digest Quantiles Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/development/extensions-contrib/thrift.html">Thrift</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/development/extensions-contrib/time-min-max.html">Timestamp Min/Max aggregators</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/development/extensions-contrib/gce-extensions.html">GCE Extensions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/development/extensions-contrib/aliyun-oss.html">Aliyun OSS</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/querying/hll-old.html">Cardinality/HyperUnique aggregators</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/querying/select-query.html">Select</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.1/ingestion/standalone-realtime.html">Realtime Process</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/apache/druid/edit/master/docs/development/extensions-contrib/moving-average-query.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">Moving Average Query</h1></header><article><div><span><!--
+  ~ Licensed to the Apache Software Foundation (ASF) under one
+  ~ or more contributor license agreements.  See the NOTICE file
+  ~ distributed with this work for additional information
+  ~ regarding copyright ownership.  The ASF licenses this file
+  ~ to you under the Apache License, Version 2.0 (the
+  ~ "License"); you may not use this file except in compliance
+  ~ with the License.  You may obtain a copy of the License at
+  ~
+  ~   http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an
+  ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~ KIND, either express or implied.  See the License for the
+  ~ specific language governing permissions and limitations
+  ~ under the License.
+  -->
+<h2><a class="anchor" aria-hidden="true" id="overview"></a><a href="#overview" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Overview</h2>
+<p><strong>Moving Average Query</strong> is an extension which provides support for <a href="https://en.wikipedia.org/wiki/Moving_average">Moving Average</a> and other Aggregate <a href="https://en.wikibooks.org/wiki/Structured_Query_Language/Window_functions">Window Functions</a> in Druid queries.</p>
+<p>These Aggregate Window Functions consume standard Druid Aggregators and outputs additional windowed aggregates called <a href="#averagers">Averagers</a>.</p>
+<h4><a class="anchor" aria-hidden="true" id="high-level-algorithm"></a><a href="#high-level-algorithm" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>High level algorithm</h4>
+<p>Moving Average encapsulates the <a href="/docs/0.20.1/querying/groupbyquery.html">groupBy query</a> (Or <a href="/docs/0.20.1/querying/timeseriesquery.html">timeseries</a> in case of no dimensions) in order to rely on the maturity of these query types.</p>
+<p>It runs the query in two main phases:</p>
+<ol>
+<li>Runs an inner <a href="../../querying/groupbyquery.html">groupBy</a> or <a href="../../querying/timeseriesquery.html">timeseries</a> query to compute Aggregators (i.e. daily count of events).</li>
+<li>Passes over aggregated results in Broker, in order to compute Averagers (i.e. moving 7 day average of the daily count).</li>
+</ol>
+<h4><a class="anchor" aria-hidden="true" id="main-enhancements-provided-by-this-extension"></a><a href="#main-enhancements-provided-by-this-extension" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Main enhancements provided by this extension:</h4>
+<ol>
+<li>Functionality: Extending druid query functionality (i.e. initial introduction of Window Functions).</li>
+<li>Performance: Improving performance of such moving aggregations by eliminating multiple segment scans.</li>
+</ol>
+<h4><a class="anchor" aria-hidden="true" id="further-reading"></a><a href="#further-reading" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Further reading</h4>
+<p><a href="https://en.wikipedia.org/wiki/Moving_average">Moving Average</a></p>
+<p><a href="https://en.wikibooks.org/wiki/Structured_Query_Language/Window_functions">Window Functions</a></p>
+<p><a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/analytic-function-concepts">Analytic Functions</a></p>
+<h2><a class="anchor" aria-hidden="true" id="operations"></a><a href="#operations" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Operations</h2>
+<p>To use this extension, make sure to <a href="/docs/0.20.1/development/extensions.html#loading-extensions">load</a> <code>druid-moving-average-query</code> only to the Broker.</p>
+<h2><a class="anchor" aria-hidden="true" id="configuration"></a><a href="#configuration" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Configuration</h2>
+<p>There are currently no configuration properties specific to Moving Average.</p>
+<h2><a class="anchor" aria-hidden="true" id="limitations"></a><a href="#limitations" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Limitations</h2>
+<ul>
+<li>movingAverage is missing support for the following groupBy properties: <code>subtotalsSpec</code>, <code>virtualColumns</code>.</li>
+<li>movingAverage is missing support for the following timeseries properties: <code>descending</code>.</li>
+<li>movingAverage is missing support for <a href="https://github.com/apache/druid/issues/4349">SQL-compatible null handling</a> (So setting druid.generic.useDefaultValueForNull in configuration will give an error).</li>
+</ul>
+<p>##Query spec:</p>
+<ul>
+<li>Most properties in the query spec derived from  <a href="/docs/0.20.1/querying/groupbyquery.html">groupBy query</a> / <a href="/docs/0.20.1/querying/timeseriesquery.html">timeseries</a>, see documentation for these query types.</li>
+</ul>
+<table>
+<thead>
+<tr><th>property</th><th>description</th><th>required?</th></tr>
+</thead>
+<tbody>
+<tr><td>queryType</td><td>This String should always be &quot;movingAverage&quot;; this is the first thing Druid looks at to figure out how to interpret the query.</td><td>yes</td></tr>
+<tr><td>dataSource</td><td>A String or Object defining the data source to query, very similar to a table in a relational database. See <a href="/docs/0.20.1/querying/datasource.html">DataSource</a> for more information.</td><td>yes</td></tr>
+<tr><td>dimensions</td><td>A JSON list of <a href="/docs/0.20.1/querying/dimensionspecs.html">DimensionSpec</a> (Notice that property is optional)</td><td>no</td></tr>
+<tr><td>limitSpec</td><td>See <a href="/docs/0.20.1/querying/limitspec.html">LimitSpec</a></td><td>no</td></tr>
+<tr><td>having</td><td>See <a href="/docs/0.20.1/querying/having.html">Having</a></td><td>no</td></tr>
+<tr><td>granularity</td><td>A period granularity; See <a href="../../querying/granularities.html#period-granularities">Period Granularities</a></td><td>yes</td></tr>
+<tr><td>filter</td><td>See <a href="/docs/0.20.1/querying/filters.html">Filters</a></td><td>no</td></tr>
+<tr><td>aggregations</td><td>Aggregations forms the input to Averagers; See <a href="/docs/0.20.1/querying/aggregations.html">Aggregations</a></td><td>yes</td></tr>
+<tr><td>postAggregations</td><td>Supports only aggregations as input; See <a href="/docs/0.20.1/querying/post-aggregations.html">Post Aggregations</a></td><td>no</td></tr>
+<tr><td>intervals</td><td>A JSON Object representing ISO-8601 Intervals. This defines the time ranges to run the query over.</td><td>yes</td></tr>
+<tr><td>context</td><td>An additional JSON Object which can be used to specify certain flags.</td><td>no</td></tr>
+<tr><td>averagers</td><td>Defines the moving average function; See <a href="#averagers">Averagers</a></td><td>yes</td></tr>
+<tr><td>postAveragers</td><td>Support input of both averagers and aggregations; Syntax is identical to postAggregations (See <a href="/docs/0.20.1/querying/post-aggregations.html">Post Aggregations</a>)</td><td>no</td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="averagers"></a><a href="#averagers" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Averagers</h2>
+<p>Averagers are used to define the Moving-Average function. Averagers are not limited to an average - they can also provide other types of window functions such as MAX()/MIN().</p>
+<h3><a class="anchor" aria-hidden="true" id="properties"></a><a href="#properties" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Properties</h3>
+<p>These are properties which are common to all Averagers:</p>
+<table>
+<thead>
+<tr><th>property</th><th>description</th><th>required?</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td>Averager type; See <a href="#averager-types">Averager types</a></td><td>yes</td></tr>
+<tr><td>name</td><td>Averager name</td><td>yes</td></tr>
+<tr><td>fieldName</td><td>Input name (An aggregation name)</td><td>yes</td></tr>
+<tr><td>buckets</td><td>Number of lookback buckets (time periods), including current one. Must be &gt;0</td><td>yes</td></tr>
+<tr><td>cycleSize</td><td>Cycle size; Used to calculate day-of-week option; See <a href="#cycle-size-day-of-week">Cycle size (Day of Week)</a></td><td>no, defaults to 1</td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="averager-types"></a><a href="#averager-types" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Averager types:</h3>
+<ul>
+<li><a href="#standard-averagers">Standard averagers</a>:
+<ul>
+<li>doubleMean</li>
+<li>doubleMeanNoNulls</li>
+<li>doubleSum</li>
+<li>doubleMax</li>
+<li>doubleMin</li>
+<li>longMean</li>
+<li>longMeanNoNulls</li>
+<li>longSum</li>
+<li>longMax</li>
+<li>longMin</li>
+</ul></li>
+</ul>
+<h4><a class="anchor" aria-hidden="true" id="standard-averagers"></a><a href="#standard-averagers" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Standard averagers</h4>
+<p>These averagers offer four functions:</p>
+<ul>
+<li>Mean (Average)</li>
+<li>MeanNoNulls (Ignores empty buckets).</li>
+<li>Sum</li>
+<li>Max</li>
+<li>Min</li>
+</ul>
+<p><strong>Ignoring nulls</strong>:
+Using a MeanNoNulls averager is useful when the interval starts at the dataset beginning time.
+In that case, the first records will ignore missing buckets and average won't be artificially low.
+However, this also means that empty days in a sparse dataset will also be ignored.</p>
+<p>Example of usage:</p>
+<pre><code class="hljs css language-json">{ <span class="hljs-attr">"type"</span> : <span class="hljs-string">"doubleMean"</span>, <span class="hljs-attr">"name"</span> : &lt;output_name&gt;, <span class="hljs-attr">"fieldName"</span>: &lt;input_name&gt; }
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="cycle-size-day-of-week"></a><a href="#cycle-size-day-of-week" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Cycle size (Day of Week)</h3>
+<p>This optional parameter is used to calculate over a single bucket within each cycle instead of all buckets.
+A prime example would be weekly buckets, resulting in a Day of Week calculation. (Other examples: Month of year, Hour of day).</p>
+<p>I.e. when using these parameters:</p>
+<ul>
+<li><em>granularity</em>: period=P1D (daily)</li>
+<li><em>buckets</em>: 28</li>
+<li><em>cycleSize</em>: 7</li>
+</ul>
+<p>Within each output record, the averager will compute the result over the following buckets: current (#0), #7, #14, #21.
+Whereas without specifying cycleSize it would have computed over all 28 buckets.</p>
+<h2><a class="anchor" aria-hidden="true" id="examples"></a><a href="#examples" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Examples</h2>
+<p>All examples are based on the Wikipedia dataset provided in the Druid <a href="/docs/0.20.1/tutorials/index.html">tutorials</a>.</p>
+<h3><a class="anchor" aria-hidden="true" id="basic-example"></a><a href="#basic-example" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Basic example</h3>
+<p>Calculating a 7-buckets moving average for Wikipedia edit deltas.</p>
+<p>Query syntax:</p>
+<pre><code class="hljs css language-json">{
+  <span class="hljs-attr">"queryType"</span>: <span class="hljs-string">"movingAverage"</span>,
+  <span class="hljs-attr">"dataSource"</span>: <span class="hljs-string">"wikipedia"</span>,
+  <span class="hljs-attr">"granularity"</span>: {
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"period"</span>,
+    <span class="hljs-attr">"period"</span>: <span class="hljs-string">"PT30M"</span>
+  },
+  <span class="hljs-attr">"intervals"</span>: [
+    <span class="hljs-string">"2015-09-12T00:00:00Z/2015-09-13T00:00:00Z"</span>
+  ],
+  <span class="hljs-attr">"aggregations"</span>: [
+    {
+      <span class="hljs-attr">"name"</span>: <span class="hljs-string">"delta30Min"</span>,
+      <span class="hljs-attr">"fieldName"</span>: <span class="hljs-string">"delta"</span>,
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"longSum"</span>
+    }
+  ],
+  <span class="hljs-attr">"averagers"</span>: [
+    {
+      <span class="hljs-attr">"name"</span>: <span class="hljs-string">"trailing30MinChanges"</span>,
+      <span class="hljs-attr">"fieldName"</span>: <span class="hljs-string">"delta30Min"</span>,
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"longMean"</span>,
+      <span class="hljs-attr">"buckets"</span>: <span class="hljs-number">7</span>
+    }
+  ]
+}
+</code></pre>
+<p>Result:</p>
+<pre><code class="hljs css language-json">[ {
+   "version" : "v1",
+   "timestamp" : "2015-09-12T00:30:00.000Z",
+   "event" : {
+     "delta30Min" : 30490,
+     "trailing30MinChanges" : 4355.714285714285
+   }
+ }, {
+   "version" : "v1",
+   "timestamp" : "2015-09-12T01:00:00.000Z",
+   "event" : {
+     "delta30Min" : 96526,
+     "trailing30MinChanges" : 18145.14285714286
+   }
+ }, {
+...
+...
+...
+}, {
+  "version" : "v1",
+  "timestamp" : "2015-09-12T23:00:00.000Z",
+  "event" : {
+    "delta30Min" : 119100,
+    "trailing30MinChanges" : 198697.2857142857
+  }
+}, {
+  "version" : "v1",
+  "timestamp" : "2015-09-12T23:30:00.000Z",
+  "event" : {
+    "delta30Min" : 177882,
+    "trailing30MinChanges" : 193890.0
+  }
+}
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="post-averager-example"></a><a href="#post-averager-example" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Post averager example</h3>
+<p>Calculating a 7-buckets moving average for Wikipedia edit deltas, plus a ratio between the current period and the moving average.</p>
+<p>Query syntax:</p>
+<pre><code class="hljs css language-json">{
+  <span class="hljs-attr">"queryType"</span>: <span class="hljs-string">"movingAverage"</span>,
+  <span class="hljs-attr">"dataSource"</span>: <span class="hljs-string">"wikipedia"</span>,
+  <span class="hljs-attr">"granularity"</span>: {
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"period"</span>,
+    <span class="hljs-attr">"period"</span>: <span class="hljs-string">"PT30M"</span>
+  },
+  <span class="hljs-attr">"intervals"</span>: [
+    <span class="hljs-string">"2015-09-12T22:00:00Z/2015-09-13T00:00:00Z"</span>
+  ],
+  <span class="hljs-attr">"aggregations"</span>: [
+    {
+      <span class="hljs-attr">"name"</span>: <span class="hljs-string">"delta30Min"</span>,
+      <span class="hljs-attr">"fieldName"</span>: <span class="hljs-string">"delta"</span>,
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"longSum"</span>
+    }
+  ],
+  <span class="hljs-attr">"averagers"</span>: [
+    {
+      <span class="hljs-attr">"name"</span>: <span class="hljs-string">"trailing30MinChanges"</span>,
+      <span class="hljs-attr">"fieldName"</span>: <span class="hljs-string">"delta30Min"</span>,
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"longMean"</span>,
+      <span class="hljs-attr">"buckets"</span>: <span class="hljs-number">7</span>
+    }
+  ],
+  <span class="hljs-attr">"postAveragers"</span> : [
+    {
+      <span class="hljs-attr">"name"</span>: <span class="hljs-string">"ratioTrailing30MinChanges"</span>,
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"arithmetic"</span>,
+      <span class="hljs-attr">"fn"</span>: <span class="hljs-string">"/"</span>,
+      <span class="hljs-attr">"fields"</span>: [
+        {
+          <span class="hljs-attr">"type"</span>: <span class="hljs-string">"fieldAccess"</span>,
+          <span class="hljs-attr">"fieldName"</span>: <span class="hljs-string">"delta30Min"</span>
+        },
+        {
+          <span class="hljs-attr">"type"</span>: <span class="hljs-string">"fieldAccess"</span>,
+          <span class="hljs-attr">"fieldName"</span>: <span class="hljs-string">"trailing30MinChanges"</span>
+        }
+      ]
+    }
+  ]
+}
+</code></pre>
+<p>Result:</p>
+<pre><code class="hljs css language-json">[ {
+  <span class="hljs-attr">"version"</span> : <span class="hljs-string">"v1"</span>,
+  <span class="hljs-attr">"timestamp"</span> : <span class="hljs-string">"2015-09-12T22:00:00.000Z"</span>,
+  <span class="hljs-attr">"event"</span> : {
+    <span class="hljs-attr">"delta30Min"</span> : <span class="hljs-number">144269</span>,
+    <span class="hljs-attr">"trailing30MinChanges"</span> : <span class="hljs-number">204088.14285714287</span>,
+    <span class="hljs-attr">"ratioTrailing30MinChanges"</span> : <span class="hljs-number">0.7068955500319539</span>
+  }
+}, {
+  <span class="hljs-attr">"version"</span> : <span class="hljs-string">"v1"</span>,
+  <span class="hljs-attr">"timestamp"</span> : <span class="hljs-string">"2015-09-12T22:30:00.000Z"</span>,
+  <span class="hljs-attr">"event"</span> : {
+    <span class="hljs-attr">"delta30Min"</span> : <span class="hljs-number">242860</span>,
+    <span class="hljs-attr">"trailing30MinChanges"</span> : <span class="hljs-number">214031.57142857142</span>,
+    <span class="hljs-attr">"ratioTrailing30MinChanges"</span> : <span class="hljs-number">1.134692411867141</span>
+  }
+}, {
+  <span class="hljs-attr">"version"</span> : <span class="hljs-string">"v1"</span>,
+  <span class="hljs-attr">"timestamp"</span> : <span class="hljs-string">"2015-09-12T23:00:00.000Z"</span>,
+  <span class="hljs-attr">"event"</span> : {
+    <span class="hljs-attr">"delta30Min"</span> : <span class="hljs-number">119100</span>,
+    <span class="hljs-attr">"trailing30MinChanges"</span> : <span class="hljs-number">198697.2857142857</span>,
+    <span class="hljs-attr">"ratioTrailing30MinChanges"</span> : <span class="hljs-number">0.5994042624782422</span>
+  }
+}, {
+  <span class="hljs-attr">"version"</span> : <span class="hljs-string">"v1"</span>,
+  <span class="hljs-attr">"timestamp"</span> : <span class="hljs-string">"2015-09-12T23:30:00.000Z"</span>,
+  <span class="hljs-attr">"event"</span> : {
+    <span class="hljs-attr">"delta30Min"</span> : <span class="hljs-number">177882</span>,
+    <span class="hljs-attr">"trailing30MinChanges"</span> : <span class="hljs-number">193890.0</span>,
+    <span class="hljs-attr">"ratioTrailing30MinChanges"</span> : <span class="hljs-number">0.9174377224199288</span>
+  }
+} ]
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="cycle-size-example"></a><a href="#cycle-size-example" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Cycle size example</h3>
+<p>Calculating an average of every first 10-minutes of the last 3 hours:</p>
+<p>Query syntax:</p>
+<pre><code class="hljs css language-json">{
+  <span class="hljs-attr">"queryType"</span>: <span class="hljs-string">"movingAverage"</span>,
+  <span class="hljs-attr">"dataSource"</span>: <span class="hljs-string">"wikipedia"</span>,
+  <span class="hljs-attr">"granularity"</span>: {
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"period"</span>,
+    <span class="hljs-attr">"period"</span>: <span class="hljs-string">"PT10M"</span>
+  },
+  <span class="hljs-attr">"intervals"</span>: [
+    <span class="hljs-string">"2015-09-12T00:00:00Z/2015-09-13T00:00:00Z"</span>
+  ],
+  <span class="hljs-attr">"aggregations"</span>: [
+    {
+      <span class="hljs-attr">"name"</span>: <span class="hljs-string">"delta10Min"</span>,
+      <span class="hljs-attr">"fieldName"</span>: <span class="hljs-string">"delta"</span>,
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"doubleSum"</span>
+    }
+  ],
+  <span class="hljs-attr">"averagers"</span>: [
+    {
+      <span class="hljs-attr">"name"</span>: <span class="hljs-string">"trailing10MinPerHourChanges"</span>,
+      <span class="hljs-attr">"fieldName"</span>: <span class="hljs-string">"delta10Min"</span>,
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"doubleMeanNoNulls"</span>,
+      <span class="hljs-attr">"buckets"</span>: <span class="hljs-number">18</span>,
+      <span class="hljs-attr">"cycleSize"</span>: <span class="hljs-number">6</span>
+    }
+  ]
+}
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/0.20.1/development/extensions-contrib/momentsketch-quantiles.html"><span class="arrow-prev">← </span><span>Moment Sketches for Approximate Quantiles module</span></a><a class="docs-next button" href="/docs/0.20.1/development/extensions-contrib/opentsdb-emitter.html"><span class="function-name-prevnext">OpenTSDB Emitter</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#overview">Overview</a></li><li><a href="#operations">Operations</a></li><li><a href="#configuration">Configuration</a></li><li><a href="#limitations">Limitations</a></li><li><a href="#averagers">Averagers</a><ul class="toc-headings"><li><a href="#properties">Properties</a></li><li><a href="#averager-types">Averager types:</a></li><li><a href="#cycle-size-day-of-week">Cycle size (Day of Week)</a></li></ul></li><li><a href="#examples">Examples</a><ul class="toc-headings"><li><a href="#basic-example">Basic example</a></li><li><a href="#post-averager-example">Post averager example</a></li><li><a href="#cycle-size-example">Cycle size example</a></li></ul></li></ul></nav></div><footer class="nav-footer druid-footer" id="footer"><div class="container"><div class="text-center"><p><a href="/technology">Technology</a> · <a href="/use-cases">Use Cases</a> · <a href="/druid-powered">Powered by Druid</a> · <a href="/docs/0.20.1/latest">Docs</a> · <a href="/community/">Community</a> · <a href="/downloads.html">Download</a> · <a href="/faq">FAQ</a></p></div><div class="text-center"><a title="Join the user group" href="https://groups.google.com/forum/#!forum/druid-user" target="_blank"><span class="fa fa-comments"></span></a> · <a title="Follow Druid" href="https://twitter.com/druidio" target="_blank"><span class="fab fa-twitter"></span></a> · <a title="Download via Apache" href="https://www.apache.org/dyn/closer.cgi?path=/incubator/druid/{{ site.druid_versions[0].versions[0].version }}/apache-druid-{{ site.druid_versions[0].versions[0].version }}-bin.tar.gz" target="_blank"><span class="fas fa-feather"></span></a> · <a title="GitHub" href="https://github.com/apache/druid" target="_blank"><span class="fab fa-github"></span></a></div><div class="text-center license">Copyright © 2019 <a href="https://www.apache.org/" target="_blank">Apache Software Foundation</a>.<br/>Except where otherwise noted, licensed under <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.<br/>Apache Druid, Druid, and the Druid logo are either registered trademarks or trademarks of The Apache Software Foundation in the United States and other countries.</div></div></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '2de99082a9f38e49dfaa059bbe4c901d',
+                indexName: 'apache_druid',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["language:en","version:0.20.1"]}
+              });
+            </script></body></html>

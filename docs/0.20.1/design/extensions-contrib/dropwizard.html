@@ -1,0 +1,634 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Dropwizard metrics emitter · Apache Druid</title><meta name="viewport" content="width=device-width"/><link rel="canonical" href="https://druid.apache.org/docs/0.20.1/design/extensions-contrib/dropwizard.html"/><meta name="generator" content="Docusaurus"/><meta name="description" content="&lt;!--"/><meta name="docsearch:language" content="en"/><meta name="docsearch:version" content="0.20.1" /><meta property="og:title" content="Dropwizard metrics emitter · Apache Druid"/><meta property="og:type" content="website"/><meta property="og:url" content="https://druid.apache.org/index.html"/><meta property="og:description" content="&lt;!--"/><meta property="og:image" content="https://druid.apache.org/img/druid_nav.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://druid.apache.org/img/druid_nav.png"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-131010415-1"></script><script>
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments); }
+              gtag('js', new Date());
+              gtag('config', 'UA-131010415-1');
+            </script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"/><link rel="stylesheet" href="/css/code-block-buttons.css"/><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script><script type="text/javascript" src="/js/code-block-buttons.js"></script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/druid_nav.png" alt="Apache Druid"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/technology" target="_self">Technology</a></li><li class=""><a href="/use-cases" target="_self">Use Cases</a></li><li class=""><a href="/druid-powered" target="_self">Powered By</a></li><li class=""><a href="/docs/0.20.1/design/index.html" target="_self">Docs</a></li><li class=""><a href="/community/" target="_self">Community</a></li><li class=""><a href="https://www.apache.org" target="_self">Apache</a></li><li class=""><a href="/downloads.html" target="_self">Download</a></li><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/apache/druid/edit/master/docs/design/extensions-contrib/dropwizard.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">Dropwizard metrics emitter</h1></header><article><div><span><!--
+  ~ Licensed to the Apache Software Foundation (ASF) under one
+  ~ or more contributor license agreements.  See the NOTICE file
+  ~ distributed with this work for additional information
+  ~ regarding copyright ownership.  The ASF licenses this file
+  ~ to you under the Apache License, Version 2.0 (the
+  ~ "License"); you may not use this file except in compliance
+  ~ with the License.  You may obtain a copy of the License at
+  ~
+  ~   http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an
+  ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~ KIND, either express or implied.  See the License for the
+  ~ specific language governing permissions and limitations
+  ~ under the License.
+  -->
+<h1><a class="anchor" aria-hidden="true" id="dropwizard-emitter"></a><a href="#dropwizard-emitter" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Dropwizard Emitter</h1>
+<p>To use this extension, make sure to <a href="/docs/0.20.1/development/extensions.html#loading-extensions">include</a> <code>dropwizard-emitter</code> extension.</p>
+<h2><a class="anchor" aria-hidden="true" id="introduction"></a><a href="#introduction" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Introduction</h2>
+<p>This extension integrates <a href="http://metrics.dropwizard.io/3.1.0/getting-started/#">Dropwizard</a> metrics library with druid so that dropwizard users can easily absorb druid into their monitoring ecosystem.
+It accumulates druid metrics as dropwizard metrics, and emits them to various sinks via dropwizard supported reporters.
+Currently supported dropwizard metrics types counter, gauge, meter, timer and histogram.
+These metrics can be emitted using either Console or JMX reporter.</p>
+<p>To use this emitter, set</p>
+<pre><code class="hljs"><span class="hljs-attr">druid.emitter</span>=dropwizard
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="configuration"></a><a href="#configuration" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Configuration</h2>
+<p>All the configuration parameters for Dropwizard emitter are under <code>druid.emitter.dropwizard</code>.</p>
+<table>
+<thead>
+<tr><th>property</th><th>description</th><th>required?</th><th>default</th></tr>
+</thead>
+<tbody>
+<tr><td><code>druid.emitter.dropwizard.reporters</code></td><td>List of dropwizard reporters to be used. Here is a list of <a href="#supported-dropwizard-reporters">Supported Reporters</a></td><td>yes</td><td>none</td></tr>
+<tr><td><code>druid.emitter.dropwizard.prefix</code></td><td>Optional prefix to be used for metrics name</td><td>no</td><td>none</td></tr>
+<tr><td><code>druid.emitter.dropwizard.includeHost</code></td><td>Flag to include the host and port as part of the metric name.</td><td>no</td><td>yes</td></tr>
+<tr><td><code>druid.emitter.dropwizard.dimensionMapPath</code></td><td>Path to JSON file defining the dropwizard metric type, and desired dimensions for every Druid metric</td><td>no</td><td>Default mapping provided. See below.</td></tr>
+<tr><td><code>druid.emitter.dropwizard.alertEmitters</code></td><td>List of emitters where alerts will be forwarded to.</td><td>no</td><td>empty list (no forwarding)</td></tr>
+<tr><td><code>druid.emitter.dropwizard.maxMetricsRegistrySize</code></td><td>Maximum size of metrics registry to be cached at any time.</td><td>no</td><td>100 Mb</td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="druid-to-dropwizard-event-conversion"></a><a href="#druid-to-dropwizard-event-conversion" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Druid to Dropwizard Event Conversion</h3>
+<p>Each metric emitted using Dropwizard must specify a type, one of <code>[timer, counter, guage, meter, histogram]</code>. Dropwizard Emitter expects this mapping to
+be provided as a JSON file.  Additionally, this mapping specifies which dimensions should be included for each metric.
+If the user does not specify their own JSON file, a <a href="#default-metrics-mapping">default mapping</a> is used.
+All metrics are expected to be mapped. Metrics which are not mapped will be ignored.
+Dropwizard metric path is organized using the following schema:</p>
+<p><code>&lt;druid metric name&gt; : { &quot;dimensions&quot; : &lt;dimension list&gt;, &quot;type&quot; : &lt;Dropwizard metric type&gt;, &quot;timeUnit&quot; : &lt;For timers, timeunit in which metric is emitted&gt;}</code></p>
+<p>e.g.</p>
+<pre><code class="hljs css language-json">"query/time" : { "dimensions" : ["dataSource", "type"], "type" : "timer", "timeUnit": "MILLISECONDS"},
+"segment/scan/pending" : { "dimensions" : [], "type" : "gauge"}
+</code></pre>
+<p>For most use-cases, the default mapping is sufficient.</p>
+<h3><a class="anchor" aria-hidden="true" id="supported-dropwizard-reporters"></a><a href="#supported-dropwizard-reporters" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Supported Dropwizard reporters</h3>
+<h4><a class="anchor" aria-hidden="true" id="jmx-reporter"></a><a href="#jmx-reporter" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>JMX Reporter</h4>
+<p>Used to report druid metrics via JMX.</p>
+<pre><code class="hljs">
+<span class="hljs-attr">druid.emitter.dropwizard.reporters</span>=[{<span class="hljs-string">"type"</span>:<span class="hljs-string">"jmx"</span>}]
+
+</code></pre>
+<h4><a class="anchor" aria-hidden="true" id="console-reporter"></a><a href="#console-reporter" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Console Reporter</h4>
+<p>Used to print Druid Metrics to console logs.</p>
+<pre><code class="hljs">
+druid.emitter.dropwizard.reporters=[{<span class="hljs-string">"type"</span>:<span class="hljs-string">"console"</span>,<span class="hljs-string">"emitIntervalInSecs"</span>:<span class="hljs-number">30</span>}<span class="hljs-string">"}]</span>
+
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="default-metrics-mapping"></a><a href="#default-metrics-mapping" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Default Metrics Mapping</h3>
+<p>Latest default metrics mapping can be found [here] (<a href="https://github.com/apache/druid/tree/master/extensions-contrib/dropwizard/src/main/resources/defaultMetricDimensions.json">https://github.com/apache/druid/tree/master/extensions-contrib/dropwizard/src/main/resources/defaultMetricDimensions.json</a>)</p>
+<pre><code class="hljs css language-json">{
+  <span class="hljs-attr">"query/time"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [
+      <span class="hljs-string">"dataSource"</span>,
+      <span class="hljs-string">"type"</span>
+    ],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"timer"</span>,
+    <span class="hljs-attr">"timeUnit"</span>: <span class="hljs-string">"MILLISECONDS"</span>
+  },
+  <span class="hljs-attr">"query/node/time"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [
+      <span class="hljs-string">"server"</span>
+    ],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"timer"</span>,
+    <span class="hljs-attr">"timeUnit"</span>: <span class="hljs-string">"MILLISECONDS"</span>
+  },
+  <span class="hljs-attr">"query/node/ttfb"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [
+      <span class="hljs-string">"server"</span>
+    ],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"timer"</span>,
+    <span class="hljs-attr">"timeUnit"</span>: <span class="hljs-string">"MILLISECONDS"</span>
+  },
+  <span class="hljs-attr">"query/node/backpressure"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [
+      <span class="hljs-string">"server"</span>
+    ],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"timer"</span>,
+    <span class="hljs-attr">"timeUnit"</span>: <span class="hljs-string">"MILLISECONDS"</span>
+  },
+  <span class="hljs-attr">"query/segment/time"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"timer"</span>,
+    <span class="hljs-attr">"timeUnit"</span>: <span class="hljs-string">"MILLISECONDS"</span>
+  },
+  <span class="hljs-attr">"query/wait/time"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"timer"</span>,
+    <span class="hljs-attr">"timeUnit"</span>: <span class="hljs-string">"MILLISECONDS"</span>
+  },
+  <span class="hljs-attr">"segment/scan/pending"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"gauge"</span>
+  },
+  <span class="hljs-attr">"query/segmentAndCache/time"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"timer"</span>,
+    <span class="hljs-attr">"timeUnit"</span>: <span class="hljs-string">"MILLISECONDS"</span>
+  },
+  <span class="hljs-attr">"query/cpu/time"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [
+      <span class="hljs-string">"dataSource"</span>,
+      <span class="hljs-string">"type"</span>
+    ],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"timer"</span>,
+    <span class="hljs-attr">"timeUnit"</span>: <span class="hljs-string">"NANOSECONDS"</span>
+  },
+  <span class="hljs-attr">"query/cache/delta/numEntries"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"counter"</span>
+  },
+  <span class="hljs-attr">"query/cache/delta/sizeBytes"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"counter"</span>
+  },
+  <span class="hljs-attr">"query/cache/delta/hits"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"counter"</span>
+  },
+  <span class="hljs-attr">"query/cache/delta/misses"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"counter"</span>
+  },
+  <span class="hljs-attr">"query/cache/delta/evictions"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"counter"</span>
+  },
+  <span class="hljs-attr">"query/cache/delta/hitRate"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"counter"</span>
+  },
+  <span class="hljs-attr">"query/cache/delta/averageBytes"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"counter"</span>
+  },
+  <span class="hljs-attr">"query/cache/delta/timeouts"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"counter"</span>
+  },
+  <span class="hljs-attr">"query/cache/delta/errors"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"counter"</span>
+  },
+  <span class="hljs-attr">"query/cache/total/numEntries"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"gauge"</span>
+  },
+  <span class="hljs-attr">"query/cache/total/sizeBytes"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"gauge"</span>
+  },
+  <span class="hljs-attr">"query/cache/total/hits"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"gauge"</span>
+  },
+  <span class="hljs-attr">"query/cache/total/misses"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"gauge"</span>
+  },
+  <span class="hljs-attr">"query/cache/total/evictions"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"gauge"</span>
+  },
+  <span class="hljs-attr">"query/cache/total/hitRate"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"gauge"</span>
+  },
+  <span class="hljs-attr">"query/cache/total/averageBytes"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"gauge"</span>
+  },
+  <span class="hljs-attr">"query/cache/total/timeouts"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"gauge"</span>
+  },
+  <span class="hljs-attr">"query/cache/total/errors"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"gauge"</span>
+  },
+  <span class="hljs-attr">"ingest/events/thrownAway"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [
+      <span class="hljs-string">"dataSource"</span>
+    ],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"counter"</span>
+  },
+  <span class="hljs-attr">"ingest/events/unparseable"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [
+      <span class="hljs-string">"dataSource"</span>
+    ],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"counter"</span>
+  },
+  <span class="hljs-attr">"ingest/events/duplicate"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [
+      <span class="hljs-string">"dataSource"</span>
+    ],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"counter"</span>
+  },
+  <span class="hljs-attr">"ingest/events/processed"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [
+      <span class="hljs-string">"dataSource"</span>
+    ],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"counter"</span>
+  },
+  <span class="hljs-attr">"ingest/rows/output"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [
+      <span class="hljs-string">"dataSource"</span>
+    ],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"counter"</span>
+  },
+  <span class="hljs-attr">"ingest/persist/counter"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [
+      <span class="hljs-string">"dataSource"</span>
+    ],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"counter"</span>
+  },
+  <span class="hljs-attr">"ingest/persist/time"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [
+      <span class="hljs-string">"dataSource"</span>
+    ],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"timer"</span>,
+    <span class="hljs-attr">"timeUnit"</span>: <span class="hljs-string">"MILLISECONDS"</span>
+  },
+  <span class="hljs-attr">"ingest/persist/cpu"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [
+      <span class="hljs-string">"dataSource"</span>
+    ],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"timer"</span>,
+    <span class="hljs-attr">"timeUnit"</span>: <span class="hljs-string">"NANOSECONDS"</span>
+  },
+  <span class="hljs-attr">"ingest/persist/backPressure"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [
+      <span class="hljs-string">"dataSource"</span>
+    ],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"gauge"</span>
+  },
+  <span class="hljs-attr">"ingest/persist/failed"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [
+      <span class="hljs-string">"dataSource"</span>
+    ],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"counter"</span>
+  },
+  <span class="hljs-attr">"ingest/handoff/failed"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [
+      <span class="hljs-string">"dataSource"</span>
+    ],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"counter"</span>
+  },
+  <span class="hljs-attr">"ingest/merge/time"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [
+      <span class="hljs-string">"dataSource"</span>
+    ],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"timer"</span>,
+    <span class="hljs-attr">"timeUnit"</span>: <span class="hljs-string">"MILLISECONDS"</span>
+  },
+  <span class="hljs-attr">"ingest/merge/cpu"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [
+      <span class="hljs-string">"dataSource"</span>
+    ],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"timer"</span>,
+    <span class="hljs-attr">"timeUnit"</span>: <span class="hljs-string">"NANOSECONDS"</span>
+  },
+  <span class="hljs-attr">"task/run/time"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [
+      <span class="hljs-string">"dataSource"</span>,
+      <span class="hljs-string">"taskType"</span>
+    ],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"timer"</span>,
+    <span class="hljs-attr">"timeUnit"</span>: <span class="hljs-string">"MILLISECONDS"</span>
+  },
+  <span class="hljs-attr">"segment/added/bytes"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [
+      <span class="hljs-string">"dataSource"</span>,
+      <span class="hljs-string">"taskType"</span>
+    ],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"counter"</span>
+  },
+  <span class="hljs-attr">"segment/moved/bytes"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [
+      <span class="hljs-string">"dataSource"</span>,
+      <span class="hljs-string">"taskType"</span>
+    ],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"counter"</span>
+  },
+  <span class="hljs-attr">"segment/nuked/bytes"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [
+      <span class="hljs-string">"dataSource"</span>,
+      <span class="hljs-string">"taskType"</span>
+    ],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"counter"</span>
+  },
+  <span class="hljs-attr">"segment/assigned/counter"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [
+      <span class="hljs-string">"tier"</span>
+    ],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"counter"</span>
+  },
+  <span class="hljs-attr">"segment/moved/counter"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [
+      <span class="hljs-string">"tier"</span>
+    ],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"counter"</span>
+  },
+  <span class="hljs-attr">"segment/dropped/counter"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [
+      <span class="hljs-string">"tier"</span>
+    ],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"counter"</span>
+  },
+  <span class="hljs-attr">"segment/deleted/counter"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [
+      <span class="hljs-string">"tier"</span>
+    ],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"counter"</span>
+  },
+  <span class="hljs-attr">"segment/unneeded/counter"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [
+      <span class="hljs-string">"tier"</span>
+    ],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"counter"</span>
+  },
+  <span class="hljs-attr">"segment/cost/raw"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [
+      <span class="hljs-string">"tier"</span>
+    ],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"counter"</span>
+  },
+  <span class="hljs-attr">"segment/cost/normalization"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [
+      <span class="hljs-string">"tier"</span>
+    ],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"counter"</span>
+  },
+  <span class="hljs-attr">"segment/cost/normalized"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [
+      <span class="hljs-string">"tier"</span>
+    ],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"counter"</span>
+  },
+  <span class="hljs-attr">"segment/loadQueue/size"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [
+      <span class="hljs-string">"server"</span>
+    ],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"gauge"</span>
+  },
+  <span class="hljs-attr">"segment/loadQueue/failed"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [
+      <span class="hljs-string">"server"</span>
+    ],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"gauge"</span>
+  },
+  <span class="hljs-attr">"segment/loadQueue/counter"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [
+      <span class="hljs-string">"server"</span>
+    ],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"gauge"</span>
+  },
+  <span class="hljs-attr">"segment/dropQueue/counter"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [
+      <span class="hljs-string">"server"</span>
+    ],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"gauge"</span>
+  },
+  <span class="hljs-attr">"segment/size"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [
+      <span class="hljs-string">"dataSource"</span>
+    ],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"gauge"</span>
+  },
+  <span class="hljs-attr">"segment/overShadowed/counter"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"gauge"</span>
+  },
+  <span class="hljs-attr">"segment/max"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"gauge"</span>
+  },
+  <span class="hljs-attr">"segment/used"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [
+      <span class="hljs-string">"dataSource"</span>,
+      <span class="hljs-string">"tier"</span>,
+      <span class="hljs-string">"priority"</span>
+    ],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"gauge"</span>
+  },
+  <span class="hljs-attr">"segment/usedPercent"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [
+      <span class="hljs-string">"dataSource"</span>,
+      <span class="hljs-string">"tier"</span>,
+      <span class="hljs-string">"priority"</span>
+    ],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"gauge"</span>
+  },
+  <span class="hljs-attr">"jvm/pool/committed"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [
+      <span class="hljs-string">"poolKind"</span>,
+      <span class="hljs-string">"poolName"</span>
+    ],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"gauge"</span>
+  },
+  <span class="hljs-attr">"jvm/pool/init"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [
+      <span class="hljs-string">"poolKind"</span>,
+      <span class="hljs-string">"poolName"</span>
+    ],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"gauge"</span>
+  },
+  <span class="hljs-attr">"jvm/pool/max"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [
+      <span class="hljs-string">"poolKind"</span>,
+      <span class="hljs-string">"poolName"</span>
+    ],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"gauge"</span>
+  },
+  <span class="hljs-attr">"jvm/pool/used"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [
+      <span class="hljs-string">"poolKind"</span>,
+      <span class="hljs-string">"poolName"</span>
+    ],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"gauge"</span>
+  },
+  <span class="hljs-attr">"jvm/bufferpool/counter"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [
+      <span class="hljs-string">"bufferpoolName"</span>
+    ],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"gauge"</span>
+  },
+  <span class="hljs-attr">"jvm/bufferpool/used"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [
+      <span class="hljs-string">"bufferpoolName"</span>
+    ],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"gauge"</span>
+  },
+  <span class="hljs-attr">"jvm/bufferpool/capacity"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [
+      <span class="hljs-string">"bufferpoolName"</span>
+    ],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"gauge"</span>
+  },
+  <span class="hljs-attr">"jvm/mem/init"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [
+      <span class="hljs-string">"memKind"</span>
+    ],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"gauge"</span>
+  },
+  <span class="hljs-attr">"jvm/mem/max"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [
+      <span class="hljs-string">"memKind"</span>
+    ],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"gauge"</span>
+  },
+  <span class="hljs-attr">"jvm/mem/used"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [
+      <span class="hljs-string">"memKind"</span>
+    ],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"gauge"</span>
+  },
+  <span class="hljs-attr">"jvm/mem/committed"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [
+      <span class="hljs-string">"memKind"</span>
+    ],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"gauge"</span>
+  },
+  <span class="hljs-attr">"jvm/gc/counter"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [
+      <span class="hljs-string">"gcName"</span>,
+      <span class="hljs-string">"gcGen"</span>
+    ],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"counter"</span>
+  },
+  <span class="hljs-attr">"jvm/gc/cpu"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [
+      <span class="hljs-string">"gcName"</span>,
+      <span class="hljs-string">"gcGen"</span>
+    ],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"timer"</span>,
+    <span class="hljs-attr">"timeUnit"</span>: <span class="hljs-string">"NANOSECONDS"</span>
+  },
+  <span class="hljs-attr">"ingest/events/buffered"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [
+      <span class="hljs-string">"serviceName"</span>,
+      <span class="hljs-string">"bufferCapacity"</span>
+    ],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"gauge"</span>
+  },
+  <span class="hljs-attr">"sys/swap/free"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"gauge"</span>
+  },
+  <span class="hljs-attr">"sys/swap/max"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"gauge"</span>
+  },
+  <span class="hljs-attr">"sys/swap/pageIn"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"gauge"</span>
+  },
+  <span class="hljs-attr">"sys/swap/pageOut"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"gauge"</span>
+  },
+  <span class="hljs-attr">"sys/disk/write/counter"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [
+      <span class="hljs-string">"fsDevName"</span>
+    ],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"counter"</span>
+  },
+  <span class="hljs-attr">"sys/disk/read/counter"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [
+      <span class="hljs-string">"fsDevName"</span>
+    ],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"counter"</span>
+  },
+  <span class="hljs-attr">"sys/disk/write/size"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [
+      <span class="hljs-string">"fsDevName"</span>
+    ],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"counter"</span>
+  },
+  <span class="hljs-attr">"sys/disk/read/size"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [
+      <span class="hljs-string">"fsDevName"</span>
+    ],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"counter"</span>
+  },
+  <span class="hljs-attr">"sys/net/write/size"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"counter"</span>
+  },
+  <span class="hljs-attr">"sys/net/read/size"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"counter"</span>
+  },
+  <span class="hljs-attr">"sys/fs/used"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [
+      <span class="hljs-string">"fsDevName"</span>,
+      <span class="hljs-string">"fsDirName"</span>,
+      <span class="hljs-string">"fsTypeName"</span>,
+      <span class="hljs-string">"fsSysTypeName"</span>,
+      <span class="hljs-string">"fsOptions"</span>
+    ],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"gauge"</span>
+  },
+  <span class="hljs-attr">"sys/fs/max"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [
+      <span class="hljs-string">"fsDevName"</span>,
+      <span class="hljs-string">"fsDirName"</span>,
+      <span class="hljs-string">"fsTypeName"</span>,
+      <span class="hljs-string">"fsSysTypeName"</span>,
+      <span class="hljs-string">"fsOptions"</span>
+    ],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"gauge"</span>
+  },
+  <span class="hljs-attr">"sys/mem/used"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"gauge"</span>
+  },
+  <span class="hljs-attr">"sys/mem/max"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"gauge"</span>
+  },
+  <span class="hljs-attr">"sys/storage/used"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [
+      <span class="hljs-string">"fsDirName"</span>
+    ],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"gauge"</span>
+  },
+  <span class="hljs-attr">"sys/cpu"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [
+      <span class="hljs-string">"cpuName"</span>,
+      <span class="hljs-string">"cpuTime"</span>
+    ],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"gauge"</span>
+  },
+  <span class="hljs-attr">"coordinator-segment/counter"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [
+      <span class="hljs-string">"dataSource"</span>
+    ],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"gauge"</span>
+  },
+  <span class="hljs-attr">"historical-segment/counter"</span>: {
+    <span class="hljs-attr">"dimensions"</span>: [
+      <span class="hljs-string">"dataSource"</span>,
+      <span class="hljs-string">"tier"</span>,
+      <span class="hljs-string">"priority"</span>
+    ],
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"gauge"</span>
+  }
+}
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#introduction">Introduction</a></li><li><a href="#configuration">Configuration</a><ul class="toc-headings"><li><a href="#druid-to-dropwizard-event-conversion">Druid to Dropwizard Event Conversion</a></li><li><a href="#supported-dropwizard-reporters">Supported Dropwizard reporters</a></li><li><a href="#default-metrics-mapping">Default Metrics Mapping</a></li></ul></li></ul></nav></div><footer class="nav-footer druid-footer" id="footer"><div class="container"><div class="text-center"><p><a href="/technology">Technology</a> · <a href="/use-cases">Use Cases</a> · <a href="/druid-powered">Powered by Druid</a> · <a href="/docs/0.20.1/latest">Docs</a> · <a href="/community/">Community</a> · <a href="/downloads.html">Download</a> · <a href="/faq">FAQ</a></p></div><div class="text-center"><a title="Join the user group" href="https://groups.google.com/forum/#!forum/druid-user" target="_blank"><span class="fa fa-comments"></span></a> · <a title="Follow Druid" href="https://twitter.com/druidio" target="_blank"><span class="fab fa-twitter"></span></a> · <a title="Download via Apache" href="https://www.apache.org/dyn/closer.cgi?path=/incubator/druid/{{ site.druid_versions[0].versions[0].version }}/apache-druid-{{ site.druid_versions[0].versions[0].version }}-bin.tar.gz" target="_blank"><span class="fas fa-feather"></span></a> · <a title="GitHub" href="https://github.com/apache/druid" target="_blank"><span class="fab fa-github"></span></a></div><div class="text-center license">Copyright © 2019 <a href="https://www.apache.org/" target="_blank">Apache Software Foundation</a>.<br/>Except where otherwise noted, licensed under <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.<br/>Apache Druid, Druid, and the Druid logo are either registered trademarks or trademarks of The Apache Software Foundation in the United States and other countries.</div></div></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '2de99082a9f38e49dfaa059bbe4c901d',
+                indexName: 'apache_druid',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["language:en","version:0.20.1"]}
+              });
+            </script></body></html>
