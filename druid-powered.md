@@ -549,6 +549,11 @@ At [Shopee](http://shopee.com/) Data Engineer Group, we use Druid for real-time 
 
 Sift Science provides an online trust platform that online businesses use to prevent fraud and abuse. We use Druid as a tool to gain real-time insights about our data and machine learning models.
 
+## SigNoz
+[SigNoz](https://signoz.io) is an open source observability platform. SigNoz uses distributed tracing to gain visibility into your systems and powers data using Kafka (to handle high ingestion rate and backpressure) and Apache Druid (Apache Druid is a high performance real-time analytics database), both proven in industry to handle scale.
+
+Druid powers aggregations after slicing and dicing of high-dimensional trace data.
+
 ## Sina Weibo
 
 Weibo Advertising Platform deploys Druid as realtime data tool for online advertising analytics and business intelligence(BI). Druid processes TBs of realtime data per day with latency in one minute.
