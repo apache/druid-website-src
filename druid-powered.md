@@ -8,6 +8,12 @@ canonical: 'https://druid.apache.org/druid-powered'
 
 There are numerous companies of various sizes in production with Druid. Some of them are listed below.
 
+## Adikteev
+
+[Adikteev](https://www.adikteev.com) is the leading mobile app re-engagement platform for performance-driven marketers, and is consistently ranked in the top 5 of the AppsFlyer Performance Index. By using Druid instead of relying on slow and stale dashboards, we have been able to achieve internal productivity gains, make better decisions faster, provide our external clients with strategic advice to improve the performance and effectiveness of their retargeting marketing campaigns, and notify clients quickly of potentially serious problems. 
+
+* [How Adikteev helps customers succeed using self-service analytics](https://imply.io/post/how-adikteev-helps-customers-succeed-using-self-service-analytics)
+
 ## Airbnb
 
 Druid powers slice and dice analytics on both historical and realtime-time metrics. It significantly reduces latency of analytic queries and help people to get insights more interactively.
@@ -76,6 +82,10 @@ BIGO selects Druid as an OLAP engine to analyze app(Like, Bigolive, IMO, etc.) d
 ## Billy Mobile
 
 Billy Mobile is a mobile advertising platform, excelling in the performance-based optimisation segment. We use Druid to power our real-time analytics dashboards, in which our publishers, advertisers and staff can get insights on how their campaigns, offers and traffic are performing, with sub-second query time and minute granularity . We are using a lambda-architecture aproach, ingesting the traffic in real time with Tranquility and Storm, and a batch layer via a tight integration with Hive and Hadoop, our Master Data Set. This way we can provide crucial fast access to data, while making sure to have the right numbers.
+
+## Blis
+
+[Blis](https://www.blis.com) is the trusted leader in location-powered advertising and analytics, helping brands understand, reach and engage consumers globally to deliver measurable results. The operations team uses Druid to manage media purchases and make intelligent pricing decisions. The analytic insights team, which helps customers maximize their value from Blis, uses Druid to discover opportunities and tell data-driven stories about their campaigns. Engineering and product teams use Druid to keep an eye on revenue and margin, with the ability to drill into unexpected changes.
 
 ## Blueshift
 
@@ -199,7 +209,13 @@ One of our key goals at [FacilityConneX](https://www.facilityconnex.com/) is to 
 
 ## Fanatics
 
-Druid powers our applications related metrics and helps us slice and dice analytics on both historical and realtime-time metrics. It significantly reduces latency of analytic queries and help people to get insights more interactively. Through druid data we can now do anomaly detection as well
+Druid powers our applications related metrics and helps us slice and dice analytics on both historical and realtime-time metrics. It significantly reduces latency of analytic queries and help people to get insights more interactively. Through druid data we can now do anomaly detection as well.
+
+## Flurry Analytics
+
+[Flurry](https://www.flurry.com) is a mobile app analytics platform that empowers product, development and growth experts to build better apps that users love. Mobile data hits the Flurry backend at a huge rate, updates statistics across hundreds of dimensions, and becomes queryable immediately. Flurry harnesses Druid to ingest data and serve queries at this massive rate.
+
+* [Druid @ Flurry](https://www.youtube.com/watch?v=6c_hc3Qca5s)
 
 ## FullContact
 
@@ -664,6 +680,10 @@ Trendyol, which is the largest e-commerce company in Turkey, uses Druid for real
 ## TripleLift
 
 TripleLift uses Druid to provide insights into performance aspects of its native programmatic exchange for sales/business development opportunities, and to provide reporting used by advertisers and publishers.
+
+## TrueCar
+
+[TrueCar](https://www.truecar.com) is a leading automotive digital marketplace that enables car buyers to connect to our nationwide network of Certified Dealers. TrueCar uses Druid and Imply Cloud to help them make their dashboards real-time, detect anomalies, and do so while minimizing engineering and operational overhead. Druid enables TrueCar to unlock insights from digital interaction data, further empowers their data scientists and product teams to improve services with increased agility, and deliver a higher quality experience.
 
 ## Twitch
 
