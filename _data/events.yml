@@ -8,3 +8,7 @@
   info: London Apache Druid Meetup by Imply
   link: https://www.meetup.com/Apache-Druid-London/events/276052050/
   
+- date: 2021-03-01 
+  name: Inside Apache Druid’s Storage and Query Engine
+  info: Carnegie Mellon Database Group
+  link: https://db.cs.cmu.edu/events/vaccination-2021-inside-apache-druids-storage-and-query-engine-gian-merlino/
