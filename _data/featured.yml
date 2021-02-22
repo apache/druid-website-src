@@ -1,4 +1,10 @@
-  - date: 2020-04-15
+-   date: 2021-02-22
+    title: "Data Modeling and Query Performance in Apache Druid"
+    name: "Matt Sarrel"
+    link: https://www.druidforum.org/t/data-modeling-and-query-performance-in-apache-druid/5942
+    company: Imply
+
+-   date: 2020-04-15
     title: "Apache Druid Vision and Roadmap"
     name: "Gian Merlino"
     link: https://imply.io/virtual-druid-summit/apache-druid-vision-and-roadmap-gian-merlino
