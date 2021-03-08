@@ -1,14 +1,10 @@
-- date: 2021-02-23 
-  name: February Druid Office Hours
+- date: 2021-03-23 
+  name: March Apache Druid Office Hours
   info: Bay Area Apache Druid Meetup by Imply
-  link: https://www.meetup.com/druidio/events/276051901
+  link: https://www.meetup.com/druidio/events/276816603
 
-- date: 2021-02-25
-  name: The February Druid Drop-in!
+- date: 2021-03-31
+  name: March Apache Druid Drop-in
   info: London Apache Druid Meetup by Imply
-  link: https://www.meetup.com/Apache-Druid-London/events/276052050/
+  link: https://www.meetup.com/Apache-Druid-London/events/276817481
   
-- date: 2021-03-01 
-  name: Inside Apache Druid’s Storage and Query Engine
-  info: Carnegie Mellon Database Group
-  link: https://db.cs.cmu.edu/events/vaccination-2021-inside-apache-druids-storage-and-query-engine-gian-merlino/
