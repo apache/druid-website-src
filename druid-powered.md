@@ -533,6 +533,14 @@ We have successfully deployed Druid at [Razorpay](https://razorpay.com/) for our
 
 redBorder is an open source, scale out, cybersecurity analytics platform based on Druid. We hope its full-blown web interface, dashboard and report systems, and ready-to-use real-time pipeline foster other Druid users to create a strong community around it. To see more, please visit redborder.org
 
+## Reddit
+
+Reddit is home to thousands of communities, endless conversation, and authentic human connection. Every day, millions of people around the world post, vote, and comment in communities organized around their interests.
+
+Reddit uses Apache Druid to provide transparency to our advertisers on how users engage with their ads. Migrating our reporting pipeline to Druid has significantly reduced our surface area for bugs and made the system more flexible to changing product requirements. Additionally, we have consistent memory usage across our reporting service.
+
+* [Scaling Reporting at Reddit](https://redditblog.com/2021/02/26/scaling-reporting-at-reddit/)
+
 ## Retargetly
 
 Retargetly is a Data Management Platform that enables publishers and advertisers to manage their first party user data, mix it with second and third party data from others providers and activate it into advertising campaigns (direct, programmatic, etc.). Druid enables us to show real time audience insights. It also provides a lot of flexibility on ad-hoc queries with low latency. We provide default graphs and metrics to our clients but they also have the possibility to make their own interactive queries on real-time.
