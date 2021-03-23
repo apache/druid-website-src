@@ -619,6 +619,12 @@ Smyte provides an API and UI for detecting and blocking bad actors on the intern
 
 * [Data Analytics and Processing at Snap](https://www.slideshare.net/CharlesAllen9/data-analytics-and-processing-at-snap-druid-meetup-la-september-2018)
 
+## Societe Generale
+
+Societe Generale, one of Europe's leading financial services groups and a major player in the economy for over 150 years, supports 29 million clients every day with 138,000 staff in 62 countries.
+
+Within the Societe Generale IT department, Apache Druid is used as Time Series Database in order to store performance metrics generated in real-time by thousands of servers, databases, middlewares. These data are stored in multiple Druid clusters in multiple regions (+840 vCPUs, +7000GB of RAM, +300 billions of events) and are used for many purposes, such as dashboarding and predictive maintenance use cases.
+
 ## Splunk
 
 We went through the journey of deploying Apache Druid clusters on Kubernetes and created a [druid-operator](https://github.com/druid-io/druid-operator). We use this operator to deploy Druid clusters at Splunk.
