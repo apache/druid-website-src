@@ -1,10 +1,19 @@
-- date: 2021-03-23 
-  name: March Apache Druid Office Hours
-  info: Bay Area Apache Druid Meetup by Imply
-  link: https://www.meetup.com/druidio/events/276816603
-
-- date: 2021-03-31
+- date: 2021-03-31 
   name: March Apache Druid Drop-in
   info: London Apache Druid Meetup by Imply
   link: https://www.meetup.com/Apache-Druid-London/events/276817481
+
+- date: 2021-04-06
+  name: Apache Druid Ecosystems
+  info: DataOps Poland
+  link: https://www.meetup.com/dataops-poland/events/276966946
   
+- date: 2021-04-07
+  name: DataEng meetup, April Edition
+  info: Sydney Data Engineering Meetup
+  link: https://www.meetup.com/Sydney-Data-Engineering-Meetup/events/276822248
+  
+ - date: 2021-04-21
+  name: Inside Apache Druid's Storage and Query Engine
+  info: SF Big Analytics
+  link: https://www.meetup.com/SF-Big-Analytics/events/277056584
