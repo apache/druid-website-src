@@ -1,0 +1,417 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Metrics · Apache Druid</title><meta name="viewport" content="width=device-width"/><link rel="canonical" href="https://druid.apache.org/docs/0.20.2/operations/metrics.html"/><meta name="generator" content="Docusaurus"/><meta name="description" content="&lt;!--"/><meta name="docsearch:language" content="en"/><meta name="docsearch:version" content="0.20.2" /><meta property="og:title" content="Metrics · Apache Druid"/><meta property="og:type" content="website"/><meta property="og:url" content="https://druid.apache.org/index.html"/><meta property="og:description" content="&lt;!--"/><meta property="og:image" content="https://druid.apache.org/img/druid_nav.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://druid.apache.org/img/druid_nav.png"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-131010415-1"></script><script>
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments); }
+              gtag('js', new Date());
+              gtag('config', 'UA-131010415-1');
+            </script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"/><link rel="stylesheet" href="/css/code-block-buttons.css"/><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script><script type="text/javascript" src="/js/code-block-buttons.js"></script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/druid_nav.png" alt="Apache Druid"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/technology" target="_self">Technology</a></li><li class=""><a href="/use-cases" target="_self">Use Cases</a></li><li class=""><a href="/druid-powered" target="_self">Powered By</a></li><li class="siteNavGroupActive"><a href="/docs/0.20.2/design/index.html" target="_self">Docs</a></li><li class=""><a href="/community/" target="_self">Community</a></li><li class=""><a href="https://www.apache.org" target="_self">Apache</a></li><li class=""><a href="/downloads.html" target="_self">Download</a></li><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Operations</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Getting started<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.2/design/index.html">Introduction to Apache Druid</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/tutorials/index.html">Quickstart</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/tutorials/docker.html">Docker</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/single-server.html">Single server deployment</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/tutorials/cluster.html">Clustered deployment</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Tutorials<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.2/tutorials/tutorial-batch.html">Loading files natively</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/tutorials/tutorial-kafka.html">Load from Apache Kafka</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/tutorials/tutorial-batch-hadoop.html">Load from Apache Hadoop</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/tutorials/tutorial-query.html">Querying data</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/tutorials/tutorial-rollup.html">Roll-up</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/tutorials/tutorial-retention.html">Configuring data retention</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/tutorials/tutorial-update-data.html">Updating existing data</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/tutorials/tutorial-compaction.html">Compacting segments</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/tutorials/tutorial-delete-data.html">Deleting data</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/tutorials/tutorial-ingestion-spec.html">Writing an ingestion spec</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/tutorials/tutorial-transform-spec.html">Transforming input data</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/tutorials/tutorial-kerberos-hadoop.html">Kerberized HDFS deep storage</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Design<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.2/design/architecture.html">Design</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/design/segments.html">Segments</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/design/processes.html">Processes and servers</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/dependencies/deep-storage.html">Deep storage</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/dependencies/metadata-storage.html">Metadata storage</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/dependencies/zookeeper.html">ZooKeeper</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Ingestion<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.2/ingestion/index.html">Ingestion</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/ingestion/data-formats.html">Data formats</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/ingestion/schema-design.html">Schema design tips</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/ingestion/data-management.html">Data management</a></li><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Stream ingestion</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/kafka-ingestion.html">Apache Kafka</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/kinesis-ingestion.html">Amazon Kinesis</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/ingestion/tranquility.html">Tranquility</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Batch ingestion</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.20.2/ingestion/native-batch.html">Native batch</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/ingestion/hadoop.html">Hadoop-based</a></li></ul></div><li class="navListItem"><a class="navItem" href="/docs/0.20.2/ingestion/tasks.html">Task reference</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/ingestion/faq.html">Troubleshooting FAQ</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Querying<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/sql.html">Druid SQL</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/querying.html">Native queries</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/query-execution.html">Query execution</a></li><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Concepts</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/datasource.html">Datasources</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/joins.html">Joins</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/lookups.html">Lookups</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/multi-value-dimensions.html">Multi-value dimensions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/multitenancy.html">Multitenancy</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/caching.html">Query caching</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/query-context.html">Context parameters</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Native query types</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/timeseriesquery.html">Timeseries</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/topnquery.html">TopN</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/groupbyquery.html">GroupBy</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/scan-query.html">Scan</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/searchquery.html">Search</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/timeboundaryquery.html">TimeBoundary</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/segmentmetadataquery.html">SegmentMetadata</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/datasourcemetadataquery.html">DatasourceMetadata</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Native query components</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/filters.html">Filters</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/granularities.html">Granularities</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/dimensionspecs.html">Dimensions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/aggregations.html">Aggregations</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/post-aggregations.html">Post-aggregations</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/misc/math-expr.html">Expressions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/having.html">Having filters (groupBy)</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/limitspec.html">Sorting and limiting (groupBy)</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/topnmetricspec.html">Sorting (topN)</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/sorting-orders.html">String comparators</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/virtual-columns.html">Virtual columns</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/geo.html">Spatial filters</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Configuration<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.2/configuration/index.html">Configuration reference</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions.html">Extensions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/configuration/logging.html">Logging</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Operations<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/druid-console.html">Web console</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/getting-started.html">Getting started with Apache Druid</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/basic-cluster-tuning.html">Basic cluster tuning</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/api-reference.html">API reference</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/high-availability.html">High availability</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/rolling-updates.html">Rolling updates</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/rule-configuration.html">Retaining or automatically dropping data</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/0.20.2/operations/metrics.html">Metrics</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/alerts.html">Alerts</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/other-hadoop.html">Working with different versions of Apache Hadoop</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/http-compression.html">HTTP compression</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/tls-support.html">TLS support</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/password-provider.html">Password providers</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/dump-segment.html">dump-segment tool</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/reset-cluster.html">reset-cluster tool</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/insert-segment-to-db.html">insert-segment-to-db tool</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/pull-deps.html">pull-deps tool</a></li><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Misc</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/management-uis.html">Legacy Management UIs</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/deep-storage-migration.html">Deep storage migration</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/export-metadata.html">Export Metadata Tool</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/metadata-migration.html">Metadata Migration</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/segment-optimization.html">Segment Size Optimization</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/use_sbt_to_build_fat_jar.html">Content for build.sbt</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Development<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/overview.html">Developing on Druid</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/modules.html">Creating extensions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/javascript.html">JavaScript functionality</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/build.html">Build from source</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/versioning.html">Versioning</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/experimental.html">Experimental features</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Misc<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.2/misc/papers-and-talks.html">Papers</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Hidden<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.2/comparisons/druid-vs-elasticsearch.html">Apache Druid vs Elasticsearch</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/comparisons/druid-vs-key-value.html">Apache Druid vs. Key/Value Stores (HBase/Cassandra/OpenTSDB)</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/comparisons/druid-vs-kudu.html">Apache Druid vs Kudu</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/comparisons/druid-vs-redshift.html">Apache Druid vs Redshift</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/comparisons/druid-vs-spark.html">Apache Druid vs Spark</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/comparisons/druid-vs-sql-on-hadoop.html">Apache Druid vs SQL-on-Hadoop</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/design/auth.html">Authentication and Authorization</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/design/broker.html">Broker</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/design/coordinator.html">Coordinator Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/design/historical.html">Historical Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/design/indexer.html">Indexer Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/design/indexing-service.html">Indexing Service</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/design/middlemanager.html">MiddleManager Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/design/overlord.html">Overlord Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/design/router.html">Router Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/design/peons.html">Peons</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/approximate-histograms.html">Approximate Histogram aggregators</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/avro.html">Apache Avro</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/azure.html">Microsoft Azure</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/bloom-filter.html">Bloom Filter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/datasketches-extension.html">DataSketches extension</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/datasketches-hll.html">DataSketches HLL Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/datasketches-quantiles.html">DataSketches Quantiles Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/datasketches-theta.html">DataSketches Theta Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/datasketches-tuple.html">DataSketches Tuple Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/druid-basic-security.html">Basic Security</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/druid-kerberos.html">Kerberos</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/druid-lookups.html">Cached Lookup Module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/druid-ranger-security.html">Apache Ranger Security</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/google.html">Google Cloud Storage</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/hdfs.html">HDFS</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/kafka-extraction-namespace.html">Apache Kafka Lookups</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/lookups-cached-global.html">Globally Cached Lookups</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/mysql.html">MySQL Metadata Store</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/orc.html">ORC Extension</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/druid-pac4j.html">Druid pac4j based Security extension</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/parquet.html">Apache Parquet Extension</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/postgresql.html">PostgreSQL Metadata Store</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/protobuf.html">Protobuf</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/s3.html">S3-compatible</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/simple-client-sslcontext.html">Simple SSLContext Provider Module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/stats.html">Stats aggregator</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/test-stats.html">Test Stats Aggregators</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/ambari-metrics-emitter.html">Ambari Metrics Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/cassandra.html">Apache Cassandra</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/cloudfiles.html">Rackspace Cloud Files</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/distinctcount.html">DistinctCount Aggregator</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/graphite.html">Graphite Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/influx.html">InfluxDB Line Protocol Parser</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/influxdb-emitter.html">InfluxDB Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/kafka-emitter.html">Kafka Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/materialized-view.html">Materialized View</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/momentsketch-quantiles.html">Moment Sketches for Approximate Quantiles module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/moving-average-query.html">Moving Average Query</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/opentsdb-emitter.html">OpenTSDB Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/redis-cache.html">Druid Redis Cache</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/sqlserver.html">Microsoft SQLServer</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/statsd.html">StatsD Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/tdigestsketch-quantiles.html">T-Digest Quantiles Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/thrift.html">Thrift</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/time-min-max.html">Timestamp Min/Max aggregators</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/gce-extensions.html">GCE Extensions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/aliyun-oss.html">Aliyun OSS</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/hll-old.html">Cardinality/HyperUnique aggregators</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/select-query.html">Select</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/ingestion/standalone-realtime.html">Realtime Process</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/apache/druid/edit/master/docs/operations/metrics.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">Metrics</h1></header><article><div><span><!--
+  ~ Licensed to the Apache Software Foundation (ASF) under one
+  ~ or more contributor license agreements.  See the NOTICE file
+  ~ distributed with this work for additional information
+  ~ regarding copyright ownership.  The ASF licenses this file
+  ~ to you under the Apache License, Version 2.0 (the
+  ~ "License"); you may not use this file except in compliance
+  ~ with the License.  You may obtain a copy of the License at
+  ~
+  ~   http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an
+  ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~ KIND, either express or implied.  See the License for the
+  ~ specific language governing permissions and limitations
+  ~ under the License.
+  -->
+<p>Druid generates metrics related to queries, ingestion, and coordination.</p>
+<p>Metrics are emitted as JSON objects to a runtime log file or over HTTP (to a service such as Apache Kafka). Metric emission is disabled by default.</p>
+<p>All Druid metrics share a common set of fields:</p>
+<ul>
+<li><code>timestamp</code> - the time the metric was created</li>
+<li><code>metric</code> - the name of the metric</li>
+<li><code>service</code> - the service name that emitted the metric</li>
+<li><code>host</code> - the host name that emitted the metric</li>
+<li><code>value</code> - some numeric value associated with the metric</li>
+</ul>
+<p>Metrics may have additional dimensions beyond those listed above.</p>
+<p>Most metric values reset each emission period. By default druid emission period is 1 minute, this can be changed by setting the property <code>druid.monitoring.emissionPeriod</code>.</p>
+<h2><a class="anchor" aria-hidden="true" id="available-metrics"></a><a href="#available-metrics" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Available Metrics</h2>
+<h2><a class="anchor" aria-hidden="true" id="query-metrics"></a><a href="#query-metrics" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Query metrics</h2>
+<h3><a class="anchor" aria-hidden="true" id="broker"></a><a href="#broker" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Broker</h3>
+<table>
+<thead>
+<tr><th>Metric</th><th>Description</th><th>Dimensions</th><th>Normal Value</th></tr>
+</thead>
+<tbody>
+<tr><td><code>query/time</code></td><td>Milliseconds taken to complete a query.</td><td>Common: dataSource, type, interval, hasFilters, duration, context, remoteAddress, id. Aggregation Queries: numMetrics, numComplexMetrics. GroupBy: numDimensions. TopN: threshold, dimension.</td><td>&lt; 1s</td></tr>
+<tr><td><code>query/bytes</code></td><td>number of bytes returned in query response.</td><td>Common: dataSource, type, interval, hasFilters, duration, context, remoteAddress, id. Aggregation Queries: numMetrics, numComplexMetrics. GroupBy: numDimensions. TopN: threshold, dimension.</td><td></td></tr>
+<tr><td><code>query/node/time</code></td><td>Milliseconds taken to query individual historical/realtime processes.</td><td>id, status, server.</td><td>&lt; 1s</td></tr>
+<tr><td><code>query/node/bytes</code></td><td>number of bytes returned from querying individual historical/realtime processes.</td><td>id, status, server.</td><td></td></tr>
+<tr><td><code>query/node/ttfb</code></td><td>Time to first byte. Milliseconds elapsed until Broker starts receiving the response from individual historical/realtime processes.</td><td>id, status, server.</td><td>&lt; 1s</td></tr>
+<tr><td><code>query/node/backpressure</code></td><td>Milliseconds that the channel to this process has spent suspended due to backpressure.</td><td>id, status, server.</td><td></td></tr>
+<tr><td><code>query/count</code></td><td>number of total queries</td><td>This metric is only available if the QueryCountStatsMonitor module is included.</td><td></td></tr>
+<tr><td><code>query/success/count</code></td><td>number of queries successfully processed</td><td>This metric is only available if the QueryCountStatsMonitor module is included.</td><td></td></tr>
+<tr><td><code>query/failed/count</code></td><td>number of failed queries</td><td>This metric is only available if the QueryCountStatsMonitor module is included.</td><td></td></tr>
+<tr><td><code>query/interrupted/count</code></td><td>number of queries interrupted due to cancellation or timeout</td><td>This metric is only available if the QueryCountStatsMonitor module is included.</td><td></td></tr>
+<tr><td><code>sqlQuery/time</code></td><td>Milliseconds taken to complete a SQL query.</td><td>id, nativeQueryIds, dataSource, remoteAddress, success.</td><td>&lt; 1s</td></tr>
+<tr><td><code>sqlQuery/bytes</code></td><td>number of bytes returned in SQL query response.</td><td>id, nativeQueryIds, dataSource, remoteAddress, success.</td><td></td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="historical"></a><a href="#historical" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Historical</h3>
+<table>
+<thead>
+<tr><th>Metric</th><th>Description</th><th>Dimensions</th><th>Normal Value</th></tr>
+</thead>
+<tbody>
+<tr><td><code>query/time</code></td><td>Milliseconds taken to complete a query.</td><td>Common: dataSource, type, interval, hasFilters, duration, context, remoteAddress, id. Aggregation Queries: numMetrics, numComplexMetrics. GroupBy: numDimensions. TopN: threshold, dimension.</td><td>&lt; 1s</td></tr>
+<tr><td><code>query/segment/time</code></td><td>Milliseconds taken to query individual segment. Includes time to page in the segment from disk.</td><td>id, status, segment.</td><td>several hundred milliseconds</td></tr>
+<tr><td><code>query/wait/time</code></td><td>Milliseconds spent waiting for a segment to be scanned.</td><td>id, segment.</td><td>&lt; several hundred milliseconds</td></tr>
+<tr><td><code>segment/scan/pending</code></td><td>Number of segments in queue waiting to be scanned.</td><td></td><td>Close to 0</td></tr>
+<tr><td><code>query/segmentAndCache/time</code></td><td>Milliseconds taken to query individual segment or hit the cache (if it is enabled on the Historical process).</td><td>id, segment.</td><td>several hundred milliseconds</td></tr>
+<tr><td><code>query/cpu/time</code></td><td>Microseconds of CPU time taken to complete a query</td><td>Common: dataSource, type, interval, hasFilters, duration, context, remoteAddress, id. Aggregation Queries: numMetrics, numComplexMetrics. GroupBy: numDimensions. TopN: threshold, dimension.</td><td>Varies</td></tr>
+<tr><td><code>query/count</code></td><td>number of total queries</td><td>This metric is only available if the QueryCountStatsMonitor module is included.</td><td></td></tr>
+<tr><td><code>query/success/count</code></td><td>number of queries successfully processed</td><td>This metric is only available if the QueryCountStatsMonitor module is included.</td><td></td></tr>
+<tr><td><code>query/failed/count</code></td><td>number of failed queries</td><td>This metric is only available if the QueryCountStatsMonitor module is included.</td><td></td></tr>
+<tr><td><code>query/interrupted/count</code></td><td>number of queries interrupted due to cancellation or timeout</td><td>This metric is only available if the QueryCountStatsMonitor module is included.</td><td></td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="real-time"></a><a href="#real-time" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Real-time</h3>
+<table>
+<thead>
+<tr><th>Metric</th><th>Description</th><th>Dimensions</th><th>Normal Value</th></tr>
+</thead>
+<tbody>
+<tr><td><code>query/time</code></td><td>Milliseconds taken to complete a query.</td><td>Common: dataSource, type, interval, hasFilters, duration, context, remoteAddress, id. Aggregation Queries: numMetrics, numComplexMetrics. GroupBy: numDimensions. TopN: threshold, dimension.</td><td>&lt; 1s</td></tr>
+<tr><td><code>query/wait/time</code></td><td>Milliseconds spent waiting for a segment to be scanned.</td><td>id, segment.</td><td>several hundred milliseconds</td></tr>
+<tr><td><code>segment/scan/pending</code></td><td>Number of segments in queue waiting to be scanned.</td><td></td><td>Close to 0</td></tr>
+<tr><td><code>query/count</code></td><td>number of total queries</td><td>This metric is only available if the QueryCountStatsMonitor module is included.</td><td></td></tr>
+<tr><td><code>query/success/count</code></td><td>number of queries successfully processed</td><td>This metric is only available if the QueryCountStatsMonitor module is included.</td><td></td></tr>
+<tr><td><code>query/failed/count</code></td><td>number of failed queries</td><td>This metric is only available if the QueryCountStatsMonitor module is included.</td><td></td></tr>
+<tr><td><code>query/interrupted/count</code></td><td>number of queries interrupted due to cancellation or timeout</td><td>This metric is only available if the QueryCountStatsMonitor module is included.</td><td></td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="jetty"></a><a href="#jetty" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Jetty</h3>
+<table>
+<thead>
+<tr><th>Metric</th><th>Description</th><th>Normal Value</th></tr>
+</thead>
+<tbody>
+<tr><td><code>jetty/numOpenConnections</code></td><td>Number of open jetty connections.</td><td>Not much higher than number of jetty threads.</td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="cache"></a><a href="#cache" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Cache</h3>
+<table>
+<thead>
+<tr><th>Metric</th><th>Description</th><th>Normal Value</th></tr>
+</thead>
+<tbody>
+<tr><td><code>query/cache/delta/*</code></td><td>Cache metrics since the last emission.</td><td></td><td>N/A</td></tr>
+<tr><td><code>query/cache/total/*</code></td><td>Total cache metrics.</td><td></td><td>N/A</td></tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr><th>Metric</th><th>Description</th><th>Dimensions</th><th>Normal Value</th></tr>
+</thead>
+<tbody>
+<tr><td><code>*/numEntries</code></td><td>Number of cache entries.</td><td></td><td>Varies.</td></tr>
+<tr><td><code>*/sizeBytes</code></td><td>Size in bytes of cache entries.</td><td></td><td>Varies.</td></tr>
+<tr><td><code>*/hits</code></td><td>Number of cache hits.</td><td></td><td>Varies.</td></tr>
+<tr><td><code>*/misses</code></td><td>Number of cache misses.</td><td></td><td>Varies.</td></tr>
+<tr><td><code>*/evictions</code></td><td>Number of cache evictions.</td><td></td><td>Varies.</td></tr>
+<tr><td><code>*/hitRate</code></td><td>Cache hit rate.</td><td></td><td>~40%</td></tr>
+<tr><td><code>*/averageByte</code></td><td>Average cache entry byte size.</td><td></td><td>Varies.</td></tr>
+<tr><td><code>*/timeouts</code></td><td>Number of cache timeouts.</td><td></td><td>0</td></tr>
+<tr><td><code>*/errors</code></td><td>Number of cache errors.</td><td></td><td>0</td></tr>
+<tr><td><code>*/put/ok</code></td><td>Number of new cache entries successfully cached.</td><td></td><td>Varies, but more than zero.</td></tr>
+<tr><td><code>*/put/error</code></td><td>Number of new cache entries that could not be cached due to errors.</td><td></td><td>Varies, but more than zero.</td></tr>
+<tr><td><code>*/put/oversized</code></td><td>Number of potential new cache entries that were skipped due to being too large (based on <code>druid.{broker,historical,realtime}.cache.maxEntrySize</code> properties).</td><td></td><td>Varies.</td></tr>
+</tbody>
+</table>
+<h4><a class="anchor" aria-hidden="true" id="memcached-only-metrics"></a><a href="#memcached-only-metrics" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Memcached only metrics</h4>
+<p>Memcached client metrics are reported as per the following. These metrics come directly from the client as opposed to from the cache retrieval layer.</p>
+<table>
+<thead>
+<tr><th>Metric</th><th>Description</th><th>Dimensions</th><th>Normal Value</th></tr>
+</thead>
+<tbody>
+<tr><td><code>query/cache/memcached/total</code></td><td>Cache metrics unique to memcached (only if <code>druid.cache.type=memcached</code>) as their actual values</td><td>Variable</td><td>N/A</td></tr>
+<tr><td><code>query/cache/memcached/delta</code></td><td>Cache metrics unique to memcached (only if <code>druid.cache.type=memcached</code>) as their delta from the prior event emission</td><td>Variable</td><td>N/A</td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="sql-metrics"></a><a href="#sql-metrics" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>SQL Metrics</h2>
+<p>If SQL is enabled, the Broker will emit the following metrics for SQL.</p>
+<table>
+<thead>
+<tr><th>Metric</th><th>Description</th><th>Dimensions</th><th>Normal Value</th></tr>
+</thead>
+<tbody>
+<tr><td><code>sqlQuery/time</code></td><td>Milliseconds taken to complete a SQL.</td><td>id, nativeQueryIds, dataSource, remoteAddress, success.</td><td>&lt; 1s</td></tr>
+<tr><td><code>sqlQuery/bytes</code></td><td>number of bytes returned in SQL response.</td><td>id, nativeQueryIds, dataSource, remoteAddress, success.</td><td></td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="ingestion-metrics-kafka-indexing-service"></a><a href="#ingestion-metrics-kafka-indexing-service" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Ingestion Metrics (Kafka Indexing Service)</h2>
+<p>These metrics are applicable for the Kafka Indexing Service.</p>
+<table>
+<thead>
+<tr><th>Metric</th><th>Description</th><th>Dimensions</th><th>Normal Value</th></tr>
+</thead>
+<tbody>
+<tr><td><code>ingest/kafka/lag</code></td><td>Total lag between the offsets consumed by the Kafka indexing tasks and latest offsets in Kafka brokers across all partitions. Minimum emission period for this metric is a minute.</td><td>dataSource.</td><td>Greater than 0, should not be a very high number</td></tr>
+<tr><td><code>ingest/kafka/maxLag</code></td><td>Max lag between the offsets consumed by the Kafka indexing tasks and latest offsets in Kafka brokers across all partitions. Minimum emission period for this metric is a minute.</td><td>dataSource.</td><td>Greater than 0, should not be a very high number</td></tr>
+<tr><td><code>ingest/kafka/avgLag</code></td><td>Average lag between the offsets consumed by the Kafka indexing tasks and latest offsets in Kafka brokers across all partitions. Minimum emission period for this metric is a minute.</td><td>dataSource.</td><td>Greater than 0, should not be a very high number</td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="ingestion-metrics-kinesis-indexing-service"></a><a href="#ingestion-metrics-kinesis-indexing-service" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Ingestion Metrics (Kinesis Indexing Service)</h2>
+<p>These metrics are applicable for the Kinesis Indexing Service.</p>
+<table>
+<thead>
+<tr><th>Metric</th><th>Description</th><th>Dimensions</th><th>Normal Value</th></tr>
+</thead>
+<tbody>
+<tr><td><code>ingest/kinesis/lag/time</code></td><td>Total lag time in milliseconds between the current message sequence number consumed by the Kinesis indexing tasks and latest sequence number in Kinesis across all shards. Minimum emission period for this metric is a minute.</td><td>dataSource.</td><td>Greater than 0, up to max Kinesis retention period in milliseconds</td></tr>
+<tr><td><code>ingest/kinesis/maxLag/time</code></td><td>Max lag time in milliseconds between the current message sequence number consumed by the Kinesis indexing tasks and latest sequence number in Kinesis across all shards. Minimum emission period for this metric is a minute.</td><td>dataSource.</td><td>Greater than 0, up to max Kinesis retention period in milliseconds</td></tr>
+<tr><td><code>ingest/kinesis/avgLag/time</code></td><td>Average lag time in milliseconds between the current message sequence number consumed by the Kinesis indexing tasks and latest sequence number in Kinesis across all shards. Minimum emission period for this metric is a minute.</td><td>dataSource.</td><td>Greater than 0, up to max Kinesis retention period in milliseconds</td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="ingestion-metrics-realtime-process"></a><a href="#ingestion-metrics-realtime-process" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Ingestion metrics (Realtime process)</h2>
+<p>These metrics are only available if the RealtimeMetricsMonitor is included in the monitors list for the Realtime process. These metrics are deltas for each emission period.</p>
+<table>
+<thead>
+<tr><th>Metric</th><th>Description</th><th>Dimensions</th><th>Normal Value</th></tr>
+</thead>
+<tbody>
+<tr><td><code>ingest/events/thrownAway</code></td><td>Number of events rejected because they are outside the windowPeriod.</td><td>dataSource, taskId, taskType.</td><td>0</td></tr>
+<tr><td><code>ingest/events/unparseable</code></td><td>Number of events rejected because the events are unparseable.</td><td>dataSource, taskId, taskType.</td><td>0</td></tr>
+<tr><td><code>ingest/events/duplicate</code></td><td>Number of events rejected because the events are duplicated.</td><td>dataSource, taskId, taskType.</td><td>0</td></tr>
+<tr><td><code>ingest/events/processed</code></td><td>Number of events successfully processed per emission period.</td><td>dataSource, taskId, taskType.</td><td>Equal to your # of events per emission period.</td></tr>
+<tr><td><code>ingest/rows/output</code></td><td>Number of Druid rows persisted.</td><td>dataSource, taskId, taskType.</td><td>Your # of events with rollup.</td></tr>
+<tr><td><code>ingest/persists/count</code></td><td>Number of times persist occurred.</td><td>dataSource, taskId, taskType.</td><td>Depends on configuration.</td></tr>
+<tr><td><code>ingest/persists/time</code></td><td>Milliseconds spent doing intermediate persist.</td><td>dataSource, taskId, taskType.</td><td>Depends on configuration. Generally a few minutes at most.</td></tr>
+<tr><td><code>ingest/persists/cpu</code></td><td>Cpu time in Nanoseconds spent on doing intermediate persist.</td><td>dataSource, taskId, taskType.</td><td>Depends on configuration. Generally a few minutes at most.</td></tr>
+<tr><td><code>ingest/persists/backPressure</code></td><td>Milliseconds spent creating persist tasks and blocking waiting for them to finish.</td><td>dataSource, taskId, taskType.</td><td>0 or very low</td></tr>
+<tr><td><code>ingest/persists/failed</code></td><td>Number of persists that failed.</td><td>dataSource, taskId, taskType.</td><td>0</td></tr>
+<tr><td><code>ingest/handoff/failed</code></td><td>Number of handoffs that failed.</td><td>dataSource, taskId, taskType.</td><td>0</td></tr>
+<tr><td><code>ingest/merge/time</code></td><td>Milliseconds spent merging intermediate segments</td><td>dataSource, taskId, taskType.</td><td>Depends on configuration. Generally a few minutes at most.</td></tr>
+<tr><td><code>ingest/merge/cpu</code></td><td>Cpu time in Nanoseconds spent on merging intermediate segments.</td><td>dataSource, taskId, taskType.</td><td>Depends on configuration. Generally a few minutes at most.</td></tr>
+<tr><td><code>ingest/handoff/count</code></td><td>Number of handoffs that happened.</td><td>dataSource, taskId, taskType.</td><td>Varies. Generally greater than 0 once every segment granular period if cluster operating normally</td></tr>
+<tr><td><code>ingest/sink/count</code></td><td>Number of sinks not handoffed.</td><td>dataSource, taskId, taskType.</td><td>1~3</td></tr>
+<tr><td><code>ingest/events/messageGap</code></td><td>Time gap between the data time in event and current system time.</td><td>dataSource, taskId, taskType.</td><td>Greater than 0, depends on the time carried in event</td></tr>
+</tbody>
+</table>
+<p>Note: If the JVM does not support CPU time measurement for the current thread, ingest/merge/cpu and ingest/persists/cpu will be 0.</p>
+<h3><a class="anchor" aria-hidden="true" id="indexing-service"></a><a href="#indexing-service" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Indexing service</h3>
+<table>
+<thead>
+<tr><th>Metric</th><th>Description</th><th>Dimensions</th><th>Normal Value</th></tr>
+</thead>
+<tbody>
+<tr><td><code>task/run/time</code></td><td>Milliseconds taken to run a task.</td><td>dataSource, taskId, taskType, taskStatus.</td><td>Varies.</td></tr>
+<tr><td><code>task/action/log/time</code></td><td>Milliseconds taken to log a task action to the audit log.</td><td>dataSource, taskId, taskType</td><td>&lt; 1000 (subsecond)</td></tr>
+<tr><td><code>task/action/run/time</code></td><td>Milliseconds taken to execute a task action.</td><td>dataSource, taskId, taskType</td><td>Varies from subsecond to a few seconds, based on action type.</td></tr>
+<tr><td><code>segment/added/bytes</code></td><td>Size in bytes of new segments created.</td><td>dataSource, taskId, taskType, interval.</td><td>Varies.</td></tr>
+<tr><td><code>segment/moved/bytes</code></td><td>Size in bytes of segments moved/archived via the Move Task.</td><td>dataSource, taskId, taskType, interval.</td><td>Varies.</td></tr>
+<tr><td><code>segment/nuked/bytes</code></td><td>Size in bytes of segments deleted via the Kill Task.</td><td>dataSource, taskId, taskType, interval.</td><td>Varies.</td></tr>
+<tr><td><code>task/success/count</code></td><td>Number of successful tasks per emission period. This metric is only available if the TaskCountStatsMonitor module is included.</td><td>dataSource.</td><td>Varies.</td></tr>
+<tr><td><code>task/failed/count</code></td><td>Number of failed tasks per emission period. This metric is only available if the TaskCountStatsMonitor module is included.</td><td>dataSource.</td><td>Varies.</td></tr>
+<tr><td><code>task/running/count</code></td><td>Number of current running tasks. This metric is only available if the TaskCountStatsMonitor module is included.</td><td>dataSource.</td><td>Varies.</td></tr>
+<tr><td><code>task/pending/count</code></td><td>Number of current pending tasks. This metric is only available if the TaskCountStatsMonitor module is included.</td><td>dataSource.</td><td>Varies.</td></tr>
+<tr><td><code>task/waiting/count</code></td><td>Number of current waiting tasks. This metric is only available if the TaskCountStatsMonitor module is included.</td><td>dataSource.</td><td>Varies.</td></tr>
+<tr><td><code>taskSlot/total/count</code></td><td>Number of total task slots per emission period. This metric is only available if the TaskSlotCountStatsMonitor module is included.</td><td></td><td>Varies.</td></tr>
+<tr><td><code>taskSlot/idle/count</code></td><td>Number of idle task slots per emission period. This metric is only available if the TaskSlotCountStatsMonitor module is included.</td><td></td><td>Varies.</td></tr>
+<tr><td><code>taskSlot/used/count</code></td><td>Number of busy task slots per emission period. This metric is only available if the TaskSlotCountStatsMonitor module is included.</td><td></td><td>Varies.</td></tr>
+<tr><td><code>taskSlot/lazy/count</code></td><td>Number of total task slots in lazy marked MiddleManagers and Indexers per emission period. This metric is only available if the TaskSlotCountStatsMonitor module is included.</td><td></td><td>Varies.</td></tr>
+<tr><td><code>taskSlot/blacklisted/count</code></td><td>Number of total task slots in blacklisted MiddleManagers and Indexers per emission period. This metric is only available if the TaskSlotCountStatsMonitor module is included.</td><td></td><td>Varies.</td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="coordination"></a><a href="#coordination" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Coordination</h2>
+<p>These metrics are for the Druid Coordinator and are reset each time the Coordinator runs the coordination logic.</p>
+<table>
+<thead>
+<tr><th>Metric</th><th>Description</th><th>Dimensions</th><th>Normal Value</th></tr>
+</thead>
+<tbody>
+<tr><td><code>segment/assigned/count</code></td><td>Number of segments assigned to be loaded in the cluster.</td><td>tier.</td><td>Varies.</td></tr>
+<tr><td><code>segment/moved/count</code></td><td>Number of segments moved in the cluster.</td><td>tier.</td><td>Varies.</td></tr>
+<tr><td><code>segment/dropped/count</code></td><td>Number of segments dropped due to being overshadowed.</td><td>tier.</td><td>Varies.</td></tr>
+<tr><td><code>segment/deleted/count</code></td><td>Number of segments dropped due to rules.</td><td>tier.</td><td>Varies.</td></tr>
+<tr><td><code>segment/unneeded/count</code></td><td>Number of segments dropped due to being marked as unused.</td><td>tier.</td><td>Varies.</td></tr>
+<tr><td><code>segment/cost/raw</code></td><td>Used in cost balancing. The raw cost of hosting segments.</td><td>tier.</td><td>Varies.</td></tr>
+<tr><td><code>segment/cost/normalization</code></td><td>Used in cost balancing. The normalization of hosting segments.</td><td>tier.</td><td>Varies.</td></tr>
+<tr><td><code>segment/cost/normalized</code></td><td>Used in cost balancing. The normalized cost of hosting segments.</td><td>tier.</td><td>Varies.</td></tr>
+<tr><td><code>segment/loadQueue/size</code></td><td>Size in bytes of segments to load.</td><td>server.</td><td>Varies.</td></tr>
+<tr><td><code>segment/loadQueue/failed</code></td><td>Number of segments that failed to load.</td><td>server.</td><td>0</td></tr>
+<tr><td><code>segment/loadQueue/count</code></td><td>Number of segments to load.</td><td>server.</td><td>Varies.</td></tr>
+<tr><td><code>segment/dropQueue/count</code></td><td>Number of segments to drop.</td><td>server.</td><td>Varies.</td></tr>
+<tr><td><code>segment/size</code></td><td>Total size of used segments in a data source. Emitted only for data sources to which at least one used segment belongs.</td><td>dataSource.</td><td>Varies.</td></tr>
+<tr><td><code>segment/count</code></td><td>Number of used segments belonging to a data source. Emitted only for data sources to which at least one used segment belongs.</td><td>dataSource.</td><td>&lt; max</td></tr>
+<tr><td><code>segment/overShadowed/count</code></td><td>Number of overshadowed segments.</td><td></td><td>Varies.</td></tr>
+<tr><td><code>segment/unavailable/count</code></td><td>Number of segments (not including replicas) left to load until segments that should be loaded in the cluster are available for queries.</td><td>dataSource.</td><td>0</td></tr>
+<tr><td><code>segment/underReplicated/count</code></td><td>Number of segments (including replicas) left to load until segments that should be loaded in the cluster are available for queries.</td><td>tier, dataSource.</td><td>0</td></tr>
+<tr><td><code>tier/historical/count</code></td><td>Number of available historical nodes in each tier.</td><td>tier.</td><td>Varies.</td></tr>
+<tr><td><code>tier/replication/factor</code></td><td>Configured maximum replication factor in each tier.</td><td>tier.</td><td>Varies.</td></tr>
+<tr><td><code>tier/required/capacity</code></td><td>Total capacity in bytes required in each tier.</td><td>tier.</td><td>Varies.</td></tr>
+<tr><td><code>tier/total/capacity</code></td><td>Total capacity in bytes available in each tier.</td><td>tier.</td><td>Varies.</td></tr>
+<tr><td><code>compact/task/count</code></td><td>Number of tasks issued in the auto compaction run.</td><td></td><td>Varies.</td></tr>
+<tr><td><code>compactTask/maxSlot/count</code></td><td>Max number of task slots that can be used for auto compaction tasks in the auto compaction run.</td><td></td><td>Varies.</td></tr>
+<tr><td><code>compactTask/availableSlot/count</code></td><td>Number of available task slots that can be used for auto compaction tasks in the auto compaction run. (this is max slot minus any currently running compaction task)</td><td></td><td>Varies.</td></tr>
+<tr><td><code>segment/waitCompact/bytes</code></td><td>Total bytes of this datasource waiting to be compacted by the auto compaction (only consider intervals/segments that are eligible for auto compaction).</td><td>datasource.</td><td>Varies.</td></tr>
+<tr><td><code>segment/waitCompact/count</code></td><td>Total number of segments of this datasource waiting to be compacted by the auto compaction (only consider intervals/segments that are eligible for auto compaction).</td><td>datasource.</td><td>Varies.</td></tr>
+<tr><td><code>interval/waitCompact/count</code></td><td>Total number of intervals of this datasource waiting to be compacted by the auto compaction (only consider intervals/segments that are eligible for auto compaction).</td><td>datasource.</td><td>Varies.</td></tr>
+<tr><td><code>segment/compacted/bytes</code></td><td>Total bytes of this datasource that are already compacted with the spec set in the auto compaction config.</td><td>datasource.</td><td>Varies.</td></tr>
+<tr><td><code>segment/compacted/count</code></td><td>Total number of segments of this datasource that are already compacted with the spec set in the auto compaction config.</td><td>datasource.</td><td>Varies.</td></tr>
+<tr><td><code>interval/compacted/count</code></td><td>Total number of intervals of this datasource that are already compacted with the spec set in the auto compaction config.</td><td>datasource.</td><td>Varies.</td></tr>
+<tr><td><code>segment/skipCompact/bytes</code></td><td>Total bytes of this datasource that are skipped (not eligible for auto compaction) by the auto compaction.</td><td>datasource.</td><td>Varies.</td></tr>
+<tr><td><code>segment/skipCompact/count</code></td><td>Total number of segments of this datasource that are skipped (not eligible for auto compaction) by the auto compaction.</td><td>datasource.</td><td>Varies.</td></tr>
+<tr><td><code>interval/skipCompact/count</code></td><td>Total number of intervals of this datasource that are skipped (not eligible for auto compaction) by the auto compaction.</td><td>datasource.</td><td>Varies.</td></tr>
+</tbody>
+</table>
+<p>If <code>emitBalancingStats</code> is set to <code>true</code> in the Coordinator <a href="../configuration/index.html#dynamic-configuration">dynamic configuration</a>, then <a href="/docs/0.20.2/configuration/logging.html">log entries</a> for class
+<code>org.apache.druid.server.coordinator.duty.EmitClusterStatsAndMetrics</code> will have extra information on balancing
+decisions.</p>
+<h2><a class="anchor" aria-hidden="true" id="general-health"></a><a href="#general-health" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>General Health</h2>
+<h3><a class="anchor" aria-hidden="true" id="historical-1"></a><a href="#historical-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Historical</h3>
+<table>
+<thead>
+<tr><th>Metric</th><th>Description</th><th>Dimensions</th><th>Normal Value</th></tr>
+</thead>
+<tbody>
+<tr><td><code>segment/max</code></td><td>Maximum byte limit available for segments.</td><td></td><td>Varies.</td></tr>
+<tr><td><code>segment/used</code></td><td>Bytes used for served segments.</td><td>dataSource, tier, priority.</td><td>&lt; max</td></tr>
+<tr><td><code>segment/usedPercent</code></td><td>Percentage of space used by served segments.</td><td>dataSource, tier, priority.</td><td>&lt; 100%</td></tr>
+<tr><td><code>segment/count</code></td><td>Number of served segments.</td><td>dataSource, tier, priority.</td><td>Varies.</td></tr>
+<tr><td><code>segment/pendingDelete</code></td><td>On-disk size in bytes of segments that are waiting to be cleared out</td><td>Varies.</td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="jvm"></a><a href="#jvm" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>JVM</h3>
+<p>These metrics are only available if the JVMMonitor module is included.</p>
+<table>
+<thead>
+<tr><th>Metric</th><th>Description</th><th>Dimensions</th><th>Normal Value</th></tr>
+</thead>
+<tbody>
+<tr><td><code>jvm/pool/committed</code></td><td>Committed pool.</td><td>poolKind, poolName.</td><td>close to max pool</td></tr>
+<tr><td><code>jvm/pool/init</code></td><td>Initial pool.</td><td>poolKind, poolName.</td><td>Varies.</td></tr>
+<tr><td><code>jvm/pool/max</code></td><td>Max pool.</td><td>poolKind, poolName.</td><td>Varies.</td></tr>
+<tr><td><code>jvm/pool/used</code></td><td>Pool used.</td><td>poolKind, poolName.</td><td>&lt; max pool</td></tr>
+<tr><td><code>jvm/bufferpool/count</code></td><td>Bufferpool count.</td><td>bufferpoolName.</td><td>Varies.</td></tr>
+<tr><td><code>jvm/bufferpool/used</code></td><td>Bufferpool used.</td><td>bufferpoolName.</td><td>close to capacity</td></tr>
+<tr><td><code>jvm/bufferpool/capacity</code></td><td>Bufferpool capacity.</td><td>bufferpoolName.</td><td>Varies.</td></tr>
+<tr><td><code>jvm/mem/init</code></td><td>Initial memory.</td><td>memKind.</td><td>Varies.</td></tr>
+<tr><td><code>jvm/mem/max</code></td><td>Max memory.</td><td>memKind.</td><td>Varies.</td></tr>
+<tr><td><code>jvm/mem/used</code></td><td>Used memory.</td><td>memKind.</td><td>&lt; max memory</td></tr>
+<tr><td><code>jvm/mem/committed</code></td><td>Committed memory.</td><td>memKind.</td><td>close to max memory</td></tr>
+<tr><td><code>jvm/gc/count</code></td><td>Garbage collection count.</td><td>gcName (cms/g1/parallel/etc.), gcGen (old/young)</td><td>Varies.</td></tr>
+<tr><td><code>jvm/gc/cpu</code></td><td>Count of CPU time in Nanoseconds spent on garbage collection. Note: <code>jvm/gc/cpu</code> represents the total time over multiple GC cycles; divide by <code>jvm/gc/count</code> to get the mean GC time per cycle</td><td>gcName, gcGen</td><td>Sum of <code>jvm/gc/cpu</code> should be within 10-30% of sum of <code>jvm/cpu/total</code>, depending on the GC algorithm used (reported by <a href="../configuration/index.html#enabling-metrics"><code>JvmCpuMonitor</code></a>)</td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="eventreceiverfirehose"></a><a href="#eventreceiverfirehose" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>EventReceiverFirehose</h3>
+<p>The following metric is only available if the EventReceiverFirehoseMonitor module is included.</p>
+<table>
+<thead>
+<tr><th>Metric</th><th>Description</th><th>Dimensions</th><th>Normal Value</th></tr>
+</thead>
+<tbody>
+<tr><td><code>ingest/events/buffered</code></td><td>Number of events queued in the EventReceiverFirehose's buffer</td><td>serviceName, dataSource, taskId, taskType, bufferCapacity.</td><td>Equal to current # of events in the buffer queue.</td></tr>
+<tr><td><code>ingest/bytes/received</code></td><td>Number of bytes received by the EventReceiverFirehose.</td><td>serviceName, dataSource, taskId, taskType.</td><td>Varies.</td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="sys"></a><a href="#sys" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Sys</h2>
+<p>These metrics are only available if the SysMonitor module is included.</p>
+<table>
+<thead>
+<tr><th>Metric</th><th>Description</th><th>Dimensions</th><th>Normal Value</th></tr>
+</thead>
+<tbody>
+<tr><td><code>sys/swap/free</code></td><td>Free swap.</td><td></td><td>Varies.</td></tr>
+<tr><td><code>sys/swap/max</code></td><td>Max swap.</td><td></td><td>Varies.</td></tr>
+<tr><td><code>sys/swap/pageIn</code></td><td>Paged in swap.</td><td></td><td>Varies.</td></tr>
+<tr><td><code>sys/swap/pageOut</code></td><td>Paged out swap.</td><td></td><td>Varies.</td></tr>
+<tr><td><code>sys/disk/write/count</code></td><td>Writes to disk.</td><td>fsDevName, fsDirName, fsTypeName, fsSysTypeName, fsOptions.</td><td>Varies.</td></tr>
+<tr><td><code>sys/disk/read/count</code></td><td>Reads from disk.</td><td>fsDevName, fsDirName, fsTypeName, fsSysTypeName, fsOptions.</td><td>Varies.</td></tr>
+<tr><td><code>sys/disk/write/size</code></td><td>Bytes written to disk. Can we used to determine how much paging is occurring with regards to segments.</td><td>fsDevName, fsDirName, fsTypeName, fsSysTypeName, fsOptions.</td><td>Varies.</td></tr>
+<tr><td><code>sys/disk/read/size</code></td><td>Bytes read from disk. Can we used to determine how much paging is occurring with regards to segments.</td><td>fsDevName, fsDirName, fsTypeName, fsSysTypeName, fsOptions.</td><td>Varies.</td></tr>
+<tr><td><code>sys/net/write/size</code></td><td>Bytes written to the network.</td><td>netName, netAddress, netHwaddr</td><td>Varies.</td></tr>
+<tr><td><code>sys/net/read/size</code></td><td>Bytes read from the network.</td><td>netName, netAddress, netHwaddr</td><td>Varies.</td></tr>
+<tr><td><code>sys/fs/used</code></td><td>Filesystem bytes used.</td><td>fsDevName, fsDirName, fsTypeName, fsSysTypeName, fsOptions.</td><td>&lt; max</td></tr>
+<tr><td><code>sys/fs/max</code></td><td>Filesystesm bytes max.</td><td>fsDevName, fsDirName, fsTypeName, fsSysTypeName, fsOptions.</td><td>Varies.</td></tr>
+<tr><td><code>sys/mem/used</code></td><td>Memory used.</td><td></td><td>&lt; max</td></tr>
+<tr><td><code>sys/mem/max</code></td><td>Memory max.</td><td></td><td>Varies.</td></tr>
+<tr><td><code>sys/storage/used</code></td><td>Disk space used.</td><td>fsDirName.</td><td>Varies.</td></tr>
+<tr><td><code>sys/cpu</code></td><td>CPU used.</td><td>cpuName, cpuTime.</td><td>Varies.</td></tr>
+</tbody>
+</table>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/0.20.2/operations/rule-configuration.html"><span class="arrow-prev">← </span><span>Retaining or automatically dropping data</span></a><a class="docs-next button" href="/docs/0.20.2/operations/alerts.html"><span>Alerts</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#available-metrics">Available Metrics</a></li><li><a href="#query-metrics">Query metrics</a><ul class="toc-headings"><li><a href="#broker">Broker</a></li><li><a href="#historical">Historical</a></li><li><a href="#real-time">Real-time</a></li><li><a href="#jetty">Jetty</a></li><li><a href="#cache">Cache</a></li></ul></li><li><a href="#sql-metrics">SQL Metrics</a></li><li><a href="#ingestion-metrics-kafka-indexing-service">Ingestion Metrics (Kafka Indexing Service)</a></li><li><a href="#ingestion-metrics-kinesis-indexing-service">Ingestion Metrics (Kinesis Indexing Service)</a></li><li><a href="#ingestion-metrics-realtime-process">Ingestion metrics (Realtime process)</a><ul class="toc-headings"><li><a href="#indexing-service">Indexing service</a></li></ul></li><li><a href="#coordination">Coordination</a></li><li><a href="#general-health">General Health</a><ul class="toc-headings"><li><a href="#historical-1">Historical</a></li><li><a href="#jvm">JVM</a></li><li><a href="#eventreceiverfirehose">EventReceiverFirehose</a></li></ul></li><li><a href="#sys">Sys</a></li></ul></nav></div><footer class="nav-footer druid-footer" id="footer"><div class="container"><div class="text-center"><p><a href="/technology">Technology</a> · <a href="/use-cases">Use Cases</a> · <a href="/druid-powered">Powered by Druid</a> · <a href="/docs/0.20.2/latest">Docs</a> · <a href="/community/">Community</a> · <a href="/downloads.html">Download</a> · <a href="/faq">FAQ</a></p></div><div class="text-center"><a title="Join the user group" href="https://groups.google.com/forum/#!forum/druid-user" target="_blank"><span class="fa fa-comments"></span></a> · <a title="Follow Druid" href="https://twitter.com/druidio" target="_blank"><span class="fab fa-twitter"></span></a> · <a title="Download via Apache" href="https://www.apache.org/dyn/closer.cgi?path=/incubator/druid/{{ site.druid_versions[0].versions[0].version }}/apache-druid-{{ site.druid_versions[0].versions[0].version }}-bin.tar.gz" target="_blank"><span class="fas fa-feather"></span></a> · <a title="GitHub" href="https://github.com/apache/druid" target="_blank"><span class="fab fa-github"></span></a></div><div class="text-center license">Copyright © 2019 <a href="https://www.apache.org/" target="_blank">Apache Software Foundation</a>.<br/>Except where otherwise noted, licensed under <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.<br/>Apache Druid, Druid, and the Druid logo are either registered trademarks or trademarks of The Apache Software Foundation in the United States and other countries.</div></div></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '2de99082a9f38e49dfaa059bbe4c901d',
+                indexName: 'apache_druid',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["language:en","version:0.20.2"]}
+              });
+            </script></body></html>

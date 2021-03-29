@@ -1,0 +1,728 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Ingestion · Apache Druid</title><meta name="viewport" content="width=device-width"/><link rel="canonical" href="https://druid.apache.org/docs/0.20.2/ingestion/index.html"/><meta name="generator" content="Docusaurus"/><meta name="description" content="&lt;!--"/><meta name="docsearch:language" content="en"/><meta name="docsearch:version" content="0.20.2" /><meta property="og:title" content="Ingestion · Apache Druid"/><meta property="og:type" content="website"/><meta property="og:url" content="https://druid.apache.org/index.html"/><meta property="og:description" content="&lt;!--"/><meta property="og:image" content="https://druid.apache.org/img/druid_nav.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://druid.apache.org/img/druid_nav.png"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-131010415-1"></script><script>
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments); }
+              gtag('js', new Date());
+              gtag('config', 'UA-131010415-1');
+            </script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"/><link rel="stylesheet" href="/css/code-block-buttons.css"/><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script><script type="text/javascript" src="/js/code-block-buttons.js"></script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/druid_nav.png" alt="Apache Druid"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/technology" target="_self">Technology</a></li><li class=""><a href="/use-cases" target="_self">Use Cases</a></li><li class=""><a href="/druid-powered" target="_self">Powered By</a></li><li class="siteNavGroupActive"><a href="/docs/0.20.2/design/index.html" target="_self">Docs</a></li><li class=""><a href="/community/" target="_self">Community</a></li><li class=""><a href="https://www.apache.org" target="_self">Apache</a></li><li class=""><a href="/downloads.html" target="_self">Download</a></li><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Ingestion</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Getting started<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.2/design/index.html">Introduction to Apache Druid</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/tutorials/index.html">Quickstart</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/tutorials/docker.html">Docker</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/single-server.html">Single server deployment</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/tutorials/cluster.html">Clustered deployment</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Tutorials<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.2/tutorials/tutorial-batch.html">Loading files natively</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/tutorials/tutorial-kafka.html">Load from Apache Kafka</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/tutorials/tutorial-batch-hadoop.html">Load from Apache Hadoop</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/tutorials/tutorial-query.html">Querying data</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/tutorials/tutorial-rollup.html">Roll-up</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/tutorials/tutorial-retention.html">Configuring data retention</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/tutorials/tutorial-update-data.html">Updating existing data</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/tutorials/tutorial-compaction.html">Compacting segments</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/tutorials/tutorial-delete-data.html">Deleting data</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/tutorials/tutorial-ingestion-spec.html">Writing an ingestion spec</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/tutorials/tutorial-transform-spec.html">Transforming input data</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/tutorials/tutorial-kerberos-hadoop.html">Kerberized HDFS deep storage</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Design<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.2/design/architecture.html">Design</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/design/segments.html">Segments</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/design/processes.html">Processes and servers</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/dependencies/deep-storage.html">Deep storage</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/dependencies/metadata-storage.html">Metadata storage</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/dependencies/zookeeper.html">ZooKeeper</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Ingestion<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem navListItemActive"><a class="navItem" href="/docs/0.20.2/ingestion/index.html">Ingestion</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/ingestion/data-formats.html">Data formats</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/ingestion/schema-design.html">Schema design tips</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/ingestion/data-management.html">Data management</a></li><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Stream ingestion</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/kafka-ingestion.html">Apache Kafka</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/kinesis-ingestion.html">Amazon Kinesis</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/ingestion/tranquility.html">Tranquility</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Batch ingestion</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.20.2/ingestion/native-batch.html">Native batch</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/ingestion/hadoop.html">Hadoop-based</a></li></ul></div><li class="navListItem"><a class="navItem" href="/docs/0.20.2/ingestion/tasks.html">Task reference</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/ingestion/faq.html">Troubleshooting FAQ</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Querying<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/sql.html">Druid SQL</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/querying.html">Native queries</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/query-execution.html">Query execution</a></li><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Concepts</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/datasource.html">Datasources</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/joins.html">Joins</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/lookups.html">Lookups</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/multi-value-dimensions.html">Multi-value dimensions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/multitenancy.html">Multitenancy</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/caching.html">Query caching</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/query-context.html">Context parameters</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Native query types</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/timeseriesquery.html">Timeseries</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/topnquery.html">TopN</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/groupbyquery.html">GroupBy</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/scan-query.html">Scan</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/searchquery.html">Search</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/timeboundaryquery.html">TimeBoundary</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/segmentmetadataquery.html">SegmentMetadata</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/datasourcemetadataquery.html">DatasourceMetadata</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Native query components</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/filters.html">Filters</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/granularities.html">Granularities</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/dimensionspecs.html">Dimensions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/aggregations.html">Aggregations</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/post-aggregations.html">Post-aggregations</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/misc/math-expr.html">Expressions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/having.html">Having filters (groupBy)</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/limitspec.html">Sorting and limiting (groupBy)</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/topnmetricspec.html">Sorting (topN)</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/sorting-orders.html">String comparators</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/virtual-columns.html">Virtual columns</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/geo.html">Spatial filters</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Configuration<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.2/configuration/index.html">Configuration reference</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions.html">Extensions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/configuration/logging.html">Logging</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Operations<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/druid-console.html">Web console</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/getting-started.html">Getting started with Apache Druid</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/basic-cluster-tuning.html">Basic cluster tuning</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/api-reference.html">API reference</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/high-availability.html">High availability</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/rolling-updates.html">Rolling updates</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/rule-configuration.html">Retaining or automatically dropping data</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/metrics.html">Metrics</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/alerts.html">Alerts</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/other-hadoop.html">Working with different versions of Apache Hadoop</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/http-compression.html">HTTP compression</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/tls-support.html">TLS support</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/password-provider.html">Password providers</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/dump-segment.html">dump-segment tool</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/reset-cluster.html">reset-cluster tool</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/insert-segment-to-db.html">insert-segment-to-db tool</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/pull-deps.html">pull-deps tool</a></li><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Misc</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/management-uis.html">Legacy Management UIs</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/deep-storage-migration.html">Deep storage migration</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/export-metadata.html">Export Metadata Tool</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/metadata-migration.html">Metadata Migration</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/segment-optimization.html">Segment Size Optimization</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/use_sbt_to_build_fat_jar.html">Content for build.sbt</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Development<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/overview.html">Developing on Druid</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/modules.html">Creating extensions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/javascript.html">JavaScript functionality</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/build.html">Build from source</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/versioning.html">Versioning</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/experimental.html">Experimental features</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Misc<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.2/misc/papers-and-talks.html">Papers</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Hidden<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.2/comparisons/druid-vs-elasticsearch.html">Apache Druid vs Elasticsearch</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/comparisons/druid-vs-key-value.html">Apache Druid vs. Key/Value Stores (HBase/Cassandra/OpenTSDB)</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/comparisons/druid-vs-kudu.html">Apache Druid vs Kudu</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/comparisons/druid-vs-redshift.html">Apache Druid vs Redshift</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/comparisons/druid-vs-spark.html">Apache Druid vs Spark</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/comparisons/druid-vs-sql-on-hadoop.html">Apache Druid vs SQL-on-Hadoop</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/design/auth.html">Authentication and Authorization</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/design/broker.html">Broker</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/design/coordinator.html">Coordinator Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/design/historical.html">Historical Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/design/indexer.html">Indexer Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/design/indexing-service.html">Indexing Service</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/design/middlemanager.html">MiddleManager Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/design/overlord.html">Overlord Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/design/router.html">Router Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/design/peons.html">Peons</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/approximate-histograms.html">Approximate Histogram aggregators</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/avro.html">Apache Avro</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/azure.html">Microsoft Azure</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/bloom-filter.html">Bloom Filter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/datasketches-extension.html">DataSketches extension</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/datasketches-hll.html">DataSketches HLL Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/datasketches-quantiles.html">DataSketches Quantiles Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/datasketches-theta.html">DataSketches Theta Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/datasketches-tuple.html">DataSketches Tuple Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/druid-basic-security.html">Basic Security</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/druid-kerberos.html">Kerberos</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/druid-lookups.html">Cached Lookup Module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/druid-ranger-security.html">Apache Ranger Security</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/google.html">Google Cloud Storage</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/hdfs.html">HDFS</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/kafka-extraction-namespace.html">Apache Kafka Lookups</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/lookups-cached-global.html">Globally Cached Lookups</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/mysql.html">MySQL Metadata Store</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/orc.html">ORC Extension</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/druid-pac4j.html">Druid pac4j based Security extension</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/parquet.html">Apache Parquet Extension</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/postgresql.html">PostgreSQL Metadata Store</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/protobuf.html">Protobuf</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/s3.html">S3-compatible</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/simple-client-sslcontext.html">Simple SSLContext Provider Module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/stats.html">Stats aggregator</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/test-stats.html">Test Stats Aggregators</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/ambari-metrics-emitter.html">Ambari Metrics Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/cassandra.html">Apache Cassandra</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/cloudfiles.html">Rackspace Cloud Files</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/distinctcount.html">DistinctCount Aggregator</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/graphite.html">Graphite Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/influx.html">InfluxDB Line Protocol Parser</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/influxdb-emitter.html">InfluxDB Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/kafka-emitter.html">Kafka Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/materialized-view.html">Materialized View</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/momentsketch-quantiles.html">Moment Sketches for Approximate Quantiles module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/moving-average-query.html">Moving Average Query</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/opentsdb-emitter.html">OpenTSDB Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/redis-cache.html">Druid Redis Cache</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/sqlserver.html">Microsoft SQLServer</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/statsd.html">StatsD Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/tdigestsketch-quantiles.html">T-Digest Quantiles Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/thrift.html">Thrift</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/time-min-max.html">Timestamp Min/Max aggregators</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/gce-extensions.html">GCE Extensions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/aliyun-oss.html">Aliyun OSS</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/hll-old.html">Cardinality/HyperUnique aggregators</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/select-query.html">Select</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/ingestion/standalone-realtime.html">Realtime Process</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/apache/druid/edit/master/docs/ingestion/index.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">Ingestion</h1></header><article><div><span><!--
+  ~ Licensed to the Apache Software Foundation (ASF) under one
+  ~ or more contributor license agreements.  See the NOTICE file
+  ~ distributed with this work for additional information
+  ~ regarding copyright ownership.  The ASF licenses this file
+  ~ to you under the Apache License, Version 2.0 (the
+  ~ "License"); you may not use this file except in compliance
+  ~ with the License.  You may obtain a copy of the License at
+  ~
+  ~   http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an
+  ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~ KIND, either express or implied.  See the License for the
+  ~ specific language governing permissions and limitations
+  ~ under the License.
+  -->
+<h2><a class="anchor" aria-hidden="true" id="overview"></a><a href="#overview" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Overview</h2>
+<p>All data in Druid is organized into <em>segments</em>, which are data files that generally have up to a few million rows each.
+Loading data in Druid is called <em>ingestion</em> or <em>indexing</em> and consists of reading data from a source system and creating
+segments based on that data.</p>
+<p>In most ingestion methods, the work of loading data is done by Druid <a href="/docs/0.20.2/design/middlemanager.html">MiddleManager</a> processes
+(or the <a href="/docs/0.20.2/design/indexer.html">Indexer</a> processes). One exception is
+Hadoop-based ingestion, where this work is instead done using a Hadoop MapReduce job on YARN (although MiddleManager or Indexer
+processes are still involved in starting and monitoring the Hadoop jobs). Once segments have been generated and stored
+in <a href="/docs/0.20.2/dependencies/deep-storage.html">deep storage</a>, they will be loaded by Historical processes. For more details on
+how this works under the hood, see the <a href="/docs/0.20.2/design/architecture.html#storage-design">Storage design</a> section of Druid's design
+documentation.</p>
+<h2><a class="anchor" aria-hidden="true" id="how-to-use-this-documentation"></a><a href="#how-to-use-this-documentation" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>How to use this documentation</h2>
+<p>This <strong>page you are currently reading</strong> provides information about universal Druid ingestion concepts, and about
+configurations that are common to all <a href="#ingestion-methods">ingestion methods</a>.</p>
+<p>The <strong>individual pages for each ingestion method</strong> provide additional information about concepts and configurations
+that are unique to each ingestion method.</p>
+<p>We recommend reading (or at least skimming) this universal page first, and then referring to the page for the
+ingestion method or methods that you have chosen.</p>
+<h2><a class="anchor" aria-hidden="true" id="ingestion-methods"></a><a href="#ingestion-methods" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Ingestion methods</h2>
+<p>The table below lists Druid's most common data ingestion methods, along with comparisons to help you choose
+the best one for your situation. Each ingestion method supports its own set of source systems to pull from. For details
+about how each method works, as well as configuration properties specific to that method, check out its documentation
+page.</p>
+<h3><a class="anchor" aria-hidden="true" id="streaming"></a><a href="#streaming" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Streaming</h3>
+<p>The most recommended, and most popular, method of streaming ingestion is the
+<a href="/docs/0.20.2/development/extensions-core/kafka-ingestion.html">Kafka indexing service</a> that reads directly from Kafka. The Kinesis
+indexing service also works well if you prefer Kinesis.</p>
+<p>This table compares the major available options:</p>
+<table>
+<thead>
+<tr><th><strong>Method</strong></th><th><a href="/docs/0.20.2/development/extensions-core/kafka-ingestion.html">Kafka</a></th><th><a href="/docs/0.20.2/development/extensions-core/kinesis-ingestion.html">Kinesis</a></th><th><a href="/docs/0.20.2/ingestion/tranquility.html">Tranquility</a></th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Supervisor type</strong></td><td><code>kafka</code></td><td><code>kinesis</code></td><td>N/A</td></tr>
+<tr><td><strong>How it works</strong></td><td>Druid reads directly from Apache Kafka.</td><td>Druid reads directly from Amazon Kinesis.</td><td>Tranquility, a library that ships separately from Druid, is used to push data into Druid.</td></tr>
+<tr><td><strong>Can ingest late data?</strong></td><td>Yes</td><td>Yes</td><td>No (late data is dropped based on the <code>windowPeriod</code> config)</td></tr>
+<tr><td><strong>Exactly-once guarantees?</strong></td><td>Yes</td><td>Yes</td><td>No</td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="batch"></a><a href="#batch" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Batch</h3>
+<p>When doing batch loads from files, you should use one-time <a href="/docs/0.20.2/ingestion/tasks.html">tasks</a>, and you have three options: <code>index_parallel</code> (native batch; parallel), <code>index_hadoop</code> (Hadoop-based),
+or <code>index</code> (native batch; single-task).</p>
+<p>In general, we recommend native batch whenever it meets your needs, since the setup is simpler (it does not depend on
+an external Hadoop cluster). However, there are still scenarios where Hadoop-based batch ingestion might be a better choice,
+for example when you already have a running Hadoop cluster and want to
+use the cluster resource of the existing cluster for batch ingestion.</p>
+<p>This table compares the three available options:</p>
+<table>
+<thead>
+<tr><th><strong>Method</strong></th><th><a href="native-batch.html#parallel-task">Native batch (parallel)</a></th><th><a href="hadoop.html">Hadoop-based</a></th><th><a href="native-batch.html#simple-task">Native batch (simple)</a></th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Task type</strong></td><td><code>index_parallel</code></td><td><code>index_hadoop</code></td><td><code>index</code></td></tr>
+<tr><td><strong>Parallel?</strong></td><td>Yes, if <code>inputFormat</code> is splittable and <code>maxNumConcurrentSubTasks</code> &gt; 1 in <code>tuningConfig</code>. See <a href="/docs/0.20.2/ingestion/data-formats.html">data format documentation</a> for details.</td><td>Yes, always.</td><td>No. Each task is single-threaded.</td></tr>
+<tr><td><strong>Can append or overwrite?</strong></td><td>Yes, both.</td><td>Overwrite only.</td><td>Yes, both.</td></tr>
+<tr><td><strong>External dependencies</strong></td><td>None.</td><td>Hadoop cluster (Druid submits Map/Reduce jobs).</td><td>None.</td></tr>
+<tr><td><strong>Input locations</strong></td><td>Any <a href="/docs/0.20.2/ingestion/native-batch.html#input-sources"><code>inputSource</code></a>.</td><td>Any Hadoop FileSystem or Druid datasource.</td><td>Any <a href="/docs/0.20.2/ingestion/native-batch.html#input-sources"><code>inputSource</code></a>.</td></tr>
+<tr><td><strong>File formats</strong></td><td>Any <a href="/docs/0.20.2/ingestion/data-formats.html#input-format"><code>inputFormat</code></a>.</td><td>Any Hadoop InputFormat.</td><td>Any <a href="/docs/0.20.2/ingestion/data-formats.html#input-format"><code>inputFormat</code></a>.</td></tr>
+<tr><td><strong><a href="#rollup">Rollup modes</a></strong></td><td>Perfect if <code>forceGuaranteedRollup</code> = true in the <a href="/docs/0.20.2/ingestion/native-batch.html#tuningconfig"><code>tuningConfig</code></a>.</td><td>Always perfect.</td><td>Perfect if <code>forceGuaranteedRollup</code> = true in the <a href="/docs/0.20.2/ingestion/native-batch.html#tuningconfig"><code>tuningConfig</code></a>.</td></tr>
+<tr><td><strong>Partitioning options</strong></td><td>Dynamic, hash-based, and range-based partitioning methods are available. See <a href="/docs/0.20.2/ingestion/native-batch.html#partitionsspec">Partitions Spec</a> for details.</td><td>Hash-based or range-based partitioning via <a href="/docs/0.20.2/ingestion/hadoop.html#partitionsspec"><code>partitionsSpec</code></a>.</td><td>Dynamic and hash-based partitioning methods are available. See <a href="/docs/0.20.2/ingestion/native-batch.html#partitionsspec-1">Partitions Spec</a> for details.</td></tr>
+</tbody>
+</table>
+<p><a name="data-model"></a></p>
+<h2><a class="anchor" aria-hidden="true" id="druids-data-model"></a><a href="#druids-data-model" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Druid's data model</h2>
+<h3><a class="anchor" aria-hidden="true" id="datasources"></a><a href="#datasources" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Datasources</h3>
+<p>Druid data is stored in datasources, which are similar to tables in a traditional RDBMS. Druid
+offers a unique data modeling system that bears similarity to both relational and timeseries models.</p>
+<h3><a class="anchor" aria-hidden="true" id="primary-timestamp"></a><a href="#primary-timestamp" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Primary timestamp</h3>
+<p>Druid schemas must always include a primary timestamp. The primary timestamp is used for
+<a href="#partitioning">partitioning and sorting</a> your data. Druid queries are able to rapidly identify and retrieve data
+corresponding to time ranges of the primary timestamp column. Druid is also able to use the primary timestamp column
+for time-based <a href="data-management.html">data management operations</a> such as dropping time chunks, overwriting time chunks,
+and time-based retention rules.</p>
+<p>The primary timestamp is parsed based on the <a href="#timestampspec"><code>timestampSpec</code></a>. In addition, the
+<a href="#granularityspec"><code>granularitySpec</code></a> controls other important operations that are based on the primary timestamp.
+Regardless of which input field the primary timestamp is read from, it will always be stored as a column named <code>__time</code>
+in your Druid datasource.</p>
+<p>If you have more than one timestamp column, you can store the others as
+<a href="/docs/0.20.2/ingestion/schema-design.html#secondary-timestamps">secondary timestamps</a>.</p>
+<h3><a class="anchor" aria-hidden="true" id="dimensions"></a><a href="#dimensions" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Dimensions</h3>
+<p>Dimensions are columns that are stored as-is and can be used for any purpose. You can group, filter, or apply
+aggregators to dimensions at query time in an ad-hoc manner. If you run with <a href="#rollup">rollup</a> disabled, then the set of
+dimensions is simply treated like a set of columns to ingest, and behaves exactly as you would expect from a typical
+database that does not support a rollup feature.</p>
+<p>Dimensions are configured through the <a href="#dimensionsspec"><code>dimensionsSpec</code></a>.</p>
+<h3><a class="anchor" aria-hidden="true" id="metrics"></a><a href="#metrics" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Metrics</h3>
+<p>Metrics are columns that are stored in an aggregated form. They are most useful when <a href="#rollup">rollup</a> is enabled.
+Specifying a metric allows you to choose an aggregation function for Druid to apply to each row during ingestion. This
+has two benefits:</p>
+<ol>
+<li>If <a href="#rollup">rollup</a> is enabled, multiple rows can be collapsed into one row even while retaining summary
+information. In the <a href="/docs/0.20.2/tutorials/tutorial-rollup.html">rollup tutorial</a>, this is used to collapse netflow data to a
+single row per <code>(minute, srcIP, dstIP)</code> tuple, while retaining aggregate information about total packet and byte counts.</li>
+<li>Some aggregators, especially approximate ones, can be computed faster at query time even on non-rolled-up data if
+they are partially computed at ingestion time.</li>
+</ol>
+<p>Metrics are configured through the <a href="#metricsspec"><code>metricsSpec</code></a>.</p>
+<h2><a class="anchor" aria-hidden="true" id="rollup"></a><a href="#rollup" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Rollup</h2>
+<h3><a class="anchor" aria-hidden="true" id="what-is-rollup"></a><a href="#what-is-rollup" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>What is rollup?</h3>
+<p>Druid can roll up data as it is ingested to minimize the amount of raw data that needs to be stored. Rollup is
+a form of summarization or pre-aggregation. In practice, rolling up data can dramatically reduce the size of data that
+needs to be stored, reducing row counts by potentially orders of magnitude. This storage reduction does come at a cost:
+as we roll up data, we lose the ability to query individual events.</p>
+<p>When rollup is disabled, Druid loads each row as-is without doing any form of pre-aggregation. This mode is similar
+to what you would expect from a typical database that does not support a rollup feature.</p>
+<p>When rollup is enabled, then any rows that have identical <a href="#dimensions">dimensions</a> and <a href="#primary-timestamp">timestamp</a>
+to each other (after <a href="#granularityspec"><code>queryGranularity</code>-based truncation</a>) can be collapsed, or <em>rolled up</em>, into a
+single row in Druid.</p>
+<p>By default, rollup is enabled.</p>
+<h3><a class="anchor" aria-hidden="true" id="enabling-or-disabling-rollup"></a><a href="#enabling-or-disabling-rollup" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Enabling or disabling rollup</h3>
+<p>Rollup is controlled by the <code>rollup</code> setting in the <a href="#granularityspec"><code>granularitySpec</code></a>. By default, it is <code>true</code>
+(enabled). Set this to <code>false</code> if you want Druid to store each record as-is, without any rollup summarization.</p>
+<h3><a class="anchor" aria-hidden="true" id="example-of-rollup"></a><a href="#example-of-rollup" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example of rollup</h3>
+<p>For an example of how to configure rollup, and of how the feature will modify your data, check out the
+<a href="/docs/0.20.2/tutorials/tutorial-rollup.html">rollup tutorial</a>.</p>
+<h3><a class="anchor" aria-hidden="true" id="maximizing-rollup-ratio"></a><a href="#maximizing-rollup-ratio" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Maximizing rollup ratio</h3>
+<p>You can measure the rollup ratio of a datasource by comparing the number of rows in Druid with the number of ingested
+events. The higher this number, the more benefit you are gaining from rollup. One way to do this is with a
+<a href="/docs/0.20.2/querying/sql.html">Druid SQL</a> query like:</p>
+<pre><code class="hljs css language-sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">SUM</span>(<span class="hljs-string">"cnt"</span>) / <span class="hljs-keyword">COUNT</span>(*) * <span class="hljs-number">1.0</span> <span class="hljs-keyword">FROM</span> datasource
+</code></pre>
+<p>In this query, <code>cnt</code> should refer to a &quot;count&quot; type metric specified at ingestion time. See
+<a href="/docs/0.20.2/ingestion/schema-design.html#counting">Counting the number of ingested events</a> on the &quot;Schema design&quot; page for more details about
+how counting works when rollup is enabled.</p>
+<p>Tips for maximizing rollup:</p>
+<ul>
+<li>Generally, the fewer dimensions you have, and the lower the cardinality of your dimensions, the better rollup ratios
+you will achieve.</li>
+<li>Use <a href="schema-design.html#sketches">sketches</a> to avoid storing high cardinality dimensions, which harm rollup ratios.</li>
+<li>Adjusting <code>queryGranularity</code> at ingestion time (for example, using <code>PT5M</code> instead of <code>PT1M</code>) increases the
+likelihood of two rows in Druid having matching timestamps, and can improve your rollup ratios.</li>
+<li>It can be beneficial to load the same data into more than one Druid datasource. Some users choose to create a &quot;full&quot;
+datasource that has rollup disabled (or enabled, but with a minimal rollup ratio) and an &quot;abbreviated&quot; datasource that
+has fewer dimensions and a higher rollup ratio. When queries only involve dimensions in the &quot;abbreviated&quot; set, using
+that datasource leads to much faster query times. This can often be done with just a small increase in storage
+footprint, since abbreviated datasources tend to be substantially smaller.</li>
+<li>If you are using a <a href="#perfect-rollup-vs-best-effort-rollup">best-effort rollup</a> ingestion configuration that does not guarantee perfect
+rollup, you can potentially improve your rollup ratio by switching to a guaranteed perfect rollup option, or by
+<a href="/docs/0.20.2/ingestion/data-management.html#compaction-and-reindexing">reindexing</a> your data in the background after initial ingestion.</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" id="perfect-rollup-vs-best-effort-rollup"></a><a href="#perfect-rollup-vs-best-effort-rollup" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Perfect rollup vs Best-effort rollup</h3>
+<p>Some Druid ingestion methods guarantee <em>perfect rollup</em>, meaning that input data are perfectly aggregated at ingestion
+time. Others offer <em>best-effort rollup</em>, meaning that input data might not be perfectly aggregated and thus there could
+be multiple segments holding rows with the same timestamp and dimension values.</p>
+<p>In general, ingestion methods that offer best-effort rollup do this because they are either parallelizing ingestion
+without a shuffling step (which would be required for perfect rollup), or because they are finalizing and publishing
+segments before all data for a time chunk has been received, which we call <em>incremental publishing</em>. In both of these
+cases, records that could theoretically be rolled up may end up in different segments. All types of streaming ingestion
+run in this mode.</p>
+<p>Ingestion methods that guarantee perfect rollup do it with an additional preprocessing step to determine intervals
+and partitioning before the actual data ingestion stage. This preprocessing step scans the entire input dataset, which
+generally increases the time required for ingestion, but provides information necessary for perfect rollup.</p>
+<p>The following table shows how each method handles rollup:</p>
+<table>
+<thead>
+<tr><th>Method</th><th>How it works</th></tr>
+</thead>
+<tbody>
+<tr><td><a href="native-batch.html">Native batch</a></td><td><code>index_parallel</code> and <code>index</code> type may be either perfect or best-effort, based on configuration.</td></tr>
+<tr><td><a href="hadoop.html">Hadoop</a></td><td>Always perfect.</td></tr>
+<tr><td><a href="/docs/0.20.2/development/extensions-core/kafka-ingestion.html">Kafka indexing service</a></td><td>Always best-effort.</td></tr>
+<tr><td><a href="/docs/0.20.2/development/extensions-core/kinesis-ingestion.html">Kinesis indexing service</a></td><td>Always best-effort.</td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="partitioning"></a><a href="#partitioning" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Partitioning</h2>
+<h3><a class="anchor" aria-hidden="true" id="why-partition"></a><a href="#why-partition" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Why partition?</h3>
+<p>Optimal partitioning and sorting of segments within your datasources can have substantial impact on footprint and
+performance.</p>
+<p>Druid datasources are always partitioned by time into <em>time chunks</em>, and each time chunk contains one or more segments.
+This partitioning happens for all ingestion methods, and is based on the <code>segmentGranularity</code> parameter of your
+ingestion spec's <code>dataSchema</code>.</p>
+<p>The segments within a particular time chunk may also be partitioned further, using options that vary based on the
+ingestion type you have chosen. In general, doing this secondary partitioning using a particular dimension will
+improve locality, meaning that rows with the same value for that dimension are stored together and can be accessed
+quickly.</p>
+<p>You will usually get the best performance and smallest overall footprint by partitioning your data on some &quot;natural&quot;
+dimension that you often filter by, if one exists. This will often improve compression - users have reported threefold
+storage size decreases - and it also tends to improve query performance as well.</p>
+<blockquote>
+<p>Partitioning and sorting are best friends! If you do have a &quot;natural&quot; partitioning dimension, you should also consider
+placing it first in the <code>dimensions</code> list of your <code>dimensionsSpec</code>, which tells Druid to sort rows within each segment
+by that column. This will often improve compression even more, beyond the improvement gained by partitioning alone.</p>
+<p>However, note that currently, Druid always sorts rows within a segment by timestamp first, even before the first
+dimension listed in your <code>dimensionsSpec</code>. This can prevent dimension sorting from being maximally effective. If
+necessary, you can work around this limitation by setting <code>queryGranularity</code> equal to <code>segmentGranularity</code> in your
+<a href="#granularityspec"><code>granularitySpec</code></a>, which will set all timestamps within the segment to the same value, and by saving
+your &quot;real&quot; timestamp as a <a href="/docs/0.20.2/ingestion/schema-design.html#secondary-timestamps">secondary timestamp</a>. This limitation may be removed
+in a future version of Druid.</p>
+</blockquote>
+<h3><a class="anchor" aria-hidden="true" id="how-to-set-up-partitioning"></a><a href="#how-to-set-up-partitioning" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>How to set up partitioning</h3>
+<p>Not all ingestion methods support an explicit partitioning configuration, and not all have equivalent levels of
+flexibility. As of current Druid versions, If you are doing initial ingestion through a less-flexible method (like
+Kafka) then you can use <a href="data-management.html#compaction-and-reindexing">reindexing techniques</a> to repartition your data after it
+is initially ingested. This is a powerful technique: you can use it to ensure that any data older than a certain
+threshold is optimally partitioned, even as you continuously add new data from a stream.</p>
+<p>The following table shows how each ingestion method handles partitioning:</p>
+<table>
+<thead>
+<tr><th>Method</th><th>How it works</th></tr>
+</thead>
+<tbody>
+<tr><td><a href="native-batch.html">Native batch</a></td><td>Configured using <a href="native-batch.html#partitionsspec"><code>partitionsSpec</code></a> inside the <code>tuningConfig</code>.</td></tr>
+<tr><td><a href="hadoop.html">Hadoop</a></td><td>Configured using <a href="hadoop.html#partitionsspec"><code>partitionsSpec</code></a> inside the <code>tuningConfig</code>.</td></tr>
+<tr><td><a href="/docs/0.20.2/development/extensions-core/kafka-ingestion.html">Kafka indexing service</a></td><td>Partitioning in Druid is guided by how your Kafka topic is partitioned. You can also <a href="data-management.html#compaction-and-reindexing">reindex</a> to repartition after initial ingestion.</td></tr>
+<tr><td><a href="/docs/0.20.2/development/extensions-core/kinesis-ingestion.html">Kinesis indexing service</a></td><td>Partitioning in Druid is guided by how your Kinesis stream is sharded. You can also <a href="data-management.html#compaction-and-reindexing">reindex</a> to repartition after initial ingestion.</td></tr>
+</tbody>
+</table>
+<blockquote>
+<p>Note that, of course, one way to partition data is to load it into separate datasources. This is a perfectly viable
+approach and works very well when the number of datasources does not lead to excessive per-datasource overheads. If
+you go with this approach, then you can ignore this section, since it is describing how to set up partitioning
+<em>within a single datasource</em>.</p>
+<p>For more details on splitting data up into separate datasources, and potential operational considerations, refer
+to the <a href="/docs/0.20.2/querying/multitenancy.html">Multitenancy considerations</a> page.</p>
+</blockquote>
+<p><a name="spec"></a></p>
+<h2><a class="anchor" aria-hidden="true" id="ingestion-specs"></a><a href="#ingestion-specs" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Ingestion specs</h2>
+<p>No matter what ingestion method you use, data is loaded into Druid using either one-time <a href="tasks.html">tasks</a> or
+ongoing &quot;supervisors&quot; (which run and supervise a set of tasks over time). In any case, part of the task or supervisor
+definition is an <em>ingestion spec</em>.</p>
+<p>Ingestion specs consists of three main components:</p>
+<ul>
+<li><a href="#dataschema"><code>dataSchema</code></a>, which configures the <a href="#datasource">datasource name</a>,
+<a href="#timestampspec">primary timestamp</a>, <a href="#dimensionsspec">dimensions</a>, <a href="#metricsspec">metrics</a>, and <a href="#transformspec">transforms and filters</a> (if needed).</li>
+<li><a href="#ioconfig"><code>ioConfig</code></a>, which tells Druid how to connect to the source system and how to parse data. For more information, see the
+documentation for each <a href="#ingestion-methods">ingestion method</a>.</li>
+<li><a href="#tuningconfig"><code>tuningConfig</code></a>, which controls various tuning parameters specific to each
+<a href="#ingestion-methods">ingestion method</a>.</li>
+</ul>
+<p>Example ingestion spec for task type <code>index_parallel</code> (native batch):</p>
+<pre><code class="hljs">{
+  <span class="hljs-attr">"type"</span>: <span class="hljs-string">"index_parallel"</span>,
+  <span class="hljs-attr">"spec"</span>: {
+    <span class="hljs-attr">"dataSchema"</span>: {
+      <span class="hljs-attr">"dataSource"</span>: <span class="hljs-string">"wikipedia"</span>,
+      <span class="hljs-attr">"timestampSpec"</span>: {
+        <span class="hljs-attr">"column"</span>: <span class="hljs-string">"timestamp"</span>,
+        <span class="hljs-attr">"format"</span>: <span class="hljs-string">"auto"</span>
+      },
+      <span class="hljs-attr">"dimensionsSpec"</span>: {
+        <span class="hljs-attr">"dimensions"</span>: [
+          { <span class="hljs-attr">"type"</span>: <span class="hljs-string">"string"</span>, <span class="hljs-attr">"page"</span> },
+          { <span class="hljs-attr">"type"</span>: <span class="hljs-string">"string"</span>, <span class="hljs-attr">"language"</span> },
+          { <span class="hljs-attr">"type"</span>: <span class="hljs-string">"long"</span>, <span class="hljs-attr">"name"</span>: <span class="hljs-string">"userId"</span> }
+        ]
+      },
+      <span class="hljs-attr">"metricsSpec"</span>: [
+        { <span class="hljs-attr">"type"</span>: <span class="hljs-string">"count"</span>, <span class="hljs-attr">"name"</span>: <span class="hljs-string">"count"</span> },
+        { <span class="hljs-attr">"type"</span>: <span class="hljs-string">"doubleSum"</span>, <span class="hljs-attr">"name"</span>: <span class="hljs-string">"bytes_added_sum"</span>, <span class="hljs-attr">"fieldName"</span>: <span class="hljs-string">"bytes_added"</span> },
+        { <span class="hljs-attr">"type"</span>: <span class="hljs-string">"doubleSum"</span>, <span class="hljs-attr">"name"</span>: <span class="hljs-string">"bytes_deleted_sum"</span>, <span class="hljs-attr">"fieldName"</span>: <span class="hljs-string">"bytes_deleted"</span> }
+      ],
+      <span class="hljs-attr">"granularitySpec"</span>: {
+        <span class="hljs-attr">"segmentGranularity"</span>: <span class="hljs-string">"day"</span>,
+        <span class="hljs-attr">"queryGranularity"</span>: <span class="hljs-string">"none"</span>,
+        <span class="hljs-attr">"intervals"</span>: [
+          <span class="hljs-string">"2013-08-31/2013-09-01"</span>
+        ]
+      }
+    },
+    <span class="hljs-attr">"ioConfig"</span>: {
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"index_parallel"</span>,
+      <span class="hljs-attr">"inputSource"</span>: {
+        <span class="hljs-attr">"type"</span>: <span class="hljs-string">"local"</span>,
+        <span class="hljs-attr">"baseDir"</span>: <span class="hljs-string">"examples/indexing/"</span>,
+        <span class="hljs-attr">"filter"</span>: <span class="hljs-string">"wikipedia_data.json"</span>
+      },
+      <span class="hljs-attr">"inputFormat"</span>: {
+        <span class="hljs-attr">"type"</span>: <span class="hljs-string">"json"</span>,
+        <span class="hljs-attr">"flattenSpec"</span>: {
+          <span class="hljs-attr">"useFieldDiscovery"</span>: <span class="hljs-literal">true</span>,
+          <span class="hljs-attr">"fields"</span>: [
+            { <span class="hljs-attr">"type"</span>: <span class="hljs-string">"path"</span>, <span class="hljs-attr">"name"</span>: <span class="hljs-string">"userId"</span>, <span class="hljs-attr">"expr"</span>: <span class="hljs-string">"$.user.id"</span> }
+          ]
+        }
+      }
+    },
+    <span class="hljs-attr">"tuningConfig"</span>: {
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"index_parallel"</span>
+    }
+  }
+}
+</code></pre>
+<p>The specific options supported by these sections will depend on the <a href="#ingestion-methods">ingestion method</a> you have chosen.
+For more examples, refer to the documentation for each ingestion method.</p>
+<p>You can also load data visually, without the need to write an ingestion spec, using the &quot;Load data&quot; functionality
+available in Druid's <a href="/docs/0.20.2/operations/druid-console.html">web console</a>. Druid's visual data loader supports
+<a href="/docs/0.20.2/development/extensions-core/kafka-ingestion.html">Kafka</a>,
+<a href="/docs/0.20.2/development/extensions-core/kinesis-ingestion.html">Kinesis</a>, and
+<a href="native-batch.html">native batch</a> mode.</p>
+<h2><a class="anchor" aria-hidden="true" id="dataschema"></a><a href="#dataschema" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>dataSchema</code></h2>
+<blockquote>
+<p>The <code>dataSchema</code> spec has been changed in 0.17.0. The new spec is supported by all ingestion methods
+except for <em>Hadoop</em> ingestion. See the <a href="#legacy-dataschema-spec">Legacy <code>dataSchema</code> spec</a> for the old spec.</p>
+</blockquote>
+<p>The <code>dataSchema</code> is a holder for the following components:</p>
+<ul>
+<li><a href="#datasource">datasource name</a>, <a href="#timestampspec">primary timestamp</a>,
+<a href="#dimensionsspec">dimensions</a>, <a href="#metricsspec">metrics</a>, and
+<a href="#transformspec">transforms and filters</a> (if needed).</li>
+</ul>
+<p>An example <code>dataSchema</code> is:</p>
+<pre><code class="hljs"><span class="hljs-string">"dataSchema"</span>: {
+  <span class="hljs-string">"dataSource"</span>: <span class="hljs-string">"wikipedia"</span>,
+  <span class="hljs-string">"timestampSpec"</span>: {
+    <span class="hljs-string">"column"</span>: <span class="hljs-string">"timestamp"</span>,
+    <span class="hljs-string">"format"</span>: <span class="hljs-string">"auto"</span>
+  },
+  <span class="hljs-string">"dimensionsSpec"</span>: {
+    <span class="hljs-string">"dimensions"</span>: [
+      { <span class="hljs-string">"type"</span>: <span class="hljs-string">"string"</span>, <span class="hljs-string">"page"</span> },
+      { <span class="hljs-string">"type"</span>: <span class="hljs-string">"string"</span>, <span class="hljs-string">"language"</span> },
+      { <span class="hljs-string">"type"</span>: <span class="hljs-string">"long"</span>, <span class="hljs-string">"name"</span>: <span class="hljs-string">"userId"</span> }
+    ]
+  },
+  <span class="hljs-string">"metricsSpec"</span>: [
+    { <span class="hljs-string">"type"</span>: <span class="hljs-string">"count"</span>, <span class="hljs-string">"name"</span>: <span class="hljs-string">"count"</span> },
+    { <span class="hljs-string">"type"</span>: <span class="hljs-string">"doubleSum"</span>, <span class="hljs-string">"name"</span>: <span class="hljs-string">"bytes_added_sum"</span>, <span class="hljs-string">"fieldName"</span>: <span class="hljs-string">"bytes_added"</span> },
+    { <span class="hljs-string">"type"</span>: <span class="hljs-string">"doubleSum"</span>, <span class="hljs-string">"name"</span>: <span class="hljs-string">"bytes_deleted_sum"</span>, <span class="hljs-string">"fieldName"</span>: <span class="hljs-string">"bytes_deleted"</span> }
+  ],
+  <span class="hljs-string">"granularitySpec"</span>: {
+    <span class="hljs-string">"segmentGranularity"</span>: <span class="hljs-string">"day"</span>,
+    <span class="hljs-string">"queryGranularity"</span>: <span class="hljs-string">"none"</span>,
+    <span class="hljs-string">"intervals"</span>: [
+      <span class="hljs-string">"2013-08-31/2013-09-01"</span>
+    ]
+  }
+}
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="datasource"></a><a href="#datasource" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>dataSource</code></h3>
+<p>The <code>dataSource</code> is located in <code>dataSchema</code> → <code>dataSource</code> and is simply the name of the
+<a href="../design/architecture.html#datasources-and-segments">datasource</a> that data will be written to. An example
+<code>dataSource</code> is:</p>
+<pre><code class="hljs"><span class="hljs-string">"dataSource"</span>: <span class="hljs-string">"my-first-datasource"</span>
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="timestampspec"></a><a href="#timestampspec" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>timestampSpec</code></h3>
+<p>The <code>timestampSpec</code> is located in <code>dataSchema</code> → <code>timestampSpec</code> and is responsible for
+configuring the <a href="#primary-timestamp">primary timestamp</a>. An example <code>timestampSpec</code> is:</p>
+<pre><code class="hljs"><span class="hljs-string">"timestampSpec"</span>: {
+  <span class="hljs-string">"column"</span>: <span class="hljs-string">"timestamp"</span>,
+  <span class="hljs-string">"format"</span>: <span class="hljs-string">"auto"</span>
+}
+</code></pre>
+<blockquote>
+<p>Conceptually, after input data records are read, Druid applies ingestion spec components in a particular order:
+first <a href="/docs/0.20.2/ingestion/data-formats.html#flattenspec"><code>flattenSpec</code></a> (if any), then <a href="#timestampspec"><code>timestampSpec</code></a>, then <a href="#transformspec"><code>transformSpec</code></a>,
+and finally <a href="#dimensionsspec"><code>dimensionsSpec</code></a> and <a href="#metricsspec"><code>metricsSpec</code></a>. Keep this in mind when writing
+your ingestion spec.</p>
+</blockquote>
+<p>A <code>timestampSpec</code> can have the following components:</p>
+<table>
+<thead>
+<tr><th>Field</th><th>Description</th><th>Default</th></tr>
+</thead>
+<tbody>
+<tr><td>column</td><td>Input row field to read the primary timestamp from.<br><br>Regardless of the name of this input field, the primary timestamp will always be stored as a column named <code>__time</code> in your Druid datasource.</td><td>timestamp</td></tr>
+<tr><td>format</td><td>Timestamp format. Options are: <ul><li><code>iso</code>: ISO8601 with 'T' separator, like &quot;2000-01-01T01:02:03.456&quot;</li><li><code>posix</code>: seconds since epoch</li><li><code>millis</code>: milliseconds since epoch</li><li><code>micro</code>: microseconds since epoch</li><li><code>nano</code>: nanoseconds since epoch</li><li><code>auto</code>: automatically detects ISO (either 'T' or space separator) or millis format</li><li>any <a href="http://joda-time.sourceforge.net/apidocs/org/joda/time/format/DateTimeFormat.html">Joda DateTimeFormat string</a></li></ul></td><td>auto</td></tr>
+<tr><td>missingValue</td><td>Timestamp to use for input records that have a null or missing timestamp <code>column</code>. Should be in ISO8601 format, like <code>&quot;2000-01-01T01:02:03.456&quot;</code>, even if you have specified something else for <code>format</code>. Since Druid requires a primary timestamp, this setting can be useful for ingesting datasets that do not have any per-record timestamps at all.</td><td>none</td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="dimensionsspec"></a><a href="#dimensionsspec" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>dimensionsSpec</code></h3>
+<p>The <code>dimensionsSpec</code> is located in <code>dataSchema</code> → <code>dimensionsSpec</code> and is responsible for
+configuring <a href="#dimensions">dimensions</a>. An example <code>dimensionsSpec</code> is:</p>
+<pre><code class="hljs"><span class="hljs-string">"dimensionsSpec"</span> : {
+  <span class="hljs-string">"dimensions"</span>: [
+    <span class="hljs-string">"page"</span>,
+    <span class="hljs-string">"language"</span>,
+    { <span class="hljs-string">"type"</span>: <span class="hljs-string">"long"</span>, <span class="hljs-string">"name"</span>: <span class="hljs-string">"userId"</span> }
+  ],
+  <span class="hljs-string">"dimensionExclusions"</span> : [],
+  <span class="hljs-string">"spatialDimensions"</span> : []
+}
+</code></pre>
+<blockquote>
+<p>Conceptually, after input data records are read, Druid applies ingestion spec components in a particular order:
+first <a href="/docs/0.20.2/ingestion/data-formats.html#flattenspec"><code>flattenSpec</code></a> (if any), then <a href="#timestampspec"><code>timestampSpec</code></a>, then <a href="#transformspec"><code>transformSpec</code></a>,
+and finally <a href="#dimensionsspec"><code>dimensionsSpec</code></a> and <a href="#metricsspec"><code>metricsSpec</code></a>. Keep this in mind when writing
+your ingestion spec.</p>
+</blockquote>
+<p>A <code>dimensionsSpec</code> can have the following components:</p>
+<table>
+<thead>
+<tr><th>Field</th><th>Description</th><th>Default</th></tr>
+</thead>
+<tbody>
+<tr><td>dimensions</td><td>A list of <a href="#dimension-objects">dimension names or objects</a>. Cannot have the same column in both <code>dimensions</code> and <code>dimensionExclusions</code>.<br><br>If this and <code>spatialDimensions</code> are both null or empty arrays, Druid will treat all non-timestamp, non-metric columns that do not appear in <code>dimensionExclusions</code> as String-typed dimension columns. See <a href="#inclusions-and-exclusions">inclusions and exclusions</a> below for details.</td><td><code>[]</code></td></tr>
+<tr><td>dimensionExclusions</td><td>The names of dimensions to exclude from ingestion. Only names are supported here, not objects.<br><br>This list is only used if the <code>dimensions</code> and <code>spatialDimensions</code> lists are both null or empty arrays; otherwise it is ignored. See <a href="#inclusions-and-exclusions">inclusions and exclusions</a> below for details.</td><td><code>[]</code></td></tr>
+<tr><td>spatialDimensions</td><td>An array of <a href="/docs/0.20.2/development/geo.html">spatial dimensions</a>.</td><td><code>[]</code></td></tr>
+</tbody>
+</table>
+<h4><a class="anchor" aria-hidden="true" id="dimension-objects"></a><a href="#dimension-objects" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Dimension objects</h4>
+<p>Each dimension in the <code>dimensions</code> list can either be a name or an object. Providing a name is equivalent to providing
+a <code>string</code> type dimension object with the given name, e.g. <code>&quot;page&quot;</code> is equivalent to <code>{&quot;name&quot;: &quot;page&quot;, &quot;type&quot;: &quot;string&quot;}</code>.</p>
+<p>Dimension objects can have the following components:</p>
+<table>
+<thead>
+<tr><th>Field</th><th>Description</th><th>Default</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td>Either <code>string</code>, <code>long</code>, <code>float</code>, or <code>double</code>.</td><td><code>string</code></td></tr>
+<tr><td>name</td><td>The name of the dimension. This will be used as the field name to read from input records, as well as the column name stored in generated segments.<br><br>Note that you can use a <a href="#transformspec"><code>transformSpec</code></a> if you want to rename columns during ingestion time.</td><td>none (required)</td></tr>
+<tr><td>createBitmapIndex</td><td>For <code>string</code> typed dimensions, whether or not bitmap indexes should be created for the column in generated segments. Creating a bitmap index requires more storage, but speeds up certain kinds of filtering (especially equality and prefix filtering). Only supported for <code>string</code> typed dimensions.</td><td><code>true</code></td></tr>
+</tbody>
+</table>
+<h4><a class="anchor" aria-hidden="true" id="inclusions-and-exclusions"></a><a href="#inclusions-and-exclusions" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Inclusions and exclusions</h4>
+<p>Druid will interpret a <code>dimensionsSpec</code> in two possible ways: <em>normal</em> or <em>schemaless</em>.</p>
+<p>Normal interpretation occurs when either <code>dimensions</code> or <code>spatialDimensions</code> is non-empty. In this case, the combination of the two lists will be taken as the set of dimensions to be ingested, and the list of <code>dimensionExclusions</code> will be ignored.</p>
+<p>Schemaless interpretation occurs when both <code>dimensions</code> and <code>spatialDimensions</code> are empty or null. In this case, the set of dimensions is determined in the following way:</p>
+<ol>
+<li>First, start from the set of all input fields from the <a href="/docs/0.20.2/ingestion/data-formats.html"><code>inputFormat</code></a> (or the <a href="/docs/0.20.2/ingestion/data-formats.html#flattenspec"><code>flattenSpec</code></a>, if one is being used).</li>
+<li>Any field listed in <code>dimensionExclusions</code> is excluded.</li>
+<li>The field listed as <code>column</code> in the <a href="#timestampspec"><code>timestampSpec</code></a> is excluded.</li>
+<li>Any field used as an input to an aggregator from the <a href="#metricsspec">metricsSpec</a> is excluded.</li>
+<li>Any field with the same name as an aggregator from the <a href="#metricsspec">metricsSpec</a> is excluded.</li>
+<li>All other fields are ingested as <code>string</code> typed dimensions with the <a href="#dimension-objects">default settings</a>.</li>
+</ol>
+<blockquote>
+<p>Note: Fields generated by a <a href="#transformspec"><code>transformSpec</code></a> are not currently considered candidates for
+schemaless dimension interpretation.</p>
+</blockquote>
+<h3><a class="anchor" aria-hidden="true" id="metricsspec"></a><a href="#metricsspec" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>metricsSpec</code></h3>
+<p>The <code>metricsSpec</code> is located in <code>dataSchema</code> → <code>metricsSpec</code> and is a list of <a href="/docs/0.20.2/querying/aggregations.html">aggregators</a>
+to apply at ingestion time. This is most useful when <a href="#rollup">rollup</a> is enabled, since it's how you configure
+ingestion-time aggregation.</p>
+<p>An example <code>metricsSpec</code> is:</p>
+<pre><code class="hljs"><span class="hljs-string">"metricsSpec"</span>: [
+  { <span class="hljs-string">"type"</span>: <span class="hljs-string">"count"</span>, <span class="hljs-string">"name"</span>: <span class="hljs-string">"count"</span> },
+  { <span class="hljs-string">"type"</span>: <span class="hljs-string">"doubleSum"</span>, <span class="hljs-string">"name"</span>: <span class="hljs-string">"bytes_added_sum"</span>, <span class="hljs-string">"fieldName"</span>: <span class="hljs-string">"bytes_added"</span> },
+  { <span class="hljs-string">"type"</span>: <span class="hljs-string">"doubleSum"</span>, <span class="hljs-string">"name"</span>: <span class="hljs-string">"bytes_deleted_sum"</span>, <span class="hljs-string">"fieldName"</span>: <span class="hljs-string">"bytes_deleted"</span> }
+]
+</code></pre>
+<blockquote>
+<p>Generally, when <a href="#rollup">rollup</a> is disabled, you should have an empty <code>metricsSpec</code> (because without rollup,
+Druid does not do any ingestion-time aggregation, so there is little reason to include an ingestion-time aggregator). However,
+in some cases, it can still make sense to define metrics: for example, if you want to create a complex column as a way of
+pre-computing part of an <a href="/docs/0.20.2/querying/aggregations.html#approximate-aggregations">approximate aggregation</a>, this can only
+be done by defining a metric in a <code>metricsSpec</code>.</p>
+</blockquote>
+<h3><a class="anchor" aria-hidden="true" id="granularityspec"></a><a href="#granularityspec" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>granularitySpec</code></h3>
+<p>The <code>granularitySpec</code> is located in <code>dataSchema</code> → <code>granularitySpec</code> and is responsible for configuring
+the following operations:</p>
+<ol>
+<li>Partitioning a datasource into <a href="../design/architecture.html#datasources-and-segments">time chunks</a> (via <code>segmentGranularity</code>).</li>
+<li>Truncating the timestamp, if desired (via <code>queryGranularity</code>).</li>
+<li>Specifying which time chunks of segments should be created, for batch ingestion (via <code>intervals</code>).</li>
+<li>Specifying whether ingestion-time <a href="#rollup">rollup</a> should be used or not (via <code>rollup</code>).</li>
+</ol>
+<p>Other than <code>rollup</code>, these operations are all based on the <a href="#primary-timestamp">primary timestamp</a>.</p>
+<p>An example <code>granularitySpec</code> is:</p>
+<pre><code class="hljs"><span class="hljs-string">"granularitySpec"</span>: {
+  <span class="hljs-string">"segmentGranularity"</span>: <span class="hljs-string">"day"</span>,
+  <span class="hljs-string">"queryGranularity"</span>: <span class="hljs-string">"none"</span>,
+  <span class="hljs-string">"intervals"</span>: [
+    <span class="hljs-string">"2013-08-31/2013-09-01"</span>
+  ],
+  <span class="hljs-string">"rollup"</span>: <span class="hljs-literal">true</span>
+}
+</code></pre>
+<p>A <code>granularitySpec</code> can have the following components:</p>
+<table>
+<thead>
+<tr><th>Field</th><th>Description</th><th>Default</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td>Either <code>uniform</code> or <code>arbitrary</code>. In most cases you want to use <code>uniform</code>.</td><td><code>uniform</code></td></tr>
+<tr><td>segmentGranularity</td><td><a href="../design/architecture.html#datasources-and-segments">Time chunking</a> granularity for this datasource. Multiple segments can be created per time chunk. For example, when set to <code>day</code>, the events of the same day fall into the same time chunk which can be optionally further partitioned into multiple segments based on other configurations and input size. Any <a href="/docs/0.20.2/querying/granularities.html">granularity</a> can be provided here. Note that all segments in the same time chunk should have the same segment granularity.<br><br>Ignored if <code>type</code> is set to <code>arbitrary</code>.</td><td><code>day</code></td></tr>
+<tr><td>queryGranularity</td><td>The resolution of timestamp storage within each segment. This must be equal to, or finer, than <code>segmentGranularity</code>. This will be the finest granularity that you can query at and still receive sensible results, but note that you can still query at anything coarser than this granularity. E.g., a value of <code>minute</code> will mean that records will be stored at minutely granularity, and can be sensibly queried at any multiple of minutes (including minutely, 5-minutely, hourly, etc).<br><br>Any <a href="/docs/0.20.2/querying/granularities.html">granularity</a> can be provided here. Use <code>none</code> to store timestamps as-is, without any truncation. Note that <code>rollup</code> will be applied if it is set even when the <code>queryGranularity</code> is set to <code>none</code>.</td><td><code>none</code></td></tr>
+<tr><td>rollup</td><td>Whether to use ingestion-time <a href="#rollup">rollup</a> or not. Note that rollup is still effective even when <code>queryGranularity</code> is set to <code>none</code>. Your data will be rolled up if they have the exactly same timestamp.</td><td><code>true</code></td></tr>
+<tr><td>intervals</td><td>A list of intervals describing what time chunks of segments should be created. If <code>type</code> is set to <code>uniform</code>, this list will be broken up and rounded-off based on the <code>segmentGranularity</code>. If <code>type</code> is set to <code>arbitrary</code>, this list will be used as-is.<br><br>If <code>null</code> or not provided, batch ingestion tasks will generally determine which time chunks to output based on what timestamps are found in the input data.<br><br>If specified, batch ingestion tasks may be able to skip a determining-partitions phase, which can result in faster ingestion. Batch ingestion tasks may also be able to request all their locks up-front instead of one by one. Batch ingestion tasks will throw away any records with timestamps outside of the specified intervals.<br><br>Ignored for any form of streaming ingestion.</td><td><code>null</code></td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="transformspec"></a><a href="#transformspec" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>transformSpec</code></h3>
+<p>The <code>transformSpec</code> is located in <code>dataSchema</code> → <code>transformSpec</code> and is responsible for transforming and filtering
+records during ingestion time. It is optional. An example <code>transformSpec</code> is:</p>
+<pre><code class="hljs"><span class="hljs-string">"transformSpec"</span>: {
+  <span class="hljs-string">"transforms"</span>: [
+    { <span class="hljs-string">"type"</span>: <span class="hljs-string">"expression"</span>, <span class="hljs-string">"name"</span>: <span class="hljs-string">"countryUpper"</span>, <span class="hljs-string">"expression"</span>: <span class="hljs-string">"upper(country)"</span> }
+  ],
+  <span class="hljs-string">"filter"</span>: {
+    <span class="hljs-string">"type"</span>: <span class="hljs-string">"selector"</span>,
+    <span class="hljs-string">"dimension"</span>: <span class="hljs-string">"country"</span>,
+    <span class="hljs-string">"value"</span>: <span class="hljs-string">"San Serriffe"</span>
+  }
+}
+</code></pre>
+<blockquote>
+<p>Conceptually, after input data records are read, Druid applies ingestion spec components in a particular order:
+first <a href="/docs/0.20.2/ingestion/data-formats.html#flattenspec"><code>flattenSpec</code></a> (if any), then <a href="#timestampspec"><code>timestampSpec</code></a>, then <a href="#transformspec"><code>transformSpec</code></a>,
+and finally <a href="#dimensionsspec"><code>dimensionsSpec</code></a> and <a href="#metricsspec"><code>metricsSpec</code></a>. Keep this in mind when writing
+your ingestion spec.</p>
+</blockquote>
+<h4><a class="anchor" aria-hidden="true" id="transforms"></a><a href="#transforms" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Transforms</h4>
+<p>The <code>transforms</code> list allows you to specify a set of expressions to evaluate on top of input data. Each transform has a
+&quot;name&quot; which can be referred to by your <code>dimensionsSpec</code>, <code>metricsSpec</code>, etc.</p>
+<p>If a transform has the same name as a field in an input row, then it will shadow the original field. Transforms that
+shadow fields may still refer to the fields they shadow. This can be used to transform a field &quot;in-place&quot;.</p>
+<p>Transforms do have some limitations. They can only refer to fields present in the actual input rows; in particular,
+they cannot refer to other transforms. And they cannot remove fields, only add them. However, they can shadow a field
+with another field containing all nulls, which will act similarly to removing the field.</p>
+<p>Transforms can refer to the <a href="#timestampspec">timestamp</a> of an input row by referring to <code>__time</code> as part of the expression.
+They can also <em>replace</em> the timestamp if you set their &quot;name&quot; to <code>__time</code>. In both cases, <code>__time</code> should be treated as
+a millisecond timestamp (number of milliseconds since Jan 1, 1970 at midnight UTC). Transforms are applied <em>after</em> the
+<code>timestampSpec</code>.</p>
+<p>Druid currently includes one kind of built-in transform, the expression transform. It has the following syntax:</p>
+<pre><code class="hljs">{
+  <span class="hljs-attr">"type"</span>: <span class="hljs-string">"expression"</span>,
+  <span class="hljs-attr">"name"</span>: <span class="hljs-string">"&lt;output name&gt;"</span>,
+  <span class="hljs-attr">"expression"</span>: <span class="hljs-string">"&lt;expr&gt;"</span>
+}
+</code></pre>
+<p>The <code>expression</code> is a <a href="/docs/0.20.2/misc/math-expr.html">Druid query expression</a>.</p>
+<blockquote>
+<p>Conceptually, after input data records are read, Druid applies ingestion spec components in a particular order:
+first <a href="/docs/0.20.2/ingestion/data-formats.html#flattenspec"><code>flattenSpec</code></a> (if any), then <a href="#timestampspec"><code>timestampSpec</code></a>, then <a href="#transformspec"><code>transformSpec</code></a>,
+and finally <a href="#dimensionsspec"><code>dimensionsSpec</code></a> and <a href="#metricsspec"><code>metricsSpec</code></a>. Keep this in mind when writing
+your ingestion spec.</p>
+</blockquote>
+<h4><a class="anchor" aria-hidden="true" id="filter"></a><a href="#filter" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Filter</h4>
+<p>The <code>filter</code> conditionally filters input rows during ingestion. Only rows that pass the filter will be
+ingested. Any of Druid's standard <a href="/docs/0.20.2/querying/filters.html">query filters</a> can be used. Note that within a
+<code>transformSpec</code>, the <code>transforms</code> are applied before the <code>filter</code>, so the filter can refer to a transform.</p>
+<h3><a class="anchor" aria-hidden="true" id="legacy-dataschema-spec"></a><a href="#legacy-dataschema-spec" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Legacy <code>dataSchema</code> spec</h3>
+<blockquote>
+<p>The <code>dataSchema</code> spec has been changed in 0.17.0. The new spec is supported by all ingestion methods
+except for <em>Hadoop</em> ingestion. See <a href="#dataschema"><code>dataSchema</code></a> for the new spec.</p>
+</blockquote>
+<p>The legacy <code>dataSchema</code> spec has below two more components in addition to the ones listed in the <a href="#dataschema"><code>dataSchema</code></a> section above.</p>
+<ul>
+<li><a href="#parser-deprecated">input row parser</a>, <a href="#flattenspec">flattening of nested data</a> (if needed)</li>
+</ul>
+<h4><a class="anchor" aria-hidden="true" id="parser-deprecated"></a><a href="#parser-deprecated" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>parser</code> (Deprecated)</h4>
+<p>In legacy <code>dataSchema</code>, the <code>parser</code> is located in the <code>dataSchema</code> → <code>parser</code> and is responsible for configuring a wide variety of
+items related to parsing input records. The <code>parser</code> is deprecated and it is highly recommended to use <code>inputFormat</code> instead.
+For details about <code>inputFormat</code> and supported <code>parser</code> types, see the <a href="/docs/0.20.2/ingestion/data-formats.html">&quot;Data formats&quot; page</a>.</p>
+<p>For details about major components of the <code>parseSpec</code>, refer to their subsections:</p>
+<ul>
+<li><a href="#timestampspec"><code>timestampSpec</code></a>, responsible for configuring the <a href="#primary-timestamp">primary timestamp</a>.</li>
+<li><a href="#dimensionsspec"><code>dimensionsSpec</code></a>, responsible for configuring <a href="#dimensions">dimensions</a>.</li>
+<li><a href="#flattenspec"><code>flattenSpec</code></a>, responsible for flattening nested data formats.</li>
+</ul>
+<p>An example <code>parser</code> is:</p>
+<pre><code class="hljs"><span class="hljs-string">"parser"</span>: {
+  <span class="hljs-string">"type"</span>: <span class="hljs-string">"string"</span>,
+  <span class="hljs-string">"parseSpec"</span>: {
+    <span class="hljs-string">"format"</span>: <span class="hljs-string">"json"</span>,
+    <span class="hljs-string">"flattenSpec"</span>: {
+      <span class="hljs-string">"useFieldDiscovery"</span>: true,
+      <span class="hljs-string">"fields"</span>: [
+        { <span class="hljs-string">"type"</span>: <span class="hljs-string">"path"</span>, <span class="hljs-string">"name"</span>: <span class="hljs-string">"userId"</span>, <span class="hljs-string">"expr"</span>: <span class="hljs-string">"$.user.id"</span> }
+      ]
+    },
+    <span class="hljs-string">"timestampSpec"</span>: {
+      <span class="hljs-string">"column"</span>: <span class="hljs-string">"timestamp"</span>,
+      <span class="hljs-string">"format"</span>: <span class="hljs-string">"auto"</span>
+    },
+    <span class="hljs-string">"dimensionsSpec"</span>: {
+      <span class="hljs-string">"dimensions"</span>: [
+        { <span class="hljs-string">"type"</span>: <span class="hljs-string">"string"</span>, <span class="hljs-string">"page"</span> },
+        { <span class="hljs-string">"type"</span>: <span class="hljs-string">"string"</span>, <span class="hljs-string">"language"</span> },
+        { <span class="hljs-string">"type"</span>: <span class="hljs-string">"long"</span>, <span class="hljs-string">"name"</span>: <span class="hljs-string">"userId"</span> }
+      ]
+    }
+  }
+}
+</code></pre>
+<h4><a class="anchor" aria-hidden="true" id="flattenspec"></a><a href="#flattenspec" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>flattenSpec</code></h4>
+<p>In the legacy <code>dataSchema</code>, the <code>flattenSpec</code> is located in <code>dataSchema</code> → <code>parser</code> → <code>parseSpec</code> → <code>flattenSpec</code> and is responsible for
+bridging the gap between potentially nested input data (such as JSON, Avro, etc) and Druid's flat data model.
+See <a href="/docs/0.20.2/ingestion/data-formats.html#flattenspec">Flatten spec</a> for more details.</p>
+<h2><a class="anchor" aria-hidden="true" id="ioconfig"></a><a href="#ioconfig" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>ioConfig</code></h2>
+<p>The <code>ioConfig</code> influences how data is read from a source system, such as Apache Kafka, Amazon S3, a mounted
+filesystem, or any other supported source system. The <code>inputFormat</code> property applies to all
+<a href="#ingestion-methods">ingestion method</a> except for Hadoop ingestion. The Hadoop ingestion still
+uses the <a href="#parser-deprecated"><code>parser</code></a> in the legacy <code>dataSchema</code>.
+The rest of <code>ioConfig</code> is specific to each individual ingestion method.
+An example <code>ioConfig</code> to read JSON data is:</p>
+<pre><code class="hljs css language-json">"ioConfig": {
+    "type": "&lt;ingestion-method-specific type code&gt;",
+    "inputFormat": {
+      "type": "json"
+    },
+    ...
+}
+</code></pre>
+<p>For more details, see the documentation provided by each <a href="#ingestion-methods">ingestion method</a>.</p>
+<h2><a class="anchor" aria-hidden="true" id="tuningconfig"></a><a href="#tuningconfig" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>tuningConfig</code></h2>
+<p>Tuning properties are specified in a <code>tuningConfig</code>, which goes at the top level of an ingestion spec. Some
+properties apply to all <a href="#ingestion-methods">ingestion methods</a>, but most are specific to each individual
+ingestion method. An example <code>tuningConfig</code> that sets all of the shared, common properties to their defaults
+is:</p>
+<pre><code class="hljs css language-plaintext">"tuningConfig": {
+  "type": "&lt;ingestion-method-specific type code&gt;",
+  "maxRowsInMemory": 1000000,
+  "maxBytesInMemory": &lt;one-sixth of JVM memory&gt;,
+  "indexSpec": {
+    "bitmap": { "type": "roaring" },
+    "dimensionCompression": "lz4",
+    "metricCompression": "lz4",
+    "longEncoding": "longs"
+  },
+  &lt;other ingestion-method-specific properties&gt;
+}
+</code></pre>
+<table>
+<thead>
+<tr><th>Field</th><th>Description</th><th>Default</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td>Each ingestion method has its own tuning type code. You must specify the type code that matches your ingestion method. Common options are <code>index</code>, <code>hadoop</code>, <code>kafka</code>, and <code>kinesis</code>.</td><td></td></tr>
+<tr><td>maxRowsInMemory</td><td>The maximum number of records to store in memory before persisting to disk. Note that this is the number of rows post-rollup, and so it may not be equal to the number of input records. Ingested records will be persisted to disk when either <code>maxRowsInMemory</code> or <code>maxBytesInMemory</code> are reached (whichever happens first).</td><td><code>1000000</code></td></tr>
+<tr><td>maxBytesInMemory</td><td>The maximum aggregate size of records, in bytes, to store in the JVM heap before persisting. This is based on a rough estimate of memory usage. Ingested records will be persisted to disk when either <code>maxRowsInMemory</code> or <code>maxBytesInMemory</code> are reached (whichever happens first).<br /><br />Setting maxBytesInMemory to -1 disables this check, meaning Druid will rely entirely on maxRowsInMemory to control memory usage. Setting it to zero means the default value will be used (one-sixth of JVM heap size).<br /><br />Note that the estimate of memory usage is designed to be an overestimate, and can be especially high when using complex ingest-time aggregators, including sketches. If this causes your indexing workloads to persist to disk too often, you can set maxBytesInMemory to -1 and rely on maxRowsInMemory instead.</td><td>One-sixth of max JVM heap size</td></tr>
+<tr><td>indexSpec</td><td>Tune how data is indexed. See below for more information.</td><td>See table below</td></tr>
+<tr><td>Other properties</td><td>Each ingestion method has its own list of additional tuning properties. See the documentation for each method for a full list: <a href="/docs/0.20.2/development/extensions-core/kafka-ingestion.html#tuningconfig">Kafka indexing service</a>, <a href="/docs/0.20.2/development/extensions-core/kinesis-ingestion.html#tuningconfig">Kinesis indexing service</a>, <a href="/docs/0.20.2/ingestion/native-batch.html#tuningconfig">Native batch</a>, and <a href="/docs/0.20.2/ingestion/hadoop.html#tuningconfig">Hadoop-based</a>.</td><td></td></tr>
+</tbody>
+</table>
+<h4><a class="anchor" aria-hidden="true" id="indexspec"></a><a href="#indexspec" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>indexSpec</code></h4>
+<p>The <code>indexSpec</code> object can include the following properties:</p>
+<table>
+<thead>
+<tr><th>Field</th><th>Description</th><th>Default</th></tr>
+</thead>
+<tbody>
+<tr><td>bitmap</td><td>Compression format for bitmap indexes. Should be a JSON object with <code>type</code> set to <code>roaring</code> or <code>concise</code>. For type <code>roaring</code>, the boolean property <code>compressRunOnSerialization</code> (defaults to true) controls whether or not run-length encoding will be used when it is determined to be more space-efficient.</td><td><code>{&quot;type&quot;: &quot;concise&quot;}</code></td></tr>
+<tr><td>dimensionCompression</td><td>Compression format for dimension columns. Options are <code>lz4</code>, <code>lzf</code>, or <code>uncompressed</code>.</td><td><code>lz4</code></td></tr>
+<tr><td>metricCompression</td><td>Compression format for primitive type metric columns. Options are <code>lz4</code>, <code>lzf</code>, <code>uncompressed</code>, or <code>none</code> (which is more efficient than <code>uncompressed</code>, but not supported by older versions of Druid).</td><td><code>lz4</code></td></tr>
+<tr><td>longEncoding</td><td>Encoding format for long-typed columns. Applies regardless of whether they are dimensions or metrics. Options are <code>auto</code> or <code>longs</code>. <code>auto</code> encodes the values using offset or lookup table depending on column cardinality, and store them with variable size. <code>longs</code> stores the value as-is with 8 bytes each.</td><td><code>longs</code></td></tr>
+</tbody>
+</table>
+<p>Beyond these properties, each ingestion method has its own specific tuning properties. See the documentation for each
+<a href="#ingestion-methods">ingestion method</a> for details.</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/0.20.2/dependencies/zookeeper.html"><span class="arrow-prev">← </span><span class="function-name-prevnext">ZooKeeper</span></a><a class="docs-next button" href="/docs/0.20.2/ingestion/data-formats.html"><span>Data formats</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#overview">Overview</a></li><li><a href="#how-to-use-this-documentation">How to use this documentation</a></li><li><a href="#ingestion-methods">Ingestion methods</a><ul class="toc-headings"><li><a href="#streaming">Streaming</a></li><li><a href="#batch">Batch</a></li></ul></li><li><a href="#druids-data-model">Druid's data model</a><ul class="toc-headings"><li><a href="#datasources">Datasources</a></li><li><a href="#primary-timestamp">Primary timestamp</a></li><li><a href="#dimensions">Dimensions</a></li><li><a href="#metrics">Metrics</a></li></ul></li><li><a href="#rollup">Rollup</a><ul class="toc-headings"><li><a href="#what-is-rollup">What is rollup?</a></li><li><a href="#enabling-or-disabling-rollup">Enabling or disabling rollup</a></li><li><a href="#example-of-rollup">Example of rollup</a></li><li><a href="#maximizing-rollup-ratio">Maximizing rollup ratio</a></li><li><a href="#perfect-rollup-vs-best-effort-rollup">Perfect rollup vs Best-effort rollup</a></li></ul></li><li><a href="#partitioning">Partitioning</a><ul class="toc-headings"><li><a href="#why-partition">Why partition?</a></li><li><a href="#how-to-set-up-partitioning">How to set up partitioning</a></li></ul></li><li><a href="#ingestion-specs">Ingestion specs</a></li><li><a href="#dataschema"><code>dataSchema</code></a><ul class="toc-headings"><li><a href="#datasource"><code>dataSource</code></a></li><li><a href="#timestampspec"><code>timestampSpec</code></a></li><li><a href="#dimensionsspec"><code>dimensionsSpec</code></a></li><li><a href="#metricsspec"><code>metricsSpec</code></a></li><li><a href="#granularityspec"><code>granularitySpec</code></a></li><li><a href="#transformspec"><code>transformSpec</code></a></li><li><a href="#legacy-dataschema-spec">Legacy <code>dataSchema</code> spec</a></li></ul></li><li><a href="#ioconfig"><code>ioConfig</code></a></li><li><a href="#tuningconfig"><code>tuningConfig</code></a></li></ul></nav></div><footer class="nav-footer druid-footer" id="footer"><div class="container"><div class="text-center"><p><a href="/technology">Technology</a> · <a href="/use-cases">Use Cases</a> · <a href="/druid-powered">Powered by Druid</a> · <a href="/docs/0.20.2/latest">Docs</a> · <a href="/community/">Community</a> · <a href="/downloads.html">Download</a> · <a href="/faq">FAQ</a></p></div><div class="text-center"><a title="Join the user group" href="https://groups.google.com/forum/#!forum/druid-user" target="_blank"><span class="fa fa-comments"></span></a> · <a title="Follow Druid" href="https://twitter.com/druidio" target="_blank"><span class="fab fa-twitter"></span></a> · <a title="Download via Apache" href="https://www.apache.org/dyn/closer.cgi?path=/incubator/druid/{{ site.druid_versions[0].versions[0].version }}/apache-druid-{{ site.druid_versions[0].versions[0].version }}-bin.tar.gz" target="_blank"><span class="fas fa-feather"></span></a> · <a title="GitHub" href="https://github.com/apache/druid" target="_blank"><span class="fab fa-github"></span></a></div><div class="text-center license">Copyright © 2019 <a href="https://www.apache.org/" target="_blank">Apache Software Foundation</a>.<br/>Except where otherwise noted, licensed under <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.<br/>Apache Druid, Druid, and the Druid logo are either registered trademarks or trademarks of The Apache Software Foundation in the United States and other countries.</div></div></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '2de99082a9f38e49dfaa059bbe4c901d',
+                indexName: 'apache_druid',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["language:en","version:0.20.2"]}
+              });
+            </script></body></html>

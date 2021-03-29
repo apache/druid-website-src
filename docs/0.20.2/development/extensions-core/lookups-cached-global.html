@@ -1,0 +1,411 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Globally Cached Lookups · Apache Druid</title><meta name="viewport" content="width=device-width"/><link rel="canonical" href="https://druid.apache.org/docs/0.20.2/development/extensions-core/lookups-cached-global.html"/><meta name="generator" content="Docusaurus"/><meta name="description" content="&lt;!--"/><meta name="docsearch:language" content="en"/><meta name="docsearch:version" content="0.20.2" /><meta property="og:title" content="Globally Cached Lookups · Apache Druid"/><meta property="og:type" content="website"/><meta property="og:url" content="https://druid.apache.org/index.html"/><meta property="og:description" content="&lt;!--"/><meta property="og:image" content="https://druid.apache.org/img/druid_nav.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://druid.apache.org/img/druid_nav.png"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-131010415-1"></script><script>
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments); }
+              gtag('js', new Date());
+              gtag('config', 'UA-131010415-1');
+            </script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"/><link rel="stylesheet" href="/css/code-block-buttons.css"/><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script><script type="text/javascript" src="/js/code-block-buttons.js"></script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/druid_nav.png" alt="Apache Druid"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/technology" target="_self">Technology</a></li><li class=""><a href="/use-cases" target="_self">Use Cases</a></li><li class=""><a href="/druid-powered" target="_self">Powered By</a></li><li class="siteNavGroupActive"><a href="/docs/0.20.2/design/index.html" target="_self">Docs</a></li><li class=""><a href="/community/" target="_self">Community</a></li><li class=""><a href="https://www.apache.org" target="_self">Apache</a></li><li class=""><a href="/downloads.html" target="_self">Download</a></li><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Hidden</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Getting started<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.2/design/index.html">Introduction to Apache Druid</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/tutorials/index.html">Quickstart</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/tutorials/docker.html">Docker</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/single-server.html">Single server deployment</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/tutorials/cluster.html">Clustered deployment</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Tutorials<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.2/tutorials/tutorial-batch.html">Loading files natively</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/tutorials/tutorial-kafka.html">Load from Apache Kafka</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/tutorials/tutorial-batch-hadoop.html">Load from Apache Hadoop</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/tutorials/tutorial-query.html">Querying data</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/tutorials/tutorial-rollup.html">Roll-up</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/tutorials/tutorial-retention.html">Configuring data retention</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/tutorials/tutorial-update-data.html">Updating existing data</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/tutorials/tutorial-compaction.html">Compacting segments</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/tutorials/tutorial-delete-data.html">Deleting data</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/tutorials/tutorial-ingestion-spec.html">Writing an ingestion spec</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/tutorials/tutorial-transform-spec.html">Transforming input data</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/tutorials/tutorial-kerberos-hadoop.html">Kerberized HDFS deep storage</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Design<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.2/design/architecture.html">Design</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/design/segments.html">Segments</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/design/processes.html">Processes and servers</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/dependencies/deep-storage.html">Deep storage</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/dependencies/metadata-storage.html">Metadata storage</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/dependencies/zookeeper.html">ZooKeeper</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Ingestion<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.2/ingestion/index.html">Ingestion</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/ingestion/data-formats.html">Data formats</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/ingestion/schema-design.html">Schema design tips</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/ingestion/data-management.html">Data management</a></li><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Stream ingestion</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/kafka-ingestion.html">Apache Kafka</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/kinesis-ingestion.html">Amazon Kinesis</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/ingestion/tranquility.html">Tranquility</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Batch ingestion</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.20.2/ingestion/native-batch.html">Native batch</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/ingestion/hadoop.html">Hadoop-based</a></li></ul></div><li class="navListItem"><a class="navItem" href="/docs/0.20.2/ingestion/tasks.html">Task reference</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/ingestion/faq.html">Troubleshooting FAQ</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Querying<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/sql.html">Druid SQL</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/querying.html">Native queries</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/query-execution.html">Query execution</a></li><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Concepts</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/datasource.html">Datasources</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/joins.html">Joins</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/lookups.html">Lookups</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/multi-value-dimensions.html">Multi-value dimensions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/multitenancy.html">Multitenancy</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/caching.html">Query caching</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/query-context.html">Context parameters</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Native query types</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/timeseriesquery.html">Timeseries</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/topnquery.html">TopN</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/groupbyquery.html">GroupBy</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/scan-query.html">Scan</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/searchquery.html">Search</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/timeboundaryquery.html">TimeBoundary</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/segmentmetadataquery.html">SegmentMetadata</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/datasourcemetadataquery.html">DatasourceMetadata</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Native query components</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/filters.html">Filters</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/granularities.html">Granularities</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/dimensionspecs.html">Dimensions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/aggregations.html">Aggregations</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/post-aggregations.html">Post-aggregations</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/misc/math-expr.html">Expressions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/having.html">Having filters (groupBy)</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/limitspec.html">Sorting and limiting (groupBy)</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/topnmetricspec.html">Sorting (topN)</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/sorting-orders.html">String comparators</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/virtual-columns.html">Virtual columns</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/geo.html">Spatial filters</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Configuration<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.2/configuration/index.html">Configuration reference</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions.html">Extensions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/configuration/logging.html">Logging</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Operations<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/druid-console.html">Web console</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/getting-started.html">Getting started with Apache Druid</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/basic-cluster-tuning.html">Basic cluster tuning</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/api-reference.html">API reference</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/high-availability.html">High availability</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/rolling-updates.html">Rolling updates</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/rule-configuration.html">Retaining or automatically dropping data</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/metrics.html">Metrics</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/alerts.html">Alerts</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/other-hadoop.html">Working with different versions of Apache Hadoop</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/http-compression.html">HTTP compression</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/tls-support.html">TLS support</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/password-provider.html">Password providers</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/dump-segment.html">dump-segment tool</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/reset-cluster.html">reset-cluster tool</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/insert-segment-to-db.html">insert-segment-to-db tool</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/pull-deps.html">pull-deps tool</a></li><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Misc</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/management-uis.html">Legacy Management UIs</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/deep-storage-migration.html">Deep storage migration</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/export-metadata.html">Export Metadata Tool</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/metadata-migration.html">Metadata Migration</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/segment-optimization.html">Segment Size Optimization</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/use_sbt_to_build_fat_jar.html">Content for build.sbt</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Development<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/overview.html">Developing on Druid</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/modules.html">Creating extensions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/javascript.html">JavaScript functionality</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/build.html">Build from source</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/versioning.html">Versioning</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/experimental.html">Experimental features</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Misc<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.2/misc/papers-and-talks.html">Papers</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Hidden<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.2/comparisons/druid-vs-elasticsearch.html">Apache Druid vs Elasticsearch</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/comparisons/druid-vs-key-value.html">Apache Druid vs. Key/Value Stores (HBase/Cassandra/OpenTSDB)</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/comparisons/druid-vs-kudu.html">Apache Druid vs Kudu</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/comparisons/druid-vs-redshift.html">Apache Druid vs Redshift</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/comparisons/druid-vs-spark.html">Apache Druid vs Spark</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/comparisons/druid-vs-sql-on-hadoop.html">Apache Druid vs SQL-on-Hadoop</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/design/auth.html">Authentication and Authorization</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/design/broker.html">Broker</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/design/coordinator.html">Coordinator Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/design/historical.html">Historical Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/design/indexer.html">Indexer Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/design/indexing-service.html">Indexing Service</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/design/middlemanager.html">MiddleManager Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/design/overlord.html">Overlord Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/design/router.html">Router Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/design/peons.html">Peons</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/approximate-histograms.html">Approximate Histogram aggregators</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/avro.html">Apache Avro</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/azure.html">Microsoft Azure</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/bloom-filter.html">Bloom Filter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/datasketches-extension.html">DataSketches extension</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/datasketches-hll.html">DataSketches HLL Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/datasketches-quantiles.html">DataSketches Quantiles Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/datasketches-theta.html">DataSketches Theta Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/datasketches-tuple.html">DataSketches Tuple Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/druid-basic-security.html">Basic Security</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/druid-kerberos.html">Kerberos</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/druid-lookups.html">Cached Lookup Module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/druid-ranger-security.html">Apache Ranger Security</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/google.html">Google Cloud Storage</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/hdfs.html">HDFS</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/kafka-extraction-namespace.html">Apache Kafka Lookups</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/0.20.2/development/extensions-core/lookups-cached-global.html">Globally Cached Lookups</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/mysql.html">MySQL Metadata Store</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/orc.html">ORC Extension</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/druid-pac4j.html">Druid pac4j based Security extension</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/parquet.html">Apache Parquet Extension</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/postgresql.html">PostgreSQL Metadata Store</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/protobuf.html">Protobuf</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/s3.html">S3-compatible</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/simple-client-sslcontext.html">Simple SSLContext Provider Module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/stats.html">Stats aggregator</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/test-stats.html">Test Stats Aggregators</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/ambari-metrics-emitter.html">Ambari Metrics Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/cassandra.html">Apache Cassandra</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/cloudfiles.html">Rackspace Cloud Files</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/distinctcount.html">DistinctCount Aggregator</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/graphite.html">Graphite Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/influx.html">InfluxDB Line Protocol Parser</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/influxdb-emitter.html">InfluxDB Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/kafka-emitter.html">Kafka Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/materialized-view.html">Materialized View</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/momentsketch-quantiles.html">Moment Sketches for Approximate Quantiles module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/moving-average-query.html">Moving Average Query</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/opentsdb-emitter.html">OpenTSDB Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/redis-cache.html">Druid Redis Cache</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/sqlserver.html">Microsoft SQLServer</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/statsd.html">StatsD Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/tdigestsketch-quantiles.html">T-Digest Quantiles Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/thrift.html">Thrift</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/time-min-max.html">Timestamp Min/Max aggregators</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/gce-extensions.html">GCE Extensions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/aliyun-oss.html">Aliyun OSS</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/hll-old.html">Cardinality/HyperUnique aggregators</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/select-query.html">Select</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/ingestion/standalone-realtime.html">Realtime Process</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/apache/druid/edit/master/docs/development/extensions-core/lookups-cached-global.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">Globally Cached Lookups</h1></header><article><div><span><!--
+  ~ Licensed to the Apache Software Foundation (ASF) under one
+  ~ or more contributor license agreements.  See the NOTICE file
+  ~ distributed with this work for additional information
+  ~ regarding copyright ownership.  The ASF licenses this file
+  ~ to you under the Apache License, Version 2.0 (the
+  ~ "License"); you may not use this file except in compliance
+  ~ with the License.  You may obtain a copy of the License at
+  ~
+  ~   http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an
+  ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~ KIND, either express or implied.  See the License for the
+  ~ specific language governing permissions and limitations
+  ~ under the License.
+  -->
+<blockquote>
+<p>Lookups are an <a href="/docs/0.20.2/development/experimental.html">experimental</a> feature.</p>
+</blockquote>
+<p>To use this Apache Druid extension, make sure to <a href="/docs/0.20.2/development/extensions.html#loading-extensions">include</a> <code>druid-lookups-cached-global</code> as an extension.</p>
+<h2><a class="anchor" aria-hidden="true" id="configuration"></a><a href="#configuration" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Configuration</h2>
+<blockquote>
+<p>Static configuration is no longer supported. Lookups can be configured through
+<a href="/docs/0.20.2/querying/lookups.html#configuration">dynamic configuration</a>.</p>
+</blockquote>
+<p>Globally cached lookups are appropriate for lookups which are not possible to pass at query time due to their size,
+or are not desired to be passed at query time because the data is to reside in and be handled by the Druid servers,
+and are small enough to reasonably populate in-memory. This usually means tens to tens of thousands of entries per lookup.</p>
+<p>Globally cached lookups all draw from the same cache pool, allowing each process to have a fixed cache pool that can be used by cached lookups.</p>
+<p>Globally cached lookups can be specified as part of the <a href="/docs/0.20.2/querying/lookups.html">cluster wide config for lookups</a> as a type of <code>cachedNamespace</code></p>
+<pre><code class="hljs css language-json">{
+   <span class="hljs-attr">"type"</span>: <span class="hljs-string">"cachedNamespace"</span>,
+   <span class="hljs-attr">"extractionNamespace"</span>: {
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"uri"</span>,
+      <span class="hljs-attr">"uri"</span>: <span class="hljs-string">"file:/tmp/prefix/"</span>,
+      <span class="hljs-attr">"namespaceParseSpec"</span>: {
+        <span class="hljs-attr">"format"</span>: <span class="hljs-string">"csv"</span>,
+        <span class="hljs-attr">"columns"</span>: [
+          <span class="hljs-string">"key"</span>,
+          <span class="hljs-string">"value"</span>
+        ]
+      },
+      <span class="hljs-attr">"pollPeriod"</span>: <span class="hljs-string">"PT5M"</span>
+    },
+    <span class="hljs-attr">"firstCacheTimeout"</span>: <span class="hljs-number">0</span>
+}
+</code></pre>
+<pre><code class="hljs css language-json">{
+   <span class="hljs-attr">"type"</span>: <span class="hljs-string">"cachedNamespace"</span>,
+   <span class="hljs-attr">"extractionNamespace"</span>: {
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"jdbc"</span>,
+      <span class="hljs-attr">"connectorConfig"</span>: {
+        <span class="hljs-attr">"connectURI"</span>: <span class="hljs-string">"jdbc:mysql:\/\/localhost:3306\/druid"</span>,
+        <span class="hljs-attr">"user"</span>: <span class="hljs-string">"druid"</span>,
+        <span class="hljs-attr">"password"</span>: <span class="hljs-string">"diurd"</span>
+      },
+      <span class="hljs-attr">"table"</span>: <span class="hljs-string">"lookupTable"</span>,
+      <span class="hljs-attr">"keyColumn"</span>: <span class="hljs-string">"mykeyColumn"</span>,
+      <span class="hljs-attr">"valueColumn"</span>: <span class="hljs-string">"myValueColumn"</span>,
+      <span class="hljs-attr">"filter"</span> : <span class="hljs-string">"myFilterSQL (Where clause statement  e.g LOOKUPTYPE=1)"</span>,
+      <span class="hljs-attr">"tsColumn"</span>: <span class="hljs-string">"timeColumn"</span>
+   },
+   <span class="hljs-attr">"firstCacheTimeout"</span>: <span class="hljs-number">120000</span>,
+   <span class="hljs-attr">"injective"</span>:<span class="hljs-literal">true</span>
+}
+</code></pre>
+<p>The parameters are as follows</p>
+<table>
+<thead>
+<tr><th>Property</th><th>Description</th><th>Required</th><th>Default</th></tr>
+</thead>
+<tbody>
+<tr><td><code>extractionNamespace</code></td><td>Specifies how to populate the local cache. See below</td><td>Yes</td><td>-</td></tr>
+<tr><td><code>firstCacheTimeout</code></td><td>How long to wait (in ms) for the first run of the cache to populate. 0 indicates to not wait</td><td>No</td><td><code>0</code> (do not wait)</td></tr>
+<tr><td><code>injective</code></td><td>If the underlying map is <a href="../../querying/lookups.html#query-execution">injective</a> (keys and values are unique) then optimizations can occur internally by setting this to <code>true</code></td><td>No</td><td><code>false</code></td></tr>
+</tbody>
+</table>
+<p>If <code>firstCacheTimeout</code> is set to a non-zero value, it should be less than <code>druid.manager.lookups.hostUpdateTimeout</code>. If <code>firstCacheTimeout</code> is NOT set, then management is essentially asynchronous and does not know if a lookup succeeded or failed in starting. In such a case logs from the processes using lookups should be monitored for repeated failures.</p>
+<p>Proper functionality of globally cached lookups requires the following extension to be loaded on the Broker, Peon, and Historical processes:
+<code>druid-lookups-cached-global</code></p>
+<h2><a class="anchor" aria-hidden="true" id="example-configuration"></a><a href="#example-configuration" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example configuration</h2>
+<p>In a simple case where only one <a href="../../querying/lookups.html#dynamic-configuration">tier</a> exists (<code>realtime_customer2</code>) with one <code>cachedNamespace</code> lookup called <code>country_code</code>, the resulting configuration JSON looks similar to the following:</p>
+<pre><code class="hljs css language-json">{
+  <span class="hljs-attr">"realtime_customer2"</span>: {
+    <span class="hljs-attr">"country_code"</span>: {
+      <span class="hljs-attr">"version"</span>: <span class="hljs-string">"v0"</span>,
+      <span class="hljs-attr">"lookupExtractorFactory"</span>: {
+        <span class="hljs-attr">"type"</span>: <span class="hljs-string">"cachedNamespace"</span>,
+        <span class="hljs-attr">"extractionNamespace"</span>: {
+          <span class="hljs-attr">"type"</span>: <span class="hljs-string">"jdbc"</span>,
+          <span class="hljs-attr">"connectorConfig"</span>: {
+            <span class="hljs-attr">"connectURI"</span>: <span class="hljs-string">"jdbc:mysql:\/\/localhost:3306\/druid"</span>,
+            <span class="hljs-attr">"user"</span>: <span class="hljs-string">"druid"</span>,
+            <span class="hljs-attr">"password"</span>: <span class="hljs-string">"diurd"</span>
+          },
+          <span class="hljs-attr">"table"</span>: <span class="hljs-string">"lookupValues"</span>,
+          <span class="hljs-attr">"keyColumn"</span>: <span class="hljs-string">"value_id"</span>,
+          <span class="hljs-attr">"valueColumn"</span>: <span class="hljs-string">"value_text"</span>,
+          <span class="hljs-attr">"filter"</span>: <span class="hljs-string">"value_type='country'"</span>,
+          <span class="hljs-attr">"tsColumn"</span>: <span class="hljs-string">"timeColumn"</span>
+        },
+        <span class="hljs-attr">"firstCacheTimeout"</span>: <span class="hljs-number">120000</span>,
+        <span class="hljs-attr">"injective"</span>: <span class="hljs-literal">true</span>
+      }
+    }
+  }
+}
+</code></pre>
+<p>Where the Coordinator endpoint <code>/druid/coordinator/v1/lookups/realtime_customer2/country_code</code> should return</p>
+<pre><code class="hljs css language-json">{
+  <span class="hljs-attr">"version"</span>: <span class="hljs-string">"v0"</span>,
+  <span class="hljs-attr">"lookupExtractorFactory"</span>: {
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"cachedNamespace"</span>,
+    <span class="hljs-attr">"extractionNamespace"</span>: {
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"jdbc"</span>,
+      <span class="hljs-attr">"connectorConfig"</span>: {
+        <span class="hljs-attr">"connectURI"</span>: <span class="hljs-string">"jdbc:mysql://localhost:3306/druid"</span>,
+        <span class="hljs-attr">"user"</span>: <span class="hljs-string">"druid"</span>,
+        <span class="hljs-attr">"password"</span>: <span class="hljs-string">"diurd"</span>
+      },
+      <span class="hljs-attr">"table"</span>: <span class="hljs-string">"lookupValues"</span>,
+      <span class="hljs-attr">"keyColumn"</span>: <span class="hljs-string">"value_id"</span>,
+      <span class="hljs-attr">"valueColumn"</span>: <span class="hljs-string">"value_text"</span>,
+      <span class="hljs-attr">"filter"</span>: <span class="hljs-string">"value_type='country'"</span>,
+      <span class="hljs-attr">"tsColumn"</span>: <span class="hljs-string">"timeColumn"</span>
+    },
+    <span class="hljs-attr">"firstCacheTimeout"</span>: <span class="hljs-number">120000</span>,
+    <span class="hljs-attr">"injective"</span>: <span class="hljs-literal">true</span>
+  }
+}
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="cache-settings"></a><a href="#cache-settings" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Cache Settings</h2>
+<p>Lookups are cached locally on Historical processes. The following are settings used by the processes which service queries when
+setting namespaces (Broker, Peon, Historical)</p>
+<table>
+<thead>
+<tr><th>Property</th><th>Description</th><th>Default</th></tr>
+</thead>
+<tbody>
+<tr><td><code>druid.lookup.namespace.cache.type</code></td><td>Specifies the type of caching to be used by the namespaces. May be one of [<code>offHeap</code>, <code>onHeap</code>]. <code>offHeap</code> uses a temporary file for off-heap storage of the namespace (memory mapped files). <code>onHeap</code> stores all cache on the heap in standard java map types.</td><td><code>onHeap</code></td></tr>
+<tr><td><code>druid.lookup.namespace.numExtractionThreads</code></td><td>The number of threads in the thread pool dedicated for lookup extraction and updates. This number may need to be scaled up, if you have a lot of lookups and they take long time to extract, to avoid timeouts.</td><td>2</td></tr>
+<tr><td><code>druid.lookup.namespace.numBufferedEntries</code></td><td>If using off-heap caching, the number of records to be stored on an on-heap buffer.</td><td>100,000</td></tr>
+</tbody>
+</table>
+<p>The cache is populated in different ways depending on the settings below. In general, most namespaces employ
+a <code>pollPeriod</code> at the end of which time they poll the remote resource of interest for updates.</p>
+<p><code>onHeap</code> uses <code>ConcurrentMap</code>s in the java heap, and thus affects garbage collection and heap sizing.
+<code>offHeap</code> uses an on-heap buffer and MapDB using memory-mapped files in the java temporary directory.
+So if total number of entries in the <code>cachedNamespace</code> is in excess of the buffer's configured capacity, the extra will be kept in memory as page cache, and paged in and out by general OS tunings.
+It's highly recommended that <code>druid.lookup.namespace.numBufferedEntries</code> is set when using <code>offHeap</code>, the value should be chosen from the range between 10% and 50% of the number of entries in the lookup.</p>
+<h2><a class="anchor" aria-hidden="true" id="supported-lookups"></a><a href="#supported-lookups" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Supported lookups</h2>
+<p>For additional lookups, please see our <a href="/docs/0.20.2/development/extensions.html">extensions list</a>.</p>
+<h3><a class="anchor" aria-hidden="true" id="uri-lookup"></a><a href="#uri-lookup" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>URI lookup</h3>
+<p>The remapping values for each globally cached lookup can be specified by a JSON object as per the following examples:</p>
+<pre><code class="hljs css language-json">{
+  <span class="hljs-attr">"type"</span>:<span class="hljs-string">"uri"</span>,
+  <span class="hljs-attr">"uri"</span>: <span class="hljs-string">"s3://bucket/some/key/prefix/renames-0003.gz"</span>,
+  <span class="hljs-attr">"namespaceParseSpec"</span>:{
+    <span class="hljs-attr">"format"</span>:<span class="hljs-string">"csv"</span>,
+    <span class="hljs-attr">"columns"</span>:[<span class="hljs-string">"key"</span>,<span class="hljs-string">"value"</span>]
+  },
+  <span class="hljs-attr">"pollPeriod"</span>:<span class="hljs-string">"PT5M"</span>
+}
+</code></pre>
+<pre><code class="hljs css language-json">{
+  <span class="hljs-attr">"type"</span>:<span class="hljs-string">"uri"</span>,
+  <span class="hljs-attr">"uriPrefix"</span>: <span class="hljs-string">"s3://bucket/some/key/prefix/"</span>,
+  <span class="hljs-attr">"fileRegex"</span>:<span class="hljs-string">"renames-[0-9]*\\.gz"</span>,
+  <span class="hljs-attr">"namespaceParseSpec"</span>:{
+    <span class="hljs-attr">"format"</span>:<span class="hljs-string">"csv"</span>,
+    <span class="hljs-attr">"columns"</span>:[<span class="hljs-string">"key"</span>,<span class="hljs-string">"value"</span>]
+  },
+  <span class="hljs-attr">"pollPeriod"</span>:<span class="hljs-string">"PT5M"</span>
+}
+</code></pre>
+<table>
+<thead>
+<tr><th>Property</th><th>Description</th><th>Required</th><th>Default</th></tr>
+</thead>
+<tbody>
+<tr><td><code>pollPeriod</code></td><td>Period between polling for updates</td><td>No</td><td>0 (only once)</td></tr>
+<tr><td><code>uri</code></td><td>URI for the file of interest, specified as a file, hdfs, or s3 path</td><td>No</td><td>Use <code>uriPrefix</code></td></tr>
+<tr><td><code>uriPrefix</code></td><td>A URI that specifies a directory (or other searchable resource) in which to search for files</td><td>No</td><td>Use <code>uri</code></td></tr>
+<tr><td><code>fileRegex</code></td><td>Optional regex for matching the file name under <code>uriPrefix</code>. Only used if <code>uriPrefix</code> is used</td><td>No</td><td><code>&quot;.*&quot;</code></td></tr>
+<tr><td><code>namespaceParseSpec</code></td><td>How to interpret the data at the URI</td><td>Yes</td><td></td></tr>
+</tbody>
+</table>
+<p>One of either <code>uri</code> or <code>uriPrefix</code> must be specified, as either a local file system (file://), HDFS (hdfs://), or S3 (s3://) location. HTTP location is not currently supported.</p>
+<p>The <code>pollPeriod</code> value specifies the period in ISO 8601 format between checks for replacement data for the lookup. If the source of the lookup is capable of providing a timestamp, the lookup will only be updated if it has changed since the prior tick of <code>pollPeriod</code>. A value of 0, an absent parameter, or <code>null</code> all mean populate once and do not attempt to look for new data later. Whenever an poll occurs, the updating system will look for a file with the most recent timestamp and assume that one with the most recent data set, replacing the local cache of the lookup data.</p>
+<p>The <code>namespaceParseSpec</code> can be one of a number of values. Each of the examples below would rename foo to bar, baz to bat, and buck to truck. All parseSpec types assumes each input is delimited by a new line. See below for the types of parseSpec supported.</p>
+<p>Only ONE file which matches the search will be used. For most implementations, the discriminator for choosing the URIs is by whichever one reports the most recent timestamp for its modification time.</p>
+<h4><a class="anchor" aria-hidden="true" id="csv-lookupparsespec"></a><a href="#csv-lookupparsespec" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>csv lookupParseSpec</h4>
+<table>
+<thead>
+<tr><th>Parameter</th><th>Description</th><th>Required</th><th>Default</th></tr>
+</thead>
+<tbody>
+<tr><td><code>columns</code></td><td>The list of columns in the csv file</td><td>no if <code>hasHeaderRow</code> is set</td><td><code>null</code></td></tr>
+<tr><td><code>keyColumn</code></td><td>The name of the column containing the key</td><td>no</td><td>The first column</td></tr>
+<tr><td><code>valueColumn</code></td><td>The name of the column containing the value</td><td>no</td><td>The second column</td></tr>
+<tr><td><code>hasHeaderRow</code></td><td>A flag to indicate that column information can be extracted from the input files' header row</td><td>no</td><td>false</td></tr>
+<tr><td><code>skipHeaderRows</code></td><td>Number of header rows to be skipped</td><td>no</td><td>0</td></tr>
+</tbody>
+</table>
+<p>If both <code>skipHeaderRows</code> and <code>hasHeaderRow</code> options are set, <code>skipHeaderRows</code> is first applied. For example, if you set
+<code>skipHeaderRows</code> to 2 and <code>hasHeaderRow</code> to true, Druid will skip the first two lines and then extract column information
+from the third line.</p>
+<p><em>example input</em></p>
+<pre><code class="hljs"><span class="hljs-keyword">bar,something,foo
+</span><span class="hljs-keyword">bat,something2,baz
+</span><span class="hljs-symbol">truck</span>,something3,<span class="hljs-keyword">buck
+</span></code></pre>
+<p><em>example namespaceParseSpec</em></p>
+<pre><code class="hljs css language-json">"namespaceParseSpec": {
+  "format": "csv",
+  "columns": ["value","somethingElse","key"],
+  "keyColumn": "key",
+  "valueColumn": "value"
+}
+</code></pre>
+<h4><a class="anchor" aria-hidden="true" id="tsv-lookupparsespec"></a><a href="#tsv-lookupparsespec" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>tsv lookupParseSpec</h4>
+<table>
+<thead>
+<tr><th>Parameter</th><th>Description</th><th>Required</th><th>Default</th></tr>
+</thead>
+<tbody>
+<tr><td><code>columns</code></td><td>The list of columns in the tsv file</td><td>yes</td><td><code>null</code></td></tr>
+<tr><td><code>keyColumn</code></td><td>The name of the column containing the key</td><td>no</td><td>The first column</td></tr>
+<tr><td><code>valueColumn</code></td><td>The name of the column containing the value</td><td>no</td><td>The second column</td></tr>
+<tr><td><code>delimiter</code></td><td>The delimiter in the file</td><td>no</td><td>tab (<code>\t</code>)</td></tr>
+<tr><td><code>listDelimiter</code></td><td>The list delimiter in the file</td><td>no</td><td>(<code>\u0001</code>)</td></tr>
+<tr><td><code>hasHeaderRow</code></td><td>A flag to indicate that column information can be extracted from the input files' header row</td><td>no</td><td>false</td></tr>
+<tr><td><code>skipHeaderRows</code></td><td>Number of header rows to be skipped</td><td>no</td><td>0</td></tr>
+</tbody>
+</table>
+<p>If both <code>skipHeaderRows</code> and <code>hasHeaderRow</code> options are set, <code>skipHeaderRows</code> is first applied. For example, if you set
+<code>skipHeaderRows</code> to 2 and <code>hasHeaderRow</code> to true, Druid will skip the first two lines and then extract column information
+from the third line.</p>
+<p><em>example input</em></p>
+<pre><code class="hljs">bar|<span class="hljs-type">something</span>,<span class="hljs-number">1</span>|<span class="hljs-type">foo</span>
+bat|<span class="hljs-type">something</span>,<span class="hljs-number">2</span>|<span class="hljs-type">baz</span>
+truck|<span class="hljs-type">something</span>,<span class="hljs-number">3</span>|<span class="hljs-type">buck</span>
+</code></pre>
+<p><em>example namespaceParseSpec</em></p>
+<pre><code class="hljs css language-json">"namespaceParseSpec": {
+  "format": "tsv",
+  "columns": ["value","somethingElse","key"],
+  "keyColumn": "key",
+  "valueColumn": "value",
+  "delimiter": "|"
+}
+</code></pre>
+<h4><a class="anchor" aria-hidden="true" id="customjson-lookupparsespec"></a><a href="#customjson-lookupparsespec" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>customJson lookupParseSpec</h4>
+<table>
+<thead>
+<tr><th>Parameter</th><th>Description</th><th>Required</th><th>Default</th></tr>
+</thead>
+<tbody>
+<tr><td><code>keyFieldName</code></td><td>The field name of the key</td><td>yes</td><td>null</td></tr>
+<tr><td><code>valueFieldName</code></td><td>The field name of the value</td><td>yes</td><td>null</td></tr>
+</tbody>
+</table>
+<p><em>example input</em></p>
+<pre><code class="hljs css language-json">{<span class="hljs-attr">"key"</span>: <span class="hljs-string">"foo"</span>, <span class="hljs-attr">"value"</span>: <span class="hljs-string">"bar"</span>, <span class="hljs-attr">"somethingElse"</span> : <span class="hljs-string">"something"</span>}
+{<span class="hljs-attr">"key"</span>: <span class="hljs-string">"baz"</span>, <span class="hljs-attr">"value"</span>: <span class="hljs-string">"bat"</span>, <span class="hljs-attr">"somethingElse"</span> : <span class="hljs-string">"something"</span>}
+{<span class="hljs-attr">"key"</span>: <span class="hljs-string">"buck"</span>, <span class="hljs-attr">"somethingElse"</span>: <span class="hljs-string">"something"</span>, <span class="hljs-attr">"value"</span>: <span class="hljs-string">"truck"</span>}
+</code></pre>
+<p><em>example namespaceParseSpec</em></p>
+<pre><code class="hljs css language-json">"namespaceParseSpec": {
+  "format": "customJson",
+  "keyFieldName": "key",
+  "valueFieldName": "value"
+}
+</code></pre>
+<p>With customJson parsing, if the value field for a particular row is missing or null then that line will be skipped, and
+will not be included in the lookup.</p>
+<h4><a class="anchor" aria-hidden="true" id="simplejson-lookupparsespec"></a><a href="#simplejson-lookupparsespec" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>simpleJson lookupParseSpec</h4>
+<p>The <code>simpleJson</code> lookupParseSpec does not take any parameters. It is simply a line delimited JSON file where the field is the key, and the field's value is the value.</p>
+<p><em>example input</em></p>
+<pre><code class="hljs css language-json">{<span class="hljs-attr">"foo"</span>: <span class="hljs-string">"bar"</span>}
+{<span class="hljs-attr">"baz"</span>: <span class="hljs-string">"bat"</span>}
+{<span class="hljs-attr">"buck"</span>: <span class="hljs-string">"truck"</span>}
+</code></pre>
+<p><em>example namespaceParseSpec</em></p>
+<pre><code class="hljs css language-json">"namespaceParseSpec":{
+  "format": "simpleJson"
+}
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="jdbc-lookup"></a><a href="#jdbc-lookup" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>JDBC lookup</h3>
+<p>The JDBC lookups will poll a database to populate its local cache. If the <code>tsColumn</code> is set it must be able to accept comparisons in the format <code>'2015-01-01 00:00:00'</code>. For example, the following must be valid SQL for the table <code>SELECT * FROM some_lookup_table WHERE timestamp_column &gt; '2015-01-01 00:00:00'</code>. If <code>tsColumn</code> is set, the caching service will attempt to only poll values that were written <em>after</em> the last sync. If <code>tsColumn</code> is not set, the entire table is pulled every time.</p>
+<table>
+<thead>
+<tr><th>Parameter</th><th>Description</th><th>Required</th><th>Default</th></tr>
+</thead>
+<tbody>
+<tr><td><code>namespace</code></td><td>The namespace to define</td><td>Yes</td><td></td></tr>
+<tr><td><code>connectorConfig</code></td><td>The connector config to use. You can set <code>connectURI</code>, <code>user</code> and <code>password</code>. You can selectively allow JDBC properties in <code>connectURI</code>. See <a href="/docs/0.20.2/configuration/index.html#jdbc-connections-to-external-databases">JDBC connections security config</a> for more details.</td><td>Yes</td><td></td></tr>
+<tr><td><code>table</code></td><td>The table which contains the key value pairs</td><td>Yes</td><td></td></tr>
+<tr><td><code>keyColumn</code></td><td>The column in <code>table</code> which contains the keys</td><td>Yes</td><td></td></tr>
+<tr><td><code>valueColumn</code></td><td>The column in <code>table</code> which contains the values</td><td>Yes</td><td></td></tr>
+<tr><td><code>filter</code></td><td>The filter to use when selecting lookups, this is used to create a where clause on lookup population</td><td>No</td><td>No Filter</td></tr>
+<tr><td><code>tsColumn</code></td><td>The column in <code>table</code> which contains when the key was updated</td><td>No</td><td>Not used</td></tr>
+<tr><td><code>pollPeriod</code></td><td>How often to poll the DB</td><td>No</td><td>0 (only once)</td></tr>
+</tbody>
+</table>
+<pre><code class="hljs css language-json">{
+  <span class="hljs-attr">"type"</span>:<span class="hljs-string">"jdbc"</span>,
+  <span class="hljs-attr">"namespace"</span>:<span class="hljs-string">"some_lookup"</span>,
+  <span class="hljs-attr">"connectorConfig"</span>:{
+    <span class="hljs-attr">"connectURI"</span>:<span class="hljs-string">"jdbc:mysql://localhost:3306/druid"</span>,
+    <span class="hljs-attr">"user"</span>:<span class="hljs-string">"druid"</span>,
+    <span class="hljs-attr">"password"</span>:<span class="hljs-string">"diurd"</span>
+  },
+  <span class="hljs-attr">"table"</span>:<span class="hljs-string">"some_lookup_table"</span>,
+  <span class="hljs-attr">"keyColumn"</span>:<span class="hljs-string">"the_old_dim_value"</span>,
+  <span class="hljs-attr">"valueColumn"</span>:<span class="hljs-string">"the_new_dim_value"</span>,
+  <span class="hljs-attr">"tsColumn"</span>:<span class="hljs-string">"timestamp_column"</span>,
+  <span class="hljs-attr">"pollPeriod"</span>:<span class="hljs-number">600000</span>
+}
+</code></pre>
+<blockquote>
+<p>If using JDBC, you will need to add your database's client JAR files to the extension's directory.
+For Postgres, the connector JAR is already included.
+For MySQL, you can get it from <a href="https://dev.mysql.com/downloads/connector/j/">https://dev.mysql.com/downloads/connector/j/</a>.
+Copy or symlink the downloaded file to <code>extensions/druid-lookups-cached-global</code> under the distribution root directory.</p>
+</blockquote>
+<h2><a class="anchor" aria-hidden="true" id="introspection"></a><a href="#introspection" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Introspection</h2>
+<p>Globally cached lookups have introspection points at <code>/keys</code> and <code>/values</code> which return a complete set of the keys and values (respectively) in the lookup. Introspection to <code>/</code> returns the entire map. Introspection to <code>/version</code> returns the version indicator for the lookup.</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/0.20.2/development/extensions-core/kafka-extraction-namespace.html"><span class="arrow-prev">← </span><span>Apache Kafka Lookups</span></a><a class="docs-next button" href="/docs/0.20.2/development/extensions-core/mysql.html"><span class="function-name-prevnext">MySQL Metadata Store</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#configuration">Configuration</a></li><li><a href="#example-configuration">Example configuration</a></li><li><a href="#cache-settings">Cache Settings</a></li><li><a href="#supported-lookups">Supported lookups</a><ul class="toc-headings"><li><a href="#uri-lookup">URI lookup</a></li><li><a href="#jdbc-lookup">JDBC lookup</a></li></ul></li><li><a href="#introspection">Introspection</a></li></ul></nav></div><footer class="nav-footer druid-footer" id="footer"><div class="container"><div class="text-center"><p><a href="/technology">Technology</a> · <a href="/use-cases">Use Cases</a> · <a href="/druid-powered">Powered by Druid</a> · <a href="/docs/0.20.2/latest">Docs</a> · <a href="/community/">Community</a> · <a href="/downloads.html">Download</a> · <a href="/faq">FAQ</a></p></div><div class="text-center"><a title="Join the user group" href="https://groups.google.com/forum/#!forum/druid-user" target="_blank"><span class="fa fa-comments"></span></a> · <a title="Follow Druid" href="https://twitter.com/druidio" target="_blank"><span class="fab fa-twitter"></span></a> · <a title="Download via Apache" href="https://www.apache.org/dyn/closer.cgi?path=/incubator/druid/{{ site.druid_versions[0].versions[0].version }}/apache-druid-{{ site.druid_versions[0].versions[0].version }}-bin.tar.gz" target="_blank"><span class="fas fa-feather"></span></a> · <a title="GitHub" href="https://github.com/apache/druid" target="_blank"><span class="fab fa-github"></span></a></div><div class="text-center license">Copyright © 2019 <a href="https://www.apache.org/" target="_blank">Apache Software Foundation</a>.<br/>Except where otherwise noted, licensed under <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.<br/>Apache Druid, Druid, and the Druid logo are either registered trademarks or trademarks of The Apache Software Foundation in the United States and other countries.</div></div></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '2de99082a9f38e49dfaa059bbe4c901d',
+                indexName: 'apache_druid',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["language:en","version:0.20.2"]}
+              });
+            </script></body></html>

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Globally Cached Lookups · Apache Druid</title><meta name="viewport" content="width=device-width"/><link rel="canonical" href="https://druid.apache.org/docs/latest/development/extensions-core/lookups-cached-global.html"/><meta name="generator" content="Docusaurus"/><meta name="description" content="&lt;!--"/><meta name="docsearch:language" content="en"/><meta name="docsearch:version" content="0.20.1" /><meta property="og:title" content="Globally Cached Lookups · Apache Druid"/><meta property="og:type" content="website"/><meta property="og:url" content="https://druid.apache.org/index.html"/><meta property="og:description" content="&lt;!--"/><meta property="og:image" content="https://druid.apache.org/img/druid_nav.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://druid.apache.org/img/druid_nav.png"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-131010415-1"></script><script>
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Globally Cached Lookups · Apache Druid</title><meta name="viewport" content="width=device-width"/><link rel="canonical" href="https://druid.apache.org/docs/latest/development/extensions-core/lookups-cached-global.html"/><meta name="generator" content="Docusaurus"/><meta name="description" content="&lt;!--"/><meta name="docsearch:language" content="en"/><meta name="docsearch:version" content="0.20.2" /><meta property="og:title" content="Globally Cached Lookups · Apache Druid"/><meta property="og:type" content="website"/><meta property="og:url" content="https://druid.apache.org/index.html"/><meta property="og:description" content="&lt;!--"/><meta property="og:image" content="https://druid.apache.org/img/druid_nav.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://druid.apache.org/img/druid_nav.png"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-131010415-1"></script><script>
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments); }
               gtag('js', new Date());
@@ -113,7 +113,6 @@ and are small enough to reasonably populate in-memory. This usually means tens t
    <span class="hljs-attr">"extractionNamespace"</span>: {
       <span class="hljs-attr">"type"</span>: <span class="hljs-string">"jdbc"</span>,
       <span class="hljs-attr">"connectorConfig"</span>: {
-        <span class="hljs-attr">"createTables"</span>: <span class="hljs-literal">true</span>,
         <span class="hljs-attr">"connectURI"</span>: <span class="hljs-string">"jdbc:mysql:\/\/localhost:3306\/druid"</span>,
         <span class="hljs-attr">"user"</span>: <span class="hljs-string">"druid"</span>,
         <span class="hljs-attr">"password"</span>: <span class="hljs-string">"diurd"</span>
@@ -153,7 +152,6 @@ and are small enough to reasonably populate in-memory. This usually means tens t
         <span class="hljs-attr">"extractionNamespace"</span>: {
           <span class="hljs-attr">"type"</span>: <span class="hljs-string">"jdbc"</span>,
           <span class="hljs-attr">"connectorConfig"</span>: {
-            <span class="hljs-attr">"createTables"</span>: <span class="hljs-literal">true</span>,
             <span class="hljs-attr">"connectURI"</span>: <span class="hljs-string">"jdbc:mysql:\/\/localhost:3306\/druid"</span>,
             <span class="hljs-attr">"user"</span>: <span class="hljs-string">"druid"</span>,
             <span class="hljs-attr">"password"</span>: <span class="hljs-string">"diurd"</span>
@@ -179,7 +177,6 @@ and are small enough to reasonably populate in-memory. This usually means tens t
     <span class="hljs-attr">"extractionNamespace"</span>: {
       <span class="hljs-attr">"type"</span>: <span class="hljs-string">"jdbc"</span>,
       <span class="hljs-attr">"connectorConfig"</span>: {
-        <span class="hljs-attr">"createTables"</span>: <span class="hljs-literal">true</span>,
         <span class="hljs-attr">"connectURI"</span>: <span class="hljs-string">"jdbc:mysql://localhost:3306/druid"</span>,
         <span class="hljs-attr">"user"</span>: <span class="hljs-string">"druid"</span>,
         <span class="hljs-attr">"password"</span>: <span class="hljs-string">"diurd"</span>
@@ -360,7 +357,7 @@ will not be included in the lookup.</p>
 </thead>
 <tbody>
 <tr><td><code>namespace</code></td><td>The namespace to define</td><td>Yes</td><td></td></tr>
-<tr><td><code>connectorConfig</code></td><td>The connector config to use</td><td>Yes</td><td></td></tr>
+<tr><td><code>connectorConfig</code></td><td>The connector config to use. You can set <code>connectURI</code>, <code>user</code> and <code>password</code>. You can selectively allow JDBC properties in <code>connectURI</code>. See <a href="/docs/latest/configuration/index.html#jdbc-connections-to-external-databases">JDBC connections security config</a> for more details.</td><td>Yes</td><td></td></tr>
 <tr><td><code>table</code></td><td>The table which contains the key value pairs</td><td>Yes</td><td></td></tr>
 <tr><td><code>keyColumn</code></td><td>The column in <code>table</code> which contains the keys</td><td>Yes</td><td></td></tr>
 <tr><td><code>valueColumn</code></td><td>The column in <code>table</code> which contains the values</td><td>Yes</td><td></td></tr>
@@ -373,7 +370,6 @@ will not be included in the lookup.</p>
   <span class="hljs-attr">"type"</span>:<span class="hljs-string">"jdbc"</span>,
   <span class="hljs-attr">"namespace"</span>:<span class="hljs-string">"some_lookup"</span>,
   <span class="hljs-attr">"connectorConfig"</span>:{
-    <span class="hljs-attr">"createTables"</span>:<span class="hljs-literal">true</span>,
     <span class="hljs-attr">"connectURI"</span>:<span class="hljs-string">"jdbc:mysql://localhost:3306/druid"</span>,
     <span class="hljs-attr">"user"</span>:<span class="hljs-string">"druid"</span>,
     <span class="hljs-attr">"password"</span>:<span class="hljs-string">"diurd"</span>
@@ -410,6 +406,6 @@ Copy or symlink the downloaded file to <code>extensions/druid-lookups-cached-glo
                 apiKey: '2de99082a9f38e49dfaa059bbe4c901d',
                 indexName: 'apache_druid',
                 inputSelector: '#search_input_react',
-                algoliaOptions: {"facetFilters":["language:en","version:0.20.1"]}
+                algoliaOptions: {"facetFilters":["language:en","version:0.20.2"]}
               });
             </script></body></html>

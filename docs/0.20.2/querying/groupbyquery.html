@@ -1,0 +1,513 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>GroupBy queries · Apache Druid</title><meta name="viewport" content="width=device-width"/><link rel="canonical" href="https://druid.apache.org/docs/0.20.2/querying/groupbyquery.html"/><meta name="generator" content="Docusaurus"/><meta name="description" content="&lt;!--"/><meta name="docsearch:language" content="en"/><meta name="docsearch:version" content="0.20.2" /><meta property="og:title" content="GroupBy queries · Apache Druid"/><meta property="og:type" content="website"/><meta property="og:url" content="https://druid.apache.org/index.html"/><meta property="og:description" content="&lt;!--"/><meta property="og:image" content="https://druid.apache.org/img/druid_nav.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://druid.apache.org/img/druid_nav.png"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-131010415-1"></script><script>
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments); }
+              gtag('js', new Date());
+              gtag('config', 'UA-131010415-1');
+            </script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"/><link rel="stylesheet" href="/css/code-block-buttons.css"/><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script><script type="text/javascript" src="/js/code-block-buttons.js"></script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/druid_nav.png" alt="Apache Druid"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/technology" target="_self">Technology</a></li><li class=""><a href="/use-cases" target="_self">Use Cases</a></li><li class=""><a href="/druid-powered" target="_self">Powered By</a></li><li class="siteNavGroupActive"><a href="/docs/0.20.2/design/index.html" target="_self">Docs</a></li><li class=""><a href="/community/" target="_self">Community</a></li><li class=""><a href="https://www.apache.org" target="_self">Apache</a></li><li class=""><a href="/downloads.html" target="_self">Download</a></li><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Native query types</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Getting started<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.2/design/index.html">Introduction to Apache Druid</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/tutorials/index.html">Quickstart</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/tutorials/docker.html">Docker</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/single-server.html">Single server deployment</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/tutorials/cluster.html">Clustered deployment</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Tutorials<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.2/tutorials/tutorial-batch.html">Loading files natively</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/tutorials/tutorial-kafka.html">Load from Apache Kafka</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/tutorials/tutorial-batch-hadoop.html">Load from Apache Hadoop</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/tutorials/tutorial-query.html">Querying data</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/tutorials/tutorial-rollup.html">Roll-up</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/tutorials/tutorial-retention.html">Configuring data retention</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/tutorials/tutorial-update-data.html">Updating existing data</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/tutorials/tutorial-compaction.html">Compacting segments</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/tutorials/tutorial-delete-data.html">Deleting data</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/tutorials/tutorial-ingestion-spec.html">Writing an ingestion spec</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/tutorials/tutorial-transform-spec.html">Transforming input data</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/tutorials/tutorial-kerberos-hadoop.html">Kerberized HDFS deep storage</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Design<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.2/design/architecture.html">Design</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/design/segments.html">Segments</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/design/processes.html">Processes and servers</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/dependencies/deep-storage.html">Deep storage</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/dependencies/metadata-storage.html">Metadata storage</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/dependencies/zookeeper.html">ZooKeeper</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Ingestion<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.2/ingestion/index.html">Ingestion</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/ingestion/data-formats.html">Data formats</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/ingestion/schema-design.html">Schema design tips</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/ingestion/data-management.html">Data management</a></li><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Stream ingestion</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/kafka-ingestion.html">Apache Kafka</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/kinesis-ingestion.html">Amazon Kinesis</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/ingestion/tranquility.html">Tranquility</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Batch ingestion</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.20.2/ingestion/native-batch.html">Native batch</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/ingestion/hadoop.html">Hadoop-based</a></li></ul></div><li class="navListItem"><a class="navItem" href="/docs/0.20.2/ingestion/tasks.html">Task reference</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/ingestion/faq.html">Troubleshooting FAQ</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Querying<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/sql.html">Druid SQL</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/querying.html">Native queries</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/query-execution.html">Query execution</a></li><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Concepts</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/datasource.html">Datasources</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/joins.html">Joins</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/lookups.html">Lookups</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/multi-value-dimensions.html">Multi-value dimensions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/multitenancy.html">Multitenancy</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/caching.html">Query caching</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/query-context.html">Context parameters</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Native query types</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/timeseriesquery.html">Timeseries</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/topnquery.html">TopN</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/0.20.2/querying/groupbyquery.html">GroupBy</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/scan-query.html">Scan</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/searchquery.html">Search</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/timeboundaryquery.html">TimeBoundary</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/segmentmetadataquery.html">SegmentMetadata</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/datasourcemetadataquery.html">DatasourceMetadata</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Native query components</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/filters.html">Filters</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/granularities.html">Granularities</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/dimensionspecs.html">Dimensions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/aggregations.html">Aggregations</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/post-aggregations.html">Post-aggregations</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/misc/math-expr.html">Expressions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/having.html">Having filters (groupBy)</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/limitspec.html">Sorting and limiting (groupBy)</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/topnmetricspec.html">Sorting (topN)</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/sorting-orders.html">String comparators</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/virtual-columns.html">Virtual columns</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/geo.html">Spatial filters</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Configuration<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.2/configuration/index.html">Configuration reference</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions.html">Extensions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/configuration/logging.html">Logging</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Operations<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/druid-console.html">Web console</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/getting-started.html">Getting started with Apache Druid</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/basic-cluster-tuning.html">Basic cluster tuning</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/api-reference.html">API reference</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/high-availability.html">High availability</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/rolling-updates.html">Rolling updates</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/rule-configuration.html">Retaining or automatically dropping data</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/metrics.html">Metrics</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/alerts.html">Alerts</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/other-hadoop.html">Working with different versions of Apache Hadoop</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/http-compression.html">HTTP compression</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/tls-support.html">TLS support</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/password-provider.html">Password providers</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/dump-segment.html">dump-segment tool</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/reset-cluster.html">reset-cluster tool</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/insert-segment-to-db.html">insert-segment-to-db tool</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/pull-deps.html">pull-deps tool</a></li><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Misc</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/management-uis.html">Legacy Management UIs</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/deep-storage-migration.html">Deep storage migration</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/export-metadata.html">Export Metadata Tool</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/metadata-migration.html">Metadata Migration</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/segment-optimization.html">Segment Size Optimization</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/operations/use_sbt_to_build_fat_jar.html">Content for build.sbt</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Development<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/overview.html">Developing on Druid</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/modules.html">Creating extensions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/javascript.html">JavaScript functionality</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/build.html">Build from source</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/versioning.html">Versioning</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/experimental.html">Experimental features</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Misc<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.2/misc/papers-and-talks.html">Papers</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Hidden<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.20.2/comparisons/druid-vs-elasticsearch.html">Apache Druid vs Elasticsearch</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/comparisons/druid-vs-key-value.html">Apache Druid vs. Key/Value Stores (HBase/Cassandra/OpenTSDB)</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/comparisons/druid-vs-kudu.html">Apache Druid vs Kudu</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/comparisons/druid-vs-redshift.html">Apache Druid vs Redshift</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/comparisons/druid-vs-spark.html">Apache Druid vs Spark</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/comparisons/druid-vs-sql-on-hadoop.html">Apache Druid vs SQL-on-Hadoop</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/design/auth.html">Authentication and Authorization</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/design/broker.html">Broker</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/design/coordinator.html">Coordinator Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/design/historical.html">Historical Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/design/indexer.html">Indexer Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/design/indexing-service.html">Indexing Service</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/design/middlemanager.html">MiddleManager Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/design/overlord.html">Overlord Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/design/router.html">Router Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/design/peons.html">Peons</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/approximate-histograms.html">Approximate Histogram aggregators</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/avro.html">Apache Avro</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/azure.html">Microsoft Azure</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/bloom-filter.html">Bloom Filter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/datasketches-extension.html">DataSketches extension</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/datasketches-hll.html">DataSketches HLL Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/datasketches-quantiles.html">DataSketches Quantiles Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/datasketches-theta.html">DataSketches Theta Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/datasketches-tuple.html">DataSketches Tuple Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/druid-basic-security.html">Basic Security</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/druid-kerberos.html">Kerberos</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/druid-lookups.html">Cached Lookup Module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/druid-ranger-security.html">Apache Ranger Security</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/google.html">Google Cloud Storage</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/hdfs.html">HDFS</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/kafka-extraction-namespace.html">Apache Kafka Lookups</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/lookups-cached-global.html">Globally Cached Lookups</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/mysql.html">MySQL Metadata Store</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/orc.html">ORC Extension</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/druid-pac4j.html">Druid pac4j based Security extension</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/parquet.html">Apache Parquet Extension</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/postgresql.html">PostgreSQL Metadata Store</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/protobuf.html">Protobuf</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/s3.html">S3-compatible</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/simple-client-sslcontext.html">Simple SSLContext Provider Module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/stats.html">Stats aggregator</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-core/test-stats.html">Test Stats Aggregators</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/ambari-metrics-emitter.html">Ambari Metrics Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/cassandra.html">Apache Cassandra</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/cloudfiles.html">Rackspace Cloud Files</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/distinctcount.html">DistinctCount Aggregator</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/graphite.html">Graphite Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/influx.html">InfluxDB Line Protocol Parser</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/influxdb-emitter.html">InfluxDB Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/kafka-emitter.html">Kafka Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/materialized-view.html">Materialized View</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/momentsketch-quantiles.html">Moment Sketches for Approximate Quantiles module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/moving-average-query.html">Moving Average Query</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/opentsdb-emitter.html">OpenTSDB Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/redis-cache.html">Druid Redis Cache</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/sqlserver.html">Microsoft SQLServer</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/statsd.html">StatsD Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/tdigestsketch-quantiles.html">T-Digest Quantiles Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/thrift.html">Thrift</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/time-min-max.html">Timestamp Min/Max aggregators</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/gce-extensions.html">GCE Extensions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/development/extensions-contrib/aliyun-oss.html">Aliyun OSS</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/hll-old.html">Cardinality/HyperUnique aggregators</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/querying/select-query.html">Select</a></li><li class="navListItem"><a class="navItem" href="/docs/0.20.2/ingestion/standalone-realtime.html">Realtime Process</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/apache/druid/edit/master/docs/querying/groupbyquery.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">GroupBy queries</h1></header><article><div><span><!--
+  ~ Licensed to the Apache Software Foundation (ASF) under one
+  ~ or more contributor license agreements.  See the NOTICE file
+  ~ distributed with this work for additional information
+  ~ regarding copyright ownership.  The ASF licenses this file
+  ~ to you under the Apache License, Version 2.0 (the
+  ~ "License"); you may not use this file except in compliance
+  ~ with the License.  You may obtain a copy of the License at
+  ~
+  ~   http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an
+  ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~ KIND, either express or implied.  See the License for the
+  ~ specific language governing permissions and limitations
+  ~ under the License.
+  -->
+<blockquote>
+<p>Apache Druid supports two query languages: <a href="/docs/0.20.2/querying/sql.html">Druid SQL</a> and <a href="/docs/0.20.2/querying/querying.html">native queries</a>.
+This document describes a query
+type in the native language. For information about when Druid SQL will use this query type, refer to the
+<a href="/docs/0.20.2/querying/sql.html#query-types">SQL documentation</a>.</p>
+</blockquote>
+<p>These types of Apache Druid queries take a groupBy query object and return an array of JSON objects where each object represents a
+grouping asked for by the query.</p>
+<blockquote>
+<p>Note: If you are doing aggregations with time as your only grouping, or an ordered groupBy over a single dimension,
+consider <a href="/docs/0.20.2/querying/timeseriesquery.html">Timeseries</a> and <a href="/docs/0.20.2/querying/topnquery.html">TopN</a> queries as well as
+groupBy. Their performance may be better in some cases. See <a href="#alternatives">Alternatives</a> below for more details.</p>
+</blockquote>
+<p>An example groupBy query object is shown below:</p>
+<pre><code class="hljs css language-json">{
+  <span class="hljs-attr">"queryType"</span>: <span class="hljs-string">"groupBy"</span>,
+  <span class="hljs-attr">"dataSource"</span>: <span class="hljs-string">"sample_datasource"</span>,
+  <span class="hljs-attr">"granularity"</span>: <span class="hljs-string">"day"</span>,
+  <span class="hljs-attr">"dimensions"</span>: [<span class="hljs-string">"country"</span>, <span class="hljs-string">"device"</span>],
+  <span class="hljs-attr">"limitSpec"</span>: { <span class="hljs-attr">"type"</span>: <span class="hljs-string">"default"</span>, <span class="hljs-attr">"limit"</span>: <span class="hljs-number">5000</span>, <span class="hljs-attr">"columns"</span>: [<span class="hljs-string">"country"</span>, <span class="hljs-string">"data_transfer"</span>] },
+  <span class="hljs-attr">"filter"</span>: {
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"and"</span>,
+    <span class="hljs-attr">"fields"</span>: [
+      { <span class="hljs-attr">"type"</span>: <span class="hljs-string">"selector"</span>, <span class="hljs-attr">"dimension"</span>: <span class="hljs-string">"carrier"</span>, <span class="hljs-attr">"value"</span>: <span class="hljs-string">"AT&amp;T"</span> },
+      { <span class="hljs-attr">"type"</span>: <span class="hljs-string">"or"</span>,
+        <span class="hljs-attr">"fields"</span>: [
+          { <span class="hljs-attr">"type"</span>: <span class="hljs-string">"selector"</span>, <span class="hljs-attr">"dimension"</span>: <span class="hljs-string">"make"</span>, <span class="hljs-attr">"value"</span>: <span class="hljs-string">"Apple"</span> },
+          { <span class="hljs-attr">"type"</span>: <span class="hljs-string">"selector"</span>, <span class="hljs-attr">"dimension"</span>: <span class="hljs-string">"make"</span>, <span class="hljs-attr">"value"</span>: <span class="hljs-string">"Samsung"</span> }
+        ]
+      }
+    ]
+  },
+  <span class="hljs-attr">"aggregations"</span>: [
+    { <span class="hljs-attr">"type"</span>: <span class="hljs-string">"longSum"</span>, <span class="hljs-attr">"name"</span>: <span class="hljs-string">"total_usage"</span>, <span class="hljs-attr">"fieldName"</span>: <span class="hljs-string">"user_count"</span> },
+    { <span class="hljs-attr">"type"</span>: <span class="hljs-string">"doubleSum"</span>, <span class="hljs-attr">"name"</span>: <span class="hljs-string">"data_transfer"</span>, <span class="hljs-attr">"fieldName"</span>: <span class="hljs-string">"data_transfer"</span> }
+  ],
+  <span class="hljs-attr">"postAggregations"</span>: [
+    { <span class="hljs-attr">"type"</span>: <span class="hljs-string">"arithmetic"</span>,
+      <span class="hljs-attr">"name"</span>: <span class="hljs-string">"avg_usage"</span>,
+      <span class="hljs-attr">"fn"</span>: <span class="hljs-string">"/"</span>,
+      <span class="hljs-attr">"fields"</span>: [
+        { <span class="hljs-attr">"type"</span>: <span class="hljs-string">"fieldAccess"</span>, <span class="hljs-attr">"fieldName"</span>: <span class="hljs-string">"data_transfer"</span> },
+        { <span class="hljs-attr">"type"</span>: <span class="hljs-string">"fieldAccess"</span>, <span class="hljs-attr">"fieldName"</span>: <span class="hljs-string">"total_usage"</span> }
+      ]
+    }
+  ],
+  <span class="hljs-attr">"intervals"</span>: [ <span class="hljs-string">"2012-01-01T00:00:00.000/2012-01-03T00:00:00.000"</span> ],
+  <span class="hljs-attr">"having"</span>: {
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"greaterThan"</span>,
+    <span class="hljs-attr">"aggregation"</span>: <span class="hljs-string">"total_usage"</span>,
+    <span class="hljs-attr">"value"</span>: <span class="hljs-number">100</span>
+  }
+}
+</code></pre>
+<p>Following are main parts to a groupBy query:</p>
+<table>
+<thead>
+<tr><th>property</th><th>description</th><th>required?</th></tr>
+</thead>
+<tbody>
+<tr><td>queryType</td><td>This String should always be &quot;groupBy&quot;; this is the first thing Druid looks at to figure out how to interpret the query</td><td>yes</td></tr>
+<tr><td>dataSource</td><td>A String or Object defining the data source to query, very similar to a table in a relational database. See <a href="/docs/0.20.2/querying/datasource.html">DataSource</a> for more information.</td><td>yes</td></tr>
+<tr><td>dimensions</td><td>A JSON list of dimensions to do the groupBy over; or see <a href="/docs/0.20.2/querying/dimensionspecs.html">DimensionSpec</a> for ways to extract dimensions.</td><td>yes</td></tr>
+<tr><td>limitSpec</td><td>See <a href="/docs/0.20.2/querying/limitspec.html">LimitSpec</a>.</td><td>no</td></tr>
+<tr><td>having</td><td>See <a href="/docs/0.20.2/querying/having.html">Having</a>.</td><td>no</td></tr>
+<tr><td>granularity</td><td>Defines the granularity of the query. See <a href="/docs/0.20.2/querying/granularities.html">Granularities</a></td><td>yes</td></tr>
+<tr><td>filter</td><td>See <a href="/docs/0.20.2/querying/filters.html">Filters</a></td><td>no</td></tr>
+<tr><td>aggregations</td><td>See <a href="/docs/0.20.2/querying/aggregations.html">Aggregations</a></td><td>no</td></tr>
+<tr><td>postAggregations</td><td>See <a href="/docs/0.20.2/querying/post-aggregations.html">Post Aggregations</a></td><td>no</td></tr>
+<tr><td>intervals</td><td>A JSON Object representing ISO-8601 Intervals. This defines the time ranges to run the query over.</td><td>yes</td></tr>
+<tr><td>subtotalsSpec</td><td>A JSON array of arrays to return additional result sets for groupings of subsets of top level <code>dimensions</code>. It is <a href="groupbyquery.html#more-on-subtotalsspec">described later</a> in more detail.</td><td>no</td></tr>
+<tr><td>context</td><td>An additional JSON Object which can be used to specify certain flags.</td><td>no</td></tr>
+</tbody>
+</table>
+<p>To pull it all together, the above query would return <em>n*m</em> data points, up to a maximum of 5000 points, where n is the cardinality of the <code>country</code> dimension, m is the cardinality of the <code>device</code> dimension, each day between 2012-01-01 and 2012-01-03, from the <code>sample_datasource</code> table. Each data point contains the (long) sum of <code>total_usage</code> if the value of the data point is greater than 100, the (double) sum of <code>data_transfer</code> and the (double) result of <code>total_usage</code> divided by <code>data_transfer</code> for the filter set for a particular grouping of <code>country</code> and <code>device</code>. The output looks like this:</p>
+<pre><code class="hljs css language-json">[
+  {
+    <span class="hljs-attr">"version"</span> : <span class="hljs-string">"v1"</span>,
+    <span class="hljs-attr">"timestamp"</span> : <span class="hljs-string">"2012-01-01T00:00:00.000Z"</span>,
+    <span class="hljs-attr">"event"</span> : {
+      <span class="hljs-attr">"country"</span> : &lt;some_dim_value_one&gt;,
+      <span class="hljs-attr">"device"</span> : &lt;some_dim_value_two&gt;,
+      <span class="hljs-attr">"total_usage"</span> : &lt;some_value_one&gt;,
+      <span class="hljs-attr">"data_transfer"</span> :&lt;some_value_two&gt;,
+      <span class="hljs-attr">"avg_usage"</span> : &lt;some_avg_usage_value&gt;
+    }
+  },
+  {
+    <span class="hljs-attr">"version"</span> : <span class="hljs-string">"v1"</span>,
+    <span class="hljs-attr">"timestamp"</span> : <span class="hljs-string">"2012-01-01T00:00:12.000Z"</span>,
+    <span class="hljs-attr">"event"</span> : {
+      <span class="hljs-attr">"dim1"</span> : &lt;some_other_dim_value_one&gt;,
+      <span class="hljs-attr">"dim2"</span> : &lt;some_other_dim_value_two&gt;,
+      <span class="hljs-attr">"sample_name1"</span> : &lt;some_other_value_one&gt;,
+      <span class="hljs-attr">"sample_name2"</span> :&lt;some_other_value_two&gt;,
+      <span class="hljs-attr">"avg_usage"</span> : &lt;some_other_avg_usage_value&gt;
+    }
+  },
+...
+]
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="behavior-on-multi-value-dimensions"></a><a href="#behavior-on-multi-value-dimensions" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Behavior on multi-value dimensions</h2>
+<p>groupBy queries can group on multi-value dimensions. When grouping on a multi-value dimension, <em>all</em> values
+from matching rows will be used to generate one group per value. It's possible for a query to return more groups than
+there are rows. For example, a groupBy on the dimension <code>tags</code> with filter <code>&quot;t1&quot; AND &quot;t3&quot;</code> would match only row1, and
+generate a result with three groups: <code>t1</code>, <code>t2</code>, and <code>t3</code>. If you only need to include values that match
+your filter, you can use a <a href="dimensionspecs.html#filtered-dimensionspecs">filtered dimensionSpec</a>. This can also
+improve performance.</p>
+<p>See <a href="multi-value-dimensions.html">Multi-value dimensions</a> for more details.</p>
+<h2><a class="anchor" aria-hidden="true" id="more-on-subtotalsspec"></a><a href="#more-on-subtotalsspec" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>More on subtotalsSpec</h2>
+<p>The subtotals feature allows computation of multiple sub-groupings in a single query. To use this feature, add a &quot;subtotalsSpec&quot; to your query as a list of subgroup dimension sets. It should contain the <code>outputName</code> from dimensions in your <code>dimensions</code> attribute, in the same order as they appear in the <code>dimensions</code> attribute (although, of course, you may skip some).</p>
+<p>For example, consider a groupBy query like this one:</p>
+<pre><code class="hljs css language-json">{
+"type": "groupBy",
+ ...
+ ...
+"dimensions": [
+  {
+  "type" : "default",
+  "dimension" : "d1col",
+  "outputName": "D1"
+  },
+  {
+  "type" : "extraction",
+  "dimension" : "d2col",
+  "outputName" :  "D2",
+  "extractionFn" : extraction_func
+  },
+  {
+  "type":"lookup",
+  "dimension":"d3col",
+  "outputName":"D3",
+  "name":"my_lookup"
+  }
+],
+...
+...
+"subtotalsSpec":[ ["D1", "D2", D3"], ["D1", "D3"], ["D3"]],
+..
+
+}
+</code></pre>
+<p>The result of the subtotalsSpec would be equivalent to concatenating the result of three groupBy queries, with the &quot;dimensions&quot; field being <code>[&quot;D1&quot;, &quot;D2&quot;, D3&quot;]</code>, <code>[&quot;D1&quot;, &quot;D3&quot;]</code> and <code>[&quot;D3&quot;]</code>, given the <code>DimensionSpec</code> shown above.
+The response for the query above would look something like:</p>
+<pre><code class="hljs css language-json">[
+  {
+    <span class="hljs-attr">"version"</span> : <span class="hljs-string">"v1"</span>,
+    <span class="hljs-attr">"timestamp"</span> : <span class="hljs-string">"t1"</span>,
+    <span class="hljs-attr">"event"</span> : { <span class="hljs-attr">"D1"</span>: <span class="hljs-string">".."</span>, <span class="hljs-attr">"D2"</span>: <span class="hljs-string">".."</span>, <span class="hljs-attr">"D3"</span>: <span class="hljs-string">".."</span> }
+    }
+  },
+    {
+    <span class="hljs-attr">"version"</span> : <span class="hljs-string">"v1"</span>,
+    <span class="hljs-attr">"timestamp"</span> : <span class="hljs-string">"t2"</span>,
+    <span class="hljs-attr">"event"</span> : { <span class="hljs-attr">"D1"</span>: <span class="hljs-string">".."</span>, <span class="hljs-attr">"D2"</span>: <span class="hljs-string">".."</span>, <span class="hljs-attr">"D3"</span>: <span class="hljs-string">".."</span> }
+    }
+  },
+  ...
+  ...
+
+   {
+    <span class="hljs-attr">"version"</span> : <span class="hljs-string">"v1"</span>,
+    <span class="hljs-attr">"timestamp"</span> : <span class="hljs-string">"t1"</span>,
+    <span class="hljs-attr">"event"</span> : { <span class="hljs-attr">"D1"</span>: <span class="hljs-string">".."</span>, <span class="hljs-attr">"D2"</span>: <span class="hljs-literal">null</span>, <span class="hljs-attr">"D3"</span>: <span class="hljs-string">".."</span> }
+    }
+  },
+    {
+    <span class="hljs-attr">"version"</span> : <span class="hljs-string">"v1"</span>,
+    <span class="hljs-attr">"timestamp"</span> : <span class="hljs-string">"t2"</span>,
+    <span class="hljs-attr">"event"</span> : { <span class="hljs-attr">"D1"</span>: <span class="hljs-string">".."</span>, <span class="hljs-attr">"D2"</span>: <span class="hljs-literal">null</span>, <span class="hljs-attr">"D3"</span>: <span class="hljs-string">".."</span> }
+    }
+  },
+  ...
+  ...
+
+  {
+    <span class="hljs-attr">"version"</span> : <span class="hljs-string">"v1"</span>,
+    <span class="hljs-attr">"timestamp"</span> : <span class="hljs-string">"t1"</span>,
+    <span class="hljs-attr">"event"</span> : { <span class="hljs-attr">"D1"</span>: <span class="hljs-literal">null</span>, <span class="hljs-attr">"D2"</span>: <span class="hljs-literal">null</span>, <span class="hljs-attr">"D3"</span>: <span class="hljs-string">".."</span> }
+    }
+  },
+    {
+    <span class="hljs-attr">"version"</span> : <span class="hljs-string">"v1"</span>,
+    <span class="hljs-attr">"timestamp"</span> : <span class="hljs-string">"t2"</span>,
+    <span class="hljs-attr">"event"</span> : { <span class="hljs-attr">"D1"</span>: <span class="hljs-literal">null</span>, <span class="hljs-attr">"D2"</span>: <span class="hljs-literal">null</span>, <span class="hljs-attr">"D3"</span>: <span class="hljs-string">".."</span> }
+    }
+  },
+...
+]
+</code></pre>
+<blockquote>
+<p>Notice that dimensions that are not included in an individual subtotalsSpec grouping are returned with a <code>null</code> value. This response format represents a behavior change as of Apache Druid 0.18.0. In release 0.17.0 and earlier, such dimensions were entirely excluded from the result.</p>
+</blockquote>
+<h2><a class="anchor" aria-hidden="true" id="implementation-details"></a><a href="#implementation-details" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Implementation details</h2>
+<h3><a class="anchor" aria-hidden="true" id="strategies"></a><a href="#strategies" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Strategies</h3>
+<p>GroupBy queries can be executed using two different strategies. The default strategy for a cluster is determined by the
+&quot;druid.query.groupBy.defaultStrategy&quot; runtime property on the Broker. This can be overridden using &quot;groupByStrategy&quot; in
+the query context. If neither the context field nor the property is set, the &quot;v2&quot; strategy will be used.</p>
+<ul>
+<li><p>&quot;v2&quot;, the default, is designed to offer better performance and memory management. This strategy generates
+per-segment results using a fully off-heap map. Data processes merge the per-segment results using a fully off-heap
+concurrent facts map combined with an on-heap string dictionary. This may optionally involve spilling to disk. Data
+processes return sorted results to the Broker, which merges result streams using an N-way merge. The broker materializes
+the results if necessary (e.g. if the query sorts on columns other than its dimensions). Otherwise, it streams results
+back as they are merged.</p></li>
+<li><p>&quot;v1&quot;, a legacy engine, generates per-segment results on data processes (Historical, realtime, MiddleManager) using a map which
+is partially on-heap (dimension keys and the map itself) and partially off-heap (the aggregated values). Data processes then
+merge the per-segment results using Druid's indexing mechanism. This merging is multi-threaded by default, but can
+optionally be single-threaded. The Broker merges the final result set using Druid's indexing mechanism again. The broker
+merging is always single-threaded. Because the Broker merges results using the indexing mechanism, it must materialize
+the full result set before returning any results. On both the data processes and the Broker, the merging index is fully
+on-heap by default, but it can optionally store aggregated values off-heap.</p></li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" id="differences-between-v1-and-v2"></a><a href="#differences-between-v1-and-v2" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Differences between v1 and v2</h3>
+<p>Query API and results are compatible between the two engines; however, there are some differences from a cluster
+configuration perspective:</p>
+<ul>
+<li>groupBy v1 controls resource usage using a row-based limit (maxResults) whereas groupBy v2 uses bytes-based limits.
+In addition, groupBy v1 merges results on-heap, whereas groupBy v2 merges results off-heap. These factors mean that
+memory tuning and resource limits behave differently between v1 and v2. In particular, due to this, some queries
+that can complete successfully in one engine may exceed resource limits and fail with the other engine. See the
+&quot;Memory tuning and resource limits&quot; section for more details.</li>
+<li>groupBy v1 imposes no limit on the number of concurrently running queries, whereas groupBy v2 controls memory usage
+by using a finite-sized merge buffer pool. By default, the number of merge buffers is 1/4 the number of processing
+threads. You can adjust this as necessary to balance concurrency and memory usage.</li>
+<li>groupBy v1 supports caching on either the Broker or Historical processes, whereas groupBy v2 only supports caching on
+Historical processes.</li>
+<li>groupBy v2 supports both array-based aggregation and hash-based aggregation. The array-based aggregation is used only
+when the grouping key is a single indexed string column. In array-based aggregation, the dictionary-encoded value is used
+as the index, so the aggregated values in the array can be accessed directly without finding buckets based on hashing.</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" id="memory-tuning-and-resource-limits"></a><a href="#memory-tuning-and-resource-limits" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Memory tuning and resource limits</h3>
+<p>When using groupBy v2, three parameters control resource usage and limits:</p>
+<ul>
+<li><code>druid.processing.buffer.sizeBytes</code>: size of the off-heap hash table used for aggregation, per query, in bytes. At
+most <code>druid.processing.numMergeBuffers</code> of these will be created at once, which also serves as an upper limit on the
+number of concurrently running groupBy queries.</li>
+<li><code>druid.query.groupBy.maxMergingDictionarySize</code>: size of the on-heap dictionary used when grouping on strings, per query,
+in bytes. Note that this is based on a rough estimate of the dictionary size, not the actual size.</li>
+<li><code>druid.query.groupBy.maxOnDiskStorage</code>: amount of space on disk used for aggregation, per query, in bytes. By default,
+this is 0, which means aggregation will not use disk.</li>
+</ul>
+<p>If <code>maxOnDiskStorage</code> is 0 (the default) then a query that exceeds either the on-heap dictionary limit, or the off-heap
+aggregation table limit, will fail with a &quot;Resource limit exceeded&quot; error describing the limit that was exceeded.</p>
+<p>If <code>maxOnDiskStorage</code> is greater than 0, queries that exceed the in-memory limits will start using disk for aggregation.
+In this case, when either the on-heap dictionary or off-heap hash table fills up, partially aggregated records will be
+sorted and flushed to disk. Then, both in-memory structures will be cleared out for further aggregation. Queries that
+then go on to exceed <code>maxOnDiskStorage</code> will fail with a &quot;Resource limit exceeded&quot; error indicating that they ran out of
+disk space.</p>
+<p>With groupBy v2, cluster operators should make sure that the off-heap hash tables and on-heap merging dictionaries
+will not exceed available memory for the maximum possible concurrent query load (given by
+<code>druid.processing.numMergeBuffers</code>). See the <a href="/docs/0.20.2/operations/basic-cluster-tuning.html">basic cluster tuning guide</a>
+for more details about direct memory usage, organized by Druid process type.</p>
+<p>Brokers do not need merge buffers for basic groupBy queries. Queries with subqueries (using a <code>query</code> dataSource) require one merge buffer if there is a single subquery, or two merge buffers if there is more than one layer of nested subqueries. Queries with <a href="groupbyquery.html#more-on-subtotalsspec">subtotals</a> need one merge buffer. These can stack on top of each other: a groupBy query with multiple layers of nested subqueries, and that also uses subtotals, will need three merge buffers.</p>
+<p>Historicals and ingestion tasks need one merge buffer for each groupBy query, unless <a href="groupbyquery.html#parallel-combine">parallel combination</a> is enabled, in which case they need two merge buffers per query.</p>
+<p>When using groupBy v1, all aggregation is done on-heap, and resource limits are done through the parameter
+<code>druid.query.groupBy.maxResults</code>. This is a cap on the maximum number of results in a result set. Queries that exceed
+this limit will fail with a &quot;Resource limit exceeded&quot; error indicating they exceeded their row limit. Cluster
+operators should make sure that the on-heap aggregations will not exceed available JVM heap space for the expected
+concurrent query load.</p>
+<h3><a class="anchor" aria-hidden="true" id="performance-tuning-for-groupby-v2"></a><a href="#performance-tuning-for-groupby-v2" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Performance tuning for groupBy v2</h3>
+<h4><a class="anchor" aria-hidden="true" id="limit-pushdown-optimization"></a><a href="#limit-pushdown-optimization" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Limit pushdown optimization</h4>
+<p>Druid pushes down the <code>limit</code> spec in groupBy queries to the segments on Historicals wherever possible to early prune unnecessary intermediate results and minimize the amount of data transferred to Brokers. By default, this technique is applied only when all fields in the <code>orderBy</code> spec is a subset of the grouping keys. This is because the <code>limitPushDown</code> doesn't guarantee the exact results if the <code>orderBy</code> spec includes any fields that are not in the grouping keys. However, you can enable this technique even in such cases if you can sacrifice some accuracy for fast query processing like in topN queries. See <code>forceLimitPushDown</code> in <a href="#groupby-v2-configurations">advanced groupBy v2 configurations</a>.</p>
+<h4><a class="anchor" aria-hidden="true" id="optimizing-hash-table"></a><a href="#optimizing-hash-table" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Optimizing hash table</h4>
+<p>The groupBy v2 engine uses an open addressing hash table for aggregation. The hash table is initialized with a given initial bucket number and gradually grows on buffer full. On hash collisions, the linear probing technique is used.</p>
+<p>The default number of initial buckets is 1024 and the default max load factor of the hash table is 0.7. If you can see too many collisions in the hash table, you can adjust these numbers. See <code>bufferGrouperInitialBuckets</code> and <code>bufferGrouperMaxLoadFactor</code> in <a href="#groupby-v2-configurations">Advanced groupBy v2 configurations</a>.</p>
+<h4><a class="anchor" aria-hidden="true" id="parallel-combine"></a><a href="#parallel-combine" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parallel combine</h4>
+<p>Once a Historical finishes aggregation using the hash table, it sorts the aggregated results and merges them before sending to the
+Broker for N-way merge aggregation in the broker. By default, Historicals use all their available processing threads
+(configured by <code>druid.processing.numThreads</code>) for aggregation, but use a single thread for sorting and merging
+aggregates which is an http thread to send data to Brokers.</p>
+<p>This is to prevent some heavy groupBy queries from blocking other queries. In Druid, the processing threads are shared
+between all submitted queries and they are <em>not interruptible</em>. It means, if a heavy query takes all available
+processing threads, all other queries might be blocked until the heavy query is finished. GroupBy queries usually take
+longer time than timeseries or topN queries, they should release processing threads as soon as possible.</p>
+<p>However, you might care about the performance of some really heavy groupBy queries. Usually, the performance bottleneck
+of heavy groupBy queries is merging sorted aggregates. In such cases, you can use processing threads for it as well.
+This is called <em>parallel combine</em>. To enable parallel combine, see <code>numParallelCombineThreads</code> in
+<a href="#groupby-v2-configurations">Advanced groupBy v2 configurations</a>. Note that parallel combine can be enabled only when
+data is actually spilled (see <a href="#memory-tuning-and-resource-limits">Memory tuning and resource limits</a>).</p>
+<p>Once parallel combine is enabled, the groupBy v2 engine can create a combining tree for merging sorted aggregates. Each
+intermediate node of the tree is a thread merging aggregates from the child nodes. The leaf node threads read and merge
+aggregates from hash tables including spilled ones. Usually, leaf processes are slower than intermediate nodes because they
+need to read data from disk. As a result, less threads are used for intermediate nodes by default. You can change the
+degree of intermediate nodes. See <code>intermediateCombineDegree</code> in <a href="#groupby-v2-configurations">Advanced groupBy v2 configurations</a>.</p>
+<p>Please note that each Historical needs two merge buffers to process a groupBy v2 query with parallel combine: one for
+computing intermediate aggregates from each segment and another for combining intermediate aggregates in parallel.</p>
+<h3><a class="anchor" aria-hidden="true" id="alternatives"></a><a href="#alternatives" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Alternatives</h3>
+<p>There are some situations where other query types may be a better choice than groupBy.</p>
+<ul>
+<li><p>For queries with no &quot;dimensions&quot; (i.e. grouping by time only) the <a href="timeseriesquery.html">Timeseries query</a> will
+generally be faster than groupBy. The major differences are that it is implemented in a fully streaming manner (taking
+advantage of the fact that segments are already sorted on time) and does not need to use a hash table for merging.</p></li>
+<li><p>For queries with a single &quot;dimensions&quot; element (i.e. grouping by one string dimension), the <a href="topnquery.html">TopN query</a>
+will sometimes be faster than groupBy. This is especially true if you are ordering by a metric and find approximate
+results acceptable.</p></li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" id="nested-groupbys"></a><a href="#nested-groupbys" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Nested groupBys</h3>
+<p>Nested groupBys (dataSource of type &quot;query&quot;) are performed differently for &quot;v1&quot; and &quot;v2&quot;. The Broker first runs the
+inner groupBy query in the usual way. &quot;v1&quot; strategy then materializes the inner query's results on-heap with Druid's
+indexing mechanism, and runs the outer query on these materialized results. &quot;v2&quot; strategy runs the outer query on the
+inner query's results stream with off-heap fact map and on-heap string dictionary that can spill to disk. Both
+strategy perform the outer query on the Broker in a single-threaded fashion.</p>
+<h3><a class="anchor" aria-hidden="true" id="configurations"></a><a href="#configurations" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Configurations</h3>
+<p>This section describes the configurations for groupBy queries. You can set the runtime properties in the <code>runtime.properties</code> file on Broker, Historical, and MiddleManager processes. You can set the query context parameters through the <a href="query-context.html">query context</a>.</p>
+<h4><a class="anchor" aria-hidden="true" id="configurations-for-groupby-v2"></a><a href="#configurations-for-groupby-v2" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Configurations for groupBy v2</h4>
+<p>Supported runtime properties:</p>
+<table>
+<thead>
+<tr><th>Property</th><th>Description</th><th>Default</th></tr>
+</thead>
+<tbody>
+<tr><td><code>druid.query.groupBy.maxMergingDictionarySize</code></td><td>Maximum amount of heap space (approximately) to use for the string dictionary during merging. When the dictionary exceeds this size, a spill to disk will be triggered.</td><td>100000000</td></tr>
+<tr><td><code>druid.query.groupBy.maxOnDiskStorage</code></td><td>Maximum amount of disk space to use, per-query, for spilling result sets to disk when either the merging buffer or the dictionary fills up. Queries that exceed this limit will fail. Set to zero to disable disk spilling.</td><td>0 (disabled)</td></tr>
+</tbody>
+</table>
+<p>Supported query contexts:</p>
+<table>
+<thead>
+<tr><th>Key</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>maxMergingDictionarySize</code></td><td>Can be used to lower the value of <code>druid.query.groupBy.maxMergingDictionarySize</code> for this query.</td></tr>
+<tr><td><code>maxOnDiskStorage</code></td><td>Can be used to lower the value of <code>druid.query.groupBy.maxOnDiskStorage</code> for this query.</td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="advanced-configurations"></a><a href="#advanced-configurations" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Advanced configurations</h3>
+<h4><a class="anchor" aria-hidden="true" id="common-configurations-for-all-groupby-strategies"></a><a href="#common-configurations-for-all-groupby-strategies" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Common configurations for all groupBy strategies</h4>
+<p>Supported runtime properties:</p>
+<table>
+<thead>
+<tr><th>Property</th><th>Description</th><th>Default</th></tr>
+</thead>
+<tbody>
+<tr><td><code>druid.query.groupBy.defaultStrategy</code></td><td>Default groupBy query strategy.</td><td>v2</td></tr>
+<tr><td><code>druid.query.groupBy.singleThreaded</code></td><td>Merge results using a single thread.</td><td>false</td></tr>
+</tbody>
+</table>
+<p>Supported query contexts:</p>
+<table>
+<thead>
+<tr><th>Key</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>groupByStrategy</code></td><td>Overrides the value of <code>druid.query.groupBy.defaultStrategy</code> for this query.</td></tr>
+<tr><td><code>groupByIsSingleThreaded</code></td><td>Overrides the value of <code>druid.query.groupBy.singleThreaded</code> for this query.</td></tr>
+</tbody>
+</table>
+<h4><a class="anchor" aria-hidden="true" id="groupby-v2-configurations"></a><a href="#groupby-v2-configurations" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>GroupBy v2 configurations</h4>
+<p>Supported runtime properties:</p>
+<table>
+<thead>
+<tr><th>Property</th><th>Description</th><th>Default</th></tr>
+</thead>
+<tbody>
+<tr><td><code>druid.query.groupBy.bufferGrouperInitialBuckets</code></td><td>Initial number of buckets in the off-heap hash table used for grouping results. Set to 0 to use a reasonable default (1024).</td><td>0</td></tr>
+<tr><td><code>druid.query.groupBy.bufferGrouperMaxLoadFactor</code></td><td>Maximum load factor of the off-heap hash table used for grouping results. When the load factor exceeds this size, the table will be grown or spilled to disk. Set to 0 to use a reasonable default (0.7).</td><td>0</td></tr>
+<tr><td><code>druid.query.groupBy.forceHashAggregation</code></td><td>Force to use hash-based aggregation.</td><td>false</td></tr>
+<tr><td><code>druid.query.groupBy.intermediateCombineDegree</code></td><td>Number of intermediate nodes combined together in the combining tree. Higher degrees will need less threads which might be helpful to improve the query performance by reducing the overhead of too many threads if the server has sufficiently powerful cpu cores.</td><td>8</td></tr>
+<tr><td><code>druid.query.groupBy.numParallelCombineThreads</code></td><td>Hint for the number of parallel combining threads. This should be larger than 1 to turn on the parallel combining feature. The actual number of threads used for parallel combining is min(<code>druid.query.groupBy.numParallelCombineThreads</code>, <code>druid.processing.numThreads</code>).</td><td>1 (disabled)</td></tr>
+<tr><td><code>druid.query.groupBy.applyLimitPushDownToSegment</code></td><td>If Broker pushes limit down to queryable data server (historicals, peons) then limit results during segment scan. If typically there are a large number of segments taking part in a query on a data server, this setting may counterintuitively reduce performance if enabled.</td><td>false (disabled)</td></tr>
+</tbody>
+</table>
+<p>Supported query contexts:</p>
+<table>
+<thead>
+<tr><th>Key</th><th>Description</th><th>Default</th></tr>
+</thead>
+<tbody>
+<tr><td><code>bufferGrouperInitialBuckets</code></td><td>Overrides the value of <code>druid.query.groupBy.bufferGrouperInitialBuckets</code> for this query.</td><td>None</td></tr>
+<tr><td><code>bufferGrouperMaxLoadFactor</code></td><td>Overrides the value of <code>druid.query.groupBy.bufferGrouperMaxLoadFactor</code> for this query.</td><td>None</td></tr>
+<tr><td><code>forceHashAggregation</code></td><td>Overrides the value of <code>druid.query.groupBy.forceHashAggregation</code></td><td>None</td></tr>
+<tr><td><code>intermediateCombineDegree</code></td><td>Overrides the value of <code>druid.query.groupBy.intermediateCombineDegree</code></td><td>None</td></tr>
+<tr><td><code>numParallelCombineThreads</code></td><td>Overrides the value of <code>druid.query.groupBy.numParallelCombineThreads</code></td><td>None</td></tr>
+<tr><td><code>sortByDimsFirst</code></td><td>Sort the results first by dimension values and then by timestamp.</td><td>false</td></tr>
+<tr><td><code>forceLimitPushDown</code></td><td>When all fields in the orderby are part of the grouping key, the Broker will push limit application down to the Historical processes. When the sorting order uses fields that are not in the grouping key, applying this optimization can result in approximate results with unknown accuracy, so this optimization is disabled by default in that case. Enabling this context flag turns on limit push down for limit/orderbys that contain non-grouping key columns.</td><td>false</td></tr>
+<tr><td><code>applyLimitPushDownToSegment</code></td><td>If Broker pushes limit down to queryable nodes (historicals, peons) then limit results during segment scan. This context value can be used to override <code>druid.query.groupBy.applyLimitPushDownToSegment</code>.</td><td>true</td></tr>
+</tbody>
+</table>
+<h4><a class="anchor" aria-hidden="true" id="groupby-v1-configurations"></a><a href="#groupby-v1-configurations" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>GroupBy v1 configurations</h4>
+<p>Supported runtime properties:</p>
+<table>
+<thead>
+<tr><th>Property</th><th>Description</th><th>Default</th></tr>
+</thead>
+<tbody>
+<tr><td><code>druid.query.groupBy.maxIntermediateRows</code></td><td>Maximum number of intermediate rows for the per-segment grouping engine. This is a tuning parameter that does not impose a hard limit; rather, it potentially shifts merging work from the per-segment engine to the overall merging index. Queries that exceed this limit will not fail.</td><td>50000</td></tr>
+<tr><td><code>druid.query.groupBy.maxResults</code></td><td>Maximum number of results. Queries that exceed this limit will fail.</td><td>500000</td></tr>
+</tbody>
+</table>
+<p>Supported query contexts:</p>
+<table>
+<thead>
+<tr><th>Key</th><th>Description</th><th>Default</th></tr>
+</thead>
+<tbody>
+<tr><td><code>maxIntermediateRows</code></td><td>Can be used to lower the value of <code>druid.query.groupBy.maxIntermediateRows</code> for this query.</td><td>None</td></tr>
+<tr><td><code>maxResults</code></td><td>Can be used to lower the value of <code>druid.query.groupBy.maxResults</code> for this query.</td><td>None</td></tr>
+<tr><td><code>useOffheap</code></td><td>Set to true to store aggregations off-heap when merging results.</td><td>false</td></tr>
+</tbody>
+</table>
+<h4><a class="anchor" aria-hidden="true" id="array-based-result-rows"></a><a href="#array-based-result-rows" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Array based result rows</h4>
+<p>Internally Druid always uses an array based representation of groupBy result rows, but by default this is translated
+into a map based result format at the Broker. To reduce the overhead of this translation, results may also be returned
+from the Broker directly in the array based format if <code>resultAsArray</code> is set to <code>true</code> on the query context.</p>
+<p>Each row is positional, and has the following fields, in order:</p>
+<ul>
+<li>Timestamp (optional; only if granularity != ALL)</li>
+<li>Dimensions (in order)</li>
+<li>Aggregators (in order)</li>
+<li>Post-aggregators (optional; in order, if present)</li>
+</ul>
+<p>This schema is not available on the response, so it must be computed from the issued query in order to properly read
+the results.</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/0.20.2/querying/topnquery.html"><span class="arrow-prev">← </span><span class="function-name-prevnext">TopN</span></a><a class="docs-next button" href="/docs/0.20.2/querying/scan-query.html"><span>Scan</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#behavior-on-multi-value-dimensions">Behavior on multi-value dimensions</a></li><li><a href="#more-on-subtotalsspec">More on subtotalsSpec</a></li><li><a href="#implementation-details">Implementation details</a><ul class="toc-headings"><li><a href="#strategies">Strategies</a></li><li><a href="#differences-between-v1-and-v2">Differences between v1 and v2</a></li><li><a href="#memory-tuning-and-resource-limits">Memory tuning and resource limits</a></li><li><a href="#performance-tuning-for-groupby-v2">Performance tuning for groupBy v2</a></li><li><a href="#alternatives">Alternatives</a></li><li><a href="#nested-groupbys">Nested groupBys</a></li><li><a href="#configurations">Configurations</a></li><li><a href="#advanced-configurations">Advanced configurations</a></li></ul></li></ul></nav></div><footer class="nav-footer druid-footer" id="footer"><div class="container"><div class="text-center"><p><a href="/technology">Technology</a> · <a href="/use-cases">Use Cases</a> · <a href="/druid-powered">Powered by Druid</a> · <a href="/docs/0.20.2/latest">Docs</a> · <a href="/community/">Community</a> · <a href="/downloads.html">Download</a> · <a href="/faq">FAQ</a></p></div><div class="text-center"><a title="Join the user group" href="https://groups.google.com/forum/#!forum/druid-user" target="_blank"><span class="fa fa-comments"></span></a> · <a title="Follow Druid" href="https://twitter.com/druidio" target="_blank"><span class="fab fa-twitter"></span></a> · <a title="Download via Apache" href="https://www.apache.org/dyn/closer.cgi?path=/incubator/druid/{{ site.druid_versions[0].versions[0].version }}/apache-druid-{{ site.druid_versions[0].versions[0].version }}-bin.tar.gz" target="_blank"><span class="fas fa-feather"></span></a> · <a title="GitHub" href="https://github.com/apache/druid" target="_blank"><span class="fab fa-github"></span></a></div><div class="text-center license">Copyright © 2019 <a href="https://www.apache.org/" target="_blank">Apache Software Foundation</a>.<br/>Except where otherwise noted, licensed under <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.<br/>Apache Druid, Druid, and the Druid logo are either registered trademarks or trademarks of The Apache Software Foundation in the United States and other countries.</div></div></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '2de99082a9f38e49dfaa059bbe4c901d',
+                indexName: 'apache_druid',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["language:en","version:0.20.2"]}
+              });
+            </script></body></html>
