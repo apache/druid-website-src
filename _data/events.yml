@@ -1,4 +1,4 @@
-- date: 2021-04-21 
+- date: 2021-04-21
   name: Inside Apache Druid's Storage and Query Engine
   info: SF Big Analytics
   link: https://www.meetup.com/SF-Big-Analytics/events/277056584
@@ -7,13 +7,13 @@
   name: April Apache Druid Office Hours
   info: Bay Area Apache Druid Meetup
   link: https://www.meetup.com/druidio/events/277443394/
-  
+
 - date: 2021-04-29
   name: The April Apache Druid Drop-In
   info: London Apache Druid Meetup
   link: https://www.meetup.com/Apache-Druid-London/events/277443473/
-  
+
 - date: 2021-05-05
-  name: Some Like It Hot: Choosing a System for Large-Scale Data Analysis
+  name: "Some Like It Hot: Choosing a System for Large-Scale Data Analysis"
   info: Philly Emerging Tech Conference
   link: https://2021.phillyemergingtech.com/talks/some-like-it-hot/
