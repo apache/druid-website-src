@@ -1,0 +1,474 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Query dimensions · Apache Druid</title><meta name="viewport" content="width=device-width"/><link rel="canonical" href="https://druid.apache.org/docs/0.21.0/querying/dimensionspecs.html"/><meta name="generator" content="Docusaurus"/><meta name="description" content="&lt;!--"/><meta name="docsearch:language" content="en"/><meta name="docsearch:version" content="0.21.0" /><meta property="og:title" content="Query dimensions · Apache Druid"/><meta property="og:type" content="website"/><meta property="og:url" content="https://druid.apache.org/index.html"/><meta property="og:description" content="&lt;!--"/><meta property="og:image" content="https://druid.apache.org/img/druid_nav.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://druid.apache.org/img/druid_nav.png"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-131010415-1"></script><script>
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments); }
+              gtag('js', new Date());
+              gtag('config', 'UA-131010415-1');
+            </script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"/><link rel="stylesheet" href="/css/code-block-buttons.css"/><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script><script type="text/javascript" src="/js/code-block-buttons.js"></script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/druid_nav.png" alt="Apache Druid"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/technology" target="_self">Technology</a></li><li class=""><a href="/use-cases" target="_self">Use Cases</a></li><li class=""><a href="/druid-powered" target="_self">Powered By</a></li><li class="siteNavGroupActive"><a href="/docs/0.21.0/design/index.html" target="_self">Docs</a></li><li class=""><a href="/community/" target="_self">Community</a></li><li class=""><a href="https://www.apache.org" target="_self">Apache</a></li><li class=""><a href="/downloads.html" target="_self">Download</a></li><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Native query components</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Getting started<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.21.0/design/index.html">Introduction to Apache Druid</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/tutorials/index.html">Quickstart</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/tutorials/docker.html">Docker</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/single-server.html">Single server deployment</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/tutorials/cluster.html">Clustered deployment</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Tutorials<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.21.0/tutorials/tutorial-batch.html">Loading files natively</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/tutorials/tutorial-kafka.html">Load from Apache Kafka</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/tutorials/tutorial-batch-hadoop.html">Load from Apache Hadoop</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/tutorials/tutorial-query.html">Querying data</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/tutorials/tutorial-rollup.html">Roll-up</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/tutorials/tutorial-retention.html">Configuring data retention</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/tutorials/tutorial-update-data.html">Updating existing data</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/tutorials/tutorial-compaction.html">Compacting segments</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/tutorials/tutorial-delete-data.html">Deleting data</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/tutorials/tutorial-ingestion-spec.html">Writing an ingestion spec</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/tutorials/tutorial-transform-spec.html">Transforming input data</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/tutorials/tutorial-kerberos-hadoop.html">Kerberized HDFS deep storage</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Design<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.21.0/design/architecture.html">Design</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/design/segments.html">Segments</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/design/processes.html">Processes and servers</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/dependencies/deep-storage.html">Deep storage</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/dependencies/metadata-storage.html">Metadata storage</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/dependencies/zookeeper.html">ZooKeeper</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Ingestion<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.21.0/ingestion/index.html">Ingestion</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/ingestion/data-formats.html">Data formats</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/ingestion/schema-design.html">Schema design tips</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/ingestion/data-management.html">Data management</a></li><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Stream ingestion</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/kafka-ingestion.html">Apache Kafka</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/kinesis-ingestion.html">Amazon Kinesis</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/ingestion/tranquility.html">Tranquility</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Batch ingestion</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.21.0/ingestion/native-batch.html">Native batch</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/ingestion/hadoop.html">Hadoop-based</a></li></ul></div><li class="navListItem"><a class="navItem" href="/docs/0.21.0/ingestion/tasks.html">Task reference</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/ingestion/faq.html">Troubleshooting FAQ</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Querying<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/sql.html">Druid SQL</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/querying.html">Native queries</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/query-execution.html">Query execution</a></li><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Concepts</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/datasource.html">Datasources</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/joins.html">Joins</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/lookups.html">Lookups</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/multi-value-dimensions.html">Multi-value dimensions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/multitenancy.html">Multitenancy</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/caching.html">Query caching</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/query-context.html">Context parameters</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Native query types</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/timeseriesquery.html">Timeseries</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/topnquery.html">TopN</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/groupbyquery.html">GroupBy</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/scan-query.html">Scan</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/searchquery.html">Search</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/timeboundaryquery.html">TimeBoundary</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/segmentmetadataquery.html">SegmentMetadata</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/datasourcemetadataquery.html">DatasourceMetadata</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Native query components</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/filters.html">Filters</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/granularities.html">Granularities</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/0.21.0/querying/dimensionspecs.html">Dimensions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/aggregations.html">Aggregations</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/post-aggregations.html">Post-aggregations</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/misc/math-expr.html">Expressions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/having.html">Having filters (groupBy)</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/limitspec.html">Sorting and limiting (groupBy)</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/topnmetricspec.html">Sorting (topN)</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/sorting-orders.html">String comparators</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/virtual-columns.html">Virtual columns</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/geo.html">Spatial filters</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Configuration<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.21.0/configuration/index.html">Configuration reference</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions.html">Extensions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/configuration/logging.html">Logging</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Operations<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/druid-console.html">Web console</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/getting-started.html">Getting started with Apache Druid</a></li><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Security</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/security-overview.html">Security overview</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/security-user-auth.html">User authentication and authorization</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/auth-ldap.html">LDAP auth</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/password-provider.html">Password providers</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/tls-support.html">TLS support</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Performance tuning</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/basic-cluster-tuning.html">Basic cluster tuning</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/segment-optimization.html">Segment Size Optimization</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/http-compression.html">HTTP compression</a></li></ul></div><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/api-reference.html">API reference</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/high-availability.html">High availability</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/rolling-updates.html">Rolling updates</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/rule-configuration.html">Retaining or automatically dropping data</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/metrics.html">Metrics</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/alerts.html">Alerts</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/other-hadoop.html">Working with different versions of Apache Hadoop</a></li><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Misc</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/management-uis.html">Legacy Management UIs</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/dump-segment.html">dump-segment tool</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/reset-cluster.html">reset-cluster tool</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/insert-segment-to-db.html">insert-segment-to-db tool</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/pull-deps.html">pull-deps tool</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/deep-storage-migration.html">Deep storage migration</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/export-metadata.html">Export Metadata Tool</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/metadata-migration.html">Metadata Migration</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/use_sbt_to_build_fat_jar.html">Content for build.sbt</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Development<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/overview.html">Developing on Druid</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/modules.html">Creating extensions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/javascript.html">JavaScript functionality</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/build.html">Build from source</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/versioning.html">Versioning</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/experimental.html">Experimental features</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Misc<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.21.0/misc/papers-and-talks.html">Papers</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Hidden<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.21.0/comparisons/druid-vs-elasticsearch.html">Apache Druid vs Elasticsearch</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/comparisons/druid-vs-key-value.html">Apache Druid vs. Key/Value Stores (HBase/Cassandra/OpenTSDB)</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/comparisons/druid-vs-kudu.html">Apache Druid vs Kudu</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/comparisons/druid-vs-redshift.html">Apache Druid vs Redshift</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/comparisons/druid-vs-spark.html">Apache Druid vs Spark</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/comparisons/druid-vs-sql-on-hadoop.html">Apache Druid vs SQL-on-Hadoop</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/design/auth.html">Authentication and Authorization</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/design/broker.html">Broker</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/design/coordinator.html">Coordinator Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/design/historical.html">Historical Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/design/indexer.html">Indexer Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/design/indexing-service.html">Indexing Service</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/design/middlemanager.html">MiddleManager Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/design/overlord.html">Overlord Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/design/router.html">Router Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/design/peons.html">Peons</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/approximate-histograms.html">Approximate Histogram aggregators</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/avro.html">Apache Avro</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/azure.html">Microsoft Azure</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/bloom-filter.html">Bloom Filter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/datasketches-extension.html">DataSketches extension</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/datasketches-hll.html">DataSketches HLL Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/datasketches-quantiles.html">DataSketches Quantiles Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/datasketches-theta.html">DataSketches Theta Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/datasketches-tuple.html">DataSketches Tuple Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/druid-basic-security.html">Basic Security</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/druid-kerberos.html">Kerberos</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/druid-lookups.html">Cached Lookup Module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/druid-ranger-security.html">Apache Ranger Security</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/google.html">Google Cloud Storage</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/hdfs.html">HDFS</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/kafka-extraction-namespace.html">Apache Kafka Lookups</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/lookups-cached-global.html">Globally Cached Lookups</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/mysql.html">MySQL Metadata Store</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/orc.html">ORC Extension</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/druid-pac4j.html">Druid pac4j based Security extension</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/parquet.html">Apache Parquet Extension</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/postgresql.html">PostgreSQL Metadata Store</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/protobuf.html">Protobuf</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/s3.html">S3-compatible</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/simple-client-sslcontext.html">Simple SSLContext Provider Module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/stats.html">Stats aggregator</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/test-stats.html">Test Stats Aggregators</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/ambari-metrics-emitter.html">Ambari Metrics Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/cassandra.html">Apache Cassandra</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/cloudfiles.html">Rackspace Cloud Files</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/distinctcount.html">DistinctCount Aggregator</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/graphite.html">Graphite Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/influx.html">InfluxDB Line Protocol Parser</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/influxdb-emitter.html">InfluxDB Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/kafka-emitter.html">Kafka Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/materialized-view.html">Materialized View</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/momentsketch-quantiles.html">Moment Sketches for Approximate Quantiles module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/moving-average-query.html">Moving Average Query</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/opentsdb-emitter.html">OpenTSDB Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/redis-cache.html">Druid Redis Cache</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/sqlserver.html">Microsoft SQLServer</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/statsd.html">StatsD Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/tdigestsketch-quantiles.html">T-Digest Quantiles Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/thrift.html">Thrift</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/time-min-max.html">Timestamp Min/Max aggregators</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/gce-extensions.html">GCE Extensions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/aliyun-oss.html">Aliyun OSS</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/hll-old.html">Cardinality/HyperUnique aggregators</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/select-query.html">Select</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/ingestion/standalone-realtime.html">Realtime Process</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/apache/druid/edit/master/docs/querying/dimensionspecs.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">Query dimensions</h1></header><article><div><span><!--
+  ~ Licensed to the Apache Software Foundation (ASF) under one
+  ~ or more contributor license agreements.  See the NOTICE file
+  ~ distributed with this work for additional information
+  ~ regarding copyright ownership.  The ASF licenses this file
+  ~ to you under the Apache License, Version 2.0 (the
+  ~ "License"); you may not use this file except in compliance
+  ~ with the License.  You may obtain a copy of the License at
+  ~
+  ~   http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an
+  ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~ KIND, either express or implied.  See the License for the
+  ~ specific language governing permissions and limitations
+  ~ under the License.
+  -->
+<blockquote>
+<p>Apache Druid supports two query languages: <a href="/docs/0.21.0/querying/sql.html">Druid SQL</a> and <a href="/docs/0.21.0/querying/querying.html">native queries</a>.
+This document describes the native
+language. For information about functions available in SQL, refer to the
+<a href="/docs/0.21.0/querying/sql.html#scalar-functions">SQL documentation</a>.</p>
+</blockquote>
+<p>The following JSON fields can be used in a query to operate on dimension values.</p>
+<h2><a class="anchor" aria-hidden="true" id="dimensionspec"></a><a href="#dimensionspec" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>DimensionSpec</h2>
+<p><code>DimensionSpec</code>s define how dimension values get transformed prior to aggregation.</p>
+<h3><a class="anchor" aria-hidden="true" id="default-dimensionspec"></a><a href="#default-dimensionspec" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Default DimensionSpec</h3>
+<p>Returns dimension values as is and optionally renames the dimension.</p>
+<pre><code class="hljs css language-json">{
+  <span class="hljs-attr">"type"</span> : <span class="hljs-string">"default"</span>,
+  <span class="hljs-attr">"dimension"</span> : &lt;dimension&gt;,
+  <span class="hljs-attr">"outputName"</span>: &lt;output_name&gt;,
+  <span class="hljs-attr">"outputType"</span>: &lt;<span class="hljs-string">"STRING"</span>|<span class="hljs-string">"LONG"</span>|<span class="hljs-string">"FLOAT"</span>&gt;
+}
+</code></pre>
+<p>When specifying a DimensionSpec on a numeric column, the user should include the type of the column in the <code>outputType</code> field. If left unspecified, the <code>outputType</code> defaults to STRING.</p>
+<p>Please refer to the <a href="#output-types">Output Types</a> section for more details.</p>
+<h3><a class="anchor" aria-hidden="true" id="extraction-dimensionspec"></a><a href="#extraction-dimensionspec" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Extraction DimensionSpec</h3>
+<p>Returns dimension values transformed using the given <a href="#extraction-functions">extraction function</a>.</p>
+<pre><code class="hljs css language-json">{
+  <span class="hljs-attr">"type"</span> : <span class="hljs-string">"extraction"</span>,
+  <span class="hljs-attr">"dimension"</span> : &lt;dimension&gt;,
+  <span class="hljs-attr">"outputName"</span> :  &lt;output_name&gt;,
+  <span class="hljs-attr">"outputType"</span>: &lt;<span class="hljs-string">"STRING"</span>|<span class="hljs-string">"LONG"</span>|<span class="hljs-string">"FLOAT"</span>&gt;,
+  <span class="hljs-attr">"extractionFn"</span> : &lt;extraction_function&gt;
+}
+</code></pre>
+<p><code>outputType</code> may also be specified in an ExtractionDimensionSpec to apply type conversion to results before merging. If left unspecified, the <code>outputType</code> defaults to STRING.</p>
+<p>Please refer to the <a href="#output-types">Output Types</a> section for more details.</p>
+<h3><a class="anchor" aria-hidden="true" id="filtered-dimensionspecs"></a><a href="#filtered-dimensionspecs" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Filtered DimensionSpecs</h3>
+<p>These are only useful for multi-value dimensions. If you have a row in Apache Druid that has a multi-value dimension with values [&quot;v1&quot;, &quot;v2&quot;, &quot;v3&quot;] and you send a groupBy/topN query grouping by that dimension with <a href="/docs/0.21.0/querying/filters.html">query filter</a> for value &quot;v1&quot;. In the response you will get 3 rows containing &quot;v1&quot;, &quot;v2&quot; and &quot;v3&quot;. This behavior might be unintuitive for some use cases.</p>
+<p>It happens because &quot;query filter&quot; is internally used on the bitmaps and only used to match the row to be included in the query result processing. With multi-value dimensions, &quot;query filter&quot; behaves like a contains check, which will match the row with dimension value [&quot;v1&quot;, &quot;v2&quot;, &quot;v3&quot;]. Please see the section on &quot;Multi-value columns&quot; in <a href="/docs/0.21.0/design/segments.html">segment</a> for more details.
+Then groupBy/topN processing pipeline &quot;explodes&quot; all multi-value dimensions resulting 3 rows for &quot;v1&quot;, &quot;v2&quot; and &quot;v3&quot; each.</p>
+<p>In addition to &quot;query filter&quot; which efficiently selects the rows to be processed, you can use the filtered dimension spec to filter for specific values within the values of a multi-value dimension. These dimensionSpecs take a delegate DimensionSpec and a filtering criteria. From the &quot;exploded&quot; rows, only rows matching the given filtering criteria are returned in the query result.</p>
+<p>The following filtered dimension spec acts as a whitelist or blacklist for values as per the &quot;isWhitelist&quot; attribute value.</p>
+<pre><code class="hljs css language-json">{ "type" : "listFiltered", "delegate" : &lt;dimensionSpec&gt;, "values": &lt;array of strings&gt;, "isWhitelist": &lt;optional attribute for true/false, default is true&gt; }
+</code></pre>
+<p>Following filtered dimension spec retains only the values matching regex. Note that <code>listFiltered</code> is faster than this and one should use that for whitelist or blacklist use case.</p>
+<pre><code class="hljs css language-json">{ <span class="hljs-attr">"type"</span> : <span class="hljs-string">"regexFiltered"</span>, <span class="hljs-attr">"delegate"</span> : &lt;dimensionSpec&gt;, <span class="hljs-attr">"pattern"</span>: &lt;java regex pattern&gt; }
+</code></pre>
+<p>Following filtered dimension spec retains only the values starting with the same prefix.</p>
+<pre><code class="hljs css language-json">{ <span class="hljs-attr">"type"</span> : <span class="hljs-string">"prefixFiltered"</span>, <span class="hljs-attr">"delegate"</span> : &lt;dimensionSpec&gt;, <span class="hljs-attr">"prefix"</span>: &lt;prefix string&gt; }
+</code></pre>
+<p>For more details and examples, see <a href="/docs/0.21.0/querying/multi-value-dimensions.html">multi-value dimensions</a>.</p>
+<h3><a class="anchor" aria-hidden="true" id="lookup-dimensionspecs"></a><a href="#lookup-dimensionspecs" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Lookup DimensionSpecs</h3>
+<blockquote>
+<p>Lookups are an <a href="/docs/0.21.0/development/experimental.html">experimental</a> feature.</p>
+</blockquote>
+<p>Lookup DimensionSpecs can be used to define directly a lookup implementation as dimension spec.
+Generally speaking there is two different kind of lookups implementations.
+The first kind is passed at the query time like <code>map</code> implementation.</p>
+<pre><code class="hljs css language-json">{
+  <span class="hljs-attr">"type"</span>:<span class="hljs-string">"lookup"</span>,
+  <span class="hljs-attr">"dimension"</span>:<span class="hljs-string">"dimensionName"</span>,
+  <span class="hljs-attr">"outputName"</span>:<span class="hljs-string">"dimensionOutputName"</span>,
+  <span class="hljs-attr">"replaceMissingValueWith"</span>:<span class="hljs-string">"missing_value"</span>,
+  <span class="hljs-attr">"retainMissingValue"</span>:<span class="hljs-literal">false</span>,
+  <span class="hljs-attr">"lookup"</span>:{<span class="hljs-attr">"type"</span>: <span class="hljs-string">"map"</span>, <span class="hljs-attr">"map"</span>:{<span class="hljs-attr">"key"</span>:<span class="hljs-string">"value"</span>}, <span class="hljs-attr">"isOneToOne"</span>:<span class="hljs-literal">false</span>}
+}
+</code></pre>
+<p>A property of <code>retainMissingValue</code> and <code>replaceMissingValueWith</code> can be specified at query time to hint how to handle missing values. Setting <code>replaceMissingValueWith</code> to <code>&quot;&quot;</code> has the same effect as setting it to <code>null</code> or omitting the property.
+Setting <code>retainMissingValue</code> to true will use the dimension's original value if it is not found in the lookup.
+The default values are <code>replaceMissingValueWith = null</code> and <code>retainMissingValue = false</code> which causes missing values to be treated as missing.</p>
+<p>It is illegal to set <code>retainMissingValue = true</code> and also specify a <code>replaceMissingValueWith</code>.</p>
+<p>A property <code>optimize</code> can be supplied to allow optimization of lookup based extraction filter (by default <code>optimize = true</code>).</p>
+<p>The second kind where it is not possible to pass at query time due to their size, will be based on an external lookup table or resource that is already registered via configuration file or/and Coordinator.</p>
+<pre><code class="hljs css language-json">{
+  <span class="hljs-attr">"type"</span>:<span class="hljs-string">"lookup"</span>,
+  <span class="hljs-attr">"dimension"</span>:<span class="hljs-string">"dimensionName"</span>,
+  <span class="hljs-attr">"outputName"</span>:<span class="hljs-string">"dimensionOutputName"</span>,
+  <span class="hljs-attr">"name"</span>:<span class="hljs-string">"lookupName"</span>
+}
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="output-types"></a><a href="#output-types" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Output Types</h2>
+<p>The dimension specs provide an option to specify the output type of a column's values. This is necessary as it is possible for a column with given name to have different value types in different segments; results will be converted to the type specified by <code>outputType</code> before merging.</p>
+<p>Note that not all use cases for DimensionSpec currently support <code>outputType</code>, the table below shows which use cases support this option:</p>
+<table>
+<thead>
+<tr><th>Query Type</th><th>Supported?</th></tr>
+</thead>
+<tbody>
+<tr><td>GroupBy (v1)</td><td>no</td></tr>
+<tr><td>GroupBy (v2)</td><td>yes</td></tr>
+<tr><td>TopN</td><td>yes</td></tr>
+<tr><td>Search</td><td>no</td></tr>
+<tr><td>Select</td><td>no</td></tr>
+<tr><td>Cardinality Aggregator</td><td>no</td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="extraction-functions"></a><a href="#extraction-functions" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Extraction Functions</h2>
+<p>Extraction functions define the transformation applied to each dimension value.</p>
+<p>Transformations can be applied to both regular (string) dimensions, as well
+as the special <code>__time</code> dimension, which represents the current time bucket
+according to the query <a href="/docs/0.21.0/querying/granularities.html">aggregation granularity</a>.</p>
+<p><strong>Note</strong>: for functions taking string values (such as regular expressions),
+<code>__time</code> dimension values will be formatted in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO-8601 format</a>
+before getting passed to the extraction function.</p>
+<h3><a class="anchor" aria-hidden="true" id="regular-expression-extraction-function"></a><a href="#regular-expression-extraction-function" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Regular Expression Extraction Function</h3>
+<p>Returns the first matching group for the given regular expression.
+If there is no match, it returns the dimension value as is.</p>
+<pre><code class="hljs css language-json">{
+  "type" : "regex",
+  "expr" : &lt;regular_expression&gt;,
+  "index" : &lt;group to extract, default 1&gt;
+  "replaceMissingValue" : true,
+  "replaceMissingValueWith" : "foobar"
+}
+</code></pre>
+<p>For example, using <code>&quot;expr&quot; : &quot;(\\w\\w\\w).*&quot;</code> will transform
+<code>'Monday'</code>, <code>'Tuesday'</code>, <code>'Wednesday'</code> into <code>'Mon'</code>, <code>'Tue'</code>, <code>'Wed'</code>.</p>
+<p>If &quot;index&quot; is set, it will control which group from the match to extract. Index zero extracts the string matching the
+entire pattern.</p>
+<p>If the <code>replaceMissingValue</code> property is true, the extraction function will transform dimension values that do not match the regex pattern to a user-specified String. Default value is <code>false</code>.</p>
+<p>The <code>replaceMissingValueWith</code> property sets the String that unmatched dimension values will be replaced with, if <code>replaceMissingValue</code> is true. If <code>replaceMissingValueWith</code> is not specified, unmatched dimension values will be replaced with nulls.</p>
+<p>For example, if <code>expr</code> is <code>&quot;(a\w+)&quot;</code> in the example JSON above, a regex that matches words starting with the letter <code>a</code>, the extraction function will convert a dimension value like <code>banana</code> to <code>foobar</code>.</p>
+<h3><a class="anchor" aria-hidden="true" id="partial-extraction-function"></a><a href="#partial-extraction-function" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Partial Extraction Function</h3>
+<p>Returns the dimension value unchanged if the regular expression matches, otherwise returns null.</p>
+<pre><code class="hljs css language-json">{ <span class="hljs-attr">"type"</span> : <span class="hljs-string">"partial"</span>, <span class="hljs-attr">"expr"</span> : &lt;regular_expression&gt; }
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="search-query-extraction-function"></a><a href="#search-query-extraction-function" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Search query extraction function</h3>
+<p>Returns the dimension value unchanged if the given <a href="/docs/0.21.0/querying/searchquery.html#searchqueryspec"><code>SearchQuerySpec</code></a>
+matches, otherwise returns null.</p>
+<pre><code class="hljs css language-json">{ <span class="hljs-attr">"type"</span> : <span class="hljs-string">"searchQuery"</span>, <span class="hljs-attr">"query"</span> : &lt;search_query_spec&gt; }
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="substring-extraction-function"></a><a href="#substring-extraction-function" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Substring Extraction Function</h3>
+<p>Returns a substring of the dimension value starting from the supplied index and of the desired length. Both index
+and length are measured in the number of Unicode code units present in the string as if it were encoded in UTF-16.
+Note that some Unicode characters may be represented by two code units. This is the same behavior as the Java String
+class's &quot;substring&quot; method.</p>
+<p>If the desired length exceeds the length of the dimension value, the remainder of the string starting at index will
+be returned. If index is greater than the length of the dimension value, null will be returned.</p>
+<pre><code class="hljs css language-json">{ <span class="hljs-attr">"type"</span> : <span class="hljs-string">"substring"</span>, <span class="hljs-attr">"index"</span> : <span class="hljs-number">1</span>, <span class="hljs-attr">"length"</span> : <span class="hljs-number">4</span> }
+</code></pre>
+<p>The length may be omitted for substring to return the remainder of the dimension value starting from index,
+or null if index greater than the length of the dimension value.</p>
+<pre><code class="hljs css language-json">{ <span class="hljs-attr">"type"</span> : <span class="hljs-string">"substring"</span>, <span class="hljs-attr">"index"</span> : <span class="hljs-number">3</span> }
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="strlen-extraction-function"></a><a href="#strlen-extraction-function" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Strlen Extraction Function</h3>
+<p>Returns the length of dimension values, as measured in the number of Unicode code units present in the string as if it
+were encoded in UTF-16. Note that some Unicode characters may be represented by two code units. This is the same
+behavior as the Java String class's &quot;length&quot; method.</p>
+<p>null strings are considered as having zero length.</p>
+<pre><code class="hljs css language-json">{ <span class="hljs-attr">"type"</span> : <span class="hljs-string">"strlen"</span> }
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="time-format-extraction-function"></a><a href="#time-format-extraction-function" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Time Format Extraction Function</h3>
+<p>Returns the dimension value formatted according to the given format string, time zone, and locale.</p>
+<p>For <code>__time</code> dimension values, this formats the time value bucketed by the
+<a href="/docs/0.21.0/querying/granularities.html">aggregation granularity</a></p>
+<p>For a regular dimension, it assumes the string is formatted in
+<a href="https://en.wikipedia.org/wiki/ISO_8601">ISO-8601 date and time format</a>.</p>
+<ul>
+<li><code>format</code> : date time format for the resulting dimension value, in <a href="http://www.joda.org/joda-time/apidocs/org/joda/time/format/DateTimeFormat.html">Joda Time DateTimeFormat</a>, or null to use the default ISO8601 format.</li>
+<li><code>locale</code> : locale (language and country) to use, given as a <a href="http://www.oracle.com/technetwork/java/javase/java8locales-2095355.html#util-text">IETF BCP 47 language tag</a>, e.g. <code>en-US</code>, <code>en-GB</code>, <code>fr-FR</code>, <code>fr-CA</code>, etc.</li>
+<li><code>timeZone</code> : time zone to use in <a href="http://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA tz database format</a>, e.g. <code>Europe/Berlin</code> (this can possibly be different than the aggregation time-zone)</li>
+<li><code>granularity</code> : <a href="/docs/0.21.0/querying/granularities.html">granularity</a> to apply before formatting, or omit to not apply any granularity.</li>
+<li><code>asMillis</code> : boolean value, set to true to treat input strings as millis rather than ISO8601 strings. Additionally, if <code>format</code> is null or not specified, output will be in millis rather than ISO8601.</li>
+</ul>
+<pre><code class="hljs css language-json">{ "type" : "timeFormat",
+  "format" : &lt;output_format&gt; (optional),
+  "timeZone" : &lt;time_zone&gt; (optional, default UTC),
+  "locale" : &lt;locale&gt; (optional, default current locale),
+  "granularity" : &lt;granularity&gt; (optional, default none) },
+  "asMillis" : &lt;true or false&gt; (optional) }
+</code></pre>
+<p>For example, the following dimension spec returns the day of the week for Montréal in French:</p>
+<pre><code class="hljs css language-json">{
+  <span class="hljs-attr">"type"</span> : <span class="hljs-string">"extraction"</span>,
+  <span class="hljs-attr">"dimension"</span> : <span class="hljs-string">"__time"</span>,
+  <span class="hljs-attr">"outputName"</span> :  <span class="hljs-string">"dayOfWeek"</span>,
+  <span class="hljs-attr">"extractionFn"</span> : {
+    <span class="hljs-attr">"type"</span> : <span class="hljs-string">"timeFormat"</span>,
+    <span class="hljs-attr">"format"</span> : <span class="hljs-string">"EEEE"</span>,
+    <span class="hljs-attr">"timeZone"</span> : <span class="hljs-string">"America/Montreal"</span>,
+    <span class="hljs-attr">"locale"</span> : <span class="hljs-string">"fr"</span>
+  }
+}
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="time-parsing-extraction-function"></a><a href="#time-parsing-extraction-function" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Time Parsing Extraction Function</h3>
+<p>Parses dimension values as timestamps using the given input format,
+and returns them formatted using the given output format.</p>
+<p>Note, if you are working with the <code>__time</code> dimension, you should consider using the
+<a href="#time-format-extraction-function">time extraction function instead</a> instead,
+which works on time value directly as opposed to string values.</p>
+<p>If &quot;joda&quot; is true, time formats are described in the <a href="http://www.joda.org/joda-time/apidocs/org/joda/time/format/DateTimeFormat.html">Joda DateTimeFormat documentation</a>.
+If &quot;joda&quot; is false (or unspecified) then formats are described in the <a href="http://icu-project.org/apiref/icu4j/com/ibm/icu/text/SimpleDateFormat.html">SimpleDateFormat documentation</a>.
+In general, we recommend setting &quot;joda&quot; to true since Joda format strings are more common in Druid APIs and since Joda handles certain edge cases (like weeks and weekyears near
+the start and end of calendar years) in a more ISO8601 compliant way.</p>
+<p>If a value cannot be parsed using the provided timeFormat, it will be returned as-is.</p>
+<pre><code class="hljs css language-json">{ "type" : "time",
+  "timeFormat" : &lt;input_format&gt;,
+  "resultFormat" : &lt;output_format&gt;,
+  "joda" : &lt;true, false&gt; }
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="javascript-extraction-function"></a><a href="#javascript-extraction-function" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>JavaScript Extraction Function</h3>
+<p>Returns the dimension value, as transformed by the given JavaScript function.</p>
+<p>For regular dimensions, the input value is passed as a string.</p>
+<p>For the <code>__time</code> dimension, the input value is passed as a number
+representing the number of milliseconds since January 1, 1970 UTC.</p>
+<p>Example for a regular dimension</p>
+<pre><code class="hljs css language-json">{
+  <span class="hljs-attr">"type"</span> : <span class="hljs-string">"javascript"</span>,
+  <span class="hljs-attr">"function"</span> : <span class="hljs-string">"function(str) { return str.substr(0, 3); }"</span>
+}
+</code></pre>
+<pre><code class="hljs css language-json">{
+  <span class="hljs-attr">"type"</span> : <span class="hljs-string">"javascript"</span>,
+  <span class="hljs-attr">"function"</span> : <span class="hljs-string">"function(str) { return str + '!!!'; }"</span>,
+  <span class="hljs-attr">"injective"</span> : <span class="hljs-literal">true</span>
+}
+</code></pre>
+<p>A property of <code>injective</code> specifies if the JavaScript function preserves uniqueness. The default value is <code>false</code> meaning uniqueness is not preserved</p>
+<p>Example for the <code>__time</code> dimension:</p>
+<pre><code class="hljs css language-json">{
+  <span class="hljs-attr">"type"</span> : <span class="hljs-string">"javascript"</span>,
+  <span class="hljs-attr">"function"</span> : <span class="hljs-string">"function(t) { return 'Second ' + Math.floor((t % 60000) / 1000); }"</span>
+}
+</code></pre>
+<blockquote>
+<p>JavaScript-based functionality is disabled by default. Please refer to the Druid <a href="/docs/0.21.0/development/javascript.html">JavaScript programming guide</a> for guidelines about using Druid's JavaScript functionality, including instructions on how to enable it.</p>
+</blockquote>
+<h3><a class="anchor" aria-hidden="true" id="registered-lookup-extraction-function"></a><a href="#registered-lookup-extraction-function" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Registered lookup extraction function</h3>
+<p>Lookups are a concept in Druid where dimension values are (optionally) replaced with new values.
+For more documentation on using lookups, please see <a href="/docs/0.21.0/querying/lookups.html">Lookups</a>.
+The &quot;registeredLookup&quot; extraction function lets you refer to a lookup that has been registered in the cluster-wide
+configuration.</p>
+<p>An example:</p>
+<pre><code class="hljs css language-json">{
+  <span class="hljs-attr">"type"</span>:<span class="hljs-string">"registeredLookup"</span>,
+  <span class="hljs-attr">"lookup"</span>:<span class="hljs-string">"some_lookup_name"</span>,
+  <span class="hljs-attr">"retainMissingValue"</span>:<span class="hljs-literal">true</span>
+}
+</code></pre>
+<p>A property of <code>retainMissingValue</code> and <code>replaceMissingValueWith</code> can be specified at query time to hint how to handle
+missing values. Setting <code>replaceMissingValueWith</code> to <code>&quot;&quot;</code> has the same effect as setting it to <code>null</code> or omitting the
+property. Setting <code>retainMissingValue</code> to true will use the dimension's original value if it is not found in the lookup.
+The default values are <code>replaceMissingValueWith = null</code> and <code>retainMissingValue = false</code> which causes missing values to
+be treated as missing.</p>
+<p>It is illegal to set <code>retainMissingValue = true</code> and also specify a <code>replaceMissingValueWith</code>.</p>
+<p>A property of <code>injective</code> can override the lookup's own sense of whether or not it is
+<a href="/docs/0.21.0/querying/lookups.html#query-execution">injective</a>. If left unspecified, Druid will use the registered cluster-wide lookup
+configuration.</p>
+<p>A property <code>optimize</code> can be supplied to allow optimization of lookup based extraction filter (by default <code>optimize = true</code>).
+The optimization layer will run on the Broker and it will rewrite the extraction filter as clause of selector filters.
+For instance the following filter</p>
+<pre><code class="hljs css language-json">{
+    <span class="hljs-attr">"filter"</span>: {
+        <span class="hljs-attr">"type"</span>: <span class="hljs-string">"selector"</span>,
+        <span class="hljs-attr">"dimension"</span>: <span class="hljs-string">"product"</span>,
+        <span class="hljs-attr">"value"</span>: <span class="hljs-string">"bar_1"</span>,
+        <span class="hljs-attr">"extractionFn"</span>: {
+            <span class="hljs-attr">"type"</span>: <span class="hljs-string">"registeredLookup"</span>,
+            <span class="hljs-attr">"optimize"</span>: <span class="hljs-literal">true</span>,
+            <span class="hljs-attr">"lookup"</span>: <span class="hljs-string">"some_lookup_name"</span>
+        }
+    }
+}
+</code></pre>
+<p>will be rewritten as the following simpler query, assuming a lookup that maps &quot;product_1&quot; and &quot;product_3&quot; to the value
+&quot;bar_1&quot;:</p>
+<pre><code class="hljs css language-json">{
+   <span class="hljs-attr">"filter"</span>:{
+      <span class="hljs-attr">"type"</span>:<span class="hljs-string">"or"</span>,
+      <span class="hljs-attr">"fields"</span>:[
+         {
+            <span class="hljs-attr">"filter"</span>:{
+               <span class="hljs-attr">"type"</span>:<span class="hljs-string">"selector"</span>,
+               <span class="hljs-attr">"dimension"</span>:<span class="hljs-string">"product"</span>,
+               <span class="hljs-attr">"value"</span>:<span class="hljs-string">"product_1"</span>
+            }
+         },
+         {
+            <span class="hljs-attr">"filter"</span>:{
+               <span class="hljs-attr">"type"</span>:<span class="hljs-string">"selector"</span>,
+               <span class="hljs-attr">"dimension"</span>:<span class="hljs-string">"product"</span>,
+               <span class="hljs-attr">"value"</span>:<span class="hljs-string">"product_3"</span>
+            }
+         }
+      ]
+   }
+}
+</code></pre>
+<p>A null dimension value can be mapped to a specific value by specifying the empty string as the key in your lookup file.
+This allows distinguishing between a null dimension and a lookup resulting in a null.
+For example, specifying <code>{&quot;&quot;:&quot;bar&quot;,&quot;bat&quot;:&quot;baz&quot;}</code> with dimension values <code>[null, &quot;foo&quot;, &quot;bat&quot;]</code> and replacing missing values with <code>&quot;oof&quot;</code> will yield results of <code>[&quot;bar&quot;, &quot;oof&quot;, &quot;baz&quot;]</code>.
+Omitting the empty string key will cause the missing value to take over. For example, specifying <code>{&quot;bat&quot;:&quot;baz&quot;}</code> with dimension values <code>[null, &quot;foo&quot;, &quot;bat&quot;]</code> and replacing missing values with <code>&quot;oof&quot;</code> will yield results of <code>[&quot;oof&quot;, &quot;oof&quot;, &quot;baz&quot;]</code>.</p>
+<h3><a class="anchor" aria-hidden="true" id="inline-lookup-extraction-function"></a><a href="#inline-lookup-extraction-function" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Inline lookup extraction function</h3>
+<p>Lookups are a concept in Druid where dimension values are (optionally) replaced with new values.
+For more documentation on using lookups, please see <a href="/docs/0.21.0/querying/lookups.html">Lookups</a>.
+The &quot;lookup&quot; extraction function lets you specify an inline lookup map without registering one in the cluster-wide
+configuration.</p>
+<p>Examples:</p>
+<pre><code class="hljs css language-json">{
+  <span class="hljs-attr">"type"</span>:<span class="hljs-string">"lookup"</span>,
+  <span class="hljs-attr">"lookup"</span>:{
+    <span class="hljs-attr">"type"</span>:<span class="hljs-string">"map"</span>,
+    <span class="hljs-attr">"map"</span>:{<span class="hljs-attr">"foo"</span>:<span class="hljs-string">"bar"</span>, <span class="hljs-attr">"baz"</span>:<span class="hljs-string">"bat"</span>}
+  },
+  <span class="hljs-attr">"retainMissingValue"</span>:<span class="hljs-literal">true</span>,
+  <span class="hljs-attr">"injective"</span>:<span class="hljs-literal">true</span>
+}
+</code></pre>
+<pre><code class="hljs css language-json">{
+  <span class="hljs-attr">"type"</span>:<span class="hljs-string">"lookup"</span>,
+  <span class="hljs-attr">"lookup"</span>:{
+    <span class="hljs-attr">"type"</span>:<span class="hljs-string">"map"</span>,
+    <span class="hljs-attr">"map"</span>:{<span class="hljs-attr">"foo"</span>:<span class="hljs-string">"bar"</span>, <span class="hljs-attr">"baz"</span>:<span class="hljs-string">"bat"</span>}
+  },
+  <span class="hljs-attr">"retainMissingValue"</span>:<span class="hljs-literal">false</span>,
+  <span class="hljs-attr">"injective"</span>:<span class="hljs-literal">false</span>,
+  <span class="hljs-attr">"replaceMissingValueWith"</span>:<span class="hljs-string">"MISSING"</span>
+}
+</code></pre>
+<p>The inline lookup should be of type <code>map</code>.</p>
+<p>The properties <code>retainMissingValue</code>, <code>replaceMissingValueWith</code>, <code>injective</code>, and <code>optimize</code> behave similarly to the
+<a href="#registered-lookup-extraction-function">registered lookup extraction function</a>.</p>
+<h3><a class="anchor" aria-hidden="true" id="cascade-extraction-function"></a><a href="#cascade-extraction-function" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Cascade Extraction Function</h3>
+<p>Provides chained execution of extraction functions.</p>
+<p>A property of <code>extractionFns</code> contains an array of any extraction functions, which is executed in the array index order.</p>
+<p>Example for chaining <a href="#regular-expression-extraction-function">regular expression extraction function</a>, <a href="#javascript-extraction-function">JavaScript extraction function</a>, and <a href="#substring-extraction-function">substring extraction function</a> is as followings.</p>
+<pre><code class="hljs css language-json">{
+  <span class="hljs-attr">"type"</span> : <span class="hljs-string">"cascade"</span>,
+  <span class="hljs-attr">"extractionFns"</span>: [
+    {
+      <span class="hljs-attr">"type"</span> : <span class="hljs-string">"regex"</span>,
+      <span class="hljs-attr">"expr"</span> : <span class="hljs-string">"/([^/]+)/"</span>,
+      <span class="hljs-attr">"replaceMissingValue"</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-attr">"replaceMissingValueWith"</span>: <span class="hljs-literal">null</span>
+    },
+    {
+      <span class="hljs-attr">"type"</span> : <span class="hljs-string">"javascript"</span>,
+      <span class="hljs-attr">"function"</span> : <span class="hljs-string">"function(str) { return \"the \".concat(str) }"</span>
+    },
+    {
+      <span class="hljs-attr">"type"</span> : <span class="hljs-string">"substring"</span>,
+      <span class="hljs-attr">"index"</span> : <span class="hljs-number">0</span>, <span class="hljs-attr">"length"</span> : <span class="hljs-number">7</span>
+    }
+  ]
+}
+</code></pre>
+<p>It will transform dimension values with specified extraction functions in the order named.
+For example, <code>'/druid/prod/historical'</code> is transformed to <code>'the dru'</code> as regular expression extraction function first transforms it to <code>'druid'</code> and then, JavaScript extraction function transforms it to <code>'the druid'</code>, and lastly, substring extraction function transforms it to <code>'the dru'</code>.</p>
+<h3><a class="anchor" aria-hidden="true" id="string-format-extraction-function"></a><a href="#string-format-extraction-function" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>String Format Extraction Function</h3>
+<p>Returns the dimension value formatted according to the given format string.</p>
+<pre><code class="hljs css language-json">{ <span class="hljs-attr">"type"</span> : <span class="hljs-string">"stringFormat"</span>, <span class="hljs-attr">"format"</span> : &lt;sprintf_expression&gt;, <span class="hljs-attr">"nullHandling"</span> : &lt;optional attribute for handling <span class="hljs-literal">null</span> value&gt; }
+</code></pre>
+<p>For example if you want to concat &quot;[&quot; and &quot;]&quot; before and after the actual dimension value, you need to specify &quot;[%s]&quot; as format string. &quot;nullHandling&quot; can be one of <code>nullString</code>, <code>emptyString</code> or <code>returnNull</code>. With &quot;[%s]&quot; format, each configuration will result <code>[null]</code>, <code>[]</code>, <code>null</code>. Default is <code>nullString</code>.</p>
+<h3><a class="anchor" aria-hidden="true" id="upper-and-lower-extraction-functions"></a><a href="#upper-and-lower-extraction-functions" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Upper and Lower extraction functions.</h3>
+<p>Returns the dimension values as all upper case or lower case.
+Optionally user can specify the language to use in order to perform upper or lower transformation</p>
+<pre><code class="hljs css language-json">{
+  <span class="hljs-attr">"type"</span> : <span class="hljs-string">"upper"</span>,
+  <span class="hljs-attr">"locale"</span>:<span class="hljs-string">"fr"</span>
+}
+</code></pre>
+<p>or without setting &quot;locale&quot; (in this case, the current value of the default locale for this instance of the Java Virtual Machine.)</p>
+<pre><code class="hljs css language-json">{
+  <span class="hljs-attr">"type"</span> : <span class="hljs-string">"lower"</span>
+}
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="bucket-extraction-function"></a><a href="#bucket-extraction-function" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Bucket Extraction Function</h3>
+<p>Bucket extraction function is used to bucket numerical values in each range of the given size by converting them to the same base value. Non numeric values are converted to null.</p>
+<ul>
+<li><code>size</code> : the size of the buckets (optional, default 1)</li>
+<li><code>offset</code> : the offset for the buckets (optional, default 0)</li>
+</ul>
+<p>The following extraction function creates buckets of 5 starting from 2. In this case, values in the range of [2, 7) will be converted to 2, values in [7, 12) will be converted to 7, etc.</p>
+<pre><code class="hljs css language-json">{
+  <span class="hljs-attr">"type"</span> : <span class="hljs-string">"bucket"</span>,
+  <span class="hljs-attr">"size"</span> : <span class="hljs-number">5</span>,
+  <span class="hljs-attr">"offset"</span> : <span class="hljs-number">2</span>
+}
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/0.21.0/querying/granularities.html"><span class="arrow-prev">← </span><span>Granularities</span></a><a class="docs-next button" href="/docs/0.21.0/querying/aggregations.html"><span>Aggregations</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#dimensionspec">DimensionSpec</a><ul class="toc-headings"><li><a href="#default-dimensionspec">Default DimensionSpec</a></li><li><a href="#extraction-dimensionspec">Extraction DimensionSpec</a></li><li><a href="#filtered-dimensionspecs">Filtered DimensionSpecs</a></li><li><a href="#lookup-dimensionspecs">Lookup DimensionSpecs</a></li></ul></li><li><a href="#output-types">Output Types</a></li><li><a href="#extraction-functions">Extraction Functions</a><ul class="toc-headings"><li><a href="#regular-expression-extraction-function">Regular Expression Extraction Function</a></li><li><a href="#partial-extraction-function">Partial Extraction Function</a></li><li><a href="#search-query-extraction-function">Search query extraction function</a></li><li><a href="#substring-extraction-function">Substring Extraction Function</a></li><li><a href="#strlen-extraction-function">Strlen Extraction Function</a></li><li><a href="#time-format-extraction-function">Time Format Extraction Function</a></li><li><a href="#time-parsing-extraction-function">Time Parsing Extraction Function</a></li><li><a href="#javascript-extraction-function">JavaScript Extraction Function</a></li><li><a href="#registered-lookup-extraction-function">Registered lookup extraction function</a></li><li><a href="#inline-lookup-extraction-function">Inline lookup extraction function</a></li><li><a href="#cascade-extraction-function">Cascade Extraction Function</a></li><li><a href="#string-format-extraction-function">String Format Extraction Function</a></li><li><a href="#upper-and-lower-extraction-functions">Upper and Lower extraction functions.</a></li><li><a href="#bucket-extraction-function">Bucket Extraction Function</a></li></ul></li></ul></nav></div><footer class="nav-footer druid-footer" id="footer"><div class="container"><div class="text-center"><p><a href="/technology">Technology</a> · <a href="/use-cases">Use Cases</a> · <a href="/druid-powered">Powered by Druid</a> · <a href="/docs/0.21.0/latest">Docs</a> · <a href="/community/">Community</a> · <a href="/downloads.html">Download</a> · <a href="/faq">FAQ</a></p></div><div class="text-center"><a title="Join the user group" href="https://groups.google.com/forum/#!forum/druid-user" target="_blank"><span class="fa fa-comments"></span></a> · <a title="Follow Druid" href="https://twitter.com/druidio" target="_blank"><span class="fab fa-twitter"></span></a> · <a title="Download via Apache" href="https://www.apache.org/dyn/closer.cgi?path=/incubator/druid/{{ site.druid_versions[0].versions[0].version }}/apache-druid-{{ site.druid_versions[0].versions[0].version }}-bin.tar.gz" target="_blank"><span class="fas fa-feather"></span></a> · <a title="GitHub" href="https://github.com/apache/druid" target="_blank"><span class="fab fa-github"></span></a></div><div class="text-center license">Copyright © 2019 <a href="https://www.apache.org/" target="_blank">Apache Software Foundation</a>.<br/>Except where otherwise noted, licensed under <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.<br/>Apache Druid, Druid, and the Druid logo are either registered trademarks or trademarks of The Apache Software Foundation in the United States and other countries.</div></div></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '2de99082a9f38e49dfaa059bbe4c901d',
+                indexName: 'apache_druid',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["language:en","version:0.21.0"]}
+              });
+            </script></body></html>

@@ -1,0 +1,1309 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Data formats · Apache Druid</title><meta name="viewport" content="width=device-width"/><link rel="canonical" href="https://druid.apache.org/docs/0.21.0/ingestion/data-formats.html"/><meta name="generator" content="Docusaurus"/><meta name="description" content="&lt;!--"/><meta name="docsearch:language" content="en"/><meta name="docsearch:version" content="0.21.0" /><meta property="og:title" content="Data formats · Apache Druid"/><meta property="og:type" content="website"/><meta property="og:url" content="https://druid.apache.org/index.html"/><meta property="og:description" content="&lt;!--"/><meta property="og:image" content="https://druid.apache.org/img/druid_nav.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://druid.apache.org/img/druid_nav.png"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-131010415-1"></script><script>
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments); }
+              gtag('js', new Date());
+              gtag('config', 'UA-131010415-1');
+            </script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"/><link rel="stylesheet" href="/css/code-block-buttons.css"/><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script><script type="text/javascript" src="/js/code-block-buttons.js"></script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/druid_nav.png" alt="Apache Druid"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/technology" target="_self">Technology</a></li><li class=""><a href="/use-cases" target="_self">Use Cases</a></li><li class=""><a href="/druid-powered" target="_self">Powered By</a></li><li class="siteNavGroupActive"><a href="/docs/0.21.0/design/index.html" target="_self">Docs</a></li><li class=""><a href="/community/" target="_self">Community</a></li><li class=""><a href="https://www.apache.org" target="_self">Apache</a></li><li class=""><a href="/downloads.html" target="_self">Download</a></li><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Ingestion</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Getting started<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.21.0/design/index.html">Introduction to Apache Druid</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/tutorials/index.html">Quickstart</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/tutorials/docker.html">Docker</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/single-server.html">Single server deployment</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/tutorials/cluster.html">Clustered deployment</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Tutorials<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.21.0/tutorials/tutorial-batch.html">Loading files natively</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/tutorials/tutorial-kafka.html">Load from Apache Kafka</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/tutorials/tutorial-batch-hadoop.html">Load from Apache Hadoop</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/tutorials/tutorial-query.html">Querying data</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/tutorials/tutorial-rollup.html">Roll-up</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/tutorials/tutorial-retention.html">Configuring data retention</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/tutorials/tutorial-update-data.html">Updating existing data</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/tutorials/tutorial-compaction.html">Compacting segments</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/tutorials/tutorial-delete-data.html">Deleting data</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/tutorials/tutorial-ingestion-spec.html">Writing an ingestion spec</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/tutorials/tutorial-transform-spec.html">Transforming input data</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/tutorials/tutorial-kerberos-hadoop.html">Kerberized HDFS deep storage</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Design<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.21.0/design/architecture.html">Design</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/design/segments.html">Segments</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/design/processes.html">Processes and servers</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/dependencies/deep-storage.html">Deep storage</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/dependencies/metadata-storage.html">Metadata storage</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/dependencies/zookeeper.html">ZooKeeper</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Ingestion<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.21.0/ingestion/index.html">Ingestion</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/0.21.0/ingestion/data-formats.html">Data formats</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/ingestion/schema-design.html">Schema design tips</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/ingestion/data-management.html">Data management</a></li><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Stream ingestion</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/kafka-ingestion.html">Apache Kafka</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/kinesis-ingestion.html">Amazon Kinesis</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/ingestion/tranquility.html">Tranquility</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Batch ingestion</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.21.0/ingestion/native-batch.html">Native batch</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/ingestion/hadoop.html">Hadoop-based</a></li></ul></div><li class="navListItem"><a class="navItem" href="/docs/0.21.0/ingestion/tasks.html">Task reference</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/ingestion/faq.html">Troubleshooting FAQ</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Querying<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/sql.html">Druid SQL</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/querying.html">Native queries</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/query-execution.html">Query execution</a></li><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Concepts</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/datasource.html">Datasources</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/joins.html">Joins</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/lookups.html">Lookups</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/multi-value-dimensions.html">Multi-value dimensions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/multitenancy.html">Multitenancy</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/caching.html">Query caching</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/query-context.html">Context parameters</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Native query types</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/timeseriesquery.html">Timeseries</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/topnquery.html">TopN</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/groupbyquery.html">GroupBy</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/scan-query.html">Scan</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/searchquery.html">Search</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/timeboundaryquery.html">TimeBoundary</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/segmentmetadataquery.html">SegmentMetadata</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/datasourcemetadataquery.html">DatasourceMetadata</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Native query components</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/filters.html">Filters</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/granularities.html">Granularities</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/dimensionspecs.html">Dimensions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/aggregations.html">Aggregations</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/post-aggregations.html">Post-aggregations</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/misc/math-expr.html">Expressions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/having.html">Having filters (groupBy)</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/limitspec.html">Sorting and limiting (groupBy)</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/topnmetricspec.html">Sorting (topN)</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/sorting-orders.html">String comparators</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/virtual-columns.html">Virtual columns</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/geo.html">Spatial filters</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Configuration<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.21.0/configuration/index.html">Configuration reference</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions.html">Extensions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/configuration/logging.html">Logging</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Operations<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/druid-console.html">Web console</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/getting-started.html">Getting started with Apache Druid</a></li><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Security</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/security-overview.html">Security overview</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/security-user-auth.html">User authentication and authorization</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/auth-ldap.html">LDAP auth</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/password-provider.html">Password providers</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/tls-support.html">TLS support</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Performance tuning</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/basic-cluster-tuning.html">Basic cluster tuning</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/segment-optimization.html">Segment Size Optimization</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/http-compression.html">HTTP compression</a></li></ul></div><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/api-reference.html">API reference</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/high-availability.html">High availability</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/rolling-updates.html">Rolling updates</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/rule-configuration.html">Retaining or automatically dropping data</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/metrics.html">Metrics</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/alerts.html">Alerts</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/other-hadoop.html">Working with different versions of Apache Hadoop</a></li><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Misc</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/management-uis.html">Legacy Management UIs</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/dump-segment.html">dump-segment tool</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/reset-cluster.html">reset-cluster tool</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/insert-segment-to-db.html">insert-segment-to-db tool</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/pull-deps.html">pull-deps tool</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/deep-storage-migration.html">Deep storage migration</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/export-metadata.html">Export Metadata Tool</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/metadata-migration.html">Metadata Migration</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/use_sbt_to_build_fat_jar.html">Content for build.sbt</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Development<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/overview.html">Developing on Druid</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/modules.html">Creating extensions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/javascript.html">JavaScript functionality</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/build.html">Build from source</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/versioning.html">Versioning</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/experimental.html">Experimental features</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Misc<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.21.0/misc/papers-and-talks.html">Papers</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Hidden<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.21.0/comparisons/druid-vs-elasticsearch.html">Apache Druid vs Elasticsearch</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/comparisons/druid-vs-key-value.html">Apache Druid vs. Key/Value Stores (HBase/Cassandra/OpenTSDB)</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/comparisons/druid-vs-kudu.html">Apache Druid vs Kudu</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/comparisons/druid-vs-redshift.html">Apache Druid vs Redshift</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/comparisons/druid-vs-spark.html">Apache Druid vs Spark</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/comparisons/druid-vs-sql-on-hadoop.html">Apache Druid vs SQL-on-Hadoop</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/design/auth.html">Authentication and Authorization</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/design/broker.html">Broker</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/design/coordinator.html">Coordinator Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/design/historical.html">Historical Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/design/indexer.html">Indexer Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/design/indexing-service.html">Indexing Service</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/design/middlemanager.html">MiddleManager Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/design/overlord.html">Overlord Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/design/router.html">Router Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/design/peons.html">Peons</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/approximate-histograms.html">Approximate Histogram aggregators</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/avro.html">Apache Avro</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/azure.html">Microsoft Azure</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/bloom-filter.html">Bloom Filter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/datasketches-extension.html">DataSketches extension</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/datasketches-hll.html">DataSketches HLL Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/datasketches-quantiles.html">DataSketches Quantiles Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/datasketches-theta.html">DataSketches Theta Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/datasketches-tuple.html">DataSketches Tuple Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/druid-basic-security.html">Basic Security</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/druid-kerberos.html">Kerberos</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/druid-lookups.html">Cached Lookup Module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/druid-ranger-security.html">Apache Ranger Security</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/google.html">Google Cloud Storage</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/hdfs.html">HDFS</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/kafka-extraction-namespace.html">Apache Kafka Lookups</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/lookups-cached-global.html">Globally Cached Lookups</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/mysql.html">MySQL Metadata Store</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/orc.html">ORC Extension</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/druid-pac4j.html">Druid pac4j based Security extension</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/parquet.html">Apache Parquet Extension</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/postgresql.html">PostgreSQL Metadata Store</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/protobuf.html">Protobuf</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/s3.html">S3-compatible</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/simple-client-sslcontext.html">Simple SSLContext Provider Module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/stats.html">Stats aggregator</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/test-stats.html">Test Stats Aggregators</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/ambari-metrics-emitter.html">Ambari Metrics Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/cassandra.html">Apache Cassandra</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/cloudfiles.html">Rackspace Cloud Files</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/distinctcount.html">DistinctCount Aggregator</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/graphite.html">Graphite Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/influx.html">InfluxDB Line Protocol Parser</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/influxdb-emitter.html">InfluxDB Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/kafka-emitter.html">Kafka Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/materialized-view.html">Materialized View</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/momentsketch-quantiles.html">Moment Sketches for Approximate Quantiles module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/moving-average-query.html">Moving Average Query</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/opentsdb-emitter.html">OpenTSDB Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/redis-cache.html">Druid Redis Cache</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/sqlserver.html">Microsoft SQLServer</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/statsd.html">StatsD Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/tdigestsketch-quantiles.html">T-Digest Quantiles Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/thrift.html">Thrift</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/time-min-max.html">Timestamp Min/Max aggregators</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/gce-extensions.html">GCE Extensions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/aliyun-oss.html">Aliyun OSS</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/hll-old.html">Cardinality/HyperUnique aggregators</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/select-query.html">Select</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/ingestion/standalone-realtime.html">Realtime Process</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/apache/druid/edit/master/docs/ingestion/data-formats.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">Data formats</h1></header><article><div><span><!--
+  ~ Licensed to the Apache Software Foundation (ASF) under one
+  ~ or more contributor license agreements.  See the NOTICE file
+  ~ distributed with this work for additional information
+  ~ regarding copyright ownership.  The ASF licenses this file
+  ~ to you under the Apache License, Version 2.0 (the
+  ~ "License"); you may not use this file except in compliance
+  ~ with the License.  You may obtain a copy of the License at
+  ~
+  ~   http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an
+  ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~ KIND, either express or implied.  See the License for the
+  ~ specific language governing permissions and limitations
+  ~ under the License.
+  -->
+<p>Apache Druid can ingest denormalized data in JSON, CSV, or a delimited form such as TSV, or any custom format. While most examples in the documentation use data in JSON format, it is not difficult to configure Druid to ingest any other delimited data.
+We welcome any contributions to new formats.</p>
+<p>This page lists all default and core extension data formats supported by Druid.
+For additional data formats supported with community extensions,
+please see our <a href="/docs/0.21.0/development/extensions.html#community-extensions">community extensions list</a>.</p>
+<h2><a class="anchor" aria-hidden="true" id="formatting-the-data"></a><a href="#formatting-the-data" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Formatting the Data</h2>
+<p>The following samples show data formats that are natively supported in Druid:</p>
+<p><em>JSON</em></p>
+<pre><code class="hljs css language-json">{<span class="hljs-attr">"timestamp"</span>: <span class="hljs-string">"2013-08-31T01:02:33Z"</span>, <span class="hljs-attr">"page"</span>: <span class="hljs-string">"Gypsy Danger"</span>, <span class="hljs-attr">"language"</span> : <span class="hljs-string">"en"</span>, <span class="hljs-attr">"user"</span> : <span class="hljs-string">"nuclear"</span>, <span class="hljs-attr">"unpatrolled"</span> : <span class="hljs-string">"true"</span>, <span class="hljs-attr">"newPage"</span> : <span class="hljs-string">"true"</span>, <span class="hljs-attr">"robot"</span>: <span class="hljs-string">"false"</span>, <span class="hljs-attr">"anonymous"</span>: <span class="hljs-string">"false"</span>, <span class="hljs-attr">"namespace"</span>:<span class="hljs-string">"article"</span>, <span class="hljs-attr">"continent"</span>:<span class="hljs-string">"North America"</span>, <span class="hljs-attr">"country"</span>:<span class="hljs-string">"United States"</span>, <span class="hljs-attr">"region"</span>:<span class="hljs-string">"Bay Area"</span>, <span class="hljs-attr">"city"</span>:<span class="hljs-string">"San Francisco"</span>, <span class="hljs-attr">"added"</span>: <span class="hljs-number">57</span>, <span class="hljs-attr">"deleted"</span>: <span class="hljs-number">200</span>, <span class="hljs-attr">"delta"</span>: <span class="hljs-number">-143</span>}
+{<span class="hljs-attr">"timestamp"</span>: <span class="hljs-string">"2013-08-31T03:32:45Z"</span>, <span class="hljs-attr">"page"</span>: <span class="hljs-string">"Striker Eureka"</span>, <span class="hljs-attr">"language"</span> : <span class="hljs-string">"en"</span>, <span class="hljs-attr">"user"</span> : <span class="hljs-string">"speed"</span>, <span class="hljs-attr">"unpatrolled"</span> : <span class="hljs-string">"false"</span>, <span class="hljs-attr">"newPage"</span> : <span class="hljs-string">"true"</span>, <span class="hljs-attr">"robot"</span>: <span class="hljs-string">"true"</span>, <span class="hljs-attr">"anonymous"</span>: <span class="hljs-string">"false"</span>, <span class="hljs-attr">"namespace"</span>:<span class="hljs-string">"wikipedia"</span>, <span class="hljs-attr">"continent"</span>:<span class="hljs-string">"Australia"</span>, <span class="hljs-attr">"country"</span>:<span class="hljs-string">"Australia"</span>, <span class="hljs-attr">"region"</span>:<span class="hljs-string">"Cantebury"</span>, <span class="hljs-attr">"city"</span>:<span class="hljs-string">"Syndey"</span>, <span class="hljs-attr">"added"</span>: <span class="hljs-number">459</span>, <span class="hljs-attr">"deleted"</span>: <span class="hljs-number">129</span>, <span class="hljs-attr">"delta"</span>: <span class="hljs-number">330</span>}
+{<span class="hljs-attr">"timestamp"</span>: <span class="hljs-string">"2013-08-31T07:11:21Z"</span>, <span class="hljs-attr">"page"</span>: <span class="hljs-string">"Cherno Alpha"</span>, <span class="hljs-attr">"language"</span> : <span class="hljs-string">"ru"</span>, <span class="hljs-attr">"user"</span> : <span class="hljs-string">"masterYi"</span>, <span class="hljs-attr">"unpatrolled"</span> : <span class="hljs-string">"false"</span>, <span class="hljs-attr">"newPage"</span> : <span class="hljs-string">"true"</span>, <span class="hljs-attr">"robot"</span>: <span class="hljs-string">"true"</span>, <span class="hljs-attr">"anonymous"</span>: <span class="hljs-string">"false"</span>, <span class="hljs-attr">"namespace"</span>:<span class="hljs-string">"article"</span>, <span class="hljs-attr">"continent"</span>:<span class="hljs-string">"Asia"</span>, <span class="hljs-attr">"country"</span>:<span class="hljs-string">"Russia"</span>, <span class="hljs-attr">"region"</span>:<span class="hljs-string">"Oblast"</span>, <span class="hljs-attr">"city"</span>:<span class="hljs-string">"Moscow"</span>, <span class="hljs-attr">"added"</span>: <span class="hljs-number">123</span>, <span class="hljs-attr">"deleted"</span>: <span class="hljs-number">12</span>, <span class="hljs-attr">"delta"</span>: <span class="hljs-number">111</span>}
+{<span class="hljs-attr">"timestamp"</span>: <span class="hljs-string">"2013-08-31T11:58:39Z"</span>, <span class="hljs-attr">"page"</span>: <span class="hljs-string">"Crimson Typhoon"</span>, <span class="hljs-attr">"language"</span> : <span class="hljs-string">"zh"</span>, <span class="hljs-attr">"user"</span> : <span class="hljs-string">"triplets"</span>, <span class="hljs-attr">"unpatrolled"</span> : <span class="hljs-string">"true"</span>, <span class="hljs-attr">"newPage"</span> : <span class="hljs-string">"false"</span>, <span class="hljs-attr">"robot"</span>: <span class="hljs-string">"true"</span>, <span class="hljs-attr">"anonymous"</span>: <span class="hljs-string">"false"</span>, <span class="hljs-attr">"namespace"</span>:<span class="hljs-string">"wikipedia"</span>, <span class="hljs-attr">"continent"</span>:<span class="hljs-string">"Asia"</span>, <span class="hljs-attr">"country"</span>:<span class="hljs-string">"China"</span>, <span class="hljs-attr">"region"</span>:<span class="hljs-string">"Shanxi"</span>, <span class="hljs-attr">"city"</span>:<span class="hljs-string">"Taiyuan"</span>, <span class="hljs-attr">"added"</span>: <span class="hljs-number">905</span>, <span class="hljs-attr">"deleted"</span>: <span class="hljs-number">5</span>, <span class="hljs-attr">"delta"</span>: <span class="hljs-number">900</span>}
+{<span class="hljs-attr">"timestamp"</span>: <span class="hljs-string">"2013-08-31T12:41:27Z"</span>, <span class="hljs-attr">"page"</span>: <span class="hljs-string">"Coyote Tango"</span>, <span class="hljs-attr">"language"</span> : <span class="hljs-string">"ja"</span>, <span class="hljs-attr">"user"</span> : <span class="hljs-string">"cancer"</span>, <span class="hljs-attr">"unpatrolled"</span> : <span class="hljs-string">"true"</span>, <span class="hljs-attr">"newPage"</span> : <span class="hljs-string">"false"</span>, <span class="hljs-attr">"robot"</span>: <span class="hljs-string">"true"</span>, <span class="hljs-attr">"anonymous"</span>: <span class="hljs-string">"false"</span>, <span class="hljs-attr">"namespace"</span>:<span class="hljs-string">"wikipedia"</span>, <span class="hljs-attr">"continent"</span>:<span class="hljs-string">"Asia"</span>, <span class="hljs-attr">"country"</span>:<span class="hljs-string">"Japan"</span>, <span class="hljs-attr">"region"</span>:<span class="hljs-string">"Kanto"</span>, <span class="hljs-attr">"city"</span>:<span class="hljs-string">"Tokyo"</span>, <span class="hljs-attr">"added"</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">"deleted"</span>: <span class="hljs-number">10</span>, <span class="hljs-attr">"delta"</span>: <span class="hljs-number">-9</span>}
+</code></pre>
+<p><em>CSV</em></p>
+<pre><code class="hljs"><span class="hljs-number">2013</span><span class="hljs-number">-08</span><span class="hljs-number">-31</span><span class="hljs-string">T01:</span><span class="hljs-number">02</span>:<span class="hljs-number">33</span>Z,<span class="hljs-string">"Gypsy Danger"</span>,<span class="hljs-string">"en"</span>,<span class="hljs-string">"nuclear"</span>,<span class="hljs-string">"true"</span>,<span class="hljs-string">"true"</span>,<span class="hljs-string">"false"</span>,<span class="hljs-string">"false"</span>,<span class="hljs-string">"article"</span>,<span class="hljs-string">"North America"</span>,<span class="hljs-string">"United States"</span>,<span class="hljs-string">"Bay Area"</span>,<span class="hljs-string">"San Francisco"</span>,<span class="hljs-number">57</span>,<span class="hljs-number">200</span>,<span class="hljs-number">-143</span>
+<span class="hljs-number">2013</span><span class="hljs-number">-08</span><span class="hljs-number">-31</span><span class="hljs-string">T03:</span><span class="hljs-number">32</span>:<span class="hljs-number">45</span>Z,<span class="hljs-string">"Striker Eureka"</span>,<span class="hljs-string">"en"</span>,<span class="hljs-string">"speed"</span>,<span class="hljs-string">"false"</span>,<span class="hljs-string">"true"</span>,<span class="hljs-string">"true"</span>,<span class="hljs-string">"false"</span>,<span class="hljs-string">"wikipedia"</span>,<span class="hljs-string">"Australia"</span>,<span class="hljs-string">"Australia"</span>,<span class="hljs-string">"Cantebury"</span>,<span class="hljs-string">"Syndey"</span>,<span class="hljs-number">459</span>,<span class="hljs-number">129</span>,<span class="hljs-number">330</span>
+<span class="hljs-number">2013</span><span class="hljs-number">-08</span><span class="hljs-number">-31</span><span class="hljs-string">T07:</span><span class="hljs-number">11</span>:<span class="hljs-number">21</span>Z,<span class="hljs-string">"Cherno Alpha"</span>,<span class="hljs-string">"ru"</span>,<span class="hljs-string">"masterYi"</span>,<span class="hljs-string">"false"</span>,<span class="hljs-string">"true"</span>,<span class="hljs-string">"true"</span>,<span class="hljs-string">"false"</span>,<span class="hljs-string">"article"</span>,<span class="hljs-string">"Asia"</span>,<span class="hljs-string">"Russia"</span>,<span class="hljs-string">"Oblast"</span>,<span class="hljs-string">"Moscow"</span>,<span class="hljs-number">123</span>,<span class="hljs-number">12</span>,<span class="hljs-number">111</span>
+<span class="hljs-number">2013</span><span class="hljs-number">-08</span><span class="hljs-number">-31</span><span class="hljs-string">T11:</span><span class="hljs-number">58</span>:<span class="hljs-number">39</span>Z,<span class="hljs-string">"Crimson Typhoon"</span>,<span class="hljs-string">"zh"</span>,<span class="hljs-string">"triplets"</span>,<span class="hljs-string">"true"</span>,<span class="hljs-string">"false"</span>,<span class="hljs-string">"true"</span>,<span class="hljs-string">"false"</span>,<span class="hljs-string">"wikipedia"</span>,<span class="hljs-string">"Asia"</span>,<span class="hljs-string">"China"</span>,<span class="hljs-string">"Shanxi"</span>,<span class="hljs-string">"Taiyuan"</span>,<span class="hljs-number">905</span>,<span class="hljs-number">5</span>,<span class="hljs-number">900</span>
+<span class="hljs-number">2013</span><span class="hljs-number">-08</span><span class="hljs-number">-31</span><span class="hljs-string">T12:</span><span class="hljs-number">41</span>:<span class="hljs-number">27</span>Z,<span class="hljs-string">"Coyote Tango"</span>,<span class="hljs-string">"ja"</span>,<span class="hljs-string">"cancer"</span>,<span class="hljs-string">"true"</span>,<span class="hljs-string">"false"</span>,<span class="hljs-string">"true"</span>,<span class="hljs-string">"false"</span>,<span class="hljs-string">"wikipedia"</span>,<span class="hljs-string">"Asia"</span>,<span class="hljs-string">"Japan"</span>,<span class="hljs-string">"Kanto"</span>,<span class="hljs-string">"Tokyo"</span>,<span class="hljs-number">1</span>,<span class="hljs-number">10</span>,<span class="hljs-number">-9</span>
+</code></pre>
+<p><em>TSV (Delimited)</em></p>
+<pre><code class="hljs"><span class="hljs-number">2013</span><span class="hljs-number">-08</span><span class="hljs-number">-31</span><span class="hljs-string">T01:</span><span class="hljs-number">02</span>:<span class="hljs-number">33</span>Z  <span class="hljs-string">"Gypsy Danger"</span>  <span class="hljs-string">"en"</span>  <span class="hljs-string">"nuclear"</span> <span class="hljs-string">"true"</span>  <span class="hljs-string">"true"</span>  <span class="hljs-string">"false"</span> <span class="hljs-string">"false"</span> <span class="hljs-string">"article"</span> <span class="hljs-string">"North America"</span> <span class="hljs-string">"United States"</span> <span class="hljs-string">"Bay Area"</span>  <span class="hljs-string">"San Francisco"</span> <span class="hljs-number">57</span>  <span class="hljs-number">200</span> <span class="hljs-number">-143</span>
+<span class="hljs-number">2013</span><span class="hljs-number">-08</span><span class="hljs-number">-31</span><span class="hljs-string">T03:</span><span class="hljs-number">32</span>:<span class="hljs-number">45</span>Z  <span class="hljs-string">"Striker Eureka"</span>  <span class="hljs-string">"en"</span>  <span class="hljs-string">"speed"</span> <span class="hljs-string">"false"</span> <span class="hljs-string">"true"</span>  <span class="hljs-string">"true"</span>  <span class="hljs-string">"false"</span> <span class="hljs-string">"wikipedia"</span> <span class="hljs-string">"Australia"</span> <span class="hljs-string">"Australia"</span> <span class="hljs-string">"Cantebury"</span> <span class="hljs-string">"Syndey"</span>  <span class="hljs-number">459</span> <span class="hljs-number">129</span> <span class="hljs-number">330</span>
+<span class="hljs-number">2013</span><span class="hljs-number">-08</span><span class="hljs-number">-31</span><span class="hljs-string">T07:</span><span class="hljs-number">11</span>:<span class="hljs-number">21</span>Z  <span class="hljs-string">"Cherno Alpha"</span>  <span class="hljs-string">"ru"</span>  <span class="hljs-string">"masterYi"</span>  <span class="hljs-string">"false"</span> <span class="hljs-string">"true"</span>  <span class="hljs-string">"true"</span>  <span class="hljs-string">"false"</span> <span class="hljs-string">"article"</span> <span class="hljs-string">"Asia"</span>  <span class="hljs-string">"Russia"</span>  <span class="hljs-string">"Oblast"</span>  <span class="hljs-string">"Moscow"</span>  <span class="hljs-number">123</span> <span class="hljs-number">12</span>  <span class="hljs-number">111</span>
+<span class="hljs-number">2013</span><span class="hljs-number">-08</span><span class="hljs-number">-31</span><span class="hljs-string">T11:</span><span class="hljs-number">58</span>:<span class="hljs-number">39</span>Z  <span class="hljs-string">"Crimson Typhoon"</span> <span class="hljs-string">"zh"</span>  <span class="hljs-string">"triplets"</span>  <span class="hljs-string">"true"</span>  <span class="hljs-string">"false"</span> <span class="hljs-string">"true"</span>  <span class="hljs-string">"false"</span> <span class="hljs-string">"wikipedia"</span> <span class="hljs-string">"Asia"</span>  <span class="hljs-string">"China"</span> <span class="hljs-string">"Shanxi"</span>  <span class="hljs-string">"Taiyuan"</span> <span class="hljs-number">905</span> <span class="hljs-number">5</span> <span class="hljs-number">900</span>
+<span class="hljs-number">2013</span><span class="hljs-number">-08</span><span class="hljs-number">-31</span><span class="hljs-string">T12:</span><span class="hljs-number">41</span>:<span class="hljs-number">27</span>Z  <span class="hljs-string">"Coyote Tango"</span>  <span class="hljs-string">"ja"</span>  <span class="hljs-string">"cancer"</span>  <span class="hljs-string">"true"</span>  <span class="hljs-string">"false"</span> <span class="hljs-string">"true"</span>  <span class="hljs-string">"false"</span> <span class="hljs-string">"wikipedia"</span> <span class="hljs-string">"Asia"</span>  <span class="hljs-string">"Japan"</span> <span class="hljs-string">"Kanto"</span> <span class="hljs-string">"Tokyo"</span> <span class="hljs-number">1</span> <span class="hljs-number">10</span>  <span class="hljs-number">-9</span>
+</code></pre>
+<p>Note that the CSV and TSV data do not contain column heads. This becomes important when you specify the data for ingesting.</p>
+<p>Besides text formats, Druid also supports binary formats such as <a href="#orc">Orc</a> and <a href="#parquet">Parquet</a> formats.</p>
+<h2><a class="anchor" aria-hidden="true" id="custom-formats"></a><a href="#custom-formats" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Custom Formats</h2>
+<p>Druid supports custom data formats and can use the <code>Regex</code> parser or the <code>JavaScript</code> parsers to parse these formats. Please note that using any of these parsers for
+parsing data will not be as efficient as writing a native Java parser or using an external stream processor. We welcome contributions of new Parsers.</p>
+<h2><a class="anchor" aria-hidden="true" id="input-format"></a><a href="#input-format" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Input Format</h2>
+<blockquote>
+<p>The Input Format is a new way to specify the data format of your input data which was introduced in 0.17.0.
+Unfortunately, the Input Format doesn't support all data formats or ingestion methods supported by Druid yet.
+Especially if you want to use the Hadoop ingestion, you still need to use the <a href="#parser">Parser</a>.
+If your data is formatted in some format not listed in this section, please consider using the Parser instead.</p>
+</blockquote>
+<p>All forms of Druid ingestion require some form of schema object. The format of the data to be ingested is specified using the <code>inputFormat</code> entry in your <a href="/docs/0.21.0/ingestion/index.html#ioconfig"><code>ioConfig</code></a>.</p>
+<h3><a class="anchor" aria-hidden="true" id="json"></a><a href="#json" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>JSON</h3>
+<p>The <code>inputFormat</code> to load data of JSON format. An example is:</p>
+<pre><code class="hljs css language-json">"ioConfig": {
+  "inputFormat": {
+    "type": "json"
+  },
+  ...
+}
+</code></pre>
+<p>The JSON <code>inputFormat</code> has the following components:</p>
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th><th>Required</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td>String</td><td>This should say <code>json</code>.</td><td>yes</td></tr>
+<tr><td>flattenSpec</td><td>JSON Object</td><td>Specifies flattening configuration for nested JSON data. See <a href="#flattenspec"><code>flattenSpec</code></a> for more info.</td><td>no</td></tr>
+<tr><td>featureSpec</td><td>JSON Object</td><td><a href="https://github.com/FasterXML/jackson-core/wiki/JsonParser-Features">JSON parser features</a> supported by Jackson library. Those features will be applied when parsing the input JSON data.</td><td>no</td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="csv"></a><a href="#csv" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>CSV</h3>
+<p>The <code>inputFormat</code> to load data of the CSV format. An example is:</p>
+<pre><code class="hljs css language-json">"ioConfig": {
+  "inputFormat": {
+    "type": "csv",
+    "columns" : ["timestamp","page","language","user","unpatrolled","newPage","robot","anonymous","namespace","continent","country","region","city","added","deleted","delta"]
+  },
+  ...
+}
+</code></pre>
+<p>The CSV <code>inputFormat</code> has the following components:</p>
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th><th>Required</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td>String</td><td>This should say <code>csv</code>.</td><td>yes</td></tr>
+<tr><td>listDelimiter</td><td>String</td><td>A custom delimiter for multi-value dimensions.</td><td>no (default = ctrl+A)</td></tr>
+<tr><td>columns</td><td>JSON array</td><td>Specifies the columns of the data. The columns should be in the same order with the columns of your data.</td><td>yes if <code>findColumnsFromHeader</code> is false or missing</td></tr>
+<tr><td>findColumnsFromHeader</td><td>Boolean</td><td>If this is set, the task will find the column names from the header row. Note that <code>skipHeaderRows</code> will be applied before finding column names from the header. For example, if you set <code>skipHeaderRows</code> to 2 and <code>findColumnsFromHeader</code> to true, the task will skip the first two lines and then extract column information from the third line. <code>columns</code> will be ignored if this is set to true.</td><td>no (default = false if <code>columns</code> is set; otherwise null)</td></tr>
+<tr><td>skipHeaderRows</td><td>Integer</td><td>If this is set, the task will skip the first <code>skipHeaderRows</code> rows.</td><td>no (default = 0)</td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="tsv-delimited"></a><a href="#tsv-delimited" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>TSV (Delimited)</h3>
+<pre><code class="hljs css language-json">"ioConfig": {
+  "inputFormat": {
+    "type": "tsv",
+    "columns" : ["timestamp","page","language","user","unpatrolled","newPage","robot","anonymous","namespace","continent","country","region","city","added","deleted","delta"],
+    "delimiter":"|"
+  },
+  ...
+}
+</code></pre>
+<p>The <code>inputFormat</code> to load data of a delimited format. An example is:</p>
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th><th>Required</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td>String</td><td>This should say <code>tsv</code>.</td><td>yes</td></tr>
+<tr><td>delimiter</td><td>String</td><td>A custom delimiter for data values.</td><td>no (default = <code>\t</code>)</td></tr>
+<tr><td>listDelimiter</td><td>String</td><td>A custom delimiter for multi-value dimensions.</td><td>no (default = ctrl+A)</td></tr>
+<tr><td>columns</td><td>JSON array</td><td>Specifies the columns of the data. The columns should be in the same order with the columns of your data.</td><td>yes if <code>findColumnsFromHeader</code> is false or missing</td></tr>
+<tr><td>findColumnsFromHeader</td><td>Boolean</td><td>If this is set, the task will find the column names from the header row. Note that <code>skipHeaderRows</code> will be applied before finding column names from the header. For example, if you set <code>skipHeaderRows</code> to 2 and <code>findColumnsFromHeader</code> to true, the task will skip the first two lines and then extract column information from the third line. <code>columns</code> will be ignored if this is set to true.</td><td>no (default = false if <code>columns</code> is set; otherwise null)</td></tr>
+<tr><td>skipHeaderRows</td><td>Integer</td><td>If this is set, the task will skip the first <code>skipHeaderRows</code> rows.</td><td>no (default = 0)</td></tr>
+</tbody>
+</table>
+<p>Be sure to change the <code>delimiter</code> to the appropriate delimiter for your data. Like CSV, you must specify the columns and which subset of the columns you want indexed.</p>
+<h3><a class="anchor" aria-hidden="true" id="orc"></a><a href="#orc" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>ORC</h3>
+<blockquote>
+<p>You need to include the <a href="/docs/0.21.0/development/extensions-core/orc.html"><code>druid-orc-extensions</code></a> as an extension to use the ORC input format.</p>
+</blockquote>
+<blockquote>
+<p>If you are considering upgrading from earlier than 0.15.0 to 0.15.0 or a higher version,
+please read <a href="/docs/0.21.0/development/extensions-core/orc.html#migration-from-contrib-extension">Migration from 'contrib' extension</a> carefully.</p>
+</blockquote>
+<p>The <code>inputFormat</code> to load data of ORC format. An example is:</p>
+<pre><code class="hljs css language-json">"ioConfig": {
+  "inputFormat": {
+    "type": "orc",
+    "flattenSpec": {
+      "useFieldDiscovery": true,
+      "fields": [
+        {
+          "type": "path",
+          "name": "nested",
+          "expr": "$.path.to.nested"
+        }
+      ]
+    },
+    "binaryAsString": false
+  },
+  ...
+}
+</code></pre>
+<p>The ORC <code>inputFormat</code> has the following components:</p>
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th><th>Required</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td>String</td><td>This should say <code>orc</code>.</td><td>yes</td></tr>
+<tr><td>flattenSpec</td><td>JSON Object</td><td>Specifies flattening configuration for nested ORC data. See <a href="#flattenspec"><code>flattenSpec</code></a> for more info.</td><td>no</td></tr>
+<tr><td>binaryAsString</td><td>Boolean</td><td>Specifies if the binary orc column which is not logically marked as a string should be treated as a UTF-8 encoded string.</td><td>no (default = false)</td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="parquet"></a><a href="#parquet" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parquet</h3>
+<blockquote>
+<p>You need to include the <a href="/docs/0.21.0/development/extensions-core/parquet.html"><code>druid-parquet-extensions</code></a> as an extension to use the Parquet input format.</p>
+</blockquote>
+<p>The <code>inputFormat</code> to load data of Parquet format. An example is:</p>
+<pre><code class="hljs css language-json">"ioConfig": {
+  "inputFormat": {
+    "type": "parquet",
+    "flattenSpec": {
+      "useFieldDiscovery": true,
+      "fields": [
+        {
+          "type": "path",
+          "name": "nested",
+          "expr": "$.path.to.nested"
+        }
+      ]
+    },
+    "binaryAsString": false
+  },
+  ...
+}
+</code></pre>
+<p>The Parquet <code>inputFormat</code> has the following components:</p>
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th><th>Required</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td>String</td><td>This should be set to <code>parquet</code> to read Parquet file</td><td>yes</td></tr>
+<tr><td>flattenSpec</td><td>JSON Object</td><td>Define a <a href="#flattenspec"><code>flattenSpec</code></a> to extract nested values from a Parquet file. Note that only 'path' expression are supported ('jq' is unavailable).</td><td>no (default will auto-discover 'root' level properties)</td></tr>
+<tr><td>binaryAsString</td><td>Boolean</td><td>Specifies if the bytes parquet column which is not logically marked as a string or enum type should be treated as a UTF-8 encoded string.</td><td>no (default = false)</td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="avro-ocf"></a><a href="#avro-ocf" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Avro OCF</h3>
+<blockquote>
+<p>You need to include the <a href="/docs/0.21.0/development/extensions-core/avro.html"><code>druid-avro-extensions</code></a> as an extension to use the Avro OCF input format.</p>
+</blockquote>
+<blockquote>
+<p>See the <a href="/docs/0.21.0/development/extensions-core/avro.html#avro-types">Avro Types</a> section for how Avro types are handled in Druid</p>
+</blockquote>
+<p>The <code>inputFormat</code> to load data of Avro OCF format. An example is:</p>
+<pre><code class="hljs css language-json">"ioConfig": {
+  "inputFormat": {
+    "type": "avro_ocf",
+    "flattenSpec": {
+      "useFieldDiscovery": true,
+      "fields": [
+        {
+          "type": "path",
+          "name": "someRecord_subInt",
+          "expr": "$.someRecord.subInt"
+        }
+      ]
+    },
+    "schema": {
+      "namespace": "org.apache.druid.data.input",
+      "name": "SomeDatum",
+      "type": "record",
+      "fields" : [
+        { "name": "timestamp", "type": "long" },
+        { "name": "eventType", "type": "string" },
+        { "name": "id", "type": "long" },
+        { "name": "someRecord", "type": {
+          "type": "record", "name": "MySubRecord", "fields": [
+            { "name": "subInt", "type": "int"},
+            { "name": "subLong", "type": "long"}
+          ]
+        }}]
+    },
+    "binaryAsString": false
+  },
+  ...
+}
+</code></pre>
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th><th>Required</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td>String</td><td>This should be set to <code>avro_ocf</code> to read Avro OCF file</td><td>yes</td></tr>
+<tr><td>flattenSpec</td><td>JSON Object</td><td>Define a <a href="#flattenspec"><code>flattenSpec</code></a> to extract nested values from a Avro records. Note that only 'path' expression are supported ('jq' is unavailable).</td><td>no (default will auto-discover 'root' level properties)</td></tr>
+<tr><td>schema</td><td>JSON Object</td><td>Define a reader schema to be used when parsing Avro records, this is useful when parsing multiple versions of Avro OCF file data</td><td>no (default will decode using the writer schema contained in the OCF file)</td></tr>
+<tr><td>binaryAsString</td><td>Boolean</td><td>Specifies if the bytes parquet column which is not logically marked as a string or enum type should be treated as a UTF-8 encoded string.</td><td>no (default = false)</td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="flattenspec"></a><a href="#flattenspec" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>FlattenSpec</h3>
+<p>The <code>flattenSpec</code> is located in <code>inputFormat</code> → <code>flattenSpec</code> and is responsible for
+bridging the gap between potentially nested input data (such as JSON, Avro, etc) and Druid's flat data model.
+An example <code>flattenSpec</code> is:</p>
+<pre><code class="hljs css language-json">"flattenSpec": {
+  "useFieldDiscovery": true,
+  "fields": [
+    { "name": "baz", "type": "root" },
+    { "name": "foo_bar", "type": "path", "expr": "$.foo.bar" },
+    { "name": "first_food", "type": "jq", "expr": ".thing.food[1]" }
+  ]
+}
+</code></pre>
+<blockquote>
+<p>Conceptually, after input data records are read, the <code>flattenSpec</code> is applied first before
+any other specs such as <a href="/docs/0.21.0/ingestion/index.html#timestampspec"><code>timestampSpec</code></a>, <a href="/docs/0.21.0/ingestion/index.html#transformspec"><code>transformSpec</code></a>,
+<a href="/docs/0.21.0/ingestion/index.html#dimensionsspec"><code>dimensionsSpec</code></a>, or <a href="/docs/0.21.0/ingestion/index.html#metricsspec"><code>metricsSpec</code></a>. Keep this in mind when writing
+your ingestion spec.</p>
+</blockquote>
+<p>Flattening is only supported for <a href="/docs/0.21.0/ingestion/data-formats.html">data formats</a> that support nesting, including <code>avro</code>, <code>json</code>, <code>orc</code>,
+and <code>parquet</code>.</p>
+<p>A <code>flattenSpec</code> can have the following components:</p>
+<table>
+<thead>
+<tr><th>Field</th><th>Description</th><th>Default</th></tr>
+</thead>
+<tbody>
+<tr><td>useFieldDiscovery</td><td>If true, interpret all root-level fields as available fields for usage by <a href="/docs/0.21.0/ingestion/index.html#timestampspec"><code>timestampSpec</code></a>, <a href="/docs/0.21.0/ingestion/index.html#transformspec"><code>transformSpec</code></a>, <a href="/docs/0.21.0/ingestion/index.html#dimensionsspec"><code>dimensionsSpec</code></a>, and <a href="/docs/0.21.0/ingestion/index.html#metricsspec"><code>metricsSpec</code></a>.<br><br>If false, only explicitly specified fields (see <code>fields</code>) will be available for use.</td><td><code>true</code></td></tr>
+<tr><td>fields</td><td>Specifies the fields of interest and how they are accessed. <a href="#field-flattening-specifications">See below for details.</a></td><td><code>[]</code></td></tr>
+</tbody>
+</table>
+<h4><a class="anchor" aria-hidden="true" id="field-flattening-specifications"></a><a href="#field-flattening-specifications" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Field flattening specifications</h4>
+<p>Each entry in the <code>fields</code> list can have the following components:</p>
+<table>
+<thead>
+<tr><th>Field</th><th>Description</th><th>Default</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td>Options are as follows:<br><br><ul><li><code>root</code>, referring to a field at the root level of the record. Only really useful if <code>useFieldDiscovery</code> is false.</li><li><code>path</code>, referring to a field using <a href="https://github.com/jayway/JsonPath">JsonPath</a> notation. Supported by most data formats that offer nesting, including <code>avro</code>, <code>json</code>, <code>orc</code>, and <code>parquet</code>.</li><li><code>jq</code>, referring to a field using <a href="https://github.com/eiiches/jackson-jq">jackson-jq</a> notation. Only supported for the <code>json</code> format.</li></ul></td><td>none (required)</td></tr>
+<tr><td>name</td><td>Name of the field after flattening. This name can be referred to by the <a href="/docs/0.21.0/ingestion/index.html#timestampspec"><code>timestampSpec</code></a>, <a href="/docs/0.21.0/ingestion/index.html#transformspec"><code>transformSpec</code></a>, <a href="/docs/0.21.0/ingestion/index.html#dimensionsspec"><code>dimensionsSpec</code></a>, and <a href="/docs/0.21.0/ingestion/index.html#metricsspec"><code>metricsSpec</code></a>.</td><td>none (required)</td></tr>
+<tr><td>expr</td><td>Expression for accessing the field while flattening. For type <code>path</code>, this should be <a href="https://github.com/jayway/JsonPath">JsonPath</a>. For type <code>jq</code>, this should be <a href="https://github.com/eiiches/jackson-jq">jackson-jq</a> notation. For other types, this parameter is ignored.</td><td>none (required for types <code>path</code> and <code>jq</code>)</td></tr>
+</tbody>
+</table>
+<h4><a class="anchor" aria-hidden="true" id="notes-on-flattening"></a><a href="#notes-on-flattening" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Notes on flattening</h4>
+<ul>
+<li>For convenience, when defining a root-level field, it is possible to define only the field name, as a string, instead of a JSON object. For example, <code>{&quot;name&quot;: &quot;baz&quot;, &quot;type&quot;: &quot;root&quot;}</code> is equivalent to <code>&quot;baz&quot;</code>.</li>
+<li>Enabling <code>useFieldDiscovery</code> will only automatically detect &quot;simple&quot; fields at the root level that correspond to data types that Druid supports. This includes strings, numbers, and lists of strings or numbers. Other types will not be automatically detected, and must be specified explicitly in the <code>fields</code> list.</li>
+<li>Duplicate field <code>name</code>s are not allowed. An exception will be thrown.</li>
+<li>If <code>useFieldDiscovery</code> is enabled, any discovered field with the same name as one already defined in the <code>fields</code> list will be skipped, rather than added twice.</li>
+<li><a href="http://jsonpath.herokuapp.com/">http://jsonpath.herokuapp.com/</a> is useful for testing <code>path</code>-type expressions.</li>
+<li>jackson-jq supports a subset of the full <a href="https://stedolan.github.io/jq/">jq</a> syntax.  Please refer to the <a href="https://github.com/eiiches/jackson-jq">jackson-jq documentation</a> for details.</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="parser"></a><a href="#parser" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parser</h2>
+<blockquote>
+<p>The Parser is deprecated for <a href="/docs/0.21.0/ingestion/native-batch.html">native batch tasks</a>, <a href="/docs/0.21.0/development/extensions-core/kafka-ingestion.html">Kafka indexing service</a>,
+and <a href="/docs/0.21.0/development/extensions-core/kinesis-ingestion.html">Kinesis indexing service</a>.
+Consider using the <a href="#input-format">input format</a> instead for these types of ingestion.</p>
+</blockquote>
+<p>This section lists all default and core extension parsers.
+For community extension parsers, please see our <a href="/docs/0.21.0/development/extensions.html#community-extensions">community extensions list</a>.</p>
+<h3><a class="anchor" aria-hidden="true" id="string-parser"></a><a href="#string-parser" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>String Parser</h3>
+<p><code>string</code> typed parsers operate on text based inputs that can be split into individual records by newlines.
+Each line can be further parsed using <a href="#parsespec"><code>parseSpec</code></a>.</p>
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th><th>Required</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td>String</td><td>This should say <code>string</code> in general, or <code>hadoopyString</code> when used in a Hadoop indexing job.</td><td>yes</td></tr>
+<tr><td>parseSpec</td><td>JSON Object</td><td>Specifies the format, timestamp, and dimensions of the data.</td><td>yes</td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="avro-hadoop-parser"></a><a href="#avro-hadoop-parser" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Avro Hadoop Parser</h3>
+<blockquote>
+<p>You need to include the <a href="/docs/0.21.0/development/extensions-core/avro.html"><code>druid-avro-extensions</code></a> as an extension to use the Avro Hadoop Parser.</p>
+</blockquote>
+<blockquote>
+<p>See the <a href="/docs/0.21.0/development/extensions-core/avro.html#avro-types">Avro Types</a> section for how Avro types are handled in Druid</p>
+</blockquote>
+<p>This parser is for <a href="/docs/0.21.0/ingestion/hadoop.html">Hadoop batch ingestion</a>.
+The <code>inputFormat</code> of <code>inputSpec</code> in <code>ioConfig</code> must be set to <code>&quot;org.apache.druid.data.input.avro.AvroValueInputFormat&quot;</code>.
+You may want to set Avro reader's schema in <code>jobProperties</code> in <code>tuningConfig</code>,
+e.g.: <code>&quot;avro.schema.input.value.path&quot;: &quot;/path/to/your/schema.avsc&quot;</code> or
+<code>&quot;avro.schema.input.value&quot;: &quot;your_schema_JSON_object&quot;</code>.
+If the Avro reader's schema is not set, the schema in Avro object container file will be used.
+See <a href="http://avro.apache.org/docs/1.7.7/spec.html#Schema+Resolution">Avro specification</a> for more information.</p>
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th><th>Required</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td>String</td><td>This should say <code>avro_hadoop</code>.</td><td>yes</td></tr>
+<tr><td>parseSpec</td><td>JSON Object</td><td>Specifies the timestamp and dimensions of the data. Should be an &quot;avro&quot; parseSpec.</td><td>yes</td></tr>
+<tr><td>fromPigAvroStorage</td><td>Boolean</td><td>Specifies whether the data file is stored using AvroStorage.</td><td>no(default == false)</td></tr>
+</tbody>
+</table>
+<p>An Avro parseSpec can contain a <a href="#flattenspec"><code>flattenSpec</code></a> using either the &quot;root&quot; or &quot;path&quot;
+field types, which can be used to read nested Avro records. The &quot;jq&quot; field type is not currently supported for Avro.</p>
+<p>For example, using Avro Hadoop parser with custom reader's schema file:</p>
+<pre><code class="hljs css language-json">{
+  <span class="hljs-attr">"type"</span> : <span class="hljs-string">"index_hadoop"</span>,
+  <span class="hljs-attr">"spec"</span> : {
+    <span class="hljs-attr">"dataSchema"</span> : {
+      <span class="hljs-attr">"dataSource"</span> : <span class="hljs-string">""</span>,
+      <span class="hljs-attr">"parser"</span> : {
+        <span class="hljs-attr">"type"</span> : <span class="hljs-string">"avro_hadoop"</span>,
+        <span class="hljs-attr">"parseSpec"</span> : {
+          <span class="hljs-attr">"format"</span>: <span class="hljs-string">"avro"</span>,
+          <span class="hljs-attr">"timestampSpec"</span>: &lt;standard timestampSpec&gt;,
+          <span class="hljs-attr">"dimensionsSpec"</span>: &lt;standard dimensionsSpec&gt;,
+          <span class="hljs-attr">"flattenSpec"</span>: &lt;optional&gt;
+        }
+      }
+    },
+    <span class="hljs-attr">"ioConfig"</span> : {
+      <span class="hljs-attr">"type"</span> : <span class="hljs-string">"hadoop"</span>,
+      <span class="hljs-attr">"inputSpec"</span> : {
+        <span class="hljs-attr">"type"</span> : <span class="hljs-string">"static"</span>,
+        <span class="hljs-attr">"inputFormat"</span>: <span class="hljs-string">"org.apache.druid.data.input.avro.AvroValueInputFormat"</span>,
+        <span class="hljs-attr">"paths"</span> : <span class="hljs-string">""</span>
+      }
+    },
+    <span class="hljs-attr">"tuningConfig"</span> : {
+       <span class="hljs-attr">"jobProperties"</span> : {
+          <span class="hljs-attr">"avro.schema.input.value.path"</span> : <span class="hljs-string">"/path/to/my/schema.avsc"</span>
+      }
+    }
+  }
+}
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="orc-hadoop-parser"></a><a href="#orc-hadoop-parser" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>ORC Hadoop Parser</h3>
+<blockquote>
+<p>You need to include the <a href="/docs/0.21.0/development/extensions-core/orc.html"><code>druid-orc-extensions</code></a> as an extension to use the ORC Hadoop Parser.</p>
+</blockquote>
+<blockquote>
+<p>If you are considering upgrading from earlier than 0.15.0 to 0.15.0 or a higher version,
+please read <a href="/docs/0.21.0/development/extensions-core/orc.html#migration-from-contrib-extension">Migration from 'contrib' extension</a> carefully.</p>
+</blockquote>
+<p>This parser is for <a href="/docs/0.21.0/ingestion/hadoop.html">Hadoop batch ingestion</a>.
+The <code>inputFormat</code> of <code>inputSpec</code> in <code>ioConfig</code> must be set to <code>&quot;org.apache.orc.mapreduce.OrcInputFormat&quot;</code>.</p>
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th><th>Required</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td>String</td><td>This should say <code>orc</code></td><td>yes</td></tr>
+<tr><td>parseSpec</td><td>JSON Object</td><td>Specifies the timestamp and dimensions of the data (<code>timeAndDims</code> and <code>orc</code> format) and a <code>flattenSpec</code> (<code>orc</code> format)</td><td>yes</td></tr>
+</tbody>
+</table>
+<p>The parser supports two <code>parseSpec</code> formats: <code>orc</code> and <code>timeAndDims</code>.</p>
+<p><code>orc</code> supports auto field discovery and flattening, if specified with a <a href="#flattenspec"><code>flattenSpec</code></a>.
+If no <code>flattenSpec</code> is specified, <code>useFieldDiscovery</code> will be enabled by default. Specifying a <code>dimensionSpec</code> is
+optional if <code>useFieldDiscovery</code> is enabled: if a <code>dimensionSpec</code> is supplied, the list of <code>dimensions</code> it defines will be
+the set of ingested dimensions, if missing the discovered fields will make up the list.</p>
+<p><code>timeAndDims</code> parse spec must specify which fields will be extracted as dimensions through the <code>dimensionSpec</code>.</p>
+<p><a href="https://orc.apache.org/docs/types.md">All column types</a> are supported, with the exception of <code>union</code> types. Columns of
+<code>list</code> type, if filled with primitives, may be used as a multi-value dimension, or specific elements can be extracted with
+<code>flattenSpec</code> expressions. Likewise, primitive fields may be extracted from <code>map</code> and <code>struct</code> types in the same manner.
+Auto field discovery will automatically create a string dimension for every (non-timestamp) primitive or <code>list</code> of
+primitives, as well as any flatten expressions defined in the <code>flattenSpec</code>.</p>
+<h4><a class="anchor" aria-hidden="true" id="hadoop-job-properties"></a><a href="#hadoop-job-properties" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Hadoop job properties</h4>
+<p>Like most Hadoop jobs, the best outcomes will add <code>&quot;mapreduce.job.user.classpath.first&quot;: &quot;true&quot;</code> or
+<code>&quot;mapreduce.job.classloader&quot;: &quot;true&quot;</code> to the <code>jobProperties</code> section of <code>tuningConfig</code>. Note that it is likely if using
+<code>&quot;mapreduce.job.classloader&quot;: &quot;true&quot;</code> that you will need to set <code>mapreduce.job.classloader.system.classes</code> to include
+<code>-org.apache.hadoop.hive.</code> to instruct Hadoop to load <code>org.apache.hadoop.hive</code> classes from the application jars instead
+of system jars, e.g.</p>
+<pre><code class="hljs css language-json">...
+    "mapreduce.job.classloader": "true",
+    "mapreduce.job.classloader.system.classes" : "java., javax.accessibility., javax.activation., javax.activity., javax.annotation., javax.annotation.processing., javax.crypto., javax.imageio., javax.jws., javax.lang.model., -javax.management.j2ee., javax.management., javax.naming., javax.net., javax.print., javax.rmi., javax.script., -javax.security.auth.message., javax.security.auth., javax.security.cert., javax.security.sasl., javax.sound., javax.sql., javax.swing., javax.tools., javax.transaction., -javax.xml.registry., -javax.xml.rpc., javax.xml., org.w3c.dom., org.xml.sax., org.apache.commons.logging., org.apache.log4j., -org.apache.hadoop.hbase., -org.apache.hadoop.hive., org.apache.hadoop., core-default.xml, hdfs-default.xml, mapred-default.xml, yarn-default.xml",
+...
+</code></pre>
+<p>This is due to the <code>hive-storage-api</code> dependency of the
+<code>orc-mapreduce</code> library, which provides some classes under the <code>org.apache.hadoop.hive</code> package. If instead using the
+setting <code>&quot;mapreduce.job.user.classpath.first&quot;: &quot;true&quot;</code>, then this will not be an issue.</p>
+<h4><a class="anchor" aria-hidden="true" id="examples"></a><a href="#examples" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Examples</h4>
+<h5><a class="anchor" aria-hidden="true" id="orc-parser-orc-parsespec-auto-field-discovery-flatten-expressions"></a><a href="#orc-parser-orc-parsespec-auto-field-discovery-flatten-expressions" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>orc</code> parser, <code>orc</code> parseSpec, auto field discovery, flatten expressions</h5>
+<pre><code class="hljs css language-json">{
+  "type": "index_hadoop",
+  "spec": {
+    "ioConfig": {
+      "type": "hadoop",
+      "inputSpec": {
+        "type": "static",
+        "inputFormat": "org.apache.orc.mapreduce.OrcInputFormat",
+        "paths": "path/to/file.orc"
+      },
+      ...
+    },
+    "dataSchema": {
+      "dataSource": "example",
+      "parser": {
+        "type": "orc",
+        "parseSpec": {
+          "format": "orc",
+          "flattenSpec": {
+            "useFieldDiscovery": true,
+            "fields": [
+              {
+                "type": "path",
+                "name": "nestedDim",
+                "expr": "$.nestedData.dim1"
+              },
+              {
+                "type": "path",
+                "name": "listDimFirstItem",
+                "expr": "$.listDim[1]"
+              }
+            ]
+          },
+          "timestampSpec": {
+            "column": "timestamp",
+            "format": "millis"
+          }
+        }
+      },
+      ...
+    },
+    "tuningConfig": &lt;hadoop-tuning-config&gt;
+    }
+  }
+}
+</code></pre>
+<h5><a class="anchor" aria-hidden="true" id="orc-parser-orc-parsespec-field-discovery-with-no-flattenspec-or-dimensionspec"></a><a href="#orc-parser-orc-parsespec-field-discovery-with-no-flattenspec-or-dimensionspec" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>orc</code> parser, <code>orc</code> parseSpec, field discovery with no flattenSpec or dimensionSpec</h5>
+<pre><code class="hljs css language-json">{
+  "type": "index_hadoop",
+  "spec": {
+    "ioConfig": {
+      "type": "hadoop",
+      "inputSpec": {
+        "type": "static",
+        "inputFormat": "org.apache.orc.mapreduce.OrcInputFormat",
+        "paths": "path/to/file.orc"
+      },
+      ...
+    },
+    "dataSchema": {
+      "dataSource": "example",
+      "parser": {
+        "type": "orc",
+        "parseSpec": {
+          "format": "orc",
+          "timestampSpec": {
+            "column": "timestamp",
+            "format": "millis"
+          }
+        }
+      },
+      ...
+    },
+    "tuningConfig": &lt;hadoop-tuning-config&gt;
+    }
+  }
+}
+</code></pre>
+<h5><a class="anchor" aria-hidden="true" id="orc-parser-orc-parsespec-no-autodiscovery"></a><a href="#orc-parser-orc-parsespec-no-autodiscovery" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>orc</code> parser, <code>orc</code> parseSpec, no autodiscovery</h5>
+<pre><code class="hljs css language-json">{
+  "type": "index_hadoop",
+  "spec": {
+    "ioConfig": {
+      "type": "hadoop",
+      "inputSpec": {
+        "type": "static",
+        "inputFormat": "org.apache.orc.mapreduce.OrcInputFormat",
+        "paths": "path/to/file.orc"
+      },
+      ...
+    },
+    "dataSchema": {
+      "dataSource": "example",
+      "parser": {
+        "type": "orc",
+        "parseSpec": {
+          "format": "orc",
+          "flattenSpec": {
+            "useFieldDiscovery": false,
+            "fields": [
+              {
+                "type": "path",
+                "name": "nestedDim",
+                "expr": "$.nestedData.dim1"
+              },
+              {
+                "type": "path",
+                "name": "listDimFirstItem",
+                "expr": "$.listDim[1]"
+              }
+            ]
+          },
+          "timestampSpec": {
+            "column": "timestamp",
+            "format": "millis"
+          },
+          "dimensionsSpec": {
+            "dimensions": [
+              "dim1",
+              "dim3",
+              "nestedDim",
+              "listDimFirstItem"
+            ],
+            "dimensionExclusions": [],
+            "spatialDimensions": []
+          }
+        }
+      },
+      ...
+    },
+    "tuningConfig": &lt;hadoop-tuning-config&gt;
+    }
+  }
+}
+</code></pre>
+<h5><a class="anchor" aria-hidden="true" id="orc-parser-timeanddims-parsespec"></a><a href="#orc-parser-timeanddims-parsespec" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>orc</code> parser, <code>timeAndDims</code> parseSpec</h5>
+<pre><code class="hljs css language-json">{
+  "type": "index_hadoop",
+  "spec": {
+    "ioConfig": {
+      "type": "hadoop",
+      "inputSpec": {
+        "type": "static",
+        "inputFormat": "org.apache.orc.mapreduce.OrcInputFormat",
+        "paths": "path/to/file.orc"
+      },
+      ...
+    },
+    "dataSchema": {
+      "dataSource": "example",
+      "parser": {
+        "type": "orc",
+        "parseSpec": {
+          "format": "timeAndDims",
+          "timestampSpec": {
+            "column": "timestamp",
+            "format": "auto"
+          },
+          "dimensionsSpec": {
+            "dimensions": [
+              "dim1",
+              "dim2",
+              "dim3",
+              "listDim"
+            ],
+            "dimensionExclusions": [],
+            "spatialDimensions": []
+          }
+        }
+      },
+      ...
+    },
+    "tuningConfig": &lt;hadoop-tuning-config&gt;
+  }
+}
+
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="parquet-hadoop-parser"></a><a href="#parquet-hadoop-parser" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parquet Hadoop Parser</h3>
+<blockquote>
+<p>You need to include the <a href="/docs/0.21.0/development/extensions-core/parquet.html"><code>druid-parquet-extensions</code></a> as an extension to use the Parquet Hadoop Parser.</p>
+</blockquote>
+<p>The Parquet Hadoop parser is for <a href="/docs/0.21.0/ingestion/hadoop.html">Hadoop batch ingestion</a> and parses Parquet files directly.
+The <code>inputFormat</code> of <code>inputSpec</code> in <code>ioConfig</code> must be set to <code>org.apache.druid.data.input.parquet.DruidParquetInputFormat</code>.</p>
+<p>The Parquet Hadoop Parser supports auto field discovery and flattening if provided with a
+<a href="#flattenspec"><code>flattenSpec</code></a> with the <code>parquet</code> <code>parseSpec</code>. Parquet nested list and map
+<a href="https://github.com/apache/parquet-format/blob/master/LogicalTypes.md">logical types</a> <em>should</em> operate correctly with
+JSON path expressions for all supported types.</p>
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th><th>Required</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td>String</td><td>This should say <code>parquet</code>.</td><td>yes</td></tr>
+<tr><td>parseSpec</td><td>JSON Object</td><td>Specifies the timestamp and dimensions of the data, and optionally, a flatten spec. Valid parseSpec formats are <code>timeAndDims</code> and <code>parquet</code></td><td>yes</td></tr>
+<tr><td>binaryAsString</td><td>Boolean</td><td>Specifies if the bytes parquet column which is not logically marked as a string or enum type should be treated as a UTF-8 encoded string.</td><td>no(default = false)</td></tr>
+</tbody>
+</table>
+<p>When the time dimension is a <a href="https://github.com/apache/parquet-format/blob/master/LogicalTypes.md">DateType column</a>,
+a format should not be supplied. When the format is UTF8 (String), either <code>auto</code> or a explicitly defined
+<a href="http://www.joda.org/joda-time/apidocs/org/joda/time/format/DateTimeFormat">format</a> is required.</p>
+<h4><a class="anchor" aria-hidden="true" id="parquet-hadoop-parser-vs-parquet-avro-hadoop-parser"></a><a href="#parquet-hadoop-parser-vs-parquet-avro-hadoop-parser" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parquet Hadoop Parser vs Parquet Avro Hadoop Parser</h4>
+<p>Both parsers read from Parquet files, but slightly differently. The main
+differences are:</p>
+<ul>
+<li>The Parquet Hadoop Parser uses a simple conversion while the Parquet Avro Hadoop Parser
+converts Parquet data into avro records first with the <code>parquet-avro</code> library and then
+parses avro data using the <code>druid-avro-extensions</code> module to ingest into Druid.</li>
+<li>The Parquet Hadoop Parser sets a hadoop job property
+<code>parquet.avro.add-list-element-records</code> to <code>false</code> (which normally defaults to <code>true</code>), in order to 'unwrap' primitive
+list elements into multi-value dimensions.</li>
+<li>The Parquet Hadoop Parser supports <code>int96</code> Parquet values, while the Parquet Avro Hadoop Parser does not.
+There may also be some subtle differences in the behavior of JSON path expression evaluation of <code>flattenSpec</code>.</li>
+</ul>
+<p>Based on those differences, we suggest using the Parquet Hadoop Parser over the Parquet Avro Hadoop Parser
+to allow ingesting data beyond the schema constraints of Avro conversion.
+However, the Parquet Avro Hadoop Parser was the original basis for supporting the Parquet format, and as such it is a bit more mature.</p>
+<h4><a class="anchor" aria-hidden="true" id="examples-1"></a><a href="#examples-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Examples</h4>
+<h5><a class="anchor" aria-hidden="true" id="parquet-parser-parquet-parsespec"></a><a href="#parquet-parser-parquet-parsespec" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>parquet</code> parser, <code>parquet</code> parseSpec</h5>
+<pre><code class="hljs css language-json">{
+  "type": "index_hadoop",
+  "spec": {
+    "ioConfig": {
+      "type": "hadoop",
+      "inputSpec": {
+        "type": "static",
+        "inputFormat": "org.apache.druid.data.input.parquet.DruidParquetInputFormat",
+        "paths": "path/to/file.parquet"
+      },
+      ...
+    },
+    "dataSchema": {
+      "dataSource": "example",
+      "parser": {
+        "type": "parquet",
+        "parseSpec": {
+          "format": "parquet",
+          "flattenSpec": {
+            "useFieldDiscovery": true,
+            "fields": [
+              {
+                "type": "path",
+                "name": "nestedDim",
+                "expr": "$.nestedData.dim1"
+              },
+              {
+                "type": "path",
+                "name": "listDimFirstItem",
+                "expr": "$.listDim[1]"
+              }
+            ]
+          },
+          "timestampSpec": {
+            "column": "timestamp",
+            "format": "auto"
+          },
+          "dimensionsSpec": {
+            "dimensions": [],
+            "dimensionExclusions": [],
+            "spatialDimensions": []
+          }
+        }
+      },
+      ...
+    },
+    "tuningConfig": &lt;hadoop-tuning-config&gt;
+    }
+  }
+}
+</code></pre>
+<h5><a class="anchor" aria-hidden="true" id="parquet-parser-timeanddims-parsespec"></a><a href="#parquet-parser-timeanddims-parsespec" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>parquet</code> parser, <code>timeAndDims</code> parseSpec</h5>
+<pre><code class="hljs css language-json">{
+  "type": "index_hadoop",
+  "spec": {
+    "ioConfig": {
+      "type": "hadoop",
+      "inputSpec": {
+        "type": "static",
+        "inputFormat": "org.apache.druid.data.input.parquet.DruidParquetInputFormat",
+        "paths": "path/to/file.parquet"
+      },
+      ...
+    },
+    "dataSchema": {
+      "dataSource": "example",
+      "parser": {
+        "type": "parquet",
+        "parseSpec": {
+          "format": "timeAndDims",
+          "timestampSpec": {
+            "column": "timestamp",
+            "format": "auto"
+          },
+          "dimensionsSpec": {
+            "dimensions": [
+              "dim1",
+              "dim2",
+              "dim3",
+              "listDim"
+            ],
+            "dimensionExclusions": [],
+            "spatialDimensions": []
+          }
+        }
+      },
+      ...
+    },
+    "tuningConfig": &lt;hadoop-tuning-config&gt;
+  }
+}
+
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="parquet-avro-hadoop-parser"></a><a href="#parquet-avro-hadoop-parser" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parquet Avro Hadoop Parser</h3>
+<blockquote>
+<p>Consider using the <a href="#parquet-hadoop-parser">Parquet Hadoop Parser</a> over this parser to ingest
+Parquet files. See <a href="#parquet-hadoop-parser-vs-parquet-avro-hadoop-parser">Parquet Hadoop Parser vs Parquet Avro Hadoop Parser</a>
+for the differences between those parsers.</p>
+</blockquote>
+<blockquote>
+<p>You need to include both the <a href="/docs/0.21.0/development/extensions-core/parquet.html"><code>druid-parquet-extensions</code></a>
+[<code>druid-avro-extensions</code>] as extensions to use the Parquet Avro Hadoop Parser.</p>
+</blockquote>
+<p>The Parquet Avro Hadoop Parser is for <a href="/docs/0.21.0/ingestion/hadoop.html">Hadoop batch ingestion</a>.
+This parser first converts the Parquet data into Avro records, and then parses them to ingest into Druid.
+The <code>inputFormat</code> of <code>inputSpec</code> in <code>ioConfig</code> must be set to <code>org.apache.druid.data.input.parquet.DruidParquetAvroInputFormat</code>.</p>
+<p>The Parquet Avro Hadoop Parser supports auto field discovery and flattening if provided with a
+<a href="#flattenspec"><code>flattenSpec</code></a> with the <code>avro</code> <code>parseSpec</code>. Parquet nested list and map
+<a href="https://github.com/apache/parquet-format/blob/master/LogicalTypes.md">logical types</a> <em>should</em> operate correctly with
+JSON path expressions for all supported types. This parser sets a hadoop job property
+<code>parquet.avro.add-list-element-records</code> to <code>false</code> (which normally defaults to <code>true</code>), in order to 'unwrap' primitive
+list elements into multi-value dimensions.</p>
+<p>Note that the <code>int96</code> Parquet value type is not supported with this parser.</p>
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th><th>Required</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td>String</td><td>This should say <code>parquet-avro</code>.</td><td>yes</td></tr>
+<tr><td>parseSpec</td><td>JSON Object</td><td>Specifies the timestamp and dimensions of the data, and optionally, a flatten spec. Should be <code>avro</code>.</td><td>yes</td></tr>
+<tr><td>binaryAsString</td><td>Boolean</td><td>Specifies if the bytes parquet column which is not logically marked as a string or enum type should be treated as a UTF-8 encoded string.</td><td>no(default = false)</td></tr>
+</tbody>
+</table>
+<p>When the time dimension is a <a href="https://github.com/apache/parquet-format/blob/master/LogicalTypes.md">DateType column</a>,
+a format should not be supplied. When the format is UTF8 (String), either <code>auto</code> or
+an explicitly defined <a href="http://www.joda.org/joda-time/apidocs/org/joda/time/format/DateTimeFormat">format</a> is required.</p>
+<h4><a class="anchor" aria-hidden="true" id="example"></a><a href="#example" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example</h4>
+<pre><code class="hljs css language-json">{
+  "type": "index_hadoop",
+  "spec": {
+    "ioConfig": {
+      "type": "hadoop",
+      "inputSpec": {
+        "type": "static",
+        "inputFormat": "org.apache.druid.data.input.parquet.DruidParquetAvroInputFormat",
+        "paths": "path/to/file.parquet"
+      },
+      ...
+    },
+    "dataSchema": {
+      "dataSource": "example",
+      "parser": {
+        "type": "parquet-avro",
+        "parseSpec": {
+          "format": "avro",
+          "flattenSpec": {
+            "useFieldDiscovery": true,
+            "fields": [
+              {
+                "type": "path",
+                "name": "nestedDim",
+                "expr": "$.nestedData.dim1"
+              },
+              {
+                "type": "path",
+                "name": "listDimFirstItem",
+                "expr": "$.listDim[1]"
+              }
+            ]
+          },
+          "timestampSpec": {
+            "column": "timestamp",
+            "format": "auto"
+          },
+          "dimensionsSpec": {
+            "dimensions": [],
+            "dimensionExclusions": [],
+            "spatialDimensions": []
+          }
+        }
+      },
+      ...
+    },
+    "tuningConfig": &lt;hadoop-tuning-config&gt;
+    }
+  }
+}
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="avro-stream-parser"></a><a href="#avro-stream-parser" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Avro Stream Parser</h3>
+<blockquote>
+<p>You need to include the <a href="/docs/0.21.0/development/extensions-core/avro.html"><code>druid-avro-extensions</code></a> as an extension to use the Avro Stream Parser.</p>
+</blockquote>
+<blockquote>
+<p>See the <a href="/docs/0.21.0/development/extensions-core/avro.html#avro-types">Avro Types</a> section for how Avro types are handled in Druid</p>
+</blockquote>
+<p>This parser is for <a href="/docs/0.21.0/ingestion/index.html#streaming">stream ingestion</a> and reads Avro data from a stream directly.</p>
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th><th>Required</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td>String</td><td>This should say <code>avro_stream</code>.</td><td>no</td></tr>
+<tr><td>avroBytesDecoder</td><td>JSON Object</td><td>Specifies how to decode bytes to Avro record.</td><td>yes</td></tr>
+<tr><td>parseSpec</td><td>JSON Object</td><td>Specifies the timestamp and dimensions of the data. Should be an &quot;avro&quot; parseSpec.</td><td>yes</td></tr>
+</tbody>
+</table>
+<p>An Avro parseSpec can contain a <a href="#flattenspec"><code>flattenSpec</code></a> using either the &quot;root&quot; or &quot;path&quot;
+field types, which can be used to read nested Avro records. The &quot;jq&quot; field type is not currently supported for Avro.</p>
+<p>For example, using Avro stream parser with schema repo Avro bytes decoder:</p>
+<pre><code class="hljs css language-json">"parser" : {
+  "type" : "avro_stream",
+  "avroBytesDecoder" : {
+    "type" : "schema_repo",
+    "subjectAndIdConverter" : {
+      "type" : "avro_1124",
+      "topic" : "${YOUR_TOPIC}"
+    },
+    "schemaRepository" : {
+      "type" : "avro_1124_rest_client",
+      "url" : "${YOUR_SCHEMA_REPO_END_POINT}",
+    }
+  },
+  "parseSpec" : {
+    "format": "avro",
+    "timestampSpec": &lt;standard timestampSpec&gt;,
+    "dimensionsSpec": &lt;standard dimensionsSpec&gt;,
+    "flattenSpec": &lt;optional&gt;
+  }
+}
+</code></pre>
+<h4><a class="anchor" aria-hidden="true" id="avro-bytes-decoder"></a><a href="#avro-bytes-decoder" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Avro Bytes Decoder</h4>
+<p>If <code>type</code> is not included, the avroBytesDecoder defaults to <code>schema_repo</code>.</p>
+<h5><a class="anchor" aria-hidden="true" id="inline-schema-based-avro-bytes-decoder"></a><a href="#inline-schema-based-avro-bytes-decoder" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Inline Schema Based Avro Bytes Decoder</h5>
+<blockquote>
+<p>The &quot;schema_inline&quot; decoder reads Avro records using a fixed schema and does not support schema migration. If you
+may need to migrate schemas in the future, consider one of the other decoders, all of which use a message header that
+allows the parser to identify the proper Avro schema for reading records.</p>
+</blockquote>
+<p>This decoder can be used if all the input events can be read using the same schema. In this case, specify the schema in the input task JSON itself, as described below.</p>
+<pre><code class="hljs"><span class="hljs-string">...</span>
+<span class="hljs-string">"avroBytesDecoder"</span>: {
+  <span class="hljs-string">"type"</span>: <span class="hljs-string">"schema_inline"</span>,
+  <span class="hljs-string">"schema"</span>: {
+    <span class="hljs-string">//your</span> schema goes here, for example
+    <span class="hljs-string">"namespace"</span>: <span class="hljs-string">"org.apache.druid.data"</span>,
+    <span class="hljs-string">"name"</span>: <span class="hljs-string">"User"</span>,
+    <span class="hljs-string">"type"</span>: <span class="hljs-string">"record"</span>,
+    <span class="hljs-string">"fields"</span>: [
+      { <span class="hljs-string">"name"</span>: <span class="hljs-string">"FullName"</span>, <span class="hljs-string">"type"</span>: <span class="hljs-string">"string"</span> },
+      { <span class="hljs-string">"name"</span>: <span class="hljs-string">"Country"</span>, <span class="hljs-string">"type"</span>: <span class="hljs-string">"string"</span> }
+    ]
+  }
+}
+<span class="hljs-string">...</span>
+</code></pre>
+<h5><a class="anchor" aria-hidden="true" id="multiple-inline-schemas-based-avro-bytes-decoder"></a><a href="#multiple-inline-schemas-based-avro-bytes-decoder" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Multiple Inline Schemas Based Avro Bytes Decoder</h5>
+<p>Use this decoder if different input events can have different read schemas. In this case, specify the schema in the input task JSON itself, as described below.</p>
+<pre><code class="hljs">...
+<span class="hljs-string">"avroBytesDecoder"</span>: {
+  <span class="hljs-string">"type"</span>: <span class="hljs-string">"multiple_schemas_inline"</span>,
+  <span class="hljs-string">"schemas"</span>: {
+    //your id -&gt; schema map goes here, for example
+    <span class="hljs-string">"1"</span>: {
+      <span class="hljs-string">"namespace"</span>: <span class="hljs-string">"org.apache.druid.data"</span>,
+      <span class="hljs-string">"name"</span>: <span class="hljs-string">"User"</span>,
+      <span class="hljs-string">"type"</span>: <span class="hljs-string">"record"</span>,
+      <span class="hljs-string">"fields"</span>: [
+        { <span class="hljs-string">"name"</span>: <span class="hljs-string">"FullName"</span>, <span class="hljs-string">"type"</span>: <span class="hljs-string">"string"</span> },
+        { <span class="hljs-string">"name"</span>: <span class="hljs-string">"Country"</span>, <span class="hljs-string">"type"</span>: <span class="hljs-string">"string"</span> }
+      ]
+    },
+    <span class="hljs-string">"2"</span>: {
+      <span class="hljs-string">"namespace"</span>: <span class="hljs-string">"org.apache.druid.otherdata"</span>,
+      <span class="hljs-string">"name"</span>: <span class="hljs-string">"UserIdentity"</span>,
+      <span class="hljs-string">"type"</span>: <span class="hljs-string">"record"</span>,
+      <span class="hljs-string">"fields"</span>: [
+        { <span class="hljs-string">"name"</span>: <span class="hljs-string">"Name"</span>, <span class="hljs-string">"type"</span>: <span class="hljs-string">"string"</span> },
+        { <span class="hljs-string">"name"</span>: <span class="hljs-string">"Location"</span>, <span class="hljs-string">"type"</span>: <span class="hljs-string">"string"</span> }
+      ]
+    },
+    ...
+    ...
+  }
+}
+...
+</code></pre>
+<p>Note that it is essentially a map of integer schema ID to avro schema object. This parser assumes that record has following format.
+first 1 byte is version and must always be 1.
+next 4 bytes are integer schema ID serialized using big-endian byte order.
+remaining bytes contain serialized avro message.</p>
+<h5><a class="anchor" aria-hidden="true" id="schemarepo-based-avro-bytes-decoder"></a><a href="#schemarepo-based-avro-bytes-decoder" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>SchemaRepo Based Avro Bytes Decoder</h5>
+<p>This Avro bytes decoder first extracts <code>subject</code> and <code>id</code> from the input message bytes, and then uses them to look up the Avro schema used to decode the Avro record from bytes. For details, see the <a href="https://github.com/schema-repo/schema-repo">schema repo</a> and <a href="https://issues.apache.org/jira/browse/AVRO-1124">AVRO-1124</a>. You will need an http service like schema repo to hold the avro schema. For information on registering a schema on the message producer side, see <code>org.apache.druid.data.input.AvroStreamInputRowParserTest#testParse()</code>.</p>
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th><th>Required</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td>String</td><td>This should say <code>schema_repo</code>.</td><td>no</td></tr>
+<tr><td>subjectAndIdConverter</td><td>JSON Object</td><td>Specifies how to extract the subject and id from message bytes.</td><td>yes</td></tr>
+<tr><td>schemaRepository</td><td>JSON Object</td><td>Specifies how to look up the Avro schema from subject and id.</td><td>yes</td></tr>
+</tbody>
+</table>
+<h6><a class="anchor" aria-hidden="true" id="avro-1124-subject-and-id-converter"></a><a href="#avro-1124-subject-and-id-converter" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Avro-1124 Subject And Id Converter</h6>
+<p>This section describes the format of the <code>subjectAndIdConverter</code> object for the <code>schema_repo</code> Avro bytes decoder.</p>
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th><th>Required</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td>String</td><td>This should say <code>avro_1124</code>.</td><td>no</td></tr>
+<tr><td>topic</td><td>String</td><td>Specifies the topic of your Kafka stream.</td><td>yes</td></tr>
+</tbody>
+</table>
+<h6><a class="anchor" aria-hidden="true" id="avro-1124-schema-repository"></a><a href="#avro-1124-schema-repository" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Avro-1124 Schema Repository</h6>
+<p>This section describes the format of the <code>schemaRepository</code> object for the <code>schema_repo</code> Avro bytes decoder.</p>
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th><th>Required</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td>String</td><td>This should say <code>avro_1124_rest_client</code>.</td><td>no</td></tr>
+<tr><td>url</td><td>String</td><td>Specifies the endpoint url of your Avro-1124 schema repository.</td><td>yes</td></tr>
+</tbody>
+</table>
+<h5><a class="anchor" aria-hidden="true" id="confluent-schema-registry-based-avro-bytes-decoder"></a><a href="#confluent-schema-registry-based-avro-bytes-decoder" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Confluent Schema Registry-based Avro Bytes Decoder</h5>
+<p>This Avro bytes decoder first extracts a unique <code>id</code> from input message bytes, and then uses it to look up the schema in the Schema Registry used to decode the Avro record from bytes.
+For details, see the Schema Registry <a href="http://docs.confluent.io/current/schema-registry/docs/">documentation</a> and <a href="https://github.com/confluentinc/schema-registry">repository</a>.</p>
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th><th>Required</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td>String</td><td>This should say <code>schema_registry</code>.</td><td>no</td></tr>
+<tr><td>url</td><td>String</td><td>Specifies the url endpoint of the Schema Registry.</td><td>yes</td></tr>
+<tr><td>capacity</td><td>Integer</td><td>Specifies the max size of the cache (default = Integer.MAX_VALUE).</td><td>no</td></tr>
+</tbody>
+</table>
+<pre><code class="hljs css language-json">...
+"avroBytesDecoder" : {
+   "type" : "schema_registry",
+   "url" : &lt;schema-registry-url&gt;
+}
+...
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="protobuf-parser"></a><a href="#protobuf-parser" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Protobuf Parser</h3>
+<blockquote>
+<p>You need to include the <a href="/docs/0.21.0/development/extensions-core/protobuf.html"><code>druid-protobuf-extensions</code></a> as an extension to use the Protobuf Parser.</p>
+</blockquote>
+<p>This parser is for <a href="/docs/0.21.0/ingestion/index.html#streaming">stream ingestion</a> and reads Protocol buffer data from a stream directly.</p>
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th><th>Required</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td>String</td><td>This should say <code>protobuf</code>.</td><td>yes</td></tr>
+<tr><td>descriptor</td><td>String</td><td>Protobuf descriptor file name in the classpath or URL.</td><td>yes</td></tr>
+<tr><td>protoMessageType</td><td>String</td><td>Protobuf message type in the descriptor.  Both short name and fully qualified name are accepted.  The parser uses the first message type found in the descriptor if not specified.</td><td>no</td></tr>
+<tr><td>parseSpec</td><td>JSON Object</td><td>Specifies the timestamp and dimensions of the data.  The format must be JSON. See <a href="/docs/0.21.0/ingestion/index.html">JSON ParseSpec</a> for more configuration options.  Note that timeAndDims parseSpec is no longer supported.</td><td>yes</td></tr>
+</tbody>
+</table>
+<p>Sample spec:</p>
+<pre><code class="hljs css language-json">"parser": {
+  "type": "protobuf",
+  "descriptor": "file:///tmp/metrics.desc",
+  "protoMessageType": "Metrics",
+  "parseSpec": {
+    "format": "json",
+    "timestampSpec": {
+      "column": "timestamp",
+      "format": "auto"
+    },
+    "dimensionsSpec": {
+      "dimensions": [
+        "unit",
+        "http_method",
+        "http_code",
+        "page",
+        "metricType",
+        "server"
+      ],
+      "dimensionExclusions": [
+        "timestamp",
+        "value"
+      ]
+    }
+  }
+}
+</code></pre>
+<p>See the <a href="/docs/0.21.0/development/extensions-core/protobuf.html">extension description</a> for
+more details and examples.</p>
+<h2><a class="anchor" aria-hidden="true" id="parsespec"></a><a href="#parsespec" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>ParseSpec</h2>
+<blockquote>
+<p>The Parser is deprecated for <a href="/docs/0.21.0/ingestion/native-batch.html">native batch tasks</a>, <a href="/docs/0.21.0/development/extensions-core/kafka-ingestion.html">Kafka indexing service</a>,
+and <a href="/docs/0.21.0/development/extensions-core/kinesis-ingestion.html">Kinesis indexing service</a>.
+Consider using the <a href="#input-format">input format</a> instead for these types of ingestion.</p>
+</blockquote>
+<p>ParseSpecs serve two purposes:</p>
+<ul>
+<li>The String Parser use them to determine the format (i.e., JSON, CSV, TSV) of incoming rows.</li>
+<li>All Parsers use them to determine the timestamp and dimensions of incoming rows.</li>
+</ul>
+<p>If <code>format</code> is not included, the parseSpec defaults to <code>tsv</code>.</p>
+<h3><a class="anchor" aria-hidden="true" id="json-parsespec"></a><a href="#json-parsespec" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>JSON ParseSpec</h3>
+<p>Use this with the String Parser to load JSON.</p>
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th><th>Required</th></tr>
+</thead>
+<tbody>
+<tr><td>format</td><td>String</td><td>This should say <code>json</code>.</td><td>no</td></tr>
+<tr><td>timestampSpec</td><td>JSON Object</td><td>Specifies the column and format of the timestamp.</td><td>yes</td></tr>
+<tr><td>dimensionsSpec</td><td>JSON Object</td><td>Specifies the dimensions of the data.</td><td>yes</td></tr>
+<tr><td>flattenSpec</td><td>JSON Object</td><td>Specifies flattening configuration for nested JSON data. See <a href="#flattenspec"><code>flattenSpec</code></a> for more info.</td><td>no</td></tr>
+</tbody>
+</table>
+<p>Sample spec:</p>
+<pre><code class="hljs css language-json">"parseSpec": {
+  "format" : "json",
+  "timestampSpec" : {
+    "column" : "timestamp"
+  },
+  "dimensionSpec" : {
+    "dimensions" : ["page","language","user","unpatrolled","newPage","robot","anonymous","namespace","continent","country","region","city"]
+  }
+}
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="json-lowercase-parsespec"></a><a href="#json-lowercase-parsespec" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>JSON Lowercase ParseSpec</h3>
+<blockquote>
+<p>The <em>jsonLowercase</em> parser is deprecated and may be removed in a future version of Druid.</p>
+</blockquote>
+<p>This is a special variation of the JSON ParseSpec that lower cases all the column names in the incoming JSON data. This parseSpec is required if you are updating to Druid 0.7.x from Druid 0.6.x, are directly ingesting JSON with mixed case column names, do not have any ETL in place to lower case those column names, and would like to make queries that include the data you created using 0.6.x and 0.7.x.</p>
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th><th>Required</th></tr>
+</thead>
+<tbody>
+<tr><td>format</td><td>String</td><td>This should say <code>jsonLowercase</code>.</td><td>yes</td></tr>
+<tr><td>timestampSpec</td><td>JSON Object</td><td>Specifies the column and format of the timestamp.</td><td>yes</td></tr>
+<tr><td>dimensionsSpec</td><td>JSON Object</td><td>Specifies the dimensions of the data.</td><td>yes</td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="csv-parsespec"></a><a href="#csv-parsespec" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>CSV ParseSpec</h3>
+<p>Use this with the String Parser to load CSV. Strings are parsed using the com.opencsv library.</p>
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th><th>Required</th></tr>
+</thead>
+<tbody>
+<tr><td>format</td><td>String</td><td>This should say <code>csv</code>.</td><td>yes</td></tr>
+<tr><td>timestampSpec</td><td>JSON Object</td><td>Specifies the column and format of the timestamp.</td><td>yes</td></tr>
+<tr><td>dimensionsSpec</td><td>JSON Object</td><td>Specifies the dimensions of the data.</td><td>yes</td></tr>
+<tr><td>listDelimiter</td><td>String</td><td>A custom delimiter for multi-value dimensions.</td><td>no (default = ctrl+A)</td></tr>
+<tr><td>columns</td><td>JSON array</td><td>Specifies the columns of the data.</td><td>yes</td></tr>
+</tbody>
+</table>
+<p>Sample spec:</p>
+<pre><code class="hljs css language-json">"parseSpec": {
+  "format" : "csv",
+  "timestampSpec" : {
+    "column" : "timestamp"
+  },
+  "columns" : ["timestamp","page","language","user","unpatrolled","newPage","robot","anonymous","namespace","continent","country","region","city","added","deleted","delta"],
+  "dimensionsSpec" : {
+    "dimensions" : ["page","language","user","unpatrolled","newPage","robot","anonymous","namespace","continent","country","region","city"]
+  }
+}
+</code></pre>
+<h4><a class="anchor" aria-hidden="true" id="csv-index-tasks"></a><a href="#csv-index-tasks" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>CSV Index Tasks</h4>
+<p>If your input files contain a header, the <code>columns</code> field is optional and you don't need to set.
+Instead, you can set the <code>hasHeaderRow</code> field to true, which makes Druid automatically extract the column information from the header.
+Otherwise, you must set the <code>columns</code> field and ensure that field must match the columns of your input data in the same order.</p>
+<p>Also, you can skip some header rows by setting <code>skipHeaderRows</code> in your parseSpec. If both <code>skipHeaderRows</code> and <code>hasHeaderRow</code> options are set,
+<code>skipHeaderRows</code> is first applied. For example, if you set <code>skipHeaderRows</code> to 2 and <code>hasHeaderRow</code> to true, Druid will
+skip the first two lines and then extract column information from the third line.</p>
+<p>Note that <code>hasHeaderRow</code> and <code>skipHeaderRows</code> are effective only for non-Hadoop batch index tasks. Other types of index
+tasks will fail with an exception.</p>
+<h4><a class="anchor" aria-hidden="true" id="other-csv-ingestion-tasks"></a><a href="#other-csv-ingestion-tasks" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Other CSV Ingestion Tasks</h4>
+<p>The <code>columns</code> field must be included and and ensure that the order of the fields matches the columns of your input data in the same order.</p>
+<h3><a class="anchor" aria-hidden="true" id="tsv--delimited-parsespec"></a><a href="#tsv--delimited-parsespec" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>TSV / Delimited ParseSpec</h3>
+<p>Use this with the String Parser to load any delimited text that does not require special escaping. By default,
+the delimiter is a tab, so this will load TSV.</p>
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th><th>Required</th></tr>
+</thead>
+<tbody>
+<tr><td>format</td><td>String</td><td>This should say <code>tsv</code>.</td><td>yes</td></tr>
+<tr><td>timestampSpec</td><td>JSON Object</td><td>Specifies the column and format of the timestamp.</td><td>yes</td></tr>
+<tr><td>dimensionsSpec</td><td>JSON Object</td><td>Specifies the dimensions of the data.</td><td>yes</td></tr>
+<tr><td>delimiter</td><td>String</td><td>A custom delimiter for data values.</td><td>no (default = \t)</td></tr>
+<tr><td>listDelimiter</td><td>String</td><td>A custom delimiter for multi-value dimensions.</td><td>no (default = ctrl+A)</td></tr>
+<tr><td>columns</td><td>JSON String array</td><td>Specifies the columns of the data.</td><td>yes</td></tr>
+</tbody>
+</table>
+<p>Sample spec:</p>
+<pre><code class="hljs css language-json">"parseSpec": {
+  "format" : "tsv",
+  "timestampSpec" : {
+    "column" : "timestamp"
+  },
+  "columns" : ["timestamp","page","language","user","unpatrolled","newPage","robot","anonymous","namespace","continent","country","region","city","added","deleted","delta"],
+  "delimiter":"|",
+  "dimensionsSpec" : {
+    "dimensions" : ["page","language","user","unpatrolled","newPage","robot","anonymous","namespace","continent","country","region","city"]
+  }
+}
+</code></pre>
+<p>Be sure to change the <code>delimiter</code> to the appropriate delimiter for your data. Like CSV, you must specify the columns and which subset of the columns you want indexed.</p>
+<h4><a class="anchor" aria-hidden="true" id="tsv-delimited-index-tasks"></a><a href="#tsv-delimited-index-tasks" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>TSV (Delimited) Index Tasks</h4>
+<p>If your input files contain a header, the <code>columns</code> field is optional and doesn't need to be set.
+Instead, you can set the <code>hasHeaderRow</code> field to true, which makes Druid automatically extract the column information from the header.
+Otherwise, you must set the <code>columns</code> field and ensure that field must match the columns of your input data in the same order.</p>
+<p>Also, you can skip some header rows by setting <code>skipHeaderRows</code> in your parseSpec. If both <code>skipHeaderRows</code> and <code>hasHeaderRow</code> options are set,
+<code>skipHeaderRows</code> is first applied. For example, if you set <code>skipHeaderRows</code> to 2 and <code>hasHeaderRow</code> to true, Druid will
+skip the first two lines and then extract column information from the third line.</p>
+<p>Note that <code>hasHeaderRow</code> and <code>skipHeaderRows</code> are effective only for non-Hadoop batch index tasks. Other types of index
+tasks will fail with an exception.</p>
+<h4><a class="anchor" aria-hidden="true" id="other-tsv-delimited-ingestion-tasks"></a><a href="#other-tsv-delimited-ingestion-tasks" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Other TSV (Delimited) Ingestion Tasks</h4>
+<p>The <code>columns</code> field must be included and and ensure that the order of the fields matches the columns of your input data in the same order.</p>
+<h3><a class="anchor" aria-hidden="true" id="multi-value-dimensions"></a><a href="#multi-value-dimensions" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Multi-value dimensions</h3>
+<p>Dimensions can have multiple values for TSV and CSV data. To specify the delimiter for a multi-value dimension, set the <code>listDelimiter</code> in the <code>parseSpec</code>.</p>
+<p>JSON data can contain multi-value dimensions as well. The multiple values for a dimension must be formatted as a JSON array in the ingested data. No additional <code>parseSpec</code> configuration is needed.</p>
+<h3><a class="anchor" aria-hidden="true" id="regex-parsespec"></a><a href="#regex-parsespec" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Regex ParseSpec</h3>
+<pre><code class="hljs css language-json">"parseSpec":{
+  "format" : "regex",
+  "timestampSpec" : {
+    "column" : "timestamp"
+  },
+  "dimensionsSpec" : {
+    "dimensions" : [&lt;your_list_of_dimensions&gt;]
+  },
+  "columns" : [&lt;your_columns_here&gt;],
+  "pattern" : &lt;regex pattern for partitioning data&gt;
+}
+</code></pre>
+<p>The <code>columns</code> field must match the columns of your regex matching groups in the same order. If columns are not provided, default
+columns names (&quot;column_1&quot;, &quot;column2&quot;, ... &quot;column_n&quot;) will be assigned. Ensure that your column names include all your dimensions.</p>
+<h3><a class="anchor" aria-hidden="true" id="javascript-parsespec"></a><a href="#javascript-parsespec" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>JavaScript ParseSpec</h3>
+<pre><code class="hljs css language-json">"parseSpec":{
+  "format" : "javascript",
+  "timestampSpec" : {
+    "column" : "timestamp"
+  },
+  "dimensionsSpec" : {
+    "dimensions" : ["page","language","user","unpatrolled","newPage","robot","anonymous","namespace","continent","country","region","city"]
+  },
+  "function" : "function(str) { var parts = str.split(\"-\"); return { one: parts[0], two: parts[1] } }"
+}
+</code></pre>
+<p>Note with the JavaScript parser that data must be fully parsed and returned as a <code>{key:value}</code> format in the JS logic.
+This means any flattening or parsing multi-dimensional values must be done here.</p>
+<blockquote>
+<p>JavaScript-based functionality is disabled by default. Please refer to the Druid <a href="/docs/0.21.0/development/javascript.html">JavaScript programming guide</a> for guidelines about using Druid's JavaScript functionality, including instructions on how to enable it.</p>
+</blockquote>
+<h3><a class="anchor" aria-hidden="true" id="timeanddims-parsespec"></a><a href="#timeanddims-parsespec" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>TimeAndDims ParseSpec</h3>
+<p>Use this with non-String Parsers to provide them with timestamp and dimensions information. Non-String Parsers
+handle all formatting decisions on their own, without using the ParseSpec.</p>
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th><th>Required</th></tr>
+</thead>
+<tbody>
+<tr><td>format</td><td>String</td><td>This should say <code>timeAndDims</code>.</td><td>yes</td></tr>
+<tr><td>timestampSpec</td><td>JSON Object</td><td>Specifies the column and format of the timestamp.</td><td>yes</td></tr>
+<tr><td>dimensionsSpec</td><td>JSON Object</td><td>Specifies the dimensions of the data.</td><td>yes</td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="orc-parsespec"></a><a href="#orc-parsespec" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Orc ParseSpec</h3>
+<p>Use this with the Hadoop ORC Parser to load ORC files.</p>
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th><th>Required</th></tr>
+</thead>
+<tbody>
+<tr><td>format</td><td>String</td><td>This should say <code>orc</code>.</td><td>no</td></tr>
+<tr><td>timestampSpec</td><td>JSON Object</td><td>Specifies the column and format of the timestamp.</td><td>yes</td></tr>
+<tr><td>dimensionsSpec</td><td>JSON Object</td><td>Specifies the dimensions of the data.</td><td>yes</td></tr>
+<tr><td>flattenSpec</td><td>JSON Object</td><td>Specifies flattening configuration for nested JSON data. See <a href="#flattenspec"><code>flattenSpec</code></a> for more info.</td><td>no</td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="parquet-parsespec"></a><a href="#parquet-parsespec" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parquet ParseSpec</h3>
+<p>Use this with the Hadoop Parquet Parser to load Parquet files.</p>
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th><th>Required</th></tr>
+</thead>
+<tbody>
+<tr><td>format</td><td>String</td><td>This should say <code>parquet</code>.</td><td>no</td></tr>
+<tr><td>timestampSpec</td><td>JSON Object</td><td>Specifies the column and format of the timestamp.</td><td>yes</td></tr>
+<tr><td>dimensionsSpec</td><td>JSON Object</td><td>Specifies the dimensions of the data.</td><td>yes</td></tr>
+<tr><td>flattenSpec</td><td>JSON Object</td><td>Specifies flattening configuration for nested JSON data. See <a href="#flattenspec"><code>flattenSpec</code></a> for more info.</td><td>no</td></tr>
+</tbody>
+</table>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/0.21.0/ingestion/index.html"><span class="arrow-prev">← </span><span>Ingestion</span></a><a class="docs-next button" href="/docs/0.21.0/ingestion/schema-design.html"><span>Schema design tips</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#formatting-the-data">Formatting the Data</a></li><li><a href="#custom-formats">Custom Formats</a></li><li><a href="#input-format">Input Format</a><ul class="toc-headings"><li><a href="#json">JSON</a></li><li><a href="#csv">CSV</a></li><li><a href="#tsv-delimited">TSV (Delimited)</a></li><li><a href="#orc">ORC</a></li><li><a href="#parquet">Parquet</a></li><li><a href="#avro-ocf">Avro OCF</a></li><li><a href="#flattenspec">FlattenSpec</a></li></ul></li><li><a href="#parser">Parser</a><ul class="toc-headings"><li><a href="#string-parser">String Parser</a></li><li><a href="#avro-hadoop-parser">Avro Hadoop Parser</a></li><li><a href="#orc-hadoop-parser">ORC Hadoop Parser</a></li><li><a href="#parquet-hadoop-parser">Parquet Hadoop Parser</a></li><li><a href="#parquet-avro-hadoop-parser">Parquet Avro Hadoop Parser</a></li><li><a href="#avro-stream-parser">Avro Stream Parser</a></li><li><a href="#protobuf-parser">Protobuf Parser</a></li></ul></li><li><a href="#parsespec">ParseSpec</a><ul class="toc-headings"><li><a href="#json-parsespec">JSON ParseSpec</a></li><li><a href="#json-lowercase-parsespec">JSON Lowercase ParseSpec</a></li><li><a href="#csv-parsespec">CSV ParseSpec</a></li><li><a href="#tsv--delimited-parsespec">TSV / Delimited ParseSpec</a></li><li><a href="#multi-value-dimensions">Multi-value dimensions</a></li><li><a href="#regex-parsespec">Regex ParseSpec</a></li><li><a href="#javascript-parsespec">JavaScript ParseSpec</a></li><li><a href="#timeanddims-parsespec">TimeAndDims ParseSpec</a></li><li><a href="#orc-parsespec">Orc ParseSpec</a></li><li><a href="#parquet-parsespec">Parquet ParseSpec</a></li></ul></li></ul></nav></div><footer class="nav-footer druid-footer" id="footer"><div class="container"><div class="text-center"><p><a href="/technology">Technology</a> · <a href="/use-cases">Use Cases</a> · <a href="/druid-powered">Powered by Druid</a> · <a href="/docs/0.21.0/latest">Docs</a> · <a href="/community/">Community</a> · <a href="/downloads.html">Download</a> · <a href="/faq">FAQ</a></p></div><div class="text-center"><a title="Join the user group" href="https://groups.google.com/forum/#!forum/druid-user" target="_blank"><span class="fa fa-comments"></span></a> · <a title="Follow Druid" href="https://twitter.com/druidio" target="_blank"><span class="fab fa-twitter"></span></a> · <a title="Download via Apache" href="https://www.apache.org/dyn/closer.cgi?path=/incubator/druid/{{ site.druid_versions[0].versions[0].version }}/apache-druid-{{ site.druid_versions[0].versions[0].version }}-bin.tar.gz" target="_blank"><span class="fas fa-feather"></span></a> · <a title="GitHub" href="https://github.com/apache/druid" target="_blank"><span class="fab fa-github"></span></a></div><div class="text-center license">Copyright © 2019 <a href="https://www.apache.org/" target="_blank">Apache Software Foundation</a>.<br/>Except where otherwise noted, licensed under <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.<br/>Apache Druid, Druid, and the Druid logo are either registered trademarks or trademarks of The Apache Software Foundation in the United States and other countries.</div></div></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '2de99082a9f38e49dfaa059bbe4c901d',
+                indexName: 'apache_druid',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["language:en","version:0.21.0"]}
+              });
+            </script></body></html>

@@ -1,0 +1,888 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>API reference · Apache Druid</title><meta name="viewport" content="width=device-width"/><link rel="canonical" href="https://druid.apache.org/docs/0.21.0/operations/api-reference.html"/><meta name="generator" content="Docusaurus"/><meta name="description" content="&lt;!--"/><meta name="docsearch:language" content="en"/><meta name="docsearch:version" content="0.21.0" /><meta property="og:title" content="API reference · Apache Druid"/><meta property="og:type" content="website"/><meta property="og:url" content="https://druid.apache.org/index.html"/><meta property="og:description" content="&lt;!--"/><meta property="og:image" content="https://druid.apache.org/img/druid_nav.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://druid.apache.org/img/druid_nav.png"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-131010415-1"></script><script>
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments); }
+              gtag('js', new Date());
+              gtag('config', 'UA-131010415-1');
+            </script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"/><link rel="stylesheet" href="/css/code-block-buttons.css"/><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script><script type="text/javascript" src="/js/code-block-buttons.js"></script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/druid_nav.png" alt="Apache Druid"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/technology" target="_self">Technology</a></li><li class=""><a href="/use-cases" target="_self">Use Cases</a></li><li class=""><a href="/druid-powered" target="_self">Powered By</a></li><li class="siteNavGroupActive"><a href="/docs/0.21.0/design/index.html" target="_self">Docs</a></li><li class=""><a href="/community/" target="_self">Community</a></li><li class=""><a href="https://www.apache.org" target="_self">Apache</a></li><li class=""><a href="/downloads.html" target="_self">Download</a></li><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Operations</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Getting started<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.21.0/design/index.html">Introduction to Apache Druid</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/tutorials/index.html">Quickstart</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/tutorials/docker.html">Docker</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/single-server.html">Single server deployment</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/tutorials/cluster.html">Clustered deployment</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Tutorials<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.21.0/tutorials/tutorial-batch.html">Loading files natively</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/tutorials/tutorial-kafka.html">Load from Apache Kafka</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/tutorials/tutorial-batch-hadoop.html">Load from Apache Hadoop</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/tutorials/tutorial-query.html">Querying data</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/tutorials/tutorial-rollup.html">Roll-up</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/tutorials/tutorial-retention.html">Configuring data retention</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/tutorials/tutorial-update-data.html">Updating existing data</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/tutorials/tutorial-compaction.html">Compacting segments</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/tutorials/tutorial-delete-data.html">Deleting data</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/tutorials/tutorial-ingestion-spec.html">Writing an ingestion spec</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/tutorials/tutorial-transform-spec.html">Transforming input data</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/tutorials/tutorial-kerberos-hadoop.html">Kerberized HDFS deep storage</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Design<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.21.0/design/architecture.html">Design</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/design/segments.html">Segments</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/design/processes.html">Processes and servers</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/dependencies/deep-storage.html">Deep storage</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/dependencies/metadata-storage.html">Metadata storage</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/dependencies/zookeeper.html">ZooKeeper</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Ingestion<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.21.0/ingestion/index.html">Ingestion</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/ingestion/data-formats.html">Data formats</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/ingestion/schema-design.html">Schema design tips</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/ingestion/data-management.html">Data management</a></li><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Stream ingestion</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/kafka-ingestion.html">Apache Kafka</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/kinesis-ingestion.html">Amazon Kinesis</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/ingestion/tranquility.html">Tranquility</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Batch ingestion</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.21.0/ingestion/native-batch.html">Native batch</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/ingestion/hadoop.html">Hadoop-based</a></li></ul></div><li class="navListItem"><a class="navItem" href="/docs/0.21.0/ingestion/tasks.html">Task reference</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/ingestion/faq.html">Troubleshooting FAQ</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Querying<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/sql.html">Druid SQL</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/querying.html">Native queries</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/query-execution.html">Query execution</a></li><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Concepts</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/datasource.html">Datasources</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/joins.html">Joins</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/lookups.html">Lookups</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/multi-value-dimensions.html">Multi-value dimensions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/multitenancy.html">Multitenancy</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/caching.html">Query caching</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/query-context.html">Context parameters</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Native query types</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/timeseriesquery.html">Timeseries</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/topnquery.html">TopN</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/groupbyquery.html">GroupBy</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/scan-query.html">Scan</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/searchquery.html">Search</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/timeboundaryquery.html">TimeBoundary</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/segmentmetadataquery.html">SegmentMetadata</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/datasourcemetadataquery.html">DatasourceMetadata</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Native query components</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/filters.html">Filters</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/granularities.html">Granularities</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/dimensionspecs.html">Dimensions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/aggregations.html">Aggregations</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/post-aggregations.html">Post-aggregations</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/misc/math-expr.html">Expressions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/having.html">Having filters (groupBy)</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/limitspec.html">Sorting and limiting (groupBy)</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/topnmetricspec.html">Sorting (topN)</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/sorting-orders.html">String comparators</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/virtual-columns.html">Virtual columns</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/geo.html">Spatial filters</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Configuration<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.21.0/configuration/index.html">Configuration reference</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions.html">Extensions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/configuration/logging.html">Logging</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Operations<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/druid-console.html">Web console</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/getting-started.html">Getting started with Apache Druid</a></li><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Security</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/security-overview.html">Security overview</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/security-user-auth.html">User authentication and authorization</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/auth-ldap.html">LDAP auth</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/password-provider.html">Password providers</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/tls-support.html">TLS support</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Performance tuning</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/basic-cluster-tuning.html">Basic cluster tuning</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/segment-optimization.html">Segment Size Optimization</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/http-compression.html">HTTP compression</a></li></ul></div><li class="navListItem navListItemActive"><a class="navItem" href="/docs/0.21.0/operations/api-reference.html">API reference</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/high-availability.html">High availability</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/rolling-updates.html">Rolling updates</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/rule-configuration.html">Retaining or automatically dropping data</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/metrics.html">Metrics</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/alerts.html">Alerts</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/other-hadoop.html">Working with different versions of Apache Hadoop</a></li><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Misc</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/management-uis.html">Legacy Management UIs</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/dump-segment.html">dump-segment tool</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/reset-cluster.html">reset-cluster tool</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/insert-segment-to-db.html">insert-segment-to-db tool</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/pull-deps.html">pull-deps tool</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/deep-storage-migration.html">Deep storage migration</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/export-metadata.html">Export Metadata Tool</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/metadata-migration.html">Metadata Migration</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/use_sbt_to_build_fat_jar.html">Content for build.sbt</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Development<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/overview.html">Developing on Druid</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/modules.html">Creating extensions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/javascript.html">JavaScript functionality</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/build.html">Build from source</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/versioning.html">Versioning</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/experimental.html">Experimental features</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Misc<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.21.0/misc/papers-and-talks.html">Papers</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Hidden<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.21.0/comparisons/druid-vs-elasticsearch.html">Apache Druid vs Elasticsearch</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/comparisons/druid-vs-key-value.html">Apache Druid vs. Key/Value Stores (HBase/Cassandra/OpenTSDB)</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/comparisons/druid-vs-kudu.html">Apache Druid vs Kudu</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/comparisons/druid-vs-redshift.html">Apache Druid vs Redshift</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/comparisons/druid-vs-spark.html">Apache Druid vs Spark</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/comparisons/druid-vs-sql-on-hadoop.html">Apache Druid vs SQL-on-Hadoop</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/design/auth.html">Authentication and Authorization</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/design/broker.html">Broker</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/design/coordinator.html">Coordinator Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/design/historical.html">Historical Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/design/indexer.html">Indexer Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/design/indexing-service.html">Indexing Service</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/design/middlemanager.html">MiddleManager Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/design/overlord.html">Overlord Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/design/router.html">Router Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/design/peons.html">Peons</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/approximate-histograms.html">Approximate Histogram aggregators</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/avro.html">Apache Avro</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/azure.html">Microsoft Azure</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/bloom-filter.html">Bloom Filter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/datasketches-extension.html">DataSketches extension</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/datasketches-hll.html">DataSketches HLL Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/datasketches-quantiles.html">DataSketches Quantiles Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/datasketches-theta.html">DataSketches Theta Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/datasketches-tuple.html">DataSketches Tuple Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/druid-basic-security.html">Basic Security</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/druid-kerberos.html">Kerberos</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/druid-lookups.html">Cached Lookup Module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/druid-ranger-security.html">Apache Ranger Security</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/google.html">Google Cloud Storage</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/hdfs.html">HDFS</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/kafka-extraction-namespace.html">Apache Kafka Lookups</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/lookups-cached-global.html">Globally Cached Lookups</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/mysql.html">MySQL Metadata Store</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/orc.html">ORC Extension</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/druid-pac4j.html">Druid pac4j based Security extension</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/parquet.html">Apache Parquet Extension</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/postgresql.html">PostgreSQL Metadata Store</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/protobuf.html">Protobuf</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/s3.html">S3-compatible</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/simple-client-sslcontext.html">Simple SSLContext Provider Module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/stats.html">Stats aggregator</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/test-stats.html">Test Stats Aggregators</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/ambari-metrics-emitter.html">Ambari Metrics Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/cassandra.html">Apache Cassandra</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/cloudfiles.html">Rackspace Cloud Files</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/distinctcount.html">DistinctCount Aggregator</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/graphite.html">Graphite Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/influx.html">InfluxDB Line Protocol Parser</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/influxdb-emitter.html">InfluxDB Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/kafka-emitter.html">Kafka Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/materialized-view.html">Materialized View</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/momentsketch-quantiles.html">Moment Sketches for Approximate Quantiles module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/moving-average-query.html">Moving Average Query</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/opentsdb-emitter.html">OpenTSDB Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/redis-cache.html">Druid Redis Cache</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/sqlserver.html">Microsoft SQLServer</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/statsd.html">StatsD Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/tdigestsketch-quantiles.html">T-Digest Quantiles Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/thrift.html">Thrift</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/time-min-max.html">Timestamp Min/Max aggregators</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/gce-extensions.html">GCE Extensions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/aliyun-oss.html">Aliyun OSS</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/hll-old.html">Cardinality/HyperUnique aggregators</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/select-query.html">Select</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/ingestion/standalone-realtime.html">Realtime Process</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/apache/druid/edit/master/docs/operations/api-reference.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">API reference</h1></header><article><div><span><!--
+  ~ Licensed to the Apache Software Foundation (ASF) under one
+  ~ or more contributor license agreements.  See the NOTICE file
+  ~ distributed with this work for additional information
+  ~ regarding copyright ownership.  The ASF licenses this file
+  ~ to you under the Apache License, Version 2.0 (the
+  ~ "License"); you may not use this file except in compliance
+  ~ with the License.  You may obtain a copy of the License at
+  ~
+  ~   http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an
+  ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~ KIND, either express or implied.  See the License for the
+  ~ specific language governing permissions and limitations
+  ~ under the License.
+  -->
+<p>This page documents all of the API endpoints for each Druid service type.</p>
+<h2><a class="anchor" aria-hidden="true" id="common"></a><a href="#common" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Common</h2>
+<p>The following endpoints are supported by all processes.</p>
+<h3><a class="anchor" aria-hidden="true" id="process-information"></a><a href="#process-information" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Process information</h3>
+<h4><a class="anchor" aria-hidden="true" id="get"></a><a href="#get" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>GET</h4>
+<ul>
+<li><code>/status</code></li>
+</ul>
+<p>Returns the Druid version, loaded extensions, memory used, total memory and other useful information about the process.</p>
+<ul>
+<li><code>/status/health</code></li>
+</ul>
+<p>An endpoint that always returns a boolean &quot;true&quot; value with a 200 OK response, useful for automated health checks.</p>
+<ul>
+<li><code>/status/properties</code></li>
+</ul>
+<p>Returns the current configuration properties of the process.</p>
+<ul>
+<li><code>/status/selfDiscovered/status</code></li>
+</ul>
+<p>Returns a JSON map of the form <code>{&quot;selfDiscovered&quot;: true/false}</code>, indicating whether the node has received a confirmation
+from the central node discovery mechanism (currently ZooKeeper) of the Druid cluster that the node has been added to the
+cluster. It is recommended to not consider a Druid node &quot;healthy&quot; or &quot;ready&quot; in automated deployment/container
+management systems until it returns <code>{&quot;selfDiscovered&quot;: true}</code> from this endpoint. This is because a node may be
+isolated from the rest of the cluster due to network issues and it doesn't make sense to consider nodes &quot;healthy&quot; in
+this case. Also, when nodes such as Brokers use ZooKeeper segment discovery for building their view of the Druid cluster
+(as opposed to HTTP segment discovery), they may be unusable until the ZooKeeper client is fully initialized and starts
+to receive data from the ZooKeeper cluster. <code>{&quot;selfDiscovered&quot;: true}</code> is a proxy event indicating that the ZooKeeper
+client on the node has started to receive data from the ZooKeeper cluster and it's expected that all segments and other
+nodes will be discovered by this node timely from this point.</p>
+<ul>
+<li><code>/status/selfDiscovered</code></li>
+</ul>
+<p>Similar to <code>/status/selfDiscovered/status</code>, but returns 200 OK response with empty body if the node has discovered itself
+and 503 SERVICE UNAVAILABLE if the node hasn't discovered itself yet. This endpoint might be useful because some
+monitoring checks such as AWS load balancer health checks are not able to look at the response body.</p>
+<h2><a class="anchor" aria-hidden="true" id="master-server"></a><a href="#master-server" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Master Server</h2>
+<p>This section documents the API endpoints for the processes that reside on Master servers (Coordinators and Overlords)
+in the suggested <a href="/docs/0.21.0/design/processes.html#server-types">three-server configuration</a>.</p>
+<h3><a class="anchor" aria-hidden="true" id="coordinator"></a><a href="#coordinator" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Coordinator</h3>
+<h4><a class="anchor" aria-hidden="true" id="leadership"></a><a href="#leadership" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Leadership</h4>
+<h5><a class="anchor" aria-hidden="true" id="get-1"></a><a href="#get-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>GET</h5>
+<ul>
+<li><code>/druid/coordinator/v1/leader</code></li>
+</ul>
+<p>Returns the current leader Coordinator of the cluster.</p>
+<ul>
+<li><code>/druid/coordinator/v1/isLeader</code></li>
+</ul>
+<p>Returns a JSON object with field &quot;leader&quot;, either true or false, indicating if this server is the current leader
+Coordinator of the cluster. In addition, returns HTTP 200 if the server is the current leader and HTTP 404 if not.
+This is suitable for use as a load balancer status check if you only want the active leader to be considered in-service
+at the load balancer.</p>
+<h4><a class="anchor" aria-hidden="true" id="segment-loading"></a><a href="#segment-loading" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Segment Loading</h4>
+<h5><a class="anchor" aria-hidden="true" id="get-2"></a><a href="#get-2" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>GET</h5>
+<ul>
+<li><code>/druid/coordinator/v1/loadstatus</code></li>
+</ul>
+<p>Returns the percentage of segments actually loaded in the cluster versus segments that should be loaded in the cluster.</p>
+<ul>
+<li><code>/druid/coordinator/v1/loadstatus?simple</code></li>
+</ul>
+<p>Returns the number of segments left to load until segments that should be loaded in the cluster are available for queries. This does not include segment replication counts.</p>
+<ul>
+<li><code>/druid/coordinator/v1/loadstatus?full</code></li>
+</ul>
+<p>Returns the number of segments left to load in each tier until segments that should be loaded in the cluster are all available. This includes segment replication counts.</p>
+<ul>
+<li><code>/druid/coordinator/v1/loadqueue</code></li>
+</ul>
+<p>Returns the ids of segments to load and drop for each Historical process.</p>
+<ul>
+<li><code>/druid/coordinator/v1/loadqueue?simple</code></li>
+</ul>
+<p>Returns the number of segments to load and drop, as well as the total segment load and drop size in bytes for each Historical process.</p>
+<ul>
+<li><code>/druid/coordinator/v1/loadqueue?full</code></li>
+</ul>
+<p>Returns the serialized JSON of segments to load and drop for each Historical process.</p>
+<h4><a class="anchor" aria-hidden="true" id="segment-loading-by-datasource"></a><a href="#segment-loading-by-datasource" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Segment Loading by Datasource</h4>
+<p>Note that all <em>interval</em> query parameters are ISO 8601 strings (e.g., 2016-06-27/2016-06-28).
+Also note that these APIs only guarantees that the segments are available at the time of the call.
+Segments can still become missing because of historical process failures or any other reasons afterward.</p>
+<h5><a class="anchor" aria-hidden="true" id="get-3"></a><a href="#get-3" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>GET</h5>
+<ul>
+<li><code>/druid/coordinator/v1/datasources/{dataSourceName}/loadstatus?forceMetadataRefresh={boolean}&amp;interval={myInterval}</code></li>
+</ul>
+<p>Returns the percentage of segments actually loaded in the cluster versus segments that should be loaded in the cluster for the given
+datasource over the given interval (or last 2 weeks if interval is not given). <code>forceMetadataRefresh</code> is required to be set.
+Setting <code>forceMetadataRefresh</code> to true will force the coordinator to poll latest segment metadata from the metadata store
+(Note: <code>forceMetadataRefresh=true</code> refreshes Coordinator's metadata cache of all datasources. This can be a heavy operation in terms
+of the load on the metadata store but can be necessary to make sure that we verify all the latest segments' load status)
+Setting <code>forceMetadataRefresh</code> to false will use the metadata cached on the coordinator from the last force/periodic refresh.
+If no used segments are found for the given inputs, this API returns <code>204 No Content</code></p>
+<ul>
+<li><code>/druid/coordinator/v1/datasources/{dataSourceName}/loadstatus?simple&amp;forceMetadataRefresh={boolean}&amp;interval={myInterval}</code></li>
+</ul>
+<p>Returns the number of segments left to load until segments that should be loaded in the cluster are available for the given datasource
+over the given interval (or last 2 weeks if interval is not given). This does not include segment replication counts. <code>forceMetadataRefresh</code> is required to be set.
+Setting <code>forceMetadataRefresh</code> to true will force the coordinator to poll latest segment metadata from the metadata store
+(Note: <code>forceMetadataRefresh=true</code> refreshes Coordinator's metadata cache of all datasources. This can be a heavy operation in terms
+of the load on the metadata store but can be necessary to make sure that we verify all the latest segments' load status)
+Setting <code>forceMetadataRefresh</code> to false will use the metadata cached on the coordinator from the last force/periodic refresh.
+If no used segments are found for the given inputs, this API returns <code>204 No Content</code></p>
+<ul>
+<li><code>/druid/coordinator/v1/datasources/{dataSourceName}/loadstatus?full&amp;forceMetadataRefresh={boolean}&amp;interval={myInterval}</code></li>
+</ul>
+<p>Returns the number of segments left to load in each tier until segments that should be loaded in the cluster are all available for the given datasource
+over the given interval (or last 2 weeks if interval is not given). This includes segment replication counts. <code>forceMetadataRefresh</code> is required to be set.
+Setting <code>forceMetadataRefresh</code> to true will force the coordinator to poll latest segment metadata from the metadata store
+(Note: <code>forceMetadataRefresh=true</code> refreshes Coordinator's metadata cache of all datasources. This can be a heavy operation in terms
+of the load on the metadata store but can be necessary to make sure that we verify all the latest segments' load status)
+Setting <code>forceMetadataRefresh</code> to false will use the metadata cached on the coordinator from the last force/periodic refresh.
+If no used segments are found for the given inputs, this API returns <code>204 No Content</code></p>
+<h4><a class="anchor" aria-hidden="true" id="metadata-store-information"></a><a href="#metadata-store-information" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Metadata store information</h4>
+<h5><a class="anchor" aria-hidden="true" id="get-4"></a><a href="#get-4" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>GET</h5>
+<ul>
+<li><code>/druid/coordinator/v1/metadata/datasources</code></li>
+</ul>
+<p>Returns a list of the names of data sources with at least one used segment in the cluster.</p>
+<ul>
+<li><code>/druid/coordinator/v1/metadata/datasources?includeUnused</code></li>
+</ul>
+<p>Returns a list of the names of data sources, regardless of whether there are used segments belonging to those data
+sources in the cluster or not.</p>
+<ul>
+<li><code>/druid/coordinator/v1/metadata/datasources?full</code></li>
+</ul>
+<p>Returns a list of all data sources with at least one used segment in the cluster. Returns all metadata about those data
+sources as stored in the metadata store.</p>
+<ul>
+<li><code>/druid/coordinator/v1/metadata/datasources/{dataSourceName}</code></li>
+</ul>
+<p>Returns full metadata for a datasource as stored in the metadata store.</p>
+<ul>
+<li><code>/druid/coordinator/v1/metadata/datasources/{dataSourceName}/segments</code></li>
+</ul>
+<p>Returns a list of all segments for a datasource as stored in the metadata store.</p>
+<ul>
+<li><code>/druid/coordinator/v1/metadata/datasources/{dataSourceName}/segments?full</code></li>
+</ul>
+<p>Returns a list of all segments for a datasource with the full segment metadata as stored in the metadata store.</p>
+<ul>
+<li><code>/druid/coordinator/v1/metadata/datasources/{dataSourceName}/segments/{segmentId}</code></li>
+</ul>
+<p>Returns full segment metadata for a specific segment as stored in the metadata store, if the segment is used. If the
+segment is unused, or is unknown, a 404 response is returned.</p>
+<h5><a class="anchor" aria-hidden="true" id="post"></a><a href="#post" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>POST</h5>
+<ul>
+<li><code>/druid/coordinator/v1/metadata/datasources/{dataSourceName}/segments</code></li>
+</ul>
+<p>Returns a list of all segments, overlapping with any of given intervals,  for a datasource as stored in the metadata store. Request body is array of string IS0 8601 intervals like [interval1, interval2,...] for example [&quot;2012-01-01T00:00:00.000/2012-01-03T00:00:00.000&quot;, &quot;2012-01-05T00:00:00.000/2012-01-07T00:00:00.000&quot;]</p>
+<ul>
+<li><code>/druid/coordinator/v1/metadata/datasources/{dataSourceName}/segments?full</code></li>
+</ul>
+<p>Returns a list of all segments, overlapping with any of given intervals, for a datasource with the full segment metadata as stored in the metadata store. Request body is array of string ISO 8601 intervals like [interval1, interval2,...] for example [&quot;2012-01-01T00:00:00.000/2012-01-03T00:00:00.000&quot;, &quot;2012-01-05T00:00:00.000/2012-01-07T00:00:00.000&quot;]</p>
+<p><a name="coordinator-datasources"></a></p>
+<h4><a class="anchor" aria-hidden="true" id="datasources"></a><a href="#datasources" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Datasources</h4>
+<p>Note that all <em>interval</em> URL parameters are ISO 8601 strings delimited by a <code>_</code> instead of a <code>/</code>
+(e.g., 2016-06-27_2016-06-28).</p>
+<h5><a class="anchor" aria-hidden="true" id="get-5"></a><a href="#get-5" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>GET</h5>
+<ul>
+<li><code>/druid/coordinator/v1/datasources</code></li>
+</ul>
+<p>Returns a list of datasource names found in the cluster.</p>
+<ul>
+<li><code>/druid/coordinator/v1/datasources?simple</code></li>
+</ul>
+<p>Returns a list of JSON objects containing the name and properties of datasources found in the cluster.  Properties include segment count, total segment byte size, replicated total segment byte size, minTime, and maxTime.</p>
+<ul>
+<li><code>/druid/coordinator/v1/datasources?full</code></li>
+</ul>
+<p>Returns a list of datasource names found in the cluster with all metadata about those datasources.</p>
+<ul>
+<li><code>/druid/coordinator/v1/datasources/{dataSourceName}</code></li>
+</ul>
+<p>Returns a JSON object containing the name and properties of a datasource. Properties include segment count, total segment byte size, replicated total segment byte size, minTime, and maxTime.</p>
+<ul>
+<li><code>/druid/coordinator/v1/datasources/{dataSourceName}?full</code></li>
+</ul>
+<p>Returns full metadata for a datasource .</p>
+<ul>
+<li><code>/druid/coordinator/v1/datasources/{dataSourceName}/intervals</code></li>
+</ul>
+<p>Returns a set of segment intervals.</p>
+<ul>
+<li><code>/druid/coordinator/v1/datasources/{dataSourceName}/intervals?simple</code></li>
+</ul>
+<p>Returns a map of an interval to a JSON object containing the total byte size of segments and number of segments for that interval.</p>
+<ul>
+<li><code>/druid/coordinator/v1/datasources/{dataSourceName}/intervals?full</code></li>
+</ul>
+<p>Returns a map of an interval to a map of segment metadata to a set of server names that contain the segment for that interval.</p>
+<ul>
+<li><code>/druid/coordinator/v1/datasources/{dataSourceName}/intervals/{interval}</code></li>
+</ul>
+<p>Returns a set of segment ids for an interval.</p>
+<ul>
+<li><code>/druid/coordinator/v1/datasources/{dataSourceName}/intervals/{interval}?simple</code></li>
+</ul>
+<p>Returns a map of segment intervals contained within the specified interval to a JSON object containing the total byte size of segments and number of segments for an interval.</p>
+<ul>
+<li><code>/druid/coordinator/v1/datasources/{dataSourceName}/intervals/{interval}?full</code></li>
+</ul>
+<p>Returns a map of segment intervals contained within the specified interval to a map of segment metadata to a set of server names that contain the segment for an interval.</p>
+<ul>
+<li><code>/druid/coordinator/v1/datasources/{dataSourceName}/intervals/{interval}/serverview</code></li>
+</ul>
+<p>Returns a map of segment intervals contained within the specified interval to information about the servers that contain the segment for an interval.</p>
+<ul>
+<li><code>/druid/coordinator/v1/datasources/{dataSourceName}/segments</code></li>
+</ul>
+<p>Returns a list of all segments for a datasource in the cluster.</p>
+<ul>
+<li><code>/druid/coordinator/v1/datasources/{dataSourceName}/segments?full</code></li>
+</ul>
+<p>Returns a list of all segments for a datasource in the cluster with the full segment metadata.</p>
+<ul>
+<li><code>/druid/coordinator/v1/datasources/{dataSourceName}/segments/{segmentId}</code></li>
+</ul>
+<p>Returns full segment metadata for a specific segment in the cluster.</p>
+<ul>
+<li><code>/druid/coordinator/v1/datasources/{dataSourceName}/tiers</code></li>
+</ul>
+<p>Return the tiers that a datasource exists in.</p>
+<h4><a class="anchor" aria-hidden="true" id="note-for-coordinators-post-and-delete-apis"></a><a href="#note-for-coordinators-post-and-delete-apis" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Note for coordinator's POST and DELETE API's</h4>
+<p>The segments would be enabled when these API's are called, but then can be disabled again by the coordinator if any dropRule matches. Segments enabled by these API's might not be loaded by historical processes if no loadRule matches.  If an indexing or kill task runs at the same time as these API's are invoked, the behavior is undefined. Some segments might be killed and others might be enabled. It's also possible that all segments might be disabled but at the same time, the indexing task is able to read data from those segments and succeed.</p>
+<p>Caution : Avoid using indexing or kill tasks and these API's at the same time for the same datasource and time chunk. (It's fine if the time chunks or datasource don't overlap)</p>
+<h5><a class="anchor" aria-hidden="true" id="post-1"></a><a href="#post-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>POST</h5>
+<ul>
+<li><code>/druid/coordinator/v1/datasources/{dataSourceName}</code></li>
+</ul>
+<p>Marks as used all segments belonging to a data source. Returns a JSON object of the form
+<code>{&quot;numChangedSegments&quot;: &lt;number&gt;}</code> with the number of segments in the database whose state has been changed (that is,
+the segments were marked as used) as the result of this API call.</p>
+<ul>
+<li><code>/druid/coordinator/v1/datasources/{dataSourceName}/segments/{segmentId}</code></li>
+</ul>
+<p>Marks as used a segment of a data source. Returns a JSON object of the form <code>{&quot;segmentStateChanged&quot;: &lt;boolean&gt;}</code> with
+the boolean indicating if the state of the segment has been changed (that is, the segment was marked as used) as the
+result of this API call.</p>
+<ul>
+<li><p><code>/druid/coordinator/v1/datasources/{dataSourceName}/markUsed</code></p></li>
+<li><p><code>/druid/coordinator/v1/datasources/{dataSourceName}/markUnused</code></p></li>
+</ul>
+<p>Marks segments (un)used for a datasource by interval or set of segment Ids.</p>
+<p>When marking used only segments that are not overshadowed will be updated.</p>
+<p>The request payload contains the interval or set of segment Ids to be marked unused.
+Either interval or segment ids should be provided, if both or none are provided in the payload, the API would throw an error (400 BAD REQUEST).</p>
+<p>Interval specifies the start and end times as IS0 8601 strings. <code>interval=(start/end)</code> where start and end both are inclusive and only the segments completely contained within the specified interval will be disabled, partially overlapping segments will not be affected.</p>
+<p>JSON Request Payload:</p>
+<table>
+<thead>
+<tr><th>Key</th><th>Description</th><th>Example</th></tr>
+</thead>
+<tbody>
+<tr><td><code>interval</code></td><td>The interval for which to mark segments unused</td><td>&quot;2015-09-12T03:00:00.000Z/2015-09-12T05:00:00.000Z&quot;</td></tr>
+<tr><td><code>segmentIds</code></td><td>Set of segment Ids to be marked unused</td><td>[&quot;segmentId1&quot;, &quot;segmentId2&quot;]</td></tr>
+</tbody>
+</table>
+<h5><a class="anchor" aria-hidden="true" id="delete"></a><a href="#delete" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>DELETE</h5>
+<ul>
+<li><code>/druid/coordinator/v1/datasources/{dataSourceName}</code></li>
+</ul>
+<p>Marks as unused all segments belonging to a data source. Returns a JSON object of the form
+<code>{&quot;numChangedSegments&quot;: &lt;number&gt;}</code> with the number of segments in the database whose state has been changed (that is,
+the segments were marked as unused) as the result of this API call.</p>
+<ul>
+<li><code>/druid/coordinator/v1/datasources/{dataSourceName}/intervals/{interval}</code></li>
+<li><code>@Deprecated. /druid/coordinator/v1/datasources/{dataSourceName}?kill=true&amp;interval={myInterval}</code></li>
+</ul>
+<p>Runs a <a href="/docs/0.21.0/ingestion/tasks.html">Kill task</a> for a given interval and datasource.</p>
+<ul>
+<li><code>/druid/coordinator/v1/datasources/{dataSourceName}/segments/{segmentId}</code></li>
+</ul>
+<p>Marks as unused a segment of a data source. Returns a JSON object of the form <code>{&quot;segmentStateChanged&quot;: &lt;boolean&gt;}</code> with
+the boolean indicating if the state of the segment has been changed (that is, the segment was marked as unused) as the
+result of this API call.</p>
+<h4><a class="anchor" aria-hidden="true" id="retention-rules"></a><a href="#retention-rules" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Retention Rules</h4>
+<p>Note that all <em>interval</em> URL parameters are ISO 8601 strings delimited by a <code>_</code> instead of a <code>/</code>
+(e.g., 2016-06-27_2016-06-28).</p>
+<h5><a class="anchor" aria-hidden="true" id="get-6"></a><a href="#get-6" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>GET</h5>
+<ul>
+<li><code>/druid/coordinator/v1/rules</code></li>
+</ul>
+<p>Returns all rules as JSON objects for all datasources in the cluster including the default datasource.</p>
+<ul>
+<li><code>/druid/coordinator/v1/rules/{dataSourceName}</code></li>
+</ul>
+<p>Returns all rules for a specified datasource.</p>
+<ul>
+<li><code>/druid/coordinator/v1/rules/{dataSourceName}?full</code></li>
+</ul>
+<p>Returns all rules for a specified datasource and includes default datasource.</p>
+<ul>
+<li><code>/druid/coordinator/v1/rules/history?interval=&lt;interval&gt;</code></li>
+</ul>
+<p>Returns audit history of rules for all datasources. default value of interval can be specified by setting <code>druid.audit.manager.auditHistoryMillis</code> (1 week if not configured) in Coordinator runtime.properties</p>
+<ul>
+<li><code>/druid/coordinator/v1/rules/history?count=&lt;n&gt;</code></li>
+</ul>
+<p>Returns last <n> entries of audit history of rules for all datasources.</p>
+<ul>
+<li><code>/druid/coordinator/v1/rules/{dataSourceName}/history?interval=&lt;interval&gt;</code></li>
+</ul>
+<p>Returns audit history of rules for a specified datasource. default value of interval can be specified by setting <code>druid.audit.manager.auditHistoryMillis</code> (1 week if not configured) in Coordinator runtime.properties</p>
+<ul>
+<li><code>/druid/coordinator/v1/rules/{dataSourceName}/history?count=&lt;n&gt;</code></li>
+</ul>
+<p>Returns last <n> entries of audit history of rules for a specified datasource.</p>
+<h5><a class="anchor" aria-hidden="true" id="post-2"></a><a href="#post-2" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>POST</h5>
+<ul>
+<li><code>/druid/coordinator/v1/rules/{dataSourceName}</code></li>
+</ul>
+<p>POST with a list of rules in JSON form to update rules.</p>
+<p>Optional Header Parameters for auditing the config change can also be specified.</p>
+<table>
+<thead>
+<tr><th>Header Param Name</th><th>Description</th><th>Default</th></tr>
+</thead>
+<tbody>
+<tr><td><code>X-Druid-Author</code></td><td>author making the config change</td><td>&quot;&quot;</td></tr>
+<tr><td><code>X-Druid-Comment</code></td><td>comment describing the change being done</td><td>&quot;&quot;</td></tr>
+</tbody>
+</table>
+<h4><a class="anchor" aria-hidden="true" id="intervals"></a><a href="#intervals" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Intervals</h4>
+<p>Note that all <em>interval</em> URL parameters are ISO 8601 strings delimited by a <code>_</code> instead of a <code>/</code>
+(e.g., 2016-06-27_2016-06-28).</p>
+<h5><a class="anchor" aria-hidden="true" id="get-7"></a><a href="#get-7" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>GET</h5>
+<ul>
+<li><code>/druid/coordinator/v1/intervals</code></li>
+</ul>
+<p>Returns all intervals for all datasources with total size and count.</p>
+<ul>
+<li><code>/druid/coordinator/v1/intervals/{interval}</code></li>
+</ul>
+<p>Returns aggregated total size and count for all intervals that intersect given isointerval.</p>
+<ul>
+<li><code>/druid/coordinator/v1/intervals/{interval}?simple</code></li>
+</ul>
+<p>Returns total size and count for each interval within given isointerval.</p>
+<ul>
+<li><code>/druid/coordinator/v1/intervals/{interval}?full</code></li>
+</ul>
+<p>Returns total size and count for each datasource for each interval within given isointerval.</p>
+<h4><a class="anchor" aria-hidden="true" id="compaction-status"></a><a href="#compaction-status" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Compaction Status</h4>
+<h5><a class="anchor" aria-hidden="true" id="get-8"></a><a href="#get-8" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>GET</h5>
+<ul>
+<li><code>/druid/coordinator/v1/compaction/progress?dataSource={dataSource}</code></li>
+</ul>
+<p>Returns the total size of segments awaiting compaction for the given dataSource.
+This is only valid for dataSource which has compaction enabled.</p>
+<h5><a class="anchor" aria-hidden="true" id="get-9"></a><a href="#get-9" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>GET</h5>
+<ul>
+<li><code>/druid/coordinator/v1/compaction/status</code></li>
+</ul>
+<p>Returns the status and statistics from the latest auto compaction run of all dataSources which have/had auto compaction enabled.
+The response payload includes a list of <code>latestStatus</code> objects. Each <code>latestStatus</code> represents the status for a dataSource (which has/had auto compaction enabled).
+The <code>latestStatus</code> object has the following keys:</p>
+<ul>
+<li><code>dataSource</code>: name of the datasource for this status information</li>
+<li><code>scheduleStatus</code>: auto compaction scheduling status. Possible values are <code>NOT_ENABLED</code> and <code>RUNNING</code>. Returns <code>RUNNING</code> if the dataSource has an active auto compaction config submitted otherwise, <code>NOT_ENABLED</code></li>
+<li><code>bytesAwaitingCompaction</code>: total bytes of this datasource waiting to be compacted by the auto compaction (only consider intervals/segments that are eligible for auto compaction)</li>
+<li><code>bytesCompacted</code>: total bytes of this datasource that are already compacted with the spec set in the auto compaction config.</li>
+<li><code>bytesSkipped</code>: total bytes of this datasource that are skipped (not eligible for auto compaction) by the auto compaction.</li>
+<li><code>segmentCountAwaitingCompaction</code>: total number of segments of this datasource waiting to be compacted by the auto compaction (only consider intervals/segments that are eligible for auto compaction)</li>
+<li><code>segmentCountCompacted</code>: total number of segments of this datasource that are already compacted with the spec set in the auto compaction config.</li>
+<li><code>segmentCountSkipped</code>: total number of segments of this datasource that are skipped (not eligible for auto compaction) by the auto compaction.</li>
+<li><code>intervalCountAwaitingCompaction</code>: total number of intervals of this datasource waiting to be compacted by the auto compaction (only consider intervals/segments that are eligible for auto compaction)</li>
+<li><code>intervalCountCompacted</code>: total number of intervals of this datasource that are already compacted with the spec set in the auto compaction config.</li>
+<li><code>intervalCountSkipped</code>: total number of intervals of this datasource that are skipped (not eligible for auto compaction) by the auto compaction.</li>
+</ul>
+<h5><a class="anchor" aria-hidden="true" id="get-10"></a><a href="#get-10" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>GET</h5>
+<ul>
+<li><code>/druid/coordinator/v1/compaction/status?dataSource={dataSource}</code></li>
+</ul>
+<p>Similar to the API <code>/druid/coordinator/v1/compaction/status</code> above but filters response to only return information for the {dataSource} given.
+Note that {dataSource} given must have/had auto compaction enabled.</p>
+<h4><a class="anchor" aria-hidden="true" id="compaction-configuration"></a><a href="#compaction-configuration" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Compaction Configuration</h4>
+<h5><a class="anchor" aria-hidden="true" id="get-11"></a><a href="#get-11" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>GET</h5>
+<ul>
+<li><code>/druid/coordinator/v1/config/compaction</code></li>
+</ul>
+<p>Returns all compaction configs.</p>
+<ul>
+<li><code>/druid/coordinator/v1/config/compaction/{dataSource}</code></li>
+</ul>
+<p>Returns a compaction config of a dataSource.</p>
+<h5><a class="anchor" aria-hidden="true" id="post-3"></a><a href="#post-3" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>POST</h5>
+<ul>
+<li><code>/druid/coordinator/v1/config/compaction/taskslots?ratio={someRatio}&amp;max={someMaxSlots}</code></li>
+</ul>
+<p>Update the capacity for compaction tasks. <code>ratio</code> and <code>max</code> are used to limit the max number of compaction tasks.
+They mean the ratio of the total task slots to the compaction task slots and the maximum number of task slots for compaction tasks, respectively.
+The actual max number of compaction tasks is <code>min(max, ratio * total task slots)</code>.
+Note that <code>ratio</code> and <code>max</code> are optional and can be omitted. If they are omitted, default values (0.1 and unbounded)
+will be set for them.</p>
+<ul>
+<li><code>/druid/coordinator/v1/config/compaction</code></li>
+</ul>
+<p>Creates or updates the compaction config for a dataSource.
+See <a href="/docs/0.21.0/configuration/index.html#compaction-dynamic-configuration">Compaction Configuration</a> for configuration details.</p>
+<h5><a class="anchor" aria-hidden="true" id="delete-1"></a><a href="#delete-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>DELETE</h5>
+<ul>
+<li><code>/druid/coordinator/v1/config/compaction/{dataSource}</code></li>
+</ul>
+<p>Removes the compaction config for a dataSource.</p>
+<h4><a class="anchor" aria-hidden="true" id="server-information"></a><a href="#server-information" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Server information</h4>
+<h5><a class="anchor" aria-hidden="true" id="get-12"></a><a href="#get-12" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>GET</h5>
+<ul>
+<li><code>/druid/coordinator/v1/servers</code></li>
+</ul>
+<p>Returns a list of servers URLs using the format <code>{hostname}:{port}</code>. Note that
+processes that run with different types will appear multiple times with different
+ports.</p>
+<ul>
+<li><code>/druid/coordinator/v1/servers?simple</code></li>
+</ul>
+<p>Returns a list of server data objects in which each object has the following keys:</p>
+<ul>
+<li><code>host</code>: host URL include (<code>{hostname}:{port}</code>)</li>
+<li><code>type</code>: process type (<code>indexer-executor</code>, <code>historical</code>)</li>
+<li><code>currSize</code>: storage size currently used</li>
+<li><code>maxSize</code>: maximum storage size</li>
+<li><code>priority</code></li>
+<li><code>tier</code></li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" id="overlord"></a><a href="#overlord" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Overlord</h3>
+<h4><a class="anchor" aria-hidden="true" id="leadership-1"></a><a href="#leadership-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Leadership</h4>
+<h5><a class="anchor" aria-hidden="true" id="get-13"></a><a href="#get-13" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>GET</h5>
+<ul>
+<li><code>/druid/indexer/v1/leader</code></li>
+</ul>
+<p>Returns the current leader Overlord of the cluster. If you have multiple Overlords, just one is leading at any given time. The others are on standby.</p>
+<ul>
+<li><code>/druid/indexer/v1/isLeader</code></li>
+</ul>
+<p>This returns a JSON object with field &quot;leader&quot;, either true or false. In addition, this call returns HTTP 200 if the
+server is the current leader and HTTP 404 if not. This is suitable for use as a load balancer status check if you
+only want the active leader to be considered in-service at the load balancer.</p>
+<h4><a class="anchor" aria-hidden="true" id="tasks"></a><a href="#tasks" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Tasks</h4>
+<p>Note that all <em>interval</em> URL parameters are ISO 8601 strings delimited by a <code>_</code> instead of a <code>/</code>
+(e.g., 2016-06-27_2016-06-28).</p>
+<h5><a class="anchor" aria-hidden="true" id="get-14"></a><a href="#get-14" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>GET</h5>
+<ul>
+<li><code>/druid/indexer/v1/tasks</code></li>
+</ul>
+<p>Retrieve list of tasks. Accepts query string parameters <code>state</code>, <code>datasource</code>, <code>createdTimeInterval</code>, <code>max</code>, and <code>type</code>.</p>
+<table>
+<thead>
+<tr><th>Query Parameter</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>state</code></td><td>filter list of tasks by task state, valid options are <code>running</code>, <code>complete</code>, <code>waiting</code>, and <code>pending</code>.</td></tr>
+<tr><td><code>datasource</code></td><td>return tasks filtered by Druid datasource.</td></tr>
+<tr><td><code>createdTimeInterval</code></td><td>return tasks created within the specified interval.</td></tr>
+<tr><td><code>max</code></td><td>maximum number of <code>&quot;complete&quot;</code> tasks to return. Only applies when <code>state</code> is set to <code>&quot;complete&quot;</code>.</td></tr>
+<tr><td><code>type</code></td><td>filter tasks by task type. See <a href="/docs/0.21.0/ingestion/tasks.html">task documentation</a> for more details.</td></tr>
+</tbody>
+</table>
+<ul>
+<li><code>/druid/indexer/v1/completeTasks</code></li>
+</ul>
+<p>Retrieve list of complete tasks. Equivalent to <code>/druid/indexer/v1/tasks?state=complete</code>.</p>
+<ul>
+<li><code>/druid/indexer/v1/runningTasks</code></li>
+</ul>
+<p>Retrieve list of running tasks. Equivalent to <code>/druid/indexer/v1/tasks?state=running</code>.</p>
+<ul>
+<li><code>/druid/indexer/v1/waitingTasks</code></li>
+</ul>
+<p>Retrieve list of waiting tasks. Equivalent to <code>/druid/indexer/v1/tasks?state=waiting</code>.</p>
+<ul>
+<li><code>/druid/indexer/v1/pendingTasks</code></li>
+</ul>
+<p>Retrieve list of pending tasks. Equivalent to <code>/druid/indexer/v1/tasks?state=pending</code>.</p>
+<ul>
+<li><code>/druid/indexer/v1/task/{taskId}</code></li>
+</ul>
+<p>Retrieve the 'payload' of a task.</p>
+<ul>
+<li><code>/druid/indexer/v1/task/{taskId}/status</code></li>
+</ul>
+<p>Retrieve the status of a task.</p>
+<ul>
+<li><code>/druid/indexer/v1/task/{taskId}/segments</code></li>
+</ul>
+<p>Retrieve information about the segments of a task.</p>
+<blockquote>
+<p>This API is deprecated and will be removed in future releases.</p>
+</blockquote>
+<ul>
+<li><code>/druid/indexer/v1/task/{taskId}/reports</code></li>
+</ul>
+<p>Retrieve a <a href="/docs/0.21.0/ingestion/tasks.html#task-reports">task completion report</a> for a task. Only works for completed tasks.</p>
+<h5><a class="anchor" aria-hidden="true" id="post-4"></a><a href="#post-4" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>POST</h5>
+<ul>
+<li><code>/druid/indexer/v1/task</code></li>
+</ul>
+<p>Endpoint for submitting tasks and supervisor specs to the Overlord. Returns the taskId of the submitted task.</p>
+<ul>
+<li><code>/druid/indexer/v1/task/{taskId}/shutdown</code></li>
+</ul>
+<p>Shuts down a task.</p>
+<ul>
+<li><code>/druid/indexer/v1/datasources/{dataSource}/shutdownAllTasks</code></li>
+</ul>
+<p>Shuts down all tasks for a dataSource.</p>
+<ul>
+<li><code>/druid/indexer/v1/taskStatus</code></li>
+</ul>
+<p>Retrieve list of task status objects for list of task id strings in request body.</p>
+<h5><a class="anchor" aria-hidden="true" id="delete-2"></a><a href="#delete-2" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>DELETE</h5>
+<ul>
+<li><code>/druid/indexer/v1/pendingSegments/{dataSource}</code></li>
+</ul>
+<p>Manually clean up pending segments table in metadata storage for <code>datasource</code>. Returns a JSON object response with
+<code>numDeleted</code> and count of rows deleted from the pending segments table. This API is used by the
+<code>druid.coordinator.kill.pendingSegments.on</code> <a href="/docs/0.21.0/configuration/index.html#coordinator-operation">coordinator setting</a>
+which automates this operation to perform periodically.</p>
+<h4><a class="anchor" aria-hidden="true" id="supervisors"></a><a href="#supervisors" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Supervisors</h4>
+<h5><a class="anchor" aria-hidden="true" id="get-15"></a><a href="#get-15" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>GET</h5>
+<ul>
+<li><code>/druid/indexer/v1/supervisor</code></li>
+</ul>
+<p>Returns a list of strings of the currently active supervisor ids.</p>
+<ul>
+<li><code>/druid/indexer/v1/supervisor?full</code></li>
+</ul>
+<p>Returns a list of objects of the currently active supervisors.</p>
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>id</code></td><td>String</td><td>supervisor unique identifier</td></tr>
+<tr><td><code>state</code></td><td>String</td><td>basic state of the supervisor. Available states:<code>UNHEALTHY_SUPERVISOR</code>, <code>UNHEALTHY_TASKS</code>, <code>PENDING</code>, <code>RUNNING</code>, <code>SUSPENDED</code>, <code>STOPPING</code>. Check <a href="/docs/0.21.0/development/extensions-core/kafka-ingestion.html#operations">Kafka Docs</a> for details.</td></tr>
+<tr><td><code>detailedState</code></td><td>String</td><td>supervisor specific state. (See documentation of specific supervisor for details), e.g. <a href="/docs/0.21.0/development/extensions-core/kafka-ingestion.html">Kafka</a> or <a href="/docs/0.21.0/development/extensions-core/kinesis-ingestion.html">Kinesis</a>)</td></tr>
+<tr><td><code>healthy</code></td><td>Boolean</td><td>true or false indicator of overall supervisor health</td></tr>
+<tr><td><code>spec</code></td><td>SupervisorSpec</td><td>json specification of supervisor (See Supervisor Configuration for details)</td></tr>
+</tbody>
+</table>
+<ul>
+<li><code>/druid/indexer/v1/supervisor?state=true</code></li>
+</ul>
+<p>Returns a list of objects of the currently active supervisors and their current state.</p>
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>id</code></td><td>String</td><td>supervisor unique identifier</td></tr>
+<tr><td><code>state</code></td><td>String</td><td>basic state of the supervisor. Available states: <code>UNHEALTHY_SUPERVISOR</code>, <code>UNHEALTHY_TASKS</code>, <code>PENDING</code>, <code>RUNNING</code>, <code>SUSPENDED</code>, <code>STOPPING</code>. Check <a href="/docs/0.21.0/development/extensions-core/kafka-ingestion.html#operations">Kafka Docs</a> for details.</td></tr>
+<tr><td><code>detailedState</code></td><td>String</td><td>supervisor specific state. (See documentation of the specific supervisor for details, e.g. <a href="/docs/0.21.0/development/extensions-core/kafka-ingestion.html">Kafka</a> or <a href="/docs/0.21.0/development/extensions-core/kinesis-ingestion.html">Kinesis</a>)</td></tr>
+<tr><td><code>healthy</code></td><td>Boolean</td><td>true or false indicator of overall supervisor health</td></tr>
+<tr><td><code>suspended</code></td><td>Boolean</td><td>true or false indicator of whether the supervisor is in suspended state</td></tr>
+</tbody>
+</table>
+<ul>
+<li><code>/druid/indexer/v1/supervisor/&lt;supervisorId&gt;</code></li>
+</ul>
+<p>Returns the current spec for the supervisor with the provided ID.</p>
+<ul>
+<li><code>/druid/indexer/v1/supervisor/&lt;supervisorId&gt;/status</code></li>
+</ul>
+<p>Returns the current status of the supervisor with the provided ID.</p>
+<ul>
+<li><code>/druid/indexer/v1/supervisor/history</code></li>
+</ul>
+<p>Returns an audit history of specs for all supervisors (current and past).</p>
+<ul>
+<li><code>/druid/indexer/v1/supervisor/&lt;supervisorId&gt;/history</code></li>
+</ul>
+<p>Returns an audit history of specs for the supervisor with the provided ID.</p>
+<h5><a class="anchor" aria-hidden="true" id="post-5"></a><a href="#post-5" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>POST</h5>
+<ul>
+<li><code>/druid/indexer/v1/supervisor</code></li>
+</ul>
+<p>Create a new supervisor or update an existing one.</p>
+<ul>
+<li><code>/druid/indexer/v1/supervisor/&lt;supervisorId&gt;/suspend</code></li>
+</ul>
+<p>Suspend the current running supervisor of the provided ID. Responds with updated SupervisorSpec.</p>
+<ul>
+<li><code>/druid/indexer/v1/supervisor/suspendAll</code></li>
+</ul>
+<p>Suspend all supervisors at once.</p>
+<ul>
+<li><code>/druid/indexer/v1/supervisor/&lt;supervisorId&gt;/resume</code></li>
+</ul>
+<p>Resume indexing tasks for a supervisor. Responds with updated SupervisorSpec.</p>
+<ul>
+<li><code>/druid/indexer/v1/supervisor/resumeAll</code></li>
+</ul>
+<p>Resume all supervisors at once.</p>
+<ul>
+<li><code>/druid/indexer/v1/supervisor/&lt;supervisorId&gt;/reset</code></li>
+</ul>
+<p>Reset the specified supervisor.</p>
+<ul>
+<li><code>/druid/indexer/v1/supervisor/&lt;supervisorId&gt;/terminate</code></li>
+</ul>
+<p>Terminate a supervisor of the provided ID.</p>
+<ul>
+<li><code>/druid/indexer/v1/supervisor/terminateAll</code></li>
+</ul>
+<p>Terminate all supervisors at once.</p>
+<ul>
+<li><code>/druid/indexer/v1/supervisor/&lt;supervisorId&gt;/shutdown</code></li>
+</ul>
+<p>Shutdown a supervisor.</p>
+<blockquote>
+<p>This API is deprecated and will be removed in future releases.
+Please use the equivalent 'terminate' instead.</p>
+</blockquote>
+<h4><a class="anchor" aria-hidden="true" id="dynamic-configuration"></a><a href="#dynamic-configuration" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Dynamic configuration</h4>
+<p>See <a href="/docs/0.21.0/configuration/index.html#overlord-dynamic-configuration">Overlord Dynamic Configuration</a> for details.</p>
+<p>Note that all <em>interval</em> URL parameters are ISO 8601 strings delimited by a <code>_</code> instead of a <code>/</code>
+(e.g., 2016-06-27_2016-06-28).</p>
+<h5><a class="anchor" aria-hidden="true" id="get-16"></a><a href="#get-16" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>GET</h5>
+<ul>
+<li><code>/druid/indexer/v1/worker</code></li>
+</ul>
+<p>Retrieves current overlord dynamic configuration.</p>
+<ul>
+<li><code>/druid/indexer/v1/worker/history?interval={interval}&amp;counter={count}</code></li>
+</ul>
+<p>Retrieves history of changes to overlord dynamic configuration. Accepts <code>interval</code> and  <code>count</code> query string parameters
+to filter by interval and limit the number of results respectively.</p>
+<ul>
+<li><code>/druid/indexer/v1/workers</code></li>
+</ul>
+<p>Retrieves a list of all the worker nodes in the cluster along with its metadata.</p>
+<ul>
+<li><code>/druid/indexer/v1/scaling</code></li>
+</ul>
+<p>Retrieves overlord scaling events if auto-scaling runners are in use.</p>
+<h5><a class="anchor" aria-hidden="true" id="post-6"></a><a href="#post-6" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>POST</h5>
+<ul>
+<li>/druid/indexer/v1/worker</li>
+</ul>
+<p>Update overlord dynamic worker configuration.</p>
+<h2><a class="anchor" aria-hidden="true" id="data-server"></a><a href="#data-server" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Data Server</h2>
+<p>This section documents the API endpoints for the processes that reside on Data servers (MiddleManagers/Peons and Historicals)
+in the suggested <a href="/docs/0.21.0/design/processes.html#server-types">three-server configuration</a>.</p>
+<h3><a class="anchor" aria-hidden="true" id="middlemanager"></a><a href="#middlemanager" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>MiddleManager</h3>
+<h5><a class="anchor" aria-hidden="true" id="get-17"></a><a href="#get-17" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>GET</h5>
+<ul>
+<li><code>/druid/worker/v1/enabled</code></li>
+</ul>
+<p>Check whether a MiddleManager is in an enabled or disabled state. Returns JSON object keyed by the combined <code>druid.host</code>
+and <code>druid.port</code> with the boolean state as the value.</p>
+<pre><code class="hljs css language-json">{<span class="hljs-attr">"localhost:8091"</span>:<span class="hljs-literal">true</span>}
+</code></pre>
+<ul>
+<li><code>/druid/worker/v1/tasks</code></li>
+</ul>
+<p>Retrieve a list of active tasks being run on MiddleManager. Returns JSON list of taskid strings.  Normal usage should
+prefer to use the <code>/druid/indexer/v1/tasks</code> <a href="#overlord">Overlord API</a> or one of it's task state specific variants instead.</p>
+<pre><code class="hljs css language-json">[<span class="hljs-string">"index_wikiticker_2019-02-11T02:20:15.316Z"</span>]
+</code></pre>
+<ul>
+<li><code>/druid/worker/v1/task/{taskid}/log</code></li>
+</ul>
+<p>Retrieve task log output stream by task id. Normal usage should prefer to use the <code>/druid/indexer/v1/task/{taskId}/log</code>
+<a href="#overlord">Overlord API</a> instead.</p>
+<h5><a class="anchor" aria-hidden="true" id="post-7"></a><a href="#post-7" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>POST</h5>
+<ul>
+<li><code>/druid/worker/v1/disable</code></li>
+</ul>
+<p>'Disable' a MiddleManager, causing it to stop accepting new tasks but complete all existing tasks. Returns JSON  object
+keyed by the combined <code>druid.host</code> and <code>druid.port</code>:</p>
+<pre><code class="hljs css language-json">{<span class="hljs-attr">"localhost:8091"</span>:<span class="hljs-string">"disabled"</span>}
+</code></pre>
+<ul>
+<li><code>/druid/worker/v1/enable</code></li>
+</ul>
+<p>'Enable' a MiddleManager, allowing it to accept new tasks again if it was previously disabled. Returns JSON  object
+keyed by the combined <code>druid.host</code> and <code>druid.port</code>:</p>
+<pre><code class="hljs css language-json">{<span class="hljs-attr">"localhost:8091"</span>:<span class="hljs-string">"enabled"</span>}
+</code></pre>
+<ul>
+<li><code>/druid/worker/v1/task/{taskid}/shutdown</code></li>
+</ul>
+<p>Shutdown a running task by <code>taskid</code>. Normal usage should prefer to use the <code>/druid/indexer/v1/task/{taskId}/shutdown</code>
+<a href="#overlord">Overlord API</a> instead. Returns JSON:</p>
+<pre><code class="hljs css language-json">{<span class="hljs-attr">"task"</span>:<span class="hljs-string">"index_kafka_wikiticker_f7011f8ffba384b_fpeclode"</span>}
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="peon"></a><a href="#peon" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Peon</h3>
+<h4><a class="anchor" aria-hidden="true" id="get-18"></a><a href="#get-18" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>GET</h4>
+<ul>
+<li><code>/druid/worker/v1/chat/{taskId}/rowStats</code></li>
+</ul>
+<p>Retrieve a live row stats report from a Peon. See <a href="/docs/0.21.0/ingestion/tasks.html#task-reports">task reports</a> for more details.</p>
+<ul>
+<li><code>/druid/worker/v1/chat/{taskId}/unparseableEvents</code></li>
+</ul>
+<p>Retrieve an unparseable events report from a Peon. See <a href="/docs/0.21.0/ingestion/tasks.html#task-reports">task reports</a> for more details.</p>
+<h3><a class="anchor" aria-hidden="true" id="historical"></a><a href="#historical" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Historical</h3>
+<h4><a class="anchor" aria-hidden="true" id="segment-loading-1"></a><a href="#segment-loading-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Segment Loading</h4>
+<h5><a class="anchor" aria-hidden="true" id="get-19"></a><a href="#get-19" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>GET</h5>
+<ul>
+<li><code>/druid/historical/v1/loadstatus</code></li>
+</ul>
+<p>Returns JSON of the form <code>{&quot;cacheInitialized&quot;:&lt;value&gt;}</code>, where value is either <code>true</code> or <code>false</code> indicating if all
+segments in the local cache have been loaded. This can be used to know when a Historical process is ready
+to be queried after a restart.</p>
+<ul>
+<li><code>/druid/historical/v1/readiness</code></li>
+</ul>
+<p>Similar to <code>/druid/historical/v1/loadstatus</code>, but instead of returning JSON with a flag, responses 200 OK if segments
+in the local cache have been loaded, and 503 SERVICE UNAVAILABLE, if they haven't.</p>
+<h2><a class="anchor" aria-hidden="true" id="query-server"></a><a href="#query-server" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Query Server</h2>
+<p>This section documents the API endpoints for the processes that reside on Query servers (Brokers) in the suggested <a href="/docs/0.21.0/design/processes.html#server-types">three-server configuration</a>.</p>
+<h3><a class="anchor" aria-hidden="true" id="broker"></a><a href="#broker" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Broker</h3>
+<h4><a class="anchor" aria-hidden="true" id="datasource-information"></a><a href="#datasource-information" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Datasource Information</h4>
+<p>Note that all <em>interval</em> URL parameters are ISO 8601 strings delimited by a <code>_</code> instead of a <code>/</code>
+(e.g., 2016-06-27_2016-06-28).</p>
+<h5><a class="anchor" aria-hidden="true" id="get-20"></a><a href="#get-20" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>GET</h5>
+<ul>
+<li><code>/druid/v2/datasources</code></li>
+</ul>
+<p>Returns a list of queryable datasources.</p>
+<ul>
+<li><code>/druid/v2/datasources/{dataSourceName}</code></li>
+</ul>
+<p>Returns the dimensions and metrics of the datasource. Optionally, you can provide request parameter &quot;full&quot; to get list of served intervals with dimensions and metrics being served for those intervals. You can also provide request param &quot;interval&quot; explicitly to refer to a particular interval.</p>
+<p>If no interval is specified, a default interval spanning a configurable period before the current time will be used. The default duration of this interval is specified in ISO 8601 duration format via:</p>
+<p>druid.query.segmentMetadata.defaultHistory</p>
+<ul>
+<li><code>/druid/v2/datasources/{dataSourceName}/dimensions</code></li>
+</ul>
+<p>Returns the dimensions of the datasource.</p>
+<blockquote>
+<p>This API is deprecated and will be removed in future releases. Please use <a href="/docs/0.21.0/querying/segmentmetadataquery.html">SegmentMetadataQuery</a> instead
+which provides more comprehensive information and supports all dataSource types including streaming dataSources. It's also encouraged to use <a href="/docs/0.21.0/querying/sql.html#metadata-tables">INFORMATION_SCHEMA tables</a>
+if you're using SQL.</p>
+</blockquote>
+<ul>
+<li><code>/druid/v2/datasources/{dataSourceName}/metrics</code></li>
+</ul>
+<p>Returns the metrics of the datasource.</p>
+<blockquote>
+<p>This API is deprecated and will be removed in future releases. Please use <a href="/docs/0.21.0/querying/segmentmetadataquery.html">SegmentMetadataQuery</a> instead
+which provides more comprehensive information and supports all dataSource types including streaming dataSources. It's also encouraged to use <a href="/docs/0.21.0/querying/sql.html#metadata-tables">INFORMATION_SCHEMA tables</a>
+if you're using SQL.</p>
+</blockquote>
+<ul>
+<li><code>/druid/v2/datasources/{dataSourceName}/candidates?intervals={comma-separated-intervals}&amp;numCandidates={numCandidates}</code></li>
+</ul>
+<p>Returns segment information lists including server locations for the given datasource and intervals. If &quot;numCandidates&quot; is not specified, it will return all servers for each interval.</p>
+<h4><a class="anchor" aria-hidden="true" id="load-status"></a><a href="#load-status" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Load Status</h4>
+<h5><a class="anchor" aria-hidden="true" id="get-21"></a><a href="#get-21" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>GET</h5>
+<ul>
+<li><code>/druid/broker/v1/loadstatus</code></li>
+</ul>
+<p>Returns a flag indicating if the Broker knows about all segments in the cluster. This can be used to know when a Broker process is ready to be queried after a restart.</p>
+<ul>
+<li><code>/druid/broker/v1/readiness</code></li>
+</ul>
+<p>Similar to <code>/druid/broker/v1/loadstatus</code>, but instead of returning a JSON, responses 200 OK if its ready and otherwise 503 SERVICE UNAVAILABLE.</p>
+<h4><a class="anchor" aria-hidden="true" id="queries"></a><a href="#queries" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Queries</h4>
+<h5><a class="anchor" aria-hidden="true" id="post-8"></a><a href="#post-8" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>POST</h5>
+<ul>
+<li><code>/druid/v2/</code></li>
+</ul>
+<p>The endpoint for submitting queries. Accepts an option <code>?pretty</code> that pretty prints the results.</p>
+<ul>
+<li><code>/druid/v2/candidates/</code></li>
+</ul>
+<p>Returns segment information lists including server locations for the given query..</p>
+<h3><a class="anchor" aria-hidden="true" id="router"></a><a href="#router" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Router</h3>
+<h4><a class="anchor" aria-hidden="true" id="get-22"></a><a href="#get-22" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>GET</h4>
+<ul>
+<li><code>/druid/v2/datasources</code></li>
+</ul>
+<p>Returns a list of queryable datasources.</p>
+<ul>
+<li><code>/druid/v2/datasources/{dataSourceName}</code></li>
+</ul>
+<p>Returns the dimensions and metrics of the datasource.</p>
+<ul>
+<li><code>/druid/v2/datasources/{dataSourceName}/dimensions</code></li>
+</ul>
+<p>Returns the dimensions of the datasource.</p>
+<ul>
+<li><code>/druid/v2/datasources/{dataSourceName}/metrics</code></li>
+</ul>
+<p>Returns the metrics of the datasource.</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/0.21.0/operations/http-compression.html"><span class="arrow-prev">← </span><span>HTTP compression</span></a><a class="docs-next button" href="/docs/0.21.0/operations/high-availability.html"><span>High availability</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#common">Common</a><ul class="toc-headings"><li><a href="#process-information">Process information</a></li></ul></li><li><a href="#master-server">Master Server</a><ul class="toc-headings"><li><a href="#coordinator">Coordinator</a></li><li><a href="#overlord">Overlord</a></li></ul></li><li><a href="#data-server">Data Server</a><ul class="toc-headings"><li><a href="#middlemanager">MiddleManager</a></li><li><a href="#peon">Peon</a></li><li><a href="#historical">Historical</a></li></ul></li><li><a href="#query-server">Query Server</a><ul class="toc-headings"><li><a href="#broker">Broker</a></li><li><a href="#router">Router</a></li></ul></li></ul></nav></div><footer class="nav-footer druid-footer" id="footer"><div class="container"><div class="text-center"><p><a href="/technology">Technology</a> · <a href="/use-cases">Use Cases</a> · <a href="/druid-powered">Powered by Druid</a> · <a href="/docs/0.21.0/latest">Docs</a> · <a href="/community/">Community</a> · <a href="/downloads.html">Download</a> · <a href="/faq">FAQ</a></p></div><div class="text-center"><a title="Join the user group" href="https://groups.google.com/forum/#!forum/druid-user" target="_blank"><span class="fa fa-comments"></span></a> · <a title="Follow Druid" href="https://twitter.com/druidio" target="_blank"><span class="fab fa-twitter"></span></a> · <a title="Download via Apache" href="https://www.apache.org/dyn/closer.cgi?path=/incubator/druid/{{ site.druid_versions[0].versions[0].version }}/apache-druid-{{ site.druid_versions[0].versions[0].version }}-bin.tar.gz" target="_blank"><span class="fas fa-feather"></span></a> · <a title="GitHub" href="https://github.com/apache/druid" target="_blank"><span class="fab fa-github"></span></a></div><div class="text-center license">Copyright © 2019 <a href="https://www.apache.org/" target="_blank">Apache Software Foundation</a>.<br/>Except where otherwise noted, licensed under <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.<br/>Apache Druid, Druid, and the Druid logo are either registered trademarks or trademarks of The Apache Software Foundation in the United States and other countries.</div></div></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '2de99082a9f38e49dfaa059bbe4c901d',
+                indexName: 'apache_druid',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["language:en","version:0.21.0"]}
+              });
+            </script></body></html>
