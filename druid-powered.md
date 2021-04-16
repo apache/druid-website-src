@@ -509,6 +509,10 @@ is what they have to say:
 
 The [Pollfish](https://www.pollfish.com/) real-time analytics platform enables researchers to analyze survey data from over half-a-billion consumers across the world, informing advertising, branding, market research, content, and product strategies. Druid is used alongside Apache Kafka, Spark, Flink, Akka Streams, Finatra / Finagle microservices, Cassandra, PostgreSQL, Hive, and Scruid – an open source Scala library for Apache Druid.
 
+## Poshmark
+
+Poshmark uses Druid for reporting to monitor key business metrics and data exploration in real-time.
+
 ## PubNative
 
 PubNative uses Druid for its real-time reports and analysis of millions of daily ad views, clicks, conversions and other events.
