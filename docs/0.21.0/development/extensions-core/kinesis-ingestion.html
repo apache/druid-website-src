@@ -1,0 +1,506 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Amazon Kinesis ingestion · Apache Druid</title><meta name="viewport" content="width=device-width"/><link rel="canonical" href="https://druid.apache.org/docs/0.21.0/development/extensions-core/kinesis-ingestion.html"/><meta name="generator" content="Docusaurus"/><meta name="description" content="&lt;!--"/><meta name="docsearch:language" content="en"/><meta name="docsearch:version" content="0.21.0" /><meta property="og:title" content="Amazon Kinesis ingestion · Apache Druid"/><meta property="og:type" content="website"/><meta property="og:url" content="https://druid.apache.org/index.html"/><meta property="og:description" content="&lt;!--"/><meta property="og:image" content="https://druid.apache.org/img/druid_nav.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://druid.apache.org/img/druid_nav.png"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-131010415-1"></script><script>
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments); }
+              gtag('js', new Date());
+              gtag('config', 'UA-131010415-1');
+            </script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"/><link rel="stylesheet" href="/css/code-block-buttons.css"/><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script><script type="text/javascript" src="/js/code-block-buttons.js"></script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/druid_nav.png" alt="Apache Druid"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/technology" target="_self">Technology</a></li><li class=""><a href="/use-cases" target="_self">Use Cases</a></li><li class=""><a href="/druid-powered" target="_self">Powered By</a></li><li class="siteNavGroupActive"><a href="/docs/0.21.0/design/index.html" target="_self">Docs</a></li><li class=""><a href="/community/" target="_self">Community</a></li><li class=""><a href="https://www.apache.org" target="_self">Apache</a></li><li class=""><a href="/downloads.html" target="_self">Download</a></li><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Stream ingestion</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Getting started<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.21.0/design/index.html">Introduction to Apache Druid</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/tutorials/index.html">Quickstart</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/tutorials/docker.html">Docker</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/single-server.html">Single server deployment</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/tutorials/cluster.html">Clustered deployment</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Tutorials<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.21.0/tutorials/tutorial-batch.html">Loading files natively</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/tutorials/tutorial-kafka.html">Load from Apache Kafka</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/tutorials/tutorial-batch-hadoop.html">Load from Apache Hadoop</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/tutorials/tutorial-query.html">Querying data</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/tutorials/tutorial-rollup.html">Roll-up</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/tutorials/tutorial-retention.html">Configuring data retention</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/tutorials/tutorial-update-data.html">Updating existing data</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/tutorials/tutorial-compaction.html">Compacting segments</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/tutorials/tutorial-delete-data.html">Deleting data</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/tutorials/tutorial-ingestion-spec.html">Writing an ingestion spec</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/tutorials/tutorial-transform-spec.html">Transforming input data</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/tutorials/tutorial-kerberos-hadoop.html">Kerberized HDFS deep storage</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Design<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.21.0/design/architecture.html">Design</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/design/segments.html">Segments</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/design/processes.html">Processes and servers</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/dependencies/deep-storage.html">Deep storage</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/dependencies/metadata-storage.html">Metadata storage</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/dependencies/zookeeper.html">ZooKeeper</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Ingestion<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.21.0/ingestion/index.html">Ingestion</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/ingestion/data-formats.html">Data formats</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/ingestion/schema-design.html">Schema design tips</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/ingestion/data-management.html">Data management</a></li><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Stream ingestion</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/kafka-ingestion.html">Apache Kafka</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/0.21.0/development/extensions-core/kinesis-ingestion.html">Amazon Kinesis</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/ingestion/tranquility.html">Tranquility</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Batch ingestion</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.21.0/ingestion/native-batch.html">Native batch</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/ingestion/hadoop.html">Hadoop-based</a></li></ul></div><li class="navListItem"><a class="navItem" href="/docs/0.21.0/ingestion/tasks.html">Task reference</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/ingestion/faq.html">Troubleshooting FAQ</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Querying<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/sql.html">Druid SQL</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/querying.html">Native queries</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/query-execution.html">Query execution</a></li><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Concepts</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/datasource.html">Datasources</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/joins.html">Joins</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/lookups.html">Lookups</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/multi-value-dimensions.html">Multi-value dimensions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/multitenancy.html">Multitenancy</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/caching.html">Query caching</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/query-context.html">Context parameters</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Native query types</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/timeseriesquery.html">Timeseries</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/topnquery.html">TopN</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/groupbyquery.html">GroupBy</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/scan-query.html">Scan</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/searchquery.html">Search</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/timeboundaryquery.html">TimeBoundary</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/segmentmetadataquery.html">SegmentMetadata</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/datasourcemetadataquery.html">DatasourceMetadata</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Native query components</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/filters.html">Filters</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/granularities.html">Granularities</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/dimensionspecs.html">Dimensions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/aggregations.html">Aggregations</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/post-aggregations.html">Post-aggregations</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/misc/math-expr.html">Expressions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/having.html">Having filters (groupBy)</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/limitspec.html">Sorting and limiting (groupBy)</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/topnmetricspec.html">Sorting (topN)</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/sorting-orders.html">String comparators</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/virtual-columns.html">Virtual columns</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/geo.html">Spatial filters</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Configuration<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.21.0/configuration/index.html">Configuration reference</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions.html">Extensions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/configuration/logging.html">Logging</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Operations<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/druid-console.html">Web console</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/getting-started.html">Getting started with Apache Druid</a></li><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Security</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/security-overview.html">Security overview</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/security-user-auth.html">User authentication and authorization</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/auth-ldap.html">LDAP auth</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/password-provider.html">Password providers</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/tls-support.html">TLS support</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Performance tuning</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/basic-cluster-tuning.html">Basic cluster tuning</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/segment-optimization.html">Segment Size Optimization</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/http-compression.html">HTTP compression</a></li></ul></div><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/api-reference.html">API reference</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/high-availability.html">High availability</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/rolling-updates.html">Rolling updates</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/rule-configuration.html">Retaining or automatically dropping data</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/metrics.html">Metrics</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/alerts.html">Alerts</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/other-hadoop.html">Working with different versions of Apache Hadoop</a></li><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Misc</h4><ul><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/management-uis.html">Legacy Management UIs</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/dump-segment.html">dump-segment tool</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/reset-cluster.html">reset-cluster tool</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/insert-segment-to-db.html">insert-segment-to-db tool</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/pull-deps.html">pull-deps tool</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/deep-storage-migration.html">Deep storage migration</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/export-metadata.html">Export Metadata Tool</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/metadata-migration.html">Metadata Migration</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/operations/use_sbt_to_build_fat_jar.html">Content for build.sbt</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Development<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/overview.html">Developing on Druid</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/modules.html">Creating extensions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/javascript.html">JavaScript functionality</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/build.html">Build from source</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/versioning.html">Versioning</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/experimental.html">Experimental features</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Misc<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.21.0/misc/papers-and-talks.html">Papers</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Hidden<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/0.21.0/comparisons/druid-vs-elasticsearch.html">Apache Druid vs Elasticsearch</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/comparisons/druid-vs-key-value.html">Apache Druid vs. Key/Value Stores (HBase/Cassandra/OpenTSDB)</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/comparisons/druid-vs-kudu.html">Apache Druid vs Kudu</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/comparisons/druid-vs-redshift.html">Apache Druid vs Redshift</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/comparisons/druid-vs-spark.html">Apache Druid vs Spark</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/comparisons/druid-vs-sql-on-hadoop.html">Apache Druid vs SQL-on-Hadoop</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/design/auth.html">Authentication and Authorization</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/design/broker.html">Broker</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/design/coordinator.html">Coordinator Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/design/historical.html">Historical Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/design/indexer.html">Indexer Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/design/indexing-service.html">Indexing Service</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/design/middlemanager.html">MiddleManager Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/design/overlord.html">Overlord Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/design/router.html">Router Process</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/design/peons.html">Peons</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/approximate-histograms.html">Approximate Histogram aggregators</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/avro.html">Apache Avro</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/azure.html">Microsoft Azure</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/bloom-filter.html">Bloom Filter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/datasketches-extension.html">DataSketches extension</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/datasketches-hll.html">DataSketches HLL Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/datasketches-quantiles.html">DataSketches Quantiles Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/datasketches-theta.html">DataSketches Theta Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/datasketches-tuple.html">DataSketches Tuple Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/druid-basic-security.html">Basic Security</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/druid-kerberos.html">Kerberos</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/druid-lookups.html">Cached Lookup Module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/druid-ranger-security.html">Apache Ranger Security</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/google.html">Google Cloud Storage</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/hdfs.html">HDFS</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/kafka-extraction-namespace.html">Apache Kafka Lookups</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/lookups-cached-global.html">Globally Cached Lookups</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/mysql.html">MySQL Metadata Store</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/orc.html">ORC Extension</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/druid-pac4j.html">Druid pac4j based Security extension</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/parquet.html">Apache Parquet Extension</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/postgresql.html">PostgreSQL Metadata Store</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/protobuf.html">Protobuf</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/s3.html">S3-compatible</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/simple-client-sslcontext.html">Simple SSLContext Provider Module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/stats.html">Stats aggregator</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-core/test-stats.html">Test Stats Aggregators</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/ambari-metrics-emitter.html">Ambari Metrics Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/cassandra.html">Apache Cassandra</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/cloudfiles.html">Rackspace Cloud Files</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/distinctcount.html">DistinctCount Aggregator</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/graphite.html">Graphite Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/influx.html">InfluxDB Line Protocol Parser</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/influxdb-emitter.html">InfluxDB Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/kafka-emitter.html">Kafka Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/materialized-view.html">Materialized View</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/momentsketch-quantiles.html">Moment Sketches for Approximate Quantiles module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/moving-average-query.html">Moving Average Query</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/opentsdb-emitter.html">OpenTSDB Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/redis-cache.html">Druid Redis Cache</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/sqlserver.html">Microsoft SQLServer</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/statsd.html">StatsD Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/tdigestsketch-quantiles.html">T-Digest Quantiles Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/thrift.html">Thrift</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/time-min-max.html">Timestamp Min/Max aggregators</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/gce-extensions.html">GCE Extensions</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/development/extensions-contrib/aliyun-oss.html">Aliyun OSS</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/hll-old.html">Cardinality/HyperUnique aggregators</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/querying/select-query.html">Select</a></li><li class="navListItem"><a class="navItem" href="/docs/0.21.0/ingestion/standalone-realtime.html">Realtime Process</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/apache/druid/edit/master/docs/development/extensions-core/kinesis-ingestion.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">Amazon Kinesis ingestion</h1></header><article><div><span><!--
+  ~ Licensed to the Apache Software Foundation (ASF) under one
+  ~ or more contributor license agreements.  See the NOTICE file
+  ~ distributed with this work for additional information
+  ~ regarding copyright ownership.  The ASF licenses this file
+  ~ to you under the Apache License, Version 2.0 (the
+  ~ "License"); you may not use this file except in compliance
+  ~ with the License.  You may obtain a copy of the License at
+  ~
+  ~   http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an
+  ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~ KIND, either express or implied.  See the License for the
+  ~ specific language governing permissions and limitations
+  ~ under the License.
+  -->
+<p>Similar to the <a href="/docs/0.21.0/development/extensions-core/kafka-ingestion.html">Kafka indexing service</a>, the Kinesis indexing service enables the configuration of <em>supervisors</em> on the Overlord, which facilitate ingestion from
+Kinesis by managing the creation and lifetime of Kinesis indexing tasks. These indexing tasks read events using Kinesis's own
+Shards and Sequence Number mechanism and are therefore able to provide guarantees of exactly-once ingestion.
+The supervisor oversees the state of the indexing tasks to coordinate handoffs, manage failures,
+and ensure that the scalability and replication requirements are maintained.</p>
+<p>The Kinesis indexing service is provided as the <code>druid-kinesis-indexing-service</code> core Apache Druid extension (see
+<a href="/docs/0.21.0/development/extensions.html#loading-extensions">Including Extensions</a>). Please note that this is
+currently designated as an <em>experimental feature</em> and is subject to the usual
+<a href="/docs/0.21.0/development/experimental.html">experimental caveats</a>.</p>
+<h2><a class="anchor" aria-hidden="true" id="submitting-a-supervisor-spec"></a><a href="#submitting-a-supervisor-spec" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Submitting a Supervisor Spec</h2>
+<p>The Kinesis indexing service requires that the <code>druid-kinesis-indexing-service</code> extension be loaded on both the Overlord
+and the MiddleManagers. A supervisor for a dataSource is started by submitting a supervisor spec via HTTP POST to
+<code>http://&lt;OVERLORD_IP&gt;:&lt;OVERLORD_PORT&gt;/druid/indexer/v1/supervisor</code>, for example:</p>
+<pre><code class="hljs">curl -X POST -H <span class="hljs-string">'Content-Type: application/json'</span> -d @supervisor-spec.json http:<span class="hljs-regexp">//</span>localhost:<span class="hljs-number">8090</span><span class="hljs-regexp">/druid/i</span>ndexer<span class="hljs-regexp">/v1/</span>supervisor
+</code></pre>
+<p>A sample supervisor spec is shown below:</p>
+<pre><code class="hljs css language-json">{
+  <span class="hljs-attr">"type"</span>: <span class="hljs-string">"kinesis"</span>,
+  <span class="hljs-attr">"dataSchema"</span>: {
+    <span class="hljs-attr">"dataSource"</span>: <span class="hljs-string">"metrics-kinesis"</span>,
+    <span class="hljs-attr">"timestampSpec"</span>: {
+      <span class="hljs-attr">"column"</span>: <span class="hljs-string">"timestamp"</span>,
+      <span class="hljs-attr">"format"</span>: <span class="hljs-string">"auto"</span>
+    },
+    <span class="hljs-attr">"dimensionsSpec"</span>: {
+      <span class="hljs-attr">"dimensions"</span>: [],
+      <span class="hljs-attr">"dimensionExclusions"</span>: [
+        <span class="hljs-string">"timestamp"</span>,
+        <span class="hljs-string">"value"</span>
+      ]
+    },
+    <span class="hljs-attr">"metricsSpec"</span>: [
+      {
+        <span class="hljs-attr">"name"</span>: <span class="hljs-string">"count"</span>,
+        <span class="hljs-attr">"type"</span>: <span class="hljs-string">"count"</span>
+      },
+      {
+        <span class="hljs-attr">"name"</span>: <span class="hljs-string">"value_sum"</span>,
+        <span class="hljs-attr">"fieldName"</span>: <span class="hljs-string">"value"</span>,
+        <span class="hljs-attr">"type"</span>: <span class="hljs-string">"doubleSum"</span>
+      },
+      {
+        <span class="hljs-attr">"name"</span>: <span class="hljs-string">"value_min"</span>,
+        <span class="hljs-attr">"fieldName"</span>: <span class="hljs-string">"value"</span>,
+        <span class="hljs-attr">"type"</span>: <span class="hljs-string">"doubleMin"</span>
+      },
+      {
+        <span class="hljs-attr">"name"</span>: <span class="hljs-string">"value_max"</span>,
+        <span class="hljs-attr">"fieldName"</span>: <span class="hljs-string">"value"</span>,
+        <span class="hljs-attr">"type"</span>: <span class="hljs-string">"doubleMax"</span>
+      }
+    ],
+    <span class="hljs-attr">"granularitySpec"</span>: {
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"uniform"</span>,
+      <span class="hljs-attr">"segmentGranularity"</span>: <span class="hljs-string">"HOUR"</span>,
+      <span class="hljs-attr">"queryGranularity"</span>: <span class="hljs-string">"NONE"</span>
+    }
+  },
+  <span class="hljs-attr">"ioConfig"</span>: {
+    <span class="hljs-attr">"stream"</span>: <span class="hljs-string">"metrics"</span>,
+    <span class="hljs-attr">"inputFormat"</span>: {
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"json"</span>
+    },
+    <span class="hljs-attr">"endpoint"</span>: <span class="hljs-string">"kinesis.us-east-1.amazonaws.com"</span>,
+    <span class="hljs-attr">"taskCount"</span>: <span class="hljs-number">1</span>,
+    <span class="hljs-attr">"replicas"</span>: <span class="hljs-number">1</span>,
+    <span class="hljs-attr">"taskDuration"</span>: <span class="hljs-string">"PT1H"</span>,
+    <span class="hljs-attr">"recordsPerFetch"</span>: <span class="hljs-number">2000</span>,
+    <span class="hljs-attr">"fetchDelayMillis"</span>: <span class="hljs-number">1000</span>
+  },
+  <span class="hljs-attr">"tuningConfig"</span>: {
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"kinesis"</span>,
+    <span class="hljs-attr">"maxRowsPerSegment"</span>: <span class="hljs-number">5000000</span>
+  }
+}
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="supervisor-spec"></a><a href="#supervisor-spec" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Supervisor Spec</h2>
+<table>
+<thead>
+<tr><th>Field</th><th>Description</th><th>Required</th></tr>
+</thead>
+<tbody>
+<tr><td><code>type</code></td><td>The supervisor type, this should always be <code>kinesis</code>.</td><td>yes</td></tr>
+<tr><td><code>dataSchema</code></td><td>The schema that will be used by the Kinesis indexing task during ingestion. See <a href="/docs/0.21.0/ingestion/index.html#dataschema"><code>dataSchema</code></a>.</td><td>yes</td></tr>
+<tr><td><code>ioConfig</code></td><td>A KinesisSupervisorIOConfig object for configuring Kafka connection and I/O-related settings for the supervisor and indexing task. See <a href="#kinesissupervisorioconfig">KinesisSupervisorIOConfig</a> below.</td><td>yes</td></tr>
+<tr><td><code>tuningConfig</code></td><td>A KinesisSupervisorTuningConfig object for configuring performance-related settings for the supervisor and indexing tasks. See <a href="#kinesissupervisortuningconfig">KinesisSupervisorTuningConfig</a> below.</td><td>no</td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="kinesissupervisorioconfig"></a><a href="#kinesissupervisorioconfig" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>KinesisSupervisorIOConfig</h3>
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th><th>Required</th></tr>
+</thead>
+<tbody>
+<tr><td><code>stream</code></td><td>String</td><td>The Kinesis stream to read.</td><td>yes</td></tr>
+<tr><td><code>inputFormat</code></td><td>Object</td><td><a href="/docs/0.21.0/ingestion/data-formats.html#input-format"><code>inputFormat</code></a> to specify how to parse input data. See <a href="#specifying-data-format">the below section</a> for details about specifying the input format.</td><td>yes</td></tr>
+<tr><td><code>endpoint</code></td><td>String</td><td>The AWS Kinesis stream endpoint for a region. You can find a list of endpoints <a href="http://docs.aws.amazon.com/general/latest/gr/rande.html#ak_region">here</a>.</td><td>no (default == kinesis.us-east-1.amazonaws.com)</td></tr>
+<tr><td><code>replicas</code></td><td>Integer</td><td>The number of replica sets, where 1 means a single set of tasks (no replication). Replica tasks will always be assigned to different workers to provide resiliency against process failure.</td><td>no (default == 1)</td></tr>
+<tr><td><code>taskCount</code></td><td>Integer</td><td>The maximum number of <em>reading</em> tasks in a <em>replica set</em>. This means that the maximum number of reading tasks will be <code>taskCount * replicas</code> and the total number of tasks (<em>reading</em> + <em>publishing</em>) will be higher than this. See <a href="#capacity-planning">Capacity Planning</a> below for more details. The number of reading tasks will be less than <code>taskCount</code> if <code>taskCount &gt; {numKinesisShards}</code>.</td><td>no (default == 1)</td></tr>
+<tr><td><code>taskDuration</code></td><td>ISO8601 Period</td><td>The length of time before tasks stop reading and begin publishing their segment.</td><td>no (default == PT1H)</td></tr>
+<tr><td><code>startDelay</code></td><td>ISO8601 Period</td><td>The period to wait before the supervisor starts managing tasks.</td><td>no (default == PT5S)</td></tr>
+<tr><td><code>period</code></td><td>ISO8601 Period</td><td>How often the supervisor will execute its management logic. Note that the supervisor will also run in response to certain events (such as tasks succeeding, failing, and reaching their taskDuration) so this value specifies the maximum time between iterations.</td><td>no (default == PT30S)</td></tr>
+<tr><td><code>useEarliestSequenceNumber</code></td><td>Boolean</td><td>If a supervisor is managing a dataSource for the first time, it will obtain a set of starting sequence numbers from Kinesis. This flag determines whether it retrieves the earliest or latest sequence numbers in Kinesis. Under normal circumstances, subsequent tasks will start from where the previous segments ended so this flag will only be used on first run.</td><td>no (default == false)</td></tr>
+<tr><td><code>completionTimeout</code></td><td>ISO8601 Period</td><td>The length of time to wait before declaring a publishing task as failed and terminating it. If this is set too low, your tasks may never publish. The publishing clock for a task begins roughly after <code>taskDuration</code> elapses.</td><td>no (default == PT6H)</td></tr>
+<tr><td><code>lateMessageRejectionPeriod</code></td><td>ISO8601 Period</td><td>Configure tasks to reject messages with timestamps earlier than this period before the task was created; for example if this is set to <code>PT1H</code> and the supervisor creates a task at <em>2016-01-01T12:00Z</em>, messages with timestamps earlier than <em>2016-01-01T11:00Z</em> will be dropped. This may help prevent concurrency issues if your data stream has late messages and you have multiple pipelines that need to operate on the same segments (e.g. a realtime and a nightly batch ingestion pipeline).</td><td>no (default == none)</td></tr>
+<tr><td><code>earlyMessageRejectionPeriod</code></td><td>ISO8601 Period</td><td>Configure tasks to reject messages with timestamps later than this period after the task reached its taskDuration; for example if this is set to <code>PT1H</code>, the taskDuration is set to <code>PT1H</code> and the supervisor creates a task at <em>2016-01-01T12:00Z</em>, messages with timestamps later than <em>2016-01-01T14:00Z</em> will be dropped. <strong>Note:</strong> Tasks sometimes run past their task duration, for example, in cases of supervisor failover. Setting earlyMessageRejectionPeriod too low may cause messages to be dropped unexpectedly whenever a task runs past its originally configured task duration.</td><td>no (default == none)</td></tr>
+<tr><td><code>recordsPerFetch</code></td><td>Integer</td><td>The number of records to request per GetRecords call to Kinesis. See 'Determining Fetch Settings' below.</td><td>no (default == 2000)</td></tr>
+<tr><td><code>fetchDelayMillis</code></td><td>Integer</td><td>Time in milliseconds to wait between subsequent GetRecords calls to Kinesis. See 'Determining Fetch Settings' below.</td><td>no (default == 1000)</td></tr>
+<tr><td><code>awsAssumedRoleArn</code></td><td>String</td><td>The AWS assumed role to use for additional permissions.</td><td>no</td></tr>
+<tr><td><code>awsExternalId</code></td><td>String</td><td>The AWS external id to use for additional permissions.</td><td>no</td></tr>
+<tr><td><code>deaggregate</code></td><td>Boolean</td><td>Whether to use the de-aggregate function of the KCL. See below for details.</td><td>no</td></tr>
+</tbody>
+</table>
+<h4><a class="anchor" aria-hidden="true" id="specifying-data-format"></a><a href="#specifying-data-format" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Specifying data format</h4>
+<p>Kinesis indexing service supports both <a href="/docs/0.21.0/ingestion/data-formats.html#input-format"><code>inputFormat</code></a> and <a href="/docs/0.21.0/ingestion/data-formats.html#parser"><code>parser</code></a> to specify the data format.
+The <code>inputFormat</code> is a new and recommended way to specify the data format for Kinesis indexing service,
+but unfortunately, it doesn't support all data formats supported by the legacy <code>parser</code>.
+(They will be supported in the future.)</p>
+<p>The supported <code>inputFormat</code>s include <a href="/docs/0.21.0/ingestion/data-formats.html#csv"><code>csv</code></a>,
+<a href="/docs/0.21.0/ingestion/data-formats.html#tsv-delimited"><code>delimited</code></a>, and <a href="/docs/0.21.0/ingestion/data-formats.html#json"><code>json</code></a>.
+You can also read <a href="/docs/0.21.0/ingestion/data-formats.html#avro-stream-parser"><code>avro_stream</code></a>,
+<a href="/docs/0.21.0/ingestion/data-formats.html#protobuf-parser"><code>protobuf</code></a>,
+and <a href="/docs/0.21.0/development/extensions-contrib/thrift.html"><code>thrift</code></a> formats using <code>parser</code>.</p>
+<p><a name="tuningconfig"></a></p>
+<h3><a class="anchor" aria-hidden="true" id="kinesissupervisortuningconfig"></a><a href="#kinesissupervisortuningconfig" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>KinesisSupervisorTuningConfig</h3>
+<p>The tuningConfig is optional and default parameters will be used if no tuningConfig is specified.</p>
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th><th>Required</th></tr>
+</thead>
+<tbody>
+<tr><td><code>type</code></td><td>String</td><td>The indexing task type, this should always be <code>kinesis</code>.</td><td>yes</td></tr>
+<tr><td><code>maxRowsInMemory</code></td><td>Integer</td><td>The number of rows to aggregate before persisting. This number is the post-aggregation rows, so it is not equivalent to the number of input events, but the number of aggregated rows that those events result in. This is used to manage the required JVM heap size. Maximum heap memory usage for indexing scales with maxRowsInMemory * (2 + maxPendingPersists).</td><td>no (default == 100000)</td></tr>
+<tr><td><code>maxBytesInMemory</code></td><td>Long</td><td>The number of bytes to aggregate in heap memory before persisting. This is based on a rough estimate of memory usage and not actual usage. Normally this is computed internally and user does not need to set it. The maximum heap memory usage for indexing is maxBytesInMemory * (2 + maxPendingPersists).</td><td>no (default == One-sixth of max JVM memory)</td></tr>
+<tr><td><code>maxRowsPerSegment</code></td><td>Integer</td><td>The number of rows to aggregate into a segment; this number is post-aggregation rows. Handoff will happen either if <code>maxRowsPerSegment</code> or <code>maxTotalRows</code> is hit or every <code>intermediateHandoffPeriod</code>, whichever happens earlier.</td><td>no (default == 5000000)</td></tr>
+<tr><td><code>maxTotalRows</code></td><td>Long</td><td>The number of rows to aggregate across all segments; this number is post-aggregation rows. Handoff will happen either if <code>maxRowsPerSegment</code> or <code>maxTotalRows</code> is hit or every <code>intermediateHandoffPeriod</code>, whichever happens earlier.</td><td>no (default == unlimited)</td></tr>
+<tr><td><code>intermediatePersistPeriod</code></td><td>ISO8601 Period</td><td>The period that determines the rate at which intermediate persists occur.</td><td>no (default == PT10M)</td></tr>
+<tr><td><code>maxPendingPersists</code></td><td>Integer</td><td>Maximum number of persists that can be pending but not started. If this limit would be exceeded by a new intermediate persist, ingestion will block until the currently-running persist finishes. Maximum heap memory usage for indexing scales with maxRowsInMemory * (2 + maxPendingPersists).</td><td>no (default == 0, meaning one persist can be running concurrently with ingestion, and none can be queued up)</td></tr>
+<tr><td><code>indexSpec</code></td><td>Object</td><td>Tune how data is indexed. See <a href="#indexspec">IndexSpec</a> for more information.</td><td>no</td></tr>
+<tr><td><code>indexSpecForIntermediatePersists</code></td><td></td><td>Defines segment storage format options to be used at indexing time for intermediate persisted temporary segments. This can be used to disable dimension/metric compression on intermediate segments to reduce memory required for final merging. However, disabling compression on intermediate segments might increase page cache use while they are used before getting merged into final segment published, see <a href="#indexspec">IndexSpec</a> for possible values.</td><td>no (default = same as indexSpec)</td></tr>
+<tr><td><code>reportParseExceptions</code></td><td>Boolean</td><td>If true, exceptions encountered during parsing will be thrown and will halt ingestion; if false, unparseable rows and fields will be skipped.</td><td>no (default == false)</td></tr>
+<tr><td><code>handoffConditionTimeout</code></td><td>Long</td><td>Milliseconds to wait for segment handoff. It must be &gt;= 0, where 0 means to wait forever.</td><td>no (default == 0)</td></tr>
+<tr><td><code>resetOffsetAutomatically</code></td><td>Boolean</td><td>Controls behavior when Druid needs to read Kinesis messages that are no longer available.<br/><br/>If false, the exception will bubble up, which will cause your tasks to fail and ingestion to halt. If this occurs, manual intervention is required to correct the situation; potentially using the <a href="/docs/0.21.0/operations/api-reference.html#supervisors">Reset Supervisor API</a>. This mode is useful for production, since it will make you aware of issues with ingestion.<br/><br/>If true, Druid will automatically reset to the earlier or latest sequence number available in Kinesis, based on the value of the <code>useEarliestSequenceNumber</code> property (earliest if true, latest if false). Please note that this can lead to data being <em>DROPPED</em> (if <code>useEarliestSequenceNumber</code> is false) or <em>DUPLICATED</em> (if <code>useEarliestSequenceNumber</code> is true) without your knowledge. Messages will be logged indicating that a reset has occurred, but ingestion will continue. This mode is useful for non-production situations, since it will make Druid attempt to recover from problems automatically, even if they lead to quiet dropping or duplicating of data.</td><td>no (default == false)</td></tr>
+<tr><td><code>skipSequenceNumberAvailabilityCheck</code></td><td>Boolean</td><td>Whether to enable checking if the current sequence number is still available in a particular Kinesis shard. If set to false, the indexing task will attempt to reset the current sequence number (or not), depending on the value of <code>resetOffsetAutomatically</code>.</td><td>no (default == false)</td></tr>
+<tr><td><code>workerThreads</code></td><td>Integer</td><td>The number of threads that the supervisor uses to handle requests/responses for worker tasks, along with any other internal asynchronous operation.</td><td>no (default == min(10, taskCount))</td></tr>
+<tr><td><code>chatThreads</code></td><td>Integer</td><td>The number of threads that will be used for communicating with indexing tasks.</td><td>no (default == min(10, taskCount * replicas))</td></tr>
+<tr><td><code>chatRetries</code></td><td>Integer</td><td>The number of times HTTP requests to indexing tasks will be retried before considering tasks unresponsive.</td><td>no (default == 8)</td></tr>
+<tr><td><code>httpTimeout</code></td><td>ISO8601 Period</td><td>How long to wait for a HTTP response from an indexing task.</td><td>no (default == PT10S)</td></tr>
+<tr><td><code>shutdownTimeout</code></td><td>ISO8601 Period</td><td>How long to wait for the supervisor to attempt a graceful shutdown of tasks before exiting.</td><td>no (default == PT80S)</td></tr>
+<tr><td><code>recordBufferSize</code></td><td>Integer</td><td>Size of the buffer (number of events) used between the Kinesis fetch threads and the main ingestion thread.</td><td>no (default == 10000)</td></tr>
+<tr><td><code>recordBufferOfferTimeout</code></td><td>Integer</td><td>Length of time in milliseconds to wait for space to become available in the buffer before timing out.</td><td>no (default == 5000)</td></tr>
+<tr><td><code>recordBufferFullWait</code></td><td>Integer</td><td>Length of time in milliseconds to wait for the buffer to drain before attempting to fetch records from Kinesis again.</td><td>no (default == 5000)</td></tr>
+<tr><td><code>fetchSequenceNumberTimeout</code></td><td>Integer</td><td>Length of time in milliseconds to wait for Kinesis to return the earliest or latest sequence number for a shard. Kinesis will not return the latest sequence number if no data is actively being written to that shard. In this case, this fetch call will repeatedly timeout and retry until fresh data is written to the stream.</td><td>no (default == 60000)</td></tr>
+<tr><td><code>fetchThreads</code></td><td>Integer</td><td>Size of the pool of threads fetching data from Kinesis. There is no benefit in having more threads than Kinesis shards.</td><td>no (default == procs * 2, where &quot;procs&quot; is the number of processors on the server that the task is running on)</td></tr>
+<tr><td><code>segmentWriteOutMediumFactory</code></td><td>Object</td><td>Segment write-out medium to use when creating segments. See below for more information.</td><td>no (not specified by default, the value from <code>druid.peon.defaultSegmentWriteOutMediumFactory.type</code> is used)</td></tr>
+<tr><td><code>intermediateHandoffPeriod</code></td><td>ISO8601 Period</td><td>How often the tasks should hand off segments. Handoff will happen either if <code>maxRowsPerSegment</code> or <code>maxTotalRows</code> is hit or every <code>intermediateHandoffPeriod</code>, whichever happens earlier.</td><td>no (default == P2147483647D)</td></tr>
+<tr><td><code>logParseExceptions</code></td><td>Boolean</td><td>If true, log an error message when a parsing exception occurs, containing information about the row where the error occurred.</td><td>no, default == false</td></tr>
+<tr><td><code>maxParseExceptions</code></td><td>Integer</td><td>The maximum number of parse exceptions that can occur before the task halts ingestion and fails. Overridden if <code>reportParseExceptions</code> is set.</td><td>no, unlimited default</td></tr>
+<tr><td><code>maxSavedParseExceptions</code></td><td>Integer</td><td>When a parse exception occurs, Druid can keep track of the most recent parse exceptions. &quot;maxSavedParseExceptions&quot; limits how many exception instances will be saved. These saved exceptions will be made available after the task finishes in the <a href="/docs/0.21.0/ingestion/tasks.html#reports">task completion report</a>. Overridden if <code>reportParseExceptions</code> is set.</td><td>no, default == 0</td></tr>
+<tr><td><code>maxRecordsPerPoll</code></td><td>Integer</td><td>The maximum number of records/events to be fetched from buffer per poll. The actual maximum will be <code>Max(maxRecordsPerPoll, Max(bufferSize, 1))</code></td><td>no, default == 100</td></tr>
+<tr><td><code>repartitionTransitionDuration</code></td><td>ISO8601 Period</td><td>When shards are split or merged, the supervisor will recompute shard -&gt; task group mappings, and signal any running tasks created under the old mappings to stop early at (current time + <code>repartitionTransitionDuration</code>). Stopping the tasks early allows Druid to begin reading from the new shards more quickly. The repartition transition wait time controlled by this property gives the stream additional time to write records to the new shards after the split/merge, which helps avoid the issues with empty shard handling described at <a href="https://github.com/apache/druid/issues/7600">https://github.com/apache/druid/issues/7600</a>.</td><td>no, (default == PT2M)</td></tr>
+<tr><td><code>offsetFetchPeriod</code></td><td>ISO8601 Period</td><td>How often the supervisor queries Kinesis and the indexing tasks to fetch current offsets and calculate lag.</td><td>no (default == PT30S, min == PT5S)</td></tr>
+</tbody>
+</table>
+<h4><a class="anchor" aria-hidden="true" id="indexspec"></a><a href="#indexspec" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>IndexSpec</h4>
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th><th>Required</th></tr>
+</thead>
+<tbody>
+<tr><td>bitmap</td><td>Object</td><td>Compression format for bitmap indexes. Should be a JSON object. See <a href="#bitmap-types">Bitmap types</a> below for options.</td><td>no (defaults to Roaring)</td></tr>
+<tr><td>dimensionCompression</td><td>String</td><td>Compression format for dimension columns. Choose from <code>LZ4</code>, <code>LZF</code>, or <code>uncompressed</code>.</td><td>no (default == <code>LZ4</code>)</td></tr>
+<tr><td>metricCompression</td><td>String</td><td>Compression format for primitive type metric columns. Choose from <code>LZ4</code>, <code>LZF</code>, <code>uncompressed</code>, or <code>none</code>.</td><td>no (default == <code>LZ4</code>)</td></tr>
+<tr><td>longEncoding</td><td>String</td><td>Encoding format for metric and dimension columns with type long. Choose from <code>auto</code> or <code>longs</code>. <code>auto</code> encodes the values using sequence number or lookup table depending on column cardinality, and store them with variable size. <code>longs</code> stores the value as is with 8 bytes each.</td><td>no (default == <code>longs</code>)</td></tr>
+</tbody>
+</table>
+<h5><a class="anchor" aria-hidden="true" id="bitmap-types"></a><a href="#bitmap-types" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Bitmap types</h5>
+<p>For Roaring bitmaps:</p>
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th><th>Required</th></tr>
+</thead>
+<tbody>
+<tr><td><code>type</code></td><td>String</td><td>Must be <code>roaring</code>.</td><td>yes</td></tr>
+<tr><td><code>compressRunOnSerialization</code></td><td>Boolean</td><td>Use a run-length encoding where it is estimated as more space efficient.</td><td>no (default == <code>true</code>)</td></tr>
+</tbody>
+</table>
+<p>For Concise bitmaps:</p>
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th><th>Required</th></tr>
+</thead>
+<tbody>
+<tr><td><code>type</code></td><td>String</td><td>Must be <code>concise</code>.</td><td>yes</td></tr>
+</tbody>
+</table>
+<h4><a class="anchor" aria-hidden="true" id="segmentwriteoutmediumfactory"></a><a href="#segmentwriteoutmediumfactory" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>SegmentWriteOutMediumFactory</h4>
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th><th>Required</th></tr>
+</thead>
+<tbody>
+<tr><td><code>type</code></td><td>String</td><td>See <a href="/docs/0.21.0/configuration/index.html#segmentwriteoutmediumfactory">Additional Peon Configuration: SegmentWriteOutMediumFactory</a> for explanation and available options.</td><td>yes</td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="operations"></a><a href="#operations" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Operations</h2>
+<p>This section gives descriptions of how some supervisor APIs work specifically in Kinesis Indexing Service.
+For all supervisor APIs, please check <a href="/docs/0.21.0/operations/api-reference.html#supervisors">Supervisor APIs</a>.</p>
+<h3><a class="anchor" aria-hidden="true" id="aws-authentication"></a><a href="#aws-authentication" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>AWS Authentication</h3>
+<p>To authenticate with AWS, you must provide your AWS access key and AWS secret key via runtime.properties, for example:</p>
+<pre><code class="hljs">-<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Ddruid</span>.</span></span>kinesis.accessKey=<span class="hljs-number">123</span> -<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Ddruid</span>.</span></span>kinesis.secretKey=<span class="hljs-number">456</span>
+</code></pre>
+<p>The AWS access key ID and secret access key are used for Kinesis API requests. If this is not provided, the service will
+look for credentials set in environment variables, in the default profile configuration file, and from the EC2 instance
+profile provider (in this order).</p>
+<h3><a class="anchor" aria-hidden="true" id="getting-supervisor-status-report"></a><a href="#getting-supervisor-status-report" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Getting Supervisor Status Report</h3>
+<p><code>GET /druid/indexer/v1/supervisor/&lt;supervisorId&gt;/status</code> returns a snapshot report of the current state of the tasks
+managed by the given supervisor. This includes the latest sequence numbers as reported by Kinesis. Unlike the Kafka
+Indexing Service, Kinesis reports lag metrics measured in time difference in milliseconds between the current sequence number and latest sequence number, rather than message count.</p>
+<p>The status report also contains the supervisor's state and a list of recently thrown exceptions (reported as
+<code>recentErrors</code>, whose max size can be controlled using the <code>druid.supervisor.maxStoredExceptionEvents</code> configuration).
+There are two fields related to the supervisor's state - <code>state</code> and <code>detailedState</code>. The <code>state</code> field will always be
+one of a small number of generic states that are applicable to any type of supervisor, while the <code>detailedState</code> field
+will contain a more descriptive, implementation-specific state that may provide more insight into the supervisor's
+activities than the generic <code>state</code> field.</p>
+<p>The list of possible <code>state</code> values are: [<code>PENDING</code>, <code>RUNNING</code>, <code>SUSPENDED</code>, <code>STOPPING</code>, <code>UNHEALTHY_SUPERVISOR</code>, <code>UNHEALTHY_TASKS</code>]</p>
+<p>The list of <code>detailedState</code> values and their corresponding <code>state</code> mapping is as follows:</p>
+<table>
+<thead>
+<tr><th>Detailed State</th><th>Corresponding State</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>UNHEALTHY_SUPERVISOR</td><td>UNHEALTHY_SUPERVISOR</td><td>The supervisor has encountered errors on the past <code>druid.supervisor.unhealthinessThreshold</code> iterations</td></tr>
+<tr><td>UNHEALTHY_TASKS</td><td>UNHEALTHY_TASKS</td><td>The last <code>druid.supervisor.taskUnhealthinessThreshold</code> tasks have all failed</td></tr>
+<tr><td>UNABLE_TO_CONNECT_TO_STREAM</td><td>UNHEALTHY_SUPERVISOR</td><td>The supervisor is encountering connectivity issues with Kinesis and has not successfully connected in the past</td></tr>
+<tr><td>LOST_CONTACT_WITH_STREAM</td><td>UNHEALTHY_SUPERVISOR</td><td>The supervisor is encountering connectivity issues with Kinesis but has successfully connected in the past</td></tr>
+<tr><td>PENDING (first iteration only)</td><td>PENDING</td><td>The supervisor has been initialized and hasn't started connecting to the stream</td></tr>
+<tr><td>CONNECTING_TO_STREAM (first iteration only)</td><td>RUNNING</td><td>The supervisor is trying to connect to the stream and update partition data</td></tr>
+<tr><td>DISCOVERING_INITIAL_TASKS (first iteration only)</td><td>RUNNING</td><td>The supervisor is discovering already-running tasks</td></tr>
+<tr><td>CREATING_TASKS (first iteration only)</td><td>RUNNING</td><td>The supervisor is creating tasks and discovering state</td></tr>
+<tr><td>RUNNING</td><td>RUNNING</td><td>The supervisor has started tasks and is waiting for taskDuration to elapse</td></tr>
+<tr><td>SUSPENDED</td><td>SUSPENDED</td><td>The supervisor has been suspended</td></tr>
+<tr><td>STOPPING</td><td>STOPPING</td><td>The supervisor is stopping</td></tr>
+</tbody>
+</table>
+<p>On each iteration of the supervisor's run loop, the supervisor completes the following tasks in sequence:</p>
+<ol>
+<li>Fetch the list of shards from Kinesis and determine the starting sequence number for each shard (either based on the
+last processed sequence number if continuing, or starting from the beginning or ending of the stream if this is a new stream).</li>
+<li>Discover any running indexing tasks that are writing to the supervisor's datasource and adopt them if they match
+the supervisor's configuration, else signal them to stop.</li>
+<li>Send a status request to each supervised task to update our view of the state of the tasks under our supervision.</li>
+<li>Handle tasks that have exceeded <code>taskDuration</code> and should transition from the reading to publishing state.</li>
+<li>Handle tasks that have finished publishing and signal redundant replica tasks to stop.</li>
+<li>Handle tasks that have failed and clean up the supervisor's internal state.</li>
+<li>Compare the list of healthy tasks to the requested <code>taskCount</code> and <code>replicas</code> configurations and create additional tasks if required.</li>
+</ol>
+<p>The <code>detailedState</code> field will show additional values (those marked with &quot;first iteration only&quot;) the first time the
+supervisor executes this run loop after startup or after resuming from a suspension. This is intended to surface
+initialization-type issues, where the supervisor is unable to reach a stable state (perhaps because it can't connect to
+Kinesis, it can't read from the stream, or it can't communicate with existing tasks). Once the supervisor is stable -
+that is, once it has completed a full execution without encountering any issues - <code>detailedState</code> will show a <code>RUNNING</code>
+state until it is stopped, suspended, or hits a failure threshold and transitions to an unhealthy state.</p>
+<h3><a class="anchor" aria-hidden="true" id="updating-existing-supervisors"></a><a href="#updating-existing-supervisors" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Updating Existing Supervisors</h3>
+<p><code>POST /druid/indexer/v1/supervisor</code> can be used to update existing supervisor spec.
+Calling this endpoint when there is already an existing supervisor for the same dataSource will cause:</p>
+<ul>
+<li>The running supervisor to signal its managed tasks to stop reading and begin publishing.</li>
+<li>The running supervisor to exit.</li>
+<li>A new supervisor to be created using the configuration provided in the request body. This supervisor will retain the
+existing publishing tasks and will create new tasks starting at the sequence numbers the publishing tasks ended on.</li>
+</ul>
+<p>Seamless schema migrations can thus be achieved by simply submitting the new schema using this endpoint.</p>
+<h3><a class="anchor" aria-hidden="true" id="suspending-and-resuming-supervisors"></a><a href="#suspending-and-resuming-supervisors" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Suspending and Resuming Supervisors</h3>
+<p>You can suspend and resume a supervisor using <code>POST /druid/indexer/v1/supervisor/&lt;supervisorId&gt;/suspend</code> and <code>POST /druid/indexer/v1/supervisor/&lt;supervisorId&gt;/resume</code>, respectively.</p>
+<p>Note that the supervisor itself will still be operating and emitting logs and metrics,
+it will just ensure that no indexing tasks are running until the supervisor is resumed.</p>
+<h3><a class="anchor" aria-hidden="true" id="resetting-supervisors"></a><a href="#resetting-supervisors" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Resetting Supervisors</h3>
+<p>The <code>POST /druid/indexer/v1/supervisor/&lt;supervisorId&gt;/reset</code> operation clears stored
+sequence numbers, causing the supervisor to start reading from either the earliest or
+latest sequence numbers in Kinesis (depending on the value of <code>useEarliestSequenceNumber</code>).
+After clearing stored sequence numbers, the supervisor kills and recreates active tasks,
+so that tasks begin reading from valid sequence numbers.</p>
+<p>Use care when using this operation! Resetting the supervisor may cause Kinesis messages
+to be skipped or read twice, resulting in missing or duplicate data.</p>
+<p>The reason for using this operation is to recover from a state in which the supervisor
+ceases operating due to missing sequence numbers. The indexing service keeps track of the latest
+persisted sequence number in order to provide exactly-once ingestion guarantees across
+tasks.</p>
+<p>Subsequent tasks must start reading from where the previous task completed in
+order for the generated segments to be accepted. If the messages at the expected starting sequence numbers are
+no longer available in Kinesis (typically because the message retention period has elapsed or the topic was
+removed and re-created) the supervisor will refuse to start and in-flight tasks will fail. This operation
+enables you to recover from this condition.</p>
+<p>Note that the supervisor must be running for this endpoint to be available.</p>
+<h3><a class="anchor" aria-hidden="true" id="terminating-supervisors"></a><a href="#terminating-supervisors" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Terminating Supervisors</h3>
+<p>The <code>POST /druid/indexer/v1/supervisor/&lt;supervisorId&gt;/terminate</code> operation terminates a supervisor and causes
+all associated indexing tasks managed by this supervisor to immediately stop and begin
+publishing their segments. This supervisor will still exist in the metadata store and its history may be retrieved
+with the supervisor history API, but will not be listed in the 'get supervisors' API response nor can its configuration
+or status report be retrieved. The only way this supervisor can start again is by submitting a functioning supervisor
+spec to the create API.</p>
+<h3><a class="anchor" aria-hidden="true" id="capacity-planning"></a><a href="#capacity-planning" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Capacity Planning</h3>
+<p>Kinesis indexing tasks run on MiddleManagers and are thus limited by the resources available in the MiddleManager
+cluster. In particular, you should make sure that you have sufficient worker capacity (configured using the
+<code>druid.worker.capacity</code> property) to handle the configuration in the supervisor spec. Note that worker capacity is
+shared across all types of indexing tasks, so you should plan your worker capacity to handle your total indexing load
+(e.g. batch processing, realtime tasks, merging tasks, etc.). If your workers run out of capacity, Kinesis indexing tasks
+will queue and wait for the next available worker. This may cause queries to return partial results but will not result
+in data loss (assuming the tasks run before Kinesis purges those sequence numbers).</p>
+<p>A running task will normally be in one of two states: <em>reading</em> or <em>publishing</em>. A task will remain in reading state for
+<code>taskDuration</code>, at which point it will transition to publishing state. A task will remain in publishing state for as long
+as it takes to generate segments, push segments to deep storage, and have them be loaded and served by a Historical process
+(or until <code>completionTimeout</code> elapses).</p>
+<p>The number of reading tasks is controlled by <code>replicas</code> and <code>taskCount</code>. In general, there will be <code>replicas * taskCount</code>
+reading tasks, the exception being if taskCount &gt; {numKinesisShards} in which case {numKinesisShards} tasks will
+be used instead. When <code>taskDuration</code> elapses, these tasks will transition to publishing state and <code>replicas * taskCount</code>
+new reading tasks will be created. Therefore to allow for reading tasks and publishing tasks to run concurrently, there
+should be a minimum capacity of:</p>
+<pre><code class="hljs"><span class="hljs-attr">workerCapacity</span> = <span class="hljs-number">2</span> * replicas * taskCount
+</code></pre>
+<p>This value is for the ideal situation in which there is at most one set of tasks publishing while another set is reading.
+In some circumstances, it is possible to have multiple sets of tasks publishing simultaneously. This would happen if the
+time-to-publish (generate segment, push to deep storage, loaded on Historical) &gt; <code>taskDuration</code>. This is a valid
+scenario (correctness-wise) but requires additional worker capacity to support. In general, it is a good idea to have
+<code>taskDuration</code> be large enough that the previous set of tasks finishes publishing before the current set begins.</p>
+<h3><a class="anchor" aria-hidden="true" id="supervisor-persistence"></a><a href="#supervisor-persistence" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Supervisor Persistence</h3>
+<p>When a supervisor spec is submitted via the <code>POST /druid/indexer/v1/supervisor</code> endpoint, it is persisted in the
+configured metadata database. There can only be a single supervisor per dataSource, and submitting a second spec for
+the same dataSource will overwrite the previous one.</p>
+<p>When an Overlord gains leadership, either by being started or as a result of another Overlord failing, it will spawn
+a supervisor for each supervisor spec in the metadata database. The supervisor will then discover running Kinesis indexing
+tasks and will attempt to adopt them if they are compatible with the supervisor's configuration. If they are not
+compatible because they have a different ingestion spec or shard allocation, the tasks will be killed and the
+supervisor will create a new set of tasks. In this way, the supervisors are persistent across Overlord restarts and
+fail-overs.</p>
+<p>A supervisor is stopped via the <code>POST /druid/indexer/v1/supervisor/&lt;supervisorId&gt;/terminate</code> endpoint. This places a
+tombstone marker in the database (to prevent the supervisor from being reloaded on a restart) and then gracefully
+shuts down the currently running supervisor. When a supervisor is shut down in this way, it will instruct its
+managed tasks to stop reading and begin publishing their segments immediately. The call to the shutdown endpoint will
+return after all tasks have been signalled to stop but before the tasks finish publishing their segments.</p>
+<h3><a class="anchor" aria-hidden="true" id="schemaconfiguration-changes"></a><a href="#schemaconfiguration-changes" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Schema/Configuration Changes</h3>
+<p>Schema and configuration changes are handled by submitting the new supervisor spec via the same
+<code>POST /druid/indexer/v1/supervisor</code> endpoint used to initially create the supervisor. The Overlord will initiate a
+graceful shutdown of the existing supervisor which will cause the tasks being managed by that supervisor to stop reading
+and begin publishing their segments. A new supervisor will then be started which will create a new set of tasks that
+will start reading from the sequence numbers where the previous now-publishing tasks left off, but using the updated schema.
+In this way, configuration changes can be applied without requiring any pause in ingestion.</p>
+<h3><a class="anchor" aria-hidden="true" id="deployment-notes"></a><a href="#deployment-notes" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Deployment Notes</h3>
+<h4><a class="anchor" aria-hidden="true" id="on-the-subject-of-segments"></a><a href="#on-the-subject-of-segments" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>On the Subject of Segments</h4>
+<p>Each Kinesis Indexing Task puts events consumed from Kinesis Shards assigned to it in a single segment for each segment
+granular interval until maxRowsPerSegment, maxTotalRows or intermediateHandoffPeriod limit is reached, at this point a new shard
+for this segment granularity is created for further events. Kinesis Indexing Task also does incremental hand-offs which
+means that all the segments created by a task will not be held up till the task duration is over. As soon as maxRowsPerSegment,
+maxTotalRows or intermediateHandoffPeriod limit is hit, all the segments held by the task at that point in time will be handed-off
+and new set of segments will be created for further events. This means that the task can run for longer durations of time
+without accumulating old segments locally on Middle Manager processes and it is encouraged to do so.</p>
+<p>Kinesis Indexing Service may still produce some small segments. Lets say the task duration is 4 hours, segment granularity
+is set to an HOUR and Supervisor was started at 9:10 then after 4 hours at 13:10, new set of tasks will be started and
+events for the interval 13:00 - 14:00 may be split across previous and new set of tasks. If you see it becoming a problem then
+one can schedule re-indexing tasks be run to merge segments together into new segments of an ideal size (in the range of ~500-700 MB per segment).
+Details on how to optimize the segment size can be found on <a href="/docs/0.21.0/operations/segment-optimization.html">Segment size optimization</a>.
+There is also ongoing work to support automatic segment compaction of sharded segments as well as compaction not requiring
+Hadoop (see <a href="https://github.com/apache/druid/pull/5102">here</a>).</p>
+<h3><a class="anchor" aria-hidden="true" id="determining-fetch-settings"></a><a href="#determining-fetch-settings" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Determining Fetch Settings</h3>
+<p>Internally, the Kinesis Indexing Service uses the Kinesis Record Supplier abstraction for fetching Kinesis data records and storing the records
+locally. The way the Kinesis Record Supplier fetches records is to have a separate thread run the fetching operation per each Kinesis Shard, the
+max number of threads is determined by <code>fetchThreads</code>. For example, a Kinesis stream with 3 shards will have 3 threads, each fetching from a shard separately.
+There is a delay between each fetching operation, which is controlled by <code>fetchDelayMillis</code>. The maximum number of records to be fetched per thread per
+operation is controlled by <code>recordsPerFetch</code>. Note that this is not the same as <code>maxRecordsPerPoll</code>.</p>
+<p>The records fetched by each thread will be pushed to a queue in the order that they are fetched. The records are stored in this queue until <code>poll()</code> is called
+by either the supervisor or the indexing task. <code>poll()</code> will attempt to drain the internal buffer queue up to a limit of <code>max(maxRecordsPerPoll, q.size())</code>.
+Here <code>maxRecordsPerPoll</code> controls the theoretical maximum records to drain out of the buffer queue, so setting this parameter to a reasonable value is essential
+in preventing the queue from overflowing or memory exceeding heap size.</p>
+<p>Kinesis places the following restrictions on calls to fetch records:</p>
+<ul>
+<li>Each data record can be up to 1 MB in size.</li>
+<li>Each shard can support up to 5 transactions per second for reads.</li>
+<li>Each shard can read up to 2 MB per second.</li>
+<li>The maximum size of data that GetRecords can return is 10 MB.</li>
+</ul>
+<p>Values for <code>recordsPerFetch</code> and <code>fetchDelayMillis</code> should be chosen to maximize throughput under the above constraints.
+The values that you choose will depend on the average size of a record and the number of consumers you have reading from
+a given shard (which will be <code>replicas</code> unless you have other consumers also reading from this Kinesis stream).</p>
+<p>If the above limits are violated, AWS will throw ProvisionedThroughputExceededException errors on subsequent calls to
+read data. When this happens, the Kinesis indexing service will pause by <code>fetchDelayMillis</code> and then attempt the call
+again.</p>
+<p>Internally, each indexing task maintains a buffer that stores the fetched but not yet processed record. <code>recordsPerFetch</code> and <code>fetchDelayMillis</code>
+control this behavior. The number of records that the indexing task fetch from the buffer is controlled by <code>maxRecordsPerPoll</code>, which
+determines the number of records to be processed per each ingestion loop in the task.</p>
+<h2><a class="anchor" aria-hidden="true" id="deaggregation"></a><a href="#deaggregation" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Deaggregation</h2>
+<p>See <a href="https://github.com/apache/druid/issues/6714">issue</a></p>
+<p>The Kinesis indexing service supports de-aggregation of multiple rows packed into a single record by the Kinesis
+Producer Library's aggregate method for more efficient data transfer. Currently, enabling the de-aggregate functionality
+requires the user to manually provide the Kinesis Client Library on the classpath, since this library has a license not
+compatible with Apache projects.</p>
+<p>To enable this feature, add the <code>amazon-kinesis-client</code> (tested on version <code>1.9.2</code>) jar file (<a href="https://mvnrepository.com/artifact/com.amazonaws/amazon-kinesis-client/1.9.2">link</a>) under <code>dist/druid/extensions/druid-kinesis-indexing-service/</code>.
+Then when submitting a supervisor-spec, set <code>deaggregate</code> to true.</p>
+<h2><a class="anchor" aria-hidden="true" id="resharding"></a><a href="#resharding" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Resharding</h2>
+<p>When changing the shard count for a Kinesis stream, there will be a window of time around the resharding operation with early shutdown of Kinesis ingestion tasks and possible task failures.</p>
+<p>The early shutdowns and task failures are expected, and they occur because the supervisor will update the shard -&gt; task group mappings as shards are closed and fully read, to ensure that tasks are not running
+with an assignment of closed shards that have been fully read and to ensure a balanced distribution of active shards across tasks.</p>
+<p>This window with early task shutdowns and possible task failures will conclude when:</p>
+<ul>
+<li>All closed shards have been fully read and the Kinesis ingestion tasks have published the data from those shards, committing the &quot;closed&quot; state to metadata storage</li>
+<li>Any remaining tasks that had inactive shards in the assignment have been shutdown (these tasks would have been created before the closed shards were completely drained)</li>
+</ul>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/0.21.0/development/extensions-core/kafka-ingestion.html"><span class="arrow-prev">← </span><span>Apache Kafka</span></a><a class="docs-next button" href="/docs/0.21.0/ingestion/tranquility.html"><span>Tranquility</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#submitting-a-supervisor-spec">Submitting a Supervisor Spec</a></li><li><a href="#supervisor-spec">Supervisor Spec</a><ul class="toc-headings"><li><a href="#kinesissupervisorioconfig">KinesisSupervisorIOConfig</a></li><li><a href="#kinesissupervisortuningconfig">KinesisSupervisorTuningConfig</a></li></ul></li><li><a href="#operations">Operations</a><ul class="toc-headings"><li><a href="#aws-authentication">AWS Authentication</a></li><li><a href="#getting-supervisor-status-report">Getting Supervisor Status Report</a></li><li><a href="#updating-existing-supervisors">Updating Existing Supervisors</a></li><li><a href="#suspending-and-resuming-supervisors">Suspending and Resuming Supervisors</a></li><li><a href="#resetting-supervisors">Resetting Supervisors</a></li><li><a href="#terminating-supervisors">Terminating Supervisors</a></li><li><a href="#capacity-planning">Capacity Planning</a></li><li><a href="#supervisor-persistence">Supervisor Persistence</a></li><li><a href="#schemaconfiguration-changes">Schema/Configuration Changes</a></li><li><a href="#deployment-notes">Deployment Notes</a></li><li><a href="#determining-fetch-settings">Determining Fetch Settings</a></li></ul></li><li><a href="#deaggregation">Deaggregation</a></li><li><a href="#resharding">Resharding</a></li></ul></nav></div><footer class="nav-footer druid-footer" id="footer"><div class="container"><div class="text-center"><p><a href="/technology">Technology</a> · <a href="/use-cases">Use Cases</a> · <a href="/druid-powered">Powered by Druid</a> · <a href="/docs/0.21.0/latest">Docs</a> · <a href="/community/">Community</a> · <a href="/downloads.html">Download</a> · <a href="/faq">FAQ</a></p></div><div class="text-center"><a title="Join the user group" href="https://groups.google.com/forum/#!forum/druid-user" target="_blank"><span class="fa fa-comments"></span></a> · <a title="Follow Druid" href="https://twitter.com/druidio" target="_blank"><span class="fab fa-twitter"></span></a> · <a title="Download via Apache" href="https://www.apache.org/dyn/closer.cgi?path=/incubator/druid/{{ site.druid_versions[0].versions[0].version }}/apache-druid-{{ site.druid_versions[0].versions[0].version }}-bin.tar.gz" target="_blank"><span class="fas fa-feather"></span></a> · <a title="GitHub" href="https://github.com/apache/druid" target="_blank"><span class="fab fa-github"></span></a></div><div class="text-center license">Copyright © 2019 <a href="https://www.apache.org/" target="_blank">Apache Software Foundation</a>.<br/>Except where otherwise noted, licensed under <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.<br/>Apache Druid, Druid, and the Druid logo are either registered trademarks or trademarks of The Apache Software Foundation in the United States and other countries.</div></div></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '2de99082a9f38e49dfaa059bbe4c901d',
+                indexName: 'apache_druid',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["language:en","version:0.21.0"]}
+              });
+            </script></body></html>
