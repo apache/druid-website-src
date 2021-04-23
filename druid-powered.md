@@ -151,6 +151,12 @@ With more than 1 billion unique users reached per month, 3 billion ads displayed
 
 * [Apache Druid for Anti-Money Laundering (AML) at DBS Bank](https://imply.io/virtual-druid-summit/apache-druid-anti-money-laundering-dbs-bank)
 
+## Dataroid
+
+[Dataroid](https://www.dataroid.com/) is a digital analytics and customer engagement platform helping brands to understand their users' interactions with their digital assets in details and deliver a better experience with data-driven insights. 
+
+Druid powers Dataroid analytics dashboards allowing our customers to interactively deep dive into behavioral and performance data and explore hundreds of metrics in real time.
+
 ## Datumo
 
 [Datumo](https://datumo.io/) is a 100% remote Big Data software house from Poland. 
