@@ -217,6 +217,10 @@ One of our key goals at [FacilityConneX](https://www.facilityconnex.com/) is to 
 
 Druid powers our applications related metrics and helps us slice and dice analytics on both historical and realtime-time metrics. It significantly reduces latency of analytic queries and help people to get insights more interactively. Through druid data we can now do anomaly detection as well.
 
+## Finin
+
+[Finin](https://finin.in/) is India’s first ever consumer-facing neobank. They're using Apache Druid as a backend for analytics, helping the company with clickstream analytics, user activity and behaviour as well as application performance management. 
+
 ## Flurry Analytics
 
 [Flurry](https://www.flurry.com) is a mobile app analytics platform that empowers product, development and growth experts to build better apps that users love. Mobile data hits the Flurry backend at a huge rate, updates statistics across hundreds of dimensions, and becomes queryable immediately. Flurry harnesses Druid to ingest data and serve queries at this massive rate.
