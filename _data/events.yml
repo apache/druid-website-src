@@ -1,10 +1,5 @@
-- date: 2021-04-26
-  name: April Apache Druid Office Hours
-  info: Bay Area Apache Druid Meetup
-  link: https://www.meetup.com/druidio/events/277443394/
-
 - date: 2021-04-29
-  name: The April Apache Druid Drop-In
+  name: "The April Apache Druid Drop-In"
   info: London Apache Druid Meetup
   link: https://www.meetup.com/Apache-Druid-London/events/277443473/
 
@@ -12,3 +7,18 @@
   name: "Some Like It Hot: Choosing a System for Large-Scale Data Analysis"
   info: Philly Emerging Tech Conference
   link: https://2021.phillyemergingtech.com/talks/some-like-it-hot/
+
+- date: 2021-05-18
+  name: "May Apache Druid Office Hours"
+  info: Bay Area Apache Druid Meetup
+  link: https://www.meetup.com/druidio/events/277839249/
+  
+- date: 2021-05-24
+  name: "The May Apache Druid Drop-In"
+  info: London Apache Druid Meetup
+  link: https://www.meetup.com/Apache-Druid-London/events/277839451
+  
+- date: 2021-05-27
+  name: "Druid & Trino Day: Unlocking Self-Service & Real-Time Analytics Across Netflix"
+  info: Bay Area Apache Druid Meetup
+  link: https://www.meetup.com/druidio/events/277837014/ 
