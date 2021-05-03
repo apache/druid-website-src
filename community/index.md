@@ -122,7 +122,7 @@ You don't need to be a committer to contribute- pull requests are welcome from a
 | [Mohamed Slim Bouguerra](https://github.com/b-slim)       | [LinkedIn](https://www.linkedin.com/)              |
 | [Navis Ryu](https://github.com/navis)                     | [SK Telecom](https://www.sktelecom.com/index.html) |
 | [Niketh Sabbineni](https://github.com/niketh)             | [Oath](https://www.oath.com/)                      |
-| [Nishant Bangarwa](https://github.com/nishantmonu51)      | Independent                                        |
+| [Nishant Bangarwa](https://github.com/nishantmonu51)      | [Rill Data](https://www.rilldata.com/)             |
 | [Parag Jain](https://github.com/pjain1)                   | [Rill Data](https://www.rilldata.com/)             |
 | [P. Taylor Goetz](https://github.com/ptgoetz)             | [EPAM](https://www.epam.com/)                      |
 | [Roman Leventov](https://github.com/leventov)             | [Snap](https://www.snap.com/en-US/)                |
