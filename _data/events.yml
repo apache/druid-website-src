@@ -1,8 +1,3 @@
-- date: 2021-04-29
-  name: "The April Apache Druid Drop-In"
-  info: London Apache Druid Meetup
-  link: https://www.meetup.com/Apache-Druid-London/events/277443473/
-
 - date: 2021-05-05
   name: "Some Like It Hot: Choosing a System for Large-Scale Data Analysis"
   info: Philly Emerging Tech Conference
@@ -17,6 +12,11 @@
   name: "The May Apache Druid Drop-In"
   info: London Apache Druid Meetup
   link: https://www.meetup.com/Apache-Druid-London/events/277839451
+  
+- date: 2021-05-26
+  name: "Funnel Analysis with Apache Spark and Druid"
+  info: Data + AI Summit 2021
+  link: https://databricks.cventevents.com/event/45414668-315b-4f08-b539-d9269a28d939/register
   
 - date: 2021-05-27
   name: "Druid & Trino Day: Unlocking Self-Service & Real-Time Analytics Across Netflix"
