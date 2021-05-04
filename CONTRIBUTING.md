@@ -6,8 +6,8 @@ By contributing to this repository you agree to license your contribution under 
 
 When submitting a pull request (PR), please use the following guidelines:
 
-- First verify your changes by running `bundle exec jekyll serve -w`.
-- For most webpage changes, please submit pull requests to this repository based off the "src" branch.
+- First verify your changes by [building & running](README.md#building) this
+- For most webpage changes, please submit pull requests to this repository
 - For any documentation changes (in the "docs" folder), please submit pull requests to the [main Druid
   repo](https://github.com/apache/druid-website-src). All Druid
   documentation is hosted under
