@@ -1,24 +1,20 @@
-- date: 2021-05-05
-  name: "Some Like It Hot: Choosing a System for Large-Scale Data Analysis"
-  info: Philly Emerging Tech Conference
-  link: https://2021.phillyemergingtech.com/talks/some-like-it-hot/
+- date: 2021-06-17
+  name: "Druid + Trino FAANG Analytics (without the FAANG engineering cost)"
+  info: Big data and Cloud Meetup
+  link: https://www.meetup.com/datariders/events/278237452/
 
-- date: 2021-05-18
-  name: "May Apache Druid Office Hours"
+- date: 2021-06-23
+  name: "June Apache Druid Office Hours"
   info: Bay Area Apache Druid Meetup
-  link: https://www.meetup.com/druidio/events/277839249/
+  link: https://www.meetup.com/druidio/events/278388970/
   
-- date: 2021-05-24
-  name: "The May Apache Druid Drop-In"
+- date: 2021-06-29
+  name: "The June Apache Druid Drop-In"
   info: London Apache Druid Meetup
-  link: https://www.meetup.com/Apache-Druid-London/events/277839451
+  link: https://www.meetup.com/Apache-Druid-London/events/278386526/
   
-- date: 2021-05-26
-  name: "Funnel Analysis with Apache Spark and Druid"
-  info: Data + AI Summit 2021
-  link: https://databricks.cventevents.com/event/45414668-315b-4f08-b539-d9269a28d939/register
+- date: 2021-07-13
+  name: "Apache Druid Deep Dive"
+  info: RVA Data Engineering
+  link: https://www.meetup.com/RVA-Data-Engineering/events/278401957/
   
-- date: 2021-05-27
-  name: "Druid & Trino Day: Unlocking Self-Service & Real-Time Analytics Across Netflix"
-  info: Bay Area Apache Druid Meetup
-  link: https://www.meetup.com/druidio/events/277837014/ 
