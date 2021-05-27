@@ -20,6 +20,8 @@ Druid powers slice and dice analytics on both historical and realtime-time metri
 
 * [How Druid enables analytics at Airbnb](https://medium.com/airbnb-engineering/druid-airbnb-data-platform-601c312f2a4c)
 
+* [How Airbnb Achieved Metric Consistency at Scale](https://medium.com/airbnb-engineering/how-airbnb-achieved-metric-consistency-at-scale-f23cc53dea70)
+
 ## Airbridge
 
 [Airbridge](https://airbridge.io) is an people-based attribution and omni-channel campaign analytics platform helping marketers measure and optimize their marketing campaigns. Thanks to Druid's data aggregation technology, marketers using Airbridge are able to receive real-time granular reports regarding their campaign's performance executed across a variety of devices, platforms, and channels.
@@ -70,6 +72,8 @@ Autonomic Transportation Mobility Cloud (TMC) is the first industry open cloud p
 ## Avesta Technologies
 
 At [Avesta](https://avestatechnologies.com/), we use Druid as a central component in our cloud data platform to provide real-time analytics solutions to our clients. We are using Druid for Customer Data Analytics and extending it for Industrial IoT and Market Automation use cases. Druid has not only proven itself to be resilient and performant but has also helped our clients save enormous amounts in cloud and licensing costs.
+
+* [Community Spotlight: staying true to open-source roots at Avesta](https://imply.io/post/community-spotlight-staying-true-to-open-source-roots-at-avesta)
 
 ## Bannerflow
 
@@ -238,6 +242,8 @@ Druid powers our applications related metrics and helps us slice and dice analyt
 ## GameAnalytics
 
 * [Why GameAnalytics migrated to Apache Druid](https://imply.io/post/why-gameanalytics-migrated-to-druid)
+
+* [Making the impossible, possible: A GameAnalytics case study](https://imply.io/post/making-the-impossible-possible-a-gameanalytics-case-study)
 
 ## Glia
 
@@ -570,6 +576,8 @@ Rubicon Project is the world’s largest independent sell-side advertising platf
 ## Sage + Archer
 
 We are using Druid as our single source of truth for both realtime statistics and data analysis. Our clients can see and filter detailed metrics in our [self-service DSP](https://www.sage-archer.com). The DSP is used for mobile and digital-out-of-home advertising campaigns. Druid is powering both the front-end and the optimization algorithms within the system.
+
+* [Community Spotlight: smart advertising from Sage+Archer + Apache Druid](https://imply.io/post/community-spotlight-smart-advertising-from-sage-archer-apache-druid)
 
 ## Salesforce
 
