@@ -359,10 +359,15 @@ enabling them to spot trends and improve performance of both marketing campaigns
 
 ## Metamarkets
 
-Druid is the primary data store for Metamarkets' full stack visual analytics
-service for the RTB (real time bidding) space. Ingesting over 200 billion events
-per day, Metamarkets is able to provide insight to its customers using complex
-ad-hoc queries at a 95th percentile query time of around 1 second.
+In 2011, Metamarkets originally created Druid to power its SaaS analytics platform.
+The technology platform processes trillions of real-time transactions monthly, across thousands of servers.
+With Druid, Metamarkets is able to provide insight to its customers using complex ad-hoc queries at a 95th percentile query time of less than 1 second.
+
+* [Introducing Druid: Real-Time Analytics at a Billion Rows Per Second](https://metamarkets.com/2011/druid-part-i-real-time-analytics-at-a-billion-rows-per-second/)
+* [Scaling the Druid Data Store](https://metamarkets.com/2012/scaling-druid/)
+* [Metamarkets Open Sources Druid](https://metamarkets.com/2012/metamarkets-open-sources-druid/)
+* [Druid Query Optimization with FIFO: Lessons from Our 5000-Core Cluster](https://metamarkets.com/2016/impact-on-query-speed-from-forced-processing-ordering-in-druid/)
+* [Distributing Data in Druid at Petabyte Scale](https://metamarkets.com/2016/distributing-data-in-druid-at-petabyte-scale/)
 
 ## Millersoft
 
@@ -556,6 +561,11 @@ Druid is a critical component in our advertising infrastructure, where it serves
 ## Retargetly
 
 Retargetly is a Data Management Platform that enables publishers and advertisers to manage their first party user data, mix it with second and third party data from others providers and activate it into advertising campaigns (direct, programmatic, etc.). Druid enables us to show real time audience insights. It also provides a lot of flexibility on ad-hoc queries with low latency. We provide default graphs and metrics to our clients but they also have the possibility to make their own interactive queries on real-time.
+
+## Rill Data
+Rill Data uses Druid to power its truly elastic, fully managed cloud service. 
+Rill uses Druid to deliver operational intelligence to business stakeholders with zero DevOps overhead.
+Rill's team operates the first and longest continuously running Druid service.
 
 ## Roambee
 

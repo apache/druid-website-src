@@ -68,6 +68,7 @@ Other Druid Distributions
 * [eBay/embedded-druid](https://github.com/eBay/embedded-druid) - Leveraging Druid capabilities in stand alone application
 * [Hortonworks Data platform](https://www.cloudera.com/products/hdp.html) - Hortonworks Data Platform includes Druid and Apache Hive to enable real-time data warehousing capabilities.   
 * [Imply Analytics Platform](http://imply.io/download) - The Imply Analytics platform includes Druid bundled with all its dependencies, an exploratory analytics UI, and a SQL layer.
+* [Rill Data](https://www.rilldata.com/) - Rill provides a truly elastic, fully managed cloud service for Apache Druid.
 
 UIs
 ---
