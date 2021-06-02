@@ -124,7 +124,7 @@ You don't need to be a committer to contribute- pull requests are welcome from a
 | [Lucas Capistrant](https://github.com/capistrant)         | [Target](https://www.target.com/)                  |
 | [Maggie Brewster](https://github.com/mcbrewster)          | [Imply](https://www.imply.io/)                     |
 | [Maxime Beauchemin](https://github.com/mistercrunch)      | [Preset](http://preset.io/)                        |
-| [Maytas Monsereenusornn](https://github.com/maytasm)      | [Imply](https://www.imply.io/)                     |
+| [Maytas Monsereenusorn](https://github.com/maytasm)      | [Imply](https://www.imply.io/)                     |
 | [Michael Schiff](https://github.com/michaelschiff)        | [Adobe](https://www.adobe.com/)                    |
 | [Mingming Qiu](https://github.com/QiuMM)                  | [Bytedance](https://bytedance.com/)                |
 | [Mohamed Slim Bouguerra](https://github.com/b-slim)       | [LinkedIn](https://www.linkedin.com/)              |
