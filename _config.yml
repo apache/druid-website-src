@@ -28,8 +28,8 @@ description: 'Real²time Exploratory Analytics on Large Datasets'
 druid_versions:
   - release: 0.21
     versions:
-      - version: 0.21.0
-        date: 2021-04-27
+      - version: 0.21.1
+        date: 2021-06-10
   - release: 0.20
     versions:
       - version: 0.20.2
