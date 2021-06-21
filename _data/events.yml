@@ -1,8 +1,3 @@
-- date: 2021-06-17
-  name: "Druid + Trino FAANG Analytics (without the FAANG engineering cost)"
-  info: Big data and Cloud Meetup
-  link: https://www.meetup.com/datariders/events/278237452/
-
 - date: 2021-06-23
   name: "June Apache Druid Office Hours"
   info: Bay Area Apache Druid Meetup
@@ -18,3 +13,7 @@
   info: RVA Data Engineering
   link: https://www.meetup.com/RVA-Data-Engineering/events/278401957/
   
+- date: 2021-07-15
+  name: "Some Like It Hot: Choosing a System for Large-Scale Data Analysis"
+  info: Data Scientists Ireland
+  link: https://www.meetup.com/DataScientistsIreland/events/278553246/
