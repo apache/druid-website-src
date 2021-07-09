@@ -1,13 +1,3 @@
-- date: 2021-06-23
-  name: "June Apache Druid Office Hours"
-  info: Bay Area Apache Druid Meetup
-  link: https://www.meetup.com/druidio/events/278388970/
-  
-- date: 2021-06-29
-  name: "The June Apache Druid Drop-In"
-  info: London Apache Druid Meetup
-  link: https://www.meetup.com/Apache-Druid-London/events/278386526/
-  
 - date: 2021-07-13
   name: "Apache Druid Deep Dive"
   info: RVA Data Engineering
@@ -17,3 +7,23 @@
   name: "Some Like It Hot: Choosing a System for Large-Scale Data Analysis"
   info: Data Scientists Ireland
   link: https://www.meetup.com/DataScientistsIreland/events/278553246/
+
+- date: 2021-07-22
+  name: "Inside Apache Druid’s Storage and Query Engine"
+  info: Subsurface 
+  link: https://www.dremio.com/subsurface/live/session/inside-apache-druids-storage-and-query-engine/
+  
+- date: 2021-07-28
+  name: "The July Apache Druid Drop-In"
+  info: London Apache Druid Meetup
+  link: https://www.meetup.com/Apache-Druid-London/events/279213449
+  
+- date: 2021-07-29
+  name: "Lightning Fast Analytics on Real-time and Historical Data"
+  info: Data Engineering Melbourne
+  link: https://www.meetup.com/Data-Engineering-Melbourne/events/278836275/
+  
+- date: 2021-08-19
+  name: "Apache Druid: Choosing a System for Large-Scale Data Analysis"
+  info: Austin Big Data AI
+  link: https://www.meetup.com/Big-Data-AI/events/279220160
