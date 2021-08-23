@@ -14,6 +14,12 @@ There are numerous companies of various sizes in production with Druid. Some of 
 
 * [How Adikteev helps customers succeed using self-service analytics](https://imply.io/post/how-adikteev-helps-customers-succeed-using-self-service-analytics)
 
+## AdsWizz
+
+[AdsWizz](https://www.adswizz.com/) is the leading global digital audio advertising solution provider, enabling the effective monetization and personalization of digital audio through a complete suite of advertising and analytics solutions.
+
+We use Druid as the core analytics engine, which powers a multitude of real-time dashboards and widgets, used both by customers and internal staff. Sub-second query response times, the removal of obsolete data cubes, ad-hoc analytics and the seamless integration of historical and real-time data are the main reasons we have chosen Druid. Advertisers, agencies and publishers can get insights on hundreds of metrics and dimensions specific to the advertising industry, having the possibility to slice and dice the data according to their needs.
+
 ## Airbnb
 
 Druid powers slice and dice analytics on both historical and realtime-time metrics. It significantly reduces latency of analytic queries and help people to get insights more interactively.
