@@ -14,6 +14,12 @@ There are numerous companies of various sizes in production with Druid. Some of 
 
 * [How Adikteev helps customers succeed using self-service analytics](https://imply.io/post/how-adikteev-helps-customers-succeed-using-self-service-analytics)
 
+## AdsWizz
+
+[AdsWizz](https://www.adswizz.com/) is the leading global digital audio advertising solution provider, enabling the effective monetization and personalization of digital audio through a complete suite of advertising and analytics solutions. 
+
+We use Druid as the core analytics engine, which powers a multitude of real-time dashboards and widgets, used both by customers and internal staff. Sub-second query response times, the removal of obsolete data cubes, ad-hoc analytics and the seamless integration of historical and real-time data are the main reasons we have chosen Druid. Advertisers, agencies and publishers can get insights on hundreds of metrics and dimensions specific to the advertising industry, having the possibility to slice and dice the data according to their needs.
+
 ## Airbnb
 
 Druid powers slice and dice analytics on both historical and realtime-time metrics. It significantly reduces latency of analytic queries and help people to get insights more interactively.
@@ -148,6 +154,12 @@ Criteo is using druid to provide its customers with user-centric analytics & rep
 With more than 1 billion unique users reached per month, 3 billion ads displayed per day, and a 70% growth in 2014, Criteo's previous stack was hard pressed keeping with the load. Replacing it with druid helped us achieved linear scalability while letting our customers explore their data in new and interactive ways.
 
 * [Real Time Metrics on Tracker Calls](http://labs.criteo.com/2016/02/real-time-metrics-on-tracker-calls/)
+
+## Cuebook
+
+At [Cuebook](https://cuebook.ai/), Druid serves as the analytics database for our augmented analytics product.
+
+* [Augmented analytics on business metrics by Cuebook with Apache Druid](https://imply.io/post/augmented-analytics-on-business-metrics-by-cuebook)
 
 ## DBS Bank
 
