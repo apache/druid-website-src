@@ -203,10 +203,6 @@ Dream11 is consuming data from Apache Druid, Amazon Redshift, and Athena and bui
 
 * [Data Highway — Dream11’s Inhouse Analytics Platform — The Burden and Benefits](https://medium.com/@D11Engg/data-highway-dream11s-inhouse-analytics-platform-the-burden-and-benefits-90b8777d282)
 
-## DripStat
-
-DripStat uses Druid as a timeseries database to power the DripStat GUI. DripStat ingests transactional data for Java, Scala, and Groovy applications into Druid.
-
 ## Easemob
 
 Easemob Technologies, Inc. is the leading provider of open IM platform, cloud computing customer services. We enable PaaS services for Instant Messaging and SaaS services for Mobile Customer Service.
