@@ -34,46 +34,46 @@
     link: https://www.druidforum.org/t/data-modeling-and-query-performance-in-apache-druid/5942
     company: Imply
 
-  - date: 2020-04-15
+  - date: 2020-04-16
     title: "Apache Druid Vision and Roadmap"
     name: "Gian Merlino"
-    link: https://imply.io/virtual-druid-summit/apache-druid-vision-and-roadmap-gian-merlino
+    link: https://youtu.be/IhqDsoIHqWY
     company: Imply
 
-  - date: 2020-04-15
+  - date: 2020-04-16
     title: "Automating CI/CD for Druid Clusters at Athena Health"
     name: "Shyam Mudambi, Ramesh Kempanna and Karthik Urs"
-    link: https://imply.io/virtual-druid-summit/automating-ci-cd-for-druid-clusters-at-athena-health
+    link: https://youtu.be/XGzMJBM8xeg
     company: Athena Health
 
-  - date: 2020-04-15
-    title: "Apache Druid for Anti-Money Laundering (AML) at DBS Bank"
+  - date: 2020-04-13
+    title: "Holistic AML compliance using Apache Druid"
     name: "Arpit Dubey"
-    link: https://imply.io/virtual-druid-summit/apache-druid-anti-money-laundering-dbs-bank
+    link: https://youtu.be/Ly3HFbbEihQ
     company: DBS
 
-  - date: 2020-04-15
+  - date: 2020-04-13
     title: "How Apache Druid Powers Real-Time Analytics at BT"
     name: "Pankaj Tiwari"
-    link: https://imply.io/virtual-druid-summit/how-druid-powers-real-time-analytics-at-bt
+    link: https://youtu.be/QZUunUDQ8p4
     company: BT
 
-  - date: 2020-04-15
+  - date: 2020-04-13
     title: "Analytics over Terabytes of Data at Twitter using Apache Druid"
     name: "Swapnesh Gandhi"
     link: https://imply.io/virtual-druid-summit/analytics-over-terabytes-of-data-at-twitter-apache-druid
     company: MoPub
 
-  - date: 2020-04-15
+  - date: 2020-04-13
     title: "Using Druid for Network Monitoring and Trust Analytics at Cisco"
     name: "TJ Giuli and Abhishek Balaji Radhakrishnan"
-    link: https://imply.io/virtual-druid-summit/apache-druid-network-monitoring-trust-analytics-cisco
+    link: https://youtu.be/KXytFBehvXA
     company: Cisco
 
-  - date: 2020-04-15
+  - date: 2020-04-13
     title: "Apache Druid Fireside Chat (Ask Us Anything"
     name: "Fangjin Yang, Gian Merlino and Vadim Ogievetsky"
-    link: https://imply.io/virtual-druid-summit/apache-druid-ask-me-anything-merlino-yang-ogievetsky
+    link: https://youtu.be/5JJccj_dSBk
     company: Imply
 
   - date: 2020-03-03
@@ -149,7 +149,7 @@
     company: Imply
     
   - date: 2019-03-15
-    title: "Data Engineering At Booking.com Case Study | #064"
+    title: "Data Engineering At Booking.com - a case study"
     name: "Andreas Kretz"
     link: https://youtu.be/9GE3yiVo1FM
     company: Booking.com
@@ -181,5 +181,5 @@
   - date: 2018-06-19
     title: "PayPal merchant ecosystem using Apache Spark, Hive, Druid, and HBase"
     name: "Deepika Khera & Kasi Natarajan"
-    link: https://dataworkssummit.com/san-jose-2018/session/paypal-merchant-ecosystem-using-apache-spark-hive-druid-and-hbase/
+    link: https://youtu.be/HJvuU0CQS44
     company: Paypal
