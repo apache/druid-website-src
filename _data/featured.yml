@@ -4,6 +4,30 @@
     link: https://imply.io/post/augmented-analytics-on-business-metrics-by-cuebook
     company: Cuebook
 
+  - date: 2021-08-09
+    title: "Funnel Analysis with Spark, Druid and DataSketches"
+    name: "Itai Yaffe, Yakir Buskila"
+    link: https://youtu.be/dOBb0IOdsnU
+    company: Databricks Data and AI Summit 2021
+
+  - date: 2021-07-21
+    title: "Apache Druid – Datenspeicher mit geringen Latenzen"
+    name: "Thomas Joos, Nico Litzel"
+    link: https://www.bigdata-insider.de/apache-druid-datenspeicher-mit-geringen-latenzen-a-1034042/
+    company: Big Data Insider
+
+  - date: 2021-06-17
+    title: "Casting the spell: Druid in Practice"
+    name: "Itai Yaffe, Yakir Buskila"
+    link: https://youtu.be/QAitmv8QRq4
+    company: Berlin Buzzwords 2021
+
+  - date: 2021-06-07
+    title: "Intro to Apache Druid … What is this Devilry"
+    name: "Daniel Beach"
+    link: https://www.confessionsofadataguy.com/intro-to-apache-druid-what-is-this-devilry/
+    company: Confessions of a Data Guy Blog
+
   - date: 2021-02-22
     title: "Data Modeling and Query Performance in Apache Druid"
     name: "Matt Sarrel"
