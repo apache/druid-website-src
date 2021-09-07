@@ -2,8 +2,18 @@
   name: "Fresh and Fast: Analytics for Real-time Intelligence and Ad-hoc Applications"
   info: Data Philly
   link: https://www.meetup.com/DataPhilly/events/279999299/
-
+  
+- date: 2021-09-21
+  name: "Druid talk at Apache Beam meetup"
+  info: London Apache Beam Meetup
+  link: https://www.meetup.com/London-Apache-Beam-Meetup/events/280442419/
+  
 - date: 2021-09-21
   name: "September Apache Druid Office Hours"
   info: Bay Area Apache Druid Meetup
   link: https://www.meetup.com/druidio/events/280461415/
+  
+- date: 2021-09-23
+  name: "Druid talk at Swiss Streaming Meetup"
+  info: Messaging and Streaming Switzerland
+  link: https://www.meetup.com/Messaging-Streaming-Switzerland/events/280481980/
