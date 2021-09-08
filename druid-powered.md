@@ -12,7 +12,7 @@ There are numerous companies of various sizes in production with Druid. Some of 
 
 [Adikteev](https://www.adikteev.com) is the leading mobile app re-engagement platform for performance-driven marketers, and is consistently ranked in the top 5 of the AppsFlyer Performance Index. By using Druid instead of relying on slow and stale dashboards, we have been able to achieve internal productivity gains, make better decisions faster, provide our external clients with strategic advice to improve the performance and effectiveness of their retargeting marketing campaigns, and notify clients quickly of potentially serious problems. 
 
-* [How Adikteev helps customers succeed using self-service analytics](https://imply.io/post/how-adikteev-helps-customers-succeed-using-self-service-analytics)
+* [How Adikteev helps customers succeed using self-service analytics](https://imply.io/post/how-adikteev-helps-customers-succeed-using-self-service-analytics) (Margot Miller), *Imply Blog*, 20 Aug 2020.
 
 ## AdsWizz
 
@@ -24,9 +24,9 @@ We use Druid as the core analytics engine, which powers a multitude of real-time
 
 Druid powers slice and dice analytics on both historical and realtime-time metrics. It significantly reduces latency of analytic queries and help people to get insights more interactively.
 
-* [How Druid enables analytics at Airbnb](https://medium.com/airbnb-engineering/druid-airbnb-data-platform-601c312f2a4c)
+* [How Druid enables analytics at Airbnb](https://medium.com/airbnb-engineering/druid-airbnb-data-platform-601c312f2a4c) (Pala Muthiah, Jinyang Li), *The AirBnb Tech Blog [Medium]*, 13 Nov 2018.
 
-* [How Airbnb Achieved Metric Consistency at Scale](https://medium.com/airbnb-engineering/how-airbnb-achieved-metric-consistency-at-scale-f23cc53dea70)
+* [How Airbnb Achieved Metric Consistency at Scale](https://medium.com/airbnb-engineering/how-airbnb-achieved-metric-consistency-at-scale-f23cc53dea70) (Amit Pahwa, Cristian Figueroa, Donghan Zhang, Haim Grosman, John Bodley, Jonathan Parks, Maggie Zhu, Philip Weiss, Robert Chang, Shao Xie, Sylvia Tomiyama, Xiaohui Sun), *The AirBnb Tech Blog [Medium]*, 30 Apr 2021.
 
 ## Airbridge
 
@@ -65,7 +65,7 @@ Druid is used to power dynamic analytics and charting in Archive-It Reports. Rep
 ## Athena Health
 At [Athena Health](https://www.athenahealth.com/), we are creating a new performance management application for our clients, and one of its key components is Apache Druid. 
 
-* [Automating CI/CD for Druid Clusters at Athena Health](https://imply.io/virtual-druid-summit/automating-ci-cd-for-druid-clusters-at-athena-health)
+* [Automating CI/CD for Druid Clusters at Athena Health](https://youtu.be/XGzMJBM8xeg) (Shyam Mudambi, Ramesh Kempanna, Karthik Urs), *Imply [YouTube]*, 16 Apr 2020.
 
 ## Atomx
 
@@ -79,7 +79,7 @@ Autonomic Transportation Mobility Cloud (TMC) is the first industry open cloud p
 
 At [Avesta](https://avestatechnologies.com/), we use Druid as a central component in our cloud data platform to provide real-time analytics solutions to our clients. We are using Druid for Customer Data Analytics and extending it for Industrial IoT and Market Automation use cases. Druid has not only proven itself to be resilient and performant but has also helped our clients save enormous amounts in cloud and licensing costs.
 
-* [Community Spotlight: staying true to open-source roots at Avesta](https://imply.io/post/community-spotlight-staying-true-to-open-source-roots-at-avesta)
+* [Community Spotlight: staying true to open-source roots at Avesta](https://imply.io/post/community-spotlight-staying-true-to-open-source-roots-at-avesta) (Dharam Gajera,Peter Marshall, Jelena Zanko), *Imply Blog*, 25 May 2021.
 
 ## Bannerflow
 
@@ -101,11 +101,13 @@ Billy Mobile is a mobile advertising platform, excelling in the performance-base
 
 Blueshift is an AI-powered customer data activation platform enabling CRM and product marketers to intelligently manage their audiences and orchestrate large-scale personalized messaging campaigns at scale. Blueshift offers real-time campaign analytics in the product powered by Druid. Additionally, we use the same analytics backend to power automatic traffic allocation capabilities using Bayesian bandits, perform cohort analysis over multiple dimensions, and generate internal reports to measure the impact of ROI of AI across different types of campaigns and industry verticals. 
 
-* [We operate a multi-tenant Druid cluster in AWS. Additionally, we have integrated our data lake (Hive/Hbase) with Druid to manage data backfills.](https://imply.io/post/blueshift-scaling-real-time-campaign-analytics-apache-druid)
+> "We operate a multi-tenant Druid cluster in AWS. Additionally, we have integrated our data lake (Hive/Hbase) with Druid to manage data backfills."
+
+* [Blueshift: Scaling real-time campaign analytics with Apache Druid](https://imply.io/post/blueshift-scaling-real-time-campaign-analytics-apache-druid) (Anuraj Pandey), *Imply blog*, 8 Aug 2019.
 
 ## Booking.com
 
-* [Data Engineering At Booking.com Case Study](https://www.youtube.com/watch?v=9GE3yiVo1FM)
+* [Data Engineering At Booking.com: a case study](https://youtu.be/9GE3yiVo1FM) (Andreas Kretz), *YouTube*, 15 Mar 2019.
 
 ## Branch
 
@@ -113,18 +115,17 @@ Branch uses Druid as their trusted analytics engine to power all of their data a
 
 ## British Telecom (BT)
 
-* [British Telecom's Apache Druid Architecture](https://imply.io/videos/british-telecoms-apache-druid-architecture)
-* [Why British Telecom Chose Druid Over Cassandra](https://imply.io/videos/why-british-telecom-chose-druid-over-cassandra)
+* [How Druid powers real-time analytics at BT](https://youtu.be/QZUunUDQ8p4) (Pankaj Tiwari), *Imply [YouTube]*, 17 Apr 2020.
 
 ## Central Bank of the Republic of Turkey
 
 The Central Bank of the Republic of Turkey addresses the challenge of analyzing and interpreting real-time tick data related to money market instruments using Apache Druid and Superset.
 
-* [Observing Intraday Indicators Using Real-Time Tick Data on Apache Superset and Druid](https://www.youtube.com/watch?v=o0JsVwFEdtA)
+* [Developing High Frequency Indicators Using Real-Time Tick Data on Apache Superset and Druid](https://youtu.be/o0JsVwFEdtA) (Zekeriya Besiroglu, Emre Tokel, Kerem Başol, M. Yağmur. Şahin), *DataWorks Summit [YouTube]*, 21 Mar 2019.
 
 ## Charter Communications
 
-* [Druid at Charter](https://speakerdeck.com/implydatainc/druid-at-charter)
+* [Druid at Charter Spectrum](https://speakerdeck.com/implydatainc/druid-at-charter) (Nate Vogel, Andy Amick), *Imply [SlideShare]*, 24 Jan 2019.
 
 ## CircleHD
 
@@ -134,7 +135,7 @@ The Central Bank of the Republic of Turkey addresses the challenge of analyzing 
 
 Cisco uses Druid to power a real-time analytics platform for network flow data.
 
-* [Under the hood of Cisco’s Tetration Analytics platform](http://www.networkworld.com/article/3086250/cisco-subnet/under-the-hood-of-cisco-s-tetration-analytics-platform.html)
+* [Under the hood of Cisco’s Tetration Analytics platform](https://www.networkworld.com/article/3086250/under-the-hood-of-cisco-s-tetration-analytics-platform.html) (Brandon Butler), *Network World*, 20 Jun 2016.
 
 ## Condé Nast
 
@@ -153,19 +154,19 @@ Druid has helped push operational visibility to the next level. Operating multi-
 Criteo is using druid to provide its customers with user-centric analytics & reporting.
 With more than 1 billion unique users reached per month, 3 billion ads displayed per day, and a 70% growth in 2014, Criteo's previous stack was hard pressed keeping with the load. Replacing it with druid helped us achieved linear scalability while letting our customers explore their data in new and interactive ways.
 
-* [Real Time Metrics on Tracker Calls](http://labs.criteo.com/2016/02/real-time-metrics-on-tracker-calls/)
+* [Real Time Metrics on Tracker Calls](http://labs.criteo.com/2016/02/real-time-metrics-on-tracker-calls/) (Camille Coueslant, Benoit Jehanno), *Criteo Engineering*, 18 Feb 2016.
 
 ## Cuebook
 
 At [Cuebook](https://cuebook.ai/), Druid serves as the analytics database for our augmented analytics product.
 
-* [Augmented analytics on business metrics by Cuebook with Apache Druid](https://imply.io/post/augmented-analytics-on-business-metrics-by-cuebook)
+* [Augmented analytics on business metrics by Cuebook with Apache Druid](https://imply.io/post/augmented-analytics-on-business-metrics-by-cuebook) (Sachin Bansal, Peter Marshall), *Imply blog*, 18 Aug 2021.
 
 ## DBS Bank
 
 [DBS](https://www.dbs.com) is using Apache Druid to handle the AML investigation for the compliance team. The AML (anti-money laundering) workflow generates alerts which are tracked within Druid. The transactional data is ingested from RDBMS to S3 and ingested back to Druid at regular intervals. Investigators can now slice and dice over millions of data with low latency.
 
-* [Apache Druid for Anti-Money Laundering (AML) at DBS Bank](https://imply.io/virtual-druid-summit/apache-druid-anti-money-laundering-dbs-bank)
+* [Holistic AML compliance using Apache Druid](https://youtu.be/Ly3HFbbEihQ) (Arpit Dubey), *Imply [YouTube]*, 15 Apr 2020.
 
 ## Dataroid
 
@@ -186,7 +187,7 @@ At [Deep.BI](https://www.deep.bi) we track user habits, engagement, product and 
 
 Our talk from FlinkForward conference in Berlin 2019:
 
-* [Real-time Stream Analytics and User Scoring Using Apache Druid, Flink & Cassandra at Deep.BI](https://medium.com/deep-bi/real-time-stream-analytics-and-user-scoring-using-apache-druid-flink-cassandra-at-deep-bi-38e5dc40958d?source=friends_link&sk=d9c85da0cb060280bfeb8f3c1c166e84)
+* [Real-time Stream Analytics and User Scoring Using Apache Druid, Flink & Cassandra at Deep.BI](https://medium.com/deep-bi/real-time-stream-analytics-and-user-scoring-using-apache-druid-flink-cassandra-at-deep-bi-38e5dc40958d) (Hisham Itani), *Medium*, 24 Mar 2020.
 
 ## Delta Projects
 
@@ -201,7 +202,7 @@ Didi uses Druid as a core component of our real-time bigdata processing pipeline
 
 Dream11 is consuming data from Apache Druid, Amazon Redshift, and Athena and building models on Looker to report user concurrency, to track user journeys, and to build interaction events based funnels.
 
-* [Data Highway — Dream11’s Inhouse Analytics Platform — The Burden and Benefits](https://medium.com/@D11Engg/data-highway-dream11s-inhouse-analytics-platform-the-burden-and-benefits-90b8777d282)
+* [Data Highway — Dream11’s Inhouse Analytics Platform — The Burden and Benefits](https://medium.com/@D11Engg/data-highway-dream11s-inhouse-analytics-platform-the-burden-and-benefits-90b8777d282) (Lavanya Pulijala), *Dream11 Engineering [Medium]*, 27 Jan 2020.
 
 ## Easemob
 
@@ -211,15 +212,15 @@ Easemob Technologies, Inc. is the leading provider of open IM platform, cloud co
 
 eBay uses Druid to aggregate multiple data streams for real-time user behavior analytics by ingesting up at a very high rate(over 100,000 events/sec), with the ability to query or aggregate data by any random combination of dimensions, and support over 100 concurrent queries without impacting ingest rate and query latencies.
 
-* [Monitoring at eBay with Druid](https://www.ebayinc.com/stories/blogs/tech/monitoring-at-ebay-with-druid/)
-* [Druid and Pulsar](http://blog.csdn.net/ebay/article/details/50205611)
-* [embedded-druid: Leveraging Druid Capabilities in Stand-alone Applications](http://www.ebaytechblog.com/2016/02/05/embedded-druid-leveraging-druid-capabilities-in-stand-alone-applications/)
+* [Monitoring at eBay with Druid](https://tech.ebayinc.com/engineering/monitoring-at-ebay-with-druid/) (Garadi Mohan), *eBay Big Data Engineering*, 29 May 2019.
+* [embedded-druid: Leveraging Druid Capabilities in Stand-alone Applications](https://tech.ebayinc.com/engineering/embedded-druid-leveraging-druid-capabilities-in-stand-alone-applications/) (Ruchir Shah), *eBay Big Data Engineering*, 5 Feb 2016.
+* [A glance of Pulsar and Druid](https://blog.csdn.net/ebay/article/details/50205611) (Xiaoming Zhang), *eBay Big Data Engineering*, 7 Dec 2015.
 
 ## Expedia
 
 Expedia built real-time customer segmentation into the Expedia Data Platform using Druid as its core component. It helps business and data science teams identify customers using many different criteria. 
 
-* [Fast Approximate Counting Usind Druid and Datasketch](https://medium.com/expedia-group-tech/fast-approximate-counting-using-druid-and-datasketch-f5f163131acd)
+* [Fast Approximate Counting Using Druid and Datasketch](https://medium.com/expedia-group-tech/fast-approximate-counting-using-druid-and-datasketch-f5f163131acd) (Elan Halfin, Aravind Sethurathnam), *Expedia Group Technology [Medium]*, 10 Dec 2020.
 
 ## FacilityConneX
 
@@ -237,11 +238,11 @@ Druid powers our applications related metrics and helps us slice and dice analyt
 
 [Flurry](https://www.flurry.com) is a mobile app analytics platform that empowers product, development and growth experts to build better apps that users love. Mobile data hits the Flurry backend at a huge rate, updates statistics across hundreds of dimensions, and becomes queryable immediately. Flurry harnesses Druid to ingest data and serve queries at this massive rate.
 
-* [Druid @ Flurry](https://www.youtube.com/watch?v=6c_hc3Qca5s)
+* [Druid @ Flurry](https://youtu.be/6c_hc3Qca5s) (Eric Tschetter), *Sift Science [YouTube]*, 16 Dec 2016.
 
 ## FullContact
 
-* [Enrich API Brings Higher Match Rates with Multi-Field Enrichment Capabilities](https://www.fullcontact.com/blog/enrich-api-brings-higher-match-rates-with-multi-field-enrichment-capabilities/)
+* [Enrich API Brings Higher Match Rates with Multi-Field Enrichment Capabilities](https://www.fullcontact.com/blog/2019/06/27/enrich-api-brings-higher-match-rates-with-multi-field-enrichment-capabilities/) (Ken Michie), *Full Contact*, 27 Jun 2019.
 
 ## Fyber
 
@@ -249,9 +250,7 @@ Druid powers our applications related metrics and helps us slice and dice analyt
 
 ## GameAnalytics
 
-* [Why GameAnalytics migrated to Apache Druid](https://imply.io/post/why-gameanalytics-migrated-to-druid)
-
-* [Making the impossible, possible: A GameAnalytics case study](https://imply.io/post/making-the-impossible-possible-a-gameanalytics-case-study)
+* [Why GameAnalytics migrated to Apache Druid](https://imply.io/post/why-gameanalytics-migrated-to-druid) (Ramón Lastres Guerrero), *Imply blog*, 14 Feb 2019.
 
 ## Glia
 
@@ -261,8 +260,8 @@ Druid powers our applications related metrics and helps us slice and dice analyt
 
 Druid powers a dashboard used internally to visualize real-time analytics on GumGum's Real Time Bidding platform. GumGum runs Druid on Amazon EC2 and can ingest up to 300,000 events per second at peak time.
 
-* [Lambda Architecture with Druid at GumGum](http://whynosql.com/2015/11/06/lambda-architecture-with-druid-at-gumgum/)
-* [Optimized Real-time Analytics using Spark Streaming and Apache Druid](https://medium.com/gumgum-tech/optimized-real-time-analytics-using-spark-streaming-and-apache-druid-d872a86ed99d)
+* [Lambda Architecture with Druid at GumGum](https://whynosql.com/2015/11/06/lambda-architecture-with-druid-at-gumgum/) (Vaibhav Puranik), *WhyNoSql [Wordpress]*, 6 Nov 2015.
+* [Optimized Real-time Analytics using Spark Streaming and Apache Druid](https://medium.com/gumgum-tech/optimized-real-time-analytics-using-spark-streaming-and-apache-druid-d872a86ed99d) (Jatinder Assi), *GumGum Tech Blog [Medium]*, 2 Jun 2020.
 
 ## Hulu
 
@@ -276,19 +275,17 @@ At Hulu, we use Druid to power our analytics platform that enables us to interac
 
 [Ibotta](https://home.ibotta.com/) is a free cash back rewards and payments app. The company has partnered with more than 1,500 brands and retailers to pay consumers cash for their purchases. Ibotta has paid out over $600 million in cash rewards to more than 35 million users since its founding in 2012.
 
-* [Combatting fraud at Ibotta with Imply](https://imply.io/post/combating-fraud-at-ibotta-with-imply)
-
 ## Imply
 
 Imply uses Druid to power public demos and to power our internal monitoring and metrics.
 
-* [Pivot: An Open Source Data Exploration UI for Druid](https://imply.io/post/hello-pivot)
-* [A Tour Through the "Big Data" Zoo](https://imply.io/post/big-data-zoo)
-* [Architecting Distributed Databases for Failure](https://imply.io/post/failure)
-* [Building a Streaming Analytics Stack with Apache Kafka and Druid](http://www.confluent.io/blog/building-a-streaming-analytics-stack-with-apache-kafka-and-druid)
-* [Compressing Longs in Druid](https://imply.io/post/compressing-longs)
-* [Securing Druid](https://imply.io/post/securing-druid)
-* [Druid query view: An elegant SQL interface for a more civilized age](https://imply.io/post/druid-console-query-view)
+* [Pivot: An Open Source Data Exploration UI for Druid](https://imply.io/post/hello-pivot) (Vadim Ogievetsky), *Imply blog*, 26 Oct 2015.
+* [A Tour Through the "Big Data" Zoo](https://imply.io/post/big-data-zoo) (Fangjin Yang), *Imply blog*, 4 Nov 2015.
+* [Architecting Distributed Databases for Failure](https://imply.io/post/failure) (Fangjin Yang), *Imply blog*, 10 Dec 2015.
+* [Building a Streaming Analytics Stack with Apache Kafka and Druid](http://www.confluent.io/blog/building-a-streaming-analytics-stack-with-apache-kafka-and-druid) (Fangjin Yang), *Confluent blog*, 14 Jun 2016.
+* [Compressing Longs in Druid](https://imply.io/post/compressing-longs) (David Li), *Imply blog*, 7 Dec 2016.
+* [Securing Druid](https://imply.io/post/securing-druid) (Jon Wei), *Imply blog*, 13 Sep 2018.
+* [Druid query view: An elegant SQL interface for a more civilized age](https://imply.io/post/druid-console-query-view) (Margaret Brewster), *Imply blog*, 16 Oct 2019.
 
 ## Inke
 
@@ -302,7 +299,7 @@ Inmobi is a mobile advertising and discovery platform. We use Druid majorly for 
 
 Innowatts uses Druid to quickly work with massive data sets, and differentiates its platform with the intended direction to read meters and forecast usage on the fly.
 
-* [Innowatts provides AI-driven analytics for the power industry](https://imply.io/post/innowatts-innovates-power-utilities-analytics)
+* [Community Spotlight: Innowatts provides AI-driven analytics for the power industry](https://imply.io/post/innowatts-innovates-power-utilities-analytics) (Daniel Hernandez, Matt Sarrel), *Imply blog*, 30 Sep 2020.
 
 ## Interactive Intelligence
 
@@ -319,7 +316,7 @@ Italiaonline is the first Italian internet company, with the two most visited we
 
 Jolata leverages Druid as the analytics data store for the realtime network perfomance managment platform. Injesting over 35 billion events per day, Jolata calculates a billion metrics every minute to visualize precise network metrics in real-time, and enable operators to quickly drill down and perform root cause analysis.
 
-* [Realtime Analytics Powered by Druid](https://www.linkedin.com/pulse/realtime-analytics-powered-druid-kiran-patchigolla)
+* [Realtime Analytics Powered by Druid](https://www.linkedin.com/pulse/realtime-analytics-powered-druid-kiran-patchigolla) (Kiran Patchigolla), *Medium*, 11 Aug 2015.
 
 ## Kering
 
@@ -348,7 +345,8 @@ LiquidM uses Druid for real-time drill-down reporting. LiquidM is also contribut
 
 ## Lyft
 
-* [Streaming SQL and Druid](https://youtu.be/ovZ9iAkQllo)
+* [Streaming SQL and Druid](https://youtu.be/ovZ9iAkQllo) (Arup Malakar), *SF Big Analytics [YouTube]*, 30 Aug 2018.
+
 
 ## Lynx Analytics
 
@@ -359,7 +357,7 @@ which they can do that is in a big part thanks to Druid!
 
 ## MakeMyTrip
 
-* [Data Insights Engine @ MakeMyTrip](https://medium.com/makemytrip-engineering/data-insights-engine-makemytrip-900bd353d99c)
+* [Data Insights Engine @ MakeMyTrip](https://medium.com/makemytrip-engineering/data-insights-engine-makemytrip-900bd353d99c) (Aditya Banerjee), *MakeMyTrip [Medium]*, 4 Jan 2019.
 
 ## MAKESENS
 
@@ -415,7 +413,7 @@ At [mParticle](https://www.mparticle.com/) we have deployed Druid across our ent
 
 ## MZ
 
-* [Druid Meetup @ MZ video](https://www.youtube.com/watch?v=zCk2BV9mQ0Y)
+* Priyadarshi, Pushkar; Yurinok, Igor, Nepune, Bikrant. "Druid @ MZ." *YouTube*, uploaded by Imply, 5 Mar 2018, <https://youtu.be/zCk2BV9mQ0Y>
 
 ## N3twork
 
@@ -434,8 +432,7 @@ two terabytes per hour, with the ability to query data as its being ingested.
 They use Druid to pinpoint anomalies within their infrastructure, endpoint
 activity and content flow.
 
-* [Druid Meetup @ Netflix video](https://www.youtube.com/watch?v=Qvhqe4yUKpw&feature=youtu.be)
-* [Druid Meetup @ Netflix slides](https://www.slideshare.net/JaebinYoon/druid-meetup-netflix-11142018/)
+* Merlino, Gian; Herman, Matt; Pasari, Vivek; Jain, Samarth. "Druid @ Netflix". *YouTube*, uploaded by Netflix Data, 14 Nov 2018. <https://youtu.be/Qvhqe4yUKpw>
 * [Netflix & Amazon Case Study](https://aws.amazon.com/solutions/case-studies/netflix-kinesis-streams/)
 * [Announcing Suro: Backbone of Netflix's Data Pipeline](http://techblog.netflix.com/2013/12/announcing-suro-backbone-of-netflixs.html)
 * [How Netflix uses Druid for Real-time Insights to Ensure a High-Quality Experience](https://netflixtechblog.com/how-netflix-uses-druid-for-real-time-insights-to-ensure-a-high-quality-experience-19e1e8568d06)
@@ -453,8 +450,8 @@ You can learn more about the AOC at http://netsil.com/download/
 Nielsen Marketing Cloud uses Druid as it's core real-time analytics tool to help its clients monitor, test and improve its audience targeting capabilities.  With Druid, Nielsen provides its clients with in-depth consumer insights leveraging world-class Nielsen audience data.
 
 * [How Nielsen Marketing Cloud Uses Druid for Audience and Marketing Performance Analysis](https://imply.io/post/nielsen-marketing-audience-analysis)
-* [Counting Unique Users in Real-Time: Here’s a Challenge for You! video] (https://youtu.be/MLUhzuQ0DHY)
-* [Counting Unique Users in Real-Time: Here’s a Challenge for You! slides](https://www.slideshare.net/Hadoop_Summit/counting-unique-users-in-realtime-heres-a-challenge-for-you-139142580)
+* [Counting Unique Users in Real-Time: Here’s a Challenge for You!"](https://youtu.be/MLUhzuQ0DHY) (Yakir Buskilla, Itai Yaffe) *YouTube*, uploaded by DataWorks Summit, 1 Apr 2019.
+* Buskilla, Yakir; Yaffe, Itai. "Counting Unique Users in Real-Time: Here’s a Challenge for You!" *SlideShare*, uploaded by DataWorks Summit, 1 Apr 2019. <https://www.slideshare.net/Hadoop_Summit/counting-unique-users-in-realtime-heres-a-challenge-for-you-139142580>
 * [Data Retention and Deletion in Apache Druid](https://medium.com/nmc-techblog/data-retention-and-deletion-in-apache-druid-74ffd12398a8)
 
 ## Nodex
