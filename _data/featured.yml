@@ -4,82 +4,52 @@
     link: https://vijay-narayanan-bigdata.medium.com/anomaly-detection-using-druid-and-imply-pivot-d6cd5bf158db
     company: Imply
 
-  - date: 2021-08-18
-    title: "Augmented analytics on business metrics by Cuebook with Apache Druid"
-    name: "Sachin Bansal"
-    link: https://imply.io/post/augmented-analytics-on-business-metrics-by-cuebook
-    company: Cuebook
-
-  - date: 2021-08-09
-    title: "Funnel Analysis with Spark, Druid and DataSketches"
-    name: "Itai Yaffe, Yakir Buskila"
-    link: https://youtu.be/dOBb0IOdsnU
-    company: Databricks Data and AI Summit 2021
-
-  - date: 2021-07-21
-    title: "Apache Druid – Datenspeicher mit geringen Latenzen"
-    name: "Thomas Joos, Nico Litzel"
-    link: https://www.bigdata-insider.de/apache-druid-datenspeicher-mit-geringen-latenzen-a-1034042/
-    company: Big Data Insider
-
-  - date: 2021-06-17
-    title: "Casting the spell: Druid in Practice"
-    name: "Itai Yaffe, Yakir Buskila"
-    link: https://youtu.be/QAitmv8QRq4
-    company: Berlin Buzzwords 2021
-
-  - date: 2021-06-07
-    title: "Intro to Apache Druid … What is this Devilry"
-    name: "Daniel Beach"
-    link: https://www.confessionsofadataguy.com/intro-to-apache-druid-what-is-this-devilry/
-    company: Confessions of a Data Guy Blog
-
   - date: 2021-02-22
     title: "Data Modeling and Query Performance in Apache Druid"
     name: "Matt Sarrel"
     link: https://www.druidforum.org/t/data-modeling-and-query-performance-in-apache-druid/5942
     company: Imply
 
-  - date: 2020-04-16
+  - date: 2020-04-15
     title: "Apache Druid Vision and Roadmap"
     name: "Gian Merlino"
-    link: https://youtu.be/IhqDsoIHqWY
+    link: https://imply.io/virtual-druid-summit/apache-druid-vision-and-roadmap-gian-merlino
     company: Imply
 
-  - date: 2020-04-16
+  - date: 2020-04-15
     title: "Automating CI/CD for Druid Clusters at Athena Health"
     name: "Shyam Mudambi, Ramesh Kempanna and Karthik Urs"
-    link: https://youtu.be/XGzMJBM8xeg
+    link: https://imply.io/virtual-druid-summit/automating-ci-cd-for-druid-clusters-at-athena-health
     company: Athena Health
 
-  - date: 2020-04-13
-    title: "Holistic AML compliance using Apache Druid"
+  - date: 2020-04-15
+    title: "Apache Druid for Anti-Money Laundering (AML) at DBS Bank"
     name: "Arpit Dubey"
-    link: https://youtu.be/Ly3HFbbEihQ
+    link: https://imply.io/virtual-druid-summit/apache-druid-anti-money-laundering-dbs-bank
     company: DBS
 
-  - date: 2020-04-13
+  - date: 2020-04-15
     title: "How Apache Druid Powers Real-Time Analytics at BT"
     name: "Pankaj Tiwari"
-    link: https://youtu.be/QZUunUDQ8p4
+    link: https://imply.io/virtual-druid-summit/how-druid-powers-real-time-analytics-at-bt
     company: BT
 
-  - date: 2020-04-13
+  - date: 2020-04-15
     title: "Analytics over Terabytes of Data at Twitter using Apache Druid"
     name: "Swapnesh Gandhi"
     link: https://imply.io/virtual-druid-summit/analytics-over-terabytes-of-data-at-twitter-apache-druid
     company: MoPub
 
-  - date: 2020-04-13
+  - date: 2020-04-15
     title: "Using Druid for Network Monitoring and Trust Analytics at Cisco"
     name: "TJ Giuli and Abhishek Balaji Radhakrishnan"
-    link: https://youtu.be/KXytFBehvXA
+    link: https://imply.io/virtual-druid-summit/apache-druid-network-monitoring-trust-analytics-cisco
     company: Cisco
 
-  - date: 2020-04-13
+  - date: 2020-04-15
     title: "Apache Druid Fireside Chat (Ask Us Anything"
     name: "Fangjin Yang, Gian Merlino and Vadim Ogievetsky"
-    link: https://youtu.be/5JJccj_dSBk
+    link: https://imply.io/virtual-druid-summit/apache-druid-ask-me-anything-merlino-yang-ogievetsky
     company: Imply
 
   - date: 2020-03-03
@@ -155,7 +125,7 @@
     company: Imply
     
   - date: 2019-03-15
-    title: "Data Engineering At Booking.com - a case study"
+    title: "Data Engineering At Booking.com Case Study | #064"
     name: "Andreas Kretz"
     link: https://youtu.be/9GE3yiVo1FM
     company: Booking.com
@@ -187,5 +157,5 @@
   - date: 2018-06-19
     title: "PayPal merchant ecosystem using Apache Spark, Hive, Druid, and HBase"
     name: "Deepika Khera & Kasi Natarajan"
-    link: https://youtu.be/HJvuU0CQS44
+    link: https://dataworkssummit.com/san-jose-2018/session/paypal-merchant-ecosystem-using-apache-spark-hive-druid-and-hbase/
     company: Paypal
