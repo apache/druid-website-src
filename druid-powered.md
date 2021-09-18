@@ -42,8 +42,6 @@ Druid is widely used in different business units of Alibaba Group.
 
 - At its Local Services Business Unit, Druid is responsible for realtime application performance monitoring and alerting. A public blog is shared [here](https://druid.org.cn/?p=91).
 
-Also in 
-
 ## Allegro
 
 [Allegro](https://allegro.tech/about-us/) is the most popular Polish shopping destination with about 14 million users monthly and over 1.5 million items sold on the platform daily.
