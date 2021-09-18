@@ -34,7 +34,15 @@ Druid powers slice and dice analytics on both historical and realtime-time metri
 
 ## Alibaba
 
-At Alibaba Search Group, we use Druid for real-time analytics of users' interaction with its popular e-commerce site.
+Druid is widely used in different business units of Alibaba Group.
+
+- At Alibaba Search Group, Druid is used to power real-time analytics of users' interaction with its popular e-commerce site.
+
+- At Alibaba Cloud, [Druid](https://www.alibabacloud.com/help/doc-detail/72987.htm) powers its [E-MapReduce](https://www.alibabacloud.com/help/doc-detail/201882.htm) cloud service, which is a big data platform based on open source engines such as Hadoop.
+
+- At its Local Services Business Unit, Druid is responsible for realtime application performance monitoring and alerting.
+
+Also in 
 
 ## Allegro
 
