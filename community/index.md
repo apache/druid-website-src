@@ -16,31 +16,27 @@ Druid development, or just stay up to date:
 * **Meetups:** Check out [Apache Druid on meetup.com](https://www.meetup.com/topics/apache-druid/) for links to regular
 meetups in cities all over the world.
 * **LinkedIn:** Connect with other Apache Druid professionals in the [LinkedIn group](https://www.linkedin.com/groups/8791983/).
-* **Twitter:** Follow us on Twitter at [@druidio](https://twitter.com/druidio).
+* **Twitter:** Follow the project on Twitter at [@druidio](https://twitter.com/druidio).
 
 ### Users
 
 * **Druid Forum:** Ask and answer questions, read and submit tips and tricks, and find links to Apache Druid articles and videos in the [Druid Forum](https://www.druidforum.org/) (by Imply).
-* **StackOverflow:** Tag your StackOverflow question with `druid` or `apache-druid`.
 * **User mailing list:** [druid-user@googlegroups.com](https://groups.google.com/forum/#!forum/druid-user) for general
 discussion, questions, and announcements.
+* **StackOverflow:** Tag your StackOverflow question with `druid` or `apache-druid`.
 
 ### Developers
 
+* **GitHub:** Star us at [apache/druid](https://github.com/apache/druid) and use this to follow Druid development, raise
+issues, or contribute pull requests. You can also report issues and problems, or suggest new features.  If you're interested in development, please see the [Contributing](#contributing)
+section below for details on our development process.
 * **Development mailing list:** [dev@druid.apache.org](https://lists.apache.org/list.html?dev@druid.apache.org) for
 discussion about project development.
 * **Slack:** Use our [invitation link to join](https://s.apache.org/slack-invite), and once you join, add the `#druid` channel.  Committers and users are present in the channel `#druid`.
-* **GitHub:** Star us at [apache/druid](https://github.com/apache/druid) and use this to follow Druid development, raise
-issues, or contribute pull requests. If you're interested in development, please see the [Contributing](#contributing)
-section below for details on our development process.
 
 ## Getting help
 
-The best place to get a wide variety of help about Druid is on the Druid user
-group [druid-user@googlegroups.com](https://groups.google.com/forum/#!forum/druid-user). You can also report issues and problems, or suggest
-new features, on [GitHub](https://github.com/apache/druid).
-
-Third party companies also provide commercial support and services for Druid, including:
+Third party companies provide commercial products, services, and support for Apache Druid, including:
 
 * [Cloudera](https://www.cloudera.com/)
 * [Datumo](https://datumo.io/)
