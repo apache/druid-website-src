@@ -10,11 +10,23 @@
     link: https://imply.io/post/augmented-analytics-on-business-metrics-by-cuebook
     company: Cuebook
 
+  - date: 2021-08-11
+    title: "Was ist Apache Druid?"
+    name: "Stefan Luber"
+    link: https://www.bigdata-insider.de/was-ist-apache-druid-a-1044465/
+    company: Big Data Insider
+
   - date: 2021-08-09
     title: "Funnel Analysis with Spark, Druid and DataSketches"
     name: "Itai Yaffe, Yakir Buskila"
     link: https://youtu.be/dOBb0IOdsnU
     company: Databricks Data and AI Summit 2021
+
+  - date: 2021-07-26
+    title: "Apache Druid Deep Dive"
+    name: "Jon King"
+    link: https://youtu.be/TkARXVqDvEw
+    company: RVA Data Engineering
 
   - date: 2021-07-21
     title: "Apache Druid – Datenspeicher mit geringen Latenzen"
