@@ -4,6 +4,12 @@
     link: https://vijay-narayanan-bigdata.medium.com/anomaly-detection-using-druid-and-imply-pivot-d6cd5bf158db
     company: Imply
 
+  - date: 2021-08-16
+    title: "Druid: Event-Driven Data with Eric Tschetter"
+    name: "Jeff Meyerson"
+    link: https://softwareengineeringdaily.com/2021/08/16/druid-event-driven-data-with-eric-tschetter/
+    company: SE Daily
+
   - date: 2021-08-18
     title: "Augmented analytics on business metrics by Cuebook with Apache Druid"
     name: "Sachin Bansal"
