@@ -1,19 +1,14 @@
-- date: 2021-09-23
-  name: "Druid talk at Swiss Streaming Meetup"
-  info: Messaging and Streaming Switzerland
-  link: https://www.meetup.com/Messaging-Streaming-Switzerland/events/280481980/
+- date: 2021-10-26
+  name: "October Apache Druid Office Hours"
+  info: Bay Area Apache Druid Meetup
+  link: https://www.meetup.com/druidio/events/281360443/
   
-- date: 2021-09-29
-  name: "Discover Druid: Hot Pipelines with Apache Druid"
-  info: London Apache Druid Meetup
-  link: https://www.meetup.com/Apache-Druid-London/events/280798369/
+- date: 2021-10-28
+  name: "Data in the Fast Lane"
+  info: Big Data & AI Milano
+  link: https://www.meetup.com/bigdata-ai-milano/events/281244276/
   
-- date: 2021-09-30
-  name: "Druid talk at DevOps Experience, 2nd Edition"
-  info: DevOps Experience Brasil
-  link: https://www.sympla.com.br/devops-experience-2-edicao---30-setembro-2021__1341134
-  
-- date: 2021-10-06
-  name: "Some Like it Hot: Choosing a System for Large-Scale Data Analysis"
-  info: Data Science Milan
-  link: https://www.meetup.com/Data-Science-Milan/events/280809967/
+- date: 2021-11-09
+  name: "Druid Summit 2021"
+  info: The virtual conference by Imply
+  link: https://druidsummit.org/
