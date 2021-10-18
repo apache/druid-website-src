@@ -44,7 +44,7 @@ Druid is widely used in different business units of Alibaba Group.
 
 ## Allegro
 
-[Allegro](https://allegro.tech/about-us/) is the most popular Polish shopping destination with about 14 million users monthly and over 1.5 million items sold on the platform daily.
+[Allegro](https://allegro.tech/) is the most popular Polish shopping destination with about 14 million users monthly and over 1.5 million items sold on the platform daily.
 We have been using Druid since 2016 as business intelligence platform to power our clickstream analytics, marketing automation, anomaly detection, technical metrics and more.
 Our cluster (432 CPUs, 1300GB of RAM on historicals) processes billions of realtime events loaded from [Kafka](https://kafka.apache.org/)
 and hundreds batch indexing jobs on daily basis.
@@ -313,7 +313,7 @@ At ININ we're using Druid within a Lambda architecture to drive cloud based call
 
 ## Italiaonline
 
-Italiaonline exploits Druid for Internet trends and analytics management inside its new [Data-Driven Contents Management System](http://www.italiaonline.it/en/supereva-a-new-online-publishing-experience/).
+Italiaonline exploits Druid for Internet trends and analytics management inside its new [Data-Driven Contents Management System](https://www.italiaonline.it/corporate/en/2016/02/17/supereva-a-new-online-publishing-experience/).
 Italiaonline is the first Italian internet company, with the two most visited web portals, Libero and Virgilio, and the most used email service of the country @libero.it. Italiaonline features 16.8 million unique users per month&ast;, 4.8 billion impressions per month&ast;&ast;,  10.2 million active email accounts&ast;&ast; and a 58% active reach&ast;.
 
 *&ast; Source: Audiweb View, powered by Nielsen, TDA 2H 2015; &ast;&ast; Internal data, December 2015*
@@ -522,7 +522,7 @@ is what they have to say:
 > seen a Open Source Community providing such a very high level of responsiveness for ANY
 > issue related to Druid setup and tuning.
 
-* [PayPal merchant ecosystem using Apache Spark, Hive, Druid, and HBase](https://dataworkssummit.com/san-jose-2018/session/paypal-merchant-ecosystem-using-apache-spark-hive-druid-and-hbase/)
+* [PayPal merchant ecosystem using Apache Spark, Hive, Druid, and HBase](https://www.youtube.com/watch?v=HJvuU0CQS44)
 
 ## PayU
 
@@ -580,7 +580,7 @@ Druid is a critical component in our advertising infrastructure, where it serves
 Retargetly is a Data Management Platform that enables publishers and advertisers to manage their first party user data, mix it with second and third party data from others providers and activate it into advertising campaigns (direct, programmatic, etc.). Druid enables us to show real time audience insights. It also provides a lot of flexibility on ad-hoc queries with low latency. We provide default graphs and metrics to our clients but they also have the possibility to make their own interactive queries on real-time.
 
 ## Rill Data
-Rill Data uses Druid to power its truly elastic, fully managed cloud service. 
+[Rill Data](https://rilldata.com) uses Druid to power its truly elastic, fully managed cloud service. 
 Rill uses Druid to deliver operational intelligence to business stakeholders with zero DevOps overhead.
 Rill's team operates the first and longest continuously running Druid service.
 
@@ -695,7 +695,7 @@ Sugo is a company that focus on realtime multi-dimension analytics and mining on
 
 ## Sweet Couch
 
-[Sweet Couch](https://www.sweetcouch.com) is a place to discover unique products which are buyable online. Druid powers [Sweet Couch harvest](https://www.sweetcouch.com/harvest/womens) which is an open analytics platform for tracking performance of online shops based out in India. All end user events are tracked and analysed using Druid for business insights.
+Sweet Couch was a place to discover unique products which are buyable online. Druid powered Sweet Couch harvest which was an open analytics platform for tracking performance of online shops based out in India. All end user events were tracked and analysed using Druid for business insights.
 
 ## Swisscom
 
@@ -735,6 +735,12 @@ Trendyol, which is the largest e-commerce company in Turkey, uses Druid for real
 ## TripleLift
 
 TripleLift uses Druid to provide insights into performance aspects of its native programmatic exchange for sales/business development opportunities, and to provide reporting used by advertisers and publishers.
+
+## Triton Digital
+
+[Triton Digital](https://www.tritondigital.com/) is the global technology and services leader to the audio streaming and podcast industry. Operating in more than 80 countries, Triton Digital provides innovative technology that enables broadcasters, podcasters, and online music services to build their audience, maximize their revenue, and streamline their operations. 
+
+Triton Digital uses Druid to [power their programmatic analytics](https://www.rilldata.com/powering-programmatic-analytics-at-triton-digital) (*Rill Data*, Oct 2021).
 
 ## TrueCar
 
@@ -856,7 +862,7 @@ Zilingo's data collection infrastructure, processing pipeline and analytics stac
 
 ## Zuoyebang
 
-[Zuoyebang](http://www.zuoyebang.com/) is the most used K12 education platform, 7 out of every 10 K12 users are using Zuoyebang. At Zuoyebang Data Platform Group, we use the Druid in the advertising scene,  mainly related to advertising display, click, billing, and other functions. The performance and timeliness of druid can meet our OLAP queries very well.
+[Zuoyebang](https://www.zybang.com/) is the most used K12 education platform, 7 out of every 10 K12 users are using Zuoyebang. At Zuoyebang Data Platform Group, we use the Druid in the advertising scene,  mainly related to advertising display, click, billing, and other functions. The performance and timeliness of druid can meet our OLAP queries very well.
 
 
 [Add Your Company](https://github.com/apache/druid-website-src/blob/master/druid-powered.md)
