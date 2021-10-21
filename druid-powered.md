@@ -87,10 +87,6 @@ At [Avesta](https://avestatechnologies.com/), we use Druid as a central componen
 
 * [Community Spotlight: staying true to open-source roots at Avesta](https://imply.io/post/community-spotlight-staying-true-to-open-source-roots-at-avesta) (Dharam Gajera,Peter Marshall, Jelena Zanko), *Imply Blog*, 25 May 2021.
 
-## Bannerflow
-
-[Bannerflow](https://www.bannerflow.com) is the leading display ad production platform. We use Druid to power our customer facing analytics system and for internal reporting, monitoring and ad-hoc data exploration.
-
 ## BIGO
 
 BIGO selects Druid as an OLAP engine to analyze app(Like, Bigolive, IMO, etc.) data in bigdata team. Typical analysis in Druid includes apm, A/B testing, push, funnel model, etc. Besides, Superset is used as dashboard for deep integration with Druid.
