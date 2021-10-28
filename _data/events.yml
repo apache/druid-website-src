@@ -1,14 +1,29 @@
-- date: 2021-10-26
-  name: "October Apache Druid Office Hours"
-  info: Bay Area Apache Druid Meetup
-  link: https://www.meetup.com/druidio/events/281360443/
-  
-- date: 2021-10-28
-  name: "Data in the Fast Lane"
-  info: Big Data & AI Milano
-  link: https://www.meetup.com/bigdata-ai-milano/events/281244276/
-  
 - date: 2021-11-09
   name: "Druid Summit 2021"
   info: The virtual conference by Imply
   link: https://druidsummit.org/
+
+- date: 2021-11-09
+  name: "Apache Druid® Basics training in London"
+  info: The Imply Accreditation Program
+  link: https://www.meetup.com/Apache-Druid-London/events/281507217/
+  
+- date: 2021-11-09
+  name: "Druid Summit 2021 Watch Party in London"
+  info: London Apache Druid Meetup
+  link: https://www.meetup.com/Apache-Druid-London/events/281507996/
+  
+- date: 2021-11-09
+  name: "Apache Druid® Basics training in Paris"
+  info: The Imply Accreditation Program
+  link: https://www.meetup.com/Paris-Apache-Druid-Meetup-by-Imply/events/281508400/
+  
+- date: 2021-11-09
+  name: "Druid Summit 2021 Watch Party in Paris"
+  info: Paris Apache Druid Meetup
+  link: https://www.meetup.com/Paris-Apache-Druid-Meetup-by-Imply/events/281509996/
+  
+- date: 2022-02-02
+  name: "Some Like it Hot: Choosing a System for Large-Scale Data Analysis"
+  info: STL Big Data
+  link: https://www.meetup.com/St-Louis-Big-Data-IDEA/events/281070114/
