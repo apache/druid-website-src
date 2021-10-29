@@ -50,6 +50,10 @@ Our cluster (432 CPUs, 1300GB of RAM on historicals) processes billions of realt
 and hundreds batch indexing jobs on daily basis.
 It's a pleasure to work with Druid, extraordinarily efficient and exceptionally stable platform with vibrant community.
 
+## Alphaa AI
+
+We leverage Apache Druid in conjunction with the Alphaa AI Super AI NLP Engine to implement Natural Language Query on billions of rows of data for Alphaa Cloud customers.
+
 ## Amobee
 
 Today’s consumers move across screens with ease. But advertisers and media companies alike struggle to unify audiences and optimize media investment. Only [Amobee](https://www.amobee.com/) brings it all together. We give you the power to bridge these silos with end-to-end solutions that help brands, agencies, and media companies optimize the consumer experience across linear TV, connected TV and digital, including social. You are in control, finding the audiences you seek and getting the performance that you need to drive meaningful results for your business. Our loyal customers have achieved dramatic performance improvements and efficiencies by holistically optimizing their full portfolio of media against strategic, in-market audiences. Together, these beloved household brands and premium media providers have made Amobee a world leading advertising & premium media management platform. Why? Like us, they believe that when all media investment can be mapped to business outcomes, everyone wins -- including the consumer.
@@ -464,6 +468,10 @@ Nielsen Marketing Cloud uses Druid as it's core real-time analytics tool to help
 
 [Nodex](https://www.nodex.co.uk) uses Druid in its real time analytics pipeline to deliver insights and analytics across a wide range of recruitment CRM software, Job boards and recruitment career portals. We ingest large amounts of data and needed something capable of real time metrics to offer KPI's to our clients to allow them to make better business decisions based on actual usage data.
 
+## Noon
+
+At Noon – The Social Learning Platform, on a daily basis we process close to 100M audio and sketch samples from more than 80K students to help measure the voice and sketch quality of our online classrooms. We built a real time analytics platform on Apache Druid and Apache Flink to provide realtime feedback on classroom quality & engagement metrics. 
+
 ## NTT Com
 
 * [Kappa architecture at NTT Com: Building a streaming analytics stack with Druid and Kafka](https://imply.io/post/kappa-architecture-at-ntt)
@@ -630,6 +638,7 @@ Weibo UVE(Unified Value Evaluation) team of Advertising Platform is using Druid 
 Druid is the primary data store used for ad-hoc analytics in Singular, enabling our customers to generate insights based on real-time and historical data.
 
 * [How Singular Delivers Blazing Fast App Analytics](https://www.singular.net/singular-app-roi-analytics/)
+* [Achieving fast upserts for Apache Druid](https://singular-engineering-blog.medium.com/achieving-fast-upserts-for-apache-druid-db6c33fba466)
 
 ## SK Telecom
 
