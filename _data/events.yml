@@ -1,27 +1,12 @@
-- date: 2021-11-09
-  name: "Druid Summit 2021"
-  info: The virtual conference by Imply
-  link: https://druidsummit.org/
-
-- date: 2021-11-09
-  name: "Apache Druid® Basics training in London"
-  info: The Imply Accreditation Program
-  link: https://www.meetup.com/Apache-Druid-London/events/281507217/
+- date: 2021-11-16
+  name: "13th Druid Meetup"
+  info: Druid Seoul 
+  link: https://www.meetup.com/Druid-Seoul/events/281856429/
   
-- date: 2021-11-09
-  name: "Druid Summit 2021 Watch Party in London"
-  info: London Apache Druid Meetup
-  link: https://www.meetup.com/Apache-Druid-London/events/281507996/
-  
-- date: 2021-11-09
-  name: "Apache Druid® Basics training in Paris"
-  info: The Imply Accreditation Program
-  link: https://www.meetup.com/Paris-Apache-Druid-Meetup-by-Imply/events/281508400/
-  
-- date: 2021-11-09
-  name: "Druid Summit 2021 Watch Party in Paris"
-  info: Paris Apache Druid Meetup
-  link: https://www.meetup.com/Paris-Apache-Druid-Meetup-by-Imply/events/281509996/
+- date: 2021-11-26
+  name: "Big data meetup (Apache Druid) hosted by Imply"
+  info: Bangalore Hadoop Meetups
+  link: https://www.meetup.com/Bangalore-Hadoop-Meetups/events/281731679/
   
 - date: 2022-02-02
   name: "Some Like it Hot: Choosing a System for Large-Scale Data Analysis"
