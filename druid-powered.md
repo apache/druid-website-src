@@ -155,6 +155,8 @@ Condé Nast uses Druid to track billions of events across our two dozen brands, 
 
 Druid has helped push operational visibility to the next level. Operating multi-tenant services requires fine-grained visibility down to the individual tenant, user, or application behavior, where most traditional monitoring stacks fail to scale or become cost-prohibitive. Leveraging Druid as part of our stack means we don't shy away from high-cardinality data. As a result, our teams can not only quickly troubleshoot issues but also glean detailed understanding to help improve the product.	
 
+* [Scaling Apache Druid for Real-Time Cloud Analytics at Confluent](https://www.confluent.io/blog/scaling-apache-druid-for-real-time-cloud-analytics-at-confluent/) (Zohreh Karimi, Harini Rajendran), *Confluent Blog*, 8 Nov 2021.
+
 ## Contiamo
 
 [Contiamo](https://www.contiamo.com) uses cutting edge technology to enable agile development and deployment of data-driven frontends and automations. Druid powers various dashboards and frontends that deal with large amounts of event based data.
