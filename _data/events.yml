@@ -1,12 +1,22 @@
-- date: 2021-11-16
-  name: "13th Druid Meetup"
-  info: Druid Seoul 
-  link: https://www.meetup.com/Druid-Seoul/events/281856429/
-  
 - date: 2021-11-26
   name: "Big data meetup (Apache Druid) hosted by Imply"
   info: Bangalore Hadoop Meetups
   link: https://www.meetup.com/Bangalore-Hadoop-Meetups/events/281731679/
+  
+- date: 2021-11-29
+  name: "The November Apache Druid Drop-In"
+  info: London Apache Druid meetup
+  link: https://www.meetup.com/Apache-Druid-London/events/282141160/
+
+- date: 2021-11-30
+  name: "November Apache Druid Office Hours"
+  info: Bay Area Apache Druid meetup
+  link: https://www.meetup.com/druidio/events/282141222/
+  
+- date: 2021-12-01
+  name: "Data in the Hot Lane with Apache Druid"
+  info: Madrid Data Engineering
+  link: https://www.meetup.com/Madrid-Data-Engineering/events/282233949/
   
 - date: 2022-02-02
   name: "Some Like it Hot: Choosing a System for Large-Scale Data Analysis"
