@@ -1,3 +1,9 @@
+  - date: 2021-11-08
+    title: "Scaling Apache Druid for Real-Time Cloud Analytics at Confluent"
+    name: "Harini Rajendran, Zohreh Krimi"
+    link: https://www.confluent.io/blog/scaling-apache-druid-for-real-time-cloud-analytics-at-confluent/
+    company: Confluent
+
   - date: 2021-09-25
     title: "Multi-Value Dimensions in Apache Druid (Part 3)"
     name: "Hellmar Becker"
