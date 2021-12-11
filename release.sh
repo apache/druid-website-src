@@ -27,10 +27,10 @@ echo "Building to docs for '$1'..."
 baseDir=$(pwd)
 
 pushd $baseDir
-rm -rf _staging/
-mkdir -p _staging/
+#rm -rf _staging/
+#mkdir -p _staging/
 cd _staging/
-git clone git@github.com:apache/druid.git
+#git clone git@github.com:apache/druid.git
 cd druid/
 
 if [ "$#" -gt 1 ]; then
