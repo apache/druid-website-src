@@ -168,6 +168,12 @@ With more than 1 billion unique users reached per month, 3 billion ads displayed
 
 * [Real Time Metrics on Tracker Calls](http://labs.criteo.com/2016/02/real-time-metrics-on-tracker-calls/) (Camille Coueslant, Benoit Jehanno), *Criteo Engineering*, 18 Feb 2016.
 
+## CrunchMetrics
+
+CrunchMetrics has fully integrated their platform with Apache Druid, designed to quickly ingest massive quantities of event data, and provide low-latency queries on top of the data. With the new integration, customers can gain real-time, intelligent insights from streaming data. This development is in line with the current scalability requirements of 5G and the digital intensification we are all experiencing.
+
+* [CrunchMetrics Year in Review 2020: A Year That Was an Anomaly in Itself!](https://www.crunchmetrics.ai/blog/crunchmetrics-year-in-review-2020-a-year-that-was-an-anomaly-in-itself/) (Rohit Maheshwari), *CrunchMetrics website*, 30 Dec 2020.
+
 ## Cuebook
 
 At [Cuebook](https://cuebook.ai/), Druid serves as the analytics database for our augmented analytics product.
@@ -245,6 +251,12 @@ Druid powers our applications related metrics and helps us slice and dice analyt
 ## Finin
 
 [Finin](https://finin.in/) is India’s first ever consumer-facing neobank. They're using Apache Druid as a backend for analytics, helping the company with clickstream analytics, user activity and behaviour as well as application performance management. 
+
+## Flipkart
+
+At Flipkart, business and analytics teams need constant visibility into how the users are interacting with the platform across all channels – website, mobile apps and m-site. They are using Druid to power their real-time clickstream analytics reports that enable their business teams to make critical decisions based on current traffic patterns and plan automated as well as manual interventions for traffic shaping.
+
+* [Clickstream Analytics with Apache Druid](https://www.youtube.com/watch?v=vCk1zRxbAnM)
 
 ## Flurry Analytics
 
@@ -354,6 +366,12 @@ LifeBuzz is a popular web property that serves tens of millions of pageviews per
 ## LiquidM
 
 LiquidM uses Druid for real-time drill-down reporting. LiquidM is also contributing back to the community by creating and maintaining a ruby client library for interacting with Druid located at <http://github.com/liquidm/ruby-druid>.
+
+## Lohika
+
+Lohika uses Druid to run analytics over large amounts of event-based data. They are using real-time ingestion with Apache Kafka to be able to better respond to changes in advertising campaigns. They are managing their cluster with Kubernetes.
+
+* [Apache Druid: Interactive Analytics at Scale](https://www.lohika.com/apache-druid-interactive-analytics-at-scale) (Volodymyr Iordanov), *Lohika website*, 18 May 2021.
 
 ## Lyft
 
@@ -542,6 +560,12 @@ is what they have to say:
 
 * [Powering Ad Analytics with Apache Druid](https://www.youtube.com/watch?v=LBXtK0DSQIw)
 
+## Play Games24x7
+
+Play Games24x7 offers multiple casual as well as real money cash games to its users. To maintain a healthy environment for their players, they constantly look out for any elements that could lead to a win by unethical means in the game. They are using Druid to identify those users who follow this set of patterns, and mark them as fraudulent.
+
+* [Real Time, High Concurrency Use Case in Fraud Detection](https://www.youtube.com/watch?v=5RbJL8vHfi0)
+
 ## Plumbr
 
 * [Introduction to Druid, fast distributed data store](https://youtu.be/rx6c7D9QmyU)
@@ -554,6 +578,12 @@ The [Pollfish](https://www.pollfish.com/) real-time analytics platform enables r
 ## Poshmark
 
 Poshmark uses Druid for reporting to monitor key business metrics and data exploration in real-time.
+
+## Preset
+
+Apache Superset was built by Maxime Beauchemin when he was at Airbnb, to visualize data from Apache Druid. Druid enables highly interactive and responsive Superset dashboards, massively shortening the time from question to answer. 
+
+* [Building Lightning Fast Dashboards Using Apache Druid & Apache Superset](https://www.youtube.com/watch?v=O0ESEZaZR88)
 
 ## PubNative
 
@@ -616,9 +646,21 @@ Salesforce's Edge Intelligence team uses Apache Druid as a real-time analytical 
 
 [Delivering High-Quality Insights Interactively Using Apache Druid at Salesforce](https://engineering.salesforce.com/delivering-high-quality-insights-interactively-using-apache-druid-at-salesforce-7a038f0fe3d1)
 
+## Scalac
+
+Scalac migrated to Apache Druid and Apache Kafka (from Apache Cassandra and Apache Spark) for their Blockchain Observability application. The analytical dashboard they created is used to visualize the data from different blockchains. It is built on React with Hooks, Redux, Saga on the front side – and Node.js, Apache Druid, and Apache Kafka on the back-end.
+
+* [How We Reduced Costs and Simplified Solution by Using Apache Druid](https://scalac.io/blog/how-we-reduced-costs-and-simplified-solution-by-using-apache-druid/) (Adrian Juszczak), *Scalac website*, 4 Feb 2020.
+
 ## Shopee
 
 At [Shopee](http://shopee.com/) Data Engineer Group, we use Druid for real-time analytics of users'(including seller and buyer) interaction with its popular e-commerce site.
+
+## Shopify
+
+Shopify uses Druid, along with Apache Flink and Airflow, to create an interactive analytics platform for realtime sales data with enormous volume and variety.
+
+* [The Lessons Learnt From Building Star Schema Type-1 Dimensions With Druid Joins in Shopify](https://www.youtube.com/watch?v=_xluVN75AaE)
 
 ## Sift Science
 
@@ -756,6 +798,10 @@ Triton Digital uses Druid to [power their programmatic analytics](https://www.ri
 ## TrueCar
 
 [TrueCar](https://www.truecar.com) is a leading automotive digital marketplace that enables car buyers to connect to our nationwide network of Certified Dealers. TrueCar uses Druid and Imply Cloud to help them make their dashboards real-time, detect anomalies, and do so while minimizing engineering and operational overhead. Druid enables TrueCar to unlock insights from digital interaction data, further empowers their data scientists and product teams to improve services with increased agility, and deliver a higher quality experience.
+
+## Trustpilot
+
+Trustpilot used Apache Druid to create an interactive application based on D3 that their entire company uses to put real time numbers behind every business decision. They replaced siloed applications built with Looker, Amplitude and others with Druid tp better respond to requests and provide more functionality to their end users.
 
 ## Twitch
 
