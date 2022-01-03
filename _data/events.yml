@@ -1,17 +1,7 @@
-- date: 2021-12-09
-  name: "Deep Dive into Apache Druid"
-  info: Toronto Data Professionals
-  link: https://www.meetup.com/toronto-data-professionals-meetup-group/events/282279190/
-  
-- date: 2021-12-15
-  name: "The December (APAC) Apache Druid Drop-In"
-  info: Sydney Apache Druid meetup
-  link: https://www.meetup.com/Sydney-Apache-Druid-Meetup-by-Imply/events/282412046/
-  
-- date: 2021-12-15
-  name: "Druid Roadmap and 2021 Highlights + Real-time Analytics @ Charter"
-  info: Denver Apache Druid meetup
-  link: https://www.meetup.com/Denver-Apache-Druid-Meetup-by-Imply/events/282454311/
+- date: 2022-01-05
+  name: "Druid talk at PyData Triangle January 2022 Meetup"
+  info: PyData Triangle
+  link: https://www.meetup.com/PyData-Triangle/events/282873505/
   
 - date: 2022-02-02
   name: "Some Like it Hot: Choosing a System for Large-Scale Data Analysis"
