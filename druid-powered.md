@@ -287,6 +287,10 @@ Druid powers a dashboard used internally to visualize real-time analytics on Gum
 * [Lambda Architecture with Druid at GumGum](https://whynosql.com/2015/11/06/lambda-architecture-with-druid-at-gumgum/) (Vaibhav Puranik), *WhyNoSql [Wordpress]*, 6 Nov 2015.
 * [Optimized Real-time Analytics using Spark Streaming and Apache Druid](https://medium.com/gumgum-tech/optimized-real-time-analytics-using-spark-streaming-and-apache-druid-d872a86ed99d) (Jatinder Assi), *GumGum Tech Blog [Medium]*, 2 Jun 2020.
 
+## Hubvisor
+
+Druid powers [Hubvisor](https://www.hubvisor.io/) realtime insights for their customer programmatic advertising auctions.
+
 ## Hulu
 
 At Hulu, we use Druid to power our analytics platform that enables us to interactively deep dive into the behaviors of our users and applications in real-time.
