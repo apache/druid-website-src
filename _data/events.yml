@@ -1,9 +1,20 @@
-- date: 2022-01-05
-  name: "Druid talk at PyData Triangle January 2022 Meetup"
-  info: PyData Triangle
-  link: https://www.meetup.com/PyData-Triangle/events/282873505/
+- date: 2022-01-19
+  name: "January Apache Druid Office Hours"
+  info: Bay Area Apache Druid meetup
+  link: https://www.meetup.com/druidio/events/283082198/
   
+- date: 2022-01-27
+  name: "Intro to Druid on Kubernetes"
+  info: DevOps Experience Brazil
+  link: https://www.sympla.com.br/evento-online/devops-experience-27-de-janeiro-de-2022/1446856
+
 - date: 2022-02-02
   name: "Some Like it Hot: Choosing a System for Large-Scale Data Analysis"
   info: STL Big Data
   link: https://www.meetup.com/St-Louis-Big-Data-IDEA/events/281070114/
+
+- date: 2022-02-07
+  name: "Data in the Hot Lane"
+  info: Open Source Hong Kong
+  link: https://www.meetup.com/opensourcehk/events/283026770/
+  
