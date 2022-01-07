@@ -872,6 +872,12 @@ We're serving pageview data via Druid and Pivot.  Our internal customers are lov
 
 Wipro Limited is an Indian multinational corporation that provides information technology, consulting and business process services. Wipro is using Druid to track and monitor the performance of internal applications and to gain insights from data in real-time. 
 
+## Wiremind
+
+Wiremind develops solutions for optimizing sold capacity (passenger transportation, airfreight and event/sport ticketing) that blend UX, software and data science.
+
+We process thousands of millions of rows of data to serve our machine learning models and ingest tens of millions of rows by batch indexation each day. We chose Druid because it gives us the ability to query data effectively, the capacity to manage ingesting tasks easily, and the capability to split data for our diverse clients while having a highly scalable architecture for our growth.
+
 ## Xiaomi
 
 Xiaomi uses Druid as an analytics tool to analyze online advertising data.
