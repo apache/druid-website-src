@@ -11,8 +11,6 @@ Most discussion about Druid happens over email and GitHub, but those aren't the 
 community. We also do chat, meetups, and more. Check out the following resources if you're looking for help, to discuss
 Druid development, or just stay up to date:
 
-* **User mailing list:** [druid-user@googlegroups.com](https://groups.google.com/forum/#!forum/druid-user) for general
-discussion, questions, and announcements. This is the perfect place to ask for help if you need it!
 * **Development mailing list:** [dev@druid.apache.org](https://lists.apache.org/list.html?dev@druid.apache.org) for
 discussion about project development.
 * **GitHub:** Star us at [apache/druid](https://github.com/apache/druid) and use this to follow Druid development, raise
@@ -20,7 +18,9 @@ issues, or contribute pull requests. If you're interested in development, please
 section below for details on our development process.
 * **Meetups:** Check out [Apache Druid on meetup.com](https://www.meetup.com/topics/apache-druid/) for links to regular
 meetups in cities all over the world.
-* **Slack:** Many committers and users are present in the channel `#druid` on the Apache Slack team. Please send an email to druid-user@googlegroups.com to get an invite to slack channel. You must send the request from same email-id that slack invitation has to be sent to.
+* **Slack:** Many committers and users are present in the channel `#druid` on the Apache Slack team. This is the perfect place to ask for help if you need it. Please send an email to druid-user@googlegroups.com to get an invite to slack channel. You must send the request from same email-id that slack invitation has to be sent to.
+* **User mailing list:** [druid-user@googlegroups.com](https://groups.google.com/forum/#!forum/druid-user) for general
+discussion, questions, and announcements.
 * **Twitter:** Follow us on Twitter at [@druidio](https://twitter.com/druidio).
 * **StackOverflow:** While the user mailing list is the primary resource for asking questions, if you prefer
 StackOverflow, make sure to tag your question with `druid` or `apache-druid`.
