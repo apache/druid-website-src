@@ -1,8 +1,20 @@
+  - date: 2021-12-16
+    title: "Seeking the Perfect Apache Druid Rollup"
+    name: "Neil Buesing"
+    link: https://www.rilldata.com/blog/seeking-the-perfect-apache-druid-rollup
+    company: Rill Data
+
   - date: 2021-11-08
     title: "Scaling Apache Druid for Real-Time Cloud Analytics at Confluent"
     name: "Harini Rajendran, Zohreh Krimi"
     link: https://www.confluent.io/blog/scaling-apache-druid-for-real-time-cloud-analytics-at-confluent/
     company: Confluent
+
+  - date: 2021-10-01
+    title: "Setting up Apache Druid on Kubernetes in under 30 minutes"
+    name: "Adheip Singh"
+    link: https://www.rilldata.com/blog/setting-up-apache-druid-on-kubernetes-part-one
+    company: Rill Data
 
   - date: 2021-09-25
     title: "Multi-Value Dimensions in Apache Druid (Part 3)"
