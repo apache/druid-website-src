@@ -660,6 +660,8 @@ Scalac migrated to Apache Druid and Apache Kafka (from Apache Cassandra and Apac
 
 At [Shopee](http://shopee.com/) Data Engineer Group, we use Druid for real-time analytics of users'(including seller and buyer) interaction with its popular e-commerce site.
 
+* [Apache Druid in Shopee](https://mp.weixin.qq.com/s/WFiPDPvxMUi_QVfBDqgVcQ)(in Chinese). Published on 2022-01-13 by [yuanlihan](https://github.com/yuanlihan), a contributor of Apache Druid.
+
 ## Shopify
 
 Shopify uses Druid, along with Apache Flink and Airflow, to create an interactive analytics platform for realtime sales data with enormous volume and variety.
