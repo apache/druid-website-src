@@ -118,6 +118,7 @@ You don't need to be a committer to contribute- pull requests are welcome from a
 | [Julian Hyde](https://github.com/julianhyde)              | [Looker](https://looker.com/)                      |
 | [Jun Rao](https://github.com/junrao)                      | [Confluent](https://www.confluent.io/)             |
 | [Kaijian Ding](https://github.com/kaijianding)            | [Alibaba](https://www.alibaba.com/)                |
+| [Kashif Faraz](https://github.com/kfaraz)                 | [Imply](https://imply.io/)                         |
 | [Kurt Young](https://github.com/kurtyoung)                | [Alibaba](https://www.alibaba.com/)                |
 | [Lijin Bin](https://github.com/binlijin)                  | [Alibaba](https://www.alibaba.com/)                |
 | [Lucas Capistrant](https://github.com/capistrant)         | [Target](https://www.target.com/)                  |
