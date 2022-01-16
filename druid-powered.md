@@ -287,6 +287,14 @@ Druid powers a dashboard used internally to visualize real-time analytics on Gum
 * [Lambda Architecture with Druid at GumGum](https://whynosql.com/2015/11/06/lambda-architecture-with-druid-at-gumgum/) (Vaibhav Puranik), *WhyNoSql [Wordpress]*, 6 Nov 2015.
 * [Optimized Real-time Analytics using Spark Streaming and Apache Druid](https://medium.com/gumgum-tech/optimized-real-time-analytics-using-spark-streaming-and-apache-druid-d872a86ed99d) (Jatinder Assi), *GumGum Tech Blog [Medium]*, 2 Jun 2020.
 
+## Hawk
+
+[Hawk](https://hawk-tech.io/)is the first independent European platform to offer a transparent and technological advertising experience across all screens.
+
+Hawk's customers harness the power of Imply Druid to access an all-in-one solution to follow their campaign KPIs throughout their lifecycle; build their business dashboards and visualize the evolution of their KPIs; set up tailored reports; and accelerate the Time-To-Market thanks to a simplified data pipeline with Druid directly connected to their Kafka cluster and RDS database.
+
+* [Data Revolution at Hawk Powered by Imply](https://imply.io/customer-stories/data-revolution-at-hawk-powered-by-imply/) (Laura Manzanilla), *Imply blog*, 12 Oct 2021.
+
 ## Hubvisor
 
 Druid powers [Hubvisor](https://www.hubvisor.io/) realtime insights for their customer programmatic advertising auctions.
