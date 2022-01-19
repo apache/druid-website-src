@@ -289,11 +289,17 @@ Druid powers a dashboard used internally to visualize real-time analytics on Gum
 
 ## Hawk
 
-[Hawk](https://hawk-tech.io/)is the first independent European platform to offer a transparent and technological advertising experience across all screens.
+[Hawk](https://hawk-tech.io/) is the first independent European platform to offer a transparent and technological advertising experience across all screens.
 
 Hawk's customers harness the power of Imply Druid to access an all-in-one solution to follow their campaign KPIs throughout their lifecycle; build their business dashboards and visualize the evolution of their KPIs; set up tailored reports; and accelerate the Time-To-Market thanks to a simplified data pipeline with Druid directly connected to their Kafka cluster and RDS database.
 
 * [Data Revolution at Hawk Powered by Imply](https://imply.io/customer-stories/data-revolution-at-hawk-powered-by-imply/) (Laura Manzanilla), *Imply blog*, 12 Oct 2021.
+
+## Hexaglobe
+
+[Hexaglobe](https://www.hexaglobe.com/) uses Druid for network and CDN analytics, and gleans intelligence from video services metrics for engineering and marketing purposes.
+
+* [How Druid can Help Analyse Video Services Metrics for QoS & Marketing Purposes](https://www.youtube.com/watch?v=vooDECOqfy0) (Pierre-Alexandre Entraygues, Anthony Courcoux ), *Imply [YouTube]*, 10 Dec 2021.
 
 ## Hubvisor
 
@@ -340,6 +346,12 @@ Innowatts uses Druid to quickly work with massive data sets, and differentiates 
 ## Interactive Intelligence
 
 At ININ we're using Druid within a Lambda architecture to drive cloud based call center analytics. Many of our realtime dashboards, downloadable reports, and public APIs utilize Druid on the backend.
+
+## ironSource
+
+At ironSource, we use Druid to power the real-time capabilities of our in-app bidding solution, which programmatically auctions off publisher ad impressions to a range of ad sources. Using Druid enables us to process and query billions of data points in real time.
+
+* [Performance Tuning of Druid Cluster at High Scale](https://www.youtube.com/watch?v=_co3nPOh7YM) (Elad Eldor), *Imply [YouTube]*, 10 Dec 2021.
 
 ## Italiaonline
 
@@ -870,6 +882,12 @@ Druid powers Virool’s real time analytics of over 1 billion raw events per day
 [WeQ](http://weq.com) is a leading mobile performance and branding ad-tech company headquartered in Berlin. Druid is one of the core services that helps WeQ drive user acquisition and engagement to deliver mobile performance and branding campaigns.
 
 We are using Druid for real-time analytics that delivers business insights and power our anti-fraud tools. We are ingesting several billions of events per day using the Kafka real-time connector. Druid is a rock-solid and flexible foundation for our data system delivering blazing-fast analytics
+
+## WhyLabs
+
+[WhyLabs](https://whylabs.ai/) is on a mission to build the interface between humans and AI applications. Our Data and AI Observability platform enables teams to monitor all of their ML models, regardless of scale, with zero configuration necessary. Druid allows WhyLabs to combine stream and batch processing to interactively explore and visualize statistically profiled datasets. 
+
+* [Migrating Our ML Insights Platform To Druid](https://www.youtube.com/watch?v=XV-rFsv9FTc) (Drew Dahlke), *Imply [YouTube]*, 10 Dec 2021.
 
 ## Wikimedia Foundation
 
