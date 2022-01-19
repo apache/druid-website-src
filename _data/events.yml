@@ -1,7 +1,12 @@
-- date: 2022-01-19
-  name: "January Apache Druid Office Hours"
-  info: Bay Area Apache Druid meetup
-  link: https://www.meetup.com/druidio/events/283082198/
+- date: 2022-01-26
+  name: "The January Apache Druid Drop-In"
+  info: London Apache Druid meetup
+  link: https://www.meetup.com/Apache-Druid-London/events/283180079/
+  
+- date: 2022-01-27
+  name: "Some Like it Hot: Choosing a System for Large-Scale Data Analysis"
+  info: Big Data Analytics Melbourne
+  link: https://www.meetup.com/Big-Data-Analytics-Meetup-Group/events/283331199/
   
 - date: 2022-01-27
   name: "Intro to Druid on Kubernetes"
