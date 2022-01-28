@@ -1,17 +1,7 @@
-- date: 2022-01-26
-  name: "The January Apache Druid Drop-In"
-  info: London Apache Druid meetup
-  link: https://www.meetup.com/Apache-Druid-London/events/283180079/
-  
-- date: 2022-01-27
-  name: "Some Like it Hot: Choosing a System for Large-Scale Data Analysis"
-  info: Big Data Analytics Melbourne
-  link: https://www.meetup.com/Big-Data-Analytics-Meetup-Group/events/283331199/
-  
-- date: 2022-01-27
-  name: "Intro to Druid on Kubernetes"
-  info: DevOps Experience Brazil
-  link: https://www.sympla.com.br/evento-online/devops-experience-27-de-janeiro-de-2022/1446856
+- date: 2022-02-02
+  name: "Data in the Fast Lane"
+  info: Digital People in Peterborough
+  link: https://www.meetup.com/Digital-People-in-Peterborough/events/283456995/
 
 - date: 2022-02-02
   name: "Some Like it Hot: Choosing a System for Large-Scale Data Analysis"
@@ -23,3 +13,7 @@
   info: Open Source Hong Kong
   link: https://www.meetup.com/opensourcehk/events/283026770/
   
+- date: 2022-02-17
+  name: "February Apache Druid Office Hours"
+  info: Bay Area Druid meetup
+  link: https://www.meetup.com/druidio/events/283553328/
