@@ -1,3 +1,9 @@
+  - date: 2022-02-04
+    title: "Multi-dimensional range partitioning"
+    name: "Kashif Faraz"
+    link: https://imply.io/blog/multi-dimensional-range-partitioning/
+    company: Imply
+  
   - date: 2021-12-16
     title: "Seeking the Perfect Apache Druid Rollup"
     name: "Neil Buesing"
