@@ -1,8 +1,3 @@
-- date: 2022-02-07
-  name: "Data in the Hot Lane"
-  info: Open Source Hong Kong
-  link: https://www.meetup.com/opensourcehk/events/283026770/
-  
 - date: 2022-02-17
   name: "February Apache Druid Office Hours"
   info: Bay Area Apache Druid meetup
@@ -18,7 +13,13 @@
   info: London Apache Druid meetup
   link: https://www.meetup.com/Apache-Druid-London/events/283712690
   
+- date: 2022-03-03
+  name: "The Superstars of Apache Druid"
+  info: Denver Apache Druid meetup
+  link: https://www.meetup.com/Denver-Apache-Druid-Meetup-by-Imply/events/283857791/
+  
 - date: 2022-03-22
   name: "The Rise of Immediate Intelligence"
   info: Dallas Business Intelligence
   link: https://www.meetup.com/Dallas-BI/events/283496581/
+  
