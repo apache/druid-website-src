@@ -383,6 +383,10 @@ KT NexR is the leading provider of the data analytics platform. We use Druid as 
 
 LDMobile is a mobile DSP for the RTB. We use Druid to aggregate some metrics in order to propose to our customers a real-time dashboard showing performance indicators of their campaigns.
 
+## Libra AI Technologies
+
+EMA (Explainable Marketing Analytics) is a marketing analytics assistant powered by Druid. She helps marketeers and ecommerce owners leverage users behavioral data and make data driven decisions. The assistant has been implemented on top of PaperGo loyalty platform and LibraAI proprietary machine learning innovations and marketing analytics.
+
 ## LifeBuzz
 
 LifeBuzz is a popular web property that serves tens of millions of pageviews per day. We use Druid for all our advanced analytics needs, including in-house analysis and professional realtime analytics for our sponsored media partners.
