@@ -383,7 +383,7 @@ KT NexR is the leading provider of the data analytics platform. We use Druid as 
 
 LDMobile is a mobile DSP for the RTB. We use Druid to aggregate some metrics in order to propose to our customers a real-time dashboard showing performance indicators of their campaigns.
 
-## Libra AI Technologies
+## Libra AI Technologies & PaperGo
 
 EMA (Explainable Marketing Analytics) is a marketing analytics assistant powered by Druid. She helps marketeers and ecommerce owners leverage users behavioral data and make data driven decisions. The assistant has been implemented on top of PaperGo loyalty platform and LibraAI proprietary machine learning innovations and marketing analytics.
 
