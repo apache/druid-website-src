@@ -1,25 +1,34 @@
-- date: 2022-02-17
-  name: "February Apache Druid Office Hours"
+- date: 2022-03-15
+  name: "March Apache Druid Office Hours"
   info: Bay Area Apache Druid meetup
-  link: https://www.meetup.com/druidio/events/283553328/
-
-- date: 2022-02-22
-  name: "The Rise of Immediate Intelligence"
-  info: Tampa Bay Data Science
-  link: https://www.meetup.com/Data-Scientists-Tampa-Bay/events/ndxdmrydcdbwb/
-  
-- date: 2022-02-23
-  name: "February Apache Druid Drop-in"
-  info: London Apache Druid meetup
-  link: https://www.meetup.com/Apache-Druid-London/events/283712690
-  
-- date: 2022-03-03
-  name: "The Superstars of Apache Druid"
-  info: Denver Apache Druid meetup
-  link: https://www.meetup.com/Denver-Apache-Druid-Meetup-by-Imply/events/283857791/
+  link: https://www.meetup.com/druidio/events/284412790/
   
 - date: 2022-03-22
   name: "The Rise of Immediate Intelligence"
   info: Dallas Business Intelligence
   link: https://www.meetup.com/Dallas-BI/events/283496581/
   
+- date: 2022-03-23
+  name: "The March Apache Druid Drop-in"
+  info: London Apache Druid meetup
+  link: https://www.meetup.com/Apache-Druid-London/events/284469425/
+  
+- date: 2022-03-29
+  name: "Druid meetup feat. Lyft & Imply"
+  info: ironSource HQ
+  link: https://druidmeetupis.splashthat.com/
+  
+- date: 2022-04-28
+  name: "The Rise of Immediate Intelligence"
+  info: Mexico City Business Analytics 
+  link: https://www.meetup.com/Mexico-City-Business-Analytics-Users/events/284227819/
+  
+- date: 2022-05-03
+  name: "Upstream Processing with Apache Flink for Immediate Intelligence"
+  info: Apache Flink Berlin
+  link: https://www.meetup.com/Apache-Flink-Meetup/events/284196256/
+  
+- date: 2022-05-19
+  name: "Intro to Druid on Kubernetes"
+  info: Triangle Kubernetes and Openshift Meetup
+  link: https://www.meetup.com/Triangle-Kubernetes-Meetup/events/283204896/
