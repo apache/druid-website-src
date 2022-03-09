@@ -3,10 +3,15 @@
   info: Bay Area Apache Druid meetup
   link: https://www.meetup.com/druidio/events/284412790/
   
+- date: 2022-03-17
+  name: "The Rise of Immediate Intelligence"
+  info: Boulder/Denver BigData
+  link: https://www.meetup.com/Boulder-Denver-Big-Data/events/284418146/
+  
 - date: 2022-03-22
   name: "The Rise of Immediate Intelligence"
   info: Dallas Business Intelligence
-  link: https://www.meetup.com/Dallas-BI/events/283496581/
+  link: https://www.meetup.com/Dallas-BI/events/284452200/
   
 - date: 2022-03-23
   name: "The March Apache Druid Drop-in"
