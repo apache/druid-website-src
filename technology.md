@@ -41,7 +41,7 @@ Key features of Druid include:
     <span class="fa fa-stream fa"></span>
     <h5>Flexible schemas</h5>
     <p>
-      Druid gracefully handles evolving schemas and <a href="/docs/latest/ingestion/flatten-json">nested data</a>.
+      Druid gracefully handles evolving schemas and <a href="/docs/latest/ingestion/data-formats.html#flattenspec">nested data</a>.
     </p>
   </div>
   <div class="feature">
