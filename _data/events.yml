@@ -1,28 +1,28 @@
-- date: 2022-03-15
-  name: "March Apache Druid Office Hours"
-  info: Bay Area Apache Druid meetup
-  link: https://www.meetup.com/druidio/events/284412790/
+- date: 2022-03-31
+  name: "Upstream Processing for Immediate Intelligence with Apache Druid"
+  info: DevOps Brazil
+  link: https://www.sympla.com.br/evento-online/devops-experience-edicao-31-de-marco-de-2022/1501928
   
-- date: 2022-03-17
+- date: 2022-04-07
+  name: "Intro to Druid on Kubernetes"
+  info: Data on Kubernetes community
+  link: https://www.meetup.com/Data-on-Kubernetes-community/events/284775093/
+  
+- date: 2022-04-20
   name: "The Rise of Immediate Intelligence"
-  info: Boulder/Denver BigData
-  link: https://www.meetup.com/Boulder-Denver-Big-Data/events/284418146/
+  info: Boston Business Intelligence
+  link: https://www.meetup.com/Boston_BI/
   
-- date: 2022-03-22
+- date: 2022-04-21
   name: "The Rise of Immediate Intelligence"
-  info: Dallas Business Intelligence
-  link: https://www.meetup.com/Dallas-BI/events/284452200/
+  info: DevDay Pune
+  link: https://www.meetup.com/devday_pune/
   
-- date: 2022-03-23
-  name: "The March Apache Druid Drop-in"
-  info: London Apache Druid meetup
-  link: https://www.meetup.com/Apache-Druid-London/events/284469425/
-  
-- date: 2022-03-29
-  name: "Druid meetup feat. Lyft & Imply"
-  info: ironSource HQ
-  link: https://druidmeetupis.splashthat.com/
-  
+- date: 2022-04-26
+  name: "The Rise of Immediate Intelligence"
+  info: Melbourne Data Engineering
+  link: https://www.meetup.com/Melbourne-Data-Engineering-Meetup/events/284772959/
+
 - date: 2022-04-28
   name: "The Rise of Immediate Intelligence"
   info: Mexico City Business Analytics 
