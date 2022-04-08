@@ -1,3 +1,15 @@
+  - date: 2022-03-20
+    title: "Druid Data Cookbook: Quantiles in Druid with Data Sketches"
+    name: "Hellmar Becker"
+    link: https://blog.hellmar-becker.de/2022/03/20/druid-data-cookbook-quantiles-in-druid-with-datasketches/
+    company: Imply
+
+  - date: 2022-02-09
+    title: "Druid Data Cookbook: Ingestion Transforms"
+    name: "Hellmar Becker"
+    link: https://blog.hellmar-becker.de/2022/02/09/druid-data-cookbook-ingestion-transforms/
+    company: Imply
+  
   - date: 2022-02-04
     title: "Multi-dimensional range partitioning"
     name: "Kashif Faraz"
