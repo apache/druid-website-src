@@ -21,7 +21,7 @@ issues, or contribute pull requests. If you're interested in development, please
 section below for details on our development process.
 * **Meetups:** Check out [Apache Druid on meetup.com](https://www.meetup.com/topics/apache-druid/) for links to regular
 meetups in cities all over the world.
-* **Slack:** Many users and committers are present on Apache Druid Slack. Use this link to join and invite others: [https://druid.apache.org/community/join-slack](/community/join-slack)
+* **Slack:** Many users and committers are present on Apache Druid Slack. Use this link to join and invite others: [https://druid.apache.org/community/join-slack](/community/join-slack?v=1)
 * **Twitter:** Follow us on Twitter at [@druidio](https://twitter.com/druidio).
 * **StackOverflow:** While the user mailing list is the primary resource for asking questions, if you prefer
 StackOverflow, make sure to tag your question with `druid` or `apache-druid`.
