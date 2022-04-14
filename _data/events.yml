@@ -1,39 +1,64 @@
-- date: 2022-03-31
-  name: "Upstream Processing for Immediate Intelligence with Apache Druid"
-  info: DevOps Brazil
-  link: https://www.sympla.com.br/evento-online/devops-experience-edicao-31-de-marco-de-2022/1501928
-  
-- date: 2022-04-07
-  name: "Intro to Druid on Kubernetes"
-  info: Data on Kubernetes community
-  link: https://www.meetup.com/Data-on-Kubernetes-community/events/284775093/
+- date: 2022-04-18
+  name: "April Apache Druid Office Hours"
+  info: Bay Area Druid Meetup by Imply
+  link: https://www.meetup.com/druidio/events/285066218/
   
 - date: 2022-04-20
   name: "The Rise of Immediate Intelligence"
   info: Boston Business Intelligence
-  link: https://www.meetup.com/Boston_BI/
+  link: https://www.meetup.com/Boston_BI/events/285100967/
   
 - date: 2022-04-21
   name: "The Rise of Immediate Intelligence"
   info: DevDay Pune
-  link: https://www.meetup.com/devday_pune/
+  link: https://www.meetup.com/devday_pune/events/285200519/
   
 - date: 2022-04-26
   name: "The Rise of Immediate Intelligence"
   info: Melbourne Data Engineering
   link: https://www.meetup.com/Melbourne-Data-Engineering-Meetup/events/284772959/
-
-- date: 2022-04-28
-  name: "The Rise of Immediate Intelligence"
-  info: Mexico City Business Analytics 
-  link: https://www.meetup.com/Mexico-City-Business-Analytics-Users/events/284227819/
+  
+- date: 2022-04-26
+  name: "Druid Community Meetup"
+  info: London Druid Meetup by Imply
+  link: https://www.meetup.com/Apache-Druid-London/events/284926988/
+  
+- date: 2022-04-27
+  name: "Apache Kafka & Apache Druid"
+  info: Apache Kafka Sydney
+  link: https://www.meetup.com/apache-kafka-sydney/events/285055765/
   
 - date: 2022-05-03
   name: "Upstream Processing with Apache Flink for Immediate Intelligence"
   info: Apache Flink Berlin
   link: https://www.meetup.com/Apache-Flink-Meetup/events/284196256/
   
+- date: 2022-05-04
+  name: "Apache Druid"
+  info: AI + Big Data
+  link: https://www.meetup.com/Houston-Hadoop-Spark-ML/events/285210953/
+  
+- date: 2022-05-05
+  name: "Intro to Druid at AWS Meetup"
+  info: AWS User Group Singapore
+  link: https://www.meetup.com/AWS-SG/events/285031170/
+  
+- date: 2022-05-16
+  name: "Druid 101 at Cleveland Big Data meetup"
+  info: Cleveland Big Data User Group
+  link: https://www.meetup.com/Cleveland-Hadoop/events/283488736/
+  
 - date: 2022-05-19
   name: "Intro to Druid on Kubernetes"
   info: Triangle Kubernetes and Openshift Meetup
   link: https://www.meetup.com/Triangle-Kubernetes-Meetup/events/283204896/
+  
+- date: 2022-05-24
+  name: "Apache Druid: The Rise of Immediate Intelligence"
+  info: DFW Practical Machine Learning
+  link: https://www.meetup.com/DFW-Practical-Machine-Learning/events/285117331/
+  
+- date: 2022-06-02
+  name: "The Rise of Immediate Intelligence"
+  info: Mexico City Business Analytics 
+  link: https://www.meetup.com/Mexico-City-Business-Analytics-Users/events/284227819/
