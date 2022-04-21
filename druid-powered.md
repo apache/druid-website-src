@@ -652,6 +652,12 @@ Rill's team operates the first and longest continuously running Druid service.
 
 We introduced Druid to our technology stack while developing our new supply chain & logistics visibility and intelligence solution. Combining Druid with other data storage, streaming & processing platforms & solutions for the IoT sensor data and 3rd party data helped us design an effective solution for our customers worldwide.
 
+## Rovio
+
+We use Druid as the low-latency backend for pivot & time-series dashboards. We typically feed data to Druid in daily batches. Data is used at Rovio to continually improve our games and provide incredible experiences for the millions of players who play our games every day.
+
+* [Unlocking interactive dashboards at Rovio with Druid and Spark](https://medium.com/@Rovio_Tech/unlocking-interactive-dashboards-at-rovio-with-druid-and-spark-40f8fe6a0b05)
+
 ## Rubicon Project
 
 Rubicon Project is the world’s largest independent sell-side advertising platform that helps premium websites and mobile apps sell ads easily and safely. Rubicon Project’s flagship reporting platform, Performance Analytics, is built on Apache Druid and is used by thousands of companies across the globe. Performance Analytics processed more than two trillion events per day during Black Friday. Druid delivers analytics from this data with an average response times under 600 ms, helping publishers maximize the yield of their digital ad inventory across the open internet and builds on our commitment to trust and transparency in the programmatic marketplace.
