@@ -821,6 +821,10 @@ Trendyol, which is the largest e-commerce company in Turkey, uses Druid for real
 
 TripleLift uses Druid to provide insights into performance aspects of its native programmatic exchange for sales/business development opportunities, and to provide reporting used by advertisers and publishers.
 
+## TripStack
+
+[TripStack](https://www.tripstack.com/) uses Druid to help gain business insight into the tens of billions of flight combinations that TripStack processes every day.
+
 ## Triton Digital
 
 [Triton Digital](https://www.tritondigital.com/) is the global technology and services leader to the audio streaming and podcast industry. Operating in more than 80 countries, Triton Digital provides innovative technology that enables broadcasters, podcasters, and online music services to build their audience, maximize their revenue, and streamline their operations. 
