@@ -1,32 +1,12 @@
-- date: 2022-04-26
-  name: "The Rise of Immediate Intelligence"
-  info: Melbourne Data Engineering
-  link: https://www.meetup.com/Melbourne-Data-Engineering-Meetup/events/284772959/
-  
-- date: 2022-04-26
-  name: "Druid Community Meetup"
-  info: London Druid Meetup by Imply
-  link: https://www.meetup.com/Apache-Druid-London/events/284926988/
-  
-- date: 2022-04-27
-  name: "Apache Kafka & Apache Druid"
-  info: Apache Kafka Sydney
-  link: https://www.meetup.com/apache-kafka-sydney/events/285055765/
-  
-- date: 2022-05-03
-  name: "Upstream Processing with Apache Flink for Immediate Intelligence"
-  info: Apache Flink Berlin
-  link: https://www.meetup.com/Apache-Flink-Meetup/events/284196256/
-  
-- date: 2022-05-04
-  name: "Apache Druid"
-  info: AI + Big Data
-  link: https://www.meetup.com/Houston-Hadoop-Spark-ML/events/285210953/
-  
 - date: 2022-05-05
   name: "Intro to Druid at AWS Meetup"
   info: AWS User Group Singapore
   link: https://www.meetup.com/AWS-SG/events/285031170/
+  
+- date: 2022-05-10
+  name: "The Rise of Immediate Intelligence"
+  info: Silicon Valley Data Science, ML, AI Platform
+  link: https://www.meetup.com/Introduction-to-Data-Science/events/285421669/
   
 - date: 2022-05-16
   name: "Druid 101 at Cleveland Big Data meetup"
