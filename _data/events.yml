@@ -1,24 +1,14 @@
-- date: 2022-05-05
-  name: "Intro to Druid at AWS Meetup"
-  info: AWS User Group Singapore
-  link: https://www.meetup.com/AWS-SG/events/285031170/
-  
-- date: 2022-05-10
-  name: "The Rise of Immediate Intelligence"
-  info: Silicon Valley Data Science, ML, AI Platform
-  link: https://www.meetup.com/Introduction-to-Data-Science/events/285421669/
-  
-- date: 2022-05-16
-  name: "Druid 101 at Cleveland Big Data meetup"
-  info: Cleveland Big Data User Group
-  link: https://www.meetup.com/Cleveland-Hadoop/events/283488736/
-  
 - date: 2022-05-19
   name: "Intro to Druid on Kubernetes"
   info: Triangle Kubernetes and Openshift Meetup
   link: https://www.meetup.com/Triangle-Kubernetes-Meetup/events/283204896/
   
 - date: 2022-05-24
+  name: "Druid Summit – Austin"
+  info: Organized by Imply
+  link: https://druidsummit.org/events/druid-summit-austin-2022/
+  
+- date: 2022-05-25
   name: "Apache Druid: The Rise of Immediate Intelligence"
   info: DFW Practical Machine Learning
   link: https://www.meetup.com/DFW-Practical-Machine-Learning/events/285117331/
@@ -27,3 +17,18 @@
   name: "The Rise of Immediate Intelligence"
   info: Mexico City Business Analytics 
   link: https://www.meetup.com/Mexico-City-Business-Analytics-Users/events/284227819/
+
+- date: 2022-06-23
+  name: "Druid Summit – Sydney"
+  info: Organized by Imply
+  link: https://druidsummit.org/events/druid-summit-sydney-2022/
+  
+- date: 2022-06-30
+  name: "The Rise of Immediate Intelligence"
+  info: DevOps Brazil
+  link: https://www.sympla.com.br/evento-online/save-the-date-devops-experience-edicao-30-de-junho-de-2022/1504405?lang=PT
+  
+- date: 2022-07-20
+  name: "The Rise of Immediate Intelligence"
+  info: Data Engineering San Diego
+  link: https://www.meetup.com/Data-Engineering-San-Diego/
