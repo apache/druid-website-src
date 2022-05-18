@@ -849,6 +849,8 @@ In order to continue empowering decision making as Twitch scaled, we turned to u
 
 * [Interactive Analytics at MoPub: Querying Terabytes of Data in Seconds](https://blog.twitter.com/engineering/en_us/topics/infrastructure/2019/interactive-analytics-at-mopub.html)
 
+* [Powering real-time data analytics with Druid at Twitter](https://blog.twitter.com/engineering/en_us/topics/infrastructure/2022/powering-real-time-data-analytics-with-druid-at-twitter)
+
 ## Unity
 
 Unity's monetization business generates billions of in-game events in a multi-sided marketplace, which creates complexity, slowness, and overhead for reporting. To work around these issues, Unity deploys a Kafka, Spark, and Druid-based ingestion and aggregation pipeline.
