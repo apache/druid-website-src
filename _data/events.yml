@@ -12,3 +12,33 @@
   name: "The Rise of Immediate Intelligence"
   info: Data Engineering San Diego
   link: https://www.meetup.com/Data-Engineering-San-Diego/
+
+- date: 2022-07-21
+  name: "Druid Summit – Seattle"
+  info: Organized by Imply
+  link: https://druidsummit.org/events/druid-summit-seattle-2022/
+  
+- date: 2022-07-26
+  name: "Druid Summit – Chicago"
+  info: Organized by Imply
+  link: https://druidsummit.org/events/druid-summit-chicago-2022/
+  
+- date: 2022-08-04
+  name: "Druid Summit – New York City"
+  info: Organized by Imply
+  link: https://druidsummit.org/events/druid-summit-new-york-city-2022/
+  
+- date: 2022-08-10
+  name: "Druid Summit – Los Angeles"
+  info: Organized by Imply
+  link: https://druidsummit.org/events/druid-summit-los-angeles-2022/
+  
+- date: 2022-08-30
+  name: "Druid Summit – Atlanta"
+  info: Organized by Imply
+  link: https://druidsummit.org/events/druid-summit-atlanta-2022/
+  
+- date: 2022-09-14
+  name: "Druid Summit – SF Bay Area"
+  info: Organized by Imply
+  link: https://druidsummit.org/events/druid-summit-san-francisco-bay-area-2022/
