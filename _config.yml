@@ -34,10 +34,6 @@ druid_versions:
     versions:
       - version: 0.22.1
         date: 2021-12-11
-  - release: 0.21
-    versions:
-      - version: 0.21.1
-        date: 2021-06-10
 
 tranquility_stable_version: 0.8.3
 
