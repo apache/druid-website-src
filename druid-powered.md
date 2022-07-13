@@ -203,6 +203,15 @@ Our talk from FlinkForward conference in Berlin 2019:
 
 * [Real-time Stream Analytics and User Scoring Using Apache Druid, Flink & Cassandra at Deep.BI](https://medium.com/deep-bi/real-time-stream-analytics-and-user-scoring-using-apache-druid-flink-cassandra-at-deep-bi-38e5dc40958d) (Hisham Itani), *Medium*, 24 Mar 2020.
 
+## Deema.agency
+
+Deema Agency Delivers Results
+As a leading digital advertising agency in Iran, we design, run and optimize performance and awareness-based digital campaigns for businesses and help them to achieve their goals. With state of the art programmatic advertising technology, extensive ad network, and advanced advertising platforms, we deliver your brand message to your target audience in Iran in the most effective way .
+We are challanging with the intensive data stream realtime for analytics and better experience with data-driven insights. 
+Druid powers our applications related metrics and helps us slice and dice analytics on both historical and realtime-time metrics.
+
+[Deema.agency](https://deema.agency)
+
 ## Delta Projects
 
 [Delta Projects](https://www.deltaprojects.com) uses Druid to power real-time audience and advertising analytics interfaces.
