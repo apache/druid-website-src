@@ -207,8 +207,8 @@ Our talk from FlinkForward conference in Berlin 2019:
 
 Deema Agency Delivers Results
 As a leading digital advertising agency in Iran, we design, run and optimize performance and awareness-based digital campaigns for businesses and help them to achieve their goals. With state of the art programmatic advertising technology, extensive ad network, and advanced advertising platforms, we deliver your brand message to your target audience in Iran in the most effective way .
-We are challanging with the intensive data stream realtime for analytics and better experience with data-driven insights. 
-Druid powers our applications related metrics and helps us slice and dice analytics on both historical and realtime-time metrics.
+We are challenging with the intensive data stream realtime for analytics and better experience with data-driven insights. 
+Druid powers our applications related metrics and helps us slice and dice analytics on both historical and realtime metrics.
 
 [Deema.agency](https://deema.agency)
 
