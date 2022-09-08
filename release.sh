@@ -17,8 +17,8 @@
 # limitations under the License.
 
 
-if [ "$#" -ne 1 ] && [ "$#" -ne 2 ]; then
-  echo "Illegal number of parameters, should one or two: the version, or the version and commitish";
+if [ "$#" -ne 2 ]; then
+  echo "Illegal number of parameters, should be two: ./release.sh version commitish";
   exit 1;
 fi
 
@@ -27,19 +27,13 @@ echo "Building to docs for '$1'..."
 baseDir=$(pwd)
 
 pushd $baseDir
-#rm -rf _staging/
-#mkdir -p _staging/
-cd _staging/
-#git clone git@github.com:apache/druid.git
-cd druid/
-
-if [ "$#" -gt 1 ]; then
-  git checkout $2
-  mvn -Pwebsite-docs -pl website compile -Dwebsite.src=$baseDir -Dwebsite.version=$1 -Dcheckstyle.skip=true
-else
-  git checkout druid-$1
-  mvn -Pwebsite-docs -pl website compile -Dwebsite.src=$baseDir -Dcheckstyle.skip=true
-fi
+rm -rf _staging
+mkdir -p _staging
+cd _staging
+git clone -b "$2" --single-branch --depth 1 git@github.com:apache/druid.git
+cd druid
+git checkout "$2"
+mvn -Pwebsite-docs -pl website compile "-Dwebsite.src=$baseDir" "-Dwebsite.version=$1" -Dcheckstyle.skip=true
 
 popd
 
