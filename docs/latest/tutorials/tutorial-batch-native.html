@@ -1,0 +1,133 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Load data with native batch ingestion · Apache Druid</title><meta name="viewport" content="width=device-width"/><link rel="canonical" href="https://druid.apache.org/docs/latest/tutorials/tutorial-batch-native.html"/><meta name="generator" content="Docusaurus"/><meta name="description" content="&lt;!--"/><meta name="docsearch:language" content="en"/><meta name="docsearch:version" content="24.0.0" /><meta property="og:title" content="Load data with native batch ingestion · Apache Druid"/><meta property="og:type" content="website"/><meta property="og:url" content="https://druid.apache.org/index.html"/><meta property="og:description" content="&lt;!--"/><meta property="og:image" content="https://druid.apache.org/img/druid_nav.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://druid.apache.org/img/druid_nav.png"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-131010415-1"></script><script>
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments); }
+              gtag('js', new Date());
+              gtag('config', 'UA-131010415-1');
+            </script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"/><link rel="stylesheet" href="/css/code-block-buttons.css"/><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script><script type="text/javascript" src="/js/code-block-buttons.js"></script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/druid_nav.png" alt="Apache Druid"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/technology" target="_self">Technology</a></li><li class=""><a href="/use-cases" target="_self">Use Cases</a></li><li class=""><a href="/druid-powered" target="_self">Powered By</a></li><li class=""><a href="/docs/latest/design/index.html" target="_self">Docs</a></li><li class=""><a href="/community/" target="_self">Community</a></li><li class=""><a href="https://www.apache.org" target="_self">Apache</a></li><li class=""><a href="/downloads.html" target="_self">Download</a></li><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/apache/druid/edit/master/docs/tutorials/tutorial-batch-native.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">Load data with native batch ingestion</h1></header><article><div><span><!--
+  ~ Licensed to the Apache Software Foundation (ASF) under one
+  ~ or more contributor license agreements.  See the NOTICE file
+  ~ distributed with this work for additional information
+  ~ regarding copyright ownership.  The ASF licenses this file
+  ~ to you under the Apache License, Version 2.0 (the
+  ~ "License"); you may not use this file except in compliance
+  ~ with the License.  You may obtain a copy of the License at
+  ~
+  ~   http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an
+  ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~ KIND, either express or implied.  See the License for the
+  ~ specific language governing permissions and limitations
+  ~ under the License.
+  -->
+<p>This topic shows you how to load and query data files in Apache Druid using its native batch ingestion feature.</p>
+<h2><a class="anchor" aria-hidden="true" id="prerequisites"></a><a href="#prerequisites" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Prerequisites</h2>
+<p>Install Druid, start up Druid services, and open the Druid console as described in the <a href="/docs/latest/tutorials/index.html">Druid quickstart</a>.</p>
+<h2><a class="anchor" aria-hidden="true" id="load-data"></a><a href="#load-data" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Load data</h2>
+<p>Ingestion specs define the schema of the data Druid reads and stores. You can write ingestion specs by hand or using the <em>data loader</em>,
+as we'll do here to perform batch file loading with Druid's native batch ingestion.</p>
+<p>The Druid distribution bundles sample data we can use. The sample data located in <code>quickstart/tutorial/wikiticker-2015-09-12-sampled.json.gz</code>
+in the Druid root directory represents Wikipedia page edits for a given day.</p>
+<ol>
+<li><p>Click <strong>Load data</strong> from the Druid console header (<img src="../assets/tutorial-batch-data-loader-00.png" alt="Load data">).</p></li>
+<li><p>Select the <strong>Local disk</strong> tile and then click <strong>Connect data</strong>.</p>
+<p><img src="../assets/tutorial-batch-data-loader-01.png" alt="Data loader init" title="Data loader init"></p></li>
+<li><p>Enter the following values:</p>
+<ul>
+<li><p><strong>Base directory</strong>: <code>quickstart/tutorial/</code></p></li>
+<li><p><strong>File filter</strong>: <code>wikiticker-2015-09-12-sampled.json.gz</code></p></li>
+</ul>
+<p><img src="../assets/tutorial-batch-data-loader-015.png" alt="Data location" title="Data location"></p>
+<p>Entering the base directory and <a href="https://commons.apache.org/proper/commons-io/apidocs/org/apache/commons/io/filefilter/WildcardFileFilter.html">wildcard file filter</a> separately, as afforded by the UI, allows you to specify multiple files for ingestion at once.</p></li>
+<li><p>Click <strong>Apply</strong>.</p>
+<p>The data loader displays the raw data, giving you a chance to verify that the data
+appears as expected.</p>
+<p><img src="../assets/tutorial-batch-data-loader-02.png" alt="Data loader sample" title="Data loader sample"></p>
+<p>Notice that your position in the sequence of steps to load data, <strong>Connect</strong> in our case, appears at the top of the console, as shown below.
+You can click other steps to move forward or backward in the sequence at any time.</p>
+<p><img src="../assets/tutorial-batch-data-loader-12.png" alt="Load data"></p></li>
+</ol>
+<ol start="5">
+<li><p>Click <strong>Next: Parse data</strong>.</p>
+<p>The data loader tries to determine the parser appropriate for the data format automatically. In this case
+it identifies the data format as <code>json</code>, as shown in the <strong>Input format</strong> field at the bottom right.</p>
+<p><img src="../assets/tutorial-batch-data-loader-03.png" alt="Data loader parse data" title="Data loader parse data"></p>
+<p>Feel free to select other <strong>Input format</strong> options to get a sense of their configuration settings
+and how Druid parses other types of data.</p></li>
+<li><p>With the JSON parser selected, click <strong>Next: Parse time</strong>. The <strong>Parse time</strong> settings are where you view and adjust the
+primary timestamp column for the data.</p>
+<p><img src="../assets/tutorial-batch-data-loader-04.png" alt="Data loader parse time" title="Data loader parse time"></p>
+<p>Druid requires data to have a primary timestamp column (internally stored in a column called <code>__time</code>).
+If you do not have a timestamp in your data, select <code>Constant value</code>. In our example, the data loader
+determines that the <code>time</code> column is the only candidate that can be used as the primary time column.</p></li>
+<li><p>Click <strong>Next: Transform</strong>, <strong>Next: Filter</strong>, and then <strong>Next: Configure schema</strong>, skipping a few steps.</p>
+<p>You do not need to adjust transformation or filtering settings, as applying ingestion time transforms and
+filters are out of scope for this tutorial.</p></li>
+<li><p>The Configure schema settings are where you configure what <a href="/docs/latest/ingestion/data-model.html#dimensions">dimensions</a>
+and <a href="/docs/latest/ingestion/data-model.html#metrics">metrics</a> are ingested. The outcome of this configuration represents exactly how the
+data will appear in Druid after ingestion.</p>
+<p>Since our dataset is very small, you can turn off <a href="/docs/latest/ingestion/rollup.html">rollup</a>
+by unsetting the <strong>Rollup</strong> switch and confirming the change when prompted.</p>
+<p><img src="../assets/tutorial-batch-data-loader-05.png" alt="Data loader schema" title="Data loader schema"></p></li>
+</ol>
+<ol start="9">
+<li><p>Click <strong>Next: Partition</strong> to configure how the data will be split into segments. In this case, choose <code>DAY</code> as the <strong>Segment granularity</strong>.</p>
+<p><img src="../assets/tutorial-batch-data-loader-06.png" alt="Data loader partition" title="Data loader partition"></p>
+<p>Since this is a small dataset, we can have just a single segment, which is what selecting <code>DAY</code> as the
+segment granularity gives us.</p></li>
+<li><p>Click <strong>Next: Tune</strong> and <strong>Next: Publish</strong>.</p></li>
+<li><p>The Publish settings are where you specify the datasource name in Druid. Let's change the default name from  <code>wikiticker-2015-09-12-sampled</code> to <code>wikipedia</code>.</p>
+<p><img src="../assets/tutorial-batch-data-loader-07.png" alt="Data loader publish" title="Data loader publish"></p></li>
+<li><p>Click <strong>Next: Edit spec</strong> to review the ingestion spec we've constructed with the data loader.</p>
+<p><img src="../assets/tutorial-batch-data-loader-08.png" alt="Data loader spec" title="Data loader spec"></p>
+<p>Feel free to go back and change settings from previous steps to see how doing so updates the spec.
+Similarly, you can edit the spec directly and see it reflected in the previous steps.</p>
+<p>For other ways to load ingestion specs in Druid, see <a href="/docs/latest/tutorials/tutorial-batch.html">Tutorial: Loading a file</a>.</p></li>
+<li><p>Once you are satisfied with the spec, click <strong>Submit</strong>.</p></li>
+</ol>
+<pre><code class="hljs">The new task for our wikipedia datasource now appears in the Ingestion view. 
+
+![Tasks view](../assets/tutorial-batch-data-loader-09.png &quot;Tasks view&quot;)
+
+The task may take a minute or two to complete. When done, the task status should be &quot;SUCCESS&quot;, with
+the duration of the task indicated. Note that the view is set to automatically 
+refresh, so you do not need to refresh the browser to see the status change.
+
+A successful task means that one or more segments have been built and are now picked up by our data servers.
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="query-the-data"></a><a href="#query-the-data" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Query the data</h2>
+<p>You can now see the data as a datasource in the console and try out a query, as follows:</p>
+<ol>
+<li><p>Click <strong>Datasources</strong> from the console header.</p>
+<p>If the wikipedia datasource doesn't appear, wait a few moments for the segment to finish loading. A datasource is
+queryable once it is shown to be &quot;Fully available&quot; in the <strong>Availability</strong> column.</p></li>
+<li><p>When the datasource is available, open the Actions menu (<img src="../assets/datasources-action-button.png" alt="Actions">) for that
+datasource and choose <strong>Query with SQL</strong>.</p>
+<p><img src="../assets/tutorial-batch-data-loader-10.png" alt="Datasource view" title="Datasource view"></p>
+<blockquote>
+<p>Notice the other actions you can perform for a datasource, including configuring retention rules, compaction, and more.</p>
+</blockquote></li>
+<li><p>Run the prepopulated query, <code>SELECT * FROM &quot;wikipedia&quot;</code> to see the results.</p>
+<p><img src="../assets/tutorial-batch-data-loader-11.png" alt="Query view" title="Query view"></p></li>
+</ol>
+</span></div></article></div><div class="docs-prevnext"></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#prerequisites">Prerequisites</a></li><li><a href="#load-data">Load data</a></li><li><a href="#query-the-data">Query the data</a></li></ul></nav></div><footer class="nav-footer druid-footer" id="footer"><div class="container"><div class="text-center"><p><a href="/technology">Technology</a> · <a href="/use-cases">Use Cases</a> · <a href="/druid-powered">Powered by Druid</a> · <a href="/docs/latest/">Docs</a> · <a href="/community/">Community</a> · <a href="/downloads.html">Download</a> · <a href="/faq">FAQ</a></p></div><div class="text-center"><a title="Join the user group" href="https://groups.google.com/forum/#!forum/druid-user" target="_blank"><span class="fa fa-comments"></span></a> · <a title="Follow Druid" href="https://twitter.com/druidio" target="_blank"><span class="fab fa-twitter"></span></a> · <a title="Download via Apache" href="https://www.apache.org/dyn/closer.cgi?path=/incubator/druid/{{ site.druid_versions[0].versions[0].version }}/apache-druid-{{ site.druid_versions[0].versions[0].version }}-bin.tar.gz" target="_blank"><span class="fas fa-feather"></span></a> · <a title="GitHub" href="https://github.com/apache/druid" target="_blank"><span class="fab fa-github"></span></a></div><div class="text-center license">Copyright © 2022 <a href="https://www.apache.org/" target="_blank">Apache Software Foundation</a>.<br/>Except where otherwise noted, licensed under <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.<br/>Apache Druid, Druid, and the Druid logo are either registered trademarks or trademarks of The Apache Software Foundation in the United States and other countries.</div></div></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '2de99082a9f38e49dfaa059bbe4c901d',
+                indexName: 'apache_druid',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["language:en","version:24.0.0"]}
+              });
+            </script></body></html>
