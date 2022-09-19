@@ -123,12 +123,15 @@ This configuration includes default settings that are appropriate for this tutor
 </code></pre>
 <p>This brings up instances of ZooKeeper and the Druid services:</p>
 <pre><code class="hljs css language-bash">$ ./bin/start-micro-quickstart
-[Fri May  3 11:40:50 2019] Running <span class="hljs-built_in">command</span>[zk], logging to[/apache-druid-24.0.0/var/sv/zk.log]: bin/run-zk conf
-[Fri May  3 11:40:50 2019] Running <span class="hljs-built_in">command</span>[coordinator-overlord], logging to[/apache-druid-24.0.0/var/sv/coordinator-overlord.log]: bin/run-druid coordinator-overlord conf/druid/single-server/micro-quickstart
-[Fri May  3 11:40:50 2019] Running <span class="hljs-built_in">command</span>[broker], logging to[/apache-druid-24.0.0/var/sv/broker.log]: bin/run-druid broker conf/druid/single-server/micro-quickstart
-[Fri May  3 11:40:50 2019] Running <span class="hljs-built_in">command</span>[router], logging to[/apache-druid-24.0.0/var/sv/router.log]: bin/run-druid router conf/druid/single-server/micro-quickstart
-[Fri May  3 11:40:50 2019] Running <span class="hljs-built_in">command</span>[historical], logging to[/apache-druid-24.0.0/var/sv/historical.log]: bin/run-druid historical conf/druid/single-server/micro-quickstart
-[Fri May  3 11:40:50 2019] Running <span class="hljs-built_in">command</span>[middleManager], logging to[/apache-druid-24.0.0/var/sv/middleManager.log]: bin/run-druid middleManager conf/druid/single-server/micro-quickstart
+[Thu Sep  8 18:30:00 2022] Starting Apache Druid.
+[Thu Sep  8 18:30:00 2022] Open http://localhost:8888/ <span class="hljs-keyword">in</span> your browser to access the web console.
+[Thu Sep  8 18:30:00 2022] Or, <span class="hljs-keyword">if</span> you have enabled TLS, use https on port 9088.
+[Thu Sep  8 18:30:00 2022] Running <span class="hljs-built_in">command</span>[zk], logging to[/apache-druid-24.0.0/var/sv/zk.log]: bin/run-zk conf
+[Thu Sep  8 18:30:00 2022] Running <span class="hljs-built_in">command</span>[coordinator-overlord], logging to[/apache-druid-24.0.0/var/sv/coordinator-overlord.log]: bin/run-druid coordinator-overlord conf/druid/single-server/micro-quickstart
+[Thu Sep  8 18:30:00 2022] Running <span class="hljs-built_in">command</span>[broker], logging to[/apache-druid-24.0.0/var/sv/broker.log]: bin/run-druid broker conf/druid/single-server/micro-quickstart
+[Thu Sep  8 18:30:00 2022] Running <span class="hljs-built_in">command</span>[router], logging to[/apache-druid-24.0.0/var/sv/router.log]: bin/run-druid router conf/druid/single-server/micro-quickstart
+[Thu Sep  8 18:30:00 2022] Running <span class="hljs-built_in">command</span>[historical], logging to[/apache-druid-24.0.0/var/sv/historical.log]: bin/run-druid historical conf/druid/single-server/micro-quickstart
+[Thu Sep  8 18:30:00 2022] Running <span class="hljs-built_in">command</span>[middleManager], logging to[/apache-druid-24.0.0/var/sv/middleManager.log]: bin/run-druid middleManager conf/druid/single-server/micro-quickstart
 </code></pre>
 <p>All persistent state, such as the cluster metadata store and segments for the services, are kept in the <code>var</code> directory under
 the Druid root directory, apache-druid-24.0.0. Each service writes to a log file under <code>var/sv</code>.</p>
