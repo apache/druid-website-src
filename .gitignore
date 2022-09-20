@@ -5,6 +5,6 @@ Gemfile.lock
 .jekyll-metadata
 node_modules
 private
-css/
+/css/
 _staging
 
