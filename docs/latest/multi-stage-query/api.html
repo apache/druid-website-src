@@ -158,7 +158,7 @@ behavior and result format of plain SELECT queries (without INSERT or REPLACE) i
 <li>The task report for an entire job is associated with the <code>query_controller</code> task. The <code>query_worker</code> tasks do not have
 their own reports; their information is incorporated into the controller report.</li>
 <li>The task report API may report <code>404 Not Found</code> temporarily while the task is in the process of starting up.</li>
-<li>As an experimental feature, the SQL task engine supports running SELECT queries. SELECT query results are written into
+<li>As an experimental feature, the MSQ task engine supports running SELECT queries. SELECT query results are written into
 the <code>multiStageQuery.payload.results.results</code> task report key as an array of arrays. The behavior and result format of plain
 SELECT queries (without INSERT or REPLACE) is subject to change.</li>
 </ul>

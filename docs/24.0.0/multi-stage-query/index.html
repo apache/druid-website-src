@@ -83,10 +83,10 @@ extension, new in Druid 24.0. Refer to the <a href="/docs/24.0.0/ingestion/index
 ingestion method is right for you.</p>
 </blockquote>
 <p>Apache Druid supports SQL-based ingestion using the bundled <a href="#load-the-extension"><code>druid-multi-stage-query</code> extension</a>.
-This extension adds a <a href="/docs/24.0.0/multi-stage-query/concepts.html#sql-task-engine">multi-stage query task engine for SQL</a> that allows running SQL
+This extension adds a <a href="/docs/24.0.0/multi-stage-query/concepts.html#multi-stage-query-task-engine">multi-stage query task engine for SQL</a> that allows running SQL
 <a href="/docs/24.0.0/multi-stage-query/concepts.html#insert">INSERT</a> and <a href="/docs/24.0.0/multi-stage-query/concepts.html#replace">REPLACE</a> statements as batch tasks. As an experimental feature,
 the task engine also supports running SELECT queries as batch tasks.</p>
-<p>Nearly all SELECT capabilities are available in the SQL task engine, with certain exceptions listed on the <a href="/docs/24.0.0/multi-stage-query/known-issues.html#select">Known
+<p>Nearly all SELECT capabilities are available in the multi-stage query (MSQ) task engine, with certain exceptions listed on the <a href="/docs/24.0.0/multi-stage-query/known-issues.html#select">Known
 issues</a> page. This allows great flexibility to apply transformations, filters, JOINs,
 aggregations, and so on as part of <code>INSERT ... SELECT</code> and <code>REPLACE ... SELECT</code> statements. This also allows in-database
 transformation: creating new tables based on queries of other tables.</p>
