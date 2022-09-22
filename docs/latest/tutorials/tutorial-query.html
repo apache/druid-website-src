@@ -105,11 +105,9 @@ create a query for the page dimension.</p></li>
 <p>A SELECT query appears in the query edit pane and immediately runs. However, in this case, the query
 returns no data, since by default the query filters for data from the last day, while our data is considerably
 older than that. Let's remove the filter.</p></li>
-<li><p>In the datasource tree, click <code>__time</code> and <strong>Remove Filter</strong>.</p>
-<p><img src="../assets/tutorial-query-03.png" alt="Clear WHERE filter" title="Clear WHERE filter"></p></li>
 <li><p>Click <strong>Run</strong> to run the query.</p>
 <p>You should now see two columns of data, a page name and the count:</p>
-<p><img src="../assets/tutorial-query-04.png" alt="Query results" title="Query results"></p>
+<p><img src="../assets/tutorial-query-03.png" alt="Query results" title="Query results"></p>
 <p>Notice that the results are limited in the console to about a hundred, by default, due to the <strong>Smart query limit</strong>
 feature. This helps users avoid inadvertently running queries that return an excessive amount of data, possibly
 overwhelming their system.</p></li>
@@ -137,18 +135,18 @@ documentation; for example, the <code>COUNT()</code> function is documented in
 <p>When you run the query again, notice that we're getting the new dimension,<code>countryName</code>, but for most of the rows, its value
 is null. Let's
 show only rows with a <code>countryName</code> value.</p></li>
-<li><p>Click the countryName dimension in the left pane and choose the first filtering option. It's not exactly what we want, but
+<li><p>Click the <code>countryName</code> dimension in the left pane and choose the first filtering option. It's not exactly what we want, but
 we'll edit it by hand. The new WHERE clause should appear in your query.</p></li>
 <li><p>Modify the WHERE clause to exclude results that do not have a value for countryName:</p>
 <pre><code class="hljs css language-sql">WHERE "countryName" IS NOT NULL
 </code></pre>
 <p>Run the query again. You should now see the top edits by country:</p>
-<p><img src="../assets/tutorial-query-035.png" alt="Finished query" title="Finished query"></p></li>
+<p><img src="../assets/tutorial-query-04.png" alt="Finished query" title="Finished query"></p></li>
 <li><p>Under the covers, every Druid SQL query is translated into a query in the JSON-based <em>Druid native query</em> format before it runs
 on data nodes. You can view the native query for this query by clicking <code>...</code> and <strong>Explain SQL Query</strong>.</p>
 <p>While you can use Druid SQL for most purposes, familiarity with native query is useful for composing complex queries and for troubleshooting
 performance issues. For more information, see <a href="/docs/latest/querying/querying.html">Native queries</a>.</p>
-<p><img src="../assets/tutorial-query-06.png" alt="Explain query" title="Explain query"></p>
+<p><img src="../assets/tutorial-query-05.png" alt="Explain query" title="Explain query"></p>
 <blockquote>
 <p>Another way to view the explain plan is by adding EXPLAIN PLAN FOR to the front of your query, as follows:</p>
 <pre><code class="hljs css language-sql"><span class="hljs-keyword">EXPLAIN</span> PLAN <span class="hljs-keyword">FOR</span>
@@ -178,14 +176,14 @@ to run Druid SQL from the command line or over HTTP.</p>
 <span class="hljs-keyword">FROM</span> wikipedia <span class="hljs-keyword">WHERE</span> TIME_IN_INTERVAL(<span class="hljs-string">"__time"</span>, <span class="hljs-string">'2015-09-12/2015-09-13'</span>)
 <span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> <span class="hljs-number">1</span>
 </code></pre>
-<p><img src="../assets/tutorial-query-07.png" alt="Query example" title="Query example"></p>
+<p><img src="../assets/tutorial-query-06.png" alt="Query example" title="Query example"></p>
 <h3><a class="anchor" aria-hidden="true" id="general-group-by"></a><a href="#general-group-by" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>General group by</h3>
 <pre><code class="hljs css language-sql"><span class="hljs-keyword">SELECT</span> channel, page, <span class="hljs-keyword">SUM</span>(added)
 <span class="hljs-keyword">FROM</span> wikipedia <span class="hljs-keyword">WHERE</span> TIME_IN_INTERVAL(<span class="hljs-string">"__time"</span>, <span class="hljs-string">'2015-09-12/2015-09-13'</span>)
 <span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> channel, page
 <span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> <span class="hljs-keyword">SUM</span>(added) <span class="hljs-keyword">DESC</span>
 </code></pre>
-<p><img src="../assets/tutorial-query-08.png" alt="Query example" title="Query example"></p>
+<p><img src="../assets/tutorial-query-07.png" alt="Query example" title="Query example"></p>
 <h2><a class="anchor" aria-hidden="true" id="other-ways-to-invoke-sql-queries"></a><a href="#other-ways-to-invoke-sql-queries" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Other ways to invoke SQL queries</h2>
 <h3><a class="anchor" aria-hidden="true" id="query-sql-via-dsql"></a><a href="#query-sql-via-dsql" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Query SQL via dsql</h3>
 <p>For convenience, the Druid package includes a SQL command-line client, located at <code>bin/dsql</code> in the Druid package root.</p>
