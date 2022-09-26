@@ -15,6 +15,7 @@ exclude:
   - package.json
   - package-lock.json
   - scss
+  - css-extra
   - private
   - _staging
   - release.sh
