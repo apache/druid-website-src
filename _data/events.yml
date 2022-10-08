@@ -1,18 +1,3 @@
-- date: 2022-09-22
-  name: "Implementing Streaming Analytics at Scale"
-  info: Austin Apache Kafka meetup
-  link: https://www.meetup.com/austin-apache-kafka-meetup-stream-data-platform/events/288078510/
-  
-- date: 2022-09-29
-  name: "Druid Summit – Paris"
-  info: Organized by Imply
-  link: https://druidsummit.org/events/druid-summit-paris-2022/
-  
-- date: 2022-09-29
-  name: "September Apache Druid Office Hours"
-  info: Bay Area Apache Druid meetup
-  link: https://www.meetup.com/druidio/events/288476899/
-  
 - date: 2022-10-11
   name: "AWS + Druid: Real-time Analytics at Scale"
   info: AWS San Diego
@@ -28,3 +13,7 @@
   info: Organized by Imply
   link: https://druidsummit.org/events/druid-summit-tel-aviv-2022/
   
+- date: 2022-12-06
+  name: "Virtual Druid Summit"
+  info: Organized by Imply
+  link: https://druidsummit.org/druid-summit-virtual-2022/
