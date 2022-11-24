@@ -63,6 +63,14 @@ Some great folks have written their own libraries to interact with Apache Druid.
 
 * [bugzmanov/druid-io-rs](https://github.com/bugzmanov/druid-io-rs) - Fully asynchronous, future-enabled Apache Druid client library for rust programming language.
 
+External Druid data readers
+---------------------------
+Tools and libraries that allow to access and query Druid data (segments) directly.
+
+#### Spark
+
+* [deep-bi/spark-druid-segment-reader](https://github.com/deep-bi/spark-druid-segment-reader) - Apache Spark connector for Scala and Python APIs for reading Druid segments directly from the Deep Storage. It replaces the need for the scan queries as Spark can load any historical segments directly (e.g. for heavy queries or machine learning). 
+
 Other Druid Distributions
 -------------------------
 * [eBay/embedded-druid](https://github.com/eBay/embedded-druid) - Leveraging Druid capabilities in stand alone application
