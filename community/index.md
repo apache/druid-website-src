@@ -13,7 +13,6 @@ Druid development, or just stay up to date:
 
 * **User mailing list:** [druid-user@googlegroups.com](https://groups.google.com/forum/#!forum/druid-user) for general
 discussion, questions, and announcements. This is the perfect place to ask for help if you need it!
-* **Druid Forum:** Ask and answer questions, read and submit tips and tricks, and find links to Apache Druid articles and videos in the [Druid Forum](https://www.druidforum.org/) (by Imply).
 * **Development mailing list:** [dev@druid.apache.org](https://lists.apache.org/list.html?dev@druid.apache.org) for
 discussion about project development.
 * **GitHub:** Star us at [apache/druid](https://github.com/apache/druid) and use this to follow Druid development, raise
