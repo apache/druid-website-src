@@ -20,7 +20,7 @@ section below for details on our development process.
 discussion about project development.
 * **Twitter:** Follow us on Twitter at [@druidio](https://twitter.com/druidio).
 
-Checkout also:
+Also check out:
 
 * **User mailing list:** [druid-user@googlegroups.com](https://groups.google.com/forum/#!forum/druid-user) for general
 discussion, questions, and announcements.
