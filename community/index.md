@@ -24,6 +24,7 @@ Also check out:
 
 * **User mailing list:** [druid-user@googlegroups.com](https://groups.google.com/forum/#!forum/druid-user) for general
 discussion, questions, and announcements.
+* **LinkedIn** Connect with other Apache Druid professionals in the [LinkedIn group](https://www.linkedin.com/groups/8791983/)
 * **Meetups:** Check out [Apache Druid on meetup.com](https://www.meetup.com/topics/apache-druid/) for links to regular
 meetups in cities all over the world.
 * **StackOverflow:** While the user mailing list is the primary resource for asking questions, if you prefer
