@@ -1,3 +1,13 @@
+- date: 2022-12-15
+  name: "Utilizing Apache Druid as a feature store to leverage ML pipeline"
+  info: Druid Seoul Meetup
+  link: https://www.meetup.com/ko-KR/druid-seoul/events/290013027/
+
+- date: 2022-12-13
+  name: "How to build a real time analytics pipeline with Apache Kafka ksqlDB & Apache Druid"
+  info: Berlin Stream Processing Meetup
+  link: https://www.meetup.com/berlin-stream-processing-meetup-group/events/288457475
+
 - date: 2022-12-06
   name: "Virtual Druid Summit (day 1)"
   info: Organized by Imply
@@ -7,3 +17,4 @@
   name: "Virtual Druid Summit (day 2)"
   info: Organized by Imply
   link: https://druidsummit.org/
+
