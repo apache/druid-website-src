@@ -12,6 +12,12 @@ npm install
 bundle install
 ```
 
+If you receive the error `error: no template named 'remove_cv_t' in namespace 'std'; did you mean 'remove_cv'? · Issue #38367 · nodejs/node · GitHub)` use [the following](https://github.com/nodejs/node/issues/38367) CXX flags with `npm install`:
+
+```
+CXXFLAGS="--std=c++14" npm install *
+```
+
 Every time you want to run the site:
 
 ```
