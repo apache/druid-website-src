@@ -1,9 +1,34 @@
-- date: 2022-12-06
-  name: "Virtual Druid Summit (day 1)"
-  info: Organized by Imply
-  link: https://druidsummit.org/
-  
-- date: 2022-12-07
-  name: "Virtual Druid Summit (day 2)"
-  info: Organized by Imply
-  link: https://druidsummit.org/
+- date: 2022-12-13
+  name: "How to build a real time analytics pipeline with Apache Kafka ksqlDB & Apache Druid"
+  info: Berlin Stream Processing Meetup
+  link: https://www.meetup.com/berlin-stream-processing-meetup-group/events/288457475
+
+- date: 2022-12-14
+  name: "What’s New with Apache Druid with Sergio Ferragut"
+  info: Apache Druid Meetup by Imply
+  link: https://www.meetup.com/druidio/events/290241696/
+
+- date: 2022-12-14
+  name: "Apache Druid Virtual Drop-in (Europe)"
+  info: Apache Druid Meetup by Imply
+  link: https://www.meetup.com/apache-druid-london/events/290021436/
+
+- date: 2022-12-15
+  name: "Utilizing Apache Druid as a feature store to leverage ML pipeline"
+  info: Druid Seoul Meetup
+  link: https://www.meetup.com/ko-KR/druid-seoul/events/290013027/
+
+- date: 2022-12-16
+  name: "Apache Druid Virtual Office Hours (Americas)"
+  info: Apache Druid Meetup by Imply
+  link: https://www.meetup.com/druidio/events/290102018/
+
+- date: 2023-01-05
+  name: "Apache Druid Virtual Drop-in (Asia and Oceania)"
+  info: Apache Druid Meetup by Imply
+  link: https://www.meetup.com/bangalore-druid-meetup-group/events/290191715/
+
+- date: 2023-01-11
+  name: "Apache Druid Virtual Drop-in (Europe)"
+  info: Apache Druid Meetup by Imply
+  link: https://www.meetup.com/apache-druid-london/events/290038185/
