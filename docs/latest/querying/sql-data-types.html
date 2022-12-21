@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>SQL data types · Apache Druid</title><meta name="viewport" content="width=device-width, initial-scale=1.0"/><link rel="canonical" href="https://druid.apache.org/docs/latest/querying/sql-data-types.html"/><meta name="generator" content="Docusaurus"/><meta name="description" content="&lt;!--"/><meta name="docsearch:language" content="en"/><meta name="docsearch:version" content="24.0.1" /><meta property="og:title" content="SQL data types · Apache Druid"/><meta property="og:type" content="website"/><meta property="og:url" content="https://druid.apache.org/index.html"/><meta property="og:description" content="&lt;!--"/><meta property="og:image" content="https://druid.apache.org/img/druid_nav.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://druid.apache.org/img/druid_nav.png"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-131010415-1"></script><script>
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>SQL data types · Apache Druid</title><meta name="viewport" content="width=device-width, initial-scale=1.0"/><link rel="canonical" href="https://druid.apache.org/docs/latest/querying/sql-data-types.html"/><meta name="generator" content="Docusaurus"/><meta name="description" content="&lt;!--"/><meta name="docsearch:language" content="en"/><meta name="docsearch:version" content="24.0.2" /><meta property="og:title" content="SQL data types · Apache Druid"/><meta property="og:type" content="website"/><meta property="og:url" content="https://druid.apache.org/index.html"/><meta property="og:description" content="&lt;!--"/><meta property="og:image" content="https://druid.apache.org/img/druid_nav.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://druid.apache.org/img/druid_nav.png"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-131010415-1"></script><script>
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments); }
               gtag('js', new Date());
@@ -90,15 +90,17 @@ json, hyperUnique, and approxHistogram columns).</p>
 milliseconds since 1970-01-01 00:00:00 UTC, not counting leap seconds. Therefore, timestamps in Druid do not carry any
 timezone information, but only carry information about the exact moment in time they represent. See the
 <a href="/docs/latest/querying/sql-scalar.html#date-and-time-functions">Time functions</a> section for more information about timestamp handling.</p>
-<p>The following table describes how Druid maps SQL types onto native types at query runtime. Casts between two SQL types
-that have the same Druid runtime type will have no effect, other than exceptions noted in the table. Casts between two
-SQL types that have different Druid runtime types will generate a runtime cast in Druid. If a value cannot be properly
-cast to another value, as in <code>CAST('foo' AS BIGINT)</code>, the runtime will substitute a default value. NULL values cast
-to non-nullable types will also be substituted with a default value (for example, nulls cast to numbers will be
-converted to zeroes).</p>
+<p>Casts between two SQL types with the same Druid runtime type (see below table) have no effect, other than exceptions
+noted in the table. Casts between two SQL types that have different Druid runtime types generate a runtime cast in
+Druid. If a value cannot be cast to the target type, as in <code>CAST('foo' AS BIGINT)</code>, Druid either substitutes a default
+value (when <code>druid.generic.useDefaultValueForNull = true</code>, the default mode), or substitutes <a href="#null-values">NULL</a> (when
+<code>druid.generic.useDefaultValueForNull = false</code>). NULL values cast to non-nullable types are also substituted with a
+default value. For example, if <code>druid.generic.useDefaultValueForNull = true</code>, a null VARCHAR cast to BIGINT is converted
+to a zero.</p>
+<p>The following table describes how Druid maps SQL types onto native types when running queries.</p>
 <table>
 <thead>
-<tr><th>SQL type</th><th>Druid runtime type</th><th>Default value</th><th>Notes</th></tr>
+<tr><th>SQL type</th><th>Druid runtime type</th><th>Default value<sup>*</sup></th><th>Notes</th></tr>
 </thead>
 <tbody>
 <tr><td>CHAR</td><td>STRING</td><td><code>''</code></td><td></td></tr>
@@ -117,19 +119,20 @@ converted to zeroes).</p>
 <tr><td>OTHER</td><td>COMPLEX</td><td>none</td><td>May represent various Druid column types such as hyperUnique, approxHistogram, etc.</td></tr>
 </tbody>
 </table>
+<p><sup>*</sup> Default value applies if <code>druid.generic.useDefaultValueForNull = true</code> (the default mode). Otherwise, the default value is <code>NULL</code> for all types.</p>
 <h2><a class="anchor" aria-hidden="true" id="multi-value-strings"></a><a href="#multi-value-strings" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Multi-value strings</h2>
 <p>Druid's native type system allows strings to potentially have multiple values. These
-<a href="/docs/latest/querying/multi-value-dimensions.html">multi-value string dimensions</a> will be reported in SQL as <code>VARCHAR</code> typed, and can be
-syntactically used like any other VARCHAR. Regular string functions that refer to multi-value string dimensions will be
+<a href="/docs/latest/querying/multi-value-dimensions.html">multi-value string dimensions</a> are reported in SQL as <code>VARCHAR</code> typed, and can be
+syntactically used like any other VARCHAR. Regular string functions that refer to multi-value string dimensions are
 applied to all values for each row individually. Multi-value string dimensions can also be treated as arrays via special
 <a href="/docs/latest/querying/sql-multivalue-string-functions.html">multi-value string functions</a>, which can perform powerful array-aware operations.</p>
-<p>Grouping by a multi-value expression will observe the native Druid multi-value aggregation behavior, which is similar to
+<p>Grouping by a multi-value expression observes the native Druid multi-value aggregation behavior, which is similar to
 the <code>UNNEST</code> functionality available in some other SQL dialects. Refer to the documentation on
 <a href="/docs/latest/querying/multi-value-dimensions.html">multi-value string dimensions</a> for additional details.</p>
 <blockquote>
 <p>Because multi-value dimensions are treated by the SQL planner as <code>VARCHAR</code>, there are some inconsistencies between how
 they are handled in Druid SQL and in native queries. For example, expressions involving multi-value dimensions may be
-incorrectly optimized by the Druid SQL planner: <code>multi_val_dim = 'a' AND multi_val_dim = 'b'</code> will be optimized to
+incorrectly optimized by the Druid SQL planner: <code>multi_val_dim = 'a' AND multi_val_dim = 'b'</code> is optimized to
 <code>false</code>, even though it is possible for a single row to have both &quot;a&quot; and &quot;b&quot; as values for <code>multi_val_dim</code>. The
 SQL behavior of multi-value dimensions will change in a future release to more closely align with their behavior
 in native queries.</p>
@@ -139,11 +142,11 @@ in native queries.</p>
 runtime property controls Druid's NULL handling mode. For the most SQL compliant behavior, set this to <code>false</code>.</p>
 <p>When <code>druid.generic.useDefaultValueForNull = true</code> (the default mode), Druid treats NULLs and empty strings
 interchangeably, rather than according to the SQL standard. In this mode Druid SQL only has partial support for NULLs.
-For example, the expressions <code>col IS NULL</code> and <code>col = ''</code> are equivalent, and both will evaluate to true if <code>col</code>
-contains an empty string. Similarly, the expression <code>COALESCE(col1, col2)</code> will return <code>col2</code> if <code>col1</code> is an empty
-string. While the <code>COUNT(*)</code> aggregator counts all rows, the <code>COUNT(expr)</code> aggregator will count the number of rows
+For example, the expressions <code>col IS NULL</code> and <code>col = ''</code> are equivalent, and both evaluate to true if <code>col</code>
+contains an empty string. Similarly, the expression <code>COALESCE(col1, col2)</code> returns <code>col2</code> if <code>col1</code> is an empty
+string. While the <code>COUNT(*)</code> aggregator counts all rows, the <code>COUNT(expr)</code> aggregator counts the number of rows
 where <code>expr</code> is neither null nor the empty string. Numeric columns in this mode are not nullable; any null or missing
-values will be treated as zeroes.</p>
+values are treated as zeroes.</p>
 <p>When <code>druid.generic.useDefaultValueForNull = false</code>, NULLs are treated more closely to the SQL standard. In this mode,
 numeric NULL is permitted, and NULLs and empty strings are no longer treated as interchangeable. This property
 affects both storage and querying, and must be set on all Druid service types to be available at both ingestion time
@@ -183,6 +186,6 @@ However, even in this mode, Druid uses two-valued logic for filter types other t
                 apiKey: 'd4ef4ffe3a2f0c7d1e34b062fd98736b',
                 indexName: 'apache_druid',
                 inputSelector: '#search_input_react',
-                algoliaOptions: {"facetFilters":["language:en","version:24.0.1"]}
+                algoliaOptions: {"facetFilters":["language:en","version:24.0.2"]}
               });
             </script></body></html>
