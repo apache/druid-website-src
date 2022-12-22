@@ -519,7 +519,7 @@ Nielsen Marketing Cloud uses Druid as it's core real-time analytics tool to help
 
 ## Nodex
 
-[Nodex](https://www.nodex.co.uk) uses Druid in its real time analytics pipeline to deliver insights and analytics across a wide range of recruitment CRM software, Job boards and recruitment career portals. We ingest large amounts of data and needed something capable of real time metrics to offer KPI's to our clients to allow them to make better business decisions based on actual usage data.
+[Nodex](https://www.nodex.co.uk/services/recruitment-crm-software) uses Druid in its real time analytics pipeline to deliver insights and analytics across a wide range of recruitment CRM software, Job boards and recruitment career portals. We ingest large amounts of data and needed something capable of real time metrics to offer KPI's to our clients to allow them to make better business decisions based on actual usage data.
 
 ## Noon
 
