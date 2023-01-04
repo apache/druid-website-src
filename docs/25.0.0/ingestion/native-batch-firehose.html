@@ -1,0 +1,401 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Native batch ingestion with firehose (Deprecated) · Apache Druid</title><meta name="viewport" content="width=device-width, initial-scale=1.0"/><link rel="canonical" href="https://druid.apache.org/docs/25.0.0/ingestion/native-batch-firehose.html"/><meta name="generator" content="Docusaurus"/><meta name="description" content="&lt;!--"/><meta name="docsearch:language" content="en"/><meta name="docsearch:version" content="25.0.0" /><meta property="og:title" content="Native batch ingestion with firehose (Deprecated) · Apache Druid"/><meta property="og:type" content="website"/><meta property="og:url" content="https://druid.apache.org/index.html"/><meta property="og:description" content="&lt;!--"/><meta property="og:image" content="https://druid.apache.org/img/druid_nav.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://druid.apache.org/img/druid_nav.png"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-131010415-1"></script><script>
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments); }
+              gtag('js', new Date());
+              gtag('config', 'UA-131010415-1');
+            </script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"/><link rel="stylesheet" href="/css/code-block-buttons.css"/><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script><script type="text/javascript" src="/js/code-block-buttons.js"></script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/druid_nav.png" alt="Apache Druid"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/technology" target="_self">Technology</a></li><li class=""><a href="/use-cases" target="_self">Use Cases</a></li><li class=""><a href="/druid-powered" target="_self">Powered By</a></li><li class="siteNavGroupActive"><a href="/docs/25.0.0/design/index.html" target="_self">Docs</a></li><li class=""><a href="/community/" target="_self">Community</a></li><li class=""><a href="https://www.apache.org" target="_self">Apache</a></li><li class=""><a href="/downloads.html" target="_self">Download</a></li><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Hidden</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Getting started<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/25.0.0/design/index.html">Introduction to Apache Druid</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/tutorials/index.html">Quickstart (local)</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/operations/single-server.html">Single server deployment</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/tutorials/cluster.html">Clustered deployment</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Tutorials<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/25.0.0/tutorials/tutorial-batch.html">Load files natively</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/tutorials/tutorial-msq-extern.html">Load files using SQL 🆕</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/tutorials/tutorial-kafka.html">Load from Apache Kafka</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/tutorials/tutorial-batch-hadoop.html">Load from Apache Hadoop</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/tutorials/tutorial-query.html">Querying data</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/tutorials/tutorial-rollup.html">Roll-up</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/tutorials/tutorial-sketches-theta.html">Theta sketches</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/tutorials/tutorial-retention.html">Configuring data retention</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/tutorials/tutorial-update-data.html">Updating existing data</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/tutorials/tutorial-compaction.html">Compacting segments</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/tutorials/tutorial-delete-data.html">Deleting data</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/tutorials/tutorial-ingestion-spec.html">Writing an ingestion spec</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/tutorials/tutorial-transform-spec.html">Transforming input data</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/tutorials/docker.html">Tutorial: Run with Docker</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/tutorials/tutorial-kerberos-hadoop.html">Kerberized HDFS deep storage</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/tutorials/tutorial-msq-convert-spec.html">Convert ingestion spec to SQL</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/tutorials/tutorial-jupyter-index.html">Jupyter Notebook tutorials</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Design<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/25.0.0/design/architecture.html">Design</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/design/segments.html">Segments</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/design/processes.html">Processes and servers</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/dependencies/deep-storage.html">Deep storage</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/dependencies/metadata-storage.html">Metadata storage</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/dependencies/zookeeper.html">ZooKeeper</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Ingestion<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/25.0.0/ingestion/index.html">Ingestion</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/ingestion/data-formats.html">Data formats</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/ingestion/data-model.html">Data model</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/ingestion/rollup.html">Data rollup</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/ingestion/partitioning.html">Partitioning</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/ingestion/ingestion-spec.html">Ingestion spec</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/ingestion/schema-design.html">Schema design tips</a></li><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Stream ingestion</h4><ul><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/kafka-ingestion.html">Apache Kafka ingestion</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/kafka-supervisor-reference.html">Apache Kafka supervisor</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/kafka-supervisor-operations.html">Apache Kafka operations</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/kinesis-ingestion.html">Amazon Kinesis</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Batch ingestion</h4><ul><li class="navListItem"><a class="navItem" href="/docs/25.0.0/ingestion/native-batch.html">Native batch</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/ingestion/native-batch-input-sources.html">Native batch: input sources</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/ingestion/migrate-from-firehose.html">Migrate from firehose</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/ingestion/hadoop.html">Hadoop-based</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">SQL-based ingestion 🆕</h4><ul><li class="navListItem"><a class="navItem" href="/docs/25.0.0/multi-stage-query/index.html">Overview</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/multi-stage-query/concepts.html">Key concepts</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/multi-stage-query/api.html">API</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/multi-stage-query/security.html">Security</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/multi-stage-query/examples.html">Examples</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/multi-stage-query/reference.html">Reference</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/multi-stage-query/known-issues.html">Known issues</a></li></ul></div><li class="navListItem"><a class="navItem" href="/docs/25.0.0/ingestion/tasks.html">Task reference</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/ingestion/faq.html">Troubleshooting FAQ</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Data management<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/25.0.0/data-management/index.html">Overview</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/data-management/update.html">Data updates</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/data-management/delete.html">Data deletion</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/data-management/schema-changes.html">Schema changes</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/data-management/compaction.html">Compaction</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/data-management/automatic-compaction.html">Automatic compaction</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Querying<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Druid SQL</h4><ul><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/sql.html">Overview and syntax</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/sql-data-types.html">SQL data types</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/sql-operators.html">Operators</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/sql-scalar.html">Scalar functions</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/sql-aggregations.html">Aggregation functions</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/sql-multivalue-string-functions.html">Multi-value string functions</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/sql-json-functions.html">JSON functions</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/sql-functions.html">All functions</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/sql-api.html">Druid SQL API</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/sql-jdbc.html">JDBC driver API</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/sql-query-context.html">SQL query context</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/sql-metadata-tables.html">SQL metadata tables</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/sql-translation.html">SQL query translation</a></li></ul></div><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/querying.html">Native queries</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/query-execution.html">Query execution</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/troubleshooting.html">Troubleshooting</a></li><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Concepts</h4><ul><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/datasource.html">Datasources</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/joins.html">Joins</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/lookups.html">Lookups</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/multi-value-dimensions.html">Multi-value dimensions</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/nested-columns.html">Nested columns</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/multitenancy.html">Multitenancy</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/caching.html">Query caching</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/using-caching.html">Using query caching</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/query-context.html">Query context</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Native query types</h4><ul><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/timeseriesquery.html">Timeseries</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/topnquery.html">TopN</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/groupbyquery.html">GroupBy</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/scan-query.html">Scan</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/searchquery.html">Search</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/timeboundaryquery.html">TimeBoundary</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/segmentmetadataquery.html">SegmentMetadata</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/datasourcemetadataquery.html">DatasourceMetadata</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Native query components</h4><ul><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/filters.html">Filters</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/granularities.html">Granularities</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/dimensionspecs.html">Dimensions</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/aggregations.html">Aggregations</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/post-aggregations.html">Post-aggregations</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/misc/math-expr.html">Expressions</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/having.html">Having filters (groupBy)</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/limitspec.html">Sorting and limiting (groupBy)</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/topnmetricspec.html">Sorting (topN)</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/sorting-orders.html">String comparators</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/virtual-columns.html">Virtual columns</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/geo.html">Spatial filters</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Configuration<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/25.0.0/configuration/index.html">Configuration reference</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions.html">Extensions</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/configuration/logging.html">Logging</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Operations<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/25.0.0/operations/web-console.html">Web console</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/operations/java.html">Java runtime</a></li><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Security</h4><ul><li class="navListItem"><a class="navItem" href="/docs/25.0.0/operations/security-overview.html">Security overview</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/operations/security-user-auth.html">User authentication and authorization</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/operations/auth-ldap.html">LDAP auth</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/operations/password-provider.html">Password providers</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/operations/dynamic-config-provider.html">Dynamic Config Providers</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/operations/tls-support.html">TLS support</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Performance tuning</h4><ul><li class="navListItem"><a class="navItem" href="/docs/25.0.0/operations/basic-cluster-tuning.html">Basic cluster tuning</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/operations/segment-optimization.html">Segment size optimization</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/operations/mixed-workloads.html">Mixed workloads</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/operations/http-compression.html">HTTP compression</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/operations/clean-metadata-store.html">Automated metadata cleanup</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Monitoring</h4><ul><li class="navListItem"><a class="navItem" href="/docs/25.0.0/operations/request-logging.html">Request logging</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/operations/metrics.html">Metrics</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/operations/alerts.html">Alerts</a></li></ul></div><li class="navListItem"><a class="navItem" href="/docs/25.0.0/operations/api-reference.html">API reference</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/operations/high-availability.html">High availability</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/operations/rolling-updates.html">Rolling updates</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/operations/rule-configuration.html">Using rules to drop and retain data</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/operations/other-hadoop.html">Working with different versions of Apache Hadoop</a></li><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Misc</h4><ul><li class="navListItem"><a class="navItem" href="/docs/25.0.0/operations/dump-segment.html">dump-segment tool</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/operations/reset-cluster.html">reset-cluster tool</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/operations/insert-segment-to-db.html">insert-segment-to-db tool</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/operations/pull-deps.html">pull-deps tool</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/operations/deep-storage-migration.html">Deep storage migration</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/operations/export-metadata.html">Export Metadata Tool</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/operations/metadata-migration.html">Metadata Migration</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/operations/use_sbt_to_build_fat_jar.html">Content for build.sbt</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Development<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/overview.html">Developing on Druid</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/modules.html">Creating extensions</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/javascript.html">JavaScript functionality</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/build.html">Build from source</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/versioning.html">Versioning</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/experimental.html">Experimental features</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Misc<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/25.0.0/misc/papers-and-talks.html">Papers</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Hidden<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/25.0.0/comparisons/druid-vs-elasticsearch.html">Apache Druid vs Elasticsearch</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/comparisons/druid-vs-key-value.html">Apache Druid vs. Key/Value Stores (HBase/Cassandra/OpenTSDB)</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/comparisons/druid-vs-kudu.html">Apache Druid vs Kudu</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/comparisons/druid-vs-redshift.html">Apache Druid vs Redshift</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/comparisons/druid-vs-spark.html">Apache Druid vs Spark</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/comparisons/druid-vs-sql-on-hadoop.html">Apache Druid vs SQL-on-Hadoop</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/design/auth.html">Authentication and Authorization</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/design/broker.html">Broker</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/design/coordinator.html">Coordinator Process</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/design/historical.html">Historical Process</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/design/indexer.html">Indexer Process</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/design/indexing-service.html">Indexing Service</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/design/middlemanager.html">MiddleManager Process</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/design/overlord.html">Overlord Process</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/design/router.html">Router Process</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/design/peons.html">Peons</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/approximate-histograms.html">Approximate Histogram aggregators</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/avro.html">Apache Avro</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/azure.html">Microsoft Azure</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/bloom-filter.html">Bloom Filter</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/datasketches-extension.html">DataSketches extension</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/datasketches-hll.html">DataSketches HLL Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/datasketches-quantiles.html">DataSketches Quantiles Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/datasketches-theta.html">DataSketches Theta Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/datasketches-tuple.html">DataSketches Tuple Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/druid-basic-security.html">Basic Security</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/druid-kerberos.html">Kerberos</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/druid-lookups.html">Cached Lookup Module</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/druid-ranger-security.html">Apache Ranger Security</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/google.html">Google Cloud Storage</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/hdfs.html">HDFS</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/kafka-extraction-namespace.html">Apache Kafka Lookups</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/lookups-cached-global.html">Globally Cached Lookups</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/mysql.html">MySQL Metadata Store</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/orc.html">ORC Extension</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/druid-pac4j.html">Druid pac4j based Security extension</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/parquet.html">Apache Parquet Extension</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/postgresql.html">PostgreSQL Metadata Store</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/protobuf.html">Protobuf</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/s3.html">S3-compatible</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/simple-client-sslcontext.html">Simple SSLContext Provider Module</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/stats.html">Stats aggregator</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/test-stats.html">Test Stats Aggregators</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/druid-aws-rds.html">Druid AWS RDS Module</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/kubernetes.html">Kubernetes</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-contrib/ambari-metrics-emitter.html">Ambari Metrics Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-contrib/cassandra.html">Apache Cassandra</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-contrib/cloudfiles.html">Rackspace Cloud Files</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-contrib/distinctcount.html">DistinctCount Aggregator</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-contrib/graphite.html">Graphite Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-contrib/influx.html">InfluxDB Line Protocol Parser</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-contrib/influxdb-emitter.html">InfluxDB Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-contrib/kafka-emitter.html">Kafka Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-contrib/materialized-view.html">Materialized View</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-contrib/momentsketch-quantiles.html">Moment Sketches for Approximate Quantiles module</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-contrib/moving-average-query.html">Moving Average Query</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-contrib/opentsdb-emitter.html">OpenTSDB Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-contrib/redis-cache.html">Druid Redis Cache</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-contrib/sqlserver.html">Microsoft SQLServer</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-contrib/statsd.html">StatsD Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-contrib/tdigestsketch-quantiles.html">T-Digest Quantiles Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-contrib/thrift.html">Thrift</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-contrib/time-min-max.html">Timestamp Min/Max aggregators</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-contrib/gce-extensions.html">GCE Extensions</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-contrib/aliyun-oss.html">Aliyun OSS</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-contrib/prometheus.html">Prometheus Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/operations/kubernetes.html">kubernetes</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/hll-old.html">Cardinality/HyperUnique aggregators</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/select-query.html">Select</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/25.0.0/ingestion/native-batch-firehose.html">Firehose (deprecated)</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/ingestion/native-batch-simple-task.html">Native batch (simple)</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/ingestion/standalone-realtime.html">Realtime Process</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/apache/druid/edit/master/docs/ingestion/native-batch-firehose.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">Native batch ingestion with firehose (Deprecated)</h1></header><article><div><span><!--
+  ~ Licensed to the Apache Software Foundation (ASF) under one
+  ~ or more contributor license agreements.  See the NOTICE file
+  ~ distributed with this work for additional information
+  ~ regarding copyright ownership.  The ASF licenses this file
+  ~ to you under the Apache License, Version 2.0 (the
+  ~ "License"); you may not use this file except in compliance
+  ~ with the License.  You may obtain a copy of the License at
+  ~
+  ~   http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an
+  ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~ KIND, either express or implied.  See the License for the
+  ~ specific language governing permissions and limitations
+  ~ under the License.
+  -->
+<blockquote>
+<p>Firehose ingestion is deprecated. See <a href="/docs/25.0.0/ingestion/migrate-from-firehose.html">Migrate from firehose to input source ingestion</a> for instructions on migrating from firehose ingestion to using native batch ingestion input sources.</p>
+</blockquote>
+<p>There are several firehoses readily available in Druid, some are meant for examples, others can be used directly in a production environment.</p>
+<h2><a class="anchor" aria-hidden="true" id="statics3firehose"></a><a href="#statics3firehose" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>StaticS3Firehose</h2>
+<p>You need to include the <a href="/docs/25.0.0/development/extensions-core/s3.html"><code>druid-s3-extensions</code></a> as an extension to use the StaticS3Firehose.</p>
+<p>This firehose ingests events from a predefined list of S3 objects.
+This firehose is <em>splittable</em> and can be used by the <a href="/docs/25.0.0/ingestion/native-batch.html">Parallel task</a>.
+Since each split represents an object in this firehose, each worker task of <code>index_parallel</code> will read an object.</p>
+<p>Sample spec:</p>
+<pre><code class="hljs css language-json">"firehose" : {
+    "type" : "static-s3",
+    "uris": ["s3://foo/bar/file.gz", "s3://bar/foo/file2.gz"]
+}
+</code></pre>
+<p>This firehose provides caching and prefetching features. In the Simple task, a firehose can be read twice if intervals or
+shardSpecs are not specified, and, in this case, caching can be useful. Prefetching is preferred when direct scan of objects is slow.
+Note that prefetching or caching isn't that useful in the Parallel task.</p>
+<table>
+<thead>
+<tr><th>property</th><th>description</th><th>default</th><th>required?</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td>This should be <code>static-s3</code>.</td><td>None</td><td>yes</td></tr>
+<tr><td>uris</td><td>JSON array of URIs where s3 files to be ingested are located.</td><td>None</td><td><code>uris</code> or <code>prefixes</code> must be set</td></tr>
+<tr><td>prefixes</td><td>JSON array of URI prefixes for the locations of s3 files to be ingested.</td><td>None</td><td><code>uris</code> or <code>prefixes</code> must be set</td></tr>
+<tr><td>maxCacheCapacityBytes</td><td>Maximum size of the cache space in bytes. 0 means disabling cache. Cached files are not removed until the ingestion task completes.</td><td>1073741824</td><td>no</td></tr>
+<tr><td>maxFetchCapacityBytes</td><td>Maximum size of the fetch space in bytes. 0 means disabling prefetch. Prefetched files are removed immediately once they are read.</td><td>1073741824</td><td>no</td></tr>
+<tr><td>prefetchTriggerBytes</td><td>Threshold to trigger prefetching s3 objects.</td><td>maxFetchCapacityBytes / 2</td><td>no</td></tr>
+<tr><td>fetchTimeout</td><td>Timeout for fetching an s3 object.</td><td>60000</td><td>no</td></tr>
+<tr><td>maxFetchRetry</td><td>Maximum retry for fetching an s3 object.</td><td>3</td><td>no</td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="staticgoogleblobstorefirehose"></a><a href="#staticgoogleblobstorefirehose" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>StaticGoogleBlobStoreFirehose</h2>
+<p>You need to include the <a href="/docs/25.0.0/development/extensions-core/google.html"><code>druid-google-extensions</code></a> as an extension to use the StaticGoogleBlobStoreFirehose.</p>
+<p>This firehose ingests events, similar to the StaticS3Firehose, but from an Google Cloud Store.</p>
+<p>As with the S3 blobstore, it is assumed to be gzipped if the extension ends in .gz</p>
+<p>This firehose is <em>splittable</em> and can be used by the <a href="/docs/25.0.0/ingestion/native-batch.html">Parallel task</a>.
+Since each split represents an object in this firehose, each worker task of <code>index_parallel</code> will read an object.</p>
+<p>Sample spec:</p>
+<pre><code class="hljs css language-json">"firehose" : {
+    "type" : "static-google-blobstore",
+    "blobs": [
+        {
+          "bucket": "foo",
+          "path": "/path/to/your/file.json"
+        },
+        {
+          "bucket": "bar",
+          "path": "/another/path.json"
+        }
+    ]
+}
+</code></pre>
+<p>This firehose provides caching and prefetching features. In the Simple task, a firehose can be read twice if intervals or
+shardSpecs are not specified, and, in this case, caching can be useful. Prefetching is preferred when direct scan of objects is slow.
+Note that prefetching or caching isn't that useful in the Parallel task.</p>
+<table>
+<thead>
+<tr><th>property</th><th>description</th><th>default</th><th>required?</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td>This should be <code>static-google-blobstore</code>.</td><td>None</td><td>yes</td></tr>
+<tr><td>blobs</td><td>JSON array of Google Blobs.</td><td>None</td><td>yes</td></tr>
+<tr><td>maxCacheCapacityBytes</td><td>Maximum size of the cache space in bytes. 0 means disabling cache. Cached files are not removed until the ingestion task completes.</td><td>1073741824</td><td>no</td></tr>
+<tr><td>maxFetchCapacityBytes</td><td>Maximum size of the fetch space in bytes. 0 means disabling prefetch. Prefetched files are removed immediately once they are read.</td><td>1073741824</td><td>no</td></tr>
+<tr><td>prefetchTriggerBytes</td><td>Threshold to trigger prefetching Google Blobs.</td><td>maxFetchCapacityBytes / 2</td><td>no</td></tr>
+<tr><td>fetchTimeout</td><td>Timeout for fetching a Google Blob.</td><td>60000</td><td>no</td></tr>
+<tr><td>maxFetchRetry</td><td>Maximum retry for fetching a Google Blob.</td><td>3</td><td>no</td></tr>
+</tbody>
+</table>
+<p>Google Blobs:</p>
+<table>
+<thead>
+<tr><th>property</th><th>description</th><th>default</th><th>required?</th></tr>
+</thead>
+<tbody>
+<tr><td>bucket</td><td>Name of the Google Cloud bucket</td><td>None</td><td>yes</td></tr>
+<tr><td>path</td><td>The path where data is located.</td><td>None</td><td>yes</td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="hdfsfirehose"></a><a href="#hdfsfirehose" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>HDFSFirehose</h2>
+<p>You need to include the <a href="/docs/25.0.0/development/extensions-core/hdfs.html"><code>druid-hdfs-storage</code></a> as an extension to use the HDFSFirehose.</p>
+<p>This firehose ingests events from a predefined list of files from the HDFS storage.
+This firehose is <em>splittable</em> and can be used by the <a href="/docs/25.0.0/ingestion/native-batch.html">Parallel task</a>.
+Since each split represents an HDFS file, each worker task of <code>index_parallel</code> will read files.</p>
+<p>Sample spec:</p>
+<pre><code class="hljs css language-json">"firehose" : {
+    "type" : "hdfs",
+    "paths": "/foo/bar,/foo/baz"
+}
+</code></pre>
+<p>This firehose provides caching and prefetching features. During native batch indexing, a firehose can be read twice if
+<code>intervals</code> are not specified, and, in this case, caching can be useful. Prefetching is preferred when direct scanning
+of files is slow.
+Note that prefetching or caching isn't that useful in the Parallel task.</p>
+<table>
+<thead>
+<tr><th>Property</th><th>Description</th><th>Default</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td>This should be <code>hdfs</code>.</td><td>none (required)</td></tr>
+<tr><td>paths</td><td>HDFS paths. Can be either a JSON array or comma-separated string of paths. Wildcards like <code>*</code> are supported in these paths.</td><td>none (required)</td></tr>
+<tr><td>maxCacheCapacityBytes</td><td>Maximum size of the cache space in bytes. 0 means disabling cache. Cached files are not removed until the ingestion task completes.</td><td>1073741824</td></tr>
+<tr><td>maxFetchCapacityBytes</td><td>Maximum size of the fetch space in bytes. 0 means disabling prefetch. Prefetched files are removed immediately once they are read.</td><td>1073741824</td></tr>
+<tr><td>prefetchTriggerBytes</td><td>Threshold to trigger prefetching files.</td><td>maxFetchCapacityBytes / 2</td></tr>
+<tr><td>fetchTimeout</td><td>Timeout for fetching each file.</td><td>60000</td></tr>
+<tr><td>maxFetchRetry</td><td>Maximum number of retries for fetching each file.</td><td>3</td></tr>
+</tbody>
+</table>
+<p>You can also ingest from other storage using the HDFS firehose if the HDFS client supports that storage.
+However, if you want to ingest from cloud storage, consider using the service-specific input source for your data storage.
+If you want to use a non-hdfs protocol with the HDFS firehose, you need to include the protocol you want
+in <code>druid.ingestion.hdfs.allowedProtocols</code>. See <a href="/docs/25.0.0/configuration/index.html#hdfs-input-source">HDFS firehose security configuration</a> for more details.</p>
+<h2><a class="anchor" aria-hidden="true" id="localfirehose"></a><a href="#localfirehose" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>LocalFirehose</h2>
+<p>This Firehose can be used to read the data from files on local disk, and is mainly intended for proof-of-concept testing, and works with <code>string</code> typed parsers.
+This Firehose is <em>splittable</em> and can be used by <a href="/docs/25.0.0/ingestion/native-batch.html">native parallel index tasks</a>.
+Since each split represents a file in this Firehose, each worker task of <code>index_parallel</code> will read a file.
+A sample local Firehose spec is shown below:</p>
+<pre><code class="hljs css language-json">{
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"local"</span>,
+    <span class="hljs-attr">"filter"</span> : <span class="hljs-string">"*.csv"</span>,
+    <span class="hljs-attr">"baseDir"</span>: <span class="hljs-string">"/data/directory"</span>
+}
+</code></pre>
+<table>
+<thead>
+<tr><th>property</th><th>description</th><th>required?</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td>This should be &quot;local&quot;.</td><td>yes</td></tr>
+<tr><td>filter</td><td>A wildcard filter for files. See <a href="http://commons.apache.org/proper/commons-io/apidocs/org/apache/commons/io/filefilter/WildcardFileFilter">here</a> for more information.</td><td>yes</td></tr>
+<tr><td>baseDir</td><td>directory to search recursively for files to be ingested.</td><td>yes</td></tr>
+</tbody>
+</table>
+<p><a name="http-firehose"></a></p>
+<h2><a class="anchor" aria-hidden="true" id="httpfirehose"></a><a href="#httpfirehose" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>HttpFirehose</h2>
+<p>This Firehose can be used to read the data from remote sites via HTTP, and works with <code>string</code> typed parsers.
+This Firehose is <em>splittable</em> and can be used by <a href="/docs/25.0.0/ingestion/native-batch.html">native parallel index tasks</a>.
+Since each split represents a file in this Firehose, each worker task of <code>index_parallel</code> will read a file.
+A sample HTTP Firehose spec is shown below:</p>
+<pre><code class="hljs css language-json">{
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"http"</span>,
+    <span class="hljs-attr">"uris"</span>: [<span class="hljs-string">"http://example.com/uri1"</span>, <span class="hljs-string">"http://example2.com/uri2"</span>]
+}
+</code></pre>
+<p>You can only use protocols listed in the <code>druid.ingestion.http.allowedProtocols</code> property as HTTP firehose input sources.
+The <code>http</code> and <code>https</code> protocols are allowed by default. See <a href="/docs/25.0.0/configuration/index.html#http-input-source">HTTP firehose security configuration</a> for more details.</p>
+<p>The below configurations can be optionally used if the URIs specified in the spec require a Basic Authentication Header.
+Omitting these fields from your spec will result in HTTP requests with no Basic Authentication Header.</p>
+<table>
+<thead>
+<tr><th>property</th><th>description</th><th>default</th></tr>
+</thead>
+<tbody>
+<tr><td>httpAuthenticationUsername</td><td>Username to use for authentication with specified URIs</td><td>None</td></tr>
+<tr><td>httpAuthenticationPassword</td><td>PasswordProvider to use with specified URIs</td><td>None</td></tr>
+</tbody>
+</table>
+<p>Example with authentication fields using the DefaultPassword provider (this requires the password to be in the ingestion spec):</p>
+<pre><code class="hljs css language-json">{
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"http"</span>,
+    <span class="hljs-attr">"uris"</span>: [<span class="hljs-string">"http://example.com/uri1"</span>, <span class="hljs-string">"http://example2.com/uri2"</span>],
+    <span class="hljs-attr">"httpAuthenticationUsername"</span>: <span class="hljs-string">"username"</span>,
+    <span class="hljs-attr">"httpAuthenticationPassword"</span>: <span class="hljs-string">"password123"</span>
+}
+</code></pre>
+<p>You can also use the other existing Druid PasswordProviders. Here is an example using the EnvironmentVariablePasswordProvider:</p>
+<pre><code class="hljs css language-json">{
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"http"</span>,
+    <span class="hljs-attr">"uris"</span>: [<span class="hljs-string">"http://example.com/uri1"</span>, <span class="hljs-string">"http://example2.com/uri2"</span>],
+    <span class="hljs-attr">"httpAuthenticationUsername"</span>: <span class="hljs-string">"username"</span>,
+    <span class="hljs-attr">"httpAuthenticationPassword"</span>: {
+        <span class="hljs-attr">"type"</span>: <span class="hljs-string">"environment"</span>,
+        <span class="hljs-attr">"variable"</span>: <span class="hljs-string">"HTTP_FIREHOSE_PW"</span>
+    }
+}
+</code></pre>
+<p>The below configurations can optionally be used for tuning the Firehose performance.
+Note that prefetching or caching isn't that useful in the Parallel task.</p>
+<table>
+<thead>
+<tr><th>property</th><th>description</th><th>default</th></tr>
+</thead>
+<tbody>
+<tr><td>maxCacheCapacityBytes</td><td>Maximum size of the cache space in bytes. 0 means disabling cache. Cached files are not removed until the ingestion task completes.</td><td>1073741824</td></tr>
+<tr><td>maxFetchCapacityBytes</td><td>Maximum size of the fetch space in bytes. 0 means disabling prefetch. Prefetched files are removed immediately once they are read.</td><td>1073741824</td></tr>
+<tr><td>prefetchTriggerBytes</td><td>Threshold to trigger prefetching HTTP objects.</td><td>maxFetchCapacityBytes / 2</td></tr>
+<tr><td>fetchTimeout</td><td>Timeout for fetching an HTTP object.</td><td>60000</td></tr>
+<tr><td>maxFetchRetry</td><td>Maximum retries for fetching an HTTP object.</td><td>3</td></tr>
+</tbody>
+</table>
+<p><a name="segment-firehose"></a></p>
+<h2><a class="anchor" aria-hidden="true" id="ingestsegmentfirehose"></a><a href="#ingestsegmentfirehose" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>IngestSegmentFirehose</h2>
+<p>This Firehose can be used to read the data from existing druid segments, potentially using a new schema and changing the name, dimensions, metrics, rollup, etc. of the segment.
+This Firehose is <em>splittable</em> and can be used by <a href="/docs/25.0.0/ingestion/native-batch.html">native parallel index tasks</a>.
+This firehose will accept any type of parser, but will only utilize the list of dimensions and the timestamp specification.
+A sample ingest Firehose spec is shown below:</p>
+<pre><code class="hljs css language-json">{
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"ingestSegment"</span>,
+    <span class="hljs-attr">"dataSource"</span>: <span class="hljs-string">"wikipedia"</span>,
+    <span class="hljs-attr">"interval"</span>: <span class="hljs-string">"2013-01-01/2013-01-02"</span>
+}
+</code></pre>
+<table>
+<thead>
+<tr><th>property</th><th>description</th><th>required?</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td>This should be &quot;ingestSegment&quot;.</td><td>yes</td></tr>
+<tr><td>dataSource</td><td>A String defining the data source to fetch rows from, very similar to a table in a relational database</td><td>yes</td></tr>
+<tr><td>interval</td><td>A String representing the ISO-8601 interval. This defines the time range to fetch the data over.</td><td>yes</td></tr>
+<tr><td>dimensions</td><td>The list of dimensions to select. If left empty, no dimensions are returned. If left null or not defined, all dimensions are returned.</td><td>no</td></tr>
+<tr><td>metrics</td><td>The list of metrics to select. If left empty, no metrics are returned. If left null or not defined, all metrics are selected.</td><td>no</td></tr>
+<tr><td>filter</td><td>See <a href="/docs/25.0.0/querying/filters.html">Filters</a></td><td>no</td></tr>
+<tr><td>maxInputSegmentBytesPerTask</td><td>Deprecated. Use <a href="/docs/25.0.0/ingestion/native-batch.html#segments-split-hint-spec">Segments Split Hint Spec</a> instead. When used with the native parallel index task, the maximum number of bytes of input segments to process in a single task. If a single segment is larger than this number, it will be processed by itself in a single task (input segments are never split across tasks). Defaults to 150MB.</td><td>no</td></tr>
+</tbody>
+</table>
+<p><a name="sql-firehose"></a></p>
+<h2><a class="anchor" aria-hidden="true" id="sqlfirehose"></a><a href="#sqlfirehose" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>SqlFirehose</h2>
+<p>This Firehose can be used to ingest events residing in an RDBMS. The database connection information is provided as part of the ingestion spec.
+For each query, the results are fetched locally and indexed.
+If there are multiple queries from which data needs to be indexed, queries are prefetched in the background, up to <code>maxFetchCapacityBytes</code> bytes.
+This Firehose is <em>splittable</em> and can be used by <a href="/docs/25.0.0/ingestion/native-batch.html">native parallel index tasks</a>.
+This firehose will accept any type of parser, but will only utilize the list of dimensions and the timestamp specification. See the extension documentation for more detailed ingestion examples.</p>
+<p>Requires one of the following extensions:</p>
+<ul>
+<li><a href="/docs/25.0.0/development/extensions-core/mysql.html">MySQL Metadata Store</a>.</li>
+<li><a href="/docs/25.0.0/development/extensions-core/postgresql.html">PostgreSQL Metadata Store</a>.</li>
+</ul>
+<pre><code class="hljs css language-json">{
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"sql"</span>,
+    <span class="hljs-attr">"database"</span>: {
+        <span class="hljs-attr">"type"</span>: <span class="hljs-string">"mysql"</span>,
+        <span class="hljs-attr">"connectorConfig"</span>: {
+            <span class="hljs-attr">"connectURI"</span>: <span class="hljs-string">"jdbc:mysql://host:port/schema"</span>,
+            <span class="hljs-attr">"user"</span>: <span class="hljs-string">"user"</span>,
+            <span class="hljs-attr">"password"</span>: <span class="hljs-string">"password"</span>
+        }
+     },
+    <span class="hljs-attr">"sqls"</span>: [<span class="hljs-string">"SELECT * FROM table1"</span>, <span class="hljs-string">"SELECT * FROM table2"</span>]
+}
+</code></pre>
+<table>
+<thead>
+<tr><th>property</th><th>description</th><th>default</th><th>required?</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td>This should be &quot;sql&quot;.</td><td></td><td>Yes</td></tr>
+<tr><td>database</td><td>Specifies the database connection details. The database type corresponds to the extension that supplies the <code>connectorConfig</code> support. The specified extension must be loaded into Druid:<br/><br/><ul><li><a href="/docs/25.0.0/development/extensions-core/mysql.html">mysql-metadata-storage</a> for <code>mysql</code></li><li> <a href="/docs/25.0.0/development/extensions-core/postgresql.html">postgresql-metadata-storage</a> extension for <code>postgresql</code>.</li></ul><br/><br/>You can selectively allow JDBC properties in <code>connectURI</code>. See <a href="/docs/25.0.0/configuration/index.html#jdbc-connections-to-external-databases">JDBC connections security config</a> for more details.</td><td></td><td>Yes</td></tr>
+<tr><td>maxCacheCapacityBytes</td><td>Maximum size of the cache space in bytes. 0 means disabling cache. Cached files are not removed until the ingestion task completes.</td><td>1073741824</td><td>No</td></tr>
+<tr><td>maxFetchCapacityBytes</td><td>Maximum size of the fetch space in bytes. 0 means disabling prefetch. Prefetched files are removed immediately once they are read.</td><td>1073741824</td><td>No</td></tr>
+<tr><td>prefetchTriggerBytes</td><td>Threshold to trigger prefetching SQL result objects.</td><td>maxFetchCapacityBytes / 2</td><td>No</td></tr>
+<tr><td>fetchTimeout</td><td>Timeout for fetching the result set.</td><td>60000</td><td>No</td></tr>
+<tr><td>foldCase</td><td>Toggle case folding of database column names. This may be enabled in cases where the database returns case insensitive column names in query results.</td><td>false</td><td>No</td></tr>
+<tr><td>sqls</td><td>List of SQL queries where each SQL query would retrieve the data to be indexed.</td><td></td><td>Yes</td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="database"></a><a href="#database" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Database</h3>
+<table>
+<thead>
+<tr><th>property</th><th>description</th><th>default</th><th>required?</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td>The type of database to query. Valid values are <code>mysql</code> and <code>postgresql</code>_</td><td></td><td>Yes</td></tr>
+<tr><td>connectorConfig</td><td>Specify the database connection properties via <code>connectURI</code>, <code>user</code> and <code>password</code></td><td></td><td>Yes</td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="inlinefirehose"></a><a href="#inlinefirehose" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>InlineFirehose</h2>
+<p>This Firehose can be used to read the data inlined in its own spec.
+It can be used for demos or for quickly testing out parsing and schema, and works with <code>string</code> typed parsers.
+A sample inline Firehose spec is shown below:</p>
+<pre><code class="hljs css language-json">{
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"inline"</span>,
+    <span class="hljs-attr">"data"</span>: <span class="hljs-string">"0,values,formatted\n1,as,CSV"</span>
+}
+</code></pre>
+<table>
+<thead>
+<tr><th>property</th><th>description</th><th>required?</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td>This should be &quot;inline&quot;.</td><td>yes</td></tr>
+<tr><td>data</td><td>Inlined data to ingest.</td><td>yes</td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="combiningfirehose"></a><a href="#combiningfirehose" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>CombiningFirehose</h2>
+<p>This Firehose can be used to combine and merge data from a list of different Firehoses.</p>
+<pre><code class="hljs css language-json">{
+    "type": "combining",
+    "delegates": [ { firehose1 }, { firehose2 }, ... ]
+}
+</code></pre>
+<table>
+<thead>
+<tr><th>property</th><th>description</th><th>required?</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td>This should be &quot;combining&quot;</td><td>yes</td></tr>
+<tr><td>delegates</td><td>List of Firehoses to combine data from</td><td>yes</td></tr>
+</tbody>
+</table>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/25.0.0/querying/select-query.html"><span class="arrow-prev">← </span><span>Select</span></a><a class="docs-next button" href="/docs/25.0.0/ingestion/native-batch-simple-task.html"><span>Native batch (simple)</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#statics3firehose">StaticS3Firehose</a></li><li><a href="#staticgoogleblobstorefirehose">StaticGoogleBlobStoreFirehose</a></li><li><a href="#hdfsfirehose">HDFSFirehose</a></li><li><a href="#localfirehose">LocalFirehose</a></li><li><a href="#httpfirehose">HttpFirehose</a></li><li><a href="#ingestsegmentfirehose">IngestSegmentFirehose</a></li><li><a href="#sqlfirehose">SqlFirehose</a><ul class="toc-headings"><li><a href="#database">Database</a></li></ul></li><li><a href="#inlinefirehose">InlineFirehose</a></li><li><a href="#combiningfirehose">CombiningFirehose</a></li></ul></nav></div><footer class="nav-footer druid-footer" id="footer"><div class="container"><div class="text-center"><p><a href="/technology">Technology</a> · <a href="/use-cases">Use Cases</a> · <a href="/druid-powered">Powered by Druid</a> · <a href="/docs/25.0.0/">Docs</a> · <a href="/community/">Community</a> · <a href="/downloads.html">Download</a> · <a href="/faq">FAQ</a></p></div><div class="text-center"><a title="Join the user group" href="https://groups.google.com/forum/#!forum/druid-user" target="_blank"><span class="fa fa-comments"></span></a> · <a title="Follow Druid" href="https://twitter.com/druidio" target="_blank"><span class="fab fa-twitter"></span></a> · <a title="Download via Apache" href="https://www.apache.org/dyn/closer.cgi?path=/incubator/druid/{{ site.druid_versions[0].versions[0].version }}/apache-druid-{{ site.druid_versions[0].versions[0].version }}-bin.tar.gz" target="_blank"><span class="fas fa-feather"></span></a> · <a title="GitHub" href="https://github.com/apache/druid" target="_blank"><span class="fab fa-github"></span></a></div><div class="text-center license">Copyright © 2022 <a href="https://www.apache.org/" target="_blank">Apache Software Foundation</a>.<br/>Except where otherwise noted, licensed under <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.<br/>Apache Druid, Druid, and the Druid logo are either registered trademarks or trademarks of The Apache Software Foundation in the United States and other countries.</div></div></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                appId: 'CPK9PMSCEY',
+                apiKey: 'd4ef4ffe3a2f0c7d1e34b062fd98736b',
+                indexName: 'apache_druid',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["language:en","version:25.0.0"]}
+              });
+            </script></body></html>
