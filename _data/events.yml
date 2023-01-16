@@ -22,7 +22,7 @@
   name: "Virtual Office Hours"
   info: Apache Druid® Meetup Americas (Bay Area) by Imply
   link: https://www.meetup.com/druidio/events/290102018/
-
+  
 - date: 2023-01-05
   name: "Virtual Drop-in"
   info: Apache Druid® Meetup Asia (Bangalore) by Imply
@@ -32,6 +32,11 @@
   name: "Virtual Drop-in"
   info: Apache Druid® Meetup Europe (London) by Imply
   link: https://www.meetup.com/apache-druid-london/events/290038185/
+  
+- date: 2023-01-13
+  name: "Apache Druid Virtual Office Hours (Americas)"
+  info: Apache Druid Meetup by Imply
+  link: https://www.meetup.com/druidio/events/290102051/
 
 - date: 2023-01-25
   name: "Virtual Drop-in"

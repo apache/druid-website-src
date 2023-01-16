@@ -203,6 +203,15 @@ Our talk from FlinkForward conference in Berlin 2019:
 
 * [Real-time Stream Analytics and User Scoring Using Apache Druid, Flink & Cassandra at Deep.BI](https://medium.com/deep-bi/real-time-stream-analytics-and-user-scoring-using-apache-druid-flink-cassandra-at-deep-bi-38e5dc40958d) (Hisham Itani), *Medium*, 24 Mar 2020.
 
+## Deema.agency
+
+Deema Agency Delivers Results
+As a leading digital advertising agency in Iran, we design, run and optimize performance and awareness-based digital campaigns for businesses and help them to achieve their goals. With state of the art programmatic advertising technology, extensive ad network, and advanced advertising platforms, we deliver your brand message to your target audience in Iran in the most effective way .
+We are challenging with the intensive data stream realtime for analytics and better experience with data-driven insights. 
+Druid powers our applications related metrics and helps us slice and dice analytics on both historical and realtime metrics.
+
+[Deema.agency](https://deema.agency)
+
 ## Delta Projects
 
 [Delta Projects](https://www.deltaprojects.com) uses Druid to power real-time audience and advertising analytics interfaces.
@@ -510,7 +519,7 @@ Nielsen Marketing Cloud uses Druid as it's core real-time analytics tool to help
 
 ## Nodex
 
-[Nodex](https://www.nodex.co.uk) uses Druid in its real time analytics pipeline to deliver insights and analytics across a wide range of recruitment CRM software, Job boards and recruitment career portals. We ingest large amounts of data and needed something capable of real time metrics to offer KPI's to our clients to allow them to make better business decisions based on actual usage data.
+[Nodex](https://www.nodex.co.uk/services/recruitment-crm-software) uses Druid in its real time analytics pipeline to deliver insights and analytics across a wide range of recruitment CRM software, Job boards and recruitment career portals. We ingest large amounts of data and needed something capable of real time metrics to offer KPI's to our clients to allow them to make better business decisions based on actual usage data.
 
 ## Noon
 
@@ -813,6 +822,12 @@ Learn more about TrafficGuard’s comprehensive fraud mitigation at (https://www
 
 * [Using Druid to fight ad fraud](https://imply.io/post/using-druid-to-fight-ad-fraud)
 
+## Travelmykashmir
+
+[Travelmykashmir](https://www.travelmykashmir.com/)is a reliable cab and [bike rental service in Srinagar](https://www.bikerentalsrinagar.com
+). We offer you comfortable, well-maintained cabs and bikes for your local or long distance travel. If you are looking for safe, secure and comfortable journey 
+in the city then book a cab with us.
+
 ## Trendyol.com - Alibaba Group Company
 
 Trendyol, which is the largest e-commerce company in Turkey, uses Druid for real-time analytics. It is mostly used for providing insights to their suppliers.
@@ -970,6 +985,5 @@ Zilingo's data collection infrastructure, processing pipeline and analytics stac
 ## Zuoyebang
 
 [Zuoyebang](https://www.zybang.com/) is the most used K12 education platform, 7 out of every 10 K12 users are using Zuoyebang. At Zuoyebang Data Platform Group, we use the Druid in the advertising scene,  mainly related to advertising display, click, billing, and other functions. The performance and timeliness of druid can meet our OLAP queries very well.
-
 
 [Add Your Company](https://github.com/apache/druid-website-src/blob/master/druid-powered.md)

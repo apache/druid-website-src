@@ -18,6 +18,8 @@ The latest Apache Druid stable release is {{ release.version }}.
 * Release date: {{ release.date | date: "%b %e %Y" }}
 * Binary download: [apache-druid-{{ release.version }}-bin.tar.gz](https://www.apache.org/dyn/closer.cgi?path=/druid/{{ release.version }}/apache-druid-{{ release.version }}-bin.tar.gz) ([sha512](https://www.apache.org/dist/druid/{{ release.version }}/apache-druid-{{ release.version }}-bin.tar.gz.sha512), [pgp](https://www.apache.org/dist/druid/{{ release.version }}/apache-druid-{{ release.version }}-bin.tar.gz.asc))
 * Source download: [apache-druid-{{ release.version }}-src.tar.gz](https://www.apache.org/dyn/closer.cgi?path=/druid/{{ release.version }}/apache-druid-{{ release.version }}-src.tar.gz) ([sha512](https://www.apache.org/dist/druid/{{ release.version }}/apache-druid-{{ release.version }}-src.tar.gz.sha512), [pgp](https://www.apache.org/dist/druid/{{ release.version }}/apache-druid-{{ release.version }}-src.tar.gz.asc))
+* Hadoop3 compatible artifacts (use these only if you use Hadoop3 with your Druid cluster):
+  * Binary download: [apache-druid-{{ release.version }}-hadoop3-bin.tar.gz](https://www.apache.org/dyn/closer.cgi?path=/druid/{{ release.version }}/apache-druid-{{ release.version }}-hadoop3-bin.tar.gz) ([sha512](https://www.apache.org/dist/druid/{{ release.version }}/apache-druid-{{ release.version }}-hadoop3-bin.tar.gz.sha512), [pgp](https://www.apache.org/dist/druid/{{ release.version }}/apache-druid-{{ release.version }}-hadoop3-bin.tar.gz.asc))
 * Release notes: [{{ release.version }}](https://github.com/apache/druid/releases/tag/druid-{{ release.version }})
 {% endfor %}
 {% endfor %}
