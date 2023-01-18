@@ -5,7 +5,7 @@ https://druid.apache.org/
 
 ## Building
 
-The site requires [Node](https://nodejs.org/en/) 10.24.1 - ensure that you use this version of node. For example, using, if you're using [nvm](https://github.com/nvm-sh/nvm):
+The site requires [Node](https://nodejs.org/en/) 10.24.1 - ensure that you use this version of node. For example, if you're using [nvm](https://github.com/nvm-sh/nvm):
 
 ```
 nvm install 10
