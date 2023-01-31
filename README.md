@@ -5,6 +5,13 @@ https://druid.apache.org/
 
 ## Building
 
+The site requires [Node](https://nodejs.org/en/) 10.24.1 - ensure that you use this version of node. For example, if you're using [nvm](https://github.com/nvm-sh/nvm):
+
+```
+nvm install 10
+nvm use 10
+```
+
 Setup (you only need to do this once):
 
 ```
