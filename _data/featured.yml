@@ -1,3 +1,9 @@
+  - date: 2023-01-22
+    title: "Apache Druid: Data Lifecycle Management"
+    name: "Hellmar Becker"
+    link: https://blog.hellmar-becker.de/2023/01/22/apache-druid-data-lifecycle-management/
+    company: Imply
+    
   - date: 2022-03-20
     title: "Druid Data Cookbook: Quantiles in Druid with Data Sketches"
     name: "Hellmar Becker"
