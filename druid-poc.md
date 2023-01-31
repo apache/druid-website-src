@@ -26,7 +26,6 @@ canonical: 'https://druid.apache.org/druid-poc'
 - [Appendix](#appendix)
   - [Community Resources](#community-resources)
   - [Training](#training)
-  - [What is Imply](#what-is-imply)
 
 # Introduction
 
@@ -321,17 +320,10 @@ If you would like to hear more about any aspect of this process, book time with 
 
 ## Training
 
-Imply offers an [Imply Faculty with a catalog of courses ](https://learn.imply.io/)and labs for Apache® Druid. To accelerate your POC implementation and get the most out of Druid, we recommend that you take advantage of these course offerings:
+To accelerate your POC implementation and get the most out of Druid, we recommend that you take advantage of these course offerings:
 
 
 
 * [Druid Basics](https://learn.imply.io/apache-druid-basics)
 * [Druid Data Modeling & Ingestion ](https://learn.imply.io/apache-druid-ingestion-and-data-modeling)
 * [Multi-stage Query Framework Basics](https://learn.imply.io/feature-preview-multi-stage-query-framework-basics)
-
-
-## What is Imply
-
-[Imply](https://imply.io/) was founded by the creators of Druid to help developers, analysts, architects, and others in the Druid community get more from the database. Many of Imply’s employees are active contributors to open source projects, including Apache® Druid. Imply has sponsored this document because we are passionate about helping developers be successful with Apache® Druid.
-
-One easy way to get started with Druid is [Imply Polaris](https://imply.io/polaris-signup/), a fully-managed Druid-as-a-Service. A free trial gets you a ready-to-use Druid environment in under 5 minutes.
