@@ -1,54 +1,29 @@
-- date: 2022-12-13
-  name: "How to build a real time analytics pipeline with Apache Kafka ksqlDB & Apache Druid"
-  info: Berlin Stream Processing Meetup
-  link: https://www.meetup.com/berlin-stream-processing-meetup-group/events/288457475
-
-- date: 2022-12-14
-  name: "What’s New with Apache Druid with Sergio Ferragut"
-  info: Apache Druid Meetup by Imply
-  link: https://www.meetup.com/druidio/events/290241696/
-
-- date: 2022-12-14
+- date: 2023-02-08
   name: "Virtual Drop-in (Europe)"
-  info: Apache Druid Meetup Europe (London) by Imply
-  link: https://www.meetup.com/apache-druid-london/events/290021436/
-
-- date: 2022-12-15
-  name: "Utilizing Apache Druid as a feature store to leverage ML pipeline"
-  info: Druid Seoul Meetup
-  link: https://www.meetup.com/ko-KR/druid-seoul/events/290013027/
-
-- date: 2022-12-16
-  name: "Virtual Office Hours"
-  info: Apache Druid Meetup Americas (Bay Area) by Imply
-  link: https://www.meetup.com/druidio/events/290102018/
-  
-- date: 2023-01-05
-  name: "Virtual Drop-in"
-  info: Apache Druid Meetup Asia (Bangalore) by Imply
-  link: https://www.meetup.com/bangalore-druid-meetup-group/events/290191715/
-
-- date: 2023-01-11
-  name: "Virtual Drop-in"
-  info: Apache Druid Meetup Europe (London) by Imply
-  link: https://www.meetup.com/apache-druid-london/events/290038185/
-  
-- date: 2023-01-13
-  name: "Apache Druid Virtual Office Hours (Americas)"
   info: Apache Druid Meetup by Imply
-  link: https://www.meetup.com/druidio/events/290102051/
+  link: https://www.meetup.com/apache-druid-london/events/290038246/
 
-- date: 2023-01-25
-  name: "Virtual Drop-in"
-  info: Apache Druid Meetup Europe (London) by Imply
-  link: https://www.meetup.com/apache-druid-london/events/290038227/
+- date: 2023-02-08
+  name: "What's New with Apache Druid"
+  info: Apache Druid Meetup by Imply
+  link: https://www.meetup.com/druidio/events/291307729/
 
-- date: 2023-01-26
-  name: "Real Time Analytics with Kafka & Druid"
-  info: Apache Druid Meetup Europe (London) by Imply
-  link: https://www.meetup.com/apache-druid-london/events/290851066/
+- date: 2023-02-10
+  name: "Virtual Drop-in (Americas)"
+  info: Apache Druid Meetup by Imply
+  link: https://www.meetup.com/druidio/events/290102358/
 
-- date: 2023-01-27
-  name: "Virtual Office Hours"
-  info: Apache Druid Meetup Americas (Bay Area) by Imply
-  link: https://www.meetup.com/druidio/events/290102175/
+- date: 2023-02-22
+  name: "Virtual Drop-in (Europe)"
+  info: Apache Druid Meetup by Imply
+  link: https://www.meetup.com/apache-druid-london/events/290038282/
+
+- date: 2023-02-22
+  name: "What's New with Apache Druid"
+  info: Apache Druid Meetup by Imply
+  link: https://www.meetup.com/druidio/events/291307779/
+
+- date: 2023-02-24
+  name: "Virtual Drop-in (Americas)"
+  info: Apache Druid Meetup by Imply
+  link: https://www.meetup.com/druidio/events/290102388/
