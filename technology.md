@@ -5,181 +5,70 @@ sectionid: technology
 canonical: 'https://druid.apache.org/technology'
 ---
 
-Apache Druid is an open source distributed data store.
-Druid’s core design combines ideas from [data warehouses](https://en.wikipedia.org/wiki/Data_warehouse), [timeseries databases](https://en.wikipedia.org/wiki/Time_series_database), and [search systems](https://en.wikipedia.org/wiki/Full-text_search) to create a high performance real-time analytics database for a broad range of [use cases](/use-cases). Druid merges key characteristics of each of the 3 systems into its ingestion layer, storage format, querying layer, and core architecture.
-
-<div class="image-large">
-  <img src="img/diagram-2.png" style="max-width: 360px">
-</div>
-
-
-Key features of Druid include:
-
-<div class="features">
-  <div class="feature">
-    <span class="fa fa-columns fa"></span>
-    <h5>Column-oriented storage</h5>
-    <p>
-      Druid stores and compresses each column individually, and only needs to read the ones needed for a particular query, which supports fast scans, rankings, and groupBys.
-    </p>
-  </div>
-  <div class="feature">
-    <span class="fa fa-search fa"></span>
-    <h5>Native search indexes</h5>
-    <p>
-      Druid creates inverted indexes for string values for fast search and filter.
-    </p>
-  </div>
-  <div class="feature">
-    <span class="fa fa-tint fa"></span>
-    <h5>Streaming and batch ingest</h5>
-    <p>
-      Out-of-the-box connectors for Apache Kafka, HDFS, AWS S3, stream processors, and more.
-    </p>
-  </div>
-  <div class="feature">
-    <span class="fa fa-stream fa"></span>
-    <h5>Flexible schemas</h5>
-    <p>
-      Druid gracefully handles evolving schemas and <a href="/docs/latest/ingestion/data-formats.html#flattenspec">nested data</a>.
-    </p>
-  </div>
-  <div class="feature">
-    <span class="fa fa-clock fa"></span>
-    <h5>Time-optimized partitioning</h5>
-    <p>
-      Druid intelligently partitions data based on time and time-based queries are significantly faster than traditional databases.
-    </p>
-  </div>
-  <div class="feature">
-    <span class="fa fa-align-left fa"></span>
-    <h5>SQL support</h5>
-    <p>
-      In addition to its native <a href="/docs/latest/querying/querying">JSON based language</a>, Druid speaks <a href="/docs/latest/querying/sql">SQL</a> over either HTTP or JDBC.
-    </p>
-  </div>
-  <div class="feature">
-    <span class="fa fa-expand fa"></span>
-    <h5>Horizontal scalability</h5>
-    <p>
-      Druid has been <a href="druid-powered">used in production</a> to ingest millions of events/sec, retain years of data, and provide sub-second queries.
-    </p>
-  </div>
-  <div class="feature">
-    <span class="fa fa-balance-scale fa"></span>
-    <h5>Easy operation</h5>
-    <p>
-      Scale up or down by just adding or removing servers, and Druid automatically rebalances. Fault-tolerant architecture routes around server failures.
-    </p>
-  </div>
-</div>
-
-## Integration
-
-Druid is complementary to many open source data technologies in the [Apache Software Foundation](https://www.apache.org/) including [Apache Kafka](https://kafka.apache.org/), [Apache Hadoop](https://hadoop.apache.org/), [Apache Flink](https://flink.apache.org/), and more.
-
-Druid typically sits between a storage or processing layer and the end user, and acts as a query layer to serve analytic workloads.
-
-<div class="image-large">
-  <img src="img/diagram-3.png" style="max-width: 580px;">
-</div>
-
-## Ingestion
-
-Druid supports both streaming and batch ingestion.
-Druid connects to a source of raw data, typically a message bus such as Apache Kafka (for streaming data loads), or a distributed filesystem such as HDFS (for batch data loads).
-
-Druid converts raw data stored in a source to a more read-optimized format (called a Druid “segment”) in a process calling “indexing”.
-
-<div class="image-large">
-  <img src="img/diagram-4.png" style="max-width: 580px;">
-</div>
-
-For more information, please visit [our docs page](/docs/latest/ingestion/index.html).
-
-## Storage
-
-Like many analytic data stores, Druid stores data in columns.
-Depending on the type of column (string, number, etc), different compression and encoding methods are applied.
-Druid also builds different types of indexes based on the column type.
-
-Similar to search systems, Druid builds inverted indexes for string columns for fast search and filter.
-Similar to timeseries databases, Druid intelligently partitions data by time to enable fast time-oriented queries.
-
-Unlike many traditional systems, Druid can optionally pre-aggregate data as it is ingested.
-This pre-aggregation step is known as [rollup](/docs/latest/tutorials/tutorial-rollup.html), and can lead to dramatic storage savings.
-
-<div class="image-large">
-  <img src="img/diagram-5.png" style="max-width: 800px;">
-</div>
-
-For more information, please visit [our docs page](/docs/latest/design/segments.html).
-
-## Querying
-
-Druid supports querying data through [JSON-over-HTTP](/docs/latest/querying/querying) and [SQL](/docs/latest/querying/sql).
-In addition to standard SQL operators, Druid supports unique operators that leverage its suite of approximate algorithms to provide rapid counting, ranking, and quantiles.
-
-<div class="image-large">
-  <img src="img/diagram-6.png" style="max-width: 580px;">
-</div>
-
-For more information, please visit [our docs page](/docs/latest/querying/querying.html).
+Apache Druid is used to power real-time analytics applications that require fast queries at scale and under load on streaming and batch data. Druid features a unique distributed architecture across its ingestion, storage, and query layer to handle the scale needed for large aggregations with the performance needed for applications.
 
 ## Architecture
-
-Druid has a microservice-based architecture can be thought of as a disassembled database.
-Each core service in Druid (ingestion, querying, and coordination) can be separately or jointly deployed on commodity hardware.
-
-Druid explicitly names every main service to allow the operator to fine tune each service based on the use case and workload.
-For example, an operator can dedicate more resources to Druid’s ingestion service while giving less resources to Druid’s query service if the workload requires it.
-
-Druid services can independently fail without impacting the operations of other services.
 
 <div class="image-large">
   <img src="img/diagram-7.png" style="max-width: 800px;">
 </div>
 
+Druid is a services-based architecture that consists of independently scalable services for ingestion, querying, and orchestration, each of which can be fine-tuned to optimize cluster resources for mixed use cases and workloads. For example, more resources can be directed to Druid’s query service while providing less resources to ingestion as workloads change.  Druid services can fail without impact on the operations of other services.
+
+A Druid deployment is a scalable cluster of commodity hardware with node types that serve specific functions.  In a small configuration, all of these nodes can run together on a single server (or even a laptop). For larger deployments, one or more servers are dedicated to each node type and can scale to thousands of nodes for higher throughput requirements.
+
+<ul style="margin-left: 20px;">
+  <li>Master Nodes govern data availability and ingestion</li>
+  <li>Query Nodes accept queries, manage execution across the system, and return the results</li>
+  <li>Data Nodes execute ingestion workloads and queries as well as store queryable data</li>
+</ul>
+
+In addition, Druid utilizes a deep storage layer - cloud object storage or HDFS - that contains an additional copy of each data segment. It enables background data movement between Druid processes and also provides a highly durable data source to recover from system failures.
+
 For more information, please visit [our docs page](/docs/latest/design/index.html).
 
-## Operations
+## Ingestion Layer
 
-Druid is designed to power applications that need to be up 24 hours a day, 7 days a week.
-As such, Druid possesses several features to ensure uptime and no data loss.
+In Druid, ingestion, sometimes called indexing, is loading data into tables. Druid reads data from source systems, whether files or streams, and stores the data in segments.
 
-<div class="features">
-  <div class="feature">
-    <span class="fa fa-clone fa"></span>
-    <h5>Data replication</h5>
-    <p>
-      All data in Druid is replicated a configurable number of times so single server failures have no impact on queries.
-    </p>
-  </div>
-  <div class="feature">
-    <span class="fa fa-th-large fa"></span>
-    <h5>Independent services</h5>
-    <p>
-      Druid explicitly names all of its main services and each service can be fine tuned based on use case.
-      Services can independently fail without impacting other services.
-      For example, if the ingestion services fails, no new data is loaded in the system, but existing data remains queryable.
-    </p>
-  </div>
-  <div class="feature">
-    <span class="fa fa-cloud-download-alt fa"></span>
-    <h5>Automatic data backup</h5>
-    <p>
-      Druid automatically backs up all indexed data to a filesystem such as HDFS.
-      You can lose your entire Druid cluster and quickly restore it from this backed up data.
-    </p>
-  </div>
-  <div class="feature">
-    <span class="fa fa-sync-alt fa"></span>
-    <h5>Rolling updates</h5>
-    <p>
-      You can update a Druid cluster with no downtime and no impact to end users through rolling updates.
-      All Druid releases are backwards compatible with the previous version.
-    </p>
-  </div>
+When data is ingested into Druid, it is automatically indexed, partitioned, and, optionally, partially pre-aggregated (known as <a href="https://druid.apache.org/docs/latest/tutorials/tutorial-rollup.html">"rollup"</a>). Compressed bitmap indexes enable fast filtering and searching across multiple columns. Data is partitioned by time and, optionally, by other dimensions.
+
+<div class="image-large">
+  <img alt="Stream Ingestion Layer" src="img/ingestion_layer_stream_batch.png" style="max-width: 580px;">
 </div>
 
-For more information, please visit [our docs page](/docs/latest/operations/basic-cluster-tuning.html).
+<h3>Stream Data</h3>
+Druid was designed from the outset for rapid ingestion and immediate querying of stream data upon delivery.  No connectors are needed as Druid includes inherent exactly-once ingestion for data streams using Apache Kafka® and Amazon Kinesis APIs. Druid’s continuous backup into deep storage also ensures a zero RPO for stream data.
+
+<h3>Batch Data</h3>
+Druid easily ingests data from object stores including HDFS, Amazon S3, Azure Blob, and Google Cloud Storage as well as data files from databases and other sources. The data files can be in a number of common formats, including JSON, CSV, TSV, Parquet, ORC, Avro, and Protobuf. Druid supports both SQL batch import and in-database transformations.
+
+For more information, please visit [our docs page](/docs/latest/ingestion/index.html).
+
+## Storage Format
+
+Druid stores data into segments. Each segment is a single file, typically comprising up to a few million rows of data. Each Druid table can have anywhere from one segment to millions of segments distributed across the cluster.
+
+Within the segments, data storage is column-oriented. Queries only load the specific columns needed for each request. Each column’s storage is optimized by data type, which further improves the performance of scans and aggregations. String columns are stored using compressed dictionary encoding, while numeric columns are stored using compressed raw values.
+
+<div class="image-large">
+  <img alt="Graphical User Interface, Application" src="img/graphical_ui_application_v2.png" style="max-width: 580px;">
+</div>
+
+For more information, please visit [our docs page](/docs/latest/design/segments.html).
+
+## Interactive Queries
+
+Druid's interactive query engine is utilized for performance-sensitive queries. The query engine and storage format were designed together to provide maximum query performance using the fewest resources possible (as well as the best price for performance for mixed workloads). 
+
+With this engine, Druid only reads from segments that are pre-loaded into memory or local storage in the data nodes. This ensures fast performance as data is co-located with computing resources and does not have to move across a network. Data is then queried using scatter/gather for optimal parallelization.
+
+<div class="image-large">
+  <img alt="Interactive Querying Scatter Gather Diagram" src="img/scatter_gather_diagram.png" style="max-width: 580px;">
+</div>
+
+First, the query engine prunes the list of segments, creating a list of which segments are relevant to the query based on time-internals and other filters.  Next, queries are divided into discrete pieces and sent in parallel to the data nodes that are managing each relevant segment or copy of that segment (“scatter”). On the data nodes, the sub-queries are processed and sent back to the query nodes to merge the final result set (“gather”). 
+
+Scatter/gather works from the smallest single server cluster (all of Druid on one server) to clusters with thousands of servers, enabling sub-second performance for most queries even with very large data sets of multiple petabytes.
+
+For more information, please visit [our docs page](/docs/latest/querying/querying.html).
