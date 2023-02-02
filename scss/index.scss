@@ -71,6 +71,18 @@
   }
 }
 
+@media (min-width: 992px) {
+  .card {
+    min-height: 294px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .card {
+    min-height: 230px;
+  }
+}
+
 .key-druid-features { 
   padding-top: 25px;
 }
@@ -103,7 +115,6 @@
     padding-left: 20px;
     padding-bottom: 10px;
     padding-right: 10px;
-    min-height: 245px;
   }
   
   .card .card-header.no-border {
