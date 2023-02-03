@@ -1,3 +1,33 @@
+  - date: 2023-01-27
+    title: "Primary and secondary partitioning"
+    name: "Sergio Ferragut"
+    link: https://imply.io/blog/real-time-analytics-database-uses-partitioning-and-pruning-to-achieve-its-legendary-performance/
+    company: Imply
+
+  - date: 2023-01-27
+    title: "Using Apache Druid for analyzing streaming data"
+    name: "Julia Brouillette"
+    link: https://devops.com/stream-big-think-bigger-analyze-streaming-data-at-scale/
+    company: Imply
+  
+  - date: 2022-12-15
+    title: "Why Confluent analyzes Kafka streams with Druid"
+    name: "Matt Armstrong"
+    link: https://www.youtube.com/watch?v=Bozxc3vP1PA
+    company: Imply
+  
+  - date: 2022-12-14
+    title: "Support for nested JSON columns in Druid"
+    name: "Karthik Kasibhatla"
+    link: https://imply.io/blog/native-support-for-semi-structured-data-in-apache-druid/
+    company: Imply
+
+  - date: 2022-12-02
+    title: "Apache Druid's fit in the modern data stack"
+    name: "David Wang"
+    link: https://imply.io/videos/apache-druids-fit-in-the-modern-data-stack/
+    company: Imply
+
   - date: 2023-01-22
     title: "Apache Druid: Data Lifecycle Management"
     name: "Hellmar Becker"

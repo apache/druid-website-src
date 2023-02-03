@@ -12,7 +12,8 @@ canonical: 'https://druid.apache.org/'
   <div class="container">
   <div class="row">
     <div class="text-center">
-    <p class="lead">Apache Druid is a real-time database to power modern analytics applications.</p>
+    <h1>Apache<sup>®</sup> Druid</h1>
+    <p class="lead">Druid is a high performance, real-time analytics database that delivers sub-second queries on streaming and batch data at scale and under load.</p>
     <p>
       <a class="button" href="/downloads.html"><span class="fa fa-download"></span> Download</a>
       <a class="button" href="/community/join-slack?v=1"><span class="fab fa-slack"></span> Join Slack</a>
@@ -32,41 +33,95 @@ canonical: 'https://druid.apache.org/'
       </h2>
       <div class="features">
         <div class="feature">
-          <span class="fa fa-chart-line fa"></span>
-          <h5>Build fast, modern data analytics applications</h5>
+          <span class="fa fa-bolt"></span>
+          <h5>Sub-second queries at any scale</h5>
           <p>
-            Druid is designed for <a href='/use-cases'>workflows</a> where fast ad-hoc analytics, instant data visibility, or supporting high concurrency is important. As such, Druid is often used to power UIs where an interactive, consistent user experience is desired.
+            Execute OLAP queries in milliseconds on high-cardinality and high-dimensional data sets with billions to trillions of rows without pre-defining or caching queries in advance.
           </p>
         </div>
         <div class="feature">
-          <span class="fa fa-forward fa"></span>
-          <h5>Easy integration with your existing data pipelines</h5>
+          <span class="fa fa-dollar-sign"></span>
+          <h5>High concurrency at the lowest cost </h5>
           <p>
-            Druid streams data from message buses such as <a href='http://kafka.apache.org/'>Kafka</a>, and <a href='https://aws.amazon.com/kinesis/'>Amazon Kinesis</a>, and batch load files from data lakes such as <a href='https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/HdfsUserGuide.html'>HDFS</a>, and <a href='https://aws.amazon.com/s3/'>Amazon S3</a>. Druid supports most popular file formats for structured and semi-structured data.
+            Build real-time analytics applications that supports 100s to 100,000s queries per second at consistent performance with a highly efficient architecture that uses less infrastructure than other databases.
           </p>
         </div>
         <div class="feature">
-          <span class="fa fa-lightbulb fa"></span>
-          <h5>Fast, consistent queries at high concurrency</h5>
+          <span class="fa fa-chart-line"></span>
+          <h5>Real-time and historical insights</h5>
           <p>
-            Druid has been <a href='https://imply.io/post/performance-benchmark-druid-presto-hive'>benchmarked</a> to greatly outperform legacy solutions. Druid combines novel storage ideas, indexing structures, and both exact and approximate queries to return most results in under a second.
-          </p>
-        </div>
-        <div class="feature">
-          <span class="fa fa-unlock fa"></span>
-          <h5>Broad applicability</h5>
-          <p>
-            Druid <a href='/use-cases'>unlocks new types of queries and workflows</a> for clickstream, APM, supply chain, network telemetry, digital marketing, risk/fraud, and many other types of data. Druid is purpose built for rapid, ad-hoc queries on both real-time and historical data.
-          </p>
-        </div>
-        <div class="feature">
-          <span class="fa fa-cloud fa"></span>
-          <h5>Deploy in public, private, and hybrid clouds</h5>
-          <p>
-            Druid can be deployed in any *NIX environment on commodity hardware, both in the cloud and on premise. Deploying Druid is easy: scaling up and down is as simple as adding and removing Druid services.
+            Unlock streaming data potential through Druid's native integration with Apache Kafka and Amazon Kinesis as it supports query-on-arrival at millions of events per second, low latency ingestion, and guaranteed consistency.
           </p>
         </div>
       </div>
+
+      <h2>
+        Key Druid Features
+      </h2>
+      
+      <div class="row key-druid-features">
+        <div class="col-md-4">
+          <div class="card card-margin">
+              <div class="card-header no-border">
+                  <h5 class="card-title">Interactive Query Engine</h5>
+              </div>
+              <div class="card-body pt-0">
+                  <p>Druid utilizes scatter/gather for high speed queries with data preloaded into memory or local storage to avoid data movement and network latency</p>
+              </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card card-margin">
+              <div class="card-header no-border">
+                  <h5 class="card-title">Tiering & QoS</h5>
+              </div>
+              <div class="card-body pt-0">
+                  <p>Configurable tiering with quality of service enables the ideal price-performance for mixed workloads, guarantees priority, and avoids resource contention</p>
+              </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card card-margin">
+              <div class="card-header no-border">
+                  <h5 class="card-title">Optimized Data Format</h5>
+              </div>
+              <div class="card-body pt-0">
+                  <p>Ingested data is automatically columnarized, time indexed, dictionary encoded, bitmap indexed, and type-aware compressed</p>
+              </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card card-margin">
+              <div class="card-header no-border">
+                  <h5 class="card-title">Elastic Architecture</h5>
+              </div>
+              <div class="card-body pt-0">
+                  <p>Loosely coupled components for ingestion, queries and orchestration combined with a deep storage layer enable easy & quick scale-up & scale-out</p>
+              </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card card-margin">
+              <div class="card-header no-border">
+                  <h5 class="card-title">True Stream Ingestion</h5>
+              </div>
+              <div class="card-body pt-0">
+                  <p>A connector-free integration with streaming platforms enables query-on-arrival, high scalability, low latency, and guaranteed consistency</p>
+              </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card card-margin">
+              <div class="card-header no-border">
+                  <h5 class="card-title">Non-stop Reliability</h5>
+              </div>
+              <div class="card-body pt-0">
+                  <p>Automatic data services including continuous backup, automated recovery, and multi-node replication ensure high availability and durability</p>
+              </div>
+          </div>
+        </div>
+      </div>
+      
 
       <h2>
         Learn more
@@ -76,7 +131,7 @@ canonical: 'https://druid.apache.org/'
           <span class="fa fa-power-off fa"></span>
           <h5>Powered By</h5>
           <p>
-            Druid is proven in production at the <a href='/druid-powered'>world’s leading companies</a> at massive scale.
+            Druid is proven in production at the <a href='/druid-powered'>world's leading companies</a> at massive scale.
           </p>
         </div>
         <div class="feature">
@@ -98,6 +153,13 @@ canonical: 'https://druid.apache.org/'
           <h5>Get Help</h5>
           <p>
             Get help from a <a href='/community/'>wide network of community members</a> about using Druid.
+          </p>
+        </div>
+        <div class="feature">
+          <span class="fa fa-podcast fa"></span>
+          <h5>Podcast</h5>
+          <p>
+            Hear from the Druid community on <a href="https://podcasts.apple.com/us/podcast/tales-at-scale/id1655951714">Apple</a>, <a href="https://open.spotify.com/show/6KAKYLJvCVegsFfKvbfDnt">Spotify</a>, and <a href="https://podcasts.google.com/feed/aHR0cHM6Ly9mZWVkcy5saWJzeW4uY29tLzQ0ODE3OS9yc3M">Google</a>.
           </p>
         </div>
       </div>
