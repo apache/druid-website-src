@@ -87,7 +87,7 @@ possible.
 
 ### Testing
 
-All Pull Requests are automatically tested on [Travis CI](https://travis-ci.com/apache/druid) on both AMD64 and ARM64 architectures.
+All Pull Requests are automatically tested through [GitHub Actions](https://github.com/apache/druid/actions) on both AMD64 and ARM64 architectures.
 
 ### Committers
 
