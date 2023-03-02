@@ -822,6 +822,12 @@ Learn more about TrafficGuard’s comprehensive fraud mitigation at (https://www
 
 * [Using Druid to fight ad fraud](https://imply.io/post/using-druid-to-fight-ad-fraud)
 
+## Travel Clan
+
+[Travel Clan](https://www.travelclan.in/) is a premier travel agency located in the scenic city of Srinagar, Kashmir. We offer a comprehensive range of [Kashmir tour packages](https://www.travelclan.in/kashmir-tour-packages/) that cater to the needs and preferences of all kinds of travellers, whether you're looking for adventure, relaxation, or culture. Our packages include everything from transportation and accommodation to sightseeing tours and adventure activities, ensuring that you have a hassle-free and enjoyable vacation.
+
+We also provide [Kashmir Tour Package from Kolkata](https://www.travelclan.in/tour/kashmir-tour-package-from-kolkata/) which includes most of the tourist [Places to visit in Kashmir](https://www.travelclan.in/places-to-visit-in-kashmir/)
+
 ## Travelmykashmir
 
 [Travelmykashmir](https://www.travelmykashmir.com/)is a reliable cab and [bike rental service in Srinagar](https://www.bikerentalsrinagar.com
