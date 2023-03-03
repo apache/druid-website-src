@@ -822,12 +822,6 @@ Learn more about TrafficGuard’s comprehensive fraud mitigation at (https://www
 
 * [Using Druid to fight ad fraud](https://imply.io/post/using-druid-to-fight-ad-fraud)
 
-## Travelmykashmir
-
-[Travelmykashmir](https://www.travelmykashmir.com/)is a reliable cab and [bike rental service in Srinagar](https://www.bikerentalsrinagar.com
-). We offer you comfortable, well-maintained cabs and bikes for your local or long distance travel. If you are looking for safe, secure and comfortable journey 
-in the city then book a cab with us.
-
 ## Trendyol.com - Alibaba Group Company
 
 Trendyol, which is the largest e-commerce company in Turkey, uses Druid for real-time analytics. It is mostly used for providing insights to their suppliers.
