@@ -828,6 +828,8 @@ Learn more about TrafficGuard’s comprehensive fraud mitigation at (https://www
 
 We also provide [Kashmir Tour Package from Kolkata](https://www.travelclan.in/tour/kashmir-tour-package-from-kolkata/) which includes most of the tourist [Places to visit in Kashmir](https://www.travelclan.in/places-to-visit-in-kashmir/)
 
+Travel Clan uses Druid to ingest real-time data from various sources such as hotel booking systems, travel booking portals, and social media platforms to get insights into real-time trends and preferences of our customers. Druid helps us track the operational metrics such as employee productivity, inventory management, and resource utilization to optimize our operations and reduce costs.
+
 ## Travelmykashmir
 
 [Travelmykashmir](https://www.travelmykashmir.com/)is a reliable cab and [bike rental service in Srinagar](https://www.bikerentalsrinagar.com
