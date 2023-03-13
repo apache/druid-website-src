@@ -1,3 +1,9 @@
+  - date: 2023-03-07
+    title: "Selective Bulk Upserts in Apache Druid"
+    name: "Hellmar Becker"
+    link: https://blog.hellmar-becker.de/2023/03/07/selective-bulk-upserts-in-apache-druid/
+    company: Imply
+
   - date: 2023-01-27
     title: "Primary and secondary partitioning"
     name: "Sergio Ferragut"
