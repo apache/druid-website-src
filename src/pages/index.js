@@ -1,5 +1,8 @@
 import Layout from "@theme/Layout";
-      import React from "react";
+import React from "react";
+import { Events } from "../../static/js/events";
+
+
 
       export default () => {
         return (
@@ -157,11 +160,12 @@ import Layout from "@theme/Layout";
               </div>
             </div>
             <div className="col-md-3">
-              {'{'}% include event-list.html %{'}'}
-              {'{'}% include featured-list.html %{'}'}
-              <div className="bottom-news">
-                {'{'}% include news-list.html %{'}'}
-              </div>
+            <h2>Upcoming Events</h2>
+            <Events />
+
+
+
+
             </div>
           </div>
         </div>
