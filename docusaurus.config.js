@@ -57,6 +57,14 @@ module.exports={
       {
         "fromExtensions": [
           "html"
+        ],
+        redirects: [
+
+{
+  "to": "/docs/"+release.urlPath+"/querying/aggregations", 
+"from": "/Aggregations.html"
+},
+
         ]
       }
     ]
