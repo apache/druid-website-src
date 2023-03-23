@@ -1,14 +1,13 @@
 import Layout from "@theme/Layout";
 import React from "react";
 import { Events } from "../../static/js/events";
-
-
+import '../css/index.css';
 
       export default () => {
         return (
-        <Layout title="Apache Druid">;
+        <Layout title="Apache Druid">
       <div>
-        <link rel="stylesheet" href="/css/index.css" />
+        <link rel="stylesheet" href="../css/index.css" />
         <main className="druid-masthead">
           <div className="container">
             <div className="row">
@@ -159,9 +158,10 @@ import { Events } from "../../static/js/events";
                 </div>
               </div>
             </div>
-            <div className="col-md-3">
+            <div className="item-list">
             <h2>Upcoming Events</h2>
             <Events />
+            <a class="btn btn-default btn-xs" href="https://www.meetup.com/topics/apache-druid/">Join a Druid Meetup!</a>
 
 
 

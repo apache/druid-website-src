@@ -77,19 +77,20 @@ module.exports={
       "logo": {
         "src": "img/druid_nav.png"
       },
+      
       "items": [
         {
-          "href": "/technology",
+          "to": "/technology",
           "label": "Technology",
           "position": "right"
         },
         {
-          "href": "/use-cases",
+          "to": "/use-cases",
           "label": "Use Cases",
           "position": "right",
         },
       {
-        "href": "/druid-powered",
+        "to": "/druid-powered",
         "label": "Powered By",
         "position": "right",
     },
