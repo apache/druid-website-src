@@ -8,29 +8,17 @@ export const Events = () => {
 
     <>
 
-      <div className="stock-container">
+      <div>
 
         {eventData.map((data, key) => {
 
           return (
 
             <div key={key}>
-
-              {data.date +
-
-                " , " +
-
-                data.name +
-
-                " ," +
-
-                data.info +
-
-                ", " +
-
-                data.link 
-                }
-
+  <p><b>{data.date}</b></p>
+  <p>{data.name}</p>
+  <p>{data.info}</p>
+  <p><a href={data.link}>Learn more</a></p>
             </div>
 
           );
