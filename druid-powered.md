@@ -805,6 +805,10 @@ Apache Druid’s speed and flexibility allow us to provide interactive analytics
 
 * [Enterprise Scale Analytics Platform Powered by Druid at Target](https://imply.io/virtual-druid-summit/enterprise-scale-analytics-platform-powered-by-druid-at-target) 
 
+## TelemetryDeck Analytics
+
+[TelemetryDeck](https://telemetrydeck.com) helps app and web developers improve their product by supplying immediate, accurate usage data while users use their app. And the best part: It's all anonymized so users' data stays private!
+
 ## Tencent
 
 Tencent SCRM product use Druid for customer behavior analysis.
