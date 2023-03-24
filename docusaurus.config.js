@@ -15,11 +15,9 @@ module.exports={
   "projectName": "ApacheDruid",
   "scripts": [
     "https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js",
-    "/js/code-block-buttons.js"
   ],
   "stylesheets": [
     "https://use.fontawesome.com/releases/v5.7.2/css/all.css",
-    "/css/code-block-buttons.css"
   ],
   "favicon": "img/favicon.png",
   "customFields": {
@@ -77,7 +75,7 @@ module.exports={
       "logo": {
         "src": "img/druid_nav.png"
       },
-      
+      "style": "dark",
       "items": [
         {
           "to": "/technology",
