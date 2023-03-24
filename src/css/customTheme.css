@@ -1,36 +1,9 @@
 :root{
-  --ifm-color-primary-lightest: #242431;
-  --ifm-color-primary-lighter: #20202C;
-  --ifm-color-primary-light: #1F1F2A;
-  --ifm-color-primary: #1C1C26;
-  --ifm-color-primary-dark: #191922;
-  --ifm-color-primary-darker: #181820;
-  --ifm-color-primary-darkest: #14141B;
-}
-
-a {
-  outline: none;
-}
-
-a:link {
-  color: blue;
-}
-
-a:focus {
-  text-decoration: underline ;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-.button {
-  background-color: lightblue;
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
+  --ifm-color-primary-lightest: #1FACFF;
+  --ifm-color-primary-lighter: #009FFD;
+  --ifm-color-primary-light: #0098F2;
+  --ifm-color-primary: #008ADC;
+  --ifm-color-primary-dark: #007CC6;
+  --ifm-color-primary-darker: #0075BB;
+  --ifm-color-primary-darkest: #00619A;
 }
