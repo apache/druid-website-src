@@ -10,5 +10,5 @@ module.exports = {
   date: "Jan 4 2023",
   versionPrevious: "24.0.2",
   datePrevious: "Dec 21 2022",
-  urlPath: "25.0.0",
+  urlPath: "latest",
 };

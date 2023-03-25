@@ -1,13 +1,17 @@
 import Layout from "@theme/Layout";
 import React from "react";
-import { Events } from "../../static/js/events";
+import { CardList } from "../../static/js/features";
+import { FeatureList } from "../../static/js/FeatureList";
+import { EventsContainer } from "../../static/js/EventsWidget";
+import { EventData } from "../../static/js/EventList";
+import { FeaturedContentContainer } from "../../static/js/ContentWidget";
 import '../css/index.css';
+import { Content } from "../../static/js/FeaturedLinks";
 
       export default () => {
         return (
         <Layout title="Apache Druid">
       <div>
-        <link rel="stylesheet" href="../css/index.css" />
         <main className="druid-masthead">
           <div className="container">
             <div className="row">
@@ -55,118 +59,55 @@ import '../css/index.css';
               <h2>
                 Key Druid Features
               </h2>
-              <div className="row key-druid-features">
-                <div className="col-md-4">
-                  <div className="card card-margin">
-                    <div className="card-header no-border">
-                      <h5 className="card-title">Interactive Query Engine</h5>
-                    </div>
-                    <div className="card-body pt-0">
-                      <p>Druid utilizes scatter/gather for high speed queries with data preloaded into memory or local storage to avoid data movement and network latency</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-md-4">
-                  <div className="card card-margin">
-                    <div className="card-header no-border">
-                      <h5 className="card-title">Tiering &amp; QoS</h5>
-                    </div>
-                    <div className="card-body pt-0">
-                      <p>Configurable tiering with quality of service enables the ideal price-performance for mixed workloads, guarantees priority, and avoids resource contention</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-md-4">
-                  <div className="card card-margin">
-                    <div className="card-header no-border">
-                      <h5 className="card-title">Optimized Data Format</h5>
-                    </div>
-                    <div className="card-body pt-0">
-                      <p>Ingested data is automatically columnarized, time indexed, dictionary encoded, bitmap indexed, and type-aware compressed</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-md-4">
-                  <div className="card card-margin">
-                    <div className="card-header no-border">
-                      <h5 className="card-title">Elastic Architecture</h5>
-                    </div>
-                    <div className="card-body pt-0">
-                      <p>Loosely coupled components for ingestion, queries and orchestration combined with a deep storage layer enable easy &amp; quick scale-up &amp; scale-out</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-md-4">
-                  <div className="card card-margin">
-                    <div className="card-header no-border">
-                      <h5 className="card-title">True Stream Ingestion</h5>
-                    </div>
-                    <div className="card-body pt-0">
-                      <p>A connector-free integration with streaming platforms enables query-on-arrival, high scalability, low latency, and guaranteed consistency</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-md-4">
-                  <div className="card card-margin">
-                    <div className="card-header no-border">
-                      <h5 className="card-title">Non-stop Reliability</h5>
-                    </div>
-                    <div className="card-body pt-0">
-                      <p>Automatic data services including continuous backup, automated recovery, and multi-node replication ensure high availability and durability</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <div>
+            <CardList jsonData={FeatureList} />
+            </div>
+            <br />
               <h2>
                 Learn more
               </h2>
               <div className="features">
                 <div className="feature">
-                  <span className="fa fa-power-off fa" />
-                  <h5>Powered By</h5>
+                  <h5><span className="fa fa-power-off fa" /> Powered By</h5>
                   <p>
                     Druid is proven in production at the <a href="/druid-powered">world's leading companies</a> at massive scale.
                   </p>
                 </div>
                 <div className="feature">
-                  <span className="fa fa-info fa" />
-                  <h5>FAQ</h5>
+                  <h5><span className="fa fa-info fa" /> FAQ</h5>
                   <p>
                     Learn about some of the <a href="faq">most common questions about Druid</a>.
                   </p>
                 </div>
                 <div className="feature">
-                  <span className="fa fa-flag-checkered fa" />
-                  <h5>Quickstart</h5>
+                  <h5><span className="fa fa-flag-checkered fa" /> Quickstart</h5>
                   <p>
                     <a href="/docs/tutorials/">Get started with Druid</a> in minutes. Load your own data and query it.
                   </p>
                 </div>
                 <div className="feature">
-                  <span className="fa fa-question-circle fa" />
-                  <h5>Get Help</h5>
+                  <h5><span className="fa fa-question-circle fa" /> Get Help</h5>
                   <p>
                     Get help from a <a href="/community/">wide network of community members</a> about using Druid.
                   </p>
                 </div>
                 <div className="feature">
-                  <span className="fa fa-podcast fa" />
-                  <h5>Podcast</h5>
+                  <h5><span className="fa fa-podcast fa" /> Podcast</h5>
                   <p>
                     Hear from the Druid community on <a href="https://podcasts.apple.com/us/podcast/tales-at-scale/id1655951714">Apple</a>, <a href="https://open.spotify.com/show/6KAKYLJvCVegsFfKvbfDnt">Spotify</a>, and <a href="https://podcasts.google.com/feed/aHR0cHM6Ly9mZWVkcy5saWJzeW4uY29tLzQ0ODE3OS9yc3M">Google</a>.
                   </p>
                 </div>
               </div>
             </div>
-            <div className="item-list">
-            <h2>Upcoming Events</h2>
-            <Events />
-            <a class="btn btn-default btn-xs" href="https://www.meetup.com/topics/apache-druid/">Join a Druid Meetup!</a>
-
-
-
-
+              <div>
+              <h3>
+                Upcoming Events
+              </h3>
+              <a class="btn btn-default btn-xs" href="https://www.meetup.com/topics/apache-druid/">Join a Druid Meetup!</a><br />
+            <EventsContainer jsonData={EventData} />
             </div>
+            <div><h3>Featured Content</h3></div>
+            <FeaturedContentContainer jsonData={Content} />
           </div>
         </div>
       </div>
