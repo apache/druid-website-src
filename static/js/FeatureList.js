@@ -9,7 +9,7 @@ export const FeatureList = [
   },
   {
     "title": "Tiering & QoS",
-    "description": "Druid utilizes scatter/gather for high speed queries with data preloaded into memory or local storage to avoid data movement and network latency</p>",
+    "description": "Druid utilizes scatter/gather for high speed queries with data preloaded into memory or local storage to avoid data movement and network latency",
   },
   {
     "title": "Optimized Data Format",
