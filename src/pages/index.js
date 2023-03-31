@@ -2,11 +2,16 @@ import Layout from "@theme/Layout";
 import React from "react";
 import { CardList } from "../../static/js/features";
 import { FeatureList } from "../../static/js/FeatureList";
+import '../css/index.css';
+
+/* Imports for the 3 widgets on the right for events, content, and releases
+*/
 import { EventsContainer } from "../../static/js/EventsWidget";
 import { EventData } from "../../static/js/EventList";
 import { FeaturedContentContainer } from "../../static/js/ContentWidget";
-import '../css/index.css';
 import { Content } from "../../static/js/FeaturedLinks";
+import { RecentReleasesContainer } from "../../static/js/RecentReleases";
+
 
       export default () => {
         return (
@@ -99,15 +104,20 @@ import { Content } from "../../static/js/FeaturedLinks";
                 </div>
               </div>
             </div>
-              <div>
+              <div class="widget-container">
+              <div class="show-right">
               <h3>
                 Upcoming Events
               </h3>
-              <a class="btn btn-default btn-xs" href="https://www.meetup.com/topics/apache-druid/">Join a Druid Meetup!</a><br />
+              <a class="button" href="https://www.meetup.com/topics/apache-druid/">Join a Druid Meetup!</a><br />
             <EventsContainer jsonData={EventData} />
             </div>
-            <div><h3>Featured Content</h3></div>
+            <div class="widget-right"><h3>Featured Content</h3>
             <FeaturedContentContainer jsonData={Content} />
+            </div>
+            <div clas="widget-right"><h3>Recent releases</h3></div>
+            <RecentReleasesContainer/>
+          </div>
           </div>
         </div>
       </div>
