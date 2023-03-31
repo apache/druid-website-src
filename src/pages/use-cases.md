@@ -39,7 +39,7 @@ Specific use cases include measuring user engagement, tracking A/B test data for
 
 Druid can compute user metrics such as [distinct counts](/docs/latest/querying/aggregations) both exactly and approximately.
 This mean measures such as daily active users can be computed in under a second approximately (with 98% avg. accuracy) to view general trends, or computed exactly to present to key stakeholders.
-Furthermore, Druid can be used for [funnel analysis](/docs/latest/development/extensions-core/datasketches-aggregators), and to measure how many users took one action, but did not take another action.
+Furthermore, Druid can be used for [funnel analysis](/docs/latest/development/extensions-core/datasketches-extension), and to measure how many users took one action, but did not take another action.
 Such analysis is useful is tracking user signups for a product.
 
 Druid’s search and filter capabilities enable rapid, easy drill-downs of users along any set of attributes.
