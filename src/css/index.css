@@ -10,36 +10,46 @@
   background-image: url("/img/watermark-dark.png");
   background-size: 800px auto;
   background-repeat: no-repeat;
-  background-position: 26 -76px; }
-  .druid-masthead .button {
-    display: inline-block;
-    min-width: 155px;
-    margin: 6px;
-    font-size: 1.1em;
-    line-height: 1.4em;
-    font-weight: 600;
-    padding: 9px 12px;
-    border-radius: 2px;
-    background: #9caeff;
-    color: #1C1C26;
-    transition: background-color 0.1s ease; }
-    .druid-masthead .button .fa, .druid-masthead .button .fab {
-      font-size: 16px;
-      margin-right: 3px; }
-    .druid-masthead .button:hover, .druid-masthead .button:active {
-      background: white;
-      text-decoration: none; }
-  .druid-masthead .lead {
-    font-size: 1.7em;
-    line-height: 1.7em;
-    font-weight: 600;
-    margin-top: 8px;
-    margin-bottom: 26px;
-    max-width: 910px;
-    margin-left: auto;
-    margin-right: auto; }
-  .druid-masthead b {
-    font-weight: 700; }
+  background-position: 26 -76px; 
+}
+.druid-masthead .button {
+  display: inline-block;
+  min-width: 155px;
+  margin: 6px;
+  font-size: 1.1em;
+  line-height: 1.4em;
+  font-weight: 600;
+  padding: 9px 12px;
+  border-radius: 2px;
+  background: #9caeff;
+  color: #1C1C26;
+  transition: background-color 0.1s ease; 
+}
+
+.druid-masthead .button .fa, .druid-masthead .button .fab {
+  font-size: 16px;
+  margin-right: 3px; 
+}
+
+.druid-masthead .button:hover, .druid-masthead .button:active {
+  background: white;
+  text-decoration: none; 
+}
+
+.druid-masthead .lead {
+  font-size: 1.7em;
+  line-height: 1.7em;
+  font-weight: 600;
+  margin-top: 8px;
+  margin-bottom: 26px;
+  max-width: 910px;
+  margin-left: auto;
+  margin-right: auto; 
+}
+
+.druid-masthead b {
+  font-weight: 700; 
+}
 
 
 .druid-feature {
@@ -57,27 +67,29 @@
 
 .button {
   position: relative;
-  top:50%;
-  background-color:#0a0a23;
+  background-color:#4460de;
+  border-color: #4460de;
   color: #fff;
-  border:none; 
-  border-radius:10px; 
-  padding:20;
-  min-height:30px; 
-  min-width: 120px;
+  display: inline-block;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding:3px 8px;
 }
 
 .widget-container {
-    position: fixed;
-    right: 0px;
-    padding: 0;
-    margin: 0;
+  margin-top: 6px;
+  padding: 0 10px;
 }
 
-.widget-right {
-  justify-content:space-between;
-  right: 0px;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 20px;
+.widget-container a {
+  display: block;
+  line-height: 1.5em;
+}
+
+.widget-container a:hover {
+  text-decoration: underline;
+}
+
+.cal-icon {
+  padding-right: 7px;
 }

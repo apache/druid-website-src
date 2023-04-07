@@ -12,29 +12,34 @@ import { FeaturedContentContainer } from "../../static/js/ContentWidget";
 import { Content } from "../../static/js/FeaturedLinks";
 import { RecentReleasesContainer } from "../../static/js/RecentReleases";
 
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Container from "react-bootstrap/Container";
 
-      export default () => {
-        return (
-        <Layout title="Apache Druid">
+export default () => {
+  return (
+    <Layout title="Apache Druid">
       <div>
         <main className="druid-masthead">
-          <div className="container">
-            <div className="row">
-              <div className="text-center">
-                <h1>Apache<sup>®</sup> Druid</h1>
-                <p className="lead">Druid is a high performance, real-time analytics database that delivers sub-second queries on streaming and batch data at scale and under load.</p>
-                <p>
-                  <a className="button" href="/downloads.html"><span className="fa fa-download" /> Download</a>
-                  <a className="button" href="/community/join-slack?v=1"><span className="fab fa-slack" /> Join Slack</a>
-                  <a className="button" href="https://github.com/apache/druid/"><span className="fab fa-github" /> GitHub</a></p>
-                <p />
-              </div>
-            </div>
-          </div>
+          <Container >
+            <Row>
+              <Col>
+                <div className="text-center">
+                  <h1>Apache<sup>®</sup> Druid</h1>
+                  <p className="lead">Druid is a high performance, real-time analytics database that delivers sub-second queries on streaming and batch data at scale and under load.</p>
+                  <p>
+                    <a className="button" href="/downloads.html"><span className="fa fa-download" /> Download</a>
+                    <a className="button" href="/community/join-slack?v=1"><span className="fab fa-slack" /> Join Slack</a>
+                    <a className="button" href="https://github.com/apache/druid/"><span className="fab fa-github" /> GitHub</a></p>
+                  <p />
+                </div>
+              </Col>
+            </Row>
+          </Container >
         </main>
-        <div className="container">
-          <div className="row">
-            <div className="col-md-9">
+        <Container >
+          <Row>
+            <Col>
               <h2>
                 Overview
               </h2>
@@ -65,9 +70,9 @@ import { RecentReleasesContainer } from "../../static/js/RecentReleases";
                 Key Druid Features
               </h2>
               <div>
-            <CardList jsonData={FeatureList} />
-            </div>
-            <br />
+                <CardList jsonData={FeatureList} />
+              </div>
+              <br />
               <h2>
                 Learn more
               </h2>
@@ -103,23 +108,24 @@ import { RecentReleasesContainer } from "../../static/js/RecentReleases";
                   </p>
                 </div>
               </div>
-            </div>
-              <div class="widget-container">
-              <div class="show-right">
-              <h3>
-                Upcoming Events
-              </h3>
-              <a class="button" href="https://www.meetup.com/topics/apache-druid/">Join a Druid Meetup!</a><br />
-            <EventsContainer jsonData={EventData} />
-            </div>
-            <div class="widget-right"><h3>Featured Content</h3>
-            <FeaturedContentContainer jsonData={Content} />
-            </div>
-            <div clas="widget-right"><h3>Recent releases</h3></div>
-            <RecentReleasesContainer/>
-          </div>
-          </div>
-        </div>
+            </Col>
+            <Col md={3}>
+              <div className="widget-container">
+                <h3>Upcoming Events</h3>
+                <EventsContainer jsonData={EventData} />
+                <a className="button" href="https://www.meetup.com/topics/apache-druid/">Join a Druid Meetup!</a><br />
+              </div>
+              <div className="widget-container">
+                <h3>Featured Content</h3>
+                <FeaturedContentContainer jsonData={Content} />
+              </div>
+              <div className="widget-container">
+                <h3>Recent releases</h3>
+                <RecentReleasesContainer/>
+              </div>
+            </Col>
+          </Row>
+        </Container>
       </div>
       </Layout>
     );
