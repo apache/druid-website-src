@@ -3,6 +3,8 @@ import React from "react";
 import { CardList } from "../../static/js/features";
 import { FeatureList } from "../../static/js/FeatureList";
 import '../css/index.css';
+import "../../static/css/base.css";
+
 
 /* Imports for the 3 widgets on the right for events, content, and releases
 */
@@ -12,29 +14,34 @@ import { FeaturedContentContainer } from "../../static/js/ContentWidget";
 import { Content } from "../../static/js/FeaturedLinks";
 import { RecentReleasesContainer } from "../../static/js/RecentReleases";
 
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Container from "react-bootstrap/Container";
 
-      export default () => {
-        return (
-        <Layout title="Apache Druid">
+export default () => {
+  return (
+    <Layout title="Apache Druid">
       <div>
         <main className="druid-masthead">
-          <div className="container">
-            <div className="row">
-              <div className="text-center">
-                <h1>Apache<sup>®</sup> Druid</h1>
-                <p className="lead">Druid is a high performance, real-time analytics database that delivers sub-second queries on streaming and batch data at scale and under load.</p>
-                <p>
-                  <a className="button" href="/downloads.html"><span className="fa fa-download" /> Download</a>
-                  <a className="button" href="/community/join-slack?v=1"><span className="fab fa-slack" /> Join Slack</a>
-                  <a className="button" href="https://github.com/apache/druid/"><span className="fab fa-github" /> GitHub</a></p>
-                <p />
-              </div>
-            </div>
-          </div>
+          <Container >
+            <Row>
+              <Col>
+                <div className="text-center">
+                  <h1>Apache<sup>®</sup> Druid</h1>
+                  <p className="lead">Druid is a high performance, real-time analytics database that delivers sub-second queries on streaming and batch data at scale and under load.</p>
+                  <p>
+                    <a className="button" href="/downloads.html"><span className="fa fa-download" /> Download</a>
+                    <a className="button" href="/community/join-slack?v=1"><span className="fab fa-slack" /> Join Slack</a>
+                    <a className="button" href="https://github.com/apache/druid/"><span className="fab fa-github" /> GitHub</a></p>
+                  <p />
+                </div>
+              </Col>
+            </Row>
+          </Container >
         </main>
-        <div className="container">
-          <div className="row">
-            <div className="col-md-9">
+        <Container >
+          <Row>
+            <Col>
               <h2>
                 Overview
               </h2>
@@ -65,61 +72,67 @@ import { RecentReleasesContainer } from "../../static/js/RecentReleases";
                 Key Druid Features
               </h2>
               <div>
-            <CardList jsonData={FeatureList} />
-            </div>
-            <br />
+                <CardList jsonData={FeatureList} />
+              </div>
+              <br />
               <h2>
                 Learn more
               </h2>
               <div className="features">
                 <div className="feature">
-                  <h5><span className="fa fa-power-off fa" /> Powered By</h5>
+                  <span className="fa fa-power-off fa" />
+                  <h5> Powered By</h5>
                   <p>
                     Druid is proven in production at the <a href="/druid-powered">world's leading companies</a> at massive scale.
                   </p>
                 </div>
                 <div className="feature">
-                  <h5><span className="fa fa-info fa" /> FAQ</h5>
+                  <span className="fa fa-info fa" />
+                  <h5> FAQ</h5>
                   <p>
                     Learn about some of the <a href="faq">most common questions about Druid</a>.
                   </p>
                 </div>
                 <div className="feature">
-                  <h5><span className="fa fa-flag-checkered fa" /> Quickstart</h5>
+                  <span className="fa fa-flag-checkered fa" />
+                  <h5> Quickstart</h5>
                   <p>
                     <a href="/docs/tutorials/">Get started with Druid</a> in minutes. Load your own data and query it.
                   </p>
                 </div>
                 <div className="feature">
-                  <h5><span className="fa fa-question-circle fa" /> Get Help</h5>
+                  <span className="fa fa-question-circle fa" />
+                  <h5> Get Help</h5>
                   <p>
                     Get help from a <a href="/community/">wide network of community members</a> about using Druid.
                   </p>
                 </div>
                 <div className="feature">
-                  <h5><span className="fa fa-podcast fa" /> Podcast</h5>
+                  <span className="fa fa-podcast fa" />
+                  <h5> Podcast</h5>
                   <p>
                     Hear from the Druid community on <a href="https://podcasts.apple.com/us/podcast/tales-at-scale/id1655951714">Apple</a>, <a href="https://open.spotify.com/show/6KAKYLJvCVegsFfKvbfDnt">Spotify</a>, and <a href="https://podcasts.google.com/feed/aHR0cHM6Ly9mZWVkcy5saWJzeW4uY29tLzQ0ODE3OS9yc3M">Google</a>.
                   </p>
                 </div>
               </div>
-            </div>
-              <div class="widget-container">
-              <div class="show-right">
-              <h3>
-                Upcoming Events
-              </h3>
-              <a class="button" href="https://www.meetup.com/topics/apache-druid/">Join a Druid Meetup!</a><br />
-            <EventsContainer jsonData={EventData} />
-            </div>
-            <div class="widget-right"><h3>Featured Content</h3>
-            <FeaturedContentContainer jsonData={Content} />
-            </div>
-            <div clas="widget-right"><h3>Recent releases</h3></div>
-            <RecentReleasesContainer/>
-          </div>
-          </div>
-        </div>
+            </Col>
+            <Col md={3}>
+              <div className="widget-container">
+                <h3>Upcoming Events</h3>
+                <EventsContainer jsonData={EventData} />
+                <a className="button" href="https://www.meetup.com/topics/apache-druid/">Join a Druid Meetup!</a><br />
+              </div>
+              <div className="widget-container">
+                <h3>Featured Content</h3>
+                <FeaturedContentContainer jsonData={Content} />
+              </div>
+              <div className="widget-container">
+                <h3>Recent releases</h3>
+                <RecentReleasesContainer/>
+              </div>
+            </Col>
+          </Row>
+        </Container>
       </div>
       </Layout>
     );
