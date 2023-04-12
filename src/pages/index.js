@@ -3,6 +3,8 @@ import React from "react";
 import { CardList } from "../../static/js/features";
 import { FeatureList } from "../../static/js/FeatureList";
 import '../css/index.css';
+import "../../static/css/base.css";
+
 
 /* Imports for the 3 widgets on the right for events, content, and releases
 */
@@ -78,31 +80,36 @@ export default () => {
               </h2>
               <div className="features">
                 <div className="feature">
-                  <h5><span className="fa fa-power-off fa" /> Powered By</h5>
+                  <span className="fa fa-power-off fa" />
+                  <h5> Powered By</h5>
                   <p>
                     Druid is proven in production at the <a href="/druid-powered">world's leading companies</a> at massive scale.
                   </p>
                 </div>
                 <div className="feature">
-                  <h5><span className="fa fa-info fa" /> FAQ</h5>
+                  <span className="fa fa-info fa" />
+                  <h5> FAQ</h5>
                   <p>
                     Learn about some of the <a href="faq">most common questions about Druid</a>.
                   </p>
                 </div>
                 <div className="feature">
-                  <h5><span className="fa fa-flag-checkered fa" /> Quickstart</h5>
+                  <span className="fa fa-flag-checkered fa" />
+                  <h5> Quickstart</h5>
                   <p>
                     <a href="/docs/tutorials/">Get started with Druid</a> in minutes. Load your own data and query it.
                   </p>
                 </div>
                 <div className="feature">
-                  <h5><span className="fa fa-question-circle fa" /> Get Help</h5>
+                  <span className="fa fa-question-circle fa" />
+                  <h5> Get Help</h5>
                   <p>
                     Get help from a <a href="/community/">wide network of community members</a> about using Druid.
                   </p>
                 </div>
                 <div className="feature">
-                  <h5><span className="fa fa-podcast fa" /> Podcast</h5>
+                  <span className="fa fa-podcast fa" />
+                  <h5> Podcast</h5>
                   <p>
                     Hear from the Druid community on <a href="https://podcasts.apple.com/us/podcast/tales-at-scale/id1655951714">Apple</a>, <a href="https://open.spotify.com/show/6KAKYLJvCVegsFfKvbfDnt">Spotify</a>, and <a href="https://podcasts.google.com/feed/aHR0cHM6Ly9mZWVkcy5saWJzeW4uY29tLzQ0ODE3OS9yc3M">Google</a>.
                   </p>

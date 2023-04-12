@@ -3,7 +3,7 @@ import React from 'react';
 export function SingleCard({ data }) {
   return (
     <div className="druid-feature">
-      <h2>{data.title}</h2>
+      <h5>{data.title}</h5>
       <p>{data.description}</p>
     </div>
   );

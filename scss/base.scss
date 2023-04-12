@@ -239,25 +239,25 @@ html, body {
 
     &:nth-child(3n-2) {
       .fa {
-        //color: $medium-1;
-        background: $light-1;
-        // background: #cbd5ff;
+        ///color: $medium-1;
+        // background: $light-1;
+        background: #cbd5ff;
       }
     }
 
     &:nth-child(3n-1) {
       .fa {
         //color: $medium-2;
-        background: $light-2;
-        // background: #a7f1d9;
+        //background: $light-2;
+        background: #a7f1d9;
       }
     }
 
     &:nth-child(3n) {
       .fa {
         //color: $medium-3;
-        background: $light-3;
-        // background: #ffd8a8;
+        // background: $light-3;
+        background: #ffd8a8;
       }
     }
 
