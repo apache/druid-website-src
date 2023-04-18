@@ -12,13 +12,6 @@ article, aside, details, figcaption, figure, footer, header, menu, nav, section 
 body {
   line-height: 1; }
 
-ol, ul {
-  list-style: none; }
-
-table {
-  border-collapse: collapse;
-  border-spacing: 0; }
-
 * {
   box-sizing: border-box;
   vertical-align: top; }
@@ -42,9 +35,6 @@ button, input, textarea {
   margin: 0; }
   button:focus, input:focus, textarea:focus {
     outline: none; }
-
-/* body {
-  margin-top: 54px; } */
 
 html, body {
   position: relative;
@@ -95,7 +85,7 @@ html, body {
     line-height: 170%; }
     html ul li, body ul li {
       margin-left: 18px;
-      list-style-type: disc; }
+    }
   html ol, body ol {
     margin-top: 14px;
     margin-bottom: 14px;
@@ -161,40 +151,6 @@ html, body {
     width: 100%;
     max-width: 660px; }
 
-.large-button {
-  display: inline-block;
-  padding: 10px 22px;
-  color: white;
-  background: #4460de;
-  border-radius: 2px;
-  font-size: 15px;
-  margin-top: 14px;
-  margin-bottom: 14px; }
-  .large-button .fa {
-    margin-right: 3px; }
-  .large-button:hover {
-    background: #2442cb;
-    text-decoration: none; }
-
-.fancy-list {
-  margin-top: 22px;
-  margin-bottom: 22px; }
-  .fancy-list li {
-    list-style: none;
-    font-weight: 600;
-    margin-left: 0;
-    padding-left: 30px;
-    margin-bottom: 8px; }
-    .fancy-list li:before {
-      content: "";
-      position: absolute;
-      top: 5px;
-      left: 0;
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-      background: #9caeff; }
-
 .features {
   margin-bottom: 28px;
   margin-top: 38px; }
@@ -224,57 +180,3 @@ html, body {
     .features .feature h5 {
       margin-bottom: 0;
       font-size: 1.2em; }
-
-.zigzag-features {
-  margin-bottom: 100px; }
-  .zigzag-features .zigzag-feature {
-    margin-top: 100px; }
-    .zigzag-features .zigzag-feature .fa {
-      top: 0;
-      position: absolute;
-      width: 220px;
-      height: 220px;
-      line-height: 220px;
-      border-radius: 50%;
-      text-align: center;
-      font-size: 70px;
-      background: #cbd5ff;
-      color: #5062B4; }
-    .zigzag-features .zigzag-feature:nth-child(2n-1) {
-      padding-right: 300px; }
-      .zigzag-features .zigzag-feature:nth-child(2n-1) .fa {
-        right: 0; }
-    .zigzag-features .zigzag-feature:nth-child(2n) {
-      padding-left: 300px; }
-      .zigzag-features .zigzag-feature:nth-child(2n) .fa {
-        left: 0; }
-    .zigzag-features .zigzag-feature:nth-child(3n-2) .fa {
-      background: #cbd5ff;
-      color: #5062B4; }
-    .zigzag-features .zigzag-feature:nth-child(3n-1) .fa {
-      background: #a7f1d9;
-      color: #2C8265; }
-    .zigzag-features .zigzag-feature:nth-child(3n) .fa {
-      background: #ffd8a8;
-      color: #926226; }
-  @media (max-width: 840px) {
-    .zigzag-features .zigzag-feature .fa {
-      position: relative;
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-      margin-bottom: 40px; }
-    .zigzag-features .zigzag-feature:nth-child(2n-1) {
-      padding-right: 0; }
-    .zigzag-features .zigzag-feature:nth-child(2n) {
-      padding-left: 0; } }
-  @media (max-width: 440px) {
-    .zigzag-features {
-      margin-bottom: 70px; }
-      .zigzag-features .zigzag-feature {
-        margin-top: 70px; }
-        .zigzag-features .zigzag-feature .fa {
-          width: 180px;
-          height: 180px;
-          line-height: 180px;
-          font-size: 60px; } }
