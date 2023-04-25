@@ -805,6 +805,10 @@ Apache Druid’s speed and flexibility allow us to provide interactive analytics
 
 * [Enterprise Scale Analytics Platform Powered by Druid at Target](https://imply.io/virtual-druid-summit/enterprise-scale-analytics-platform-powered-by-druid-at-target) 
 
+## TelemetryDeck Analytics
+
+[TelemetryDeck](https://telemetrydeck.com) helps app and web developers improve their product by supplying immediate, accurate usage data while users use their app. And the best part: It's all anonymized so users' data stays private!
+
 ## Tencent
 
 Tencent SCRM product use Druid for customer behavior analysis.
@@ -821,12 +825,6 @@ Druid is a key component of our Big Data Operation Insight Platform.We use imply
 Learn more about TrafficGuard’s comprehensive fraud mitigation at (https://www.trafficguard.ai)
 
 * [Using Druid to fight ad fraud](https://imply.io/post/using-druid-to-fight-ad-fraud)
-
-## Travelmykashmir
-
-[Travelmykashmir](https://www.travelmykashmir.com/)is a reliable cab and [bike rental service in Srinagar](https://www.bikerentalsrinagar.com
-). We offer you comfortable, well-maintained cabs and bikes for your local or long distance travel. If you are looking for safe, secure and comfortable journey 
-in the city then book a cab with us.
 
 ## Trendyol.com - Alibaba Group Company
 

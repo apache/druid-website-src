@@ -58,7 +58,7 @@ If you're looking for some starter projects, we maintain a [list of issues](http
 for new developers.
 
 There are plenty of ways to help outside writing Druid code. *Code review of pull requests*
-(even if you are not a committer), feature suggestions, reporting bugs, [documentation](/docs/latest/design/)
+(even if you are not a committer), feature suggestions, reporting bugs, [documentation](/docs/latest/design.md)
 and usability feedback all matter immensely. Another big way to help is
 through [client libraries](../libraries), which are
 available in a variety of languages. If you develop a new one, we'll be happy
@@ -87,7 +87,7 @@ possible.
 
 ### Testing
 
-All Pull Requests are automatically tested on [Travis CI](https://travis-ci.com/apache/druid) on both AMD64 and ARM64 architectures.
+All Pull Requests are automatically tested through [GitHub Actions](https://github.com/apache/druid/actions) on both AMD64 and ARM64 architectures.
 
 ### Committers
 
@@ -163,7 +163,7 @@ If you are an official Druid committer then congratulations! You are part of a f
 1. Pull requests which have just one +1 from a committer couldn't be merged earlier than after 3 working days since PR submission.
 1. A pull request with just one +1 could be merged only by (or in coordination with) the committer who provided the review. Because the reviewer may think that the PR is complex or risky enough that needs another pair of eyes to look at it. If this is the case, the first reviewer should indicate this in the PR approval message.
 1. If a pull request has two or more +1's from committers who are not the author, it could be merged immediately and by any committer. But still, enough time since the PR submission should pass to give folks a reasonable chance to indicate a desire to comment on the pull request. AKA: don't merge a pull request that was submitted Friday evening until at least 1~2 regular work days have passed. Use good judgement here.
-1. Major architectural and backwards incompatible changes, or changes which have long-term maintainance consequences (see examples in [the "Getting your changes accepted" section above](#getting-your-changes-accepted)), should have at least three +1's from committers, on the "design" level of review. One approval could be from the author of the PR. The first committer who indicates that a PR needs design review should add the `Design Review` tag to such a pull request.
+1. Major architectural and backwards incompatible changes, or changes which have long-term maintenance consequences (see examples in [the "Getting your changes accepted" section above](#getting-your-changes-accepted)), should have at least three +1's from committers, on the "design" level of review. One approval could be from the author of the PR. The first committer who indicates that a PR needs design review should add the `Design Review` tag to such a pull request.
 1. Travis-CI should pass or have some **very** good reason why it won't pass for a pull request.
 1. You reasonably believe that all comments have been addressed.
 1. You are expected to be the champion for your own pull requests.
@@ -176,7 +176,7 @@ If you are an official Druid committer then congratulations! You are part of a f
 1. If you feel a pull request is required for the next release, mark it as such in the Milestone of the pull request.
 1. Do not comment on a pull request unless you are willing to follow up on the edits.
 1. Give priority to getting older pull requests merged. (Either as their champion or as an active commenter)
-1. And most importantly.. the PMC desires to ensure a positive and effective developer experience! If you find that things are not functioning to your expectations, pleaes raise the issue.
+1. And most importantly.. the PMC desires to ensure a positive and effective developer experience! If you find that things are not functioning to your expectations, please raise the issue.
 
 Remember, we all want to see this project thrive!
 
