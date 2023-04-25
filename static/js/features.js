@@ -1,5 +1,7 @@
 import React from 'react';
 
+/*Displays the cards on the homepage that list Druid features */
+
 export function SingleCard({ data }) {
   return (
     <div className="druid-feature">

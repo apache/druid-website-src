@@ -1,5 +1,7 @@
 import React from 'react';
 
+/* Displays the upcoming events from EventList*/
+
 export function Events({ data }) {
   return (
     <div>

@@ -58,10 +58,10 @@ If you're looking for some starter projects, we maintain a [list of issues](http
 for new developers.
 
 There are plenty of ways to help outside writing Druid code. *Code review of pull requests*
-(even if you are not a committer), feature suggestions, reporting bugs, [documentation](/docs/design/)
+(even if you are not a committer), feature suggestions, reporting bugs, [documentation](/docs/latest/design/)
 and usability feedback all matter immensely. Another big way to help is
 through [client libraries](../libraries), which are
-avaialble in a variety of languages. If you develop a new one, we'll be happy
+available in a variety of languages. If you develop a new one, we'll be happy
 to include it in the list.
 
 ### Getting your changes accepted
@@ -72,7 +72,7 @@ Pull requests require one approval (+1) from an established committer on code an
 exception is major architectural changes or API changes, and/or changes to
 
  - HTTP requests and responses (e. g. a new HTTP endpoint)
- - [Interfaces for extensions](/docs/development/modules)
+ - [Interfaces for extensions](/docs/latest/development/modules)
  - Server configuration (e. g. altering the behavior of a config property)
  - Emitted metrics
  - Other major changes, judged by the discretion of Druid committers
