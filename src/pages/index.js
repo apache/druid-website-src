@@ -10,8 +10,8 @@ import "../../static/css/base.css";
 */
 import { EventsContainer } from "../../static/js/EventsWidget";
 import { EventData } from "../../static/js/EventList";
-import { FeaturedContentContainer } from "../../static/js/ContentWidget";
-import { Content } from "../../static/js/FeaturedLinks";
+import { FeaturedContentContainer } from "../../static/js/FeaturedContentWidget";
+import { Content } from "../../static/js/FeaturedContent";
 import { RecentReleasesContainer } from "../../static/js/RecentReleases";
 
 import Row from "react-bootstrap/Row";
