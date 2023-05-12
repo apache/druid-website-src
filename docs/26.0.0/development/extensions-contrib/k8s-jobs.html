@@ -1,0 +1,144 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>MM-less Druid in K8s · Apache Druid</title><meta name="viewport" content="width=device-width, initial-scale=1.0"/><link rel="canonical" href="https://druid.apache.org/docs/26.0.0/development/extensions-contrib/k8s-jobs.html"/><meta name="generator" content="Docusaurus"/><meta name="description" content="&lt;!--"/><meta name="docsearch:language" content="en"/><meta name="docsearch:version" content="26.0.0" /><meta property="og:title" content="MM-less Druid in K8s · Apache Druid"/><meta property="og:type" content="website"/><meta property="og:url" content="https://druid.apache.org/index.html"/><meta property="og:description" content="&lt;!--"/><meta property="og:image" content="https://druid.apache.org/img/druid_nav.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://druid.apache.org/img/druid_nav.png"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-131010415-1"></script><script>
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments); }
+              gtag('js', new Date());
+              gtag('config', 'UA-131010415-1');
+            </script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"/><link rel="stylesheet" href="/css/code-block-buttons.css"/><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script><script type="text/javascript" src="/js/code-block-buttons.js"></script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/druid_nav.png" alt="Apache Druid"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/technology" target="_self">Technology</a></li><li class=""><a href="/use-cases" target="_self">Use Cases</a></li><li class=""><a href="/druid-powered" target="_self">Powered By</a></li><li class=""><a href="/docs/26.0.0/design/index.html" target="_self">Docs</a></li><li class=""><a href="/community/" target="_self">Community</a></li><li class=""><a href="https://www.apache.org" target="_self">Apache</a></li><li class=""><a href="/downloads.html" target="_self">Download</a></li><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/apache/druid/edit/master/docs/development/extensions-contrib/k8s-jobs.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">MM-less Druid in K8s</h1></header><article><div><span><!--
+  ~ Licensed to the Apache Software Foundation (ASF) under one
+  ~ or more contributor license agreements.  See the NOTICE file
+  ~ distributed with this work for additional information
+  ~ regarding copyright ownership.  The ASF licenses this file
+  ~ to you under the Apache License, Version 2.0 (the
+  ~ "License"); you may not use this file except in compliance
+  ~ with the License.  You may obtain a copy of the License at
+  ~
+  ~   http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an
+  ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~ KIND, either express or implied.  See the License for the
+  ~ specific language governing permissions and limitations
+  ~ under the License.
+  -->
+<p>Apache Druid Extension to enable using Kubernetes for launching and managing tasks instead of the Middle Managers.  This extension allows you to launch tasks as kubernetes jobs removing the need for your middle manager.</p>
+<p>Consider this an <a href="/docs/26.0.0/development/experimental.html">EXPERIMENTAL</a> feature mostly because it has not been tested yet on a wide variety of long-running Druid clusters.</p>
+<h2><a class="anchor" aria-hidden="true" id="how-it-works"></a><a href="#how-it-works" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>How it works</h2>
+<p>The K8s extension builds a pod spec using the specified pod adapter, the default implementation takes the podSpec of your <code>Overlord</code> pod and creates a kubernetes job from this podSpec.  Thus if you have sidecars such as Splunk or Istio it can optionally launch a task as a K8s job.  All jobs are natively restorable, they are decoupled from the druid deployment, thus restarting pods or doing upgrades has no affect on tasks in flight.  They will continue to run and when the overlord comes back up it will start tracking them again.</p>
+<h2><a class="anchor" aria-hidden="true" id="pod-adapters"></a><a href="#pod-adapters" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Pod Adapters</h2>
+<p>The logic defining how the pod template is built for your kubernetes job depends on which pod adapter you have specified.</p>
+<h3><a class="anchor" aria-hidden="true" id="overlord-single-container-pod-adapter"></a><a href="#overlord-single-container-pod-adapter" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Overlord Single Container Pod Adapter</h3>
+<p>The overlord single container pod adapter takes the podSpec of your <code>Overlord</code> pod and creates a kubernetes job from this podSpec.  This is the default pod adapter implementation, to explicitly enable it you can specify the runtime property <code>druid.indexer.runner.k8s.adapter.type: overlordSingleContainer</code></p>
+<h3><a class="anchor" aria-hidden="true" id="overlord-multi-container-pod-adapter"></a><a href="#overlord-multi-container-pod-adapter" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Overlord Multi Container Pod Adapter</h3>
+<p>The overlord multi container pod adapter takes the podSpec of your <code>Overlord</code> pod and creates a kubernetes job from this podSpec.  It uses kubexit to manage dependency ordering between the main container that runs your druid peon and other sidecars defined in the <code>Overlord</code> pod spec.  To enable this pod adapter you can specify the runtime property <code>druid.indexer.runner.k8s.adapter.type: overlordMultiContainer</code></p>
+<h3><a class="anchor" aria-hidden="true" id="custom-template-pod-adapter"></a><a href="#custom-template-pod-adapter" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Custom Template Pod Adapter</h3>
+<p>The custom template pod adapter allows you to specify a pod template file per task type.  This adapter requires you to specify a <code>base</code> pod spec which will be used in the case that a task specific pod spec has not been defined.  To enable this pod adapter you can specify the runtime property <code>druid.indexer.runner.k8s.adapter.type: customTemplateAdapter</code></p>
+<p>The base pod template must be specified as the runtime property <code>druid.indexer.runner.k8s.podTemplate.base: /path/to/basePodSpec.yaml</code>
+Task specific pod templates must be specified as the runtime property <code>druid.indexer.runner.k8s.podTemplate.{taskType}: /path/to/taskSpecificPodSpec.yaml</code> where {taskType} is the name of the task type i.e <code>index_parallel</code></p>
+<h2><a class="anchor" aria-hidden="true" id="configuration"></a><a href="#configuration" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Configuration</h2>
+<p>To use this extension please make sure to  <a href="/docs/26.0.0/development/extensions.html#loading-extensions">include</a><code>druid-kubernetes-overlord-extensions</code> in the extensions load list for your overlord process.</p>
+<p>The extension uses the task queue to limit how many concurrent tasks (K8s jobs) are in flight so it is required you have a reasonable value for <code>druid.indexer.queue.maxSize</code>.  Additionally set the variable <code>druid.indexer.runner.namespace</code> to the namespace in which you are running druid.</p>
+<p>Other configurations required are:
+<code>druid.indexer.runner.type: k8s</code> and <code>druid.indexer.task.encapsulatedTask: true</code></p>
+<p>You can add optional labels to your K8s jobs / pods if you need them by using the following configuration:
+<code>druid.indexer.runner.labels: '{&quot;key&quot;:&quot;value&quot;}'</code>
+Annotations are the same with:
+<code>druid.indexer.runner.annotations: '{&quot;key&quot;:&quot;value&quot;}'</code></p>
+<p>All other configurations you had for the middle manager tasks must be moved under the overlord with one caveat, you must specify javaOpts as an array:
+<code>druid.indexer.runner.javaOptsArray</code>, <code>druid.indexer.runner.javaOpts</code> is no longer supported.</p>
+<p>If you are running without a middle manager you need to also use <code>druid.processing.intermediaryData.storage.type=deepstore</code></p>
+<p>Additional Configuration</p>
+<h3><a class="anchor" aria-hidden="true" id="properties"></a><a href="#properties" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Properties</h3>
+<table>
+<thead>
+<tr><th>Property</th><th>Possible Values</th><th>Description</th><th>Default</th><th>required</th></tr>
+</thead>
+<tbody>
+<tr><td><code>druid.indexer.runner.debugJobs</code></td><td><code>boolean</code></td><td>Clean up K8s jobs after tasks complete.</td><td>False</td><td>No</td></tr>
+<tr><td><code>druid.indexer.runner.sidecarSupport</code></td><td><code>boolean</code></td><td>Deprecated, specify adapter type as runtime property <code>druid.indexer.runner.k8s.adapter.type: overlordMultiContainer</code> instead. If your overlord pod has sidecars, this will attempt to start the task with the same sidecars as the overlord pod.</td><td>False</td><td>No</td></tr>
+<tr><td><code>druid.indexer.runner.primaryContainerName</code></td><td><code>String</code></td><td>If running with sidecars, the <code>primaryContainerName</code> should be that of your druid container like <code>druid-overlord</code>.</td><td>First container in <code>podSpec</code> list</td><td>No</td></tr>
+<tr><td><code>druid.indexer.runner.kubexitImage</code></td><td><code>String</code></td><td>Used kubexit project to help shutdown sidecars when the main pod completes.  Otherwise jobs with sidecars never terminate.</td><td>karlkfi/kubexit:latest</td><td>No</td></tr>
+<tr><td><code>druid.indexer.runner.disableClientProxy</code></td><td><code>boolean</code></td><td>Use this if you have a global http(s) proxy and you wish to bypass it.</td><td>false</td><td>No</td></tr>
+<tr><td><code>druid.indexer.runner.maxTaskDuration</code></td><td><code>Duration</code></td><td>Max time a task is allowed to run for before getting killed</td><td><code>PT4H</code></td><td>No</td></tr>
+<tr><td><code>druid.indexer.runner.taskCleanupDelay</code></td><td><code>Duration</code></td><td>How long do jobs stay around before getting reaped from K8s</td><td><code>P2D</code></td><td>No</td></tr>
+<tr><td><code>druid.indexer.runner.taskCleanupInterval</code></td><td><code>Duration</code></td><td>How often to check for jobs to be reaped</td><td><code>PT10M</code></td><td>No</td></tr>
+<tr><td><code>druid.indexer.runner.K8sjobLaunchTimeout</code></td><td><code>Duration</code></td><td>How long to wait to launch a K8s task before marking it as failed, on a resource constrained cluster it may take some time.</td><td><code>PT1H</code></td><td>No</td></tr>
+<tr><td><code>druid.indexer.runner.javaOptsArray</code></td><td><code>JsonArray</code></td><td>java opts for the task.</td><td><code>-Xmx1g</code></td><td>No</td></tr>
+<tr><td><code>druid.indexer.runner.labels</code></td><td><code>JsonObject</code></td><td>Additional labels you want to add to peon pod</td><td><code>{}</code></td><td>No</td></tr>
+<tr><td><code>druid.indexer.runner.annotations</code></td><td><code>JsonObject</code></td><td>Additional annotations you want to add to peon pod</td><td><code>{}</code></td><td>No</td></tr>
+<tr><td><code>druid.indexer.runner.peonMonitors</code></td><td><code>JsonArray</code></td><td>Overrides <code>druid.monitoring.monitors</code>. Use this property if you don't want to inherit monitors from the Overlord.</td><td><code>[]</code></td><td>No</td></tr>
+<tr><td><code>druid.indexer.runner.graceTerminationPeriodSeconds</code></td><td><code>Long</code></td><td>Number of seconds you want to wait after a sigterm for container lifecycle hooks to complete.  Keep at a smaller value if you want tasks to hold locks for shorter periods.</td><td><code>PT30S</code> (K8s default)</td><td>No</td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="gotchas"></a><a href="#gotchas" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Gotchas</h3>
+<ul>
+<li>You must have in your role the ability to launch jobs.</li>
+<li>All Druid Pods belonging to one Druid cluster must be inside same kubernetes namespace.</li>
+<li>For the sidecar support to work, your entry point / command in docker must be explicitly defined your spec.</li>
+</ul>
+<p>You can't have something like this:
+Dockerfile:
+<code>ENTRYPOINT: [&quot;foo.sh&quot;]</code></p>
+<p>and in your sidecar specs:</p>
+<pre><code class="hljs css language-container:"><span class="hljs-code">        name: foo</span>
+<span class="hljs-code">        args: </span>
+<span class="hljs-bullet">           - </span>arg1
+<span class="hljs-bullet">           - </span>arg2 
+</code></pre>
+<p>That will not work, because we cannot decipher what your command is, the extension needs to know it explicitly.
+*<em>Even for sidecars like Istio which are dynamically created by the service mesh, this needs to happen.</em></p>
+<p>Instead do the following:
+You can keep your Dockerfile the same but you must have a sidecar spec like so:</p>
+<pre><code class="hljs css language-container:"><span class="hljs-symbol">        name:</span> foo
+<span class="hljs-symbol">        command:</span> foo.sh
+<span class="hljs-symbol">        args:</span> 
+           - arg1
+           - arg2 
+</code></pre>
+<p>The following roles must also be accessible. An example spec could be:</p>
+<pre><code class="hljs"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">rbac.authorization.k8s.io/v1</span>
+<span class="hljs-attr">kind:</span> <span class="hljs-string">Role</span>
+<span class="hljs-attr">metadata:</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">druid-cluster</span>
+<span class="hljs-attr">rules:</span>
+<span class="hljs-bullet">-</span> <span class="hljs-attr">apiGroups:</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-string">""</span>
+  <span class="hljs-attr">resources:</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-string">pods</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-string">configmaps</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-string">jobs</span>
+  <span class="hljs-attr">verbs:</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-string">'*'</span>
+<span class="hljs-meta">---</span>
+<span class="hljs-attr">kind:</span> <span class="hljs-string">RoleBinding</span>
+<span class="hljs-attr">apiVersion:</span> <span class="hljs-string">rbac.authorization.k8s.io/v1</span>
+<span class="hljs-attr">metadata:</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">druid-cluster</span>
+<span class="hljs-attr">subjects:</span>
+<span class="hljs-bullet">-</span> <span class="hljs-attr">kind:</span> <span class="hljs-string">ServiceAccount</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">default</span>
+<span class="hljs-attr">roleRef:</span>
+  <span class="hljs-attr">kind:</span> <span class="hljs-string">Role</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">druid-cluster</span>
+  <span class="hljs-attr">apiGroup:</span> <span class="hljs-string">rbac.authorization.k8s.io</span>
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#how-it-works">How it works</a></li><li><a href="#pod-adapters">Pod Adapters</a><ul class="toc-headings"><li><a href="#overlord-single-container-pod-adapter">Overlord Single Container Pod Adapter</a></li><li><a href="#overlord-multi-container-pod-adapter">Overlord Multi Container Pod Adapter</a></li><li><a href="#custom-template-pod-adapter">Custom Template Pod Adapter</a></li></ul></li><li><a href="#configuration">Configuration</a><ul class="toc-headings"><li><a href="#properties">Properties</a></li><li><a href="#gotchas">Gotchas</a></li></ul></li></ul></nav></div><footer class="nav-footer druid-footer" id="footer"><div class="container"><div class="text-center"><p><a href="/technology">Technology</a> · <a href="/use-cases">Use Cases</a> · <a href="/druid-powered">Powered by Druid</a> · <a href="/docs/26.0.0/">Docs</a> · <a href="/community/">Community</a> · <a href="/downloads.html">Download</a> · <a href="/faq">FAQ</a></p></div><div class="text-center"><a title="Join the user group" href="https://groups.google.com/forum/#!forum/druid-user" target="_blank"><span class="fa fa-comments"></span></a> · <a title="Follow Druid" href="https://twitter.com/druidio" target="_blank"><span class="fab fa-twitter"></span></a> · <a title="Download via Apache" href="https://www.apache.org/dyn/closer.cgi?path=/incubator/druid/{{ site.druid_versions[0].versions[0].version }}/apache-druid-{{ site.druid_versions[0].versions[0].version }}-bin.tar.gz" target="_blank"><span class="fas fa-feather"></span></a> · <a title="GitHub" href="https://github.com/apache/druid" target="_blank"><span class="fab fa-github"></span></a></div><div class="text-center license">Copyright © 2022 <a href="https://www.apache.org/" target="_blank">Apache Software Foundation</a>.<br/>Except where otherwise noted, licensed under <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.<br/>Apache Druid, Druid, and the Druid logo are either registered trademarks or trademarks of The Apache Software Foundation in the United States and other countries.</div></div></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                appId: 'CPK9PMSCEY',
+                apiKey: 'd4ef4ffe3a2f0c7d1e34b062fd98736b',
+                indexName: 'apache_druid',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["language:en","version:26.0.0"]}
+              });
+            </script></body></html>
