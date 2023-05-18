@@ -77,7 +77,7 @@
   ~ specific language governing permissions and limitations
   ~ under the License.
   -->
-<p>All ingestion methods use ingestion tasks to load data into Druid. Streaming ingestion uses ongoing supervisors that run and supervise a set of tasks over time. Native batch and Hadoop-based ingestion use a one-time <a href="/docs/latest/ingestion/tasks.html">task</a>. All types of ingestion use an <em>ingestion spec</em> to configure ingestion.</p>
+<p>All ingestion methods use ingestion tasks to load data into Druid. Streaming ingestion uses ongoing supervisors that run and supervise a set of tasks over time. Native batch and Hadoop-based ingestion use a one-time <a href="/docs/latest/ingestion/tasks.html">task</a>. Other than with SQL-based ingestion, use an <em>ingestion spec</em> to configure your ingestion.</p>
 <p>Ingestion specs consists of three main components:</p>
 <ul>
 <li><a href="#dataschema"><code>dataSchema</code></a>, which configures the <a href="#datasource">datasource name</a>,
@@ -223,15 +223,20 @@ your ingestion spec.</p>
 <p>Treat <code>__time</code> as a millisecond timestamp: the number of milliseconds since Jan 1, 1970 at midnight UTC.</p>
 <h3><a class="anchor" aria-hidden="true" id="dimensionsspec"></a><a href="#dimensionsspec" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>dimensionsSpec</code></h3>
 <p>The <code>dimensionsSpec</code> is located in <code>dataSchema</code> → <code>dimensionsSpec</code> and is responsible for
-configuring <a href="/docs/latest/ingestion/data-model.html#dimensions">dimensions</a>. An example <code>dimensionsSpec</code> is:</p>
-<pre><code class="hljs"><span class="hljs-string">"dimensionsSpec"</span> : {
-  <span class="hljs-string">"dimensions"</span>: [
-    <span class="hljs-string">"page"</span>,
-    <span class="hljs-string">"language"</span>,
-    { <span class="hljs-string">"type"</span>: <span class="hljs-string">"long"</span>, <span class="hljs-string">"name"</span>: <span class="hljs-string">"userId"</span> }
+configuring <a href="/docs/latest/ingestion/data-model.html#dimensions">dimensions</a>.</p>
+<p>You can either manually specify the dimensions or take advantage of schema auto-discovery where you allow Druid to infer all or some of the schema for your data. This means that you don't have to explicitly specify your dimensions and their type.</p>
+<p>To use schema auto-discovery, set <code>useSchemaDiscovery</code> to <code>true</code>.</p>
+<p>Alternatively, you can use the string-based schemaless ingestion where any discovered dimensions are treated as strings. To do so, leave <code>useSchemaDiscovery</code> set to <code>false</code> (default). Then, set the dimensions list to empty or set the  <code>includeAllDimensions</code> property to <code>true</code>.</p>
+<p>The following <code>dimensionsSpec</code> example uses schema auto-discovery (<code>&quot;useSchemaDiscovery&quot;: true</code>) in conjunction with explicitly defined dimensions to have Druid infer some of the schema for the data:</p>
+<pre><code class="hljs css language-json">"dimensionsSpec" : {
+  "dimensions": [
+    "page",
+    "language",
+    { "type": "long", "name": "userId" }
   ],
-  <span class="hljs-string">"dimensionExclusions"</span> : [],
-  <span class="hljs-string">"spatialDimensions"</span> : []
+  "dimensionExclusions" : [],
+  "spatialDimensions" : [],
+  "useSchemaDiscovery": true
 }
 </code></pre>
 <blockquote>
@@ -249,7 +254,8 @@ your ingestion spec.</p>
 <tr><td><code>dimensions</code></td><td>A list of <a href="#dimension-objects">dimension names or objects</a>. You cannot include the same column in both <code>dimensions</code> and <code>dimensionExclusions</code>.<br /><br />If <code>dimensions</code> and <code>spatialDimensions</code> are both null or empty arrays, Druid treats all columns other than timestamp or metrics that do not appear in <code>dimensionExclusions</code> as String-typed dimension columns. See <a href="#inclusions-and-exclusions">inclusions and exclusions</a> for details.<br /><br />As a best practice, put the most frequently filtered dimensions at the beginning of the dimensions list. In this case, it would also be good to consider <a href="/docs/latest/ingestion/partitioning.html"><code>partitioning</code></a> by those same dimensions.</td><td><code>[]</code></td></tr>
 <tr><td><code>dimensionExclusions</code></td><td>The names of dimensions to exclude from ingestion. Only names are supported here, not objects.<br /><br />This list is only used if the <code>dimensions</code> and <code>spatialDimensions</code> lists are both null or empty arrays; otherwise it is ignored. See <a href="#inclusions-and-exclusions">inclusions and exclusions</a> below for details.</td><td><code>[]</code></td></tr>
 <tr><td><code>spatialDimensions</code></td><td>An array of <a href="/docs/latest/development/geo.html">spatial dimensions</a>.</td><td><code>[]</code></td></tr>
-<tr><td><code>includeAllDimensions</code></td><td>You can set <code>includeAllDimensions</code> to true to ingest both explicit dimensions in the <code>dimensions</code> field and other dimensions that the ingestion task discovers from input data. In this case, the explicit dimensions will appear first in order that you specify them and the dimensions dynamically discovered will come after. This flag can be useful especially with auto schema discovery using <a href="./data-formats.html#flattenspec"><code>flattenSpec</code></a>. If this is not set and the <code>dimensions</code> field is not empty, Druid will ingest only explicit dimensions. If this is not set and the <code>dimensions</code> field is empty, all discovered dimensions will be ingested.</td><td>false</td></tr>
+<tr><td><code>includeAllDimensions</code></td><td>Note that this field only applies to string-based schema discovery where Druid ingests dimensions it discovers as strings. This is different from schema auto-discovery where Druid infers the type for data. You can set <code>includeAllDimensions</code> to true to ingest both explicit dimensions in the <code>dimensions</code> field and other dimensions that the ingestion task discovers from input data. In this case, the explicit dimensions will appear first in the order that you specify them, and the dimensions dynamically discovered will come after. This flag can be useful especially with auto schema discovery using <a href="./data-formats.html#flattenspec"><code>flattenSpec</code></a>. If this is not set and the <code>dimensions</code> field is not empty, Druid will ingest only explicit dimensions. If this is not set and the <code>dimensions</code> field is empty, all discovered dimensions will be ingested.</td><td>false</td></tr>
+<tr><td><code>useSchemaDiscovery</code></td><td>Configure Druid to use schema auto-discovery to discover some or all of the dimensions and types for your data. For any dimensions that aren't a uniform type, Druid ingests them as JSON. You can use this for native batch or streaming ingestion.</td><td>false</td></tr>
 </tbody>
 </table>
 <h4><a class="anchor" aria-hidden="true" id="dimension-objects"></a><a href="#dimension-objects" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Dimension objects</h4>
@@ -261,7 +267,7 @@ a <code>string</code> type dimension object with the given name, e.g. <code>&quo
 <tr><th>Field</th><th>Description</th><th>Default</th></tr>
 </thead>
 <tbody>
-<tr><td>type</td><td>Either <code>string</code>, <code>long</code>, <code>float</code>, <code>double</code>, or <code>json</code>.</td><td><code>string</code></td></tr>
+<tr><td>type</td><td>Either <code>auto</code>, <code>string</code>, <code>long</code>, <code>float</code>, <code>double</code>, or <code>json</code>. For the <code>auto</code> type, Druid determines the most appropriate type for the dimension and assigns one of the following: STRING, ARRAY<STRING>, LONG, ARRAY<LONG>, DOUBLE, ARRAY<DOUBLE>, or COMPLEX<json> columns, all sharing a common 'nested' format. When Druid infers the schema with schema auto-discovery, the type is <code>auto</code>.</td><td><code>string</code></td></tr>
 <tr><td>name</td><td>The name of the dimension. This will be used as the field name to read from input records, as well as the column name stored in generated segments.<br /><br />Note that you can use a <a href="#transformspec"><code>transformSpec</code></a> if you want to rename columns during ingestion time.</td><td>none (required)</td></tr>
 <tr><td>createBitmapIndex</td><td>For <code>string</code> typed dimensions, whether or not bitmap indexes should be created for the column in generated segments. Creating a bitmap index requires more storage, but speeds up certain kinds of filtering (especially equality and prefix filtering). Only supported for <code>string</code> typed dimensions.</td><td><code>true</code></td></tr>
 <tr><td>multiValueHandling</td><td>Specify the type of handling for <a href="/docs/latest/querying/multi-value-dimensions.html">multi-value fields</a>. Possible values are <code>sorted_array</code>, <code>sorted_set</code>, and <code>array</code>. <code>sorted_array</code> and <code>sorted_set</code> order the array upon ingestion. <code>sorted_set</code> removes duplicates. <code>array</code> ingests data as-is</td><td><code>sorted_array</code></td></tr>
@@ -270,6 +276,9 @@ a <code>string</code> type dimension object with the given name, e.g. <code>&quo
 <h4><a class="anchor" aria-hidden="true" id="inclusions-and-exclusions"></a><a href="#inclusions-and-exclusions" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Inclusions and exclusions</h4>
 <p>Druid will interpret a <code>dimensionsSpec</code> in two possible ways: <em>normal</em> or <em>schemaless</em>.</p>
 <p>Normal interpretation occurs when either <code>dimensions</code> or <code>spatialDimensions</code> is non-empty. In this case, the combination of the two lists will be taken as the set of dimensions to be ingested, and the list of <code>dimensionExclusions</code> will be ignored.</p>
+<blockquote>
+<p>The following description of schemaless refers to  string-based schemaless  where Druid treats dimensions it discovers as strings. We recommend you use schema auto-discovery instead where Druid infers the type for the dimension. For more information, see <a href="#dimensionsspec"><code>dimensionsSpec</code></a>.</p>
+</blockquote>
 <p>Schemaless interpretation occurs when both <code>dimensions</code> and <code>spatialDimensions</code> are empty or null. In this case, the set of dimensions is determined in the following way:</p>
 <ol>
 <li>First, start from the set of all root-level fields from the input record, as determined by the <a href="/docs/latest/ingestion/data-formats.html"><code>inputFormat</code></a>. &quot;Root-level&quot; includes all fields at the top level of a data structure, but does not included fields nested within maps or lists. To extract these, you must use a <a href="/docs/latest/ingestion/data-formats.html#flattenspec"><code>flattenSpec</code></a>. All fields of non-nested data formats, such as CSV and delimited text, are considered root-level.</li>
@@ -280,6 +289,7 @@ a <code>string</code> type dimension object with the given name, e.g. <code>&quo
 <li>Any field with the same name as an aggregator from the <a href="#metricsspec">metricsSpec</a> is excluded.</li>
 <li>All other fields are ingested as <code>string</code> typed dimensions with the <a href="#dimension-objects">default settings</a>.</li>
 </ol>
+<p>Additionally, if you have empty columns that you want to include in the string-based schemaless ingestion, you'll need to include the context parameter <code>storeEmptyColumns</code> and set it to <code>true</code>.</p>
 <blockquote>
 <p>Note: Fields generated by a <a href="#transformspec"><code>transformSpec</code></a> are not currently considered candidates for
 schemaless dimension interpretation.</p>
