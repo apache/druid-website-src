@@ -1,9 +1,9 @@
 ---
 title: Technology
-layout: simple_page
-sectionid: technology
 canonical: 'https://druid.apache.org/technology'
 ---
+
+# Technology
 
 Apache Druid is used to power real-time analytics applications that require fast queries at scale and under load on streaming and batch data. Druid features a unique distributed architecture across its ingestion, storage, and query layer to handle the scale needed for large aggregations with the performance needed for applications.
 

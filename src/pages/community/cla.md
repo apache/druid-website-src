@@ -4,6 +4,8 @@ layout: simple_page
 canonical: 'https://druid.apache.org/community/cla'
 ---
 
+# Druid Contributor License Agreement
+
 Per Apache policy, all Druid committers are required to have a contributor license agreement (CLA) on file with
 the Apache Software Foundation.
 

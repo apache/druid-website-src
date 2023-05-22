@@ -1,9 +1,9 @@
 ---
 title: Use Cases
-layout: simple_page
-sectionid: use-cases
 canonical: 'https://druid.apache.org/use-cases'
 ---
+
+# Use cases
 
 ## Power real-time analytics, data applications, and more
 

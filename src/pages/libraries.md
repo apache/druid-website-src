@@ -4,6 +4,8 @@ layout: simple_page
 canonical: 'https://druid.apache.org/libraries'
 ---
 
+# Community and Third Party Software
+
 Query Libraries
 ---------------
 
