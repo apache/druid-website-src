@@ -4,7 +4,7 @@
 - the routing of the built site, e.g. if release.urlPath set to latest, you get http://localhost:3000/docs/latest/design/
 
 */
-var release = require('./static/js/release.js')
+var version = require('./static/js/version.js')
 
 module.exports={
   "title": "Apache® Druid",
@@ -36,8 +36,8 @@ module.exports={
           "exclude": [
             '**incubating/**'
           ],
-          "path": "./docs/"+release.version,
-          "routeBasePath": "/docs/"+release.urlPath,
+          "path": "./docs/"+version.version,
+          "routeBasePath": "/docs/"+version.urlPath,
           "sidebarPath": "./sidebars.json"
         },
         "theme": {
@@ -58,7 +58,7 @@ module.exports={
         ],
         redirects: [
 {
-  "to": "/docs/"+release.urlPath+"/querying/aggregations", 
+  "to": "/docs/"+version.urlPath+"/querying/aggregations", 
 "from": "/Aggregations.html"
 },
         ]
@@ -93,7 +93,7 @@ module.exports={
         "position": "right",
     },
         {
-          "to": "/docs/"+release.urlPath+"/design/",
+          "to": "/docs/"+version.urlPath+"/design/",
           "label": "Docs",
           "position": "right"
         },
