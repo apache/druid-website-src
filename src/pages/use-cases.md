@@ -25,7 +25,7 @@ Common application areas for Druid include:
 
 </div>
 
-Some of these use cases are described in more detail below. For an overview of technical differentiation, please see the [FAQ](/faq).
+Some of these use cases are described in more detail below. For an overview of technical differentiation, please see the [FAQ](./faq.md).
 
 <div class="zigzag-features">
 <div class="zigzag-feature">
