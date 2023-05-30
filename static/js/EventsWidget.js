@@ -17,7 +17,6 @@ import React from 'react';
  * limitations under the License.
  */
 
- /* Add copy-to-clipboard buttons to code blocks */
 
 /* Displays the upcoming events from EventList*/
 

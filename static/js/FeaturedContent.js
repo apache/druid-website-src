@@ -20,7 +20,7 @@ Used by ContentWidget.js in index.js to display the first 5 entries from the top
  * limitations under the License.
  */
 
- /* Add copy-to-clipboard buttons to code blocks */
+ 
 
 export const Content = [
     {

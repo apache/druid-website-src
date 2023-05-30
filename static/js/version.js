@@ -28,7 +28,7 @@ urlPath is the value that's used for routing. The latest Druid docs are served o
  * limitations under the License.
  */
 
- /* Add copy-to-clipboard buttons to code blocks */
+ 
 
 module.exports = {
   version: "25.0.0",

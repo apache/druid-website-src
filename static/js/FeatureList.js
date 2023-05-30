@@ -20,7 +20,7 @@ Used by features.js in index.js to display the cards under the heading Key Druid
  * limitations under the License.
  */
 
- /* Add copy-to-clipboard buttons to code blocks */
+ 
 
 export const FeatureList = [
   {

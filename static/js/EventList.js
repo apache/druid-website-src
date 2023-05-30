@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
- /* Add copy-to-clipboard buttons to code blocks */
+ 
 
 export const EventData = [
   {

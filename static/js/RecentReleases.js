@@ -19,7 +19,7 @@ import * as version from "./version.js";
  * limitations under the License.
  */
 
- /* Add copy-to-clipboard buttons to code blocks */
+ 
 
 export  function RecentReleasesContainer({ jsonData }) {
   return (
