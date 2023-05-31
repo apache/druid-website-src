@@ -13,6 +13,7 @@ import { EventData } from "../../static/js/EventList";
 import { FeaturedContentContainer } from "../../static/js/FeaturedContentWidget";
 import { Content } from "../../static/js/FeaturedContent";
 import { RecentReleasesContainer } from "../../static/js/RecentReleases";
+import { Releases } from "../../static/js/version";
 
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -128,7 +129,7 @@ export default () => {
               </div>
               <div className="widget-container">
                 <h3>Recent releases</h3>
-                <RecentReleasesContainer/>
+                <RecentReleasesContainer jsonData={Releases} />
               </div>
             </Col>
           </Row>

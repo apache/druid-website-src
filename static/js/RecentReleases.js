@@ -1,5 +1,4 @@
 import React from 'react';
-import * as version from "./version.js";
 
 /*
  * Licensed to the Apache Software Foundation (ASF) under one
@@ -19,13 +18,25 @@ import * as version from "./version.js";
  * limitations under the License.
  */
 
- 
 
-export  function RecentReleasesContainer({ jsonData }) {
+export function RecentReleases({ data }) {
   return (
     <div>
-      <p><a href={ `https://github.com/apache/druid/releases/tag/druid-${version.version}`}>Apache Druid {version.version}</a></p>
-      <p><a href={ `https://github.com/apache/druid/releases/tag/druid-${version.versionPrevious}`}>Apache Druid {version.versionPrevious}</a></p>
+      <p>
+        <a href={`https://github.com/apache/druid/releases/tag/druid-${data.version}`}><b>{data.version}</b></a>
+        {data.date}
+      </p>
+    </div>
+  );
+}
+
+export  function RecentReleasesContainer({ jsonData }) {
+  const firstThree = jsonData.slice(0,5);
+  return (
+    <div>
+      {firstThree.map((data) => (
+        <RecentReleases key={data.version} data={data}/>
+      ))}
     </div>
   );
 }
