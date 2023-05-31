@@ -1,7 +1,7 @@
 ---
 id: tutorial-update-data
-title: Update existing data
-sidebar_label: Update existing data
+title: "Tutorial: Updating existing data"
+sidebar_label: "Updating existing data"
 ---
 
 <!--
@@ -32,9 +32,9 @@ Before starting this tutorial, download and run Apache Druid on your local machi
 the [single-machine quickstart](index.md).
 
 You should also be familiar with the material in the following tutorials:
-* [Load a file](../tutorials/tutorial-batch.md)
-* [Query data](../tutorials/tutorial-query.md)
-* [Rollup](../tutorials/tutorial-rollup.md)
+* [Tutorial: Loading a file](../tutorials/tutorial-batch.md)
+* [Tutorial: Querying data](../tutorials/tutorial-query.md)
+* [Tutorial: Roll-up](../tutorials/tutorial-rollup.md)
 
 ## Load initial data
 

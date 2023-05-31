@@ -1,6 +1,6 @@
 ---
 id: tutorial-batch
-title: "Load a file"
+title: "Tutorial: Loading a file"
 sidebar_label: "Load files natively"
 ---
 

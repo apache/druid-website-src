@@ -1,7 +1,7 @@
 ---
-id: schema-model
-title: Druid schema model
-sidebar_label: Schema model
+id: data-model
+title: "Druid data model"
+sidebar_label: Data model
 description: Introduces concepts of datasources, primary timestamp, dimensions, and metrics.
 ---
 
