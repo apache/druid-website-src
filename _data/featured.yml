@@ -9,7 +9,7 @@
     name: "Hellmar Becker"
     link: https://blog.hellmar-becker.de/2023/04/08/druid-sneak-peek-timeseries-interpolation/
     company: Imply
-   
+
   - date: 2023-03-07
     title: "Selective Bulk Upserts in Apache Druid"
     name: "Hellmar Becker"
