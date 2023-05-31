@@ -1,5 +1,9 @@
 /*
-Used by ContentWidget.js in index.js to display the first 5 entries from the top. 
+Used by 
+- RecentReleasesWidget in index.js to display the first 3 entries from the top. 
+- docusaurus.config.js to determine the docs folder to use to build the site
+- the downloads page to interpolate the links
+
 */
 
 /*
