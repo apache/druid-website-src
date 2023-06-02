@@ -124,13 +124,6 @@ const Redirects=[
       "to": "/docs/latest/querying/select-query"
     },
     {
-      "from": [
-        "/docs/latest/index.html",
-        "/docs/latest/operations/getting-started.html"
-      ],
-      "to": "/docs/latest/design/"
-    },
-    {
       "from": "/docs/latest/ingestion/automatic-compaction.html",
       "to": "/docs/latest/data-management/automatic-compaction"
     },
