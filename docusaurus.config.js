@@ -3,7 +3,9 @@
 - the Druid version (release.version)
 
 */
+
 var Releases = require('./static/js/version.js').Releases;
+const Redirects = require('./redirects.js').Redirects;
 
 /*
 The routing of the built site is determined by urlpath. If urlPath set to latest, you get http://localhost:3000/docs/latest/design/ built
@@ -60,12 +62,7 @@ module.exports={
         "fromExtensions": [
           "html"
         ],
-        redirects: [
-{
-  "to": "/docs/"+urlPath+"/querying/aggregations", 
-"from": "/Aggregations.html"
-},
-        ]
+        "redirects": Redirects
       }
     ]
   ],
