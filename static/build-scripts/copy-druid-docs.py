@@ -6,13 +6,13 @@ import os
 # Replaces {{DRUIDVERSION}} in the markdown files with the druid version you specify for the variable
 # 
 
-druid_version = "27.0.0"
+druid_version = "26.0.0"
 druid_variable = "{{DRUIDVERSION}}"
 
 
 # Doc directories for apache/druid (source) and website-src (destination). Assumes they're peers
-source_directory = "../druid/docs"
-destination_directory = f"./docs/{druid_version}"
+source_directory = "../../../druid/docs"
+destination_directory = f"../../docs/{druid_version}"
 
 # Copies the docs
 copy_tree(source_directory,destination_directory)
