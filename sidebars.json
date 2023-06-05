@@ -18,7 +18,6 @@
       "tutorials/tutorial-update-data",
       "tutorials/tutorial-compaction",
       "tutorials/tutorial-delete-data",
-      "tutorials/tutorial-ingestion-spec",
       "tutorials/tutorial-transform-spec",
       "tutorials/docker",
       "tutorials/tutorial-kerberos-hadoop",
@@ -44,7 +43,6 @@
       "ingestion/data-model",
       "ingestion/rollup",
       "ingestion/partitioning",
-      "ingestion/ingestion-spec",
       "ingestion/schema-design",
       {
         "type": "category",
