@@ -289,7 +289,7 @@ GROUP BY
 Join datasources allow you to do a SQL-style join of two datasources. Stacking joins on top of each other allows
 you to join arbitrarily many datasources.
 
-In Druid {{DRUIDVERSION}}, joins in native queries are implemented with a broadcast hash-join algorithm. This means
+In Druid 26.0.0, joins in native queries are implemented with a broadcast hash-join algorithm. This means
 that all datasources other than the leftmost "base" datasource must fit in memory. It also means that the join condition
 must be an equality. This feature is intended mainly to allow joining regular Druid tables with [lookup](#lookup),
 [inline](#inline), and [query](#query) datasources.
@@ -349,7 +349,7 @@ and how to detect it.
 3. One common reason for implicit subquery generation is if the types of the two halves of an equality do not match.
 For example, since lookup keys are always strings, the condition `druid.d JOIN lookup.l ON d.field = l.field` will
 perform best if `d.field` is a string.
-4. As of Druid {{DRUIDVERSION}}, the join operator must evaluate the condition for each row. In the future, we expect
+4. As of Druid 26.0.0, the join operator must evaluate the condition for each row. In the future, we expect
 to implement both early and deferred condition evaluation, which we expect to improve performance considerably for
 common use cases.
 5. Currently, Druid does not support pushing down predicates (condition and filter) past a Join (i.e. into 

@@ -72,7 +72,7 @@ which determines the version of Druid to use. The Druid version references the D
 In the same directory as `docker-compose.yaml` and `environment`, start the application:
 
 ```bash
-DRUID_VERSION={{DRUIDVERSION}} docker compose --profile druid-jupyter up -d
+DRUID_VERSION=26.0.0 docker compose --profile druid-jupyter up -d
 ```
 
 ### Start Jupyter, Druid, and Kafka
@@ -82,7 +82,7 @@ Running Druid in Docker requires the `environment` file as well as the `DRUID_VE
 In the same directory as `docker-compose.yaml` and `environment`, start the application:
 
 ```bash
-DRUID_VERSION={{DRUIDVERSION}} docker compose --profile all-services up -d
+DRUID_VERSION=26.0.0 docker compose --profile all-services up -d
 ```
 
 ### Update image from Docker Hub
@@ -102,7 +102,7 @@ If you prefer to build the image locally from the official source, do the follow
 3. Start the services using `-f docker-compose-local.yaml` in the `docker compose` command. For example:
 
 ```bash
-DRUID_VERSION={{DRUIDVERSION}} docker compose --profile all-services -f docker-compose-local.yaml up -d
+DRUID_VERSION=26.0.0 docker compose --profile all-services -f docker-compose-local.yaml up -d
 ```
 
 ## Access Jupyter-based tutorials
