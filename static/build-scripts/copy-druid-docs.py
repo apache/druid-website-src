@@ -8,26 +8,29 @@ import os
 # Replaces {{DRUIDVERSION}} in the markdown files with the druid version you specify for the variable
 
 #Update this to the Druid version you are releasing
-druid_version = "26.0.0"
+druid_version = "25.0.0"
 
 druid_variable = "{{DRUIDVERSION}}"
 
 
-# Doc directories for apache/druid (source) and website-src (destination). Assumes they're peers
 # Make sure you have the correct  branch checked out for `apache/druid`
-source_directory = "../../../my-druid-fork/docs"
+# Assumes they're peers:
+# Set source_directory to your OSS Druid repo 
+# Set destination_directory to your druid-website-src 
+
+source_directory = "../../../my-druid-fork/"
 destination_directory = f"../../docs/{druid_version}"
 destination_directory_latest = "../../docs/latest"
 
 # Copies the docs
-copy_tree(source_directory,destination_directory)
+copy_tree(source_directory+"docs",destination_directory)
 
 # deletes the _bin directory that's not needed
 shutil.rmtree(f"{destination_directory}/_bin")
 
 # Copy sidebars.json and redirects.json
-shutil.copyfile("../../../druid/website/sidebars.json","../../sidebars.json")
-shutil.copyfile("../../../druid/website/redirects.json","../../redirects.js")
+shutil.copyfile(source_directory+"website/sidebars.json","../../sidebars.json")
+shutil.copyfile(source_directory+"website/redirects.json","../../redirects.js")
 
 
 # Find/replace {{DRUIDVERSION}} with the actual version
@@ -61,7 +64,7 @@ do_the_replace(destination_directory, druid_variable, druid_version)
 
 def is_it_latest():
 
-  is_latest = input("Is this version going to be the highest version available for download? If yes, the docs will also be used for 'latest'. (y/n)").lower()
+  is_latest = input(f"Is {druid_version} going to be the highest version available for download? If yes, the docs will also be used for 'latest'. (y/n)").lower()
 
   if is_latest == 'y':
       print("Also copying the docs to docs/latest.")
