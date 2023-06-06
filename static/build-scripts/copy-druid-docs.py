@@ -58,7 +58,7 @@ do_the_replace(destination_directory, druid_variable, druid_version)
 
 def is_it_latest():
 
-  is_latest = input("Is this version going to be the highest version available for Download? If yes, the docs will also be used for 'latest'. (y/n)").lower()
+  is_latest = input("Is this version going to be the highest version available for download? If yes, the docs will also be used for 'latest'. (y/n)").lower()
 
   if is_latest == 'y':
       print("Also copying the docs to docs/latest.")
