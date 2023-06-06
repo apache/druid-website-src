@@ -2,6 +2,7 @@ _site
 Gemfile.lock
 .DS_store
 .idea
+.vscode
 .jekyll-metadata
 node_modules
 private

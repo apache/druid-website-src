@@ -29,9 +29,9 @@
     "sass": "^1.61.0"
   },
   "dependencies": {
-    "@docusaurus/core": "latest",
-    "@docusaurus/plugin-client-redirects": "latest",
-    "@docusaurus/preset-classic": "latest",
+    "@docusaurus/core": "^2.4.1",
+    "@docusaurus/plugin-client-redirects": "^2.4.1",
+    "@docusaurus/preset-classic": "^2.4.1",
     "bootstrap": "^5.2.3",
     "clsx": "^1.1.1",
     "fast-glob": "^3.2.2",

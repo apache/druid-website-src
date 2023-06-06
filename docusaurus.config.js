@@ -1,16 +1,14 @@
-/*Imports the variables that're used to specify the following the following
-- the docs sub directory that has the version of the docs you want to publish
-- the Druid version (release.version)
-
-*/
-
-var Releases = require('./static/js/version.js').Releases;
 const Redirects = require('./redirects.js').Redirects;
 
 /*
-The routing of the built site is determined by urlpath. If urlPath set to latest, you get http://localhost:3000/docs/latest/design/ built
+buildVersion is used for 2 things:
+
+- `path` determines the docs folder to use for input, such as /docs/26.0
+- `routeBasePath` for the the routing of the built . If  set to latest, you get http://localhost:3000/docs/latest/design/ built. 
+
+The build script handles updating this variable for you when you're building the site for production. You do not need to update it manually. It's set to latest by default to allow the site to be built ad hoc for local preview.
 */
-var urlPath = "latest";
+var buildVersion = "latest";
 
 module.exports={
   "title": "Apache® Druid",
@@ -42,8 +40,8 @@ module.exports={
           "exclude": [
             '**incubating/**'
           ],
-          "path": "./docs/"+Releases[0].version,
-          "routeBasePath": "/docs/"+urlPath,
+          "path": "./docs/"+buildVersion,
+          "routeBasePath": "/docs/"+buildVersion,
           "sidebarPath": "./sidebars.json"
         },
         "theme": {
