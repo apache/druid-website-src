@@ -3,8 +3,9 @@ from distutils.dir_util import copy_tree
 import os
 
 # Copies over the docs folder from `apache/druid` to `druid-website-src`
+# Copies over sidebars and redirects
 # Replaces {{DRUIDVERSION}} in the markdown files with the druid version you specify for the variable
-# 
+
 
 druid_version = "26.0.0"
 druid_variable = "{{DRUIDVERSION}}"
