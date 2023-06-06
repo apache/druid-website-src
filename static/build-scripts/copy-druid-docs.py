@@ -20,6 +20,11 @@ copy_tree(source_directory,destination_directory)
 # deletes the _bin directory that's not needed
 shutil.rmtree(f"{destination_directory}/_bin")
 
+# Copy sidebars.json and redirects.json
+shutil.copyfile("../../../druid/website/sidebars.json","../../sidebars.json")
+shutil.copyfile("../../../druid/website/redirects.json","../../redirects.js")
+
+
 # Find/replace {{DRUIDVERSION}} with the actual version
 def replace_text_in_file(destination_directory, druid_variable, druid_version):
     with open(destination_directory, 'r') as file:
@@ -48,3 +53,4 @@ def do_the_replace(directory_path, druid_variable, druid_version):
 
 
 do_the_replace(destination_directory, druid_variable, druid_version)
+
