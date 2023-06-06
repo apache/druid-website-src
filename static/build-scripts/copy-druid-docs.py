@@ -2,16 +2,19 @@ import shutil
 from distutils.dir_util import copy_tree
 import os
 
-# Copies over the docs folder from `apache/druid` to `druid-website-src`
+# Copies over the docs folder from `apache/druid` to `druid-website-src into the version for it, e.g. druid-website-src/docs/26.0.0`
+# Prompts the user on whether or not this is the highest available version for download. If yes, also copies the docs to `druid-website-src/docs/latest`
 # Copies over sidebars and redirects
 # Replaces {{DRUIDVERSION}} in the markdown files with the druid version you specify for the variable
 
-
+#Update this to the Druid version you are releasing
 druid_version = "26.0.0"
+
 druid_variable = "{{DRUIDVERSION}}"
 
 
 # Doc directories for apache/druid (source) and website-src (destination). Assumes they're peers
+# Make sure you have the correct  branch checked out for `apache/druid`
 source_directory = "../../../druid/docs"
 destination_directory = f"../../docs/{druid_version}"
 destination_directory_latest = "../../docs/latest"
