@@ -8,9 +8,13 @@ var Releases = require('./static/js/version.js').Releases;
 const Redirects = require('./redirects.js').Redirects;
 
 /*
-The routing of the built site is determined by urlpath. If urlPath set to latest, you get http://localhost:3000/docs/latest/design/ built
+The routing of the built site is determined by urlpath. If urlPath set to latest, you get http://localhost:3000/docs/latest/design/ built. 
 */
 var urlPath = "latest";
+/*Multiple versions are in the docs folder. This var determines which docs directory is used to build the site. Releases.version is reverse chronological array of the versions, so [0] is the highest version number
+*/
+var docsPath = Releases[0].version
+
 
 module.exports={
   "title": "Apache® Druid",
@@ -42,7 +46,7 @@ module.exports={
           "exclude": [
             '**incubating/**'
           ],
-          "path": "./docs/"+Releases[0].version,
+          "path": "./docs/"+docsPath,
           "routeBasePath": "/docs/"+urlPath,
           "sidebarPath": "./sidebars.json"
         },
