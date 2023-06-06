@@ -15,7 +15,7 @@ druid_variable = "{{DRUIDVERSION}}"
 
 # Doc directories for apache/druid (source) and website-src (destination). Assumes they're peers
 # Make sure you have the correct  branch checked out for `apache/druid`
-source_directory = "../../../druid/docs"
+source_directory = "../../../my-druid-fork/docs"
 destination_directory = f"../../docs/{druid_version}"
 destination_directory_latest = "../../docs/latest"
 

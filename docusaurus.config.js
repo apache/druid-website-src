@@ -92,7 +92,7 @@ module.exports={
         "position": "right",
     },
         {
-          "to": "/docs/"+urlPath+"/design/",
+          "to": "/docs/"+buildVersion+"/design/",
           "label": "Docs",
           "position": "right"
         },
