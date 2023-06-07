@@ -5,15 +5,17 @@ https://druid.apache.org/
 
 This repo is used to build the Apache Druid website. It is the source of truth for website pages such as the website homepage and pages like Community. The source of truth for  the markdown files for `docs`, the sidebar, and redirects is [`apache/druid`](https://github.com/apache/druid/). 
 
-The target repo for this site when you're ready to publish is [`druid-website`](https://github.com/apache/druid-website).
+The target repo for the website when you're ready to publish is [`druid-website`](https://github.com/apache/druid-website).
 
 ## Building the site for Druid 26 and later
 
-By default, the site is configured to always build latest if you run `npm start|build` or `yarn start|build`. This way, you can always view the site locally.
+By default, the repo always build latest if you run `npm start|build` or `yarn start|build`. This way, you can always view the site locally.
 
 The build scripts described in [Publish the site](#publish-the-site) handles building the versioned docs for when you're ready to do a release.
 
-### Install Docusaurus2
+To start, you'll need to install Docusaurus 2.  
+
+### Install Docusaurus 2
 
 You need a supported version of node, such as the latest Node 18.
 
