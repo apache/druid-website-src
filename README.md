@@ -65,7 +65,7 @@ The `do_all_things.py` script is a wrapper for the following scripts:
 
 ## Building the site before Druid 26
 
-The site for versions before 26 was built using a combination of Jekyll and Docusaurus2
+The site for versions before 26 was built using a combination of Jekyll (this repo) and Docusaurus 1 (the main Druid repo).
 
 The site requires [Node](https://nodejs.org/en/) 10.24.1 - ensure that you use this version of node. For example, if you're using [nvm](https://github.com/nvm-sh/nvm):
 
