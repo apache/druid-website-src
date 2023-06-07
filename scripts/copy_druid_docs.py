@@ -14,8 +14,10 @@ druid_variable = "{{DRUIDVERSION}}"
 # Make sure you have the correct branch checked out for `apache/druid`
 # The directory structure should have apache/druid and apache/druid-website-src as peers
 # Set source_directory to your OSS Druid repo
-source_directory = "../../my-druid-fork/"
-
+source_directory = "../../druid/"
+if not os.path.exists(source_directory):
+    import sys
+    sys.exit("Please supply a valid path for source_directory in copy_druid_docs.py")
 
 # Find/replace {{DRUIDVERSION}} with the actual version
 def replace_text_in_file(destination_directory, druid_version):
