@@ -25,7 +25,7 @@ import shutil
 import subprocess
 import sys
 
-def build_docs(versions):
+def build_docs(versions, use_yarn):
 
     for v in versions:
         print(f"Building the docs for version '{v}'...")
@@ -41,7 +41,11 @@ def build_docs(versions):
             print(re.sub(r"^var buildVersion.*", replacement, line), end='')
 
         # build the docs
-        subprocess.run(["npm", "run", "build"])
+        if not use_yarn:
+            subprocess.run(["npm", "run", "build"])
+        else:
+            subprocess.run(["yarn", "build"])
+
 
         # move output to temporary directory since docusaurus 2
         # overwrites build directory with each build.
@@ -63,7 +67,7 @@ def build_docs(versions):
     shutil.rmtree(source_dir)
     shutil.move(destination_dir, source_dir)
 
-def main(versions, skip_install):
+def main(versions, skip_install, use_yarn):
 
     # from druid-website-src/static/build-scripts,
     # move to druid-website-src to run the npm commands
@@ -75,13 +79,17 @@ def main(versions, skip_install):
     # install docusaurus 2
     if not skip_install:
         print("Installing Docusaurus 2...")
-        subprocess.run(["npm", "install"])
+
+        if not use_yarn:
+            subprocess.run(["npm", "install"])
+        else:
+            subprocess.run(["yarn", "install"])
 
     # remove the old build directory
     shutil.rmtree('build', ignore_errors=True)
 
     # do the actual builds
-    build_docs(versions)
+    build_docs(versions, use_yarn)
 
 if __name__ == "__main__":
     import argparse
@@ -95,7 +103,11 @@ if __name__ == "__main__":
                         help="Skip the Docusaurus 2 installation",
                         action='store_true')
 
+    parser.add_argument("--yarn", default=False,
+                        help="Use yarn to install and build instead of npm",
+                        action='store_true')
+
     args = parser.parse_args()
 
-    main(args.versions, args.skip_install)
+    main(args.versions, args.skip_install, args.yarn)
 
