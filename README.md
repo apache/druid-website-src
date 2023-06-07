@@ -31,13 +31,15 @@ Run `npm install` or `yarn install` in the root of the directory.
 
 These are the steps to publish either a new release or a hotfix to an existing release. Note that you'll always need to build `latest` so that the downloads page lists the correct versions, so the script automatically builds latest for you.
 
+> Note that the build scripts expect `apache/druid` and `apache/druid-website-src` to be peers at the same directory level.
+
 1. Update the version list in `static/js/version.js`. The highest release version goes in position 0. This file is used by `RecentReleasesWidget` on the home page to display the 3 most recent versions and to interpolate the download links on the download page.
 
-2. Go to `script/build-scripts/`
+2. From the root of `druid-website-src`, go to `scripts/`.
 
 3. In `copy_druid_docs.py`, set `source_directory` to your OSS Druid repo. Make sure you're on the correct branch in your Druid repo before continuing. 
 
-4. In `static/build-scripts`, run `python do_all_things.py -v VERSION`. The script assumes you used `npm` to install. See example 3 if you use `yarn`.
+4. In `scripts`, run `python do_all_things.py -v VERSION`. The script assumes you used `npm` to install. See example 3 if you use `yarn`.
 
    **Example 1**: `python do_all_things.py -v 26.0.0`. This command builds version 26.0.0 of the docs and latest.
 
