@@ -1,15 +1,21 @@
 # Druid project website
-=====================
 
 https://druid.apache.org/
 
-This repo is used to build the Apache Druid website. It is the source of truth for website pages such as the website homepage and pages like Community. The source of truth for  the markdown files for `docs`, the sidebar, and redirects is [`apache/druid`](https://github.com/apache/druid/). 
+This repo is used to build the Apache Druid website. It is the source of truth for website pages such as the website homepage and pages like Community.
+
+A different repo houses the source of truth for the following:
+* Markdown files for `docs`
+* the sidebar file, and
+* the redirects file.
+
+For those, see [`apache/druid`](https://github.com/apache/druid/). 
 
 The target repo for the website when you're ready to publish is [`druid-website`](https://github.com/apache/druid-website).
 
 ## Building the site for Druid 26 and later
 
-By default, the repo always build latest if you run `npm start|build` or `yarn start|build`. This way, you can always view the site locally.
+By default, the repo always starts/builds latest if you run `npm start|build` or `yarn start|build`. This way, you can always view the site locally.
 
 The build scripts described in [Publish the site](#publish-the-site) handles building the versioned docs for when you're ready to do a release.
 
@@ -31,17 +37,17 @@ These are the steps to publish either a new release or a hotfix to an existing r
 
 3. In `copy_druid_docs.py`, set `source_directory` to your OSS Druid repo. Make sure you're on the correct branch in your Druid repo before continuing. 
 
-4. In `static/build-scripts`, run `python do_all_things.py -v VERSION`. The script assumes you used `npm` to install. See example 3 if you used `yarn`.
+4. In `static/build-scripts`, run `python do_all_things.py -v VERSION`. The script assumes you used `npm` to install. See example 3 if you use `yarn`.
 
    **Example 1**: `python do_all_things.py -v 26.0.0`. This command builds version 26.0.0 of the docs and latest.
 
    **Example 2**: If you already have Docusaurus 2 installed, skip the installation by specifying the flag `--skip-install`. For example, `python do_all_things.py -v 26.0.0 --skip-install`
 
-   **Example 3**: If you want to use yarn instead of npm, specify the flag `--yarn`. For example, python do_all_things.py -v 26.0.0 --skip-install --yarn
+   **Example 3**: If you want to use yarn instead of npm, specify the flag `--yarn`. For example, `python do_all_things.py -v 26.0.0 --skip-install --yarn`
 
-   For more information about the scripts, see [the scripts](#the-scripts)
+   For more information about the scripts, see [the scripts](#the-scripts).
 
-5. Find the build output in `druid-website-src/build`. If you go to the `build/docs`, you should see the latest and the version you specified. These are the files for the built site. If you run it locally, such as with `http-server` you'll get the latest version of the site, such as `localhost:8080/docs/latest/` and the version you built, such as `localhost:8080/docs/26.0.0/`.
+5. Find the build output in `druid-website-src/build`. If you go to `build/docs`, you should see the latest and the version you specified. These are the files for the built site. If you run it locally, such as with `http-server` you'll get the latest version of the site, such as `localhost:8080/docs/latest/` and the version you built, such as `localhost:8080/docs/26.0.0/`.
 
 6. Make a PR to `https://github.com/apache/druid-website` with the contents of `build`.
 
@@ -49,9 +55,9 @@ These are the steps to publish either a new release or a hotfix to an existing r
 
 The `do_all_things.py` script is a wrapper for the following scripts:
 
-- Uses `copy_druid_docs.py` to copy the markdown files for the docs over and inserts the actual Druid version for the variable {{DRUIDVERSION}}. It copies the markdown files to `docs/VERSION`. If the version is going to be the highest version available, it'll also copy to `docs/latest`.
+- Uses `copy_druid_docs.py` to copy the markdown files for the docs over and inserts the actual Druid version for the variable {{DRUIDVERSION}}. It copies the Markdown files to `docs/VERSION`. If the version is going to be the highest version available, it'll also copy to `docs/latest`.
 
-- Uses `build_docs.py` to build the version you want and latest. You always need to build latest to update the downloads page and the widgets on the home page It also handles writing the redirects to create the versioned redirects for (`/doc/VERSION/`). 
+- Uses `build_docs.py` to build the version you want and latest. You always need to build latest to update the downloads page and the widgets on the home page. It also handles writing the redirects to create the versioned redirects for (`/docs/VERSION/`). 
 
 
 
