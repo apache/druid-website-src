@@ -66,7 +66,7 @@ not time, or when computing complex metrics such as histograms and quantiles.
 ### Does Druid separate storage and compute?
 
 Druid creates an indexed copy of raw data that is highly optimized for
-analytic queries. Druid runs queries over this indexed data, called a ['segment'](/docs/design/segments)
+analytic queries. Druid runs queries over this indexed data, called a ['segment'](/docs/latest/design/segments)
 in Druid, and does not pull raw data from an external storage system as needed
 by queries. 
 
@@ -74,7 +74,7 @@ by queries.
 
 Druid can be deployed on commodity hardware in any *NIX based environment.
 A Druid cluster consists of several different services, each designed to do a small set of things very well (ingestion, querying, coordination, etc).
-Many of these services can be co-located and deployed together on the same hardware as described [here](/docs/tutorials/quickstart).
+Many of these services can be co-located and deployed together on the same hardware as described [here](/docs/latest/tutorials/).
 
 Druid was designed for the cloud, and runs well in AWS, GCP, Azure, and other cloud environments.
 

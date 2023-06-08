@@ -28,7 +28,7 @@ A Druid deployment is a scalable cluster of commodity hardware with node types t
 
 In addition, Druid utilizes a deep storage layer - cloud object storage or HDFS - that contains an additional copy of each data segment. It enables background data movement between Druid processes and also provides a highly durable data source to recover from system failures.
 
-For more information, please visit [our docs page](../../../docs/design).
+For more information, please visit [our docs page](/docs/latest/design).
 
 
 ## Ingestion Layer
@@ -61,7 +61,7 @@ Within the segments, data storage is column-oriented. Queries only load the spec
   <img alt="Graphical User Interface, Application" src="img/graphical_ui_application_v2.png" />
 </div>
 
-For more information, please visit [our docs page](/docs/latest/design/segments.html).
+For more information, please visit [our docs page](/docs/latest/design/segments).
 
 ## Interactive Queries
 
@@ -77,4 +77,4 @@ First, the query engine prunes the list of segments, creating a list of which se
 
 Scatter/gather works from the smallest single server cluster (all of Druid on one server) to clusters with thousands of servers, enabling sub-second performance for most queries even with very large data sets of multiple petabytes.
 
-For more information, please visit [our docs page](/docs/latest/querying/querying.html).
+For more information, please visit [our docs page](/docs/latest/querying/).

@@ -86,7 +86,7 @@ UIs
 Tools
 -----
 
-* [Insert Segments](/docs/operations/insert-segment-to-db) - A tool that can insert segments' metadata into Druid metadata storage.
+* [Insert Segments](/docs/latest/operations/insert-segment-to-db) - A tool that can insert segments' metadata into Druid metadata storage.
 * [liquidm/druid-dumbo](https://github.com/liquidm/druid-dumbo) - Scripts to help generate batch configs for the ingestion of data into Druid
 * [housejester/druid-test-harness](https://github.com/housejester/druid-test-harness) - A set of scripts to simplify standing up some servers and seeing how things work
 * [spaghettifunk/druid-prometheus-exporter](https://github.com/spaghettifunk/druid-prometheus-exporter) - A HTTP service for collecting Druid metrics and exposing them as Prometheus metrics

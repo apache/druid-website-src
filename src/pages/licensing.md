@@ -12,7 +12,7 @@ The Druid website is licensed under [CC-BY-SA 4.0](http://creativecommons.org/li
 
 ## Copyright and Trademark
 
-Contributions to Druid are subject to a [contributor license agreement](/community/cla.html)
+Contributions to Druid are subject to a [contributor license agreement](./community/cla).
 
 ## Does Druid use or embed any other open source software?
 
