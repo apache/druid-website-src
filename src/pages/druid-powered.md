@@ -2,7 +2,11 @@
 title: Powered by Apache Druid
 ---
 
-# Powered by Apache Druid 
+<div class="simple-header">
+  <div class="container">
+    <h1>Powered by Apache Druid</h1>
+  </div>
+</div>
 
 :::tip
 
