@@ -37,9 +37,12 @@ export function Events({ data }) {
 export  function EventsContainer({ jsonData }) {
   return ( 
     <div>
-      {jsonData.map((data) => (
+      {jsonData.length === 0 ? (
+        <p>Nothing scheduled yet.</p> ) : (
+      
+      jsonData.map((data) => (
         <Events key={data.name} data={data} />
-      ))}
+      )))}
     </div>
   );
 }
