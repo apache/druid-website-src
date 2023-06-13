@@ -75,7 +75,7 @@ def main(druid_version):
 
     # Copy sidebars.json and redirects.json
     shutil.copyfile(source_directory+"website/sidebars.json","../sidebars.json")
-    shutil.copyfile(source_directory+"website/redirects.json","../redirects.js")
+    shutil.copyfile(source_directory+"website/redirects.js","../redirects.js")
 
     do_the_replace(destination_directory, druid_version)
 
