@@ -98,7 +98,7 @@ export default () => {
                   <span className="fa fa-flag-checkered fa" />
                   <h5> Quickstart</h5>
                   <p>
-                    <a href="/docs/tutorials/">Get started with Druid</a> in minutes. Load your own data and query it.
+                    <a href="/docs/latest/tutorials/">Get started with Druid</a> in minutes. Load your own data and query it.
                   </p>
                 </div>
                 <div className="feature">
