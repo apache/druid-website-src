@@ -27,3 +27,8 @@
   name: "Virtual drop-in (Europe)"
   info: Apache Druid real-time analytics drop-in (Europe) by Imply
   link: https://www.meetup.com/apache-druid-london/events/291355923/
+
+- date: 2023-07-27
+  name: "In-person (Americas)"
+  info: "Real-Time Meetup: Druid Roadmap + Success Stories from Conviva & ThousandEyes"
+  link: https://www.meetup.com/druidio/events/294343938/
