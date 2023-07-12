@@ -29,7 +29,7 @@ Common application areas for Druid include:
 
 Some of these use cases are described in more detail below. For an overview of technical differentiation, please see the [FAQ](faq).
 
-If you are experimenting with a new use case for Druid or  have questions about Druid's capabilities and features, join the [Apache Druid Slack](http://apachedruidworkspace.slack.com/) channel! There, you can connect with Druid experts, ask questions, and get help in real time.
+If you are experimenting with a new use case for Druid or have questions about Druid's capabilities and features, join the [Apache Druid Slack](http://apachedruidworkspace.slack.com/) channel! There, you can connect with Druid experts, ask questions, and get help in real time.
 
 <div class="zigzag-features">
 <div class="zigzag-feature">
