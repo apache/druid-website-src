@@ -1,23 +1,44 @@
-import shutil
 from distutils.dir_util import copy_tree
 import os
+import shutil
+import subprocess
 
 """
-# Copies over the docs folder from `apache/druid` to `druid-website-src into the version for it, e.g. druid-website-src/docs/26.0.0`
-# Prompts the user on whether or not this is the highest available version for download. If yes, also copies the docs to `druid-website-src/docs/latest`
-# Copies over sidebars and redirects
-# Replaces {{DRUIDVERSION}} in the markdown files with the druid version you specify for the variable
+copy_druid_docs.py does the following:
+
+1. Copies over the docs folder from `apache/druid` to `druid-website-src into
+   the version for it, e.g. druid-website-src/docs/26.0.0`
+
+2. Copies over sidebars and redirects.
+
+3. Replaces {{DRUIDVERSION}} in the Markdown files with the Druid version
+   you specify in the command line.
+
+4. Prompts the user on whether or not this is the highest available version
+   for download. If yes, also copies the docs to `druid-website-src/docs/latest`
+
+To use this as a standalone script, call it like:
+python copy_druid_docs.py -v 26.0.0
 """
 
 druid_variable = "{{DRUIDVERSION}}"
 
-# Make sure you have the correct branch checked out for `apache/druid`
-# The directory structure should have apache/druid and apache/druid-website-src as peers
 # Set source_directory to your OSS Druid repo
-source_directory = "../../my-druid-fork/"
+# The directory structure should have apache/druid and apache/druid-website-src as peers
+source_directory = "../../druid/"
 if not os.path.exists(source_directory):
     import sys
-    sys.exit("Please supply a valid path for source_directory in copy_druid_docs.py")
+    sys.exit("Please supply a valid path for 'source_directory' in copy_druid_docs.py")
+
+# Check that the correct branch is checked out for `apache/druid`
+branch_result = subprocess.run(["git", "rev-parse", "--abbrev-ref", "HEAD"], capture_output=True)
+current_branch = branch_result.stdout.decode('ascii').strip()
+correct_branch = input("Is the following docs source correct? (y/n)\n"
+                       f"Repo:\t'{source_directory}'\nBranch:\t'{current_branch}'\n").lower()
+if correct_branch == 'n':
+    print("Exiting. Confirm the correct repo location in the 'source_directory' variable and check out the correct branch.")
+    quit()
+
 
 # Find/replace {{DRUIDVERSION}} with the actual version
 def replace_text_in_file(destination_directory, druid_version):
