@@ -9,6 +9,8 @@ private
 /css/
 _staging
 scripts/__pycache__/
+build
+published_versions/.nojekyll
 
 # yarn v2
 .yarn/cache
