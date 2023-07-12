@@ -51,7 +51,7 @@ These are the steps to publish either a new release or a hotfix to an existing r
 
 5. Find the build output in `druid-website-src/build`. If you go to `build/docs`, you should see the latest and the version you specified. These are the files for the built site. If you run it locally, such as with `http-server` you'll get the latest version of the site, such as `localhost:8080/docs/latest/` and the version you built, such as `localhost:8080/docs/26.0.0/`.
 
-6. Make a PR to `https://github.com/apache/druid-website` with the contents of `build`.
+6. Make a PR to `https://github.com/apache/druid-website` with the contents of `published_versions`.
 
 ### The scripts
 
@@ -61,36 +61,22 @@ The `do_all_things.py` script is a wrapper for the following scripts:
 
 - Uses `build_docs.py` to build the version you want and latest. You always need to build latest to update the downloads page and the widgets on the home page. It also handles writing the redirects to create the versioned redirects for (`/docs/VERSION/`). 
 
+Once `do_all_things.py` builds the version you want and latest, it copies the build output to `published_versions`. You can use this directory to republish the whole site.
 
+`published_versions` houses the following:
+
+- The old CSS needed to properly render Docusaurus 1 pages
+- The website pages, like Community
+- All the built HTML pages for the docs, including pre-Docusaurus 2 HTML pages
 
 ## Building the site before Druid 26
 
-The site for versions before 26 was built using a combination of Jekyll (this repo) and Docusaurus 1 (the main Druid repo).
+The HTML files for pre-Docusaurus 2 versions (versions before 26) are in .published_versions/docs. If you need to publish updated versions of those files for any reason, you need to build the docs with Docusaurus 1 in the `apache/druid` repo:
 
-The site requires [Node](https://nodejs.org/en/) 10.24.1 - ensure that you use this version of node. For example, if you're using [nvm](https://github.com/nvm-sh/nvm):
-
-```
-nvm install 10
-nvm use 10
-```
-
-Setup (you only need to do this once):
-
-```
-npm install
-bundle install
-```
-
-Every time you want to run the site:
-
-```
-gulp
-npm start
-```
-
-### Notes
-
-Ideally we would not be checking in the `css` directory and just build it as part of the deploy process.
+1. Checkout the branch you want to build, such as `25.0.0`.
+2. In `apache/druid/website`, run `npm run build` or `yarn build`.
+3. Copy the HTML files for the docs from the build output to `published_versions/docs/VERSION`.
+4. Publish the site as you normally would for a new release.
 
 ## Contributing
 

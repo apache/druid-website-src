@@ -1,5 +1,6 @@
 import copy_druid_docs
 import build_docs
+import shutil
 
 # Example: python do_all_things.py -v 26.0.0
 
@@ -10,6 +11,9 @@ def main(versions, skip_install, use_yarn):
 
     # build all specified versions of the docs
     build_docs.main([args.version, "latest"], skip_install, use_yarn)
+
+    print("Copying build output to ./published_versions. Use that directory to publish the site.")
+    shutil.copytree('build','published_versions', dirs_exist_ok=True)
 
 if __name__ == "__main__":
     import argparse
