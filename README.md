@@ -13,6 +13,15 @@ For those, see [`apache/druid`](https://github.com/apache/druid/).
 
 The target repo for the website when you're ready to publish is [`druid-website`](https://github.com/apache/druid-website).
 
+## Updating homepage widgets
+
+If you need to update the contents of Upcoming Events, Featured Content or Latest releases widgets, you can find them in `static/js`:
+
+- `EventList.js` (rendered by `EventsWidget.js`)
+- `FeaturedContent.js` (rendered by `FeaturedContentWidget.js`)
+- `version.js` (rendered by `RecentReleasesWidget.js`)
+
+
 ## Building the site for Druid 26 and later
 
 By default, the repo always starts/builds latest if you run `npm start|build` or `yarn start|build`. This way, you can always view the site locally.
