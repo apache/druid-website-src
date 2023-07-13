@@ -5,7 +5,7 @@ https://druid.apache.org/
 This repo is used to build the Apache Druid website. It is the source of truth for website pages such as the website homepage and pages like Community.
 
 A different repo houses the source of truth for the following:
-* Markdown files for `docs`
+* Markdown files for `docs` (If you're looking for the HTML pages that were previously here for pre-26.0.0 docs, they're now in `published_versions`)
 * the sidebar file
 * the redirects file
 
@@ -49,7 +49,9 @@ These are the steps to publish either a new release or a hotfix to an existing r
 
    For more information about the scripts, see [the scripts](#the-scripts).
 
-   The versions you built (such as 26.0.0 and lateest) are copied to `published_versions` where the compiled pages for the older docs live.
+> While the script builds the docs for the specified version, you'll get some false positives for broken links. (The first version that the script builds.) These are from the website pages to `/latest` doc pages, which don't exist yet. You only need to pay attention to broken links from the second build, which is for `latest`.
+
+   The versions you built (such as 26.0.0 and latest) are copied to `published_versions` where the compiled pages for the older docs live.
 
 5. Go to `published_versions` and verify the site. If you run it locally, such as with `http-server` you'll get the latest version of the site, such as `localhost:8080/docs/latest/` and the version you built, such as `localhost:8080/docs/26.0.0/`. In addition, you should be able to see pre-Docusaurus2 versions such as 25.0.0 with the old CSS.
 
