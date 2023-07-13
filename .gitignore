@@ -8,7 +8,7 @@ node_modules
 private
 /css/
 _staging
-
+published_versions/.nojekyll
 
 # yarn v2
 .yarn/cache
