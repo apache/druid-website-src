@@ -12,7 +12,7 @@ def main(versions, skip_install, use_yarn):
     # build all specified versions of the docs
     build_docs.main([args.version, "latest"], skip_install, use_yarn)
 
-    print("Copying build output to ./published_versions. Use that directory to publish the site.")
+    print("Copying build output to ../published_versions. Use that directory to publish the site.")
     shutil.copytree('build','published_versions', dirs_exist_ok=True)
 
 if __name__ == "__main__":

@@ -31,7 +31,7 @@ if not os.path.exists(source_directory):
     sys.exit("Please supply a valid path for 'source_directory' in copy_druid_docs.py")
 
 # Check that the correct branch is checked out for `apache/druid`
-branch_result = subprocess.run(["git", "rev-parse", "--abbrev-ref", "HEAD"], capture_output=True)
+branch_result = subprocess.run(["git", "rev-parse", "--abbrev-ref", "HEAD"], cwd=source_directory, capture_output=True)
 current_branch = branch_result.stdout.decode('ascii').strip()
 correct_branch = input("Is the following docs source correct? (y/n)\n"
                        f"Repo:\t'{source_directory}'\nBranch:\t'{current_branch}'\n").lower()
