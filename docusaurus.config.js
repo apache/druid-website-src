@@ -36,7 +36,6 @@ module.exports={
         "docs": {
           "showLastUpdateAuthor": false,
           "showLastUpdateTime": false,
-          "editUrl": "https://github.com/apache/druid/edit/master/docs/",
           "exclude": [
             '**incubating/**'
           ],
@@ -143,7 +142,7 @@ module.exports={
     "image": "img/druid_nav.png",
     "footer": {
       "links": [],
-      "copyright": "Copyright © 2023 Apache Software Foundation",
+      "copyright": "Copyright © 2023 Apache Software Foundation. Except where otherwise noted, licensed under CC BY-SA 4.0. Apache Druid, Druid, and the Druid logo are either registered trademarks or trademarks of The Apache Software Foundation in the United States and other countries.",
       "logo": {
         "src": "img/favicon.png"
       }
