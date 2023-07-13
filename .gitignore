@@ -10,6 +10,7 @@ private
 _staging
 published_versions/.nojekyll
 build
+scripts/__pycache__
 
 # yarn v2
 .yarn/cache
