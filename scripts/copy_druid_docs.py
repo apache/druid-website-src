@@ -33,8 +33,8 @@ if not os.path.exists(source_directory):
 # Check that the correct branch is checked out for `apache/druid`
 branch_result = subprocess.run(["git", "rev-parse", "--abbrev-ref", "HEAD"], cwd=source_directory, capture_output=True)
 current_branch = branch_result.stdout.decode('ascii').strip()
-correct_branch = input("Is the following docs source correct? (y/n)\n"
-                       f"Repo:\t'{source_directory}'\nBranch:\t'{current_branch}'\n").lower()
+print(f"Repo:\t'{source_directory}'\nBranch:\t'{current_branch}'\n")
+correct_branch = input("Is the following docs source correct? (y/n)").lower()
 if correct_branch == 'n':
     print("Exiting. Confirm the correct repo location in the 'source_directory' variable and check out the correct branch.")
     quit()
