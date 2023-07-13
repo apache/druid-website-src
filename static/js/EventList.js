@@ -30,5 +30,16 @@ This is the format for an entry in the array:
 */
 
 export const EventData = [
-
-  ]
+  {
+  "date": "2023-07-27",
+  "name": "In-person (Americas)",
+  "info": "Real-Time Meetup: Druid Roadmap + Success Stories from Conviva & ThousandEyes",
+  "link": "https://www.meetup.com/druidio/events/294343938/"
+  },
+  {
+    "date": "2023-03-02",
+    "name": "Virtual Drop-in (Asia)",
+    "info": "Apache Druid Meetup by Imply",
+    "link": "https://www.meetup.com/bangalore-druid-meetup-group/events/291483003/"
+  }  
+]

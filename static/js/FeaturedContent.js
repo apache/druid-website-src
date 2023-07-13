@@ -23,7 +23,29 @@ Used by ContentWidget.js in index.js to display the first 5 entries from the top
  
 
 export const Content = [
-    {
+  {
+    "date": "2023-04-23",
+    "title": "Multi-Value Dimensions in Apache Druid (Part 5)",
+    "name": "Hellmar Becker",
+    "link": "https://blog.hellmar-becker.de/2023/04/23/multivalue-dimensions-in-apache-druid-part-5/",
+    "company": "Imply"
+  },
+  {
+    "date": "2023-04-08",
+    "title": "Druid Sneak Peek: Timeseries Interpolation",
+    "name": "Hellmar Becker",
+    "link": "https://blog.hellmar-becker.de/2023/04/08/druid-sneak-peek-timeseries-interpolation/",
+    "company": "Imply"
+  },
+  {
+    "date": "2023-03-07",
+    "title": "Selective Bulk Upserts in Apache Druid",
+    "name": "Hellmar Becker",
+    "link": "https://blog.hellmar-becker.de/2023/03/07/selective-bulk-upserts-in-apache-druid/",
+    "company": "Imply"
+  },
+
+  {
       "date": "2023-01-27",
       "title": "Primary and secondary partitioning",
       "name": "Sergio Ferragut",

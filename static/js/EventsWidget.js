@@ -22,7 +22,7 @@ import React from 'react';
 
 export function Events({ data }) {
   return (
-    <div>
+    <div>  
       <p>
         <i className="fa fa-solid fa-calendar cal-icon"></i>
         <b>{data.date}</b><br/>
@@ -34,15 +34,15 @@ export function Events({ data }) {
   );
 }
 
-export  function EventsContainer({ jsonData }) {
+export function EventsContainer({ jsonData }) { 
+  const today = new Date(); 
   return ( 
-    <div>
-      {jsonData.length === 0 ? (
-        <p>Nothing scheduled yet.</p> ) : (
-      
-      jsonData.map((data) => (
-        <Events key={data.name} data={data} />
-      )))}
-    </div>
-  );
+    <div> {
+      jsonData.length === 0 ? ( <p>Nothing scheduled yet.</p> ) : ( jsonData.map((data) => { 
+        const eventDate = new Date(data.date); 
+        return eventDate >= today ? ( <Events key={data.name} data={data} /> ) : null; 
+      }) 
+    )} 
+    </div> 
+  ); 
 }
