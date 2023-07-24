@@ -172,7 +172,7 @@ CrunchMetrics has fully integrated their platform with Apache Druid, designed to
 
 ## Cuebook
 
-At [Cuebook](https://cuebook.ai/), Druid serves as the analytics database for our augmented analytics product.
+At [Cuebook](https://cueobserve.cuebook.ai/), Druid serves as the analytics database for our augmented analytics product.
 
 * [Augmented analytics on business metrics by Cuebook with Apache Druid](https://imply.io/post/augmented-analytics-on-business-metrics-by-cuebook) (Sachin Bansal, Peter Marshall), *Imply blog*, 18 Aug 2021.
 
