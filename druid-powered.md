@@ -40,7 +40,7 @@ Druid is widely used in different business units of Alibaba Group.
 
 - At Alibaba Cloud, Druid powers its [E-MapReduce](https://www.alibabacloud.com/help/doc-detail/201882.html) cloud service, which is a big data platform based on open source engines such as Hadoop. See [E-MapReduce Druid](https://www.alibabacloud.com/help/doc-detail/72987.html) for more details.
 
-- At its Local Services Business Unit, Druid is responsible for realtime application performance monitoring and alerting. More details can be found in [this blog](https://druid.org.cn/?p=91) (Chinese).
+- At its Local Services Business Unit, Druid is responsible for realtime application performance monitoring and alerting.
 
 ## Allegro
 
