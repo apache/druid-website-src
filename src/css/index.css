@@ -1,0 +1,96 @@
+.druid-masthead {
+  padding: 50px 20px 42px 20px;
+  background-color: #3b3b50;
+  text-align: center;
+  margin: auto;
+  margin-left: auto;
+  margin-bottom: 14px;
+  color: white;
+  overflow: hidden;
+  background-image: url("/img/watermark-dark.png");
+  background-size: 800px auto;
+  background-repeat: no-repeat;
+  background-position: 26 -76px; 
+}
+.druid-masthead .button {
+  display: inline-block;
+  min-width: 155px;
+  margin: 6px;
+  font-size: 1.1em;
+  line-height: 1.4em;
+  font-weight: 600;
+  padding: 9px 12px;
+  border-radius: 2px;
+  background: #9caeff;
+  color: #1C1C26;
+  transition: background-color 0.1s ease; 
+}
+
+.druid-masthead .button .fa, .druid-masthead .button .fab {
+  font-size: 16px;
+  margin-right: 3px; 
+}
+
+.druid-masthead .button:hover, .druid-masthead .button:active {
+  background: white;
+  text-decoration: none; 
+}
+
+.druid-masthead .lead {
+  font-size: 1.7em;
+  line-height: 1.7em;
+  font-weight: 600;
+  margin-top: 8px;
+  margin-bottom: 26px;
+  max-width: 910px;
+  margin-left: auto;
+  margin-right: auto; 
+}
+
+.druid-masthead b {
+  font-weight: 700; 
+}
+
+
+.druid-feature {
+  background-color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.druid-feature-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Three columns, each taking up 1/3 of the width */
+  gap: 20px; /* Space between the cards */
+}
+
+.button {
+  position: relative;
+  background-color:#4460de;
+  border-color: #4460de;
+  color: #fff;
+  display: inline-block;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding:3px 8px;
+  width: fit-content;
+}
+
+.widget-container {
+  margin-top: 6px;
+  padding: 0 10px;
+}
+
+.widget-container a {
+  display: block;
+  line-height: 1.5em;
+}
+
+.widget-container a:hover {
+  text-decoration: underline;
+}
+
+.cal-icon {
+  padding-right: 7px;
+}
