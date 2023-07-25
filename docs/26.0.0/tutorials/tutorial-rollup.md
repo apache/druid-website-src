@@ -113,7 +113,7 @@ We will see how these definitions are used after we load this data.
 
 ## Load the example data
 
-From the apache-druid-{{DRUIDVERSION}} package root, run the following command:
+From the apache-druid-26.0.0 package root, run the following command:
 
 ```bash
 bin/post-index-task --file quickstart/tutorial/rollup-index.json --url http://localhost:8081
