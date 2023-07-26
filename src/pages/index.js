@@ -102,6 +102,13 @@ export default () => {
                   </p>
                 </div>
                 <div className="feature">
+                  <span className="fa fa-shield fa" />
+                  <h5> Security</h5>
+                  <p>
+                    Learn about <a href="/docs/latest/operations/security-overview.html">security features, configuration instructions, and best practices</a> to secure Druid.
+                  </p>
+                </div>
+                <div className="feature">
                   <span className="fa fa-question-circle fa" />
                   <h5> Get Help</h5>
                   <p>
