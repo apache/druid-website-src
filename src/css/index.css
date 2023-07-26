@@ -1,16 +1,21 @@
+html a, body a {
+  text-decoration: none;
+}
+
+html b, body b {
+  font-weight: bold;
+}
+
 .druid-masthead {
-  padding: 50px 20px 42px 20px;
+  padding: 50px 20px 50px 20px;
   background-color: #3b3b50;
   text-align: center;
-  margin: auto;
-  margin-left: auto;
-  margin-bottom: 14px;
   color: white;
   overflow: hidden;
   background-image: url("/img/watermark-dark.png");
   background-size: 800px auto;
   background-repeat: no-repeat;
-  background-position: 26 -76px; 
+  background-position: 26% -76px; 
 }
 .druid-masthead .button {
   display: inline-block;
@@ -51,6 +56,43 @@
   font-weight: 700; 
 }
 
+.druid-masthead sup {
+  vertical-align: super; 
+  font-size: 0.5em;
+}
+
+.navbar__logo {
+  padding-left: 15px;
+}
+
+.navbar__items--right{
+  padding-right: 15px;
+}
+
+.navbar__item {
+  color: #9caeff;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+.navbar__item:hover {
+  color: white;
+}
+
+.navbar__link {
+  color: #9caeff;
+}
+
+.navbar__link:hover {
+  color: white;
+}
+
+.dropdown__menu {
+  margin-top: 0;
+}
+
+.navbar {
+  padding-right: 15px;
+}
 
 .druid-feature {
   background-color: white;
@@ -93,4 +135,28 @@
 
 .cal-icon {
   padding-right: 7px;
+}
+
+@media (max-width: 500px) {
+  .druid-masthead {
+    .lead {
+      font-size: 1.4em;
+    }
+
+    .button {
+      min-width: 130px;
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  .card {
+    min-height: 294px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .card {
+    min-height: 230px;
+  }
 }

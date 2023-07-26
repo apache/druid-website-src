@@ -5,6 +5,10 @@ import { FeatureList } from "../../static/js/FeatureList";
 import '../css/index.css';
 import "../../static/css/base.css";
 
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 /* Imports for the 3 widgets on the right for events, content, and releases
 */
@@ -14,10 +18,6 @@ import { FeaturedContentContainer } from "../../static/js/FeaturedContentWidget"
 import { Content } from "../../static/js/FeaturedContent";
 import { RecentReleasesContainer } from "../../static/js/RecentReleasesWidget";
 import { Releases } from "../../static/js/version";
-
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Container from "react-bootstrap/Container";
 
 export default () => {
   return (
@@ -42,7 +42,7 @@ export default () => {
         </main>
         <Container >
           <Row>
-            <Col>
+            <Col md={9}>
               <h2>
                 Overview
               </h2>
@@ -117,7 +117,7 @@ export default () => {
                 </div>
               </div>
             </Col>
-            <Col md={3}>
+            <Col>
               <div className="widget-container">
                 <h3>Upcoming Events</h3>
                 <EventsContainer jsonData={EventData} />
