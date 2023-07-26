@@ -148,16 +148,5 @@ module.exports={
         "src": "img/favicon.png"
       }
     },
-    "algolia": {
-      "appId": "CPK9PMSCEY",
-      "apiKey": "d4ef4ffe3a2f0c7d1e34b062fd98736b",
-      "indexName": "apache_druid",
-      "algoliaOptions": {
-        "facetFilters": [
-          "language:LANGUAGE",
-          "version:druidVersion"
-        ]
-      }
-    }
   }
 }
