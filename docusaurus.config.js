@@ -61,7 +61,8 @@ module.exports={
         ],
         "redirects": Redirects
       }
-    ]
+    ],
+      require.resolve('docusaurus-lunr-search')
   ],
   "themeConfig": {
     colorMode: {
