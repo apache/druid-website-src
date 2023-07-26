@@ -1,5 +1,6 @@
 html a, body a {
   text-decoration: none;
+  color: inherit;
 }
 
 html b, body b {
