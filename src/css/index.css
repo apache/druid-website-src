@@ -1,3 +1,9 @@
+/* Set line height */
+body table {
+  line-height: 1.5;
+}
+
+/* Home page CSS grid */
 .grid-container {
   display: grid;
   grid-template-columns: 3fr 1fr;
@@ -12,6 +18,7 @@
   padding: 0 15px;
 }
 
+/* Home page banner */
 .druid-masthead {
   padding: 50px 20px 50px 20px;
   margin-bottom: 10px;
@@ -24,6 +31,8 @@
   background-repeat: no-repeat;
   background-position: 26% -76px; 
 }
+
+/* Banner button */
 .druid-masthead .button {
   display: inline-block;
   min-width: 155px;
@@ -68,17 +77,23 @@
   font-size: 0.5em;
 }
 
+/* Ensure monospace is used for code font */
 code {
-  background-color: rgb(21 23 25 / 5%);
-  border-radius: 3px;
   color: inherit;
-  font-family: monospace;
+  font-family: monospace !important;
 }
 
+/* Add padding to navbar logo */
 .navbar__logo {
   padding-left: 15px;
 }
 
+/* Add padding to navbar */
+.navbar {
+  padding-right: 15px;
+}
+
+/* Style navbar items */
 .navbar__items--right{
   padding-right: 15px;
 }
@@ -92,6 +107,7 @@ code {
   color: white;
 }
 
+/* Style navbar links */
 .navbar__link {
   color: #9caeff;
 }
@@ -100,14 +116,12 @@ code {
   color: white;
 }
 
+/* Ensure that dropdown stays open when clicked */
 .dropdown__menu {
   margin-top: 0;
 }
 
-.navbar {
-  padding-right: 15px;
-}
-
+/* Individual key feature */
 .druid-feature {
   background-color: white;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -115,12 +129,14 @@ code {
   padding: 20px;
 }
 
+/* Grid system for key features */
 .druid-feature-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* Three columns, each taking up 1/3 of the width */
   gap: 20px; /* Space between the cards */
 }
 
+/* Call to action button */
 .button {
   position: relative;
   background-color:#4460de;
@@ -133,6 +149,7 @@ code {
   width: fit-content;
 }
 
+/* Widget container CSS*/
 .widget-container {
   margin-top: 6px;
   padding: 0 10px;
@@ -151,6 +168,7 @@ code {
   padding-right: 7px;
 }
 
+/* Change font color in footer */
 .footer__copyright{
   margin-top: 12px;
   font-size: 14px;
