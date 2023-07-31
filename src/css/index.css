@@ -77,10 +77,15 @@ body table {
   font-size: 0.5em;
 }
 
-/* Ensure monospace is used for code font */
+/* Use font styling from Docusaurus 1 */
 code {
-  color: inherit;
-  font-family: monospace !important;
+    background-color: rgba(27,31,35,.05) !important;
+    border-radius: 3px !important;
+    color: inherit !important;
+    font-family: SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace !important;
+    font-size: 85% !important;
+    margin: 0 !important;
+    padding: 3.2px 6.4px !important;
 }
 
 /* Add padding to navbar logo */
