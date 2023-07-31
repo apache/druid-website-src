@@ -10,7 +10,7 @@ article, aside, details, figcaption, figure, footer, header, menu, nav, section 
   display: block; }
 
 body {
-  line-height: 1.2 em; }
+  line-height: 1; }
 
 * {
   box-sizing: border-box;
@@ -203,7 +203,6 @@ html, body {
     .fancy-list li::before {
       content: "";
       position: absolute;
-      top: 5px;
       left: 0;
       width: 16px;
       height: 16px;

@@ -3,7 +3,7 @@ import React from "react";
 import { CardList } from "../../static/js/features";
 import { FeatureList } from "../../static/js/FeatureList";
 import '../css/index.css';
-import "../../static/css/base.css";
+import "../css/base.css";
 
 /* Imports for the 3 widgets on the right for events, content, and releases
 */

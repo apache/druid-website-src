@@ -8,8 +8,6 @@
     "write-translations": "docusaurus-write-translations",
     "version": "docusaurus-version",
     "rename-version": "docusaurus-rename-version",
-    "compile-scss": "node-sass scss -o static/css",
-    "watch-scss": "node-sass --watch scss -o static/css",
     "link-lint": "npm run build && node script/link-lint.js",
     "spellcheck": "mdspell --en-us --ignore-numbers --report '../docs/**/*.md' || (./script/notify-spellcheck-issues && false)",
     "swizzle": "docusaurus swizzle",
@@ -32,12 +30,10 @@
     "@docusaurus/core": "^2.4.1",
     "@docusaurus/plugin-client-redirects": "^2.4.1",
     "@docusaurus/preset-classic": "^2.4.1",
-    "bootstrap": "^5.2.3",
     "clsx": "^1.1.1",
     "fast-glob": "^3.2.2",
     "fs-extra": "^8.1.0",
     "react": "^17.0.2",
-    "react-bootstrap": "^2.7.2",
     "react-dom": "^17.0.2",
     "replace-in-file": "^4.3.1"
   }
