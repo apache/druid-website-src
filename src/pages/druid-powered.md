@@ -8,9 +8,11 @@ title: Powered by Apache Druid
   </div>
 </div>
 
+
 :::tip
 
-<a href="https://github.com/apache/druid-website-src/blob/master/src/pages/druid-powered.md"><span class="fa fa-plus"></span> Add Your Company</a>
+<a href="https://github.com/apache/druid-website-src/blob/master/src/pages/druid-powered.md">
+<span class="fa fa-plus"></span> Add your company</a>
 
 :::
 

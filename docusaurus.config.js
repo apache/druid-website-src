@@ -44,7 +44,10 @@ module.exports={
           "sidebarPath": "./sidebars.json"
         },
         "theme": {
-          "customCss": "./src/css/customTheme.css"
+         "customCss": [
+          "./src/css/customTheme.css",
+          "./src/css/index.css"
+         ]
         },
         "gtag": {
           "trackingID": "UA-131010415-1"
@@ -85,11 +88,11 @@ module.exports={
           "label": "Use Cases",
           "position": "right",
         },
-      {
+        {
         "to": "/druid-powered",
         "label": "Powered By",
         "position": "right",
-    },
+        },
         {
           "to": "/docs/"+buildVersion+"/design/",
           "label": "Docs",
@@ -102,6 +105,7 @@ module.exports={
         },
         {
           "label": "Apache®",
+          "type": "dropdown",
           "position": "right",
           "items": [
             {
@@ -128,8 +132,6 @@ module.exports={
               "href": "https://www.apache.org/foundation/sponsorship.html",
               "label": "Sponsorship"
             }
-
-
           ],
         },
         {

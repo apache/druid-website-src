@@ -3,8 +3,7 @@ import React from "react";
 import { CardList } from "../../static/js/features";
 import { FeatureList } from "../../static/js/FeatureList";
 import '../css/index.css';
-import "../../static/css/base.css";
-
+import "../css/base.css";
 
 /* Imports for the 3 widgets on the right for events, content, and releases
 */
@@ -15,34 +14,23 @@ import { Content } from "../../static/js/FeaturedContent";
 import { RecentReleasesContainer } from "../../static/js/RecentReleasesWidget";
 import { Releases } from "../../static/js/version";
 
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Container from "react-bootstrap/Container";
-
 export default () => {
   return (
     <Layout title="Apache Druid">
       <div>
         <main className="druid-masthead">
-          <Container >
-            <Row>
-              <Col>
-                <div className="text-center">
-                  <h1>Apache<sup>®</sup> Druid</h1>
-                  <p className="lead">Druid is a high performance, real-time analytics database that delivers sub-second queries on streaming and batch data at scale and under load.</p>
-                  <p>
-                    <a className="button" href="/downloads.html"><span className="fa fa-download" /> Download</a>
-                    <a className="button" href="/community/join-slack?v=1"><span className="fab fa-slack" /> Join Slack</a>
-                    <a className="button" href="https://github.com/apache/druid/"><span className="fab fa-github" /> GitHub</a></p>
-                  <p />
-                </div>
-              </Col>
-            </Row>
-          </Container >
+            <div className="text-center">
+              <h1>Apache<sup>®</sup> Druid</h1>
+                <p className="lead">Druid is a high performance, real-time analytics database that delivers sub-second queries on streaming and batch data at scale and under load.</p>
+                <p>
+                  <a className="button" href="/downloads.html"><span className="fa fa-download" /> Download</a>
+                  <a className="button" href="/community/join-slack?v=1"><span className="fab fa-slack" /> Join Slack</a>
+                  <a className="button" href="https://github.com/apache/druid/"><span className="fab fa-github" /> GitHub</a></p>
+                <p />
+            </div>
         </main>
-        <Container >
-          <Row>
-            <Col>
+            <div className="grid-container">
+              <div className="grid-item">
               <h2>
                 Overview
               </h2>
@@ -116,8 +104,8 @@ export default () => {
                   </p>
                 </div>
               </div>
-            </Col>
-            <Col md={3}>
+              </div>
+            <div className="grid-item">
               <div className="widget-container">
                 <h3>Upcoming Events</h3>
                 <EventsContainer jsonData={EventData} />
@@ -131,9 +119,8 @@ export default () => {
                 <h3>Recent releases</h3>
                 <RecentReleasesContainer jsonData={Releases} />
               </div>
-            </Col>
-          </Row>
-        </Container>
+            </div>
+            </div>
       </div>
       </Layout>
     );
