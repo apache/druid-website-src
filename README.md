@@ -50,11 +50,30 @@ These are the steps to publish either a new release or a hotfix to an existing r
 
 4. In `scripts`, run `python do_all_things.py -v VERSION`. The script assumes you used `npm` to install. See example 3 if you use `yarn`.
 
-   **Example 1**: `python do_all_things.py -v 26.0.0`. This command builds version 26.0.0 of the docs and latest.
+    **Example 1**: This command builds version 27.0.0 of the docs and latest.
+    ```
+    python do_all_things.py -v 27.0.0
+    ```
 
-   **Example 2**: If you already have Docusaurus 2 installed, skip the installation by specifying the flag `--skip-install`. For example, `python do_all_things.py -v 26.0.0 --skip-install`
+    **Example 2**: If you already have Docusaurus 2 installed, skip the installation by specifying the flag `--skip-install`.
+    ```
+    python do_all_things.py -v 27.0.0 --skip-install
+    ```
 
-   **Example 3**: If you want to use yarn instead of npm, specify the flag `--yarn`. For example, `python do_all_things.py -v 26.0.0 --skip-install --yarn`
+    **Example 3**: If you want to use yarn instead of npm, specify the flag `--yarn`.
+    ```
+    python do_all_things.py -v 27.0.0 --yarn
+    ```
+
+    **Example 4**: If you have apache/druid in a completely different place (see note above), specify it using the `--source` flag.
+    ```
+    python do_all_things.py -v 27.0.0 --source /my/path/to/apache/druid
+    ```
+
+    **Example 5**: If you want to skip all the source docs (don't copy them from apache/druid), use the `--no-docs` flag.
+    ```
+    python do_all_things.py -v 27.0.0 --no-docs
+    ```
 
    For more information about the scripts, see [the scripts](#the-scripts).
 
