@@ -4,10 +4,12 @@ import shutil
 
 # Example: python do_all_things.py -v 26.0.0
 
-def main(versions, source, skip_install, use_yarn):
+def main(versions, no_docs, source, skip_install, use_yarn):
 
-    # copy the docs from apache/druid
-    copy_druid_docs.main(versions, source)
+    # if no_docs is True, don't copy docs over from source
+    # if False, copy the source Markdown files from apache/druid
+    if not no_docs:
+        copy_druid_docs.main(versions, source)
 
     # build all specified versions of the docs
     build_docs.main([versions, "latest"], skip_install, use_yarn)
@@ -24,6 +26,11 @@ if __name__ == "__main__":
                         " since it's already accounted for. "
                         "For example: -v 26.0.0")
 
+    parser.add_argument("--no-docs", default=False,
+                        help="Set this option if you want to update non-docs ",
+                        "pages, such as the home page."
+                        action='store_true')
+
     parser.add_argument("-s", "--source", default="../../druid",
                         help="The apache/druid folder to use as docs source.")
 
@@ -37,5 +44,5 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    main(args.version, args.source, args.skip_install, args.yarn)
+    main(args.version, args.no_docs, args.source, args.skip_install, args.yarn)
 
