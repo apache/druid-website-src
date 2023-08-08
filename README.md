@@ -21,6 +21,7 @@ If you need to update the contents of Upcoming Events, Featured Content or Lates
 - `FeaturedContent.js` (rendered by `FeaturedContentWidget.js`)
 - `version.js` (rendered by `RecentReleasesWidget.js`)
 
+If you only need to update the homepage widgets,  use the `--no-docs` flag (as shown in example 5) to build the site. This uses the existing docs in `latest` and only builds `latest`, which is what's used for the homepage and other non-doc pages.
 
 ## Building the site for Druid 26 and later
 
@@ -51,28 +52,34 @@ These are the steps to publish either a new release or a hotfix to an existing r
 4. In `scripts`, run `python do_all_things.py -v VERSION`. The script assumes you used `npm` to install. See example 3 if you use `yarn`.
 
     **Example 1**: This command builds version 27.0.0 of the docs and latest.
+    
     ```
     python do_all_things.py -v 27.0.0
     ```
 
     **Example 2**: If you already have Docusaurus 2 installed, skip the installation by specifying the flag `--skip-install`.
+    
     ```
     python do_all_things.py -v 27.0.0 --skip-install
     ```
 
     **Example 3**: If you want to use yarn instead of npm, specify the flag `--yarn`.
+    
     ```
     python do_all_things.py -v 27.0.0 --yarn
     ```
 
     **Example 4**: If you have apache/druid in a completely different place (see note above), specify it using the `--source` flag.
+    
+
     ```
     python do_all_things.py -v 27.0.0 --source /my/path/to/apache/druid
     ```
 
-    **Example 5**: If you want to use the Markdown files already in this repo because you don't need to publish doc changes, use the `--no-docs` flag. The script will use the docs already in `docs/latest` to build the site. Use this if you need to republish the site to update the homepage widgets or other non-doc website pages.
+    **Example 5**: If you want to use the Markdown files already in this repo because you don't want to also publish doc changes, use the `--no-docs` flag. The script will use the docs already in `docs/latest` to build the site. Use this if you need to republish the site to update the homepage widgets or other non-doc website pages.
+    
     ```
-    python do_all_things.py -v 27.0.0 --no-docs
+    python do_all_things.py --no-docs
     ```
 
    For more information about the scripts, see [the scripts](#the-scripts).
@@ -83,7 +90,9 @@ These are the steps to publish either a new release or a hotfix to an existing r
 
 5. Go to `published_versions` and verify the site. If you run it locally, such as with `http-server` you'll get the latest version of the site, such as `localhost:8080/docs/latest/` and the version you built, such as `localhost:8080/docs/26.0.0/`. In addition, you should be able to see pre-Docusaurus2 versions such as 25.0.0 with the old CSS.
 
-6. Make a PR to `https://github.com/apache/druid-website` with the contents of `published_versions`.
+6. Commit the built files to `druid-website-src` and make a PR.
+
+7. Use the contents of `published_versions` to make a PR to `https://github.com/apache/druid-website` (either the `asf-staging` branch or the `asf-site` branch).
 
 ### The scripts
 
