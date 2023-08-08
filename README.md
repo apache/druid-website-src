@@ -70,7 +70,7 @@ These are the steps to publish either a new release or a hotfix to an existing r
     python do_all_things.py -v 27.0.0 --source /my/path/to/apache/druid
     ```
 
-    **Example 5**: If you want to skip all the source docs (don't copy them from apache/druid), use the `--no-docs` flag.
+    **Example 5**: If you want to use the Markdown files already in this repo because you don't need to publish doc changes, use the `--no-docs` flag. The script will use the docs already in `docs/latest` to build the site. Use this if you need to republish the site to update the homepage widgets or other non-doc website pages.
     ```
     python do_all_things.py -v 27.0.0 --no-docs
     ```
