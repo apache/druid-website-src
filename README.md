@@ -90,7 +90,7 @@ These are the steps to publish either a new release or a hotfix to an existing r
 
 5. Go to `published_versions` and verify the site. If you run it locally, such as with `http-server` you'll get the latest version of the site, such as `localhost:8080/docs/latest/` and the version you built, such as `localhost:8080/docs/26.0.0/`. In addition, you should be able to see pre-Docusaurus2 versions such as 25.0.0 with the old CSS.
 
-6. Commit the built files to `druid-website-src` and make a PR.
+6. Commit the built files along with the Markdown files to `druid-website-src` and make a PR.
 
 7. Use the contents of `published_versions` to make a PR to `https://github.com/apache/druid-website` (either the `asf-staging` branch or the `asf-site` branch).
 
