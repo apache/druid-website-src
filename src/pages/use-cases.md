@@ -33,7 +33,7 @@ If you are experimenting with a new use case for Druid or have questions about D
 
 <div class="zigzag-features">
 <div class="zigzag-feature">
-<span class="fa fa-users fa"></span>
+<span class="fa fa-users"></span>
 
 ## User activity and behavior
 
@@ -51,7 +51,7 @@ Measure and compare user activity by age, gender, location, and much more.
 </div>
 
 <div class="zigzag-feature">
-<span class="fa fa-project-diagram fa"></span>
+<span class="fa fa-project-diagram"></span>
 
 ## Network flows
 
@@ -65,7 +65,7 @@ Druid's ability to handle flexible schemas means that you can add any attributes
 </div>
 
 <div class="zigzag-feature">
-<span class="fa fa-comments-dollar fa"></span>
+<span class="fa fa-comments-dollar"></span>
 
 
 ## Digital marketing
@@ -81,7 +81,7 @@ Druid can be used to compute impressions, clicks, eCPM, and key conversion metri
 </div>
 
 <div class="zigzag-feature">
-<span class="fa fa-tachometer-alt fa"></span>
+<span class="fa fa-tachometer-alt"></span>
 
 ## Application performance management
 
@@ -96,7 +96,7 @@ For example, rank API endpoints based on 95th percentile query latency, and slic
 </div>
 
 <div class="zigzag-feature">
-<span class="fa fa-thermometer-three-quarters fa"></span>
+<span class="fa fa-thermometer-three-quarters"></span>
 
 
 ## IoT and device metrics
@@ -116,7 +116,7 @@ Furthermore, you search and filter on tag values orders of magnitude faster than
 </div>
 
 <div class="zigzag-feature">
-<span class="fa fa-chart-pie fa"></span>
+<span class="fa fa-chart-pie"></span>
 
 ## OLAP and business intelligence
 

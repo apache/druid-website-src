@@ -210,54 +210,48 @@ html, body {
       background: #9caeff;
     }
 
+.zigzag-feature:nth-child(3n-2) .fa {
+  background: #cbd5ff;
+  color: #5062B4;
+  display:table-cell;
+  vertical-align:middle;
+}
+.zigzag-feature:nth-child(3n-1) .fa {
+  background: #a7f1d9;
+  color: #2C8265; }
 
-.zigzag-features {
-  margin-bottom: 100px;
-  margin-top: 38px; }
-  .zigzag-features .zigzag-feature {
-    margin-top: 100px; }
-    .zigzag-features .zigzag-feature:nth-child(3n-2) .fa {
-      background: #cbd5ff;
-      color: #5062B4; }
-    .zigzag-features .zigzag-feature:nth-child(3n-1) .fa {
-      background: #a7f1d9;
-      color: #2C8265; }
-    .zigzag-features .zigzag-feature:nth-child(3n) .fa {
-      background: #ffd8a8;
-      color: #926226; }
-    .zigzag-features .zigzag-feature:nth-child(2n-1) {
-      padding-right: 300px;
-    }
-    .zigzag-features .zigzag-feature:nth-child(2n-1) .fa {
-      right: 0;
-    }
-    .zigzag-features .zigzag-feature:nth-child(2n) {
-      padding-left: 300px;
-    }
-    .zigzag-features .zigzag-feature:nth-child(2n) .fa {
-      left: 0;
-    }
-    .zigzag-features .zigzag-feature .fa {
-      top: 0;
-      position: absolute;
-      width: 220px;
-      height: 220px;
-      line-height: 220px;
-      border-radius: 50%;
-      text-align: center;
-      font-size: 70px;
-      background: #cbd5ff;
-      color: #5062B4; }
-  
+.zigzag-feature:nth-child(3n) .fa {
+  background: #ffd8a8;
+  color: #926226; }
 
+.zigzag-feature:nth-child(2n-1) {
+  padding-right: 300px;}
+
+.zigzag-feature:nth-child(2n-1) .fa {
+  right: 0;}
+
+.zigzag-feature:nth-child(2n) {
+  padding-left: 300px;
+}
+
+.zigzag-feature:nth-child(2n) .fa {
+  left: 0;}
+
+.zigzag-feature .fa {
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  line-height: 220px;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 70px;
+  background: #cbd5ff;
+  color: #5062B4;
+}
 
 @media (max-width: 840px) {
   .zigzag-feature .fa {
     display: none;
-    /* position: relative; */
-    /* margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 40px; */
   }
 
   .zigzag-features .zigzag-feature:nth-child(2n-1) {
@@ -269,7 +263,6 @@ html, body {
   }
 }
 
-
 @media (max-width: 440px) {
   .zigzag-features {
     margin-bottom: 70px;
@@ -278,10 +271,6 @@ html, body {
     margin-top: 70px;
   }
   .zigzag-feature .fa {
-      /* width: 180px;
-      height: 180px;
-      line-height: 180px;
-      font-size: 60px; */
       display: none;
   }
 }
