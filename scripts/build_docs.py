@@ -1,5 +1,12 @@
 #!/usr/bin/python
 
+import fileinput
+import os
+import re
+import shutil
+import subprocess
+import sys
+
 """
 build-docs.py
 
@@ -18,12 +25,8 @@ Example call:   python build-docs.py -v latest 26.0.0
 
 """
 
-import fileinput
-import os
-import re
-import shutil
-import subprocess
-import sys
+def rsync_build_output(src, dst):
+    subprocess.run(["rsync", "--delete", src, dst])
 
 def build_docs(versions, use_yarn):
 
@@ -46,7 +49,6 @@ def build_docs(versions, use_yarn):
         else:
             subprocess.run(["yarn", "build"])
 
-
         # move output to temporary directory since docusaurus 2
         # overwrites build directory with each build.
         # the "latest" version is built last to maintain
@@ -55,17 +57,18 @@ def build_docs(versions, use_yarn):
         destination_dir = "build__temp"
         if not os.path.isdir(source_dir):
             sys.exit("ERROR: The docs were not built. Check Docusaurus logs.")
-        shutil.copytree(source_dir, destination_dir, dirs_exist_ok=True)
+        rsync_build_output(source_dir + "/", destination_dir)
 
         # restore the redirect file back to URLs with "latest"
-        #subprocess.run(["git", "restore", "redirects.js"])
         if v != "latest":
             for line in fileinput.input("redirects.js", inplace=1):
                 print(line.replace(f"/{v}/", "/latest/"), end='')
 
     # after all version builds, rename the temp directory back to "build"
     shutil.rmtree(source_dir)
-    shutil.move(destination_dir, source_dir)
+    rsync_build_output(destination_dir + "/", source_dir)
+    shutil.rmtree(destination_dir)
+
 
 def main(versions, skip_install, use_yarn):
 
