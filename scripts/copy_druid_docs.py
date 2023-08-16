@@ -1,4 +1,3 @@
-from distutils.dir_util import copy_tree
 import os
 import shutil
 import subprocess
@@ -74,11 +73,7 @@ def do_the_replace(file_path, druid_version):
         item_path = os.path.join(file_path, item)
 
         # If the item is a file and has a markdown extension
-        if os.path.isfile(item_path) and item_path.lower().endswith(".md"):
-            replace_text_in_file(item_path, druid_version)
-
-        # If the item is a file and has a markdownx extension
-        if os.path.isfile(item_path) and item_path.lower().endswith(".mdx"):
+        if os.path.isfile(item_path) and (item_path.lower().endswith(".md") or item_path.lower().endswith(".mdx")):
             replace_text_in_file(item_path, druid_version)
 
         # If the item is a directory, recursively process its contents
@@ -90,14 +85,13 @@ def is_it_latest(druid_version, source_directory, destination_directory_latest):
 
     if is_latest == 'y':
         print("Also copying the docs to docs/latest.")
-        copy_tree(source_directory+'/docs', destination_directory_latest)
+        subprocess.run(["rsync", "-av", "--delete", f"{source_directory}/docs/", destination_directory_latest])
         shutil.rmtree(f"{destination_directory_latest}/_bin")
         do_the_replace(destination_directory_latest, druid_version)
     elif is_latest == 'n':
         print("Not copying the docs to docs/latest")
     else:
         print("Enter y or n to make a choice")
-
 
 def main(druid_version, source_directory="../../druid"):
     is_valid, error_msg = check_source(source_directory)
@@ -109,7 +103,7 @@ def main(druid_version, source_directory="../../druid"):
     destination_directory_latest = "../docs/latest"
 
     # Copies the docs
-    copy_tree(source_directory+"/docs", destination_directory)
+    subprocess.run(["rsync", "-av", "--delete", f"{source_directory}/docs/", destination_directory])
 
     # deletes the _bin directory that's not needed
     shutil.rmtree(f"{destination_directory}/_bin")

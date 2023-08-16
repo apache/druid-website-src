@@ -1,11 +1,5 @@
 #!/usr/bin/python
 
-import fileinput
-import os
-import re
-import shutil
-import subprocess
-import sys
 
 """
 build-docs.py
@@ -24,6 +18,14 @@ Help:           python build-docs.py --help
 Example call:   python build-docs.py -v latest 26.0.0
 
 """
+
+import fileinput
+import os
+import re
+import shutil
+import subprocess
+import sys
+
 
 def rsync_build_output(src, dst):
     subprocess.run(["rsync", "--delete", src, dst])
