@@ -28,7 +28,7 @@ import sys
 
 
 def rsync_build_output(src, dst):
-    subprocess.run(["rsync", "--delete", src, dst])
+    subprocess.run(["rsync", "--delete", "--recursive", src, dst])
 
 def build_docs(versions, use_yarn):
 
