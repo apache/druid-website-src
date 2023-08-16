@@ -85,7 +85,7 @@ def is_it_latest(druid_version, source_directory, destination_directory_latest):
 
     if is_latest == 'y':
         print("Also copying the docs to docs/latest.")
-        subprocess.run(["rsync", "-av", "--delete", "--recursive", f"{source_directory}/docs/", destination_directory_latest])
+        subprocess.run(["rsync", "--delete", "--recursive", f"{source_directory}/docs/", destination_directory_latest])
         shutil.rmtree(f"{destination_directory_latest}/_bin")
         do_the_replace(destination_directory_latest, druid_version)
     elif is_latest == 'n':
@@ -103,7 +103,7 @@ def main(druid_version, source_directory="../../druid"):
     destination_directory_latest = "../docs/latest"
 
     # Copies the docs
-    subprocess.run(["rsync", "-av", "--delete", "--recursive", f"{source_directory}/docs/", destination_directory])
+    subprocess.run(["rsync", "--delete", "--recursive", f"{source_directory}/docs/", destination_directory])
 
     # deletes the _bin directory that's not needed
     shutil.rmtree(f"{destination_directory}/_bin")
