@@ -26,10 +26,6 @@ import shutil
 import subprocess
 import sys
 
-
-def rsync_build_output(src, dst):
-    subprocess.run(["rsync", "--delete", "--recursive", src, dst])
-
 def build_docs(versions, use_yarn):
 
     for v in versions:
@@ -44,7 +40,7 @@ def build_docs(versions, use_yarn):
         replacement = f'var buildVersion = "{v}";'
         for line in fileinput.input("docusaurus.config.js", inplace=1):
             print(re.sub(r"^var buildVersion.*", replacement, line), end='')
-
+        shutil.rmtree(f"published_versions/docs/{v}", ignore_errors=True) 
         # build the docs
         if not use_yarn:
             subprocess.run(["npm", "run", "build"])
@@ -59,18 +55,17 @@ def build_docs(versions, use_yarn):
         destination_dir = "build__temp"
         if not os.path.isdir(source_dir):
             sys.exit("ERROR: The docs were not built. Check Docusaurus logs.")
-        rsync_build_output(source_dir + "/", destination_dir)
+        shutil.copytree(source_dir, destination_dir, dirs_exist_ok=True)
 
         # restore the redirect file back to URLs with "latest"
+        #subprocess.run(["git", "restore", "redirects.js"])
         if v != "latest":
             for line in fileinput.input("redirects.js", inplace=1):
                 print(line.replace(f"/{v}/", "/latest/"), end='')
 
     # after all version builds, rename the temp directory back to "build"
     shutil.rmtree(source_dir)
-    rsync_build_output(destination_dir + "/", source_dir)
-    shutil.rmtree(destination_dir)
-
+    shutil.move(destination_dir, source_dir)
 
 def main(versions, skip_install, use_yarn):
 
@@ -92,7 +87,6 @@ def main(versions, skip_install, use_yarn):
 
     # remove the old build directory
     shutil.rmtree('build', ignore_errors=True)
-
     # do the actual builds
     build_docs(versions, use_yarn)
 
