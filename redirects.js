@@ -1,7 +1,31 @@
-const Redirects=[
+/*
+  ~ Licensed to the Apache Software Foundation (ASF) under one
+  ~ or more contributor license agreements.  See the NOTICE file
+  ~ distributed with this work for additional information
+  ~ regarding copyright ownership.  The ASF licenses this file
+  ~ to you under the Apache License, Version 2.0 (the
+  ~ "License"); you may not use this file except in compliance
+  ~ with the License.  You may obtain a copy of the License at
+  ~
+  ~   http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an
+  ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~ KIND, either express or implied.  See the License for the
+  ~ specific language governing permissions and limitations
+  ~ under the License.
+  */
+
+
+
+  const Redirects=[
     {
-      "from": "/docs/latest/configuration/auth.html",
-      "to": "/docs/latest/design/auth"
+      "from": [
+        "/docs/latest/configuration/auth.html",
+        "/docs/latest/design/auth.html"
+      ],
+      "to": "/docs/latest/operations/auth"
     },
     {
       "from": [
@@ -41,8 +65,11 @@ const Redirects=[
       "to": "/docs/latest/ingestion/standalone-realtime"
     },
     {
-      "from": "/docs/latest/configuration/zookeeper.html",
-      "to": "/docs/latest/dependencies/zookeeper"
+      "from": [
+        "/docs/latest/configuration/zookeeper.html",
+        "/docs/latest/dependencies/zookeeper.html"
+      ],
+      "to": "/docs/latest/design/zookeeper"
     },
     {
       "from": "/docs/latest/dependencies/cassandra-deep-storage.html",
@@ -150,8 +177,11 @@ const Redirects=[
       "to": "/docs/latest/data-management/delete"
     },
     {
-      "from": "/docs/latest/ingestion/firehose.html",
-      "to": "/docs/latest/ingestion/migrate-from-firehose"
+      "from": [
+        "/docs/latest/ingestion/firehose.html",
+        "/docs/latest/ingestion/migrate-from-firehose"
+    ],
+      "to": "/docs/latest/operations/migrate-from-firehose" 
     },
     {
       "from": [
@@ -169,9 +199,13 @@ const Redirects=[
       "to": "/docs/latest/ingestion/tasks"
     },
     {
-      "from": "/docs/latest/ingestion/native_tasks.html",
-      "to": "/docs/latest/ingestion/native-batch"
+      "from": [
+        "/docs/latest/ingestion/native_tasks.html",
+        "/docs/latest/ingestion/native-batch-input-sources.html"
+    ],
+      "to": "/docs/latest/ingestion/input-sources"
     },
+  
     {
       "from": "/docs/latest/ingestion/schema-changes.html",
       "to": "/docs/latest/design/segments"
@@ -188,9 +222,13 @@ const Redirects=[
       "from": "/docs/latest/misc/tasks.html",
       "to": "/docs/latest/ingestion/tasks"
     },
-    {
-      "from": "/docs/latest/operations/including-extensions.html",
-      "to": "/docs/latest/development/extensions"
+  
+  {
+      "from": [
+        "/docs/latest/operations/including-extensions.html",
+        "/docs/latest/development/extensions"
+      ],
+      "to": "/docs/latest/configuration/extensions"
     },
     {
       "from": "/docs/latest/operations/multitenancy.html",
@@ -246,8 +284,33 @@ const Redirects=[
     {
       "from": "/docs/latest/operations/recommendations.html",
       "to": "/docs/latest/operations/basic-cluster-tuning"
+    },
+    {
+      "from":  "/docs/latest/misc/math-expr.html",
+      "to": "/docs/latest/querying/math-expr"
+  
+    },
+    {
+      "from":  "/docs/latest/operations/getting-started",
+      "to": "/docs/latest/design/"
+    },
+    {
+      "from":  "/docs/latest/querying/sql-api.html",
+      "to": "/docs/latest/api-reference/sql-api"
+    },
+    {
+      "from":  "/docs/latest/querying/sql-jdbc.html",
+      "to": "/docs/latest/api-reference/sql-jdbc"
+    },
+    {
+      "from":  "/docs/latest/multi-stage-query/api.html",
+      "to": "/docs/latest/api-reference/sql-ingestion-api"
+    },
+    {
+      "from":  "/docs/latest/operations/api-reference.html",
+      "to": "/docs/latest/api-reference/"
     }
   ]
-
-
+  
+  
   module.exports.Redirects = Redirects;
