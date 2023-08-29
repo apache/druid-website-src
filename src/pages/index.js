@@ -24,7 +24,7 @@ export default () => {
                 <p className="lead">Druid is a high performance, real-time analytics database that delivers sub-second queries on streaming and batch data at scale and under load.</p>
                 <p>
                   <a className="button" href="/downloads.html"><span className="fa fa-download" /> Download</a>
-                  <a className="button" href="/community/join-slack?v=1"><span className="fab fa-slack" /> Join Slack</a>
+                  <a className="button" href="https://join.slack.com/t/apachedruidworkspace/shared_invite/zt-143m5afbr-4ebnAPJPaQfNOUu_g1MvSw"><span className="fab fa-slack" /> Join Slack</a>
                   <a className="button" href="https://github.com/apache/druid/"><span className="fab fa-github" /> GitHub</a></p>
                 <p />
             </div>
