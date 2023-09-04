@@ -47,4 +47,16 @@ export const FeatureList = [
     "title": "Non-stop Reliability",
     "description": "Automatic data services including continuous backup, automated recovery, and multi-node replication ensure high availability and durability",
   },
+  {
+    "title": "Schema Auto-Discovery",
+    "description": "Druid can automatically detect, define, and update column names and data types upon ingestion, providing the ease of schemaless and the performance of strongly-typed",
+  },
+  {
+    "title": "Flexible Joins Support",
+    "description": "Druid can support join operations during data ingestion and at query-time execution, with the fastest query performance when tables are pre-joined during ingestion",
+  },
+  {
+    "title": "SQL Support",
+    "description": "Developers and analysts can easily use the familiar SQL API for end-to-end data operations across ingestion, transformation, and querying",
+  },
   ]
