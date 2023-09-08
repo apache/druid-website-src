@@ -1,5 +1,6 @@
 #!/usr/bin/python
 
+
 """
 build-docs.py
 
@@ -39,13 +40,12 @@ def build_docs(versions, use_yarn):
         replacement = f'var buildVersion = "{v}";'
         for line in fileinput.input("docusaurus.config.js", inplace=1):
             print(re.sub(r"^var buildVersion.*", replacement, line), end='')
-
+        shutil.rmtree(f"published_versions/docs/{v}", ignore_errors=True) 
         # build the docs
         if not use_yarn:
             subprocess.run(["npm", "run", "build"])
         else:
             subprocess.run(["yarn", "build"])
-
 
         # move output to temporary directory since docusaurus 2
         # overwrites build directory with each build.
@@ -87,7 +87,6 @@ def main(versions, skip_install, use_yarn):
 
     # remove the old build directory
     shutil.rmtree('build', ignore_errors=True)
-
     # do the actual builds
     build_docs(versions, use_yarn)
 
