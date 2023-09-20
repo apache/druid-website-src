@@ -53,7 +53,7 @@ export const FeatureList = [
   },
   {
     "title": "Flexible Joins Support",
-    "description": "Druid can support join operations during data ingestion and at query-time execution, with the fastest query performance when tables are pre-joined during ingestion",
+    "description": "Druid supports join operations during data ingestion and at query-time execution, with the fastest query performance when tables are pre-joined during ingestion",
   },
   {
     "title": "SQL Support",
