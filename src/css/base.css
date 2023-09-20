@@ -285,3 +285,27 @@ html, body {
       display: none;
   }
 }
+
+/* Banner styles start */
+.promotion-banner {
+  margin-top: -14px;
+  padding: 5px 5px 10px 5px;
+  text-align: center;
+  color: white;
+  overflow: hidden;
+  background-image: url('https://imply.io/wp-content/uploads/2023/09/ds23_background_stripe.png');
+  background-size: cover;
+  background-position: center;
+  margin-bottom: 30px;
+}
+
+/* Equivalent of linkStyle object */
+.promotion-banner a {
+  text-decoration: underline;
+}
+
+/* Equivalent of headerStyle object */
+.promotion-banner h4 {
+  margin-top: 20px;
+}
+/* Banner styles end */
