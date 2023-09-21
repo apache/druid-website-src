@@ -25,26 +25,38 @@ Used by features.js in index.js to display the cards under the heading Key Druid
 export const FeatureList = [
   {
     "title": "Interactive Query Engine",
-    "description": "Druid utilizes scatter/gather for high speed queries with data preloaded into memory or local storage to avoid data movement and network latency",
+    "description": "Druid utilizes scatter/gather for high speed queries with data preloaded into memory or local storage to avoid data movement and network latency.",
   },
   {
     "title": "Tiering & QoS",
-    "description": "Configurable tiering with quality of service enables the ideal price-performance for mixed workloads, guarantees priority, and avoids resource contention",
+    "description": "Configurable tiering with quality of service enables the ideal price-performance for mixed workloads, guarantees priority, and avoids resource contention.",
   },
   {
     "title": "Optimized Data Format",
-    "description": "Ingested data is automatically columnarized, time indexed, dictionary encoded, bitmap indexed, and type-aware compressed",
+    "description": "Ingested data is automatically columnarized, time-indexed, dictionary-encoded, bitmap-indexed, and type-aware compressed.",
   },
   {
     "title": "Elastic Architecture",
-    "description": "Loosely coupled components for ingestion, queries and orchestration combined with a deep storage layer enable easy & quick scale-up & scale-out",
+    "description": "Loosely coupled components for ingestion, queries, and orchestration combined with a deep storage layer enable easy & quick scale-up & scale-out.",
   },
   {
     "title": "True Stream Ingestion",
-    "description": "A connector-free integration with streaming platforms enables query-on-arrival, high scalability, low latency, and guaranteed consistency",
+    "description": "A connector-free integration with streaming platforms enables query-on-arrival, high scalability, low latency, and guaranteed consistency.",
   },
   {
     "title": "Non-stop Reliability",
-    "description": "Automatic data services including continuous backup, automated recovery, and multi-node replication ensure high availability and durability",
+    "description": "Automatic data services including continuous backup, automated recovery, and multi-node replication ensure high availability and durability.",
+  },
+  {
+    "title": "Schema Auto-Discovery",
+    "description": "Druid can automatically detect, define, and update column names and data types upon ingestion, providing the ease of schemaless and the performance of strongly typed schemas.",
+  },
+  {
+    "title": "Flexible Joins Support",
+    "description": "Druid supports join operations during data ingestion and at query-time execution, with the fastest query performance when tables are pre-joined during ingestion.",
+  },
+  {
+    "title": "SQL Support",
+    "description": "Developers and analysts can easily use the familiar SQL API for end-to-end data operations across ingestion, transformation, and querying.",
   },
   ]
