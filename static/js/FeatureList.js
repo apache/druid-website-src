@@ -33,7 +33,7 @@ export const FeatureList = [
   },
   {
     "title": "Optimized Data Format",
-    "description": "Ingested data is automatically columnarized, time-indexed, dictionary-encoded, bitmap-indexed, and type-aware compressed",
+    "description": "Ingested data is automatically columnarized, time-indexed, dictionary-encoded, bitmap-indexed, and type-aware compressed.",
   },
   {
     "title": "Elastic Architecture",
