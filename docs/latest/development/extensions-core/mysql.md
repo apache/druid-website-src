@@ -48,9 +48,9 @@ Copy or symlink this file inside the folder `extensions/mysql-metadata-storage` 
 This extension also supports using the MariaDB connector jar, though it is also not included in the Druid distribution, so you must install it separately.
 
 - Download from the MariaDB site: https://mariadb.com/downloads/connector
-- Download from Maven Central: https://repo1.maven.org/maven2/org/mariadb/jdbc/mariadb-java-client/2.7.3/mariadb-java-client-2.7.3.jar
+- Download from Maven Central: https://repo1.maven.org/maven2/org/mariadb/jdbc/mariadb-java-client/2.7.10/mariadb-java-client-2.7.10.jar
 
-This fetches the MariaDB connector JAR file with a name like `maria-java-client-2.7.3.jar`.
+This fetches the MariaDB connector JAR file with a name like `maria-java-client-2.7.10.jar`.
 
 Copy or symlink this file to `extensions/mysql-metadata-storage` under the distribution root directory.
 
