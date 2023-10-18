@@ -1,0 +1,71 @@
+---
+title: Download
+---
+
+import { Releases } from "../../static/js/version";
+
+<div class="simple-header">
+  <div class="container">
+    <h1>Download</h1>
+  </div>
+</div>
+
+## Latest release
+
+<p>The latest Apache Druid stable release is {Releases[0].version}.</p>
+
+<!-- This causes the page to not compile
+<p>
+<a href="https://www.apache.org/dyn/closer.cgi?path=/druid/{{ Releases[0].version }}/apache-druid-{{ Releases[0].version }}-bin.tar.gz" download onclick="trackDownload('button', 'https://www.apache.org/dyn/closer.cgi?path=/druid/{{ Releases[0].version }}/apache-druid-{{ Releases[0].version }}-bin.tar.gz');"><span class="fa fa-download"></span> Download {{Releases[0].version}} release</a><br />
+</p>
+-->
+<ul>
+<li>Release date: {Releases[0].date}</li>
+<li>Binary download: <a href={ `https://www.apache.org/dyn/closer.cgi?path=/druid/${Releases[0].version}/apache-druid-${Releases[0].version}-bin.tar.gz`}>apache-druid-{Releases[0].version}-bin.tar.gz</a> (<a href={ `https://www.apache.org/dist/druid/${Releases[0].version}/apache-druid-${Releases[0].version}-bin.tar.gz.sha512`}>sha512</a>, <a href={ `https://www.apache.org/dist/druid/${Releases[0].version}/apache-druid-${Releases[0].version}-bin.tar.gz.asc`}>pgp</a>)</li>
+<li>Source download: <a href={ `https://www.apache.org/dyn/closer.cgi?path=/druid/${Releases[0].version}/apache-druid-${Releases[0].version}-src.tar.gz`}>apache-druid-{Releases[0].version}-bin.tar.gz</a> (<a href={ `https://www.apache.org/dist/druid/${Releases[0].version}/apache-druid-${Releases[0].version}-src.tar.gz.sha512`}>sha512</a>, <a href={ `https://www.apache.org/dist/druid/${Releases[0].version}/apache-druid-${Releases[0].version}-src.tar.gz.asc`}>pgp</a>)</li>
+<li>Hadoop3 compatible artifacts (use these only if you use Hadoop3 with your Druid cluster):
+  <ul><li>Binary download: <a href={ `https://www.apache.org/dyn/closer.cgi?path=/druid/${Releases[0].version}/apache-druid-${Releases[0].version}-hadoop3-bin.tar.gz`}>apache-druid-{Releases[0].version}-bin.tar.gz</a> (<a href={ `https://www.apache.org/dist/druid/${Releases[0].version}/apache-druid-${Releases[0].version}-hadoop3-bin.tar.gz.sha512`}>sha512</a>, <a href={ `https://www.apache.org/dist/druid/${Releases[0].version}/apache-druid-${Releases[0].version}-hadoop3-bin.tar.gz.asc`}>pgp</a>)</li></ul>
+  </li>
+<li>Release notes: <a href={ `https://github.com/apache/druid/releases/tag/druid-${Releases[0].version}`}>{Releases[0].version}</a></li>
+</ul>
+
+You should verify your download by following these [procedures](https://www.apache.org/info/verification.html) and using these [KEYS](https://www.apache.org/dist/druid/KEYS).
+
+To learn more about releases, please visit the [versioning page](/docs/latest/development/versioning).
+
+## Get started
+
+To get started with Druid, visit the [quickstart](/docs/latest/tutorials/).
+
+## Optional dependencies
+
+### MySQL JDBC Driver
+
+Due to licensing considerations, the MySQL metadata store extension does not include the required MySQL JDBC driver which
+must be downloaded separately. Please see the [documentation](/docs/latest/development/extensions-core/mysql) for instructions on how to include this library.
+
+## Release candidates
+
+Release candidates are announced on the [Druid dev mailing list](https://lists.apache.org/list.html?dev@druid.apache.org).
+
+If you are interested in being notified of upcoming release candidates and being involved in the dev community (e.g. validating and approving RC builds), you can subscribe to the list by emailing: **dev-subscribe@druid.apache.org**
+
+Previous discussions are available in the [Apache Mail Archives](https://lists.apache.org/list.html?dev@druid.apache.org).
+
+## Older releases
+
+The previous major release branch of Apache Druid was 24.0.2.
+
+<h3>{Releases[1].version}</h3>
+
+<ul>
+<li>Release date: {Releases[1].date}</li>
+<li>Binary download: <a href={ `https://www.apache.org/dyn/closer.cgi?path=/druid/${Releases[1].version}/apache-druid-${Releases[1].version}-bin.tar.gz`}>apache-druid-{Releases[1].version}-bin.tar.gz</a> (<a href={ `https://www.apache.org/dist/druid/${Releases[1].version}/apache-druid-${Releases[1].version}-bin.tar.gz.sha512`}>sha512</a>, <a href={ `https://www.apache.org/dist/druid/${Releases[1].version}/apache-druid-${Releases[1].version}-bin.tar.gz.asc`}>pgp</a>)</li>
+<li>Source download: <a href={ `https://www.apache.org/dyn/closer.cgi?path=/druid/${Releases[1].version}/apache-druid-${Releases[1].version}-src.tar.gz`}>apache-druid-{Releases[1].version}-bin.tar.gz</a> (<a href={ `https://www.apache.org/dist/druid/${Releases[1].version}/apache-druid-${Releases[1].version}-src.tar.gz.sha512`}>sha512</a>, <a href={ `https://www.apache.org/dist/druid/${Releases[1].version}/apache-druid-${Releases[1].version}-src.tar.gz.asc`}>pgp</a>)</li>
+<li>Release notes: <a href={ `https://github.com/apache/druid/releases/tag/druid-${Releases[1].version}`}>{Releases[1].version}</a></li>
+</ul>
+
+All other releases of Apache Druid are available at the [Apache Druid release archives](https://archive.apache.org/dist/druid/).
+
+Archived versions of releases made while Druid was under the Apache Incubator are available at [Apache Druid (incubating) release archives](https://archive.apache.org/dist/incubator/druid/).
+

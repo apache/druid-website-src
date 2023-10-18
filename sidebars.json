@@ -1,0 +1,271 @@
+{
+  "docs": {
+    "Getting started": [
+      "design/index",
+      "tutorials/index",
+      "operations/single-server",
+      "tutorials/cluster"
+    ],
+    "Tutorials": [
+      "tutorials/tutorial-msq-extern",
+      "tutorials/tutorial-kafka",
+      "tutorials/tutorial-batch-hadoop",
+      "tutorials/tutorial-query",
+      "tutorials/tutorial-rollup",
+      "tutorials/tutorial-sketches-theta",
+      "tutorials/tutorial-retention",
+      "tutorials/tutorial-update-data",
+      "tutorials/tutorial-compaction",
+      "tutorials/tutorial-delete-data",
+      "tutorials/tutorial-ingestion-spec",
+      "tutorials/tutorial-transform-spec",
+      "tutorials/tutorial-msq-convert-spec",
+      "tutorials/docker",
+      "tutorials/tutorial-kerberos-hadoop",
+      "tutorials/tutorial-sql-query-view",
+      "tutorials/tutorial-unnest-arrays",
+      "tutorials/tutorial-query-deep-storage",
+      "tutorials/tutorial-jupyter-index",
+      "tutorials/tutorial-jupyter-docker",
+      "tutorials/tutorial-jdbc"
+    ],
+    "Design": [
+      "design/architecture",
+      "design/segments",
+      "design/processes",
+      "design/deep-storage",
+      "design/metadata-storage",
+      "design/zookeeper"
+    ],
+    "Ingestion": [
+      "ingestion/index",
+      {
+        "type": "category",
+        "label": "Ingestion concepts",
+        "items": [
+          "ingestion/data-formats",
+          "ingestion/input-sources",
+          "ingestion/schema-model",
+          "ingestion/rollup",
+          "ingestion/partitioning",
+          "ingestion/tasks"
+        ]
+      },
+      {
+        "type": "category",
+        "label": "SQL-based batch",
+        "items": [
+          "multi-stage-query/index",
+          "multi-stage-query/concepts",
+          "multi-stage-query/security",
+          "multi-stage-query/examples",
+          "multi-stage-query/reference",
+          "multi-stage-query/known-issues"
+        ]
+      },
+      {
+        "type": "category",
+        "label": "Streaming",
+        "items": [
+          "development/extensions-core/kafka-ingestion",
+          "development/extensions-core/kafka-supervisor-reference",
+          "development/extensions-core/kafka-supervisor-operations",
+          "development/extensions-core/kinesis-ingestion"
+        ]
+      },
+      {
+        "type": "category",
+        "label": "Classic batch",
+        "items": [
+          "ingestion/native-batch",
+          "ingestion/hadoop"
+        ]
+      },
+      "ingestion/ingestion-spec",
+      "ingestion/schema-design",
+      "ingestion/faq"
+    ],
+    "Data management": [
+      "data-management/index",
+      "data-management/update",
+      "data-management/delete",
+      "data-management/schema-changes",
+      "data-management/compaction",
+      "data-management/automatic-compaction"
+    ],
+    "Querying": [
+      {
+        "type": "category",
+        "label": "Druid SQL",
+        "items": [
+          "querying/sql",
+          "querying/query-deep-storage",
+          "querying/sql-data-types",
+          "querying/sql-operators",
+          "querying/sql-scalar",
+          "querying/sql-aggregations",
+          "querying/sql-array-functions",
+          "querying/sql-multivalue-string-functions",
+          "querying/sql-json-functions",
+          "querying/sql-functions",
+          "querying/sql-query-context",
+          "querying/sql-metadata-tables",
+          "querying/sql-translation"
+        ]
+      },
+      "querying/querying",
+      "querying/query-execution",
+      "querying/troubleshooting",
+      {
+        "type": "category",
+        "label": "Concepts",
+        "items": [
+          "querying/datasource",
+          "querying/joins",
+          "querying/lookups",
+          "querying/multi-value-dimensions",
+          "querying/nested-columns",
+          "querying/multitenancy",
+          "querying/caching",
+          "querying/using-caching",
+          "querying/query-context"
+        ]
+      },
+
+      {
+        "type": "category",
+        "label": "Native query types",
+        "items": [
+          "querying/timeseriesquery",
+          "querying/topnquery",
+          "querying/groupbyquery",
+          "querying/scan-query",
+          "querying/searchquery",
+          "querying/timeboundaryquery",
+          "querying/segmentmetadataquery",
+          "querying/datasourcemetadataquery"
+        ]
+      },
+      {
+        "type": "category",
+        "label": "Native query components",
+        "items": [
+          "querying/filters",
+          "querying/granularities",
+          "querying/dimensionspecs",
+          "querying/aggregations",
+          "querying/post-aggregations",
+          "querying/math-expr",
+          "querying/having",
+          "querying/limitspec",
+          "querying/topnmetricspec",
+          "querying/sorting-orders",
+          "querying/virtual-columns",
+          "querying/geo"
+        ]
+      }
+    ],
+    "API reference":[
+      "api-reference/api-reference",
+      {
+        "type": "category",
+        "label": "HTTP APIs",
+        "items": [
+          "api-reference/sql-api",
+          "api-reference/sql-ingestion-api",
+          "api-reference/json-querying-api",
+          "api-reference/tasks-api",
+          "api-reference/supervisor-api",
+          "api-reference/retention-rules-api",
+          "api-reference/data-management-api",
+          "api-reference/automatic-compaction-api",
+          "api-reference/lookups-api",
+          "api-reference/service-status-api",
+          "api-reference/dynamic-configuration-api",
+          "api-reference/legacy-metadata-api"
+        ]
+      },
+      {
+        "type": "category",
+        "label": "Java APIs",
+        "items": [
+          "api-reference/sql-jdbc"
+        ]
+      }
+
+    ],
+    "Configuration": [
+      "configuration/index",
+      "configuration/extensions",
+      "configuration/logging"
+    ],
+    "Operations": [
+      "operations/web-console",
+      "operations/java",
+      "operations/durable-storage",
+      {
+        "type": "category",
+        "label": "Security",
+        "items": [
+          "operations/security-overview",
+          "operations/security-user-auth",
+          "operations/auth-ldap",
+          "operations/password-provider",
+          "operations/dynamic-config-provider",
+          "operations/tls-support"
+        ]
+      },
+      {
+        "type": "category",
+        "label": "Performance tuning",
+        "items": [
+          "operations/basic-cluster-tuning",
+          "operations/segment-optimization",
+          "operations/mixed-workloads",
+          "operations/http-compression",
+          "operations/clean-metadata-store"
+        ]
+      },
+      {
+        "type": "category",
+        "label": "Monitoring",
+        "items": [
+          "operations/request-logging",
+          "operations/metrics",
+          "operations/alerts"
+        ]
+      },
+      "operations/high-availability",
+      "operations/rolling-updates",
+      "operations/rule-configuration",
+      "operations/migrate-from-firehose",
+      "operations/other-hadoop",
+      {
+        "type": "category",
+        "label": "Misc",
+        "items": [
+          "operations/dump-segment",
+          "operations/reset-cluster",
+          "operations/insert-segment-to-db",
+          "operations/pull-deps",
+          "operations/deep-storage-migration",
+          "operations/export-metadata",
+          "operations/metadata-migration",
+          "operations/use_sbt_to_build_fat_jar"
+        ]
+      }
+    ],
+    "Development": [
+      "development/overview",
+      "development/modules",
+      "development/javascript",
+      "development/build",
+      "development/versioning",
+      "development/contribute-to-docs",
+      "development/experimental"
+    ],
+    "Misc": [
+      "misc/papers-and-talks"
+    ]
+  }
+}

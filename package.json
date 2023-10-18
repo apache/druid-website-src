@@ -1,30 +1,41 @@
 {
-  "name": "druid-website",
-  "version": "0.2.0",
-  "description": "Druid Website (Source)",
-  "keywords": [
-    "druid",
-    "website"
-  ],
-  "private": true,
+  "license": "Apache-2.0",
   "scripts": {
-    "run": "bundle exec jekyll serve --future --port 4001 --safe",
-    "start": "bundle exec jekyll serve --future --port 4001 --safe",
-    "watch": "gulp watch",
-    "clean": "rm -rf css/*",
-    "compile": "gulp all && cp ./css-extra/* ./css && bundle exec jekyll build",
-    "build": "npm run compile && rm -r ../druid-website/* && cp -r ./_site/* ../druid-website/",
-    "build-release": "./release.sh"
+    "examples": "docusaurus-examples",
+    "start": "docusaurus start",
+    "build": "docusaurus build",
+    "publish-gh-pages": "docusaurus-publish",
+    "write-translations": "docusaurus-write-translations",
+    "version": "docusaurus-version",
+    "rename-version": "docusaurus-rename-version",
+    "link-lint": "npm run build && node script/link-lint.js",
+    "spellcheck": "mdspell --en-us --ignore-numbers --report '../docs/**/*.md' || (./script/notify-spellcheck-issues && false)",
+    "swizzle": "docusaurus swizzle",
+    "deploy": "docusaurus deploy",
+    "docusaurus": "docusaurus"
   },
-  "dependencies": {
-    "broken-link-checker": "0.7.8",
-    "glob": "7.1.2",
-    "gulp": "3.9.1",
-    "gulp-sass": "4.0.1",
-    "natives": "^1.1.6",
-    "node-sass": "4.9.2"
+  "engines": {
+    "node": ">=16"
   },
   "volta": {
-    "node": "10.24.1"
+    "node": "16.17.0",
+    "npm": "8.15.0"
+  },
+  "devDependencies": {
+    "markdown-spellcheck": "^1.3.1",
+    "node-sass": "^7.0.0",
+    "sass": "^1.61.0"
+  },
+  "dependencies": {
+    "@docusaurus/core": "^2.4.1",
+    "@docusaurus/plugin-client-redirects": "^2.4.1",
+    "@docusaurus/preset-classic": "^2.4.1",
+    "clsx": "^1.1.1",
+    "docusaurus-lunr-search": "^2.3.2",
+    "fast-glob": "^3.2.2",
+    "fs-extra": "^8.1.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "replace-in-file": "^4.3.1"
   }
 }
