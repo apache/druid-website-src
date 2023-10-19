@@ -4,11 +4,7 @@
 """
 build-docs.py
 
-<<<<<<< Updated upstream
-Version:        6 June 2023
-=======
 Version:        19 Oct 2023
->>>>>>> Stashed changes
 
 Purpose:        Build the OSS Druid Docusaurus 2 docs for all
                 versions supplied in the [-v, --versions] flag.
@@ -44,14 +40,10 @@ def build_docs(versions, use_yarn):
         replacement = f'var buildVersion = "{v}";'
         for line in fileinput.input("docusaurus.config.js", inplace=1):
             print(re.sub(r"^var buildVersion.*", replacement, line), end='')
-<<<<<<< Updated upstream
-        shutil.rmtree(f"published_versions/docs/{v}", ignore_errors=True) 
-=======
 
         # remove specific version folder in published_versions/docs if exists
         shutil.rmtree(f"published_versions/docs/{v}", ignore_errors=True)
 
->>>>>>> Stashed changes
         # build the docs
         if not use_yarn:
             subprocess.run(["npm", "run", "build"])
@@ -78,15 +70,12 @@ def build_docs(versions, use_yarn):
     shutil.rmtree(source_dir)
     shutil.move(destination_dir, source_dir)
 
-<<<<<<< Updated upstream
-=======
     # save the build output to check into GitHub
     # applies to last version only, typically "latest"
     print("Copying build output to ../published_versions. Use that directory to publish the site.")
     shutil.copytree('build','published_versions', dirs_exist_ok=True)
 
 
->>>>>>> Stashed changes
 def main(versions, skip_install, use_yarn):
 
     # from druid-website-src/static/build-scripts,
@@ -107,17 +96,11 @@ def main(versions, skip_install, use_yarn):
 
     # remove the old build directory
     shutil.rmtree('build', ignore_errors=True)
-<<<<<<< Updated upstream
-    # do the actual builds
-    build_docs(versions, use_yarn)
-
-=======
 
     # do the actual builds
     build_docs(versions, use_yarn)
 
 
->>>>>>> Stashed changes
 if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser()

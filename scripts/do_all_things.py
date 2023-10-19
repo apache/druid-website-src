@@ -1,9 +1,5 @@
 import copy_druid_docs
 import build_docs
-<<<<<<< Updated upstream
-import shutil
-=======
->>>>>>> Stashed changes
 
 # Example: python do_all_things.py -v 26.0.0
 
@@ -20,12 +16,6 @@ def main(versions, no_docs, source, skip_install, use_yarn):
     else:
         build_docs.main(["latest"], skip_install, use_yarn)
 
-<<<<<<< Updated upstream
-    print("Copying build output to ../published_versions. Use that directory to publish the site.")
-    shutil.copytree('build','published_versions', dirs_exist_ok=True)
-
-=======
->>>>>>> Stashed changes
 if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser()
