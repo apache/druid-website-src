@@ -28,6 +28,10 @@ import sys
 
 def build_docs(versions, use_yarn):
 
+    # define the folders that Docusaurus builds into and a temporary one
+    build_dir = "build"
+    temp_dir = "build__temp"
+
     for v in versions:
         print(f"Building the docs for version '{v}'...")
 
@@ -54,11 +58,9 @@ def build_docs(versions, use_yarn):
         # overwrites build directory with each build.
         # the "latest" version is built last to maintain
         # all the non-docs content for latest
-        source_dir = "build"
-        destination_dir = "build__temp"
-        if not os.path.isdir(source_dir):
+        if not os.path.isdir(build_dir):
             sys.exit("ERROR: The docs were not built. Check Docusaurus logs.")
-        shutil.copytree(source_dir, destination_dir, dirs_exist_ok=True)
+        shutil.copytree(build_dir, temp_dir, dirs_exist_ok=True)
 
         # restore the redirect file back to URLs with "latest"
         #subprocess.run(["git", "restore", "redirects.js"])
@@ -66,19 +68,25 @@ def build_docs(versions, use_yarn):
             for line in fileinput.input("redirects.js", inplace=1):
                 print(line.replace(f"/{v}/", "/latest/"), end='')
 
-    # after all version builds, rename the temp directory back to "build"
-    shutil.rmtree(source_dir)
-    shutil.move(destination_dir, source_dir)
+        # save the assets folder to check into GitHub
+        # applies to EACH version, since Doc2 attaches an alphanumeric string
+        # to each asset; so you can't republish an old version unless you
+        # also have the associated assets
+        shutil.copytree(f"{build_dir}/assets", 'published_versions/assets', dirs_exist_ok=True)
 
-    # save the build output to check into GitHub
-    # applies to last version only, typically "latest"
+
+    # after building ALL versions, rename the temp directory back to "build"
+    shutil.rmtree(build_dir)
+    shutil.move(temp_dir, build_dir)
+
+    # save the final build output to check into GitHub
     print("Copying build output to ../published_versions. Use that directory to publish the site.")
-    shutil.copytree('build','published_versions', dirs_exist_ok=True)
+    shutil.copytree(build_dir, 'published_versions', dirs_exist_ok=True)
 
 
 def main(versions, skip_install, use_yarn):
 
-    # from druid-website-src/static/build-scripts,
+    # from druid-website-src/scripts,
     # move to druid-website-src to run the npm commands
     os.chdir("../")
 
@@ -99,7 +107,6 @@ def main(versions, skip_install, use_yarn):
 
     # do the actual builds
     build_docs(versions, use_yarn)
-
 
 if __name__ == "__main__":
     import argparse
