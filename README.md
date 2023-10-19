@@ -41,15 +41,15 @@ Run `npm install` or `yarn install` in the root of the directory.
 
 These are the steps to publish either a new release or a hotfix to an existing release. Note that you'll always need to build `latest` so that the downloads page lists the correct versions, so the script automatically builds latest for you.
 
-> Note that the build scripts expect `apache/druid` and `apache/druid-website-src` to be peers at the same directory level.
+Before you start:
+* Make sure you're on the correct branch in your apache/druid repo.
+* Get the path of the apache/druid repo. You can skip this if you have `apache/druid` and `apache/druid-website-src` as peers at the same directory level.
 
 1. Update the version list in `static/js/version.js`. The highest release version goes in position 0. This file is used by `RecentReleasesWidget` on the home page to display the 3 most recent versions and to interpolate the download links on the download page.
 
 2. From the root of `druid-website-src`, go to `scripts/`.
 
-3. In `copy_druid_docs.py`, set `source_directory` to your OSS Druid repo. Make sure you're on the correct branch in your Druid repo before continuing. 
-
-4. In `scripts`, run `python do_all_things.py -v VERSION`. The script assumes you used `npm` to install. See example 3 if you use `yarn`.
+3. In `scripts`, run `python do_all_things.py -v VERSION`. The script assumes you used `npm` to install. See example 3 if you use `yarn`.
 
     **Example 1**: This command builds version 27.0.0 of the docs and latest.
     
@@ -69,8 +69,7 @@ These are the steps to publish either a new release or a hotfix to an existing r
     python do_all_things.py -v 27.0.0 --yarn
     ```
 
-    **Example 4**: If you have apache/druid in a completely different place (see note above), specify it using the `--source` flag.
-    
+    **Example 4**: If you have apache/druid in different place from druid-website-src, or use a different directory name than `druid`, specify its path using the `--source` flag.
 
     ```
     python do_all_things.py -v 27.0.0 --source /my/path/to/apache/druid
@@ -88,11 +87,11 @@ These are the steps to publish either a new release or a hotfix to an existing r
 
    The versions you built (such as 26.0.0 and latest) are copied to `published_versions` where the compiled pages for the older docs live.
 
-5. Go to `published_versions` and verify the site. If you run it locally, such as with `http-server` you'll get the latest version of the site, such as `localhost:8080/docs/latest/` and the version you built, such as `localhost:8080/docs/26.0.0/`. In addition, you should be able to see pre-Docusaurus2 versions such as 25.0.0 with the old CSS.
+4. Go to `published_versions` and verify the site. If you run it locally, such as with `http-server` you'll get the latest version of the site, such as `localhost:8080/docs/latest/` and the version you built, such as `localhost:8080/docs/26.0.0/`. In addition, you should be able to see pre-Docusaurus2 versions such as 25.0.0 with the old CSS.
 
-6. Commit the built files along with the Markdown files to `druid-website-src` and make a PR.
+5. Commit the built files along with the Markdown files to `druid-website-src` and make a PR.
 
-7. Use the contents of `published_versions` to make a PR to `https://github.com/apache/druid-website` (either the `asf-staging` branch or the `asf-site` branch).
+6. Use the contents of `published_versions` to make a PR to `https://github.com/apache/druid-website` (either the `asf-staging` branch or the `asf-site` branch).
 
 ### The scripts
 
