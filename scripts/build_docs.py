@@ -4,7 +4,7 @@
 """
 build-docs.py
 
-Version:        6 June 2023
+Version:        19 Oct 2023
 
 Purpose:        Build the OSS Druid Docusaurus 2 docs for all
                 versions supplied in the [-v, --versions] flag.
@@ -28,6 +28,10 @@ import sys
 
 def build_docs(versions, use_yarn):
 
+    # define the folders that Docusaurus builds into and a temporary one
+    build_dir = "build"
+    temp_dir = "build__temp"
+
     for v in versions:
         print(f"Building the docs for version '{v}'...")
 
@@ -40,7 +44,10 @@ def build_docs(versions, use_yarn):
         replacement = f'var buildVersion = "{v}";'
         for line in fileinput.input("docusaurus.config.js", inplace=1):
             print(re.sub(r"^var buildVersion.*", replacement, line), end='')
-        shutil.rmtree(f"published_versions/docs/{v}", ignore_errors=True) 
+
+        # remove specific version folder in published_versions/docs if exists
+        shutil.rmtree(f"published_versions/docs/{v}", ignore_errors=True)
+
         # build the docs
         if not use_yarn:
             subprocess.run(["npm", "run", "build"])
@@ -51,11 +58,9 @@ def build_docs(versions, use_yarn):
         # overwrites build directory with each build.
         # the "latest" version is built last to maintain
         # all the non-docs content for latest
-        source_dir = "build"
-        destination_dir = "build__temp"
-        if not os.path.isdir(source_dir):
+        if not os.path.isdir(build_dir):
             sys.exit("ERROR: The docs were not built. Check Docusaurus logs.")
-        shutil.copytree(source_dir, destination_dir, dirs_exist_ok=True)
+        shutil.copytree(build_dir, temp_dir, dirs_exist_ok=True)
 
         # restore the redirect file back to URLs with "latest"
         #subprocess.run(["git", "restore", "redirects.js"])
@@ -63,13 +68,25 @@ def build_docs(versions, use_yarn):
             for line in fileinput.input("redirects.js", inplace=1):
                 print(line.replace(f"/{v}/", "/latest/"), end='')
 
-    # after all version builds, rename the temp directory back to "build"
-    shutil.rmtree(source_dir)
-    shutil.move(destination_dir, source_dir)
+        # save the assets folder to check into GitHub
+        # applies to EACH version, since Doc2 attaches an alphanumeric string
+        # to each asset; so you can't republish an old version unless you
+        # also have the associated assets
+        shutil.copytree(f"{build_dir}/assets", 'published_versions/assets', dirs_exist_ok=True)
+
+
+    # after building ALL versions, rename the temp directory back to "build"
+    shutil.rmtree(build_dir)
+    shutil.move(temp_dir, build_dir)
+
+    # save the final build output to check into GitHub
+    print("Copying build output to ../published_versions. Use that directory to publish the site.")
+    shutil.copytree(build_dir, 'published_versions', dirs_exist_ok=True)
+
 
 def main(versions, skip_install, use_yarn):
 
-    # from druid-website-src/static/build-scripts,
+    # from druid-website-src/scripts,
     # move to druid-website-src to run the npm commands
     os.chdir("../")
 
@@ -87,6 +104,7 @@ def main(versions, skip_install, use_yarn):
 
     # remove the old build directory
     shutil.rmtree('build', ignore_errors=True)
+
     # do the actual builds
     build_docs(versions, use_yarn)
 
