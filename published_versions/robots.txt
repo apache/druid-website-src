@@ -1,0 +1,18 @@
+# robots.txt for https://druid.apache.org
+
+# Keep robots from crawling old Druid doc versions
+# and the unused blog endpoint
+
+User-agent: *
+Disallow: /docs/0*/
+Disallow: /docs/1*/
+Disallow: /docs/2*/
+Disallow: /docs/3*/
+Disallow: /docs/4*/
+Disallow: /docs/5*/
+Disallow: /docs/6*/
+Disallow: /docs/7*/
+Disallow: /docs/8*/
+Disallow: /docs/9*/
+Disallow: /blog*
+
