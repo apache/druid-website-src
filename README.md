@@ -13,6 +13,8 @@ For those, see [`apache/druid`](https://github.com/apache/druid/).
 
 The target repo for the website when you're ready to publish is [`druid-website`](https://github.com/apache/druid-website).
 
+The state of `master` for `apache/druid-website-src` should match the state of `asf-site` for `apache/druid-website`. For `asf-staging` in `apache/druid-website`, those PRs should be left unnmerged until they go into `asf-site`.
+
 ## Updating homepage widgets
 
 If you need to update the contents of Upcoming Events, Featured Content or Latest releases widgets, you can find them in `static/js`:
