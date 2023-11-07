@@ -38,18 +38,18 @@ Once the Docker install is complete, please proceed to the next steps in the tut
 
 ## Build the Hadoop docker image
 
-For this tutorial, we've provided a Dockerfile for a Hadoop 3.3.6 cluster, which we'll use to run the batch indexing task.
+For this tutorial, we've provided a Dockerfile for a Hadoop 2.8.5 cluster, which we'll use to run the batch indexing task.
 
 This Dockerfile and related files are located at `quickstart/tutorial/hadoop/docker`.
 
-From the apache-druid-28.0.0 package root, run the following commands to build a Docker image named "druid-hadoop-demo" with version tag "3.3.6":
+From the apache-druid-27.0.0 package root, run the following commands to build a Docker image named "druid-hadoop-demo" with version tag "2.8.5":
 
 ```bash
 cd quickstart/tutorial/hadoop/docker
-docker build -t druid-hadoop-demo:3.3.6 .
+docker build -t druid-hadoop-demo:2.8.5 .
 ```
 
-This will start building the Hadoop image. Once the image build is done, you should see the message `Successfully tagged druid-hadoop-demo:3.3.6` printed to the console.
+This will start building the Hadoop image. Once the image build is done, you should see the message `Successfully tagged druid-hadoop-demo:2.8.5` printed to the console.
 
 ## Setup the Hadoop docker cluster
 
@@ -77,7 +77,7 @@ On the host machine, add the following entry to `/etc/hosts`:
 Once the `/tmp/shared` folder has been created and the `etc/hosts` entry has been added, run the following command to start the Hadoop container.
 
 ```bash
-docker run -it  -h druid-hadoop-demo --name druid-hadoop-demo -p 2049:2049 -p 2122:2122 -p 8020:8020 -p 8021:8021 -p 8030:8030 -p 8031:8031 -p 8032:8032 -p 8033:8033 -p 8040:8040 -p 8042:8042 -p 8088:8088 -p 8443:8443 -p 9000:9000 -p 10020:10020 -p 19888:19888 -p 34455:34455 -p 49707:49707 -p 50010:50010 -p 50020:50020 -p 50030:50030 -p 50060:50060 -p 50070:50070 -p 50075:50075 -p 50090:50090 -p 51111:51111 -v /tmp/shared:/shared druid-hadoop-demo:3.3.6 /etc/bootstrap.sh -bash
+docker run -it  -h druid-hadoop-demo --name druid-hadoop-demo -p 2049:2049 -p 2122:2122 -p 8020:8020 -p 8021:8021 -p 8030:8030 -p 8031:8031 -p 8032:8032 -p 8033:8033 -p 8040:8040 -p 8042:8042 -p 8088:8088 -p 8443:8443 -p 9000:9000 -p 10020:10020 -p 19888:19888 -p 34455:34455 -p 49707:49707 -p 50010:50010 -p 50020:50020 -p 50030:50030 -p 50060:50060 -p 50070:50070 -p 50075:50075 -p 50090:50090 -p 51111:51111 -v /tmp/shared:/shared druid-hadoop-demo:2.8.5 /etc/bootstrap.sh -bash
 ```
 
 Once the container is started, your terminal will attach to a bash shell running inside the container:
@@ -110,7 +110,7 @@ docker exec -it druid-hadoop-demo bash
 
 ### Copy input data to the Hadoop container
 
-From the apache-druid-28.0.0 package root on the host, copy the `quickstart/tutorial/wikiticker-2015-09-12-sampled.json.gz` sample data to the shared folder:
+From the apache-druid-27.0.0 package root on the host, copy the `quickstart/tutorial/wikiticker-2015-09-12-sampled.json.gz` sample data to the shared folder:
 
 ```bash
 cp quickstart/tutorial/wikiticker-2015-09-12-sampled.json.gz /tmp/shared/wikiticker-2015-09-12-sampled.json.gz
@@ -125,7 +125,6 @@ cd /usr/local/hadoop/bin
 ./hdfs dfs -mkdir /druid
 ./hdfs dfs -mkdir /druid/segments
 ./hdfs dfs -mkdir /quickstart
-./hdfs dfs -mkdir /user
 ./hdfs dfs -chmod 777 /druid
 ./hdfs dfs -chmod 777 /druid/segments
 ./hdfs dfs -chmod 777 /quickstart
@@ -206,10 +205,10 @@ We've included a sample of Wikipedia edits from September 12, 2015 to get you st
 To load this data into Druid, you can submit an *ingestion task* pointing to the file. We've included
 a task that loads the `wikiticker-2015-09-12-sampled.json.gz` file included in the archive.
 
-Let's submit the `wikipedia-index-hadoop3.json` task:
+Let's submit the `wikipedia-index-hadoop.json` task:
 
 ```bash
-bin/post-index-task --file quickstart/tutorial/wikipedia-index-hadoop3.json --url http://localhost:8081
+bin/post-index-task --file quickstart/tutorial/wikipedia-index-hadoop.json --url http://localhost:8081
 ```
 
 ## Querying your data
