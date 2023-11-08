@@ -244,7 +244,7 @@ You should query for the number of ingested rows with:
 
 Druid can infer the schema for your data in one of two ways:
 
-- [Type-aware schema discovery](#type-aware-schema-discovery) where Druid infers the schema and type for your data. Type-aware schema discovery is available for native batch and streaming ingestion.
+- [Type-aware schema discovery (experimental)](#type-aware-schema-discovery) where Druid infers the schema and type for your data. Type-aware schema discovery is an experimental feature currently available for native batch and streaming ingestion.
 - [String-based schema discovery](#string-based-schema-discovery) where all the discovered columns are typed as either native string or multi-value string columns.
 
 #### Type-aware schema discovery
@@ -258,10 +258,12 @@ You can have Druid infer the schema and types for your data partially or fully b
 When performing type-aware schema discovery, Druid can discover all of the columns of your input data (that aren't in
 the exclusion list). Druid automatically chooses the most appropriate native Druid type among `STRING`, `LONG`,
 `DOUBLE`, `ARRAY<STRING>`, `ARRAY<LONG>`, `ARRAY<DOUBLE>`, or `COMPLEX<json>` for nested data. For input formats with
-native boolean types, Druid ingests these values as longs if `druid.expressions.useStrictBooleans` is set to `true`
-(the default) or strings if set to `false`. Array typed columns can be queried using
+native boolean types, Druid ingests these values as strings if `druid.expressions.useStrictBooleans` is set to `false`
+(the default), or longs if set to `true` (for more SQL compatible behavior). Array typed columns can be queried using
 the [array functions](../querying/sql-array-functions.md) or [UNNEST](../querying/sql-functions.md#unnest). Nested
 columns can be queried with the [JSON functions](../querying/sql-json-functions.md).
+
+We also highly recommend setting `druid.generic.useDefaultValueForNull=false` when using these columns since it also enables out of the box `ARRAY` type filtering. If not set to `false`, setting `sqlUseBoundsAndSelectors` to `false` on the [SQL query context](../querying/sql-query-context.md) can enable `ARRAY` filtering instead.
 
 Mixed type columns are stored in the _least_ restrictive type that can represent all values in the column. For example:
 

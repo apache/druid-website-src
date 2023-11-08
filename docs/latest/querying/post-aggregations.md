@@ -38,54 +38,49 @@ There are several post-aggregators available.
 The arithmetic post-aggregator applies the provided function to the given
 fields from left to right. The fields can be aggregators or other post aggregators.
 
-| Property | Description | Required |
-| --- | --- | --- |
-| `type` | Must be `"arithmetic"`. | Yes |
-| `name` | Output name of the post-aggregation | Yes |
-| `fn`| Supported functions are `+`, `-`, `*`, `/`, `pow` and `quotient` | Yes |
-| `fields` | List of post-aggregator specs which define inputs to the `fn` | Yes |
-| `ordering` | If no ordering (or `null`) is specified, the default floating point ordering is used. `numericFirst` ordering always returns finite values first, followed by `NaN`, and infinite values last. | No |
-
+Supported functions are `+`, `-`, `*`, `/`, `pow` and `quotient`.
 
 **Note**:
+
 * `/` division always returns `0` if dividing by`0`, regardless of the numerator.
 * `quotient` division behaves like regular floating point division
 * Arithmetic post-aggregators always use floating point arithmetic.
 
-Example:
+Arithmetic post-aggregators may also specify an `ordering`, which defines the order
+of resulting values when sorting results (this can be useful for topN queries for instance):
+
+- If no ordering (or `null`) is specified, the default floating point ordering is used.
+- `numericFirst` ordering always returns finite values first, followed by `NaN`, and infinite values last.
+
+The grammar for an arithmetic post aggregation is:
 
 ```json
-{
+postAggregation : {
   "type"  : "arithmetic",
-  "name"  : "mult",
-  "fn"    : "*",
-  "fields": [
-    {"type": "fieldAccess", "fieldName":  "someAgg"},
-    {"type": "fieldAccess", "fieldName":  "someOtherAgg"}
-  ]
+  "name"  : <output_name>,
+  "fn"    : <arithmetic_function>,
+  "fields": [<post_aggregator>, <post_aggregator>, ...],
+  "ordering" : <null (default), or "numericFirst">
 }
 ```
 
 ### Field accessor post-aggregators
 
-These post-aggregators return the value produced by the specified [dimension](../querying/dimensionspecs.md) or [aggregator](../querying/aggregations.md).
+These post-aggregators return the value produced by the specified [aggregator](../querying/aggregations.md).
 
-| Property | Description | Required |
-| --- | --- | --- |
-| `type` | Must be `"fieldAccess"` or `"finalizingFieldAccess"`. Use type `"fieldAccess"` to return the raw aggregation object, or use type `"finalizingFieldAccess"` to return a finalized value, such as an estimated cardinality. | Yes |
-| `name` | Output name of the post-aggregation | Yes if defined as a standalone post-aggregation, but may be omitted if used inline to some other post-aggregator in a `fields` list |
-| `fieldName` | The output name of the dimension or aggregator to reference | Yes |
-
-Example:
+`fieldName` refers to the output name of the aggregator given in the [aggregations](../querying/aggregations.md) portion of the query.
+For complex aggregators, like "cardinality" and "hyperUnique", the `type` of the post-aggregator determines what
+the post-aggregator will return. Use type "fieldAccess" to return the raw aggregation object, or use type
+"finalizingFieldAccess" to return a finalized value, such as an estimated cardinality.
 
 ```json
-{ "type" : "fieldAccess", "name": "someField", "fieldName" : "someAggregator" }
+{ "type" : "fieldAccess", "name": <output_name>, "fieldName" : <aggregator_name> }
 ```
 
 or
 
 ```json
-{ "type" : "finalizingFieldAccess", "name": "someFinalizedField", "fieldName" : "someAggregator" }
+{ "type" : "finalizingFieldAccess", "name": <output_name>, "fieldName" : <aggregator_name> }
 ```
 
 
@@ -93,51 +88,28 @@ or
 
 The constant post-aggregator always returns the specified value.
 
-| Property | Description | Required |
-| --- | --- | --- |
-| `type` | Must be `"constant"` | Yes |
-| `name` | Output name of the post-aggregation | Yes |
-| `value` | The constant value | Yes |
-
-Example:
-
 ```json
-{ "type"  : "constant", "name"  : "someConstant", "value" : 1234 }
+{ "type"  : "constant", "name"  : <output_name>, "value" : <numerical_value> }
 ```
 
 
 ### Expression post-aggregator
 The expression post-aggregator is defined using a Druid [expression](math-expr.md).
 
-| Property | Description | Required |
-| --- | --- | --- |
-| `type` | Must be `"expression"` | Yes |
-| `name` | Output name of the post-aggregation | Yes |
-| `expression` | Native Druid [expression](math-expr.md) to compute, may refer to any dimension or aggregator output names | Yes |
-| `ordering` | If no ordering (or `null`) is specified, the "natural" ordering is used. `numericFirst` ordering always returns finite values first, followed by `NaN`, and infinite values last. If the expression produces array or complex types, specify `ordering` as null and use `outputType` instead to use the correct type native ordering. | No |
-| `outputType` | Output type is optional, and can be any native Druid type: `LONG`, `FLOAT`, `DOUBLE`, `STRING`, `ARRAY` types (e.g. `ARRAY<LONG>`), or `COMPLEX` types (e.g. `COMPLEX<json>`). If not specified, the output type will be inferred from the `expression`. If specified and `ordering` is null, the type native ordering will be used for sorting values. If the expression produces array or complex types, this value must be non-null to ensure the correct ordering is used. If `outputType` does not match the actual output type of the `expression`, the value will be attempted to coerced to the specified type, possibly failing if coercion is not possible. | No |
-
-Example:
 ```json
 {
   "type": "expression",
-  "name": "someExpression",
-  "expression": "someAgg + someOtherAgg",
-  "ordering": null,
-  "outputType": "LONG" 
+  "name": <output_name>,
+  "expression": <post-aggregation expression>,
+  "ordering" : <null (default), or "numericFirst">
 }
 ```
+
 
 ### Greatest / Least post-aggregators
 
 `doubleGreatest` and `longGreatest` computes the maximum of all fields and Double.NEGATIVE_INFINITY.
 `doubleLeast` and `longLeast` computes the minimum of all fields and Double.POSITIVE_INFINITY.
-
-| Property | Description | Required |
-| --- | --- | --- |
-| `type` | Must be `"doubleGreatest"`, `"doubleLeast"`, `"longGreatest"`, or `"longLeast"`. | Yes |
-| `name` | Output name of the post-aggregation | Yes |
-| `fields` | List of post-aggregator specs which define inputs to the greatest or least function | Yes |
 
 The difference between the `doubleMax` aggregator and the `doubleGreatest` post-aggregator is that `doubleMax` returns the highest value of
 all rows for one specific column while `doubleGreatest` returns the highest value of multiple columns in one row. These are similar to the
@@ -148,11 +120,8 @@ Example:
 ```json
 {
   "type"  : "doubleGreatest",
-  "name"  : "theGreatest",
-  "fields": [
-   { "type": "fieldAccess", "fieldName": "someAgg" },
-   { "type": "fieldAccess", "fieldName": "someOtherAgg" }
-  ]
+  "name"  : <output_name>,
+  "fields": [<post_aggregator>, <post_aggregator>, ...]
 }
 ```
 
@@ -160,20 +129,23 @@ Example:
 
 Applies the provided JavaScript function to the given fields. Fields are passed as arguments to the JavaScript function in the given order.
 
-| Property | Description | Required |
-| --- | --- | --- |
-| `type` | Must be `"javascript"` | Yes |
-| `name` | Output name of the post-aggregation | Yes |
-| `fieldNames` | List of input dimension or aggregator output names | Yes |
-| `function` | String javascript function which accepts `fieldNames` as arguments | Yes |
+```json
+postAggregation : {
+  "type": "javascript",
+  "name": <output_name>,
+  "fieldNames" : [<aggregator_name>, <aggregator_name>, ...],
+  "function": <javascript function>
+}
+```
 
-Example:
+Example JavaScript aggregator:
+
 ```json
 {
   "type": "javascript",
-  "name": "someJavascript",
-  "fieldNames" : ["someAgg", "someOtherAgg"],
-  "function": "function(someAgg, someOtherAgg) { return 100 * Math.abs(someAgg) / someOtherAgg;"
+  "name": "absPercent",
+  "fieldNames": ["delta", "total"],
+  "function": "function(delta, total) { return 100 * Math.abs(delta) / total; }"
 }
 ```
 
@@ -185,25 +157,17 @@ Example:
 
 The hyperUniqueCardinality post aggregator is used to wrap a hyperUnique object such that it can be used in post aggregations.
 
-| Property | Description | Required |
-| --- | --- | --- |
-| `type` | Must be `"hyperUniqueCardinality"` | Yes |
-| `name` | Output name of the post-aggregation | Yes |
-| `fieldName` | The output name of a [`hyperUnique` aggregator](aggregations.md#cardinality-hyperunique) | Yes |
-
 ```json
 {
   "type"  : "hyperUniqueCardinality",
-  "name": "someCardinality",
-  "fieldName"  : "someHyperunique"
+  "name": <output name>,
+  "fieldName"  : <the name field value of the hyperUnique aggregator>
 }
 ```
 
 It can be used in a sample calculation as so:
 
 ```json
-{
-  ...
   "aggregations" : [{
     {"type" : "count", "name" : "rows"},
     {"type" : "hyperUnique", "name" : "unique_users", "fieldName" : "uniques"}
@@ -217,7 +181,6 @@ It can be used in a sample calculation as so:
       { "type" : "fieldAccess", "name" : "rows", "fieldName" : "rows" }
     ]
   }]
-  ...
 ```
 
 This post-aggregator will inherit the rounding behavior of the aggregator it references. Note that this inheritance

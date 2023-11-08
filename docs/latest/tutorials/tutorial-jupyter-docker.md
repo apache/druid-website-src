@@ -80,7 +80,7 @@ which determines the version of Druid to use. The Druid version references the D
 In the same directory as `docker-compose.yaml` and `environment`, start the application:
 
 ```bash
-DRUID_VERSION=28.0.0 docker compose --profile druid-jupyter up -d
+DRUID_VERSION=27.0.0 docker compose --profile druid-jupyter up -d
 ```
 
 ### Start Jupyter, Druid, and Kafka
@@ -90,7 +90,7 @@ Running Druid in Docker requires the `environment` file as well as the `DRUID_VE
 In the same directory as `docker-compose.yaml` and `environment`, start the application:
 
 ```bash
-DRUID_VERSION=28.0.0 docker compose --profile all-services up -d
+DRUID_VERSION=27.0.0 docker compose --profile all-services up -d
 ```
 
 ### Start Kafka and Jupyter
@@ -100,7 +100,7 @@ If you already have Druid running externally, such as an existing cluster or a d
 In the same directory as `docker-compose.yaml` and `environment`, start the application:
 
 ```bash
-DRUID_VERSION=28.0.0 docker compose --profile kafka-jupyter up -d
+DRUID_VERSION=27.0.0 docker compose --profile kafka-jupyter up -d
 ```
 
 If you have an external Druid instance running on a different machine than the one hosting the Docker Compose environment, change the `host` variable in the notebook tutorial to the hostname or address of the machine where Druid is running.
@@ -111,7 +111,7 @@ If Druid is running local to the same machine as Jupyter, open the tutorial and 
 host = "host.docker.internal"
 ```
 
-To enable Druid to ingest data from Kafka within the Docker Compose environment, update the `bootstrap.servers` property in the Kafka ingestion spec to `localhost:9094` before ingesting. For reference, see [Consumer properties](../development/extensions-core/kafka-supervisor-reference.md#consumer-properties).
+To enable Druid to ingest data from Kafka within the Docker Compose environment, update the `bootstrap.servers` property in the Kafka ingestion spec to `localhost:9094` before ingesting. For reference, see [more on consumer properties](../development/extensions-core/kafka-supervisor-reference.md#more-on-consumerproperties).
 
 ### Update image from Docker Hub
 
@@ -130,7 +130,7 @@ If you prefer to build the image locally from the official source, do the follow
 3. Start the services using `-f docker-compose-local.yaml` in the `docker compose` command. For example:
 
 ```bash
-DRUID_VERSION=28.0.0 docker compose --profile all-services -f docker-compose-local.yaml up -d
+DRUID_VERSION=27.0.0 docker compose --profile all-services -f docker-compose-local.yaml up -d
 ```
 
 ## Access Jupyter-based tutorials
@@ -141,7 +141,7 @@ This way you can save your work completed within the Docker container.
 
 1. Navigate to the notebooks at http://localhost:8889.
 :::info
- If you set `JUPYTER_PORT` to another port number, replace `8889` with the value of the Jupyter port.
+If you set `JUPYTER_PORT` to another port number, replace `8889` with the value of the Jupyter port.
 :::
 
 2. Select a tutorial. If you don't plan to save your changes, you can use the notebook directly as is. Otherwise, continue to the next step.
@@ -236,7 +236,7 @@ For ARM-based devices, follow this setup to start Druid externally, while keepin
    docker compose --profile jupyter up -d
    
    # Start Kafka and Jupyter
-   DRUID_VERSION=28.0.0 docker compose --profile kafka-jupyter up -d
+   DRUID_VERSION=27.0.0 docker compose --profile kafka-jupyter up -d
    ```
 
 3. If Druid is running local to the same machine as Jupyter, open the tutorial and set the `host` variable to `host.docker.internal` before starting. For example:

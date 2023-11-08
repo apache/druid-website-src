@@ -78,7 +78,8 @@ In this section, you download sample data to the tutorial's directory and send t
 2. Download the sample data to your new directory and extract it:
 
    ```bash
-   (cd sample-data && curl -O https://static.imply.io/example-data/kttm-nested-v2/kttm-nested-v2-2019-08-25.json.gz)
+   cd sample-data
+   curl -O https://static.imply.io/example-data/kttm-nested-v2/kttm-nested-v2-2019-08-25.json.gz
    ```
 
 3. In your Kafka root directory, run the following commands to post sample events to the `kttm` Kafka topic:
@@ -268,13 +269,13 @@ You can also use the Druid API to submit a supervisor spec.
 1. Run the following command to download the sample spec:
 
    ```bash
-   curl -o kttm-kafka-supervisor.json https://raw.githubusercontent.com/apache/druid/master/docs/assets/files/kttm-kafka-supervisor.json
+   curl -O https://druid.apache.org/docs/latest/assets/files/kttm-kafka-supervisor.json
    ```
 
 2. Run the following command to submit the spec in the `kttm-kafka-supervisor.json` file:
 
     ```bash
-    curl -X POST -H 'Content-Type: application/json' -d @kttm-kafka-supervisor.json http://localhost:8081/druid/indexer/v1/supervisor
+    curl -XPOST -H 'Content-Type: application/json' kttm-kafka-supervisor.json http://localhost:8081/druid/indexer/v1/supervisor
     ```
 
     After Druid successfully creates the supervisor, you get a response containing the supervisor ID: `{"id":"kttm-kafka-supervisor-api"}`.
