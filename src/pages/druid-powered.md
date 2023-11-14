@@ -707,9 +707,10 @@ Scalac migrated to Apache Druid and Apache Kafka (from Apache Cassandra and Apac
 
 ## Shopee
 
-At [Shopee](http://shopee.com/) Data Engineer Group, we use Druid for real-time analytics of users'(including seller and buyer) interaction with its popular e-commerce site.
+At [Shopee](http://shopee.com/), we provides a sub-second OLAP engine service that supports a vast array of business needs, including user behavior analysis, product recommendation, sales data analysis, brand analysis, network performance analysis, core metrics analysis, advertising revenue analysis, application trajectory analysis, cross-border e-commerce analysis, content recommendation, and more. At the mean time, by upgrading to a cloud-native architecture, evolving the Druid core, and refining the surrounding ecosystem, we continuously enhance the service's stability, performance, security, and usability, while also reducing labor and machine costs.
 
-* [Apache Druid in Shopee](https://mp.weixin.qq.com/s/WFiPDPvxMUi_QVfBDqgVcQ)(in Chinese). Published on 2022-01-13 by [yuanlihan](https://github.com/yuanlihan), a contributor of Apache Druid.
+* [Apache Druid in Shopee](https://mp.weixin.qq.com/s/WFiPDPvxMUi_QVfBDqgVcQ) (in Chinese). Published on 2022-01-13 by [yuanlihan](https://github.com/yuanlihan), a contributor of Apache Druid.
+* [Apache Druid cloud native architecture evolution](https://yuzhouwan.com/posts/220820/) (in Chinese). Published on 2022-08-18 by [Benedict Jin](https://github.com/asdf2014), a Committer and PMC Member of Apache Druid.
 
 ## Shopify
 
