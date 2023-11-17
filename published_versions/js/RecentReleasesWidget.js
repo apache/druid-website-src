@@ -31,7 +31,7 @@ export function RecentReleases({ data }) {
 }
 
 export  function RecentReleasesContainer({ jsonData }) {
-  const firstThree = jsonData.slice(0,5);
+  const firstThree = jsonData.slice(0,3);
   return (
     <div>
       {firstThree.map((data) => (
