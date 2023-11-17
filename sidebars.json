@@ -90,8 +90,18 @@
       "data-management/update",
       "data-management/delete",
       "data-management/schema-changes",
-      "data-management/compaction",
-      "data-management/automatic-compaction"
+      {
+        "type": "category",
+        "label": "Compaction",
+        "link": {
+           "type": "doc",
+           "id": "data-management/compaction"
+        },
+        "items": [
+           "data-management/automatic-compaction",
+           "data-management/manual-compaction"
+         ]
+       }
     ],
     "Querying": [
       {
@@ -99,11 +109,13 @@
         "label": "Druid SQL",
         "items": [
           "querying/sql",
+          "querying/tips-good-queries",
           "querying/query-deep-storage",
           "querying/sql-data-types",
           "querying/sql-operators",
           "querying/sql-scalar",
           "querying/sql-aggregations",
+          "querying/sql-window-functions",
           "querying/sql-array-functions",
           "querying/sql-multivalue-string-functions",
           "querying/sql-json-functions",
@@ -124,6 +136,7 @@
           "querying/joins",
           "querying/lookups",
           "querying/multi-value-dimensions",
+          "querying/arrays",
           "querying/nested-columns",
           "querying/multitenancy",
           "querying/caching",
@@ -267,5 +280,5 @@
     "Misc": [
       "misc/papers-and-talks"
     ]
-  }
+      }
 }
