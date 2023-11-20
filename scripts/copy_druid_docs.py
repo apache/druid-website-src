@@ -112,6 +112,10 @@ def main(druid_version, source_directory="../../druid"):
     shutil.copyfile(source_directory+"/website/sidebars.json", "../sidebars.json")
     shutil.copyfile(source_directory+"/website/redirects.js", "../redirects.js")
 
+    # Copies the data folder from the root of druid-website-src
+    # into published_versions so
+    subprocess.run(["rsync", "--delete", "--recursive", "../data", "../published_versions/"])
+
     do_the_replace(destination_directory, druid_version)
 
     is_it_latest(druid_version, source_directory, destination_directory_latest)

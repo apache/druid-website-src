@@ -120,6 +120,10 @@ The HTML files for pre-Docusaurus 2 versions (versions before 26) are in .publis
 3. Copy the HTML files for the docs from the build output to `published_versions/docs/VERSION`.
 4. Publish the site as you normally would for a new release.
 
+## Example data files
+
+If you want to add a new example data file, add it to the `data` directory in the root of the repo. As part of the build process, it gets copied into the build output that's used to publish the site.
+
 ## Contributing
 
 See [CONTRIBUTING.md](https://github.com/apache/druid-website-src/blob/master/CONTRIBUTING.md).
