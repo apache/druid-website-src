@@ -27,11 +27,11 @@
     "sass": "^1.61.0"
   },
   "dependencies": {
-    "@docusaurus/core": "^2.4.1",
-    "@docusaurus/plugin-client-redirects": "^2.4.1",
-    "@docusaurus/preset-classic": "^2.4.1",
+    "@docusaurus/core": "^3.0.0",
+    "@docusaurus/plugin-client-redirects": "^3.0.0",
+    "@docusaurus/preset-classic": "^3.0.0",
     "clsx": "^1.1.1",
-    "docusaurus-lunr-search": "^2.3.2",
+    "docusaurus-lunr-search": "^3.3.0",
     "fast-glob": "^3.2.2",
     "fs-extra": "^8.1.0",
     "react": "^17.0.2",
