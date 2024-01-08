@@ -24,6 +24,13 @@ Used by ContentWidget.js in index.js to display the first 5 entries from the top
 
 export const Content = [
   {
+    "date": "2023-11-25",
+    "title": "Druid Data Cookbook: Upserts in Druid SQL",
+    "name": "Hellmar Becker",
+    "link": "https://blog.hellmar-becker.de/2023/11/25/druid-data-cookbook-upserts-in-druid-sql/",
+    "company": "Imply"
+  },
+  {
     "date": "2023-09-07",
     "title": "New in Apache Druid 27: Querying Deep Storage",
     "name": "Hellmar Becker",
