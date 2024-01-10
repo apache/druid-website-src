@@ -29,25 +29,6 @@ export default () => {
                 <p />
             </div>
         </main>
-
-        <section className="promotion-banner">
-          <div className="container">
-              <div className="text-center">
-                <h4>
-                  Registration is now open!{' '}
-                  <a
-                    href="http://druidsummit.org/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Register today
-                  </a>{' '}
-                  for virtual Druid Summit on December 6th.
-                </h4>
-              </div>
-          </div>
-        </section>
-
             <div className="grid-container">
               <div className="grid-item">
               <h2>
