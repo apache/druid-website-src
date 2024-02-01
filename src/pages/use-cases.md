@@ -13,26 +13,12 @@ canonical: 'https://druid.apache.org/use-cases'
 
 Apache Druid is a database that is most often used for powering use cases where real-time ingest, fast query performance, and high uptime are important. As such, Druid is commonly used for powering GUIs of analytical applications, or as a backend for highly-concurrent APIs that need fast aggregations. Druid works best with event-oriented data.
 
-Common application areas for Druid include:
+If you are experimenting with a new use case for Druid or have questions about Druid's capabilities and features, join the [Apache Druid Slack](http://apachedruidworkspace.slack.com/) channel! There, you can connect with Druid experts, ask questions, and get help in real time. 
 
-<div class="fancy-list">
-    <ui>
-        <li>Clickstream analytics (web and mobile analytics)</li>
-        <li>Risk/fraud analysis</li>
-        <li>Network telemetry analytics (network performance monitoring)</li>
-        <li>Server metrics storage</li>
-        <li>Supply chain analytics (manufacturing metrics)</li>
-        <li>Application performance metrics</li>
-        <li>Business intelligence / OLAP</li>
-    </ui>
-</div>
+## Common use case examples
 
-Some of these use cases are described in more detail below. For an overview of technical differentiation, please see the [FAQ](faq).
-
-If you are experimenting with a new use case for Druid or have questions about Druid's capabilities and features, join the [Apache Druid Slack](http://apachedruidworkspace.slack.com/) channel! There, you can connect with Druid experts, ask questions, and get help in real time.
-
-<div class="zigzag-features">
-<div class="zigzag-feature">
+<div class="features">
+<div class="feature">
 <span class="fa fa-users fa"></span>
 
 ## User activity and behavior
@@ -50,7 +36,7 @@ Measure and compare user activity by age, gender, location, and much more.
 
 </div>
 
-<div class="zigzag-feature">
+<div class="feature">
 <span class="fa fa-project-diagram fa"></span>
 
 ## Network flows
@@ -64,7 +50,7 @@ Druid's ability to handle flexible schemas means that you can add any attributes
 
 </div>
 
-<div class="zigzag-feature">
+<div class="feature">
 <span class="fa fa-comments-dollar fa"></span>
 
 
@@ -80,7 +66,7 @@ Druid can be used to compute impressions, clicks, eCPM, and key conversion metri
 
 </div>
 
-<div class="zigzag-feature">
+<div class="feature">
 <span class="fa fa-tachometer-alt fa"></span>
 
 ## Application performance management
@@ -95,7 +81,7 @@ For example, rank API endpoints based on 95th percentile query latency, and slic
 
 </div>
 
-<div class="zigzag-feature">
+<div class="feature">
 <span class="fa fa-thermometer-three-quarters fa"></span>
 
 
@@ -115,7 +101,7 @@ Furthermore, you search and filter on tag values orders of magnitude faster than
 
 </div>
 
-<div class="zigzag-feature">
+<div class="feature">
 <span class="fa fa-chart-pie fa"></span>
 
 ## OLAP and business intelligence
