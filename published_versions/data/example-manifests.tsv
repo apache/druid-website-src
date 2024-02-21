@@ -1,2 +1,0 @@
-name	description	spec
-Wikipedia Edits	Edits on Wikipedia from one day	{"type":"index_parallel","ioConfig":{"type":"index_parallel","firehose":{"type":"http","uris":["https://druid.apache.org/data/wikipedia.json.gz"]}},"tuningConfig":{"type":"index_parallel"},"dataSchema":{"dataSource":"new-data-source","granularitySpec":{"type":"uniform","segmentGranularity":"DAY","queryGranularity":"HOUR"}}}
