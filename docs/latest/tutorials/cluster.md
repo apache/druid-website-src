@@ -150,14 +150,14 @@ First, download and unpack the release archive. It's best to do this on a single
 since you will be editing the configurations and then copying the modified distribution out to all
 of your servers.
 
-[Download](https://www.apache.org/dyn/closer.cgi?path=/druid/29.0.0/apache-druid-29.0.0-bin.tar.gz)
-the 29.0.0 release.
+[Download](https://www.apache.org/dyn/closer.cgi?path=/druid/29.0.1/apache-druid-29.0.1-bin.tar.gz)
+the 29.0.1 release.
 
 Extract Druid by running the following commands in your terminal:
 
 ```bash
-tar -xzf apache-druid-29.0.0-bin.tar.gz
-cd apache-druid-29.0.0
+tar -xzf apache-druid-29.0.1-bin.tar.gz
+cd apache-druid-29.0.1
 ```
 
 In the package, you should find:
@@ -423,7 +423,7 @@ Copy the Druid distribution and your edited configurations to your Master server
 If you have been editing the configurations on your local machine, you can use *rsync* to copy them:
 
 ```bash
-rsync -az apache-druid-29.0.0/ MASTER_SERVER:apache-druid-29.0.0/
+rsync -az apache-druid-29.0.1/ MASTER_SERVER:apache-druid-29.0.1/
 ```
 
 ### No Zookeeper on Master
