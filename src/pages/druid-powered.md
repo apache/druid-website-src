@@ -537,10 +537,6 @@ At Noon – The Social Learning Platform, on a daily basis we process close to 1
 
 [OCEAN-IT](http://www.ocean-it.co.kr/index/index.do) is a company established in S.Korea 2008, and is playing a role in system & database construction, operation in the public IT sector. We have received a service request from Korea Electric Power Corporation (KEPCO), and have been performing system and data purification work. In particular, OCEAN-IT are carrying out the business at the request of KEPCO, collecting real-time sensor databases such as Boiler, Turbine, and Generator as raw data from four power plants in Korea, and refining them for real-time inquiry and analysis. The raw data collected is 40,000 cases per second, which can be estimated to be 1.15 billion cases per day, and these data are implemented to be searchable within 0.1 second of response speed.
 
-## Ona
-
-Ona <https://ona.io> is a software engineering and design firm based in Nairobi, Kenya and Washington, DC. Our mission is to improve the effectiveness of humanitarian and development aid by empowering organizations worldwide with collective and actionable intelligence. We use Druid to power dashboards and disseminate global health and service delivery data pulled from diverse sources.
-
 ## OneAPM
 
 OneAPM <http://oneapm.com> is an IT service compmay focusing on Application Performance Management (APM). In OneAPM, Druid is used to power clients' interactive queries on performance data collected from their applications in realtime.
