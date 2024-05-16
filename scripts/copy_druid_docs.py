@@ -86,7 +86,8 @@ def is_it_latest(druid_version, source_directory, destination_directory_latest):
     if is_latest == 'y':
         print("Also copying the docs to docs/latest.")
         subprocess.run(["rsync", "--delete", "--recursive", f"{source_directory}/docs/", destination_directory_latest])
-        shutil.rmtree(f"{destination_directory_latest}/_bin")
+        if os.path.exists(f"{destination_directory_latest}/_bin"):
+            shutil.rmtree(f"{destination_directory_latest}/_bin")
         do_the_replace(destination_directory_latest, druid_version)
     elif is_latest == 'n':
         print("Not copying the docs to docs/latest")
@@ -106,7 +107,8 @@ def main(druid_version, source_directory="../../druid"):
     subprocess.run(["rsync", "--delete", "--recursive", f"{source_directory}/docs/", destination_directory])
 
     # deletes the _bin directory that's not needed
-    shutil.rmtree(f"{destination_directory}/_bin")
+    if os.path.exists(f"{destination_directory_latest}/_bin"):
+      shutil.rmtree(f"{destination_directory_latest}/_bin")    
 
     # Copy sidebars.json and redirects.json
     shutil.copyfile(source_directory+"/website/sidebars.json", "../sidebars.json")
