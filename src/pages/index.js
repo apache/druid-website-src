@@ -116,7 +116,7 @@ export default () => {
                 <FeaturedContentContainer jsonData={Content} />
               </div>
               <div className="widget-container">
-                <h3>Recent releases</h3>
+                <h3>Recent Releases</h3>
                 <RecentReleasesContainer jsonData={Releases} />
               </div>
             </div>
