@@ -34,15 +34,15 @@ export default () => {
           <div className="container">
               <div className="text-center">
                 <h4>
-                  Druid Summit 2023 - Call for Speakers is now open!{' '}
+                  Druid Summit 2024 - Call for Speakers is now open!{' '}
                   <a
-                    href="http://druidsummit.org/"
+                    href="https://forms.gle/NqKJpSwsRDSsA7RE9"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     Apply to speak
                   </a>{' '}
-                  by October 6th.
+                  by August 2nd.
                 </h4>
               </div>
           </div>
