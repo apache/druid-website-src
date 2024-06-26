@@ -42,7 +42,7 @@ export default () => {
                   >
                     Apply to speak
                   </a>{' '}
-                  by August 2nd.
+                  by August 5th.
                 </h4>
               </div>
           </div>
