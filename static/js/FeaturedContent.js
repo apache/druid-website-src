@@ -24,6 +24,27 @@ Used by ContentWidget.js in index.js to display the first 5 entries from the top
 
 export const Content = [
   {
+    "date": "2024-06-17",
+    "title": "Using Spectator Histogram and DDSketch for Advanced Statistical Analysis",
+    "name": "Reena Leone",
+    "link": "https://imply.io/podcast/apache-druid-29-getting-up-to-speed-performance-ecosystem-sql-compliance-sergio-ferragut/",
+    "company": "Imply"
+  },
+  {
+    "date": "2024-04-17",
+    "title": "Monitoring Apache Druid in Grafana",
+    "name": "Beata Zawiślak",
+    "link": "https://www.deep.bi/blog/monitoring-apache-druid-in-grafana",
+    "company": "Deep.BI"
+  },
+  {
+    "date": "2024-03-29",
+    "title": "Getting up to Speed on Druid’s Performance, Ecosystem, and SQL Compliance",
+    "name": "Reena Leone",
+    "link": "https://imply.io/podcast/apache-druid-29-getting-up-to-speed-performance-ecosystem-sql-compliance-sergio-ferragut/",
+    "company": "Imply"
+  },
+  {
     "date": "2023-11-25",
     "title": "Druid Data Cookbook: Upserts in Druid SQL",
     "name": "Hellmar Becker",
