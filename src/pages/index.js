@@ -21,7 +21,7 @@ export default () => {
         <main className="druid-masthead">
             <div className="text-center">
               <h1>Apache<sup>®</sup> Druid</h1>
-                <p className="lead">Druid is a high performance, real-time analytics database that delivers sub-second queries on streaming and batch data at scale and under load.</p>
+                <p className="lead">A high performance, real-time analytics database that delivers sub-second queries on streaming and batch data at scale and under load.</p>
                 <p>
                   <a className="button" href="/downloads.html"><span className="fa fa-download" /> Download</a>
                   <a className="button" href="/community/join-slack/?v=2"><span className="fab fa-slack" /> Join Slack</a>
@@ -34,7 +34,15 @@ export default () => {
           <div className="container">
               <div className="text-center">
                 <h4>
-                  Druid Summit 2024 - Call for Speakers is now open!{' '}
+                {' '}
+                  <a
+                    href="https://druidsummit.org/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Druid Summit 2024
+                  </a>{' '}
+                   - Call for Speakers is now open!{' '}
                   <a
                     href="https://forms.gle/NqKJpSwsRDSsA7RE9"
                     target="_blank"
