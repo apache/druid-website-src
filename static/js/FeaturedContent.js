@@ -31,7 +31,7 @@ export const Content = [
     "company": "Imply"
   },
   {
-    "date": "2024-04-17",
+    "date": "2024-04-29",
     "title": "Monitoring Apache Druid in Grafana",
     "name": "Beata Zawiślak",
     "link": "https://www.deep.bi/blog/monitoring-apache-druid-in-grafana",
