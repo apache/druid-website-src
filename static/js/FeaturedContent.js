@@ -27,7 +27,7 @@ export const Content = [
     "date": "2024-06-17",
     "title": "Using Spectator Histogram and DDSketch for Advanced Statistical Analysis",
     "name": "Reena Leone",
-    "link": "https://imply.io/podcast/apache-druid-29-getting-up-to-speed-performance-ecosystem-sql-compliance-sergio-ferragut/",
+    "link": "https://imply.io/blog/community-spotlight-using-netflix-spectator-histogram-kongs-ddsketch-apache-druid-advanced-statistical-analysis/",
     "company": "Imply"
   },
   {
