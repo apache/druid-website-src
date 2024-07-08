@@ -56,7 +56,7 @@ It's a pleasure to work with Druid, extraordinarily efficient and exceptionally 
 
 ## Alphaa AI
 
-We leverage Apache Druid in conjunction with the Alphaa AI Super AI NLP Engine to implement Natural Language Query on billions of rows of data for Alphaa Cloud customers.
+[Alphaa AI](https://alphaa.ai) have leveraged Apache Druid in conjunction with the Alphaa AI Super AI NLP Engine to implement Natural Language Query on billions of rows of data for Alphaa Cloud customers.
 
 ## Amobee
 
