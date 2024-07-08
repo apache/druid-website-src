@@ -257,10 +257,6 @@ One of our key goals at [FacilityConneX](https://www.facilityconnex.com/) is to 
 
 Druid powers our applications related metrics and helps us slice and dice analytics on both historical and realtime-time metrics. It significantly reduces latency of analytic queries and help people to get insights more interactively. Through druid data we can now do anomaly detection as well.
 
-## Finin
-
-[Finin](https://finin.in/) is India’s first ever consumer-facing neobank. They're using Apache Druid as a backend for analytics, helping the company with clickstream analytics, user activity and behaviour as well as application performance management. 
-
 ## Flipkart
 
 At Flipkart, business and analytics teams need constant visibility into how the users are interacting with the platform across all channels – website, mobile apps and m-site. They are using Druid to power their real-time clickstream analytics reports that enable their business teams to make critical decisions based on current traffic patterns and plan automated as well as manual interventions for traffic shaping.
