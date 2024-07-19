@@ -56,7 +56,7 @@ It's a pleasure to work with Druid, extraordinarily efficient and exceptionally 
 
 ## Alphaa AI
 
-We leverage Apache Druid in conjunction with the Alphaa AI Super AI NLP Engine to implement Natural Language Query on billions of rows of data for Alphaa Cloud customers.
+[Alphaa AI](https://alphaa.ai) have leveraged Apache Druid in conjunction with the Alphaa AI Super AI NLP Engine to implement Natural Language Query on billions of rows of data for Alphaa Cloud customers.
 
 ## Amobee
 
@@ -257,21 +257,11 @@ One of our key goals at [FacilityConneX](https://www.facilityconnex.com/) is to 
 
 Druid powers our applications related metrics and helps us slice and dice analytics on both historical and realtime-time metrics. It significantly reduces latency of analytic queries and help people to get insights more interactively. Through druid data we can now do anomaly detection as well.
 
-## Finin
-
-[Finin](https://finin.in/) is India’s first ever consumer-facing neobank. They're using Apache Druid as a backend for analytics, helping the company with clickstream analytics, user activity and behaviour as well as application performance management. 
-
 ## Flipkart
 
 At Flipkart, business and analytics teams need constant visibility into how the users are interacting with the platform across all channels – website, mobile apps and m-site. They are using Druid to power their real-time clickstream analytics reports that enable their business teams to make critical decisions based on current traffic patterns and plan automated as well as manual interventions for traffic shaping.
 
 * [Clickstream Analytics with Apache Druid](https://www.youtube.com/watch?v=vCk1zRxbAnM)
-
-## Flurry Analytics
-
-[Flurry](https://www.flurry.com) is a mobile app analytics platform that empowers product, development and growth experts to build better apps that users love. Mobile data hits the Flurry backend at a huge rate, updates statistics across hundreds of dimensions, and becomes queryable immediately. Flurry harnesses Druid to ingest data and serve queries at this massive rate.
-
-* [Druid @ Flurry](https://youtu.be/6c_hc3Qca5s) (Eric Tschetter), *Sift Science [YouTube]*, 16 Dec 2016.
 
 ## FullContact
 
