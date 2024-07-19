@@ -267,12 +267,6 @@ At Flipkart, business and analytics teams need constant visibility into how the 
 
 * [Clickstream Analytics with Apache Druid](https://www.youtube.com/watch?v=vCk1zRxbAnM)
 
-## Flurry Analytics
-
-[Flurry](https://www.flurry.com) is a mobile app analytics platform that empowers product, development and growth experts to build better apps that users love. Mobile data hits the Flurry backend at a huge rate, updates statistics across hundreds of dimensions, and becomes queryable immediately. Flurry harnesses Druid to ingest data and serve queries at this massive rate.
-
-* [Druid @ Flurry](https://youtu.be/6c_hc3Qca5s) (Eric Tschetter), *Sift Science [YouTube]*, 16 Dec 2016.
-
 ## FullContact
 
 * [Enrich API Brings Higher Match Rates with Multi-Field Enrichment Capabilities](https://www.fullcontact.com/blog/2019/06/27/enrich-api-brings-higher-match-rates-with-multi-field-enrichment-capabilities/) (Ken Michie), *Full Contact*, 27 Jun 2019.
