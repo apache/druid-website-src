@@ -28,8 +28,7 @@
         "tutorials/tutorial-append-data",
         "tutorials/tutorial-update-data",
         "tutorials/tutorial-compaction",
-        "tutorials/tutorial-delete-data",
-        "tutorials/tutorial-latest-by"]
+        "tutorials/tutorial-delete-data"]
        },
       {"type": "category",
         "label": "Querying tutorials",
@@ -37,8 +36,7 @@
           "tutorials/tutorial-query",
           "tutorials/tutorial-sql-query-view",
           "tutorials/tutorial-unnest-arrays",
-          "tutorials/tutorial-query-deep-storage",
-          "tutorials/tutorial-latest-by"]
+          "tutorials/tutorial-query-deep-storage"]
       },
     "tutorials/tutorial-sketches-theta",
     "tutorials/tutorial-jdbc",
