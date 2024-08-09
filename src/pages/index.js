@@ -42,15 +42,7 @@ export default () => {
                   >
                     Druid Summit 2024
                   </a>{' '}
-                   - Call for Speakers is now open!{' '}
-                  <a
-                    href="https://forms.gle/NqKJpSwsRDSsA7RE9"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Apply to speak
-                  </a>{' '}
-                  by August 5th.
+                   - Registration is now open!{' '}
                 </h4>
               </div>
           </div>
