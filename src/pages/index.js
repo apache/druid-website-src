@@ -119,7 +119,7 @@ export default () => {
                   <span className="fa fa-podcast fa" />
                   <h5> Podcast</h5>
                   <p>
-                    Hear from the Druid community on <a href="https://podcasts.apple.com/us/podcast/tales-at-scale/id1655951714">Apple</a>, <a href="https://open.spotify.com/show/6KAKYLJvCVegsFfKvbfDnt">Spotify</a>, and <a href="https://podcasts.google.com/feed/aHR0cHM6Ly9mZWVkcy5saWJzeW4uY29tLzQ0ODE3OS9yc3M">Google</a>.
+                    Hear from the Druid community on <a href="https://podcasts.apple.com/us/podcast/tales-at-scale/id1655951714">Apple</a>, <a href="https://open.spotify.com/show/6KAKYLJvCVegsFfKvbfDnt">Spotify</a>, and <a href="https://music.youtube.com/playlist?list=PLDZysOZKycN4ndlSxImrdFugdQ2NYbYMv">YouTube Music</a>.
                   </p>
                 </div>
               </div>
