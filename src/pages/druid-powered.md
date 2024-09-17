@@ -757,6 +757,12 @@ Societe Generale, one of Europe's leading financial services groups and a major 
 
 Within the Societe Generale IT department, Apache Druid is used as Time Series Database in order to store performance metrics generated in real-time by thousands of servers, databases, middlewares. These data are stored in multiple Druid clusters in multiple regions (+840 vCPUs, +7000GB of RAM, +300 billions of events) and are used for many purposes, such as dashboarding and predictive maintenance use cases.
 
+## Spideo
+
+Spideo provides personalization and recommendations with their Spideo recommendation system for movies, TV, and video streaming platforms. User interactions on the Spideo platform (click, play, bookmark, etc.) are stored in the read optimized user events table hosted on Apache Druid. Filtered user personas are ingested in the dedicated table on Apache Druid.
+
+* [Introducing connect personalization at scale](https://spideo.com/business/introducing-connect-personalization-at-scale/)
+
 ## Splunk
 
 We went through the journey of deploying Apache Druid clusters on Kubernetes and created a [druid-operator](https://github.com/druid-io/druid-operator). We use this operator to deploy Druid clusters at Splunk.
