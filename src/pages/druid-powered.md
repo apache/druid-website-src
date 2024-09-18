@@ -759,7 +759,7 @@ Within the Societe Generale IT department, Apache Druid is used as Time Series D
 
 ## Spideo
 
-Spideo provides personalization and recommendations with their Spideo recommendation system for movies, TV, and video streaming platforms. User interactions on the Spideo platform (click, play, bookmark, etc.) are stored in the read optimized user events table hosted on Apache Druid. Filtered user personas are ingested in the dedicated table on Apache Druid.
+Spideo provides personalization and recommendations with their Spideo recommendation system for movies, TV, and video streaming platforms. User interactions on the Spideo platform (click, play, bookmark, etc.) are stored in the read optimized user events table hosted on Apache Druid. Filtered user personas are ingested into the dedicated table in Apache Druid.
 
 * [Introducing connect personalization at scale](https://spideo.com/business/introducing-connect-personalization-at-scale/)
 
