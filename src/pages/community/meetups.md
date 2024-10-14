@@ -18,6 +18,8 @@ All Apache Druid Meetups subject to the Apache [anti-harassment policy](https://
 
 **Focus on the Technical:** This audience understands and has built data architectures – if you get it, they’ll get it. Of course, start with the basics of who you are, what you built, and why before going all-in on the technical insights, examples, and demos.
 
+**Keep an open mind:** The Apache Druid project has [a vendor neutrality policy](https://community.apache.org/projectIndependence#:~:text=Apache%20projects%20are%20managed%20independently) because it is important to keep an open mind about approaches and not only share one product or solution when many are available. A community that obviously favors one specific vendor in some exclusive way will often discourage new contributors from competing vendors, and this would be an issue for the long-term health of the project.
+
 **Show and Tell:** If you can, prepare a short demo to accompany your presentation to showcase your work. This will help put everything in context for your fellow developers and the more visual learners in the audience.
 
 **Watch the Clock:** If you run over, then the next will, and so on, until we’re either completely off schedule or someone else’s talk gets cut short!  Practice your presentation ahead of time to make sure you stay within your allotted time.
