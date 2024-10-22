@@ -23,6 +23,20 @@ Used by ContentWidget.js in index.js to display the first 5 entries from the top
  
 
 export const Content = [
+   {
+    "date": "2024-09-04",
+    "title": "APIs, Analytics, and Apache Druid: How Kong Delivers API Observability and Insights",
+    "name": "Reena Leone",
+    "link": "https://imply.io/podcast/apis-analytics-apache-druid-kong-api-observability-insights-hiroshi-fukada/",
+    "company": "Imply"
+  },
+ {
+    "date": "2024-09-22",
+    "title": "Druid Data Cookbook: Flattening Arrays of Complex Objects",
+    "name": "Hellmar Becker",
+    "link": "https://blog.hellmar-becker.de/2024/09/22/druid-data-cookbook-flattening-arrays-of-complex-objects/",
+    "company": "Imply"
+  },
   {
     "date": "2024-06-17",
     "title": "Using Spectator Histogram and DDSketch for Advanced Statistical Analysis",
