@@ -24,21 +24,18 @@ sidebar_label: Aggregate data with rollup
   -->
 
 
-Apache Druid&circledR; can summarize raw data at ingestion time using a process known as "rollup." [Rollup](../multi-stage-query/concepts.md#rollup) is a first-level aggregation operation over a selected set of columns that reduces the size of stored data.
+Apache Druid can summarize raw data at ingestion time using a process we refer to as "rollup". Rollup is a first-level aggregation operation over a selected set of columns that reduces the size of stored data.
 
-This tutorial demonstrates how to apply rollup during ingestion and highlights its effects during query execution. The examples in the tutorial use the [multi-stage query (MSQ)](../multi-stage-query/index.md) task engine to execute SQL statements.
+This tutorial will demonstrate the effects of rollup on an example dataset.
 
-## Prerequisites
+For this tutorial, we'll assume you've already downloaded Druid as described in
+the [single-machine quickstart](index.md) and have it running on your local machine.
 
-Before proceeding, download Druid as described in [Quickstart (local)](index.md) and have it running on your local machine. You don't need to load any data into the Druid cluster.
+It will also be helpful to have finished [Load a file](../tutorials/tutorial-batch.md) and [Query data](../tutorials/tutorial-query.md) tutorials.
 
-You should be familiar with data querying in Druid. If you haven't already, go through the [Query data](../tutorials/tutorial-query.md) tutorial first. 
+## Example data
 
-
-## Load the example data
-
-For this tutorial, you use a small sample of network flow event data representing IP traffic.
-The data contains packet and byte counts from a source IP address to a destination IP address.
+For this tutorial, we'll use a small sample of network flow event data, representing packet and byte counts for traffic from a source to a destination IP address that occurred within a particular second.
 
 ```json
 {"timestamp":"2018-01-01T01:01:35Z","srcIP":"1.1.1.1", "dstIP":"2.2.2.2","packets":20,"bytes":9024}
@@ -52,63 +49,102 @@ The data contains packet and byte counts from a source IP address to a destinati
 {"timestamp":"2018-01-02T21:35:45Z","srcIP":"7.7.7.7", "dstIP":"8.8.8.8","packets":12,"bytes":2818}
 ```
 
-Load the sample dataset using the [`INSERT INTO`](../multi-stage-query/reference.md/#insert) statement and the [`EXTERN`](../multi-stage-query/reference.md/#extern-function) function to ingest the data inline. In the [Druid web console](../operations/web-console.md), go to the **Query** view and run the following query:
+A file containing this sample input data is located at `quickstart/tutorial/rollup-data.json`.
 
-```sql
-INSERT INTO "rollup_tutorial"
-WITH "inline_data" AS (
-  SELECT *
-  FROM TABLE(EXTERN('{
-    "type":"inline",
-    "data":"{\"timestamp\":\"2018-01-01T01:01:35Z\",\"srcIP\":\"1.1.1.1\",\"dstIP\":\"2.2.2.2\",\"packets\":20,\"bytes\":9024}\n{\"timestamp\":\"2018-01-01T01:02:14Z\",\"srcIP\":\"1.1.1.1\",\"dstIP\":\"2.2.2.2\",\"packets\":38,\"bytes\":6289}\n{\"timestamp\":\"2018-01-01T01:01:59Z\",\"srcIP\":\"1.1.1.1\",\"dstIP\":\"2.2.2.2\",\"packets\":11,\"bytes\":5780}\n{\"timestamp\":\"2018-01-01T01:01:51Z\",\"srcIP\":\"1.1.1.1\",\"dstIP\":\"2.2.2.2\",\"packets\":255,\"bytes\":21133}\n{\"timestamp\":\"2018-01-01T01:02:29Z\",\"srcIP\":\"1.1.1.1\",\"dstIP\":\"2.2.2.2\",\"packets\":377,\"bytes\":359971}\n{\"timestamp\":\"2018-01-01T01:03:29Z\",\"srcIP\":\"1.1.1.1\",\"dstIP\":\"2.2.2.2\",\"packets\":49,\"bytes\":10204}\n{\"timestamp\":\"2018-01-02T21:33:14Z\",\"srcIP\":\"7.7.7.7\",\"dstIP\":\"8.8.8.8\",\"packets\":38,\"bytes\":6289}\n{\"timestamp\":\"2018-01-02T21:33:45Z\",\"srcIP\":\"7.7.7.7\",\"dstIP\":\"8.8.8.8\",\"packets\":123,\"bytes\":93999}\n{\"timestamp\":\"2018-01-02T21:35:45Z\",\"srcIP\":\"7.7.7.7\",\"dstIP\":\"8.8.8.8\",\"packets\":12,\"bytes\":2818}"}', 
-    '{"type":"json"}')) 
-    EXTEND ("timestamp" VARCHAR, "srcIP" VARCHAR, "dstIP" VARCHAR, "packets" BIGINT, "bytes" BIGINT)
-)
-SELECT
-  FLOOR(TIME_PARSE("timestamp") TO MINUTE) AS __time,
-  "srcIP",
-  "dstIP",
-  SUM("bytes") AS "bytes",
-  SUM("packets") AS "packets",
-  COUNT(*) AS "count"
-FROM "inline_data"
-GROUP BY 1, 2, 3
-PARTITIONED BY DAY
+We'll ingest this data using the following ingestion task spec, located at `quickstart/tutorial/rollup-index.json`.
+
+```json
+{
+  "type" : "index_parallel",
+  "spec" : {
+    "dataSchema" : {
+      "dataSource" : "rollup-tutorial",
+      "dimensionsSpec" : {
+        "dimensions" : [
+          "srcIP",
+          "dstIP"
+        ]
+      },
+      "timestampSpec": {
+        "column": "timestamp",
+        "format": "iso"
+      },
+      "metricsSpec" : [
+        { "type" : "count", "name" : "count" },
+        { "type" : "longSum", "name" : "packets", "fieldName" : "packets" },
+        { "type" : "longSum", "name" : "bytes", "fieldName" : "bytes" }
+      ],
+      "granularitySpec" : {
+        "type" : "uniform",
+        "segmentGranularity" : "week",
+        "queryGranularity" : "minute",
+        "intervals" : ["2018-01-01/2018-01-03"],
+        "rollup" : true
+      }
+    },
+    "ioConfig" : {
+      "type" : "index_parallel",
+      "inputSource" : {
+        "type" : "local",
+        "baseDir" : "quickstart/tutorial",
+        "filter" : "rollup-data.json"
+      },
+      "inputFormat" : {
+        "type" : "json"
+      },
+      "appendToExisting" : false
+    },
+    "tuningConfig" : {
+      "type" : "index_parallel",
+      "partitionsSpec": {
+        "type": "dynamic"
+      },
+      "maxRowsInMemory" : 25000
+    }
+  }
+}
 ```
 
-Note the following aspects of the ingestion statement:
-* You transform the timestamp field using the `FLOOR` function to round timestamps down to the minute.
-* You group by the dimensions `timestamp`, `srcIP`, and `dstIP`.
-* You create the `bytes` and `packets` metrics, which are summed from their respective input fields.
-* You also create the `count` metric that records the number of rows that get rolled-up per each row in the datasource.
+Rollup has been enabled by setting `"rollup" : true` in the `granularitySpec`.
 
-With rollup, Druid combines rows with identical timestamp and dimension values after the timestamp truncation. Druid computes and stores the metric values using the specified aggregation function over each set of rolled-up rows.
+Note that we have `srcIP` and `dstIP` defined as dimensions, a longSum metric is defined for the `packets` and `bytes` columns, and the `queryGranularity` has been defined as `minute`.
 
-After the ingestion completes, you can query the data.
+We will see how these definitions are used after we load this data.
+
+## Load the example data
+
+From the apache-druid-30.0.1 package root, run the following command:
+
+```bash
+bin/post-index-task --file quickstart/tutorial/rollup-index.json --url http://localhost:8081
+```
+
+After the script completes, we will query the data.
 
 ## Query the example data
 
-In the web console, open a new tab in the **Query** view. Run the following query to view the ingested data:
+Let's run `bin/dsql` and issue a `select * from "rollup-tutorial";` query to see what data was ingested.
 
-```sql
-SELECT * FROM "rollup_tutorial"
+```bash
+$ bin/dsql
+Welcome to dsql, the command-line client for Druid SQL.
+Type "\h" for help.
+dsql> select * from "rollup-tutorial";
+┌──────────────────────────┬────────┬───────┬─────────┬─────────┬─────────┐
+│ __time                   │ bytes  │ count │ dstIP   │ packets │ srcIP   │
+├──────────────────────────┼────────┼───────┼─────────┼─────────┼─────────┤
+│ 2018-01-01T01:01:00.000Z │  35937 │     3 │ 2.2.2.2 │     286 │ 1.1.1.1 │
+│ 2018-01-01T01:02:00.000Z │ 366260 │     2 │ 2.2.2.2 │     415 │ 1.1.1.1 │
+│ 2018-01-01T01:03:00.000Z │  10204 │     1 │ 2.2.2.2 │      49 │ 1.1.1.1 │
+│ 2018-01-02T21:33:00.000Z │ 100288 │     2 │ 8.8.8.8 │     161 │ 7.7.7.7 │
+│ 2018-01-02T21:35:00.000Z │   2818 │     1 │ 8.8.8.8 │      12 │ 7.7.7.7 │
+└──────────────────────────┴────────┴───────┴─────────┴─────────┴─────────┘
+Retrieved 5 rows in 1.18s.
+
+dsql>
 ```
 
-Returns the following:
-
-| `__time` | `srcIP` | `dstIP` | `bytes` | `count` | `packets` |
-| -- | -- | -- | -- | -- | -- |
-| `2018-01-01T01:01:00.000Z` | `1.1.1.1` | `2.2.2.2` | `35,937` | `3` | `286` |
-| `2018-01-01T01:02:00.000Z` | `1.1.1.1` | `2.2.2.2` | `366,260` | `2` | `415` |
-| `2018-01-01T01:03:00.000Z` | `1.1.1.1` | `2.2.2.2` | `10,204` | `1` | `49` |
-| `2018-01-02T21:33:00.000Z` | `7.7.7.7` | `8.8.8.8` | `100,288` | `2` | `161` |
-| `2018-01-02T21:35:00.000Z` | `7.7.7.7` | `8.8.8.8` | `2,818` | `1` | `12` |
-
-Notice there are only five rows as opposed to the nine rows in the example data. In the next section, you explore the components of the rolled-up rows.
-
-## View rollup in action
-
-Consider the three events in the original input data that occur over the course of minute `2018-01-01T01:01`:
+Let's look at the three events in the original input data that occurred during `2018-01-01T01:01`:
 
 ```json
 {"timestamp":"2018-01-01T01:01:35Z","srcIP":"1.1.1.1", "dstIP":"2.2.2.2","packets":20,"bytes":9024}
@@ -116,47 +152,47 @@ Consider the three events in the original input data that occur over the course 
 {"timestamp":"2018-01-01T01:01:59Z","srcIP":"1.1.1.1", "dstIP":"2.2.2.2","packets":11,"bytes":5780}
 ```
 
-Druid combines the three rows into one during rollup:
+These three rows have been "rolled up" into the following row:
 
-| `__time` | `srcIP` | `dstIP` | `bytes` | `count` | `packets` |
-| -- | -- | -- | -- | -- | -- |
-| `2018-01-01T01:01:00.000Z` | `1.1.1.1` | `2.2.2.2` | `35,937` | `3` | `286` |
+```bash
+┌──────────────────────────┬────────┬───────┬─────────┬─────────┬─────────┐
+│ __time                   │ bytes  │ count │ dstIP   │ packets │ srcIP   │
+├──────────────────────────┼────────┼───────┼─────────┼─────────┼─────────┤
+│ 2018-01-01T01:01:00.000Z │  35937 │     3 │ 2.2.2.2 │     286 │ 1.1.1.1 │
+└──────────────────────────┴────────┴───────┴─────────┴─────────┴─────────┘
+```
 
-Before the grouping occurs, the `FLOOR(TIME_PARSE("timestamp") TO MINUTE)` expression buckets (floors) the timestamp column of the original input by minute.
+The input rows have been grouped by the timestamp and dimension columns `{timestamp, srcIP, dstIP}` with sum aggregations on the metric columns `packets` and `bytes`.
 
-The input rows are grouped because they have the same values for their dimension columns `{timestamp, srcIP, dstIP}`. The metric columns calculate the sum aggregation of the grouped rows for `packets` and `bytes`. The `count` metric shows how many rows from the original input data contributed to the final rolled-up row.
+Before the grouping occurs, the timestamps of the original input data are bucketed/floored by minute, due to the `"queryGranularity":"minute"` setting in the ingestion spec.
 
-Now, consider the two events in the original input data that occur over the course of minute `2018-01-01T01:02`:
+Likewise, these two events that occurred during `2018-01-01T01:02` have been rolled up:
 
 ```json
 {"timestamp":"2018-01-01T01:02:14Z","srcIP":"1.1.1.1", "dstIP":"2.2.2.2","packets":38,"bytes":6289}
 {"timestamp":"2018-01-01T01:02:29Z","srcIP":"1.1.1.1", "dstIP":"2.2.2.2","packets":377,"bytes":359971}
 ```
 
-The rows are grouped into the following during rollup:
+```bash
+┌──────────────────────────┬────────┬───────┬─────────┬─────────┬─────────┐
+│ __time                   │ bytes  │ count │ dstIP   │ packets │ srcIP   │
+├──────────────────────────┼────────┼───────┼─────────┼─────────┼─────────┤
+│ 2018-01-01T01:02:00.000Z │ 366260 │     2 │ 2.2.2.2 │     415 │ 1.1.1.1 │
+└──────────────────────────┴────────┴───────┴─────────┴─────────┴─────────┘
+```
 
-| `__time` | `srcIP` | `dstIP` | `bytes` | `count` | `packets` |
-| -- | -- | -- | -- | -- | -- |
-| `2018-01-01T01:02:00.000Z` | `1.1.1.1` | `2.2.2.2` | `366,260` | `2` | `415` |
-
-In the original input data, only one event occurs over the course of minute `2018-01-01T01:03`:
+For the last event recording traffic between 1.1.1.1 and 2.2.2.2, no rollup took place, because this was the only event that occurred during `2018-01-01T01:03`:
 
 ```json
 {"timestamp":"2018-01-01T01:03:29Z","srcIP":"1.1.1.1", "dstIP":"2.2.2.2","packets":49,"bytes":10204}
 ```
 
-Therefore, no rollup takes place:
+```bash
+┌──────────────────────────┬────────┬───────┬─────────┬─────────┬─────────┐
+│ __time                   │ bytes  │ count │ dstIP   │ packets │ srcIP   │
+├──────────────────────────┼────────┼───────┼─────────┼─────────┼─────────┤
+│ 2018-01-01T01:03:00.000Z │  10204 │     1 │ 2.2.2.2 │      49 │ 1.1.1.1 │
+└──────────────────────────┴────────┴───────┴─────────┴─────────┴─────────┘
+```
 
-| `__time` | `srcIP` | `dstIP` | `bytes` | `count` | `packets` |
-| -- | -- | -- | -- | -- | -- |
-| `2018-01-01T01:03:00.000Z` | `1.1.1.1` | `2.2.2.2` | `10,204` | `1` | `49` |
-
-
-## Learn more
-
-See the following topics for more information:
-
-* [Data rollup](../ingestion/rollup.md) for suggestions and best practices when performing rollup.
-* [SQL-based ingestion concepts](../multi-stage-query/concepts.md#rollup) for information on rollup using SQL-based ingestion.
-* [SQL-based ingestion query examples](../multi-stage-query/examples.md#insert-with-rollup) for another example of data rollup.  
-* [Druid schema model](../ingestion/schema-model.md) to learn about the primary timestamp, dimensions, and metrics.
+Note that the `count` metric shows how many rows in the original input data contributed to the final "rolled up" row.

@@ -217,6 +217,7 @@ The following shows an example log emitter output:
                 "user",
                 "v0"
             ],
+            "legacy": false,
             "context":
             {
                 "populateCache": false,

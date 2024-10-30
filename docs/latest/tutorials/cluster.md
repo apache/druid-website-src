@@ -32,7 +32,7 @@ your needs.
 This simple cluster will feature:
 
  - A Master server to host the Coordinator and Overlord processes
- - Two scalable, fault-tolerant Data servers running Historical and Middle Manager processes
+ - Two scalable, fault-tolerant Data servers running Historical and MiddleManager processes
  - A query server, hosting the Druid Broker and Router processes
 
 In production, we recommend deploying multiple Master servers and multiple Query servers in a fault-tolerant configuration based on your specific fault-tolerance needs, but you can get started quickly with one Master and one Query server and add more servers later.
@@ -58,7 +58,7 @@ Example Master server configurations that have been sized for this hardware can 
 
 #### Data server
 
-Historicals and Middle Managers can be colocated on the same server to handle the actual data in your cluster. These servers benefit greatly from CPU, RAM,
+Historicals and MiddleManagers can be colocated on the same server to handle the actual data in your cluster. These servers benefit greatly from CPU, RAM,
 and SSDs.
 
 In this example, we will be deploying the equivalent of two AWS [i3.4xlarge](https://aws.amazon.com/ec2/instance-types/i3/) instances.
@@ -117,7 +117,7 @@ In a clustered deployment, having multiple Data servers is a good idea for fault
 
 When choosing the Data server hardware, you can choose a split factor `N`, divide the original CPU/RAM of the single-server deployment by `N`, and deploy `N` Data servers of reduced size in the new cluster.
 
-Instructions for adjusting the Historical/Middle Manager configs for the split are described in a later section in this guide.
+Instructions for adjusting the Historical/MiddleManager configs for the split are described in a later section in this guide.
 
 #### Query server
 
@@ -150,14 +150,14 @@ First, download and unpack the release archive. It's best to do this on a single
 since you will be editing the configurations and then copying the modified distribution out to all
 of your servers.
 
-[Download](https://www.apache.org/dyn/closer.cgi?path=/druid/31.0.0/apache-druid-31.0.0-bin.tar.gz)
-the 31.0.0 release.
+[Download](https://www.apache.org/dyn/closer.cgi?path=/druid/30.0.1/apache-druid-30.0.1-bin.tar.gz)
+the 30.0.1 release.
 
 Extract Druid by running the following commands in your terminal:
 
 ```bash
-tar -xzf apache-druid-31.0.0-bin.tar.gz
-cd apache-druid-31.0.0
+tar -xzf apache-druid-30.0.1-bin.tar.gz
+cd apache-druid-30.0.1
 ```
 
 In the package, you should find:
@@ -324,7 +324,7 @@ You can copy your existing `coordinator-overlord` configs from the single-server
 
 #### Data
 
-Suppose we are migrating from a single-server deployment that had 32 CPU and 256GiB RAM. In the old deployment, the following configurations for Historicals and Middle Managers were applied:
+Suppose we are migrating from a single-server deployment that had 32 CPU and 256GiB RAM. In the old deployment, the following configurations for Historicals and MiddleManagers were applied:
 
 Historical (Single-server)
 
@@ -334,7 +334,7 @@ druid.processing.numMergeBuffers=8
 druid.processing.numThreads=31
 ```
 
-Middle Manager (Single-server)
+MiddleManager (Single-server)
 
 ```
 druid.worker.capacity=8
@@ -351,7 +351,7 @@ Historical
 - `druid.processing.numMergeBuffers`: Divide the old value from the single-server deployment by the split factor
 - `druid.processing.buffer.sizeBytes`: Keep this unchanged
 
-Middle Manager:
+MiddleManager:
 
 - `druid.worker.capacity`: Divide the old value from the single-server deployment by the split factor
 - `druid.indexer.fork.property.druid.processing.numMergeBuffers`: Keep this unchanged
@@ -368,7 +368,7 @@ druid.processing.numMergeBuffers=4
 druid.processing.numThreads=15
 ```
 
-New Middle Manager (on 2 Data servers)
+New MiddleManager (on 2 Data servers)
 
 ```
 druid.worker.capacity=4
@@ -423,7 +423,7 @@ Copy the Druid distribution and your edited configurations to your Master server
 If you have been editing the configurations on your local machine, you can use *rsync* to copy them:
 
 ```bash
-rsync -az apache-druid-31.0.0/ MASTER_SERVER:apache-druid-31.0.0/
+rsync -az apache-druid-30.0.1/ MASTER_SERVER:apache-druid-30.0.1/
 ```
 
 ### No Zookeeper on Master
@@ -460,8 +460,8 @@ bin/start-cluster-data-server
 You can add more Data servers as needed.
 
 :::info
- For clusters with complex resource allocation needs, you can break apart Historicals and Middle Managers and scale the components individually.
- This also allows you take advantage of Druid's built-in Middle Manager autoscaling facility.
+ For clusters with complex resource allocation needs, you can break apart Historicals and MiddleManagers and scale the components individually.
+ This also allows you take advantage of Druid's built-in MiddleManager autoscaling facility.
 :::
 
 ## Start Query Server

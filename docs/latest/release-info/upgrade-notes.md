@@ -38,65 +38,15 @@ For more information, see [Migration guide: front-coded dictionaries](./migr-fro
 
 If you're already using this feature, you don't need to take any action. 
 
-## 31.0.0
+## Upcoming removals
 
-### Upgrade notes
+As part of the continued improvements to Druid, we are deprecating certain features and behaviors in favor of newer iterations that offer more robust features and are more aligned with standard ANSI SQL. Many of these new features have been the default for new deployments for several releases.
 
-#### Array ingest mode now defaults to array
+The following features are deprecated, and we currently plan to remove support as early as Druid 32.0.0:
 
-The SQL-based ingestion query context flag `arrayIngestMode` now defaults to `array` instead of `mvd`. This means that SQL `VARCHAR ARRAY` types is no longer implicitly translated and stored in `VARCHAR` columns, but is instead stored as `VARCHAR ARRAY`. This change permits other array types such as `BIGINT ARRAY` and `DOUBLE ARRAY` to be inserted with MSQ task engine into their respective array column types instead of failing as they do in `mvd` mode.
-
-To continue to store multi-value strings, modify any insert/replace queries to wrap the array types with the `ARRAY_TO_MV` operator.
-
-Validation is in place to prevent mixing `VARCHAR` and `VARCHAR ARRAY` columns in the same table, so any ingestions affected by this change will fail and provide a descriptive error message instead of exhibiting unexpected behavior.
-
-The `arrayIngestMode` option of `none` has been removed. It was introduced prior to the table validation logic as a means for cluster operators to force query writers to explicitly set `array` or `mvd` on their query contexts, but provides little utility in Druid 31.
-
-See the following topics for more information:
-* [Ingest multi-value dimensions](https://druid.apache.org/docs/latest/querying/multi-value-dimensions.md#sql-based-ingestion) for how to ingest multi-value strings.
-* [Ingest arrays](https://druid.apache.org/docs/latest/querying/arrays.md#sql-based-ingestion) for ingesting arrays.
-
-[#16789](https://github.com/apache/druid/pull/16789)
-
-#### Removed task action audit logging
-
-The deprecated task action audit logging has been removed. This change includes the following updates:
-
-- The endpoint `/indexer/v1/task/{taskId}/segments` is no longer supported.
-- Druid doesn't write to or read from the metadata table `druid_taskLog`.
-- Druid ignores the property `druid.indexer.auditlog.enabled`.
-- Druid doesn't emit the metric `task/action/log/time`.
-
-These changes are backward compatible with all existing metadata storage extensions.
-
-[#16309](https://github.com/apache/druid/pull/16309)
-
-#### Removed Firehose and FirehoseFactory
-
-Removed Firehose and FirehoseFactory and remaining implementations.
-Apache deprecated support for Druid firehoses in version 0.17. Support for firehose ingestion was removed in version 26.0.
-
-[#16758](https://github.com/apache/druid/pull/16758)
-
-### Incompatible changes
-
-#### Removed the scan query legacy mode
-
-The native scan query legacy mode has been removed. It was introduced in Druid 0.11 to maintain compatibility during an upgrade from older versions of Druid where the scan query was part of a `contrib` extension.
-
-[#16659](https://github.com/apache/druid/pull/16659)
-
-Hard-coded `"legacy":false` following removal of the legacy mode to prevent error during rolling upgrades or downgrades.
-
-[#16793](https://github.com/apache/druid/pull/16793)
-
-#### ZK-based segment loading
-
-ZK-based segment loading is now disabled. ZK `servedSegmentsPath` was deprecated in Druid 0.7.1. This legacy path has been replaced by `liveSegmentsPath`.
-
-Segment-serving processes such as Peons, Historicals and Indexers no longer create ZK `loadQueuePath` entries. The `druid.zk.paths.loadQueuePath` and `druid.zk.paths.servedSegmentsPath` properties are no longer used.
-
-Move to HTTP-based segment loading first and then perform the version upgrade.
+* **Non-SQL compliant null handling**: By default, Druid now differentiates between an empty string and a record with no data as well as between an empty numerical record and `0`. For more information, see [NULL values](../querying/sql-data-types.md#null-values). For a tutorial on the SQL-compliant logic, see the [Null handling tutorial](../tutorials/tutorial-sql-null.md).
+* **Non-strict Boolean handling**: Druid now strictly uses `1` (true) or `0` (false). Previously, true and false could be represented either as `true` and `false` or as `1` and `0`, respectively. In addition, Druid now returns a null value for Boolean comparisons like `True && NULL`. For more information, see [Boolean logic](../querying/sql-data-types.md#boolean-logic). For examples of filters that use the SQL-compliant logic, see [Query filters](../querying/filters.md).
+* **Two-value logic**: By default, Druid now uses three-valued logic for both ingestion and querying. This primarily affects filters using logical NOT operations on columns with NULL values. For more information, see [Boolean logic](../querying/sql-data-types.md#boolean-logic). For examples of filters that use the SQL-compliant logic, see [Query filters](../querying/filters.md).
 
 ## 30.0.0
 
@@ -134,7 +84,7 @@ The following are the changes to the default values for the Coordinator service:
 
 #### `GoogleTaskLogs` upload buffer size
 
-Changed the upload buffer size in `GoogleTaskLogs` to 1 MB instead of 15 MB to allow more uploads in parallel and prevent the Middle Manager service from running out of memory.
+Changed the upload buffer size in `GoogleTaskLogs` to 1 MB instead of 15 MB to allow more uploads in parallel and prevent the MiddleManager service from running out of memory.
 
 [#16236](https://github.com/apache/druid/pull/16236)
 

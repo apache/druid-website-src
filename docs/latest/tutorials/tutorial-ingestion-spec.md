@@ -582,7 +582,7 @@ We've finished defining the ingestion spec, it should now look like the followin
 
 ## Submit the task and query the data
 
-From the apache-druid-31.0.0 package root, run the following command:
+From the apache-druid-30.0.1 package root, run the following command:
 
 ```bash
 bin/post-index-task --file quickstart/ingestion-tutorial-index.json --url http://localhost:8081
@@ -590,18 +590,24 @@ bin/post-index-task --file quickstart/ingestion-tutorial-index.json --url http:/
 
 After the script completes, we will query the data.
 
-In the web console, open a new tab in the **Query** view. Run the following query to view the ingested data:
+Let's run `bin/dsql` and issue a `select * from "ingestion-tutorial";` query to see what data was ingested.
 
-```sql
-select * from "ingestion-tutorial"
+```bash
+$ bin/dsql
+Welcome to dsql, the command-line client for Druid SQL.
+Type "\h" for help.
+dsql> select * from "ingestion-tutorial";
+
+┌──────────────────────────┬───────┬──────┬───────┬─────────┬─────────┬─────────┬──────────┬─────────┬─────────┐
+│ __time                   │ bytes │ cost │ count │ dstIP   │ dstPort │ packets │ protocol │ srcIP   │ srcPort │
+├──────────────────────────┼───────┼──────┼───────┼─────────┼─────────┼─────────┼──────────┼─────────┼─────────┤
+│ 2018-01-01T01:01:00.000Z │  6000 │  4.9 │     3 │ 2.2.2.2 │    3000 │      60 │ 6        │ 1.1.1.1 │    2000 │
+│ 2018-01-01T01:02:00.000Z │  9000 │ 18.1 │     2 │ 2.2.2.2 │    7000 │      90 │ 6        │ 1.1.1.1 │    5000 │
+│ 2018-01-01T01:03:00.000Z │  6000 │  4.3 │     1 │ 2.2.2.2 │    7000 │      60 │ 6        │ 1.1.1.1 │    5000 │
+│ 2018-01-01T02:33:00.000Z │ 30000 │ 56.9 │     2 │ 8.8.8.8 │    5000 │     300 │ 17       │ 7.7.7.7 │    4000 │
+│ 2018-01-01T02:35:00.000Z │ 30000 │ 46.3 │     1 │ 8.8.8.8 │    5000 │     300 │ 17       │ 7.7.7.7 │    4000 │
+└──────────────────────────┴───────┴──────┴───────┴─────────┴─────────┴─────────┴──────────┴─────────┴─────────┘
+Retrieved 5 rows in 0.12s.
+
+dsql>
 ```
-
-Returns the following:
-
-| `__time` | `bytes` | `cost` | `count` | `dstIP` | `dstPort` | `packets` | `protocol` | `srcIP` | `srcPort` |
-| -- | -- | -- | -- | -- | -- | -- | -- | -- | -- |
-| `2018-01-01T01:01:00.000Z` | `6000` | `4.9` | `3` | `2.2.2.2` | `3000` | `60` | `6` | `1.1.1.1` | `2000` |
-| `2018-01-01T01:02:00.000Z` |  `9000` | `18.1` | `2` | `2.2.2.2` | `7000` | `90` | `6` | `1.1.1.1` | `5000` |
-| `2018-01-01T01:03:00.000Z` | `6000` |  `4.3` | `1` | `2.2.2.2` | `7000` | `60` | `6` | `1.1.1.1` | `5000` |
-| `2018-01-01T02:33:00.000Z` | `30000` | `56.9` | `2` | `8.8.8.8` | `5000` | `300` | `17` | `7.7.7.7` | `4000` |
-| `2018-01-01T02:35:00.000Z` | `30000` | `46.3` | `1` | `8.8.8.8` | `5000` | `300` | `17` | `7.7.7.7` | `4000` |

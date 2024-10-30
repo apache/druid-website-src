@@ -280,7 +280,10 @@ The above EXPLAIN PLAN returns the following result:
             ]
           },
           "inputFormat": {
-            "type": "json"
+            "type": "json",
+            "keepNullColumns": false,
+            "assumeNewlineDelimited": false,
+            "useJsonNodeReader": false
           },
           "signature": [
             {
@@ -342,6 +345,7 @@ The above EXPLAIN PLAN returns the following result:
           "regionName",
           "v0"
         ],
+        "legacy": false,
         "context": {
           "finalizeAggregations": false,
           "forceExpressionVirtualColumns": true,
@@ -499,7 +503,10 @@ The above EXPLAIN PLAN query returns the following result:
             ]
           },
           "inputFormat": {
-            "type": "json"
+            "type": "json",
+            "keepNullColumns": false,
+            "assumeNewlineDelimited": false,
+            "useJsonNodeReader": false
           },
           "signature": [
             {
@@ -561,6 +568,7 @@ The above EXPLAIN PLAN query returns the following result:
           "regionName",
           "v0"
         ],
+        "legacy": false,
         "context": {
           "finalizeAggregations": false,
           "groupByEnableMultiValueUnnesting": false,
