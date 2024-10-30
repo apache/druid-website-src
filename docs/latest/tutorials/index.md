@@ -1,7 +1,7 @@
 ---
 id: index
-title: "Quickstart (local)"
-sidebar_label: Quickstart (local)
+title: "Local quickstart"
+sidebar_label: Local quickstart
 ---
 
 <!--
@@ -45,7 +45,7 @@ The software requirements for the installation machine are:
 * Perl 5
 
 Java must be available. Either it is on your path, or set one of the `JAVA_HOME` or `DRUID_JAVA_HOME` environment variables.
-You can run `apache-druid-30.0.1/bin/verify-java` to verify Java requirements for your environment.
+You can run `apache-druid-31.0.0/bin/verify-java` to verify Java requirements for your environment.
 
 Before installing a production Druid instance, be sure to review the [security
 overview](../operations/security-overview.md). In general, avoid running Druid as root user. Consider creating a
@@ -53,13 +53,13 @@ dedicated user account for running Druid.
 
 ## Install Druid
 
-Download the [30.0.1 release](https://www.apache.org/dyn/closer.cgi?path=/druid/30.0.1/apache-druid-30.0.1-bin.tar.gz) from Apache Druid. 
+Download the [31.0.0 release](https://druid.apache.org/downloads/) from Apache Druid. 
 
 In your terminal, extract the file and change directories to the distribution directory:
 
 ```bash
-tar -xzf apache-druid-30.0.1-bin.tar.gz
-cd apache-druid-30.0.1
+tar -xzf apache-druid-31.0.0-bin.tar.gz
+cd apache-druid-31.0.0
 ```
 
 The distribution directory contains `LICENSE` and `NOTICE` files and subdirectories for executable files, configuration files, sample data and more.
@@ -71,7 +71,7 @@ This configuration includes default settings that are appropriate for this tutor
 
 You can view the default settings in the configuration files located in `conf/druid/auto`.
 
-From the apache-druid-30.0.1 package root, run the following command:
+From the apache-druid-31.0.0 package root, run the following command:
 
 ```bash
 ./bin/start-druid
@@ -85,20 +85,20 @@ $ ./bin/start-druid
 [Tue Nov 29 16:31:06 2022] Starting Apache Druid.
 [Tue Nov 29 16:31:06 2022] Open http://localhost:8888/ in your browser to access the web console.
 [Tue Nov 29 16:31:06 2022] Or, if you have enabled TLS, use https on port 9088.
-[Tue Nov 29 16:31:06 2022] Starting services with log directory [/apache-druid-30.0.1/log].
+[Tue Nov 29 16:31:06 2022] Starting services with log directory [/apache-druid-31.0.0/log].
 [Tue Nov 29 16:31:06 2022] Running command[zk]: bin/run-zk conf
-[Tue Nov 29 16:31:06 2022] Running command[broker]: bin/run-druid broker /apache-druid-30.0.1/conf/druid/single-server/quickstart '-Xms1187m -Xmx1187m -XX:MaxDirectMemorySize=791m'
-[Tue Nov 29 16:31:06 2022] Running command[router]: bin/run-druid router /apache-druid-30.0.1/conf/druid/single-server/quickstart '-Xms128m -Xmx128m'
-[Tue Nov 29 16:31:06 2022] Running command[coordinator-overlord]: bin/run-druid coordinator-overlord /apache-druid-30.0.1/conf/druid/single-server/quickstart '-Xms1290m -Xmx1290m'
-[Tue Nov 29 16:31:06 2022] Running command[historical]: bin/run-druid historical /apache-druid-30.0.1/conf/druid/single-server/quickstart '-Xms1376m -Xmx1376m -XX:MaxDirectMemorySize=2064m'
-[Tue Nov 29 16:31:06 2022] Running command[middleManager]: bin/run-druid middleManager /apache-druid-30.0.1/conf/druid/single-server/quickstart '-Xms64m -Xmx64m' '-Ddruid.worker.capacity=2 -Ddruid.indexer.runner.javaOptsArray=["-server","-Duser.timezone=UTC","-Dfile.encoding=UTF-8","-XX:+ExitOnOutOfMemoryError","-Djava.util.logging.manager=org.apache.logging.log4j.jul.LogManager","-Xms256m","-Xmx256m","-XX:MaxDirectMemorySize=256m"]'
+[Tue Nov 29 16:31:06 2022] Running command[broker]: bin/run-druid broker /apache-druid-31.0.0/conf/druid/single-server/quickstart '-Xms1187m -Xmx1187m -XX:MaxDirectMemorySize=791m'
+[Tue Nov 29 16:31:06 2022] Running command[router]: bin/run-druid router /apache-druid-31.0.0/conf/druid/single-server/quickstart '-Xms128m -Xmx128m'
+[Tue Nov 29 16:31:06 2022] Running command[coordinator-overlord]: bin/run-druid coordinator-overlord /apache-druid-31.0.0/conf/druid/single-server/quickstart '-Xms1290m -Xmx1290m'
+[Tue Nov 29 16:31:06 2022] Running command[historical]: bin/run-druid historical /apache-druid-31.0.0/conf/druid/single-server/quickstart '-Xms1376m -Xmx1376m -XX:MaxDirectMemorySize=2064m'
+[Tue Nov 29 16:31:06 2022] Running command[middleManager]: bin/run-druid middleManager /apache-druid-31.0.0/conf/druid/single-server/quickstart '-Xms64m -Xmx64m' '-Ddruid.worker.capacity=2 -Ddruid.indexer.runner.javaOptsArray=["-server","-Duser.timezone=UTC","-Dfile.encoding=UTF-8","-XX:+ExitOnOutOfMemoryError","-Djava.util.logging.manager=org.apache.logging.log4j.jul.LogManager","-Xms256m","-Xmx256m","-XX:MaxDirectMemorySize=256m"]'
 ```
 
 Druid may use up to 80% of the total available system memory.
 To explicitly set the total memory available to Druid, pass a value for the memory parameter. For example, `./bin/start-druid -m 16g`. 
 
-Druid stores all persistent state data, such as the cluster metadata store and data segments, in `apache-druid-30.0.1/var`.
-Each service writes to a log file under `apache-druid-30.0.1/log`.
+Druid stores all persistent state data, such as the cluster metadata store and data segments, in `apache-druid-31.0.0/var`.
+Each service writes to a log file under `apache-druid-31.0.0/log`.
 
 At any time, you can revert Druid to its original, post-installation state by deleting the entire `var` directory. You may want to do this, for example, between Druid tutorials or after experimentation, to start with a fresh instance. 
 
