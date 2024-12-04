@@ -48,7 +48,7 @@ You can modify the value of `DRUID_SINGLE_NODE_CONF` in the Docker [`environment
 
 Create a directory to hold the Druid Docker files.
 
-The Druid source code contains [an example `docker-compose.yml`](https://github.com/apache/druid/blob/31.0.0/distribution/docker/docker-compose.yml) which pulls an image from Docker Hub and is suited to be used as an example environment and to experiment with Docker based Druid configuration and deployments. [Download](https://raw.githubusercontent.com/apache/druid/31.0.0/distribution/docker/docker-compose.yml) this file to the directory created above.
+The Druid source code contains [an example `docker-compose.yml`](https://github.com/apache/druid/blob/31.0.1/distribution/docker/docker-compose.yml) which pulls an image from Docker Hub and is suited to be used as an example environment and to experiment with Docker based Druid configuration and deployments. [Download](https://raw.githubusercontent.com/apache/druid/31.0.1/distribution/docker/docker-compose.yml) this file to the directory created above.
 
 ### Compose file
 
@@ -58,7 +58,7 @@ It will also create a named volume `druid_shared` as deep storage to keep and sh
 
 ### Environment file
 
-The Druid `docker-compose.yml` example uses an [environment file](https://docs.docker.com/compose/environment-variables/#the-env_file-configuration-option) to specify the complete Druid configuration, including the environment variables described in [Configuration](#configuration). This file is named `environment` by default, and must be in the same directory as the `docker-compose.yml` file. [Download](https://raw.githubusercontent.com/apache/druid/31.0.0/distribution/docker/environment) the example `environment` file to the directory created above. The options in this file work well for trying Druid and for using the tutorial.
+The Druid `docker-compose.yml` example uses an [environment file](https://docs.docker.com/compose/environment-variables/#the-env_file-configuration-option) to specify the complete Druid configuration, including the environment variables described in [Configuration](#configuration). This file is named `environment` by default, and must be in the same directory as the `docker-compose.yml` file. [Download](https://raw.githubusercontent.com/apache/druid/31.0.1/distribution/docker/environment) the example `environment` file to the directory created above. The options in this file work well for trying Druid and for using the tutorial.
 
 The single-file approach is inadequate for a production system. Instead we suggest using either `DRUID_COMMON_CONFIG` and `DRUID_CONFIG_${service}` or specially tailored, service-specific environment files.
 
@@ -81,7 +81,7 @@ Production configuration:
 
 Logging configuration:
 
-* `DRUID_LOG4J` -- set the entire [`log4j.xml` configuration file](https://logging.apache.org/log4j/2.x/manual/configuration.html#XML)  verbatim. ([Example](https://github.com/apache/druid/blob/31.0.0/distribution/docker/environment#L52))
+* `DRUID_LOG4J` -- set the entire [`log4j.xml` configuration file](https://logging.apache.org/log4j/2.x/manual/configuration.html#XML)  verbatim. ([Example](https://github.com/apache/druid/blob/31.0.1/distribution/docker/environment#L52))
 * `DRUID_LOG_LEVEL` -- override the default [Log4j log level](https://en.wikipedia.org/wiki/Log4j#Log4j_log_levels)
 * `DRUID_SERVICE_LOG4J` -- set the entire [`log4j.xml` configuration file](https://logging.apache.org/log4j/2.x/manual/configuration.html#XML)  verbatim specific to a service.
 * `DRUID_SERVICE_LOG_LEVEL` -- override the default [Log4j log level](https://en.wikipedia.org/wiki/Log4j#Log4j_log_levels) in the service specific log4j.
@@ -131,7 +131,7 @@ You can explore the Druid containers using Docker to start a shell:
 docker exec -ti <id> sh
 ```
 
-Where `<id>` is the container id found with `docker ps`. Druid is installed in `/opt/druid`. The [script](https://github.com/apache/druid/blob/31.0.0/distribution/docker/druid.sh) which consumes the environment variables mentioned above, and which launches Druid, is located at `/druid.sh`.
+Where `<id>` is the container id found with `docker ps`. Druid is installed in `/opt/druid`. The [script](https://github.com/apache/druid/blob/31.0.1/distribution/docker/druid.sh) which consumes the environment variables mentioned above, and which launches Druid, is located at `/druid.sh`.
 
 Run `docker compose down` to shut down the cluster. Your data is persisted as a set of [Docker volumes](https://docs.docker.com/storage/volumes/) and will be available when you restart your Druid cluster.
 
