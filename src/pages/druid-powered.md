@@ -359,6 +359,18 @@ Italiaonline is the first Italian internet company, with the two most visited we
 
 *&ast; Source: Audiweb View, powered by Nielsen, TDA 2H 2015; &ast;&ast; Internal data, December 2015*
 
+## iunera
+Iunera has been involved in the "Fahrbar20" project, which focuses on AI-based occupancy optimization in public transport, receiving public funding from the german "Federal Ministry for Digital and Transport" for this initiative.
+
+Druid is utilized in Fahrbar20 to power real-time analytics applications that require fast queries on large datasets. This is particularly useful for the project's aim to optimize vehicle occupancy in public transport (ÖPNV) by analyzing streaming and batch data at scale and under load.
+
+iunera has published all relevant sourcecode and documentation of the fahrbar20 project and the underlying kubernetes cluster configs open source on github under the following links:
+* [All fahrbar20 sourcecode ](https://github.com/orgs/iunera/repositories?q=fahrbar2)
+* [Druid Kubernetes cluster config](https://github.com/iunera/druid-cluster-config)
+* [How NFTs and AI can solve Public Transport challenges ](https://www.iunera.com/kraken/big-data-examples/how-nfts-and-ai-can-solve-public-transport-challenges) 
+
+Furthermore, iunera has published and druid extension for python code execution during druid ingestion jobs on https://github.com/iunera/iu-code-ingestion-druid-extension.  
+
 ## Jolata
 
 Jolata leverages Druid as the analytics data store for the realtime network perfomance managment platform. Injesting over 35 billion events per day, Jolata calculates a billion metrics every minute to visualize precise network metrics in real-time, and enable operators to quickly drill down and perform root cause analysis.
