@@ -362,7 +362,7 @@ Italiaonline is the first Italian internet company, with the two most visited we
 ## iunera
 iunera has been involved in the "Fahrbar20" project, which focuses on AI-based occupancy optimization in public transport, receiving public funding from the German Federal Ministry for Digital and Transport.
 
-Druid is utilized in Fahrbar20 to power real-time analytics applications that require fast queries on large datasets. This is particularly useful for the project's aim to optimize vehicle occupancy in public transport (ÖPNV) by analyzing streaming and batch data at scale and under load.
+Fahrbar20 uses Druid to power real-time analytics applications that require fast queries on large datasets. This is particularly useful for the project's aim to optimize vehicle occupancy in public transport (ÖPNV) by analyzing streaming and batch data at scale and under load.
 
 iunera has published all relevant sourcecode and documentation of the fahrbar20 project and the underlying kubernetes cluster configs open source on github under the following links:
 * [All fahrbar20 sourcecode ](https://github.com/orgs/iunera/repositories?q=fahrbar2)
