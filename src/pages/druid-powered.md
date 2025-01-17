@@ -364,7 +364,7 @@ iunera has been involved in the "Fahrbar20" project, which focuses on AI-based o
 
 Fahrbar20 uses Druid to power real-time analytics applications that require fast queries on large datasets. This is particularly useful for the project's aim to optimize vehicle occupancy in public transport (ÖPNV) by analyzing streaming and batch data at scale and under load.
 
-iunera has published all relevant sourcecode and documentation of the fahrbar20 project and the underlying kubernetes cluster configs open source on github under the following links:
+iunera has published all relevant source code and documentation of the fahrbar20 project and the underlying kubernetes cluster configs open source on GitHub:
 * [All fahrbar20 sourcecode ](https://github.com/orgs/iunera/repositories?q=fahrbar2)
 * [Druid Kubernetes cluster config](https://github.com/iunera/druid-cluster-config)
 * [How NFTs and AI can solve Public Transport challenges ](https://www.iunera.com/kraken/big-data-examples/how-nfts-and-ai-can-solve-public-transport-challenges) 
