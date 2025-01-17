@@ -369,7 +369,7 @@ iunera has published all relevant source code and documentation of the fahrbar20
 * [Druid Kubernetes cluster config](https://github.com/iunera/druid-cluster-config)
 * [How NFTs and AI can solve Public Transport challenges ](https://www.iunera.com/kraken/big-data-examples/how-nfts-and-ai-can-solve-public-transport-challenges) 
 
-Furthermore, iunera has published and druid extension for python code execution during druid ingestion jobs on https://github.com/iunera/iu-code-ingestion-druid-extension.  
+Furthermore, iunera has published a  Druid extension for python code execution during druid ingestion jobs on https://github.com/iunera/iu-code-ingestion-druid-extension.  
 
 ## Jolata
 
