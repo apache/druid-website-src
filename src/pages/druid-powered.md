@@ -360,7 +360,7 @@ Italiaonline is the first Italian internet company, with the two most visited we
 *&ast; Source: Audiweb View, powered by Nielsen, TDA 2H 2015; &ast;&ast; Internal data, December 2015*
 
 ## iunera
-Iunera has been involved in the "Fahrbar20" project, which focuses on AI-based occupancy optimization in public transport, receiving public funding from the german "Federal Ministry for Digital and Transport" for this initiative.
+iunera has been involved in the "Fahrbar20" project, which focuses on AI-based occupancy optimization in public transport, receiving public funding from the German Federal Ministry for Digital and Transport.
 
 Druid is utilized in Fahrbar20 to power real-time analytics applications that require fast queries on large datasets. This is particularly useful for the project's aim to optimize vehicle occupancy in public transport (ÖPNV) by analyzing streaming and batch data at scale and under load.
 
