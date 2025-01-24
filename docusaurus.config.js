@@ -52,9 +52,6 @@ module.exports={
           "./src/css/index.css"
          ]
         },
-        "gtag": {
-          "trackingID": "UA-131010415-1"
-        }
       }
     ]
   ],
