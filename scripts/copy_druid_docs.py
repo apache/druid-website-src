@@ -59,17 +59,18 @@ def check_source(source_directory):
 
 def replace_text_in_file(destination_directory, druid_version):
     """
-    Find/replace \{\{DRUIDVERSION}} and {{DRUIDVERSION]] with the actual version
+    Find/replace "{{DRUIDVERSION}}", "\{DRUIDVERSION}", "\{{DRUIDVERSION}}", "\{DRUIDVERSION}}"
     """
-
     with open(destination_directory, 'r') as file:
         file_content = file.read()
 
-    # Replace both patterns
-    modified_content = re.sub(r"\{\{DRUIDVERSION\}\}|\{\{DRUIDVERSION\]\]", druid_version, file_content)
+
+    pattern = r"(?:\{\{DRUIDVERSION\}\}|\\\{DRUIDVERSION\}\}?|\\\{\{DRUIDVERSION\}\})"
+    modified_content = re.sub(pattern, druid_version, file_content)
 
     with open(destination_directory, 'w') as file:
         file.write(modified_content)
+
 def do_the_replace(file_path, druid_version):
     for item in os.listdir(file_path):
         item_path = os.path.join(file_path, item)
