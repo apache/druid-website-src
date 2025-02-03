@@ -1,6 +1,7 @@
 import os
 import shutil
 import subprocess
+import re
 
 """
 copy_druid_docs.py does the following:
@@ -19,6 +20,7 @@ copy_druid_docs.py does the following:
 To use this as a standalone script, call it like:
 python copy_druid_docs.py -v 26.0.0
 """
+
 
 druid_variable = "{{DRUIDVERSION}}"
 
@@ -57,17 +59,17 @@ def check_source(source_directory):
 
 def replace_text_in_file(destination_directory, druid_version):
     """
-    Find/replace {{DRUIDVERSION}} with the actual version
+    Find/replace \{\{DRUIDVERSION}} and {{DRUIDVERSION]] with the actual version
     """
 
     with open(destination_directory, 'r') as file:
         file_content = file.read()
 
-    modified_content = file_content.replace(druid_variable, druid_version)
+    # Replace both patterns
+    modified_content = re.sub(r"\{\{DRUIDVERSION\}\}|\{\{DRUIDVERSION\]\]", druid_version, file_content)
 
     with open(destination_directory, 'w') as file:
         file.write(modified_content)
-
 def do_the_replace(file_path, druid_version):
     for item in os.listdir(file_path):
         item_path = os.path.join(file_path, item)
