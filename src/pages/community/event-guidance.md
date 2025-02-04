@@ -145,7 +145,7 @@ Amongst other things:
 * Attendees must never feel compelled to provide their personal data for pipeline generation.
 * Let your company's technical expertise and integrity shine through your speaker: Druid events aren't a place for reciting battle cards or to have your speaker trained up and ready to go with objection handling narratives.
 
-#### Respect the part we all play
+#### Respect the part we all play
 
 Never claim to be the [sole or exclusive leaders](https://www.apache.org/foundation/marks/events#events) of the Apache Druid project, nor the sole source of information. And never imply ownership, endorsement, or sponsorship of any ASF-related project or initiative of any kind.
 
