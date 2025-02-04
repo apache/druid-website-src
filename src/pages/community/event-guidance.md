@@ -111,7 +111,7 @@ You can help by making a special effort to find and coach first-time speakers in
 
 Spreading the word about your event is essential for maximizing engagement. Whether through social media, community mailing lists, or direct outreach, effective promotion ensures that interested participants know about and can attend your event. This section provides strategies for promoting your event across various channels and engaging the Apache Druid community.
 
-#### Give it some Slack!
+#### Give it some Slack!
 
 The community mailing lists and Slack channel are a great place to connect with the PMC, to find local community members, to find out what would interest people, and to bring together your plan for your event.
 
@@ -157,7 +157,7 @@ Never leave your audience believing that, somehow, you are speaking on behalf of
 
 When you use the Apache Druid logo or name (or any Apache marks) make sure your audience won't get confused between Apache projects and someone else's products or service. For example, don't mix and match corporate logos on the same slides.
 
-#### Respect the family
+#### Respect the family
 
 Keep your talk unbiased and educational. Engineers who create open source software - whoever they are - are our friends!
 
@@ -165,7 +165,7 @@ Never disparage the ASF, its projects, members, sponsors, or communities - wheth
 
 ### Content and delivery
 
-#### Stay on topic
+#### Stay on topic
 
 The focus of your talk must be Apache Druid.
 
@@ -181,6 +181,6 @@ Feel good about sharing roadblocks you hit and how you worked around them, and a
 
 Everyone loves a demo! And we love demos that come before the slideware! Think about doing something live (or narrated over a recording) that showcases your work.
 
-#### Watch the Clock
+#### Watch the Clock
 
 If you run over, then the next will, and so on. Eventually the event is completely off schedule, and someone's talk may be cut short! Practice your presentation ahead of time to make sure you stay within your allotted time.
