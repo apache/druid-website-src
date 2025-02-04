@@ -25,7 +25,7 @@ Our goal is to foster an inclusive, informative, and engaging environment that a
 
 Apache Druid community events can take many forms, from informal meetups to structured conferences with multiple tracks. The format you choose should reflect the needs and interests of your target audience. Whether online or in-person, well-organized events ensure attendees gain value from the content, network with peers, and contribute to the community. This section provides guidance on structuring your event for maximum impact.
 
-#### Apache Software Foundation rules take precedence
+#### Apache Software Foundation rules take precedence
 
 If your event uses “Apache Druid” in its branding, be sure to review [Apache’s trademark policy](https://www.apache.org/foundation/marks/) to ensure compliance.
 
