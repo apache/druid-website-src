@@ -18,10 +18,10 @@ module.exports={
   "organizationName": "Apache®",
   "projectName": "ApacheDruid",
   "scripts": [
-    "https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js",
+    "./static/js/clipboard.min.js",
   ],
   "stylesheets": [
-    "https://use.fontawesome.com/releases/v5.7.2/css/all.css",
+    "./src/css/fontawesone.css",
   ],
   "favicon": "img/favicon.png",
   "customFields": {
