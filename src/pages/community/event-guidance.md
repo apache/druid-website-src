@@ -17,7 +17,13 @@ This guide helps organizers and speakers create successful events — whether vi
 
 ## Guidance for organizers
 
-### Event rules and community alignment
+Hosting an event for the Apache Druid community is a fantastic way to bring together users, contributors, and enthusiasts to share knowledge, experiences, and innovations. Whether you’re organizing a small meetup, a virtual webinar, or a large-scale conference, this guide provides key recommendations to help make your event a success.
+
+Our goal is to foster an inclusive, informative, and engaging environment that aligns with the values of the Apache Software Foundation (ASF) and the broader open-source community.
+
+### Event format and structure
+
+Apache Druid community events can take many forms, from informal meetups to structured conferences with multiple tracks. The format you choose should reflect the needs and interests of your target audience. Whether online or in-person, well-organized events ensure attendees gain value from the content, network with peers, and contribute to the community. This section provides guidance on structuring your event for maximum impact.
 
 #### Apache Software Foundation rules take precedence
 
@@ -45,7 +51,9 @@ It’s a standard practice for organizers of Apache-related events to connect wi
 
 #### The community is bigger than Druid
 
-As an organizer of an Apache Druid meetup, you're part of a bigger movement full of cool and superb people. Take note of the ecosystem around Apache Druid and bring them along! Whether it's speakers or attendees, it's worth contacting other Apache meetups in your area. Remember that the focus of the event remains Apache Druid, so guide speakers to talk about how their technology relates to and works with Apache Druid.
+As an organizer of an Apache Druid meetup, you'll be playing a part of a bigger movement that's full of cool and superb people!
+
+Take note of the ecosystem around Apache Druid - you'll be fostering connections across the technoscape!
 
 * [Apache Airflow](https://airflow.apache.org/community/)
 * [Apache Beam](https://beam.apache.org/community/)
@@ -61,7 +69,11 @@ As an organizer of an Apache Druid meetup, you're part of a bigger movement full
 * [Apache Superset](https://superset.apache.org/community/)
 * [Apache Zookeeper](https://zookeeper.apache.org/)
 
+Remember that the focus of the event remains Apache Druid, so guide speakers to talk about how their technology relates to and works with Apache Druid.
+
 ### Speaker and content selection
+
+High-quality content is at the heart of a great community event. To maintain an informative and welcoming environment, event organizers should ensure speakers are selected fairly, with a focus on technical depth, relevance, and diverse perspectives. Talks should aim to educate, inspire, and engage attendees, rather than promote commercial products or services. Below are recommendations to help curate content that aligns with Apache Druid’s open-source ethos.
 
 #### Select speakers based on merit
 
@@ -97,19 +109,25 @@ You can help by making a special effort to find and coach first-time speakers in
 
 ### Communication and promotion
 
-#### Give it some Slack
+Spreading the word about your event is essential for maximizing engagement. Whether through social media, community mailing lists, or direct outreach, effective promotion ensures that interested participants know about and can attend your event. This section provides strategies for promoting your event across various channels and engaging the Apache Druid community.
+
+#### Give it some Slack!
 
 The community mailing lists and Slack channel are a great place to connect with the PMC, to find local community members, to find out what would interest people, and to bring together your plan for your event.
 
 Feel welcome to share details of your event, the time, date, and location, and about the topics and speakers.
 
-Never spam.
-
-#### Promote it
-
 Help speakers promote their talks and your event, giving them guidance on how and when to promote. Keep your vision in mind, and work with them to drive attendance.
 
-And don't forget - the event doesn't stop when the pizza boxes are in the recycling! Think about how you might publish the content (with each speaker's permission) and create buzz after all is said and done.
+Never spam.
+
+#### Record and share sessions
+
+Recording and sharing event content can significantly extend the reach and impact of your sessions, allowing community members to access knowledge even if they couldn’t attend in real-time. However, it’s crucial to balance this with privacy considerations and compliance with regulations such as the General Data Protection Regulation (GDPR).
+
+Before recording, ensure that all participants — especially speakers and attendees who may appear in the video — are informed and have given their consent. Provide clear opt-out options for those who prefer not to be recorded, such as designated no-recording areas for in-person events or the ability to disable video participation in virtual events.
+
+With each speaker's permission, think about how and where you might publish the content and create buzz after all the pizza boxes are in the recycling...
 
 ## Guidance for speakers
 
