@@ -21,7 +21,7 @@ module.exports={
     "./static/js/clipboard.min.js",
   ],
   "stylesheets": [
-    "./src/css/fontawesone.css",
+    "./src/css/fontawesome.css",
   ],
   "favicon": "img/favicon.png",
   "customFields": {
