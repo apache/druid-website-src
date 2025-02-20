@@ -65,7 +65,7 @@ def replace_text_in_file(destination_directory, druid_version):
         file_content = file.read()
 
 
-    pattern = r"(?:\{\{DRUIDVERSION\}\}|\\\{DRUIDVERSION\}\}?|\\\{\{DRUIDVERSION\}\})"
+    pattern = r"\{\{DRUIDVERSION\}\}|\{DRUIDVERSION\}"
     modified_content = re.sub(pattern, druid_version, file_content)
 
     with open(destination_directory, 'w') as file:
