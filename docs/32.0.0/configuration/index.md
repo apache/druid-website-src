@@ -403,7 +403,7 @@ Metric monitoring is an essential part of Druid operations. The following monito
 |`org.apache.druid.server.metrics.SegmentStatsMonitor` | **EXPERIMENTAL** Reports statistics about segments on Historical services. Available only on Historical services. Not to be used when lazy loading is configured.|
 |`org.apache.druid.server.metrics.QueryCountStatsMonitor`|Reports how many queries have been successful/failed/interrupted.|
 |`org.apache.druid.server.metrics.SubqueryCountStatsMonitor`|Reports how many subqueries have been materialized as rows or bytes and various other statistics related to the subquery execution|
-|`org.apache.druid.server.emitter.HttpEmittingMonitor`|Reports internal metrics of `http` or `parametrized` emitter (see below). Must not be used with another emitter type. See the description of the metrics here: <https://github.com/apache/druid/pull/4973>.|
+|`org.apache.druid.server.emitter.HttpEmittingMonitor`|Reports internal metrics of `http` or `parametrized` emitter (see below). Must not be used with another emitter type. See the description of the metrics here: https://github.com/apache/druid/pull/4973.|
 |`org.apache.druid.server.metrics.TaskCountStatsMonitor`|Reports how many ingestion tasks are currently running/pending/waiting and also the number of successful/failed tasks per emission period.|
 |`org.apache.druid.server.metrics.TaskSlotCountStatsMonitor`|Reports metrics about task slot usage per emission period.|
 |`org.apache.druid.server.metrics.WorkerTaskCountStatsMonitor`|Reports how many ingestion tasks are currently running/pending/waiting, the number of successful/failed tasks, and metrics about task slot usage for the reporting worker, per emission period. Only supported by Middle Manager node types.|
@@ -882,6 +882,7 @@ These Coordinator static configurations can be defined in the `coordinator/runti
 |`druid.coordinator.kill.ignoreDurationToRetain`|A way to override `druid.coordinator.kill.durationToRetain` and tell the coordinator that you do not care about the end date of unused segment intervals when it comes to killing them. If true, the coordinator considers all unused segments as eligible to be killed.|false|
 |`druid.coordinator.kill.bufferPeriod`|The amount of time that a segment must be unused before it is able to be permanently removed from metadata and deep storage. This can serve as a buffer period to prevent data loss if data ends up being needed after being marked unused.|`P30D`|
 |`druid.coordinator.kill.maxSegments`|The number of unused segments to kill per kill task. This number must be greater than 0. This only applies when `druid.coordinator.kill.on=true`.|100|
+|`druid.coordinator.kill.maxInterval`|The largest interval, as an [ISO 8601 duration](https://en.wikipedia.org/wiki/ISO_8601#Durations), of segments to delete per kill task. Set to zero, e.g. `PT0S`, for unlimited. This only applies when `druid.coordinator.kill.on=true`.|`P30D`|
 |`druid.coordinator.balancer.strategy`|The [balancing strategy](../design/coordinator.md#balancing-segments-in-a-tier) used by the Coordinator to distribute segments among the Historical servers in a tier. The `cost` strategy distributes segments by minimizing a cost function, `diskNormalized` weights these costs with the disk usage ratios of the servers and `random` distributes segments randomly.|`cost`|
 |`druid.coordinator.loadqueuepeon.http.repeatDelay`|The start and repeat delay (in milliseconds) for the load queue peon, which manages the load/drop queue of segments for any server.|1 minute|
 |`druid.coordinator.loadqueuepeon.http.batchSize`|Number of segment load/drop requests to batch in one HTTP request. Note that it must be smaller than `druid.segmentCache.numLoadingThreads` config on Historical service.|1|
@@ -1181,7 +1182,8 @@ The following table shows the dynamic configuration properties for the Overlord.
 
 The following is an example of an Overlord dynamic config:
 
-<details><summary>Click to view the example</summary>
+<details>
+<summary>Click to view the example</summary>
 
 ```json
 {
@@ -2112,8 +2114,8 @@ The `druid.query.default.context.{query_context_key}` runtime property prefix ap
 
 The precedence chain for query context values is as follows:
 
-hard-coded default value in Druid code <- runtime property not prefixed with `druid.query.default.context`
-<- runtime property prefixed with `druid.query.default.context` <- context parameter in the query
+hard-coded default value in Druid code `<-` runtime property not prefixed with `druid.query.default.context`
+`<-` runtime property prefixed with `druid.query.default.context` `<-` context parameter in the query
 
 Note that not all query context key has a runtime property not prefixed with `druid.query.default.context` that can
 override the hard-coded default value. For example, `maxQueuedBytes` has `druid.broker.http.maxQueuedBytes`
