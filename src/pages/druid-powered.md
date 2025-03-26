@@ -5,8 +5,7 @@ title: Powered by Apache Druid
 
 :::tip
 
-<a href="https://github.com/apache/druid-website-src/blob/master/src/pages/druid-powered.md">
-<span class="fa fa-plus"></span> Add your company</a>
+<a href="https://github.com/apache/druid-website-src/blob/master/src/pages/druid-powered.md"><span class="fa fa-plus"></span> Add your company</a>
 
 :::
 
@@ -404,7 +403,7 @@ LifeBuzz is a popular web property that serves tens of millions of pageviews per
 
 ## LiquidM
 
-LiquidM uses Druid for real-time drill-down reporting. LiquidM is also contributing back to the community by creating and maintaining a ruby client library for interacting with Druid located at <http://github.com/liquidm/ruby-druid>.
+LiquidM uses Druid for real-time drill-down reporting. LiquidM is also contributing back to the community by creating and maintaining a ruby client library for interacting with Druid located at http://github.com/liquidm/ruby-druid.
 
 ## Lohika
 
@@ -482,7 +481,7 @@ At [mParticle](https://www.mparticle.com/) we have deployed Druid across our ent
 
 ## MZ
 
-* Priyadarshi, Pushkar; Yurinok, Igor, Nepune, Bikrant. "Druid @ MZ." *YouTube*, uploaded by Imply, 5 Mar 2018, <https://youtu.be/zCk2BV9mQ0Y>
+* Priyadarshi, Pushkar; Yurinok, Igor, Nepune, Bikrant. "Druid @ MZ." *YouTube*, uploaded by Imply, 5 Mar 2018, https://youtu.be/zCk2BV9mQ0Y
 
 ## N3twork
 
@@ -501,7 +500,7 @@ two terabytes per hour, with the ability to query data as its being ingested.
 They use Druid to pinpoint anomalies within their infrastructure, endpoint
 activity and content flow.
 
-* Merlino, Gian; Herman, Matt; Pasari, Vivek; Jain, Samarth. "Druid @ Netflix". *YouTube*, uploaded by Netflix Data, 14 Nov 2018. <https://youtu.be/Qvhqe4yUKpw>
+* Merlino, Gian; Herman, Matt; Pasari, Vivek; Jain, Samarth. "Druid @ Netflix". *YouTube*, uploaded by Netflix Data, 14 Nov 2018. https://youtu.be/Qvhqe4yUKpw
 * [Netflix & Amazon Case Study](https://aws.amazon.com/solutions/case-studies/netflix-kinesis-streams/)
 * [Announcing Suro: Backbone of Netflix's Data Pipeline](http://techblog.netflix.com/2013/12/announcing-suro-backbone-of-netflixs.html)
 * [How Netflix uses Druid for Real-time Insights to Ensure a High-Quality Experience](https://netflixtechblog.com/how-netflix-uses-druid-for-real-time-insights-to-ensure-a-high-quality-experience-19e1e8568d06)
@@ -520,7 +519,7 @@ Nielsen Marketing Cloud uses Druid as it's core real-time analytics tool to help
 
 * [How Nielsen Marketing Cloud Uses Druid for Audience and Marketing Performance Analysis](https://imply.io/post/nielsen-marketing-audience-analysis)
 * [Counting Unique Users in Real-Time: Here’s a Challenge for You!"](https://youtu.be/MLUhzuQ0DHY) (Yakir Buskilla, Itai Yaffe) *YouTube*, uploaded by DataWorks Summit, 1 Apr 2019.
-* Buskilla, Yakir; Yaffe, Itai. "Counting Unique Users in Real-Time: Here’s a Challenge for You!" *SlideShare*, uploaded by DataWorks Summit, 1 Apr 2019. <https://www.slideshare.net/Hadoop_Summit/counting-unique-users-in-realtime-heres-a-challenge-for-you-139142580>
+* Buskilla, Yakir; Yaffe, Itai. "Counting Unique Users in Real-Time: Here’s a Challenge for You!" *SlideShare*, uploaded by DataWorks Summit, 1 Apr 2019. https://www.slideshare.net/Hadoop_Summit/counting-unique-users-in-realtime-heres-a-challenge-for-you-139142580
 * [Data Retention and Deletion in Apache Druid](https://medium.com/nmc-techblog/data-retention-and-deletion-in-apache-druid-74ffd12398a8)
 
 ## Nodex
@@ -541,7 +540,7 @@ At Noon – The Social Learning Platform, on a daily basis we process close to 1
 
 ## OneAPM
 
-OneAPM <http://oneapm.com> is an IT service compmay focusing on Application Performance Management (APM). In OneAPM, Druid is used to power clients' interactive queries on performance data collected from their applications in realtime.
+[OneAPM](http://oneapm.com) is an IT service compmay focusing on Application Performance Management (APM). In OneAPM, Druid is used to power clients' interactive queries on performance data collected from their applications in realtime.
 
 ## Oppo
 

@@ -95,7 +95,7 @@ def main(versions, skip_install, use_yarn):
 
     # install docusaurus 2
     if not skip_install:
-        print("Installing Docusaurus 2...")
+        print("Installing Docusaurus...")
 
         if not use_yarn:
             subprocess.run(["npm", "install"])
