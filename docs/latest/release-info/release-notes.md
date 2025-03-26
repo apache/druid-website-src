@@ -22,7 +22,7 @@ title: "Release notes"
   ~ under the License.
   -->
 
-<!--Replace 32.0.0 with the correct Druid version.-->
+<!--Replace 32.0.1 with the correct Druid version.-->
 
 Apache Druid 32.0.0 contains over $NUMBER_FEATURES new features, bug fixes, performance enhancements, documentation improvements, and additional test coverage from $NUMBER_OF_CONTRIBUTORS contributors.
 
@@ -32,7 +32,7 @@ Replace {{MILESTONE}} with the correct milestone number. For example: https://gi
 
 See the [complete set of changes](https://github.com/apache/druid/issues?q=is%3Aclosed+milestone%3A{{MILESTONE}}+sort%3Aupdated-desc+) for additional details, including bug fixes.
 
-Review the [upgrade notes](#upgrade-notes) and [incompatible changes](#incompatible-changes) before you upgrade to Druid 32.0.0.
+Review the [incompatible changes](#incompatible-changes) before you upgrade to Druid 32.0.1.
 If you are upgrading across multiple versions, see the [Upgrade notes](upgrade-notes.md) page, which lists upgrade notes for the most recent Druid versions.
 
 <!-- 
