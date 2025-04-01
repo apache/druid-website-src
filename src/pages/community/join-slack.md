@@ -6,7 +6,7 @@ import BrowserOnly from '@docusaurus/BrowserOnly';
 
 <BrowserOnly>
       {() => {
-        window.location.replace(""https://join.slack.com/t/apachedruidworkspace/shared_invite/zt-32htswe5e-lUvNjDHsjA92HeTlwEqPIg"");
+        window.location.replace("https://join.slack.com/t/apachedruidworkspace/shared_invite/zt-32htswe5e-lUvNjDHsjA92HeTlwEqPIg");
         return null;
       }}
     </BrowserOnly>
