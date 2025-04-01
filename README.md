@@ -25,15 +25,25 @@ If you need to update the contents of Upcoming Events, Featured Content or Lates
 
 If you only need to update the homepage widgets,  use the `--no-docs` flag (as shown in example 5) to build the site. This uses the existing docs in `latest` and only builds `latest`, which is what's used for the homepage and other non-doc pages.
 
-## Building the site for Druid 26 and later
+## Building the site for Druid
+
+> Note that different versions of Druid use different versions of Docusaurus due to upgrades
 
 By default, the repo always starts/builds latest if you run `npm start|build` or `yarn start|build`. This way, you can always view the site locally.
 
 The build scripts described in [Publish the site](#publish-the-site) handles building the versioned docs for when you're ready to do a release.
 
-To start, you'll need to install Docusaurus 2.  
+To start, you'll need to install Docusaurus 3.  
 
-### Install Docusaurus 2
+### Docusaurus version
+
+Different Druid versions run different docusaurus versions due to upgrades. The versions are only somewhat compatible. The publishing process for Docusaurus 2 and 3 are the same. The scripts were upgraded behind the scenes, so the user-facing commands are still the same. Druid verisons before 26 (Docusaurus) 1 use a [different process](#building-the-site-before-druid-26).
+
+- Druid 32.0.1: Docusaurus 3
+- Druid 26-32.0.0 : Docusaurus 2 
+- Druid versions earlier than 26: Docusaurus 1
+
+### Install Docusaurus 
 
 You need a supported version of node, such as the latest Node 18.
 
