@@ -1,5 +1,5 @@
 const Redirects = require('./redirects.js').Redirects;
-
+const copyright = `Copyright © ${new Date().getFullYear()}`;
 /*
 buildVersion is used for 2 things:
 
@@ -146,7 +146,7 @@ module.exports={
     "image": "img/druid_nav.png",
     "footer": {
       "links": [],
-      "copyright": "Copyright © 2023 Apache Software Foundation. Except where otherwise noted, licensed under CC BY-SA 4.0. Apache Druid, Druid, and the Druid logo are either registered trademarks or trademarks of The Apache Software Foundation in the United States and other countries.",
+      "copyright": copyright + " Apache Software Foundation. Except where otherwise noted, licensed under CC BY-SA 4.0. Apache Druid, Druid, and the Druid logo are either registered trademarks or trademarks of The Apache Software Foundation in the United States and other countries.",
       "logo": {
         "src": "img/favicon.png"
       }
