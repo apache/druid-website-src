@@ -77,6 +77,7 @@ UIs
 
 * [Apache Superset](https://github.com/apache/superset) - Superset is a modern data exploration and data visualization platform.
 * [Deep.Explorer](https://www.deep.bi/solutions/apache-druid) - A UI built for slice & dice analytics, adhoc queries and powerful, easy data visualizations
+* [Embeddable](https://embeddable.com) - Developer-first customer-facing dashboards for your [Druid DB](https://docs.embeddable.com/data/credentials#druid)
 * [Grafana](https://github.com/societe-generale/druidplugin) - A plugin for [Grafana](http://grafana.org/)
 * [grafana](https://github.com/Quantiply/grafana-plugins/tree/master/features/druid) - A plugin for [Grafana](http://grafana.org/)
 * [Pivot](https://github.com/implydata/pivot) - An exploratory analytics UI for Druid
