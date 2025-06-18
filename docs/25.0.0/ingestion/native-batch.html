@@ -1,0 +1,797 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Native batch ingestion · Apache Druid</title><meta name="viewport" content="width=device-width, initial-scale=1.0"/><link rel="canonical" href="https://druid.apache.org/docs/25.0.0/ingestion/native-batch.html"/><meta name="generator" content="Docusaurus"/><meta name="description" content="&lt;!--"/><meta name="docsearch:language" content="en"/><meta name="docsearch:version" content="25.0.0" /><meta property="og:title" content="Native batch ingestion · Apache Druid"/><meta property="og:type" content="website"/><meta property="og:url" content="https://druid.apache.org/index.html"/><meta property="og:description" content="&lt;!--"/><meta property="og:image" content="https://druid.apache.org/img/druid_nav.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://druid.apache.org/img/druid_nav.png"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/>
+<link rel="stylesheet" href="/css/all.css"/><link rel="stylesheet" href="/css/code-block-buttons.css"/><script type="text/javascript" src="/js/clipboard.min.js"></script><script type="text/javascript" src="/js/code-block-buttons.js"></script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/druid_nav.png" alt="Apache Druid"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/technology" target="_self">Technology</a></li><li class=""><a href="/use-cases" target="_self">Use Cases</a></li><li class=""><a href="/druid-powered" target="_self">Powered By</a></li><li class="siteNavGroupActive"><a href="/docs/25.0.0/design/index.html" target="_self">Docs</a></li><li class=""><a href="/community/" target="_self">Community</a></li><li class=""><a href="https://www.apache.org" target="_self">Apache</a></li><li class=""><a href="/downloads.html" target="_self">Download</a></li><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Batch ingestion</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Getting started<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/25.0.0/design/index.html">Introduction to Apache Druid</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/tutorials/index.html">Quickstart (local)</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/operations/single-server.html">Single server deployment</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/tutorials/cluster.html">Clustered deployment</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Tutorials<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/25.0.0/tutorials/tutorial-batch.html">Load files natively</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/tutorials/tutorial-msq-extern.html">Load files using SQL 🆕</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/tutorials/tutorial-kafka.html">Load from Apache Kafka</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/tutorials/tutorial-batch-hadoop.html">Load from Apache Hadoop</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/tutorials/tutorial-query.html">Querying data</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/tutorials/tutorial-rollup.html">Roll-up</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/tutorials/tutorial-sketches-theta.html">Theta sketches</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/tutorials/tutorial-retention.html">Configuring data retention</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/tutorials/tutorial-update-data.html">Updating existing data</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/tutorials/tutorial-compaction.html">Compacting segments</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/tutorials/tutorial-delete-data.html">Deleting data</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/tutorials/tutorial-ingestion-spec.html">Writing an ingestion spec</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/tutorials/tutorial-transform-spec.html">Transforming input data</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/tutorials/docker.html">Tutorial: Run with Docker</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/tutorials/tutorial-kerberos-hadoop.html">Kerberized HDFS deep storage</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/tutorials/tutorial-msq-convert-spec.html">Convert ingestion spec to SQL</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/tutorials/tutorial-jupyter-index.html">Jupyter Notebook tutorials</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Design<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/25.0.0/design/architecture.html">Design</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/design/segments.html">Segments</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/design/processes.html">Processes and servers</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/dependencies/deep-storage.html">Deep storage</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/dependencies/metadata-storage.html">Metadata storage</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/dependencies/zookeeper.html">ZooKeeper</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Ingestion<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/25.0.0/ingestion/index.html">Ingestion</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/ingestion/data-formats.html">Data formats</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/ingestion/data-model.html">Data model</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/ingestion/rollup.html">Data rollup</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/ingestion/partitioning.html">Partitioning</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/ingestion/ingestion-spec.html">Ingestion spec</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/ingestion/schema-design.html">Schema design tips</a></li><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Stream ingestion</h4><ul><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/kafka-ingestion.html">Apache Kafka ingestion</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/kafka-supervisor-reference.html">Apache Kafka supervisor</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/kafka-supervisor-operations.html">Apache Kafka operations</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/kinesis-ingestion.html">Amazon Kinesis</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Batch ingestion</h4><ul><li class="navListItem navListItemActive"><a class="navItem" href="/docs/25.0.0/ingestion/native-batch.html">Native batch</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/ingestion/native-batch-input-sources.html">Native batch: input sources</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/ingestion/migrate-from-firehose.html">Migrate from firehose</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/ingestion/hadoop.html">Hadoop-based</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">SQL-based ingestion 🆕</h4><ul><li class="navListItem"><a class="navItem" href="/docs/25.0.0/multi-stage-query/index.html">Overview</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/multi-stage-query/concepts.html">Key concepts</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/multi-stage-query/api.html">API</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/multi-stage-query/security.html">Security</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/multi-stage-query/examples.html">Examples</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/multi-stage-query/reference.html">Reference</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/multi-stage-query/known-issues.html">Known issues</a></li></ul></div><li class="navListItem"><a class="navItem" href="/docs/25.0.0/ingestion/tasks.html">Task reference</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/ingestion/faq.html">Troubleshooting FAQ</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Data management<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/25.0.0/data-management/index.html">Overview</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/data-management/update.html">Data updates</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/data-management/delete.html">Data deletion</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/data-management/schema-changes.html">Schema changes</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/data-management/compaction.html">Compaction</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/data-management/automatic-compaction.html">Automatic compaction</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Querying<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Druid SQL</h4><ul><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/sql.html">Overview and syntax</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/sql-data-types.html">SQL data types</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/sql-operators.html">Operators</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/sql-scalar.html">Scalar functions</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/sql-aggregations.html">Aggregation functions</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/sql-multivalue-string-functions.html">Multi-value string functions</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/sql-json-functions.html">JSON functions</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/sql-functions.html">All functions</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/sql-api.html">Druid SQL API</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/sql-jdbc.html">JDBC driver API</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/sql-query-context.html">SQL query context</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/sql-metadata-tables.html">SQL metadata tables</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/sql-translation.html">SQL query translation</a></li></ul></div><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/querying.html">Native queries</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/query-execution.html">Query execution</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/troubleshooting.html">Troubleshooting</a></li><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Concepts</h4><ul><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/datasource.html">Datasources</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/joins.html">Joins</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/lookups.html">Lookups</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/multi-value-dimensions.html">Multi-value dimensions</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/nested-columns.html">Nested columns</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/multitenancy.html">Multitenancy</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/caching.html">Query caching</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/using-caching.html">Using query caching</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/query-context.html">Query context</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Native query types</h4><ul><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/timeseriesquery.html">Timeseries</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/topnquery.html">TopN</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/groupbyquery.html">GroupBy</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/scan-query.html">Scan</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/searchquery.html">Search</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/timeboundaryquery.html">TimeBoundary</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/segmentmetadataquery.html">SegmentMetadata</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/datasourcemetadataquery.html">DatasourceMetadata</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Native query components</h4><ul><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/filters.html">Filters</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/granularities.html">Granularities</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/dimensionspecs.html">Dimensions</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/aggregations.html">Aggregations</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/post-aggregations.html">Post-aggregations</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/misc/math-expr.html">Expressions</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/having.html">Having filters (groupBy)</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/limitspec.html">Sorting and limiting (groupBy)</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/topnmetricspec.html">Sorting (topN)</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/sorting-orders.html">String comparators</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/virtual-columns.html">Virtual columns</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/geo.html">Spatial filters</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Configuration<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/25.0.0/configuration/index.html">Configuration reference</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions.html">Extensions</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/configuration/logging.html">Logging</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Operations<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/25.0.0/operations/web-console.html">Web console</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/operations/java.html">Java runtime</a></li><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Security</h4><ul><li class="navListItem"><a class="navItem" href="/docs/25.0.0/operations/security-overview.html">Security overview</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/operations/security-user-auth.html">User authentication and authorization</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/operations/auth-ldap.html">LDAP auth</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/operations/password-provider.html">Password providers</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/operations/dynamic-config-provider.html">Dynamic Config Providers</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/operations/tls-support.html">TLS support</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Performance tuning</h4><ul><li class="navListItem"><a class="navItem" href="/docs/25.0.0/operations/basic-cluster-tuning.html">Basic cluster tuning</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/operations/segment-optimization.html">Segment size optimization</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/operations/mixed-workloads.html">Mixed workloads</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/operations/http-compression.html">HTTP compression</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/operations/clean-metadata-store.html">Automated metadata cleanup</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Monitoring</h4><ul><li class="navListItem"><a class="navItem" href="/docs/25.0.0/operations/request-logging.html">Request logging</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/operations/metrics.html">Metrics</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/operations/alerts.html">Alerts</a></li></ul></div><li class="navListItem"><a class="navItem" href="/docs/25.0.0/operations/api-reference.html">API reference</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/operations/high-availability.html">High availability</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/operations/rolling-updates.html">Rolling updates</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/operations/rule-configuration.html">Using rules to drop and retain data</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/operations/other-hadoop.html">Working with different versions of Apache Hadoop</a></li><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Misc</h4><ul><li class="navListItem"><a class="navItem" href="/docs/25.0.0/operations/dump-segment.html">dump-segment tool</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/operations/reset-cluster.html">reset-cluster tool</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/operations/insert-segment-to-db.html">insert-segment-to-db tool</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/operations/pull-deps.html">pull-deps tool</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/operations/deep-storage-migration.html">Deep storage migration</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/operations/export-metadata.html">Export Metadata Tool</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/operations/metadata-migration.html">Metadata Migration</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/operations/use_sbt_to_build_fat_jar.html">Content for build.sbt</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Development<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/overview.html">Developing on Druid</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/modules.html">Creating extensions</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/javascript.html">JavaScript functionality</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/build.html">Build from source</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/versioning.html">Versioning</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/experimental.html">Experimental features</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Misc<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/25.0.0/misc/papers-and-talks.html">Papers</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Hidden<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/25.0.0/comparisons/druid-vs-elasticsearch.html">Apache Druid vs Elasticsearch</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/comparisons/druid-vs-key-value.html">Apache Druid vs. Key/Value Stores (HBase/Cassandra/OpenTSDB)</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/comparisons/druid-vs-kudu.html">Apache Druid vs Kudu</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/comparisons/druid-vs-redshift.html">Apache Druid vs Redshift</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/comparisons/druid-vs-spark.html">Apache Druid vs Spark</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/comparisons/druid-vs-sql-on-hadoop.html">Apache Druid vs SQL-on-Hadoop</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/design/auth.html">Authentication and Authorization</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/design/broker.html">Broker</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/design/coordinator.html">Coordinator Process</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/design/historical.html">Historical Process</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/design/indexer.html">Indexer Process</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/design/indexing-service.html">Indexing Service</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/design/middlemanager.html">MiddleManager Process</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/design/overlord.html">Overlord Process</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/design/router.html">Router Process</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/design/peons.html">Peons</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/approximate-histograms.html">Approximate Histogram aggregators</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/avro.html">Apache Avro</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/azure.html">Microsoft Azure</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/bloom-filter.html">Bloom Filter</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/datasketches-extension.html">DataSketches extension</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/datasketches-hll.html">DataSketches HLL Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/datasketches-quantiles.html">DataSketches Quantiles Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/datasketches-theta.html">DataSketches Theta Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/datasketches-tuple.html">DataSketches Tuple Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/druid-basic-security.html">Basic Security</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/druid-kerberos.html">Kerberos</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/druid-lookups.html">Cached Lookup Module</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/druid-ranger-security.html">Apache Ranger Security</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/google.html">Google Cloud Storage</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/hdfs.html">HDFS</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/kafka-extraction-namespace.html">Apache Kafka Lookups</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/lookups-cached-global.html">Globally Cached Lookups</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/mysql.html">MySQL Metadata Store</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/orc.html">ORC Extension</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/druid-pac4j.html">Druid pac4j based Security extension</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/parquet.html">Apache Parquet Extension</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/postgresql.html">PostgreSQL Metadata Store</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/protobuf.html">Protobuf</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/s3.html">S3-compatible</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/simple-client-sslcontext.html">Simple SSLContext Provider Module</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/stats.html">Stats aggregator</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/test-stats.html">Test Stats Aggregators</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/druid-aws-rds.html">Druid AWS RDS Module</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-core/kubernetes.html">Kubernetes</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-contrib/ambari-metrics-emitter.html">Ambari Metrics Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-contrib/cassandra.html">Apache Cassandra</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-contrib/cloudfiles.html">Rackspace Cloud Files</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-contrib/distinctcount.html">DistinctCount Aggregator</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-contrib/graphite.html">Graphite Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-contrib/influx.html">InfluxDB Line Protocol Parser</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-contrib/influxdb-emitter.html">InfluxDB Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-contrib/kafka-emitter.html">Kafka Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-contrib/materialized-view.html">Materialized View</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-contrib/momentsketch-quantiles.html">Moment Sketches for Approximate Quantiles module</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-contrib/moving-average-query.html">Moving Average Query</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-contrib/opentsdb-emitter.html">OpenTSDB Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-contrib/redis-cache.html">Druid Redis Cache</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-contrib/sqlserver.html">Microsoft SQLServer</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-contrib/statsd.html">StatsD Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-contrib/tdigestsketch-quantiles.html">T-Digest Quantiles Sketch module</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-contrib/thrift.html">Thrift</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-contrib/time-min-max.html">Timestamp Min/Max aggregators</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-contrib/gce-extensions.html">GCE Extensions</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-contrib/aliyun-oss.html">Aliyun OSS</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/development/extensions-contrib/prometheus.html">Prometheus Emitter</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/operations/kubernetes.html">kubernetes</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/hll-old.html">Cardinality/HyperUnique aggregators</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/querying/select-query.html">Select</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/ingestion/native-batch-firehose.html">Firehose (deprecated)</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/ingestion/native-batch-simple-task.html">Native batch (simple)</a></li><li class="navListItem"><a class="navItem" href="/docs/25.0.0/ingestion/standalone-realtime.html">Realtime Process</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/apache/druid/edit/master/docs/ingestion/native-batch.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">Native batch ingestion</h1></header><article><div><span><!--
+  ~ Licensed to the Apache Software Foundation (ASF) under one
+  ~ or more contributor license agreements.  See the NOTICE file
+  ~ distributed with this work for additional information
+  ~ regarding copyright ownership.  The ASF licenses this file
+  ~ to you under the Apache License, Version 2.0 (the
+  ~ "License"); you may not use this file except in compliance
+  ~ with the License.  You may obtain a copy of the License at
+  ~
+  ~   http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an
+  ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~ KIND, either express or implied.  See the License for the
+  ~ specific language governing permissions and limitations
+  ~ under the License.
+  -->
+<blockquote>
+<p>This page describes native batch ingestion using <a href="/docs/25.0.0/ingestion/ingestion-spec.html">ingestion specs</a>. Refer to the <a href="/docs/25.0.0/ingestion/index.html#batch">ingestion
+methods</a> table to determine which ingestion method is right for you.</p>
+</blockquote>
+<p>Apache Druid supports the following types of native batch indexing tasks:</p>
+<ul>
+<li>Parallel task indexing (<code>index_parallel</code>) that can run multiple indexing tasks concurrently. Parallel task works well for production ingestion tasks.</li>
+<li>Simple task indexing (<code>index</code>) that run a single indexing task at a time. Simple task indexing is suitable for development and test environments.</li>
+</ul>
+<p>This topic covers the configuration for <code>index_parallel</code> ingestion specs.</p>
+<p>For related information on batch indexing, see:</p>
+<ul>
+<li><a href="/docs/25.0.0/ingestion/index.html#batch">Batch ingestion method comparison table</a> for a comparison of batch ingestion methods.</li>
+<li><a href="/docs/25.0.0/tutorials/tutorial-batch.html">Tutorial: Loading a file</a> for a tutorial on native batch ingestion.</li>
+<li><a href="/docs/25.0.0/ingestion/native-batch-input-sources.html">Input sources</a> for possible input sources.</li>
+<li><a href="/docs/25.0.0/ingestion/data-formats.html#input-format">Input formats</a> for possible input formats.</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="submit-an-indexing-task"></a><a href="#submit-an-indexing-task" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Submit an indexing task</h2>
+<p>To run either kind of native batch indexing task you can:</p>
+<ul>
+<li>Use the <strong>Load Data</strong> UI in the web console to define and submit an ingestion spec.</li>
+<li>Define an ingestion spec in JSON based upon the <a href="#parallel-indexing-example">examples</a> and reference topics for batch indexing. Then POST the ingestion spec to the <a href="/docs/25.0.0/operations/api-reference.html#tasks">Indexer API endpoint</a>,
+<code>/druid/indexer/v1/task</code>, the Overlord service. Alternatively you can use the indexing script included with Druid at <code>bin/post-index-task</code>.</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="parallel-task-indexing"></a><a href="#parallel-task-indexing" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parallel task indexing</h2>
+<p>The parallel task type <code>index_parallel</code> is a task for multi-threaded batch indexing. Parallel task indexing only relies on Druid resources. It does not depend on other external systems like Hadoop.</p>
+<p>The <code>index_parallel</code> task is a supervisor task that orchestrates
+the whole indexing process. The supervisor task splits the input data and creates worker tasks to process the individual portions of data.</p>
+<p>Druid issues the worker tasks to the Overlord. The overlord schedules and runs the workers on MiddleManagers or Indexers. After a worker task successfully processes the assigned input portion, it reports the resulting segment list to the supervisor task.</p>
+<p>The supervisor task periodically checks the status of worker tasks. If a task fails, the supervisor retries the task until the number of retries reaches the configured limit. If all worker tasks succeed, it publishes the reported segments at once and finalizes ingestion.</p>
+<p>The detailed behavior of the parallel task is different depending on the <code>partitionsSpec</code>. See <a href="#partitionsspec"><code>partitionsSpec</code></a> for more details.</p>
+<p>Parallel tasks require:</p>
+<ul>
+<li>a splittable <a href="#splittable-input-sources"><code>inputSource</code></a> in the <code>ioConfig</code>. For a list of supported splittable input formats, see <a href="#splittable-input-sources">Splittable input sources</a>.</li>
+<li>the <code>maxNumConcurrentSubTasks</code> greater than 1 in the <code>tuningConfig</code>. Otherwise tasks run sequentially. The <code>index_parallel</code> task reads each input file one by one and creates segments by itself.</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" id="supported-compression-formats"></a><a href="#supported-compression-formats" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Supported compression formats</h3>
+<p>Native batch ingestion supports the following compression formats:</p>
+<ul>
+<li><code>bz2</code></li>
+<li><code>gz</code></li>
+<li><code>xz</code></li>
+<li><code>zip</code></li>
+<li><code>sz</code> (Snappy)</li>
+<li><code>zst</code> (ZSTD).</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" id="implementation-considerations"></a><a href="#implementation-considerations" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Implementation considerations</h3>
+<p>This section covers implementation details to consider when you implement parallel task ingestion.</p>
+<h4><a class="anchor" aria-hidden="true" id="volume-control-for-worker-tasks"></a><a href="#volume-control-for-worker-tasks" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Volume control for worker tasks</h4>
+<p>You can control the amount of input data each worker task processes using different configurations depending on the phase in parallel ingestion.</p>
+<ul>
+<li>See <a href="#partitionsspec"><code>partitionsSpec</code></a> for details about how partitioning affects data volume for tasks.</li>
+<li>For the tasks that read data from the <code>inputSource</code>, you can set the <a href="#split-hint-spec">Split hint spec</a> in the <code>tuningConfig</code>.</li>
+<li>For the task that merge shuffled segments, you can set the <code>totalNumMergeTasks</code> in the <code>tuningConfig</code>.</li>
+</ul>
+<h4><a class="anchor" aria-hidden="true" id="number-of-running-tasks"></a><a href="#number-of-running-tasks" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Number of running tasks</h4>
+<p>The <code>maxNumConcurrentSubTasks</code> in the <code>tuningConfig</code> determines the number of concurrent worker tasks that run in parallel. The supervisor task checks the number of current running worker tasks and creates more if it's smaller than <code>maxNumConcurrentSubTasks</code> regardless of the number of available task slots. This may affect to other ingestion performance. See <a href="#capacity-planning">Capacity planning</a> section for more details.</p>
+<h4><a class="anchor" aria-hidden="true" id="replacing-or-appending-data"></a><a href="#replacing-or-appending-data" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Replacing or appending data</h4>
+<p>By default, batch ingestion replaces all data in the intervals in your <code>granularitySpec</code>' for any segment that it writes to. If you want to add to the segment instead, set the <code>appendToExisting</code> flag in the <code>ioConfig</code>. Batch ingestion only replaces data in segments where it actively adds data. If there are segments in the intervals for your <code>granularitySpec</code> that have do not have data from a task, they remain unchanged. If any existing segments partially overlap with the intervals in the <code>granularitySpec</code>, the portion of those segments outside the interval for the new spec remain visible.</p>
+<h4><a class="anchor" aria-hidden="true" id="fully-replacing-existing-segments-using-tombstones"></a><a href="#fully-replacing-existing-segments-using-tombstones" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Fully replacing existing segments using tombstones</h4>
+<p>You can set <code>dropExisting</code> flag in the <code>ioConfig</code> to true if you want the ingestion task to replace all existing segments that start and end within the intervals for your <code>granularitySpec</code>. This applies whether or not the new data covers all existing segments. <code>dropExisting</code> only applies when <code>appendToExisting</code> is false and the  <code>granularitySpec</code> contains an <code>interval</code>. WARNING: this functionality is still in beta.</p>
+<p>The following examples demonstrate when to set the <code>dropExisting</code> property to true in the <code>ioConfig</code>:</p>
+<p>Consider an existing segment with an interval of 2020-01-01 to 2021-01-01 and <code>YEAR</code> <code>segmentGranularity</code>. You want to overwrite the whole interval of 2020-01-01 to 2021-01-01 with new data using the finer segmentGranularity of <code>MONTH</code>. If the replacement data does not have a record within every months from 2020-01-01 to 2021-01-01 Druid cannot drop the original <code>YEAR</code> segment even if it does include all the replacement data. Set <code>dropExisting</code> to true in this case to replace the original segment at <code>YEAR</code> <code>segmentGranularity</code> since you no longer need it.<br /><br />
+Imagine you want to re-ingest or overwrite a datasource and the new data does not contain some time intervals that exist in the datasource. For example, a datasource contains the following data at <code>MONTH</code> segmentGranularity:</p>
+<ul>
+<li><strong>January</strong>: 1 record</li>
+<li><strong>February</strong>: 10 records</li>
+<li><strong>March</strong>: 10 records</li>
+</ul>
+<p>You want to re-ingest and overwrite with new data as follows:</p>
+<ul>
+<li><strong>January</strong>: 0 records</li>
+<li><strong>February</strong>: 10 records</li>
+<li><strong>March</strong>: 9 records</li>
+</ul>
+<p>Unless you set <code>dropExisting</code> to true, the result after ingestion with overwrite using the same MONTH segmentGranularity would be:</p>
+<ul>
+<li><strong>January</strong>: 1 record</li>
+<li><strong>February</strong>: 10 records</li>
+<li><strong>March</strong>: 9 records</li>
+</ul>
+<p>This may not be what it is expected since the new data has 0 records for January. Set <code>dropExisting</code> to true to replace the unneeded January segment with a tombstone.</p>
+<h2><a class="anchor" aria-hidden="true" id="parallel-indexing-example"></a><a href="#parallel-indexing-example" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parallel indexing example</h2>
+<p>The following example illustrates the configuration for a parallel indexing task:</p>
+<pre><code class="hljs css language-json">{
+  <span class="hljs-attr">"type"</span>: <span class="hljs-string">"index_parallel"</span>,
+  <span class="hljs-attr">"spec"</span>: {
+    <span class="hljs-attr">"dataSchema"</span>: {
+      <span class="hljs-attr">"dataSource"</span>: <span class="hljs-string">"wikipedia_parallel_index_test"</span>,
+      <span class="hljs-attr">"timestampSpec"</span>: {
+        <span class="hljs-attr">"column"</span>: <span class="hljs-string">"timestamp"</span>
+      },
+      <span class="hljs-attr">"dimensionsSpec"</span>: {
+        <span class="hljs-attr">"dimensions"</span>: [
+          <span class="hljs-string">"country"</span>,
+          <span class="hljs-string">"page"</span>,
+          <span class="hljs-string">"language"</span>,
+          <span class="hljs-string">"user"</span>,
+          <span class="hljs-string">"unpatrolled"</span>,
+          <span class="hljs-string">"newPage"</span>,
+          <span class="hljs-string">"robot"</span>,
+          <span class="hljs-string">"anonymous"</span>,
+          <span class="hljs-string">"namespace"</span>,
+          <span class="hljs-string">"continent"</span>,
+          <span class="hljs-string">"region"</span>,
+          <span class="hljs-string">"city"</span>
+        ]
+      },
+      <span class="hljs-attr">"metricsSpec"</span>: [
+        {
+          <span class="hljs-attr">"type"</span>: <span class="hljs-string">"count"</span>,
+          <span class="hljs-attr">"name"</span>: <span class="hljs-string">"count"</span>
+        },
+        {
+          <span class="hljs-attr">"type"</span>: <span class="hljs-string">"doubleSum"</span>,
+          <span class="hljs-attr">"name"</span>: <span class="hljs-string">"added"</span>,
+          <span class="hljs-attr">"fieldName"</span>: <span class="hljs-string">"added"</span>
+        },
+        {
+          <span class="hljs-attr">"type"</span>: <span class="hljs-string">"doubleSum"</span>,
+          <span class="hljs-attr">"name"</span>: <span class="hljs-string">"deleted"</span>,
+          <span class="hljs-attr">"fieldName"</span>: <span class="hljs-string">"deleted"</span>
+        },
+        {
+          <span class="hljs-attr">"type"</span>: <span class="hljs-string">"doubleSum"</span>,
+          <span class="hljs-attr">"name"</span>: <span class="hljs-string">"delta"</span>,
+          <span class="hljs-attr">"fieldName"</span>: <span class="hljs-string">"delta"</span>
+        }
+      ],
+      <span class="hljs-attr">"granularitySpec"</span>: {
+        <span class="hljs-attr">"segmentGranularity"</span>: <span class="hljs-string">"DAY"</span>,
+        <span class="hljs-attr">"queryGranularity"</span>: <span class="hljs-string">"second"</span>,
+        <span class="hljs-attr">"intervals"</span>: [
+          <span class="hljs-string">"2013-08-31/2013-09-02"</span>
+        ]
+      }
+    },
+    <span class="hljs-attr">"ioConfig"</span>: {
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"index_parallel"</span>,
+      <span class="hljs-attr">"inputSource"</span>: {
+        <span class="hljs-attr">"type"</span>: <span class="hljs-string">"local"</span>,
+        <span class="hljs-attr">"baseDir"</span>: <span class="hljs-string">"examples/indexing/"</span>,
+        <span class="hljs-attr">"filter"</span>: <span class="hljs-string">"wikipedia_index_data*"</span>
+      },
+      <span class="hljs-attr">"inputFormat"</span>: {
+        <span class="hljs-attr">"type"</span>: <span class="hljs-string">"json"</span>
+      }
+    },
+    <span class="hljs-attr">"tuningConfig"</span>: {
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"index_parallel"</span>,
+      <span class="hljs-attr">"partitionsSpec"</span>: {
+        <span class="hljs-attr">"type"</span>: <span class="hljs-string">"single_dim"</span>,
+        <span class="hljs-attr">"partitionDimension"</span>: <span class="hljs-string">"country"</span>,
+        <span class="hljs-attr">"targetRowsPerSegment"</span>: <span class="hljs-number">5000000</span>
+      },
+      <span class="hljs-attr">"maxNumConcurrentSubTasks"</span>: <span class="hljs-number">2</span>
+    }
+  }
+}
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="parallel-indexing-configuration"></a><a href="#parallel-indexing-configuration" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parallel indexing configuration</h2>
+<p>The following table defines the primary sections of the input spec:</p>
+<table>
+<thead>
+<tr><th>property</th><th>description</th><th>required?</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td>The task type. For parallel task indexing, set the value to <code>index_parallel</code>.</td><td>yes</td></tr>
+<tr><td>id</td><td>The task ID. If omitted, Druid generates the task ID using the task type, data source name, interval, and date-time stamp.</td><td>no</td></tr>
+<tr><td>spec</td><td>The ingestion spec that defines the <a href="#dataschema">data schema</a>, <a href="#ioconfig">IO config</a>, and <a href="#tuningconfig">tuning config</a>.</td><td>yes</td></tr>
+<tr><td>context</td><td>Context to specify various task configuration parameters. See <a href="/docs/25.0.0/ingestion/tasks.html#context-parameters">Task context parameters</a> for more details.</td><td>no</td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="dataschema"></a><a href="#dataschema" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>dataSchema</code></h3>
+<p>This field is required. In general, it defines the way that Druid will store your data: the primary timestamp column, the dimensions, metrics, and any transformations. For an overview, see <a href="/docs/25.0.0/ingestion/ingestion-spec.html#dataschema">Ingestion Spec DataSchema</a>.</p>
+<p>When defining the <code>granularitySpec</code> for index parallel, consider the defining <code>intervals</code> explicitly if you know the time range of the data. This way locking failure happens faster and Druid won't accidentally replace data outside the interval range some rows contain unexpected timestamps. The reasoning is as follows:</p>
+<ul>
+<li>If you explicitly define <code>intervals</code>, batch ingestion locks all intervals specified when it starts up. Problems with locking become evident quickly when multiple ingestion or indexing tasks try to obtain a lock on the same interval. For example, if a Kafka ingestion task tries to obtain a lock on a locked interval causing the ingestion task fail. Furthermore, if there are rows outside the specified intervals, Druid drops them, avoiding conflict with unexpected intervals.</li>
+<li>If you do not define <code>intervals</code>, batch ingestion locks each interval when the interval is discovered. In this case if the task overlaps with a higher-priority task, issues with conflicting locks occur later in the ingestion process. Also if the source data includes rows with unexpected timestamps, they may caused unexpected locking of intervals.</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" id="ioconfig"></a><a href="#ioconfig" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>ioConfig</code></h3>
+<table>
+<thead>
+<tr><th>property</th><th>description</th><th>default</th><th>required?</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td>The task type. Set to the value to <code>index_parallel</code>.</td><td>none</td><td>yes</td></tr>
+<tr><td>inputFormat</td><td><a href="/docs/25.0.0/ingestion/data-formats.html#input-format"><code>inputFormat</code></a> to specify how to parse input data.</td><td>none</td><td>yes</td></tr>
+<tr><td>appendToExisting</td><td>Creates segments as additional shards of the latest version, effectively appending to the segment set instead of replacing it. This means that you can append new segments to any datasource regardless of its original partitioning scheme. You must use the <code>dynamic</code> partitioning type for the appended segments. If you specify a different partitioning type, the task fails with an error.</td><td>false</td><td>no</td></tr>
+<tr><td>dropExisting</td><td>If <code>true</code> and <code>appendToExisting</code> is <code>false</code> and the <code>granularitySpec</code> contains an<code>interval</code>, then the ingestion task replaces all existing segments fully contained by the specified <code>interval</code> when the task publishes new segments. If ingestion fails, Druid does not change any existing segment. In the case of misconfiguration where either <code>appendToExisting</code> is <code>true</code> or <code>interval</code> is not specified in <code>granularitySpec</code>, Druid does not replace any segments even if <code>dropExisting</code> is <code>true</code>. WARNING: this functionality is still in beta.</td><td>false</td><td>no</td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="tuningconfig"></a><a href="#tuningconfig" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>tuningConfig</code></h3>
+<p>The tuningConfig is optional and default parameters will be used if no tuningConfig is specified. See below for more details.</p>
+<table>
+<thead>
+<tr><th>property</th><th>description</th><th>default</th><th>required?</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td>The task type. Set the value to<code>index_parallel</code>.</td><td>none</td><td>yes</td></tr>
+<tr><td>maxRowsInMemory</td><td>Determines when Druid should perform intermediate persists to disk. Normally you do not need to set this. Depending on the nature of your data, if rows are short in terms of bytes. For example, you may not want to store a million rows in memory. In this case, set this value.</td><td>1000000</td><td>no</td></tr>
+<tr><td>maxBytesInMemory</td><td>Use to determine when Druid should perform intermediate persists to disk. Normally Druid computes this internally and you do not need to set it. This value represents number of bytes to aggregate in heap memory before persisting. This is based on a rough estimate of memory usage and not actual usage. The maximum heap memory usage for indexing is maxBytesInMemory * (2 + maxPendingPersists). Note that <code>maxBytesInMemory</code> also includes heap usage of artifacts created from intermediary persists. This means that after every persist, the amount of <code>maxBytesInMemory</code> until next persist will decrease. Tasks fail when the sum of bytes of all intermediary persisted artifacts exceeds <code>maxBytesInMemory</code>.</td><td>1/6 of max JVM memory</td><td>no</td></tr>
+<tr><td>maxColumnsToMerge</td><td>Limit of the number of segments to merge in a single phase when merging segments for publishing. This limit affects the total number of columns present in a set of segments to merge. If the limit is exceeded, segment merging occurs in multiple phases. Druid merges at least 2 segments per phase, regardless of this setting.</td><td>-1 (unlimited)</td><td>no</td></tr>
+<tr><td>maxTotalRows</td><td>Deprecated. Use <code>partitionsSpec</code> instead. Total number of rows in segments waiting to be pushed. Used to determine when intermediate pushing should occur.</td><td>20000000</td><td>no</td></tr>
+<tr><td>numShards</td><td>Deprecated. Use <code>partitionsSpec</code> instead. Directly specify the number of shards to create when using a <code>hashed</code> <code>partitionsSpec</code>. If this is specified and <code>intervals</code> is specified in the <code>granularitySpec</code>, the index task can skip the determine intervals/partitions pass through the data.</td><td>null</td><td>no</td></tr>
+<tr><td>splitHintSpec</td><td>Hint to control the amount of data that each first phase task reads. Druid may ignore the hint depending on the implementation of the input source. See <a href="#split-hint-spec">Split hint spec</a> for more details.</td><td>size-based split hint spec</td><td>no</td></tr>
+<tr><td>partitionsSpec</td><td>Defines how to partition data in each timeChunk, see <a href="#partitionsspec">PartitionsSpec</a></td><td><code>dynamic</code> if <code>forceGuaranteedRollup</code> = false, <code>hashed</code> or <code>single_dim</code> if <code>forceGuaranteedRollup</code> = true</td><td>no</td></tr>
+<tr><td>indexSpec</td><td>Defines segment storage format options to be used at indexing time, see <a href="/docs/25.0.0/ingestion/ingestion-spec.html#indexspec">IndexSpec</a></td><td>null</td><td>no</td></tr>
+<tr><td>indexSpecForIntermediatePersists</td><td>Defines segment storage format options to use at indexing time for intermediate persisted temporary segments. You can use this configuration to disable dimension/metric compression on intermediate segments to reduce memory required for final merging. However, if you disable compression on intermediate segments, page cache use my increase while intermediate segments are used before Druid merges them to the final published segment published. See <a href="/docs/25.0.0/ingestion/ingestion-spec.html#indexspec">IndexSpec</a> for possible values.</td><td>same as indexSpec</td><td>no</td></tr>
+<tr><td>maxPendingPersists</td><td>Maximum number of pending persists that remain not started. If a new intermediate persist exceeds this limit, ingestion blocks until the currently-running persist finishes. Maximum heap memory usage for indexing scales with maxRowsInMemory * (2 + maxPendingPersists).</td><td>0 (meaning one persist can be running concurrently with ingestion, and none can be queued up)</td><td>no</td></tr>
+<tr><td>forceGuaranteedRollup</td><td>Forces <a href="/docs/25.0.0/ingestion/rollup.html">perfect rollup</a>. The perfect rollup optimizes the total size of generated segments and querying time but increases indexing time. If true, specify <code>intervals</code> in the <code>granularitySpec</code> and use either <code>hashed</code> or <code>single_dim</code> for the <code>partitionsSpec</code>. You cannot use this flag in conjunction with <code>appendToExisting</code> of IOConfig. For more details, see <a href="#segment-pushing-modes">Segment pushing modes</a>.</td><td>false</td><td>no</td></tr>
+<tr><td>reportParseExceptions</td><td>If true, Druid throws exceptions encountered during parsing and halts ingestion. If false, Druid skips unparseable rows and fields.</td><td>false</td><td>no</td></tr>
+<tr><td>pushTimeout</td><td>Milliseconds to wait to push segments. Must be &gt;= 0, where 0 means to wait forever.</td><td>0</td><td>no</td></tr>
+<tr><td>segmentWriteOutMediumFactory</td><td>Segment write-out medium to use when creating segments. See <a href="#segmentwriteoutmediumfactory">SegmentWriteOutMediumFactory</a>.</td><td>If not specified, uses the value from <code>druid.peon.defaultSegmentWriteOutMediumFactory.type</code></td><td>no</td></tr>
+<tr><td>maxNumConcurrentSubTasks</td><td>Maximum number of worker tasks that can be run in parallel at the same time. The supervisor task spawns worker tasks up to <code>maxNumConcurrentSubTasks</code> regardless of the current available task slots. If this value is 1, the supervisor task processes data ingestion on its own instead of spawning worker tasks. If this value is set to too large, the supervisor may create too many worker tasks that block other ingestion tasks. See <a href="#capacity-planning">Capacity planning</a> for more details.</td><td>1</td><td>no</td></tr>
+<tr><td>maxRetry</td><td>Maximum number of retries on task failures.</td><td>3</td><td>no</td></tr>
+<tr><td>maxNumSegmentsToMerge</td><td>Max limit for the number of segments that a single task can merge at the same time in the second phase. Used only when <code>forceGuaranteedRollup</code> is true.</td><td>100</td><td>no</td></tr>
+<tr><td>totalNumMergeTasks</td><td>Total number of tasks that merge segments in the merge phase when <code>partitionsSpec</code> is set to <code>hashed</code> or <code>single_dim</code>.</td><td>10</td><td>no</td></tr>
+<tr><td>taskStatusCheckPeriodMs</td><td>Polling period in milliseconds to check running task statuses.</td><td>1000</td><td>no</td></tr>
+<tr><td>chatHandlerTimeout</td><td>Timeout for reporting the pushed segments in worker tasks.</td><td>PT10S</td><td>no</td></tr>
+<tr><td>chatHandlerNumRetries</td><td>Retries for reporting the pushed segments in worker tasks.</td><td>5</td><td>no</td></tr>
+<tr><td>awaitSegmentAvailabilityTimeoutMillis</td><td>Long</td><td>Milliseconds to wait for the newly indexed segments to become available for query after ingestion completes. If <code>&lt;= 0</code>, no wait occurs. If <code>&gt; 0</code>, the task waits for the Coordinator to indicate that the new segments are available for querying. If the timeout expires, the task exits as successful, but the segments are not confirmed as available for query.</td><td>no (default = 0)</td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="split-hint-spec"></a><a href="#split-hint-spec" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Split Hint Spec</h3>
+<p>The split hint spec is used to help the supervisor task divide input sources. Each worker task processes a single input division. You can control the amount of data each worker task reads during the first phase.</p>
+<h4><a class="anchor" aria-hidden="true" id="size-based-split-hint-spec"></a><a href="#size-based-split-hint-spec" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Size-based Split Hint Spec</h4>
+<p>The size-based split hint spec affects all splittable input sources except for the HTTP input source and SQL input source.</p>
+<table>
+<thead>
+<tr><th>property</th><th>description</th><th>default</th><th>required?</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td>Set the value to <code>maxSize</code>.</td><td>none</td><td>yes</td></tr>
+<tr><td>maxSplitSize</td><td>Maximum number of bytes of input files to process in a single subtask. If a single file is larger than the limit, Druid processes the file alone in a single subtask. Druid does not split files across tasks. One subtask will not process more files than <code>maxNumFiles</code> even when their total size is smaller than <code>maxSplitSize</code>. <a href="/docs/25.0.0/configuration/human-readable-byte.html">Human-readable format</a> is supported.</td><td>1GiB</td><td>no</td></tr>
+<tr><td>maxNumFiles</td><td>Maximum number of input files to process in a single subtask. This limit avoids task failures when the ingestion spec is too long. There are two known limits on the max size of serialized ingestion spec: the max ZNode size in ZooKeeper (<code>jute.maxbuffer</code>) and the max packet size in MySQL (<code>max_allowed_packet</code>). These limits can cause ingestion tasks fail if the serialized ingestion spec size hits one of them. One subtask will not process more data than <code>maxSplitSize</code> even when the total number of files is smaller than <code>maxNumFiles</code>.</td><td>1000</td><td>no</td></tr>
+</tbody>
+</table>
+<h4><a class="anchor" aria-hidden="true" id="segments-split-hint-spec"></a><a href="#segments-split-hint-spec" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Segments Split Hint Spec</h4>
+<p>The segments split hint spec is used only for <a href="/docs/25.0.0/ingestion/native-batch-input-sources.html"><code>DruidInputSource</code></a> and legacy <code>IngestSegmentFirehose</code>.</p>
+<table>
+<thead>
+<tr><th>property</th><th>description</th><th>default</th><th>required?</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td>Set the value to <code>segments</code>.</td><td>none</td><td>yes</td></tr>
+<tr><td>maxInputSegmentBytesPerTask</td><td>Maximum number of bytes of input segments to process in a single subtask. If a single segment is larger than this number, Druid processes the segment alone in a single subtask. Druid never splits input segments across tasks. A single subtask will not process more segments than <code>maxNumSegments</code> even when their total size is smaller than <code>maxInputSegmentBytesPerTask</code>. <a href="/docs/25.0.0/configuration/human-readable-byte.html">Human-readable format</a> is supported.</td><td>1GiB</td><td>no</td></tr>
+<tr><td>maxNumSegments</td><td>Maximum number of input segments to process in a single subtask. This limit avoids failures due to the the ingestion spec being too long. There are two known limits on the max size of serialized ingestion spec: the max ZNode size in ZooKeeper (<code>jute.maxbuffer</code>) and the max packet size in MySQL (<code>max_allowed_packet</code>). These limits can make ingestion tasks fail when the serialized ingestion spec size hits one of them. A single subtask will not process more data than <code>maxInputSegmentBytesPerTask</code> even when the total number of segments is smaller than <code>maxNumSegments</code>.</td><td>1000</td><td>no</td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="partitionsspec"></a><a href="#partitionsspec" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>partitionsSpec</code></h3>
+<p>The primary partition for Druid is time. You can define a secondary partitioning method in the partitions spec. Use the <code>partitionsSpec</code> type that applies for your <a href="/docs/25.0.0/ingestion/rollup.html">rollup</a> method. For perfect rollup, you can use:</p>
+<ul>
+<li><code>hashed</code> partitioning based on the hash value of specified dimensions for each row</li>
+<li><code>single_dim</code> based on ranges of values for a single dimension</li>
+<li><code>range</code> based on ranges of values of multiple dimensions.</li>
+</ul>
+<p>For best-effort rollup, use <code>dynamic</code>.</p>
+<p>For an overview, see <a href="/docs/25.0.0/ingestion/partitioning.html">Partitioning</a>.</p>
+<p>The <code>partitionsSpec</code> types have different characteristics.</p>
+<table>
+<thead>
+<tr><th>PartitionsSpec</th><th>Ingestion speed</th><th>Partitioning method</th><th>Supported rollup mode</th><th>Secondary partition pruning at query time</th></tr>
+</thead>
+<tbody>
+<tr><td><code>dynamic</code></td><td>Fastest</td><td><a href="#dynamic-partitioning">Dynamic partitioning</a> based on the number of rows in a segment.</td><td>Best-effort rollup</td><td>N/A</td></tr>
+<tr><td><code>hashed</code></td><td>Moderate</td><td>Multiple dimension <a href="#hash-based-partitioning">hash-based partitioning</a> may reduce both your datasource size and query latency by improving data locality. See <a href="/docs/25.0.0/ingestion/partitioning.html">Partitioning</a> for more details.</td><td>Perfect rollup</td><td>The broker can use the partition information to prune segments early to speed up queries. Since the broker knows how to hash <code>partitionDimensions</code> values to locate a segment, given a query including a filter on all the <code>partitionDimensions</code>, the broker can pick up only the segments holding the rows satisfying the filter on <code>partitionDimensions</code> for query processing.<br/><br/>Note that <code>partitionDimensions</code> must be set at ingestion time to enable secondary partition pruning at query time.</td></tr>
+<tr><td><code>single_dim</code></td><td>Slower</td><td>Single dimension <a href="#single-dimension-range-partitioning">range partitioning</a> may reduce your datasource size and query latency by improving data locality. See <a href="/docs/25.0.0/ingestion/partitioning.html">Partitioning</a> for more details.</td><td>Perfect rollup</td><td>The broker can use the partition information to prune segments early to speed up queries. Since the broker knows the range of <code>partitionDimension</code> values in each segment, given a query including a filter on the <code>partitionDimension</code>, the broker can pick up only the segments holding the rows satisfying the filter on <code>partitionDimension</code> for query processing.</td></tr>
+<tr><td><code>range</code></td><td>Slowest</td><td>Multiple dimension <a href="#multi-dimension-range-partitioning">range partitioning</a> may reduce your datasource size and query latency by improving data locality. See <a href="/docs/25.0.0/ingestion/partitioning.html">Partitioning</a> for more details.</td><td>Perfect rollup</td><td>The broker can use the partition information to prune segments early to speed up queries. Since the broker knows the range of <code>partitionDimensions</code> values within each segment, given a query including a filter on the first of the <code>partitionDimensions</code>, the broker can pick up only the segments holding the rows satisfying the filter on the first partition dimension for query processing.</td></tr>
+</tbody>
+</table>
+<h4><a class="anchor" aria-hidden="true" id="dynamic-partitioning"></a><a href="#dynamic-partitioning" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Dynamic partitioning</h4>
+<table>
+<thead>
+<tr><th>property</th><th>description</th><th>default</th><th>required?</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td>Set the value to <code>dynamic</code>.</td><td>none</td><td>yes</td></tr>
+<tr><td>maxRowsPerSegment</td><td>Used in sharding. Determines how many rows are in each segment.</td><td>5000000</td><td>no</td></tr>
+<tr><td>maxTotalRows</td><td>Total number of rows across all segments waiting for being pushed. Used in determining when intermediate segment push should occur.</td><td>20000000</td><td>no</td></tr>
+</tbody>
+</table>
+<p>With the Dynamic partitioning, the parallel index task runs in a single phase:
+it spawns multiple worker tasks (type <code>single_phase_sub_task</code>), each of which creates segments.
+How the worker task creates segments:</p>
+<ul>
+<li>Whenever the number of rows in the current segment exceeds
+<code>maxRowsPerSegment</code>.</li>
+<li>When the total number of rows in all segments across all time chunks reaches to <code>maxTotalRows</code>. At this point the task pushes all segments created so far to the deep storage and creates new ones.</li>
+</ul>
+<h4><a class="anchor" aria-hidden="true" id="hash-based-partitioning"></a><a href="#hash-based-partitioning" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Hash-based partitioning</h4>
+<table>
+<thead>
+<tr><th>property</th><th>description</th><th>default</th><th>required?</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td>Set the value to <code>hashed</code>.</td><td>none</td><td>yes</td></tr>
+<tr><td>numShards</td><td>Directly specify the number of shards to create. If this is specified and <code>intervals</code> is specified in the <code>granularitySpec</code>, the index task can skip the determine intervals/partitions pass through the data. This property and <code>targetRowsPerSegment</code> cannot both be set.</td><td>none</td><td>no</td></tr>
+<tr><td>targetRowsPerSegment</td><td>A target row count for each partition. If <code>numShards</code> is left unspecified, the Parallel task will determine a partition count automatically such that each partition has a row count close to the target, assuming evenly distributed keys in the input data. A target per-segment row count of 5 million is used if both <code>numShards</code> and <code>targetRowsPerSegment</code> are null.</td><td>null (or 5,000,000 if both <code>numShards</code> and <code>targetRowsPerSegment</code> are null)</td><td>no</td></tr>
+<tr><td>partitionDimensions</td><td>The dimensions to partition on. Leave blank to select all dimensions.</td><td>null</td><td>no</td></tr>
+<tr><td>partitionFunction</td><td>A function to compute hash of partition dimensions. See <a href="#hash-partition-function">Hash partition function</a></td><td><code>murmur3_32_abs</code></td><td>no</td></tr>
+</tbody>
+</table>
+<p>The Parallel task with hash-based partitioning is similar to <a href="https://en.wikipedia.org/wiki/MapReduce">MapReduce</a>.
+The task runs in up to 3 phases: <code>partial dimension cardinality</code>, <code>partial segment generation</code> and <code>partial segment merge</code>.</p>
+<ul>
+<li>The <code>partial dimension cardinality</code> phase is an optional phase that only runs if <code>numShards</code> is not specified.
+The Parallel task splits the input data and assigns them to worker tasks based on the split hint spec.
+Each worker task (type <code>partial_dimension_cardinality</code>) gathers estimates of partitioning dimensions cardinality for
+each time chunk. The Parallel task will aggregate these estimates from the worker tasks and determine the highest
+cardinality across all of the time chunks in the input data, dividing this cardinality by <code>targetRowsPerSegment</code> to
+automatically determine <code>numShards</code>.</li>
+<li>In the <code>partial segment generation</code> phase, just like the Map phase in MapReduce,
+the Parallel task splits the input data based on the split hint spec
+and assigns each split to a worker task. Each worker task (type <code>partial_index_generate</code>) reads the assigned split, and partitions rows by the time chunk from <code>segmentGranularity</code> (primary partition key) in the <code>granularitySpec</code>
+and then by the hash value of <code>partitionDimensions</code> (secondary partition key) in the <code>partitionsSpec</code>.
+The partitioned data is stored in local storage of
+the <a href="/docs/25.0.0/design/middlemanager.html">middleManager</a> or the <a href="/docs/25.0.0/design/indexer.html">indexer</a>.</li>
+<li>The <code>partial segment merge</code> phase is similar to the Reduce phase in MapReduce.
+The Parallel task spawns a new set of worker tasks (type <code>partial_index_generic_merge</code>) to merge the partitioned data created in the previous phase. Here, the partitioned data is shuffled based on
+the time chunk and the hash value of <code>partitionDimensions</code> to be merged; each worker task reads the data falling in the same time chunk and the same hash value from multiple MiddleManager/Indexer processes and merges them to create the final segments. Finally, they push the final segments to the deep storage at once.</li>
+</ul>
+<h5><a class="anchor" aria-hidden="true" id="hash-partition-function"></a><a href="#hash-partition-function" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Hash partition function</h5>
+<p>In hash partitioning, the partition function is used to compute hash of partition dimensions. The partition dimension values are first serialized into a byte array as a whole, and then the partition function is applied to compute hash of the byte array. Druid currently supports only one partition function.</p>
+<table>
+<thead>
+<tr><th>name</th><th>description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>murmur3_32_abs</code></td><td>Applies an absolute value function to the result of <a href="https://guava.dev/releases/16.0/api/docs/com/google/common/hash/Hashing.html#murmur3_32()"><code>murmur3_32</code></a>.</td></tr>
+</tbody>
+</table>
+<h4><a class="anchor" aria-hidden="true" id="single-dimension-range-partitioning"></a><a href="#single-dimension-range-partitioning" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Single-dimension range partitioning</h4>
+<blockquote>
+<p>Single dimension range partitioning is not supported in the sequential mode of the <code>index_parallel</code> task type.</p>
+</blockquote>
+<p>Range partitioning has <a href="#benefits-of-range-partitioning">several benefits</a> related to storage footprint and query
+performance.</p>
+<p>The Parallel task will use one subtask when you set <code>maxNumConcurrentSubTasks</code> to 1.</p>
+<p>When you use this technique to partition your data, segment sizes may be unequally distributed if the data in your <code>partitionDimension</code> is also unequally distributed.  Therefore, to avoid imbalance in data layout, review the distribution of values in your source data before deciding on a partitioning strategy.</p>
+<p>Range partitioning is not possible on multi-value dimensions. If the provided
+<code>partitionDimension</code> is multi-value, your ingestion job will report an error.</p>
+<table>
+<thead>
+<tr><th>property</th><th>description</th><th>default</th><th>required?</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td>Set the value to <code>single_dim</code>.</td><td>none</td><td>yes</td></tr>
+<tr><td>partitionDimension</td><td>The dimension to partition on. Only rows with a single dimension value are allowed.</td><td>none</td><td>yes</td></tr>
+<tr><td>targetRowsPerSegment</td><td>Target number of rows to include in a partition, should be a number that targets segments of 500MB~1GB.</td><td>none</td><td>either this or <code>maxRowsPerSegment</code></td></tr>
+<tr><td>maxRowsPerSegment</td><td>Soft max for the number of rows to include in a partition.</td><td>none</td><td>either this or <code>targetRowsPerSegment</code></td></tr>
+<tr><td>assumeGrouped</td><td>Assume that input data has already been grouped on time and dimensions. Ingestion will run faster, but may choose sub-optimal partitions if this assumption is violated.</td><td>false</td><td>no</td></tr>
+</tbody>
+</table>
+<p>With <code>single-dim</code> partitioning, the Parallel task runs in 3 phases,
+i.e., <code>partial dimension distribution</code>, <code>partial segment generation</code>, and <code>partial segment merge</code>.
+The first phase is to collect some statistics to find
+the best partitioning and the other 2 phases are to create partial segments
+and to merge them, respectively, as in hash-based partitioning.</p>
+<ul>
+<li>In the <code>partial dimension distribution</code> phase, the Parallel task splits the input data and
+assigns them to worker tasks based on the split hint spec. Each worker task (type <code>partial_dimension_distribution</code>) reads
+the assigned split and builds a histogram for <code>partitionDimension</code>.
+The Parallel task collects those histograms from worker tasks and finds
+the best range partitioning based on <code>partitionDimension</code> to evenly
+distribute rows across partitions. Note that either <code>targetRowsPerSegment</code>
+or <code>maxRowsPerSegment</code> will be used to find the best partitioning.</li>
+<li>In the <code>partial segment generation</code> phase, the Parallel task spawns new worker tasks (type <code>partial_range_index_generate</code>)
+to create partitioned data. Each worker task reads a split created as in the previous phase,
+partitions rows by the time chunk from the <code>segmentGranularity</code> (primary partition key) in the <code>granularitySpec</code>
+and then by the range partitioning found in the previous phase.
+The partitioned data is stored in local storage of
+the <a href="/docs/25.0.0/design/middlemanager.html">middleManager</a> or the <a href="/docs/25.0.0/design/indexer.html">indexer</a>.</li>
+<li>In the <code>partial segment merge</code> phase, the parallel index task spawns a new set of worker tasks (type <code>partial_index_generic_merge</code>) to merge the partitioned
+data created in the previous phase. Here, the partitioned data is shuffled based on
+the time chunk and the value of <code>partitionDimension</code>; each worker task reads the segments
+falling in the same partition of the same range from multiple MiddleManager/Indexer processes and merges
+them to create the final segments. Finally, they push the final segments to the deep storage.</li>
+</ul>
+<blockquote>
+<p>Because the task with single-dimension range partitioning makes two passes over the input
+in <code>partial dimension distribution</code> and <code>partial segment generation</code> phases,
+the task may fail if the input changes in between the two passes.</p>
+</blockquote>
+<h4><a class="anchor" aria-hidden="true" id="multi-dimension-range-partitioning"></a><a href="#multi-dimension-range-partitioning" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Multi-dimension range partitioning</h4>
+<blockquote>
+<p>Multi-dimension range partitioning is not supported in the sequential mode of the <code>index_parallel</code> task type.</p>
+</blockquote>
+<p>Range partitioning has <a href="#benefits-of-range-partitioning">several benefits</a> related to storage footprint and query
+performance. Multi-dimension range partitioning improves over single-dimension range partitioning by allowing
+Druid to distribute segment sizes more evenly, and to prune on more dimensions.</p>
+<p>Range partitioning is not possible on multi-value dimensions. If one of the provided
+<code>partitionDimensions</code> is multi-value, your ingestion job will report an error.</p>
+<table>
+<thead>
+<tr><th>property</th><th>description</th><th>default</th><th>required?</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td>Set the value to <code>range</code>.</td><td>none</td><td>yes</td></tr>
+<tr><td>partitionDimensions</td><td>An array of dimensions to partition on. Order the dimensions from most frequently queried to least frequently queried. For best results, limit your number of dimensions to between three and five dimensions.</td><td>none</td><td>yes</td></tr>
+<tr><td>targetRowsPerSegment</td><td>Target number of rows to include in a partition, should be a number that targets segments of 500MB~1GB.</td><td>none</td><td>either this or <code>maxRowsPerSegment</code></td></tr>
+<tr><td>maxRowsPerSegment</td><td>Soft max for the number of rows to include in a partition.</td><td>none</td><td>either this or <code>targetRowsPerSegment</code></td></tr>
+<tr><td>assumeGrouped</td><td>Assume that input data has already been grouped on time and dimensions. Ingestion will run faster, but may choose sub-optimal partitions if this assumption is violated.</td><td>false</td><td>no</td></tr>
+</tbody>
+</table>
+<h4><a class="anchor" aria-hidden="true" id="benefits-of-range-partitioning"></a><a href="#benefits-of-range-partitioning" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Benefits of range partitioning</h4>
+<p>Range partitioning, either <code>single_dim</code> or <code>range</code>, has several benefits:</p>
+<ol>
+<li>Lower storage footprint due to combining similar data into the same segments, which improves compressibility.</li>
+<li>Better query performance due to Broker-level segment pruning, which removes segments from
+consideration when they cannot possibly contain data matching the query filter.</li>
+</ol>
+<p>For Broker-level segment pruning to be effective, you must include partition dimensions in the <code>WHERE</code> clause. Each
+partition dimension can participate in pruning if the prior partition dimensions (those to its left) are also
+participating, and if the query uses filters that support pruning.</p>
+<p>Filters that support pruning include:</p>
+<ul>
+<li>Equality on string literals, like <code>x = 'foo'</code> and <code>x IN ('foo', 'bar')</code> where <code>x</code> is a string.</li>
+<li>Comparison between string columns and string literals, like <code>x &lt; 'foo'</code> or other comparisons
+involving <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, or <code>&gt;=</code>.</li>
+</ul>
+<p>For example, if you configure the following <code>range</code> partitioning during ingestion:</p>
+<pre><code class="hljs css language-json">"partitionsSpec": {
+  "type": "range",
+  "partitionDimensions": ["countryName", "cityName"],
+  "targetRowsPerSegment": 5000000
+}
+</code></pre>
+<p>Then, filters like <code>WHERE countryName = 'United States'</code> or <code>WHERE countryName = 'United States' AND cityName = 'New York'</code>
+can make use of pruning. However, <code>WHERE cityName = 'New York'</code> cannot make use of pruning, because countryName is not
+involved. The clause <code>WHERE cityName LIKE 'New%'</code> cannot make use of pruning either, because LIKE filters do not
+support pruning.</p>
+<h2><a class="anchor" aria-hidden="true" id="http-status-endpoints"></a><a href="#http-status-endpoints" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>HTTP status endpoints</h2>
+<p>The supervisor task provides some HTTP endpoints to get running status.</p>
+<ul>
+<li><code>http://{PEON_IP}:{PEON_PORT}/druid/worker/v1/chat/{SUPERVISOR_TASK_ID}/mode</code></li>
+</ul>
+<p>Returns 'parallel' if the indexing task is running in parallel. Otherwise, it returns 'sequential'.</p>
+<ul>
+<li><code>http://{PEON_IP}:{PEON_PORT}/druid/worker/v1/chat/{SUPERVISOR_TASK_ID}/phase</code></li>
+</ul>
+<p>Returns the name of the current phase if the task running in the parallel mode.</p>
+<ul>
+<li><code>http://{PEON_IP}:{PEON_PORT}/druid/worker/v1/chat/{SUPERVISOR_TASK_ID}/progress</code></li>
+</ul>
+<p>Returns the estimated progress of the current phase if the supervisor task is running in the parallel mode.</p>
+<p>An example of the result is</p>
+<pre><code class="hljs css language-json">{
+  <span class="hljs-attr">"running"</span>:<span class="hljs-number">10</span>,
+  <span class="hljs-attr">"succeeded"</span>:<span class="hljs-number">0</span>,
+  <span class="hljs-attr">"failed"</span>:<span class="hljs-number">0</span>,
+  <span class="hljs-attr">"complete"</span>:<span class="hljs-number">0</span>,
+  <span class="hljs-attr">"total"</span>:<span class="hljs-number">10</span>,
+  <span class="hljs-attr">"estimatedExpectedSucceeded"</span>:<span class="hljs-number">10</span>
+}
+</code></pre>
+<ul>
+<li><code>http://{PEON_IP}:{PEON_PORT}/druid/worker/v1/chat/{SUPERVISOR_TASK_ID}/subtasks/running</code></li>
+</ul>
+<p>Returns the task IDs of running worker tasks, or an empty list if the supervisor task is running in the sequential mode.</p>
+<ul>
+<li><code>http://{PEON_IP}:{PEON_PORT}/druid/worker/v1/chat/{SUPERVISOR_TASK_ID}/subtaskspecs</code></li>
+</ul>
+<p>Returns all worker task specs, or an empty list if the supervisor task is running in the sequential mode.</p>
+<ul>
+<li><code>http://{PEON_IP}:{PEON_PORT}/druid/worker/v1/chat/{SUPERVISOR_TASK_ID}/subtaskspecs/running</code></li>
+</ul>
+<p>Returns running worker task specs, or an empty list if the supervisor task is running in the sequential mode.</p>
+<ul>
+<li><code>http://{PEON_IP}:{PEON_PORT}/druid/worker/v1/chat/{SUPERVISOR_TASK_ID}/subtaskspecs/complete</code></li>
+</ul>
+<p>Returns complete worker task specs, or an empty list if the supervisor task is running in the sequential mode.</p>
+<ul>
+<li><code>http://{PEON_IP}:{PEON_PORT}/druid/worker/v1/chat/{SUPERVISOR_TASK_ID}/subtaskspec/{SUB_TASK_SPEC_ID}</code></li>
+</ul>
+<p>Returns the worker task spec of the given id, or HTTP 404 Not Found error if the supervisor task is running in the sequential mode.</p>
+<ul>
+<li><code>http://{PEON_IP}:{PEON_PORT}/druid/worker/v1/chat/{SUPERVISOR_TASK_ID}/subtaskspec/{SUB_TASK_SPEC_ID}/state</code></li>
+</ul>
+<p>Returns the state of the worker task spec of the given id, or HTTP 404 Not Found error if the supervisor task is running in the sequential mode.
+The returned result contains the worker task spec, a current task status if exists, and task attempt history.</p>
+<p>An example of the result is</p>
+<pre><code class="hljs css language-json">{
+  <span class="hljs-attr">"spec"</span>: {
+    <span class="hljs-attr">"id"</span>: <span class="hljs-string">"index_parallel_lineitem_2018-04-20T22:12:43.610Z_2"</span>,
+    <span class="hljs-attr">"groupId"</span>: <span class="hljs-string">"index_parallel_lineitem_2018-04-20T22:12:43.610Z"</span>,
+    <span class="hljs-attr">"supervisorTaskId"</span>: <span class="hljs-string">"index_parallel_lineitem_2018-04-20T22:12:43.610Z"</span>,
+    <span class="hljs-attr">"context"</span>: <span class="hljs-literal">null</span>,
+    <span class="hljs-attr">"inputSplit"</span>: {
+      <span class="hljs-attr">"split"</span>: <span class="hljs-string">"/path/to/data/lineitem.tbl.5"</span>
+    },
+    <span class="hljs-attr">"ingestionSpec"</span>: {
+      <span class="hljs-attr">"dataSchema"</span>: {
+        <span class="hljs-attr">"dataSource"</span>: <span class="hljs-string">"lineitem"</span>,
+        <span class="hljs-attr">"timestampSpec"</span>: {
+          <span class="hljs-attr">"column"</span>: <span class="hljs-string">"l_shipdate"</span>,
+          <span class="hljs-attr">"format"</span>: <span class="hljs-string">"yyyy-MM-dd"</span>
+        },
+        <span class="hljs-attr">"dimensionsSpec"</span>: {
+          <span class="hljs-attr">"dimensions"</span>: [
+            <span class="hljs-string">"l_orderkey"</span>,
+            <span class="hljs-string">"l_partkey"</span>,
+            <span class="hljs-string">"l_suppkey"</span>,
+            <span class="hljs-string">"l_linenumber"</span>,
+            <span class="hljs-string">"l_returnflag"</span>,
+            <span class="hljs-string">"l_linestatus"</span>,
+            <span class="hljs-string">"l_shipdate"</span>,
+            <span class="hljs-string">"l_commitdate"</span>,
+            <span class="hljs-string">"l_receiptdate"</span>,
+            <span class="hljs-string">"l_shipinstruct"</span>,
+            <span class="hljs-string">"l_shipmode"</span>,
+            <span class="hljs-string">"l_comment"</span>
+          ]
+        },
+        <span class="hljs-attr">"metricsSpec"</span>: [
+          {
+            <span class="hljs-attr">"type"</span>: <span class="hljs-string">"count"</span>,
+            <span class="hljs-attr">"name"</span>: <span class="hljs-string">"count"</span>
+          },
+          {
+            <span class="hljs-attr">"type"</span>: <span class="hljs-string">"longSum"</span>,
+            <span class="hljs-attr">"name"</span>: <span class="hljs-string">"l_quantity"</span>,
+            <span class="hljs-attr">"fieldName"</span>: <span class="hljs-string">"l_quantity"</span>,
+            <span class="hljs-attr">"expression"</span>: <span class="hljs-literal">null</span>
+          },
+          {
+            <span class="hljs-attr">"type"</span>: <span class="hljs-string">"doubleSum"</span>,
+            <span class="hljs-attr">"name"</span>: <span class="hljs-string">"l_extendedprice"</span>,
+            <span class="hljs-attr">"fieldName"</span>: <span class="hljs-string">"l_extendedprice"</span>,
+            <span class="hljs-attr">"expression"</span>: <span class="hljs-literal">null</span>
+          },
+          {
+            <span class="hljs-attr">"type"</span>: <span class="hljs-string">"doubleSum"</span>,
+            <span class="hljs-attr">"name"</span>: <span class="hljs-string">"l_discount"</span>,
+            <span class="hljs-attr">"fieldName"</span>: <span class="hljs-string">"l_discount"</span>,
+            <span class="hljs-attr">"expression"</span>: <span class="hljs-literal">null</span>
+          },
+          {
+            <span class="hljs-attr">"type"</span>: <span class="hljs-string">"doubleSum"</span>,
+            <span class="hljs-attr">"name"</span>: <span class="hljs-string">"l_tax"</span>,
+            <span class="hljs-attr">"fieldName"</span>: <span class="hljs-string">"l_tax"</span>,
+            <span class="hljs-attr">"expression"</span>: <span class="hljs-literal">null</span>
+          }
+        ],
+        <span class="hljs-attr">"granularitySpec"</span>: {
+          <span class="hljs-attr">"type"</span>: <span class="hljs-string">"uniform"</span>,
+          <span class="hljs-attr">"segmentGranularity"</span>: <span class="hljs-string">"YEAR"</span>,
+          <span class="hljs-attr">"queryGranularity"</span>: {
+            <span class="hljs-attr">"type"</span>: <span class="hljs-string">"none"</span>
+          },
+          <span class="hljs-attr">"rollup"</span>: <span class="hljs-literal">true</span>,
+          <span class="hljs-attr">"intervals"</span>: [
+            <span class="hljs-string">"1980-01-01T00:00:00.000Z/2020-01-01T00:00:00.000Z"</span>
+          ]
+        },
+        <span class="hljs-attr">"transformSpec"</span>: {
+          <span class="hljs-attr">"filter"</span>: <span class="hljs-literal">null</span>,
+          <span class="hljs-attr">"transforms"</span>: []
+        }
+      },
+      <span class="hljs-attr">"ioConfig"</span>: {
+        <span class="hljs-attr">"type"</span>: <span class="hljs-string">"index_parallel"</span>,
+        <span class="hljs-attr">"inputSource"</span>: {
+          <span class="hljs-attr">"type"</span>: <span class="hljs-string">"local"</span>,
+          <span class="hljs-attr">"baseDir"</span>: <span class="hljs-string">"/path/to/data/"</span>,
+          <span class="hljs-attr">"filter"</span>: <span class="hljs-string">"lineitem.tbl.5"</span>
+        },
+        <span class="hljs-attr">"inputFormat"</span>: {
+          <span class="hljs-attr">"format"</span>: <span class="hljs-string">"tsv"</span>,
+          <span class="hljs-attr">"delimiter"</span>: <span class="hljs-string">"|"</span>,
+          <span class="hljs-attr">"columns"</span>: [
+            <span class="hljs-string">"l_orderkey"</span>,
+            <span class="hljs-string">"l_partkey"</span>,
+            <span class="hljs-string">"l_suppkey"</span>,
+            <span class="hljs-string">"l_linenumber"</span>,
+            <span class="hljs-string">"l_quantity"</span>,
+            <span class="hljs-string">"l_extendedprice"</span>,
+            <span class="hljs-string">"l_discount"</span>,
+            <span class="hljs-string">"l_tax"</span>,
+            <span class="hljs-string">"l_returnflag"</span>,
+            <span class="hljs-string">"l_linestatus"</span>,
+            <span class="hljs-string">"l_shipdate"</span>,
+            <span class="hljs-string">"l_commitdate"</span>,
+            <span class="hljs-string">"l_receiptdate"</span>,
+            <span class="hljs-string">"l_shipinstruct"</span>,
+            <span class="hljs-string">"l_shipmode"</span>,
+            <span class="hljs-string">"l_comment"</span>
+          ]
+        },
+        <span class="hljs-attr">"appendToExisting"</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">"dropExisting"</span>: <span class="hljs-literal">false</span>
+      },
+      <span class="hljs-attr">"tuningConfig"</span>: {
+        <span class="hljs-attr">"type"</span>: <span class="hljs-string">"index_parallel"</span>,
+        <span class="hljs-attr">"partitionsSpec"</span>: {
+          <span class="hljs-attr">"type"</span>: <span class="hljs-string">"dynamic"</span>
+        },
+        <span class="hljs-attr">"maxRowsInMemory"</span>: <span class="hljs-number">1000000</span>,
+        <span class="hljs-attr">"maxTotalRows"</span>: <span class="hljs-number">20000000</span>,
+        <span class="hljs-attr">"numShards"</span>: <span class="hljs-literal">null</span>,
+        <span class="hljs-attr">"indexSpec"</span>: {
+          <span class="hljs-attr">"bitmap"</span>: {
+            <span class="hljs-attr">"type"</span>: <span class="hljs-string">"roaring"</span>
+          },
+          <span class="hljs-attr">"dimensionCompression"</span>: <span class="hljs-string">"lz4"</span>,
+          <span class="hljs-attr">"metricCompression"</span>: <span class="hljs-string">"lz4"</span>,
+          <span class="hljs-attr">"longEncoding"</span>: <span class="hljs-string">"longs"</span>
+        },
+        <span class="hljs-attr">"indexSpecForIntermediatePersists"</span>: {
+          <span class="hljs-attr">"bitmap"</span>: {
+            <span class="hljs-attr">"type"</span>: <span class="hljs-string">"roaring"</span>
+          },
+          <span class="hljs-attr">"dimensionCompression"</span>: <span class="hljs-string">"lz4"</span>,
+          <span class="hljs-attr">"metricCompression"</span>: <span class="hljs-string">"lz4"</span>,
+          <span class="hljs-attr">"longEncoding"</span>: <span class="hljs-string">"longs"</span>
+        },
+        <span class="hljs-attr">"maxPendingPersists"</span>: <span class="hljs-number">0</span>,
+        <span class="hljs-attr">"reportParseExceptions"</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">"pushTimeout"</span>: <span class="hljs-number">0</span>,
+        <span class="hljs-attr">"segmentWriteOutMediumFactory"</span>: <span class="hljs-literal">null</span>,
+        <span class="hljs-attr">"maxNumConcurrentSubTasks"</span>: <span class="hljs-number">4</span>,
+        <span class="hljs-attr">"maxRetry"</span>: <span class="hljs-number">3</span>,
+        <span class="hljs-attr">"taskStatusCheckPeriodMs"</span>: <span class="hljs-number">1000</span>,
+        <span class="hljs-attr">"chatHandlerTimeout"</span>: <span class="hljs-string">"PT10S"</span>,
+        <span class="hljs-attr">"chatHandlerNumRetries"</span>: <span class="hljs-number">5</span>,
+        <span class="hljs-attr">"logParseExceptions"</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">"maxParseExceptions"</span>: <span class="hljs-number">2147483647</span>,
+        <span class="hljs-attr">"maxSavedParseExceptions"</span>: <span class="hljs-number">0</span>,
+        <span class="hljs-attr">"forceGuaranteedRollup"</span>: <span class="hljs-literal">false</span>
+      }
+    }
+  },
+  <span class="hljs-attr">"currentStatus"</span>: {
+    <span class="hljs-attr">"id"</span>: <span class="hljs-string">"index_sub_lineitem_2018-04-20T22:16:29.922Z"</span>,
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"index_sub"</span>,
+    <span class="hljs-attr">"createdTime"</span>: <span class="hljs-string">"2018-04-20T22:16:29.925Z"</span>,
+    <span class="hljs-attr">"queueInsertionTime"</span>: <span class="hljs-string">"2018-04-20T22:16:29.929Z"</span>,
+    <span class="hljs-attr">"statusCode"</span>: <span class="hljs-string">"RUNNING"</span>,
+    <span class="hljs-attr">"duration"</span>: <span class="hljs-number">-1</span>,
+    <span class="hljs-attr">"location"</span>: {
+      <span class="hljs-attr">"host"</span>: <span class="hljs-literal">null</span>,
+      <span class="hljs-attr">"port"</span>: <span class="hljs-number">-1</span>,
+      <span class="hljs-attr">"tlsPort"</span>: <span class="hljs-number">-1</span>
+    },
+    <span class="hljs-attr">"dataSource"</span>: <span class="hljs-string">"lineitem"</span>,
+    <span class="hljs-attr">"errorMsg"</span>: <span class="hljs-literal">null</span>
+  },
+  <span class="hljs-attr">"taskHistory"</span>: []
+}
+</code></pre>
+<ul>
+<li><code>http://{PEON_IP}:{PEON_PORT}/druid/worker/v1/chat/{SUPERVISOR_TASK_ID}/subtaskspec/{SUB_TASK_SPEC_ID}/history</code></li>
+</ul>
+<p>Returns the task attempt history of the worker task spec of the given id, or HTTP 404 Not Found error if the supervisor task is running in the sequential mode.</p>
+<h2><a class="anchor" aria-hidden="true" id="segment-pushing-modes"></a><a href="#segment-pushing-modes" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Segment pushing modes</h2>
+<p>While ingesting data using the parallel task indexing, Druid creates segments from the input data and pushes them. For segment pushing,
+the parallel task index supports the following segment pushing modes based upon your type of <a href="/docs/25.0.0/ingestion/rollup.html">rollup</a>:</p>
+<ul>
+<li>Bulk pushing mode: Used for perfect rollup. Druid pushes every segment at the very end of the index task. Until then, Druid stores created segments in memory and local storage of the service running the index task. To enable bulk pushing mode, set <code>forceGuaranteedRollup</code> to <code>true</code> in your tuning config. You cannot use bulk pushing with <code>appendToExisting</code> in your IOConfig.</li>
+<li>Incremental pushing mode: Used for best-effort rollup. Druid pushes segments are incrementally during the course of the indexing task. The index task collects data and stores created segments in the memory and disks of the services running the task until the total number of collected rows exceeds <code>maxTotalRows</code>. At that point the index task immediately pushes all segments created up until that moment, cleans up pushed segments, and continues to ingest the remaining data.</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="capacity-planning"></a><a href="#capacity-planning" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Capacity planning</h2>
+<p>The supervisor task can create up to <code>maxNumConcurrentSubTasks</code> worker tasks no matter how many task slots are currently available.
+As a result, total number of tasks which can be run at the same time is <code>(maxNumConcurrentSubTasks + 1)</code> (including the supervisor task).
+Please note that this can be even larger than total number of task slots (sum of the capacity of all workers).
+If <code>maxNumConcurrentSubTasks</code> is larger than <code>n (available task slots)</code>, then
+<code>maxNumConcurrentSubTasks</code> tasks are created by the supervisor task, but only <code>n</code> tasks would be started.
+Others will wait in the pending state until any running task is finished.</p>
+<p>If you are using the Parallel Index Task with stream ingestion together,
+we would recommend to limit the max capacity for batch ingestion to prevent
+stream ingestion from being blocked by batch ingestion. Suppose you have
+<code>t</code> Parallel Index Tasks to run at the same time, but want to limit
+the max number of tasks for batch ingestion to <code>b</code>. Then, (sum of <code>maxNumConcurrentSubTasks</code>
+of all Parallel Index Tasks + <code>t</code> (for supervisor tasks)) must be smaller than <code>b</code>.</p>
+<p>If you have some tasks of a higher priority than others, you may set their
+<code>maxNumConcurrentSubTasks</code> to a higher value than lower priority tasks.
+This may help the higher priority tasks to finish earlier than lower priority tasks
+by assigning more task slots to them.</p>
+<h2><a class="anchor" aria-hidden="true" id="splittable-input-sources"></a><a href="#splittable-input-sources" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Splittable input sources</h2>
+<p>Use the <code>inputSource</code> object to define the location where your index can read data. Only the native parallel task and simple task support the input source.</p>
+<p>For details on available input sources see:</p>
+<ul>
+<li><a href="/docs/25.0.0/ingestion/native-batch-input-sources.html#s3-input-source">S3 input source</a> (<code>s3</code>) reads data from AWS S3 storage.</li>
+<li><a href="/docs/25.0.0/ingestion/native-batch-input-sources.html#google-cloud-storage-input-source">Google Cloud Storage input source</a> (<code>gs</code>) reads data from Google Cloud Storage.</li>
+<li><a href="/docs/25.0.0/ingestion/native-batch-input-sources.html#azure-input-source">Azure input source</a> (<code>azure</code>) reads data from Azure Blob Storage and Azure Data Lake.</li>
+<li><a href="/docs/25.0.0/ingestion/native-batch-input-sources.html#hdfs-input-source">HDFS input source</a> (<code>hdfs</code>) reads data from HDFS storage.</li>
+<li><a href="/docs/25.0.0/ingestion/native-batch-input-sources.html#http-input-source">HTTP input Source</a> (<code>http</code>) reads data from HTTP servers.</li>
+<li><a href="/docs/25.0.0/ingestion/native-batch-input-sources.html#inline-input-source">Inline input Source</a> reads data you paste into the web console.</li>
+<li><a href="/docs/25.0.0/ingestion/native-batch-input-sources.html#local-input-source">Local input Source</a> (<code>local</code>) reads data from local storage.</li>
+<li><a href="/docs/25.0.0/ingestion/native-batch-input-sources.html#druid-input-source">Druid input Source</a> (<code>druid</code>) reads data from a Druid datasource.</li>
+<li><a href="/docs/25.0.0/ingestion/native-batch-input-sources.html#sql-input-source">SQL input Source</a> (<code>sql</code>) reads data from a RDBMS source.</li>
+</ul>
+<p>For information on how to combine input sources, see <a href="/docs/25.0.0/ingestion/native-batch-input-sources.html#combining-input-source">Combining input source</a>.</p>
+<h3><a class="anchor" aria-hidden="true" id="segmentwriteoutmediumfactory"></a><a href="#segmentwriteoutmediumfactory" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>segmentWriteOutMediumFactory</code></h3>
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th><th>Required</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td>String</td><td>See <a href="/docs/25.0.0/configuration/index.html#segmentwriteoutmediumfactory">Additional Peon Configuration: SegmentWriteOutMediumFactory</a> for explanation and available options.</td><td>yes</td></tr>
+</tbody>
+</table>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/25.0.0/ingestion/standalone-realtime.html"><span class="arrow-prev">← </span><span>Realtime Process</span></a><a class="docs-next button" href="/docs/25.0.0/ingestion/native-batch-input-sources.html"><span>Native batch: input sources</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#submit-an-indexing-task">Submit an indexing task</a></li><li><a href="#parallel-task-indexing">Parallel task indexing</a><ul class="toc-headings"><li><a href="#supported-compression-formats">Supported compression formats</a></li><li><a href="#implementation-considerations">Implementation considerations</a></li></ul></li><li><a href="#parallel-indexing-example">Parallel indexing example</a></li><li><a href="#parallel-indexing-configuration">Parallel indexing configuration</a><ul class="toc-headings"><li><a href="#dataschema"><code>dataSchema</code></a></li><li><a href="#ioconfig"><code>ioConfig</code></a></li><li><a href="#tuningconfig"><code>tuningConfig</code></a></li><li><a href="#split-hint-spec">Split Hint Spec</a></li><li><a href="#partitionsspec"><code>partitionsSpec</code></a></li></ul></li><li><a href="#http-status-endpoints">HTTP status endpoints</a></li><li><a href="#segment-pushing-modes">Segment pushing modes</a></li><li><a href="#capacity-planning">Capacity planning</a></li><li><a href="#splittable-input-sources">Splittable input sources</a><ul class="toc-headings"><li><a href="#segmentwriteoutmediumfactory"><code>segmentWriteOutMediumFactory</code></a></li></ul></li></ul></nav></div><footer class="nav-footer druid-footer" id="footer"><div class="container"><div class="text-center"><p><a href="/technology">Technology</a> · <a href="/use-cases">Use Cases</a> · <a href="/druid-powered">Powered by Druid</a> · <a href="/docs/25.0.0/">Docs</a> · <a href="/community/">Community</a> · <a href="/downloads.html">Download</a> · <a href="/faq">FAQ</a></p></div><div class="text-center"><a title="Join the user group" href="https://groups.google.com/forum/#!forum/druid-user" target="_blank"><span class="fa fa-comments"></span></a> · <a title="Follow Druid" href="https://twitter.com/druidio" target="_blank"><span class="fab fa-twitter"></span></a> · <a title="Download via Apache" href="https://www.apache.org/dyn/closer.cgi?path=/incubator/druid/{{ site.druid_versions[0].versions[0].version }}/apache-druid-{{ site.druid_versions[0].versions[0].version }}-bin.tar.gz" target="_blank"><span class="fas fa-feather"></span></a> · <a title="GitHub" href="https://github.com/apache/druid" target="_blank"><span class="fab fa-github"></span></a></div><div class="text-center license">Copyright © 2022 <a href="https://www.apache.org/" target="_blank">Apache Software Foundation</a>.<br/>Except where otherwise noted, licensed under <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.<br/>Apache Druid, Druid, and the Druid logo are either registered trademarks or trademarks of The Apache Software Foundation in the United States and other countries.</div></div></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                appId: 'CPK9PMSCEY',
+                apiKey: 'd1e34b062fd98736bd4ef4ffe3a2f0c7',
+                indexName: 'apache_druid',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["language:en","version:25.0.0"]}
+              });
+            </script></body></html>
