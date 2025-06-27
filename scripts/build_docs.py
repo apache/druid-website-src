@@ -1,12 +1,11 @@
 #!/usr/bin/python
 
-
 """
 build-docs.py
 
-Version:        19 Oct 2023
+Version:        18 June 2025
 
-Purpose:        Build the OSS Druid Docusaurus 2 docs for all
+Purpose:        Build the OSS Druid Docusaurus 3 docs for all
                 versions supplied in the [-v, --versions] flag.
                 Versions aside from "latest" only retain content
                 from the docs folder. The "latest" version keeps
@@ -16,7 +15,6 @@ Purpose:        Build the OSS Druid Docusaurus 2 docs for all
 Help:           python build-docs.py --help
 
 Example call:   python build-docs.py -v latest 26.0.0
-
 """
 
 import fileinput
@@ -45,16 +43,13 @@ def build_docs(versions, use_yarn):
         for line in fileinput.input("docusaurus.config.js", inplace=1):
             print(re.sub(r"^var buildVersion.*", replacement, line), end='')
 
-        # remove specific version folder in published_versions/docs if exists
-        shutil.rmtree(f"published_versions/docs/{v}", ignore_errors=True)
-
         # build the docs
         if not use_yarn:
             subprocess.run(["npm", "run", "build"])
         else:
             subprocess.run(["yarn", "build"])
 
-        # move output to temporary directory since docusaurus 2
+        # move output to temporary directory since docusaurus 3
         # overwrites build directory with each build.
         # the "latest" version is built last to maintain
         # all the non-docs content for latest
@@ -63,25 +58,13 @@ def build_docs(versions, use_yarn):
         shutil.copytree(build_dir, temp_dir, dirs_exist_ok=True)
 
         # restore the redirect file back to URLs with "latest"
-        #subprocess.run(["git", "restore", "redirects.js"])
         if v != "latest":
             for line in fileinput.input("redirects.js", inplace=1):
                 print(line.replace(f"/{v}/", "/latest/"), end='')
 
-        # save the assets folder to check into GitHub
-        # applies to EACH version, since Doc2 attaches an alphanumeric string
-        # to each asset; so you can't republish an old version unless you
-        # also have the associated assets
-        shutil.copytree(f"{build_dir}/assets", 'published_versions/assets', dirs_exist_ok=True)
-
-
     # after building ALL versions, rename the temp directory back to "build"
     shutil.rmtree(build_dir)
     shutil.move(temp_dir, build_dir)
-
-    # save the final build output to check into GitHub
-    print("Copying build output to ../published_versions. Use that directory to publish the site.")
-    shutil.copytree(build_dir, 'published_versions', dirs_exist_ok=True)
 
 
 def main(versions, skip_install, use_yarn):
@@ -108,6 +91,7 @@ def main(versions, skip_install, use_yarn):
     # do the actual builds
     build_docs(versions, use_yarn)
 
+
 if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser()
@@ -117,7 +101,7 @@ if __name__ == "__main__":
                         "For example: -v latest 26.0.0")
 
     parser.add_argument("--skip-install",
-                        help="Skip the Docusaurus 2 installation",
+                        help="Skip the Docusaurus 3 installation",
                         action='store_true')
 
     parser.add_argument("--yarn", default=False,
@@ -127,4 +111,3 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     main(args.versions, args.skip_install, args.yarn)
-

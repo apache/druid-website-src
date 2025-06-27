@@ -5,7 +5,7 @@ https://druid.apache.org/
 This repo is used to build the Apache Druid website. It is the source of truth for website pages such as the website homepage and pages like Community.
 
 A different repo houses the source of truth for the following:
-* Markdown files for `docs` (If you're looking for the HTML pages that were previously here for pre-26.0.0 docs, they're now in `published_versions`)
+* Markdown files for `docs` 
 * the sidebar file
 * the redirects file
 
@@ -13,7 +13,7 @@ For those, see [`apache/druid`](https://github.com/apache/druid/).
 
 The target repo for the website when you're ready to publish is [`druid-website`](https://github.com/apache/druid-website).
 
-The state of `master` for `apache/druid-website-src` should match the state of `asf-site` for `apache/druid-website`. For `asf-staging` in `apache/druid-website`, those PRs should be left unnmerged until they go into `asf-site`.
+When publishing, build the site and then copy the contents of `build` to the `druid-website` repo. Don't delete the existing docs content in `druid-website` since it also contains the docs for previous releases.
 
 ## Updating homepage widgets
 
@@ -54,7 +54,7 @@ Run `npm install` or `yarn install` in the root of the directory.
 These are the steps to publish either a new release or a hotfix to an existing release. Note that you'll always need to build `latest` so that the downloads page lists the correct versions, so the script automatically builds latest for you.
 
 Before you start:
-* Make sure you're on the correct branch in your apache/druid repo.
+* Make sure you're on the correct branch in your `apache/druid` repo.
 * Get the path of the apache/druid repo. You can skip this if you have `apache/druid` and `apache/druid-website-src` as peers at the same directory level.
 
 1. Update the version list in `static/js/version.js`. The highest release version goes in position 0. This file is used by `RecentReleasesWidget` on the home page to display the 3 most recent versions and to interpolate the download links on the download page.
@@ -97,13 +97,11 @@ Before you start:
 
 > While the script builds the docs for the specified version, you'll get some false positives for broken links. (The first version that the script builds.) These are from the website pages to `/latest` doc pages, which don't exist yet. You only need to pay attention to broken links from the second build, which is for `latest`.
 
-   The versions you built (such as 26.0.0 and latest) are copied to `published_versions` where the compiled pages for the older docs live.
+   The versions you built (such as 26.0.0 and latest) are in `build` along with the homepage etc.
 
-4. Go to `published_versions` and verify the site. If you run it locally, such as with `http-server` you'll get the latest version of the site, such as `localhost:8080/docs/latest/` and the version you built, such as `localhost:8080/docs/26.0.0/`. In addition, you should be able to see pre-Docusaurus2 versions such as 25.0.0 with the old CSS.
+4. Go to `build` and verify the site. If you run it locally, such as with `http-server` you'll get the latest version of the site, such as `localhost:8080/docs/latest/` and the version you built, such as `localhost:8080/docs/26.0.0/`. 
 
-5. Commit the built files along with the Markdown files to `druid-website-src` and make a PR.
-
-6. Use the contents of `published_versions` to make a PR to `https://github.com/apache/druid-website` (either the `asf-staging` branch or the `asf-site` branch).
+5. Use the contents of `build` to make a PR to `https://github.com/apache/druid-website` (either the `asf-staging` branch or the `asf-site` branch). Make sure you do not delete the previous Druid versions in the `docs` folder in `druid-website`.
 
 ### The scripts
 
@@ -123,12 +121,12 @@ Once `do_all_things.py` builds the version you want and latest, it copies the bu
 
 ## Building the site before Druid 26
 
-The HTML files for pre-Docusaurus 2 versions (versions before 26) are in .published_versions/docs. If you need to publish updated versions of those files for any reason, you need to build the docs with Docusaurus 1 in the `apache/druid` repo:
+The HTML files for pre-Docusaurus 2 versions (versions before 26) are in `./docs`. If you need to publish updated versions of those files for any reason, you need to build the docs with Docusaurus 1 in the `apache/druid` repo first:
 
-1. Checkout the branch you want to build, such as `25.0.0`.
-2. In `apache/druid/website`, run `npm run build` or `yarn build`.
-3. Copy the HTML files for the docs from the build output to `published_versions/docs/VERSION`.
-4. Publish the site as you normally would for a new release.
+1. Checkout the branch you want to build, such as `25.0.0` in `apache/druid`.
+2. In `apache/druid/website`, install the old version of Docusaurus and run `npm run build` or `yarn build`.
+3. Copy the HTML files for the docs from the build output to `/docs/VERSION` in this repo.
+4. Copy those files to `/docs/VERSION` in `druid-website`.
 
 ## Example data files
 
