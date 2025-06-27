@@ -13,7 +13,7 @@ For those, see [`apache/druid`](https://github.com/apache/druid/).
 
 The target repo for the website when you're ready to publish is [`druid-website`](https://github.com/apache/druid-website).
 
-When publishing, build the site and then copy the contents of `build` to the `druid-website` repo. Make sure you do not accidentally delete the contents of `docs` in `druid-website`.
+When publishing, build the site and then copy the contents of `build` to the `druid-website` repo. Don't delete the existing docs content in `druid-website` since it also contains the docs for previous releases.
 
 ## Updating homepage widgets
 
@@ -101,7 +101,7 @@ Before you start:
 
 4. Go to `build` and verify the site. If you run it locally, such as with `http-server` you'll get the latest version of the site, such as `localhost:8080/docs/latest/` and the version you built, such as `localhost:8080/docs/26.0.0/`. 
 
-6. Use the contents of `build` to make a PR to `https://github.com/apache/druid-website` (either the `asf-staging` branch or the `asf-site` branch). Make sure you do not delete the previous Druid versions in the `docs` folder in `druid-website`.
+5. Use the contents of `build` to make a PR to `https://github.com/apache/druid-website` (either the `asf-staging` branch or the `asf-site` branch). Make sure you do not delete the previous Druid versions in the `docs` folder in `druid-website`.
 
 ### The scripts
 
