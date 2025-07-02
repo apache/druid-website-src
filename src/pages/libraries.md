@@ -93,6 +93,7 @@ Tools
 * [spaghettifunk/druid-prometheus-exporter](https://github.com/spaghettifunk/druid-prometheus-exporter) - A HTTP service for collecting Druid metrics and exposing them as Prometheus metrics
 * [rovio-ingest](https://github.com/rovio/rovio-ingest) - An implementation of the DatasourceV2 interface of Apache Spark™ for writing Spark Datasets to Apache Druid™.
 * [rb-druid-indexer](https://github.com/redBorder/rb-druid-indexer) - redBorder cluster-compatible distributed service for automatically managing Druid supervisor task submissions and spec file configurations.
+* [apache-druid-mcp-server](https://github.com/AnilPuram/apache-druid-mcp-server) - Model Context Protocol (MCP) server for Apache Druid that provides AI tools and clients with seamless access to query, manage, and interact with Druid datasources through standardized MCP tools.
 
 Community Extensions
 --------------------
