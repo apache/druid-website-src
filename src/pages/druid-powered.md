@@ -19,7 +19,7 @@ There are numerous companies of various sizes in production with Druid. Some of 
 
 ## Adjoe
 
-adjoe is developing new ways for apps to monetize and scale by improving the user experience of ads, both rewarded and programmatic. As an adtech company, we process an immense volume of data, requiring technology that can keep pace with our high‑throughput environment. adjoe uses Druid to power innovative dashboards and interfaces that deliver vital, data‑driven insights to stakeholders and account managers.
+[Adjoe](https://adjoe.io/) is developing new ways for apps to monetize and scale by improving the user experience of ads, both rewarded and programmatic. As an adtech company, we process an immense volume of data, requiring technology that can keep pace with our high‑throughput environment. adjoe uses Druid to power innovative dashboards and interfaces that deliver vital, data‑driven insights to stakeholders and account managers.
 
 With Druid’s sub‑second query latency, we can rapidly slice and dice engagement metrics, optimize ad placements, and pinpoint high‑performing campaigns. In the fast‑paced world of advertising, Druid is essential for delivering the speed and precision needed for confident, well‑informed decision‑making.
 
