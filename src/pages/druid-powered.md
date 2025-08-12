@@ -17,7 +17,7 @@ There are numerous companies of various sizes in production with Druid. Some of 
 
 * [How Adikteev helps customers succeed using self-service analytics](https://imply.io/post/how-adikteev-helps-customers-succeed-using-self-service-analytics) (Margot Miller), *Imply Blog*, 20 Aug 2020.
 
-## adjoe
+## Adjoe
 
 adjoe is developing new ways for apps to monetize and scale by improving the user experience of ads, both rewarded and programmatic. As an adtech company, we process an immense volume of data, requiring technology that can keep pace with our high‑throughput environment. adjoe uses Druid to power innovative dashboards and interfaces that deliver vital, data‑driven insights to stakeholders and account managers.
 
