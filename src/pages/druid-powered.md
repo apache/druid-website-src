@@ -696,6 +696,13 @@ Salesforce's Edge Intelligence team uses Apache Druid as a real-time analytical 
 
 [Delivering High-Quality Insights Interactively Using Apache Druid at Salesforce](https://engineering.salesforce.com/delivering-high-quality-insights-interactively-using-apache-druid-at-salesforce-7a038f0fe3d1)
 
+## Savee
+
+Savee deal intelligence team analyzes 9M+ deals for 90,000+ brands on savee.in and Coupoy.com combined. We visualize the efficiency of the pratform for the users. It's built uding reactjs, python backend. Node.js, and data anlytics A pache Druid, and Apache Kafka.
+
+* [Savee.in](https://www.savee.in) (Sasidhar A), *Scalac website*, 4 Feb 2020.
+
+
 ## Scalac
 
 Scalac migrated to Apache Druid and Apache Kafka (from Apache Cassandra and Apache Spark) for their Blockchain Observability application. The analytical dashboard they created is used to visualize the data from different blockchains. It is built on React with Hooks, Redux, Saga on the front side – and Node.js, Apache Druid, and Apache Kafka on the back-end.
