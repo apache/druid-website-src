@@ -94,6 +94,8 @@ Tools
 * [rovio-ingest](https://github.com/rovio/rovio-ingest) - An implementation of the DatasourceV2 interface of Apache Spark™ for writing Spark Datasets to Apache Druid™.
 * [rb-druid-indexer](https://github.com/redBorder/rb-druid-indexer) - redBorder cluster-compatible distributed service for automatically managing Druid supervisor task submissions and spec file configurations.
 * [apache-druid-mcp-server](https://github.com/AnilPuram/apache-druid-mcp-server) - Model Context Protocol (MCP) server for Apache Druid that provides AI tools and clients with seamless access to query, manage, and interact with Druid datasources through standardized MCP tools.
+* [iunera/druid-mcp-server](https://github.com/iunera/druid-mcp-server) - A Java-based Model Context Protocol (MCP) server for Apache Druid built with Spring AI, supporting OAuth, basic-security-extension, readonlymode, and the latest MCP protocol (stdio/sse/http).
+* [iunera/data-philter](https://github.com/iunera/data-philter) - A local-first, privacy-focused conversational AI interface that translates natural language into SQL for Apache Druid and ClickHouse.
 
 Community Extensions
 --------------------
