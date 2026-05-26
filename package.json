@@ -34,6 +34,7 @@
     "@docusaurus/plugin-client-redirects": "^3.10.1",
     "@docusaurus/preset-classic": "^3.10.1",
     "@docusaurus/theme-mermaid": "^3.10.1",
+    "@docusaurus/faster": "^3.10.1",
     "clsx": "^1.1.1",
     "docusaurus-lunr-search": "^3.6.1",
     "@mermaid-js/layout-elk": "^0.1.9",
