@@ -80,7 +80,7 @@ UIs
 * [Embeddable](https://embeddable.com) - Developer-first customer-facing dashboards for your [Druid DB](https://docs.embeddable.com/data/credentials#druid)
 * [Grafana](https://github.com/societe-generale/druidplugin) - A plugin for [Grafana](http://grafana.org/)
 * [grafana](https://github.com/Quantiply/grafana-plugins/tree/master/features/druid) - A plugin for [Grafana](http://grafana.org/)
-* [LibreDB Studio](https://github.com/libredb/libredb-studio) - A self-hosted, MIT-licensed database IDE in the browser. Queries Druid over the SQL HTTP endpoint (`POST /druid/v2/sql`, Router `8888` or Broker `8082`) with no driver dependency, renders `EXPLAIN` as the native query plan, and browses datasources alongside nine other engines in the same interface
+* [LibreDB Studio](https://github.com/libredb/libredb-studio) - A self-hosted, MIT-licensed database IDE in the browser. Queries Druid over the SQL HTTP endpoint (`POST /druid/v2/sql`, Router `8888` or Broker `8082`) with no driver dependency, renders `EXPLAIN` as the native query plan, and browses datasources in the same interface as its other SQL, NoSQL, analytics and search connections
 * [Pivot](https://github.com/implydata/pivot) - An exploratory analytics UI for Druid
 * [Metabase](https://github.com/metabase/metabase) - Simple dashboards, charts and query tool for your Druid DB
 * [Metatron](https://github.com/metatron-app/metatron-discovery) - All-in-one analytics with Druid from easy data preparation to fast visualization
