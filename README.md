@@ -5,7 +5,7 @@ https://druid.apache.org/
 This repo is used to build the Apache Druid website. It is the source of truth for website pages such as the website homepage and pages like Community.
 
 A different repo houses the source of truth for the following:
-* Markdown files for `docs` 
+* Markdown and MDX files for `docs` 
 * the sidebar file
 * the redirects file
 
@@ -13,7 +13,7 @@ For those, see [`apache/druid`](https://github.com/apache/druid/).
 
 The target repo for the website when you're ready to publish is [`druid-website`](https://github.com/apache/druid-website).
 
-When publishing, build the site and then copy the contents of `build` to the `druid-website` repo. Don't delete the existing docs content in `druid-website` since it also contains the docs for previous releases.
+When publishing, build the site and then copy the contents of `build` to the `druid-website` repo. Don't delete the existing docs content in `druid-website` since it also contains the docs for previous releases. 
 
 ## Updating homepage widgets
 
@@ -33,19 +33,18 @@ By default, the repo always starts/builds latest if you run `npm start|build` or
 
 The build scripts described in [Publish the site](#publish-the-site) handles building the versioned docs for when you're ready to do a release.
 
-To start, you'll need to install Docusaurus 3.  
-
 ### Docusaurus version
 
-Different Druid versions run different docusaurus versions due to upgrades. The versions are only somewhat compatible. The publishing process for Docusaurus 2 and 3 are the same. The scripts were upgraded behind the scenes, so the user-facing commands are still the same. Druid verisons before 26 (Docusaurus) 1 use a [different process](#building-the-site-before-druid-26).
+Different Druid versions run different Docusaurus versions due to upgrades. The versions are only somewhat compatible. The publishing process for Docusaurus 2 and 3 are the same. The scripts were upgraded behind the scenes, so the user-facing commands are still the same. Druid versions earlier than 26 (Docusaurus 1) use a [different process](#building-the-site-before-druid-26).
 
-- Druid 32.0.1: Docusaurus 3
+- Druid after 37: Docusaurus 3.10.1 with backwards compatibility features turned off
+- Druid 32.0.1-37: Docusaurus 3.7 with backwards compatibility features turned on
 - Druid 26-32.0.0 : Docusaurus 2 
 - Druid versions earlier than 26: Docusaurus 1
 
 ### Install Docusaurus 
 
-You need a supported version of node, such as the latest Node 18.
+You need a supported version of node, such as the latest Node 22.
 
 Run `npm install` or `yarn install` in the root of the directory.
 
@@ -99,7 +98,7 @@ Before you start:
 
    The versions you built (such as 26.0.0 and latest) are in `build` along with the homepage etc.
 
-4. Go to `build` and verify the site. If you run it locally, such as with `http-server` you'll get the latest version of the site, such as `localhost:8080/docs/latest/` and the version you built, such as `localhost:8080/docs/26.0.0/`. 
+4. Go to `build` and verify the site. If you run it locally, such as with `http-server`, you'll get the latest version of the site, such as `localhost:8080/docs/latest/` and the version you built, such as `localhost:8080/docs/26.0.0/`. 
 
 5. Use the contents of `build` to make a PR to `https://github.com/apache/druid-website` (either the `asf-staging` branch or the `asf-site` branch). Make sure you do not delete the previous Druid versions in the `docs` folder in `druid-website`.
 
@@ -111,13 +110,14 @@ The `do_all_things.py` script is a wrapper for the following scripts:
 
 - Uses `build_docs.py` to build the version you want and latest. You always need to build latest to update the downloads page and the widgets on the home page. It also handles writing the redirects to create the versioned redirects for (`/docs/VERSION/`). 
 
-Once `do_all_things.py` builds the version you want and latest, it copies the build output to `published_versions`. You can use this directory to republish the whole site.
+Once `do_all_things.py` builds the version you want and latest, it copies the build output to `build`. In `build`, you should see directories for `latest`, `SOME_VERSION` (such as `37.0.0), and assorted Docusaurus files.
 
-`published_versions` houses the following:
 
-- The old CSS needed to properly render Docusaurus 1 pages
-- The website pages, like Community
-- All the built HTML pages for the docs, including pre-Docusaurus 2 HTML pages
+You can use this directory to republish the whole site.
+
+## Building the site for Druid 26 to 37
+
+These releases were built using Docusaurus 3.7 with all the backwards compatibility flags enabled.
 
 ## Building the site before Druid 26
 
