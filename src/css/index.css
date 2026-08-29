@@ -191,16 +191,67 @@ code {
       min-width: 130px;
     }
   }
+
+  .druid-feature-container {
+    grid-template-columns: 1fr;
+  }
+
+  .features .feature {
+    padding-left: 0;
+  }
+
+  .features .feature .fa {
+    position: relative;
+    margin: 0 auto 12px;
+  }
+}
+
+@media (max-width: 840px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+  }
+
+  .features .feature {
+    padding-left: 60px;
+  }
+
+  .features .feature .fa {
+    width: 44px;
+    height: 44px;
+    line-height: 44px;
+    font-size: 16px;
+  }
 }
 
 @media (min-width: 992px) {
   .card {
     min-height: 294px;
   }
+
+  .grid-container {
+    grid-template-columns: 1fr;
+    padding-right: 10px;
+    padding-left: 10px;
+  }
 }
 
-@media (min-width: 1200px) {
-  .card {
-    min-height: 230px;
+@media (min-width: 841px) {
+  .grid-container {
+    grid-template-columns: 3fr 1fr;
+  }
+}
+
+@media (max-width: 500px) {
+  .druid-feature-container {
+    grid-template-columns: 1fr;
+  }
+
+  .features .feature {
+    padding-left: 0;
+  }
+
+  .features .feature .fa {
+    position: relative;
+    margin: 0 auto 12px;
   }
 }
