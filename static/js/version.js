@@ -27,16 +27,16 @@ Used by
 
 const Releases = [
   {
+    version: "38.0.0",
+    date: "Sep 24 2026"
+  },
+  {
     version: "37.0.0",
     date: "May 8 2026"
   },
   {
     version: "36.0.0",
     date: "Feb 9 2026"
-  },
-  {
-    version: "35.0.1",
-    date: "Dec 15 2025"
   }
 ]
 
