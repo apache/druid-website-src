@@ -1,0 +1,665 @@
+---
+id: kafka-ingestion
+title: "Apache Kafka ingestion"
+sidebar_label: "Apache Kafka ingestion"
+description: "Overview of the Kafka indexing service for Druid. Includes example supervisor specs to help you get started."
+---
+
+<!--
+  ~ Licensed to the Apache Software Foundation (ASF) under one
+  ~ or more contributor license agreements.  See the NOTICE file
+  ~ distributed with this work for additional information
+  ~ regarding copyright ownership.  The ASF licenses this file
+  ~ to you under the Apache License, Version 2.0 (the
+  ~ "License"); you may not use this file except in compliance
+  ~ with the License.  You may obtain a copy of the License at
+  ~
+  ~   http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an
+  ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~ KIND, either express or implied.  See the License for the
+  ~ specific language governing permissions and limitations
+  ~ under the License.
+  -->
+
+:::info
+To use the Kafka indexing service, you must be on Apache Kafka&circledR; version 0.11.x or higher.
+If you are using an older version, refer to the [Apache Kafka upgrade guide](https://kafka.apache.org/documentation/#upgrade).
+:::
+
+When you enable the Kafka indexing service, you can configure supervisors on the Overlord to manage the creation and lifetime of Kafka indexing tasks.
+Kafka indexing tasks read events using Kafka partition and offset mechanism to guarantee exactly-once ingestion. The supervisor oversees the state of the indexing tasks to coordinate handoffs, manage failures, and ensure that scalability and replication requirements are maintained.
+
+This topic contains configuration information for the Kafka indexing service supervisor for Apache Druid.
+
+## Setup
+
+To use the Kafka indexing service, you must first load the `druid-kafka-indexing-service` extension on both the Overlord and the Middle Manager. See [Loading extensions](../configuration/extensions.md) for more information.
+
+## Supervisor spec configuration
+
+This section outlines the configuration properties that are specific to the Apache Kafka streaming ingestion method. For configuration properties shared across all streaming ingestion methods supported by Druid, see [Supervisor spec](supervisor.md#supervisor-spec).
+
+The following example shows a supervisor spec for the Kafka indexing service:
+
+<details>
+  <summary>Click to view the example</summary>
+
+```json
+{
+  "type": "kafka",
+  "spec": {
+    "dataSchema": {
+      "dataSource": "metrics-kafka",
+      "timestampSpec": {
+        "column": "timestamp",
+        "format": "auto"
+      },
+      "dimensionsSpec": {
+        "dimensions": [],
+        "dimensionExclusions": [
+          "timestamp",
+          "value"
+        ]
+      },
+      "metricsSpec": [
+        {
+          "name": "count",
+          "type": "count"
+        },
+        {
+          "name": "value_sum",
+          "fieldName": "value",
+          "type": "doubleSum"
+        },
+        {
+          "name": "value_min",
+          "fieldName": "value",
+          "type": "doubleMin"
+        },
+        {
+          "name": "value_max",
+          "fieldName": "value",
+          "type": "doubleMax"
+        }
+      ],
+      "granularitySpec": {
+        "type": "uniform",
+        "segmentGranularity": "HOUR",
+        "queryGranularity": "NONE"
+      }
+    },
+    "ioConfig": {
+      "topic": "metrics",
+      "inputFormat": {
+        "type": "json"
+      },
+      "consumerProperties": {
+        "bootstrap.servers": "localhost:9092"
+      },
+      "taskCount": 1,
+      "replicas": 1,
+      "taskDuration": "PT1H"
+    },
+    "tuningConfig": {
+      "type": "kafka",
+      "maxRowsPerSegment": 5000000
+    }
+  }
+}
+```
+
+</details>
+
+### I/O configuration
+
+The following table outlines the `ioConfig` configuration properties specific to Kafka.
+For configuration properties shared across all streaming ingestion methods, refer to [Supervisor I/O configuration](supervisor.md#io-configuration).
+
+|Property|Type|Description|Required|Default|
+|--------|----|-----------|--------|-------|
+|`topic`|String|The Kafka topic to read from. Note that once this value is established for a supervisor, updating it is not supported. To ingest data from multiple topic, use `topicPattern`. |Yes if `topicPattern` isn't set.||
+|`partitionIds`|Array of integers|Optional nonempty set of nonnegative partition IDs for a single `topic`. Omit or set to null to read all partitions. Cannot be combined with `topicPattern` or `boundedStreamConfig`. See [Ingest selected partitions](#ingest-selected-partitions).|No|null|
+|`topicPattern`|String|Multiple Kafka topics to read from, passed as a regex pattern. See [Ingest from multiple topics](#ingest-from-multiple-topics) for more information.|Yes if `topic` isn't set.||
+|`consumerProperties`|String, Object|A map of properties to pass to the Kafka consumer. See [Consumer properties](#consumer-properties) for details.|Yes. At the minimum, you must set the `bootstrap.servers` property to establish the initial connection to the Kafka cluster.||
+|`pollTimeout`|Long|The length of time to wait for the Kafka consumer to poll records, in milliseconds.|No|100|
+|`useEarliestOffset`|Boolean|If a supervisor is managing a datasource for the first time, it obtains a set of starting offsets from Kafka. This flag determines whether the supervisor retrieves the earliest or latest offsets in Kafka. Under normal circumstances, subsequent tasks start from where the previous segments ended so this flag is only used on the first run.|No|`false`|
+|`headerBasedFilterConfig`|Object|Configuration for filtering Kafka records based on their headers before ingestion. See [Header-based filtering](#header-based-filtering) for more details.|No|null|
+|`idleConfig`|Object|Defines how and when the Kafka supervisor can become idle. See [Idle configuration](#idle-configuration) for more details.|No|null|
+
+#### Ingest from multiple topics
+
+:::info
+If you enable multi-topic ingestion for a datasource, downgrading to a version older than
+28.0.0 will cause the ingestion for that datasource to fail.
+:::
+
+:::info
+Migrating an existing supervisor to use `topicPattern` instead of `topic` is not supported. It is also not supported to change the `topicPattern` of an existing supervisor to a different regex pattern.
+You can force the migration by doing the following:
+1. Suspend the supervisor.
+2. Reset the offsets.
+3. Submit updated supervisor.
+:::
+
+You can ingest data from one or multiple topics.
+When ingesting data from multiple topics, Druid assigns partitions based on the hashcode of the topic name and the ID of the partition within that topic. The partition assignment might not be uniform across all the tasks. Druid assumes that partitions across individual topics have similar load. If you want to ingest from both high and low load topics in the same supervisor, it is recommended that you have a higher number of partitions for a high load topic and a lower number of partitions for a low load topic.
+
+To ingest data from multiple topics, use the `topicPattern` property instead of `topic`.
+You pass multiple topics as a regex pattern. For example, to ingest data from clicks and impressions, set `topicPattern` to `clicks|impressions`.
+Similarly, you can use `metrics-.*` as the value for `topicPattern` if you want to ingest from all the topics that start with `metrics-`. If you add a new topic that matches the regex to the cluster, Druid automatically starts ingesting from the new topic. Topic names that match partially, such as `my-metrics-12`, are not included for ingestion.
+
+#### Consumer properties
+
+Consumer properties control how a supervisor reads and processes event messages from a Kafka stream. For more information about consumer configuration and advanced use cases, refer to the [Kafka documentation](https://kafka.apache.org/documentation/#consumerconfigs).
+
+You must include `bootstrap.servers` in consumer properties with a list of Kafka brokers in the format `<BROKER_1>:<PORT_1>,<BROKER_2>:<PORT_2>,...`.
+In some cases, you may need to retrieve consumer properties at runtime. For example, when `bootstrap.servers` is unknown or not static.
+
+The `isolation.level` property determines how Druid handles transactional Kafka messages. Although standard Kafka consumers default to `read_uncommitted`, Druid's ingestion engine defaults to `read_committed`. This ensures that only finalized data is indexed and aborted transactions are ignored. If you need to use legacy Kafka brokers or don’t want Druid to consume only committed transactions, explicitly set `isolation.level` to `read_uncommitted`. Note that using `read_uncommitted` removes Druid's offset gap check, which requires the message source to ensure the message offsets are continuous.
+
+If your Kafka cluster enables consumer group ACLs, you can set `group.id` in `consumerProperties` to override the default auto generated group ID.
+
+To enable SSL connections, you must provide passwords for `keystore`, `truststore`, and `key` confidentially. You can specify these settings in the `jaas.conf` login configuration file or in `consumerProperties` with `sasl.jaas.config`.
+To protect sensitive information, use the [environment variable dynamic config provider](../operations/dynamic-config-provider.md#environment-variable-dynamic-config-provider) to store credentials in system environment variables instead of plain text.
+Although you can also use the [password provider](../operations/password-provider.md) interface to specify SSL configuration for Kafka ingestion, consider using the dynamic config provider as this feature is deprecated.
+
+For example, when using SASL and SSL with Kafka, set the following environment variables for the Druid user on machines running the Overlord and Peon services. Replace the values to match your environment configurations.
+
+```
+export KAFKA_JAAS_CONFIG="org.apache.kafka.common.security.plain.PlainLoginModule required username='accesskey' password='secret key';"
+export SSL_KEY_PASSWORD=mysecretkeypassword
+export SSL_KEYSTORE_PASSWORD=mysecretkeystorepassword
+export SSL_TRUSTSTORE_PASSWORD=mysecrettruststorepassword
+```
+
+When you define the consumer properties in the supervisor spec, use the dynamic config provider to refer to the environment variables:
+
+```json
+"consumerProperties": {
+  "bootstrap.servers": "localhost:9092",
+  "security.protocol": "SASL_SSL", 
+  "sasl.mechanism": "PLAIN", 
+  "ssl.keystore.location": "/opt/kafka/config/kafka01.keystore.jks",
+  "ssl.truststore.location": "/opt/kafka/config/kafka.truststore.jks",
+  "druid.dynamic.config.provider": {
+    "type": "environment",
+    "variables": {
+      "sasl.jaas.config": "KAFKA_JAAS_CONFIG",
+      "ssl.key.password": "SSL_KEY_PASSWORD",
+      "ssl.keystore.password": "SSL_KEYSTORE_PASSWORD",
+      "ssl.truststore.password": "SSL_TRUSTSTORE_PASSWORD"
+    }
+  }
+}
+```
+
+When connecting to Kafka, Druid replaces the environment variables with their corresponding values.
+
+#### Idle configuration
+
+:::info
+Idle state transitioning is currently designated as experimental.
+:::
+
+When the supervisor enters the idle state, no new tasks are launched subsequent to the completion of the currently executing tasks. This strategy may lead to reduced costs for cluster operators while using topics that get sporadic data.
+
+The following table outlines the configuration options for `idleConfig`:
+
+|Property|Description|Required|
+|--------|-----------|--------|
+|`enabled`|If `true`, the supervisor becomes idle if there is no data on input stream or topic for some time.|No|`false`|
+|`inactiveAfterMillis`|The supervisor becomes idle if all existing data has been read from input topic and no new data has been published for `inactiveAfterMillis` milliseconds.|No|`600_000`|
+
+The following example shows a supervisor spec with idle configuration enabled:
+
+<details>
+  <summary>Click to view the example</summary>
+
+```json
+{
+  "type": "kafka",
+  "spec": {
+    "dataSchema": {...},
+    "ioConfig": {
+      "topic": "metrics",
+      "inputFormat": {
+        "type": "json"
+      },
+      "consumerProperties": {
+        "bootstrap.servers": "localhost:9092"
+      },
+      "autoScalerConfig": {
+        "enableTaskAutoScaler": true,
+        "taskCountMax": 6,
+        "taskCountMin": 2,
+        "minScaleUpDelay": "PT10M",
+        "minScaleDownDelay": "PT10M",
+        "autoScalerStrategy": "lagBased",
+        "lagCollectionIntervalMillis": 30000,
+        "lagCollectionRangeMillis": 600000,
+        "scaleOutThreshold": 6000000,
+        "triggerScaleOutFractionThreshold": 0.3,
+        "scaleInThreshold": 1000000,
+        "triggerScaleInFractionThreshold": 0.9,
+        "scaleActionStartDelayMillis": 300000,
+        "scaleActionPeriodMillis": 60000,
+        "scaleInStep": 1,
+        "scaleOutStep": 2
+      },
+      "taskCount": 1,
+      "replicas": 1,
+      "taskDuration": "PT1H",
+      "idleConfig": {
+        "enabled": true,
+        "inactiveAfterMillis": 600000
+      }
+    },
+    "tuningConfig": {...}
+  }
+}
+```
+</details>
+
+#### Header-based filtering
+
+Header-based filtering allows you to filter Kafka records based on their headers before ingestion, reducing the amount of data processed and improving ingestion performance. This is particularly useful when you want to ingest only a subset of records from a Kafka topic based on header values.
+
+**Important**: Header-based filtering uses **permissive behavior** by default. Records are included (not filtered out) in the following cases:
+- Records without the specified header
+- Records with the specified header but null or empty values
+- Records with the specified header that fail to decode
+- Records where header evaluation encounters any error
+
+This ensures that data ingestion continues even when header information is missing or malformed. Only records with successfully decoded header values that don't match the filter criteria are excluded.
+
+The following table outlines the configuration options for `headerBasedFilterConfig`:
+
+|Property|Type|Description|Required|Default|
+|--------|----|-----------|--------|-------|
+|`filter`|Object|A Druid filter specification that defines which records to include if the evaluation result of this filter is true based on header values. Only `in` filter is supported. The `dimension` field represents the header key/name to filter on.|Yes||
+|`encoding`|String|The character encoding used to decode header values. Supported encodings include `UTF-8`, `UTF-16`, `ISO-8859-1`, `US-ASCII`, `UTF-16BE`, and `UTF-16LE`.|No|`UTF-8`|
+|`stringDecodingCacheSize`|Integer|The maximum number of decoded header strings to cache in memory. Set to a higher value for better performance when processing many unique header values.|No|10000|
+
+##### Header-based filtering example
+
+The following example shows how to configure header-based filtering to ingest only records where the `environment` header has the value `production` or `staging`:
+
+<details>
+  <summary>Click to view the example</summary>
+
+```json
+{
+  "type": "kafka",
+  "spec": {
+    "dataSchema": {
+      "dataSource": "metrics-kafka",
+      "timestampSpec": {
+        "column": "timestamp",
+        "format": "auto"
+      },
+      "dimensionsSpec": {
+        "dimensions": [],
+        "dimensionExclusions": [
+          "timestamp",
+          "value"
+        ]
+      },
+      "metricsSpec": [
+        {
+          "name": "count",
+          "type": "count"
+        },
+        {
+          "name": "value_sum",
+          "fieldName": "value",
+          "type": "doubleSum"
+        }
+      ],
+      "granularitySpec": {
+        "type": "uniform",
+        "segmentGranularity": "HOUR",
+        "queryGranularity": "NONE"
+      }
+    },
+    "ioConfig": {
+      "topic": "metrics",
+      "inputFormat": {
+        "type": "json"
+      },
+      "consumerProperties": {
+        "bootstrap.servers": "localhost:9092"
+      },
+      "headerBasedFilterConfig": {
+        "filter": {
+          "type": "in",
+          "dimension": "environment",
+          "values": ["production", "staging"]
+        },
+        "encoding": "UTF-8",
+        "stringDecodingCacheSize": 10000
+      },
+      "taskCount": 1,
+      "replicas": 1,
+      "taskDuration": "PT1H"
+    },
+    "tuningConfig": {
+      "type": "kafka",
+      "maxRowsPerSegment": 5000000
+    }
+  }
+}
+```
+</details>
+
+In this example:
+- Records with `environment` header values of `production` or `staging` will be ingested
+- Records **without** the `environment` header will also be ingested (permissive behavior)
+- Records with the `environment` header but null/empty values will also be ingested (permissive behavior)
+- Records with the `environment` header that fail to decode will also be ingested (permissive behavior)
+- If multiple `environment` headers exist, the **last** header value is used for filtering
+- Header values will be decoded using UTF-8 encoding
+- Up to 10,000 decoded header strings will be cached for performance
+
+##### Performance considerations
+
+Header-based filtering provides several performance benefits:
+
+- **Reduced ingestion load**: Records are filtered before being processed by the ingestion pipeline
+- **Lower memory usage**: Filtered records don't consume memory in the ingestion process
+- **Improved throughput**: Less data to process means higher effective throughput
+- **String decoding cache**: Frequently accessed header values are cached to avoid repeated decoding
+
+Filtered events are tracked using the standard Druid ingestion metrics. The `ingest/events/filtered` metric reports the number of events rejected by header-based filtering. For more information about ingestion metrics, see [Ingestion metrics](../operations/metrics.md#other-ingestion-metrics).
+
+#### Streaming partitions spec
+
+When you set `streamingPartitionsSpec.partitionDimensions` in the tuning config, the supervisor tracks the distinct values observed for each listed dimension during ingestion. At segment publish time, each segment is annotated with only the values it actually ingested by publishing it with a `dim_value_set` shard spec, which records the observed values per tracked dimension. The broker then uses these annotations to skip segments at query time when the query filter doesn't intersect the segment's declared values.
+
+This enables segment pruning for streaming-ingested data without waiting for compaction to produce hash or range-partitioned segments. The `partitionDimensions` should be kept in sync with the compaction config's `partitionDimensions` for the same datasource.
+
+`streamingPartitionsSpec` is a typed object. The default and currently only type is `dim_value_set`, which records the distinct values observed for each tracked dimension. The `type` may be omitted, in which case it defaults to `dim_value_set`; you can set it explicitly (`"streamingPartitionsSpec": {"type": "dim_value_set", "partitionDimensions": [...]}`) to be forward-compatible with future strategies.
+
+**Usage guidelines:**
+
+- Only string-typed dimensions are currently supported.
+- Use only low-to-medium cardinality dimensions (for example, `tenant_id`, `region`, `environment`). High-cardinality dimensions bloat segment metadata with no pruning benefit.
+- Set `maxValuesPerDimension` as a safety cap if a tracked dimension may unexpectedly grow high-cardinality. When a segment's observed distinct values for a dimension exceed the cap, that dimension is omitted from the segment's stamped filter map: pruning is disabled for that dimension on that segment, but other tracked dimensions continue to prune as normal. Default is unlimited (uncapped).
+- Most effective when Kafka partitions are keyed by the tracked dimension (for example, using tenant ID as the message key). Each task naturally sees a subset of values, and segments get tight filter annotations.
+- Also works with multiple supervisors reading from separate topics into one datasource.
+- Use a range or hashed compaction `partitionsSpec`, not the dynamic strategy: dynamic compaction does not partition by dimension, so it cannot preserve pruning after compaction.
+- After compaction, the streaming pruning annotations are replaced by the compaction output's partitioning (hash or range), which provides its own pruning.
+
+The following example configures a supervisor to track the `tenant` dimension:
+
+```json
+{
+  "type": "kafka",
+  "spec": {
+    "dataSchema": {
+      "dataSource": "multi_tenant_events",
+      "timestampSpec": {"column": "timestamp", "format": "iso"},
+      "dimensionsSpec": {"dimensions": ["tenant", "region", "event_type"]},
+      "granularitySpec": {"type": "uniform", "segmentGranularity": "HOUR", "queryGranularity": "NONE"}
+    },
+    "ioConfig": {
+      "type": "kafka",
+      "topic": "events",
+      "consumerProperties": {"bootstrap.servers": "localhost:9092"},
+      "inputFormat": {"type": "json"},
+      "taskCount": 4,
+      "taskDuration": "PT1H"
+    },
+    "tuningConfig": {
+      "type": "kafka",
+      "streamingPartitionsSpec": {"partitionDimensions": ["tenant"]}
+    }
+  }
+}
+```
+
+With this configuration, a query like `SELECT * FROM multi_tenant_events WHERE tenant = 'acme'` skips segments that contain no rows for `acme`, reducing the number of segments scanned.
+
+#### Data format
+
+The Kafka indexing service supports [`inputFormat`](data-formats.md#input-format). For more information, see [Source input formats](data-formats.md).
+
+The Kafka indexing service supports the following values for `inputFormat`:
+
+* `csv`
+* `tvs`
+* `json`
+* `kafka`
+* `avro_stream`
+* `protobuf`
+* `thrift`
+
+##### Kafka input format supervisor spec example
+
+The `kafka` input format lets you parse the Kafka metadata fields in addition to the Kafka payload value contents.
+
+The `kafka` input format wraps around the payload parsing input format and augments the data it outputs with the Kafka event timestamp, the Kafka topic name, the Kafka event headers, and the key field that itself can be parsed using any available input format.
+
+For example, consider the following structure for a Kafka message that represents a wiki edit in a development environment:
+
+- **Kafka timestamp**: `1680795276351`
+- **Kafka topic**: `wiki-edits`
+- **Kafka headers**:
+  - `env=development`
+  - `zone=z1`
+- **Kafka key**: `wiki-edit`
+- **Kafka payload value**: `{"channel":"#sv.wikipedia","timestamp":"2016-06-27T00:00:11.080Z","page":"Salo Toraut","delta":31,"namespace":"Main"}`
+
+Using `{ "type": "json" }` as the input format only parses the payload value.
+To parse the Kafka metadata in addition to the payload, use the `kafka` input format.
+
+You configure it as follows:
+
+- `valueFormat`: Define how to parse the payload value. Set this to the payload parsing input format (`{ "type": "json" }`).
+- `timestampColumnName`: Supply a custom name for the Kafka timestamp in the Druid schema to avoid conflicts with columns from the payload. The default is `kafka.timestamp`.
+- `topicColumnName`: Supply a custom name for the Kafka topic in the Druid schema to avoid conflicts with columns from the payload. The default is `kafka.topic`. This field is useful when ingesting data from multiple topics into the same datasource.
+- `headerFormat`: The default value `string` decodes strings in UTF-8 encoding from the Kafka header.  
+   Other supported encoding formats include the following:
+   - `ISO-8859-1`: ISO Latin Alphabet No. 1, that is, ISO-LATIN-1.
+   - `US-ASCII`: Seven-bit ASCII. Also known as ISO646-US. The Basic Latin block of the Unicode character set.
+   - `UTF-16`: Sixteen-bit UCS Transformation Format, byte order identified by an optional byte-order mark.
+   - `UTF-16BE`: Sixteen-bit UCS Transformation Format, big-endian byte order.
+   - `UTF-16LE`: Sixteen-bit UCS Transformation Format, little-endian byte order.
+- `headerColumnPrefix`: Supply a prefix to the Kafka headers to avoid any conflicts with columns from the payload. The default is `kafka.header.`.
+  Considering the header from the example, Druid maps the headers to the following columns: `kafka.header.env`, `kafka.header.zone`.
+- `keyFormat`: Supply an input format to parse the key. Only the first value is used.
+  If, as in the example, your key values are simple strings, then you can use the `tsv` format to parse them.
+  ```json
+  {
+    "type": "tsv",
+    "findColumnsFromHeader": false,
+    "columns": ["x"]
+  } 
+  ```
+  Note that for `tsv`,`csv`, and `regex` formats, you need to provide a `columns` array to make a valid input format. Only the first one is used, and its name will be ignored in favor of `keyColumnName`.
+- `keyColumnName`: Supply the name for the Kafka key column to avoid conflicts with columns from the payload. The default is `kafka.key`.
+
+The following input format uses default values for `timestampColumnName`, `topicColumnName`, `headerColumnPrefix`, and `keyColumnName`:
+
+```json
+{
+  "type": "kafka",
+  "valueFormat": {
+    "type": "json"
+  },
+  "headerFormat": {
+    "type": "string"
+  },
+  "keyFormat": {
+    "type": "tsv",
+    "findColumnsFromHeader": false,
+    "columns": ["x"]
+  }
+}
+```
+
+It parses the example message as follows:
+
+```json
+{
+  "channel": "#sv.wikipedia",
+  "timestamp": "2016-06-27T00:00:11.080Z",
+  "page": "Salo Toraut",
+  "delta": 31,
+  "namespace": "Main",
+  "kafka.timestamp": 1680795276351,
+  "kafka.topic": "wiki-edits",
+  "kafka.header.env": "development",
+  "kafka.header.zone": "z1",
+  "kafka.key": "wiki-edit"
+}
+```
+
+Finally, add these Kafka metadata columns to the `dimensionsSpec` or set your `dimensionsSpec` to auto-detect columns.
+     
+The following supervisor spec demonstrates how to ingest the Kafka header, key, timestamp, and topic into Druid dimensions:
+
+<details>
+  <summary>Click to view the example</summary>
+
+```json
+{
+  "type": "kafka",
+  "spec": {
+    "ioConfig": {
+      "type": "kafka",
+      "consumerProperties": {
+        "bootstrap.servers": "localhost:9092"
+      },
+      "topic": "wiki-edits",
+      "inputFormat": {
+        "type": "kafka",
+        "valueFormat": {
+          "type": "json"
+        },
+        "headerFormat": {
+          "type": "string"
+        },
+        "keyFormat": {
+          "type": "tsv",
+          "findColumnsFromHeader": false,
+          "columns": ["x"]
+        }
+      },
+      "useEarliestOffset": true
+    },
+    "dataSchema": {
+      "dataSource": "wikiticker",
+      "timestampSpec": {
+        "column": "timestamp",
+        "format": "posix"
+      },
+      "dimensionsSpec":  "dimensionsSpec": {
+        "useSchemaDiscovery": true,
+        "includeAllDimensions": true
+      },
+      "granularitySpec": {
+        "queryGranularity": "none",
+        "rollup": false,
+        "segmentGranularity": "day"
+      }
+    },
+    "tuningConfig": {
+      "type": "kafka"
+    }
+  }
+}
+```
+</details>
+
+After Druid ingests the data, you can query the Kafka metadata columns as follows:
+
+```sql
+SELECT
+  "kafka.header.env",
+  "kafka.key",
+  "kafka.timestamp",
+  "kafka.topic"
+FROM "wikiticker"
+```
+
+This query returns:
+
+|`kafka.header.env`|`kafka.key`|`kafka.timestamp`|`kafka.topic`|
+|------------------|-----------|-----------------|-------------|
+|`development`|`wiki-edit`|`1680795276351`|`wiki-edits`|
+
+### Tuning configuration
+
+The following table outlines the `tuningConfig` configuration properties specific to Kafka.
+For configuration properties shared across all streaming ingestion methods, refer to [Supervisor tuning configuration](supervisor.md#tuning-configuration).
+
+|Property|Type|Description|Required|Default|
+|--------|----|-----------|--------|-------|
+|`numPersistThreads`|Integer|The number of threads to use to create and persist incremental segments on the disk. Higher ingestion data throughput results in a larger number of incremental segments, causing significant CPU time to be spent on the creation of the incremental segments on the disk. For datasources with number of columns running into hundreds or thousands, creation of the incremental segments may take up significant time, in the order of multiple seconds. In both of these scenarios, ingestion can stall or pause frequently, causing it to fall behind. You can use additional threads to parallelize the segment creation without blocking ingestion as long as there are sufficient CPU resources available.|No|1|
+|`streamingPartitionsSpec`|Object|Configures query-time segment pruning for streaming-ingested segments. A typed object with an optional `type` (defaults to `dim_value_set`), `partitionDimensions` (List of String), the dimensions whose observed values each segment records so the broker can skip segments that can't match a query filter, and an optional `maxValuesPerDimension` (Integer) cap on the distinct values recorded per dimension per segment. See [Streaming partitions spec](#streaming-partitions-spec) for details.|No|null|
+
+## Ingest selected partitions
+
+Set `partitionIds` in the supervisor's `ioConfig` to consume only specific partitions:
+
+```json
+{
+  "type": "kafka",
+  "topic": "events",
+  "partitionIds": [0, 2, 5],
+  "consumerProperties": {"bootstrap.servers": "localhost:9092"},
+  "useEarliestOffset": true
+}
+```
+
+This fragment can be used to investigate production data in a separate diagnostic supervisor and datasource without ingesting the entire topic again.
+The diagnostic supervisor maintains its own offsets.
+Selected partitions are not necessarily a representative sample, and selecting partitions does not limit their throughput.
+Additional ingestion still consumes Kafka and Druid resources.
+
+Druid validates IDs against Kafka `partitionsFor(topic)` metadata during discovery, including discovery for sampling and monitoring.
+Spec parsing does not contact Kafka.
+Missing IDs produce a supervisor error and are retried; a new supervisor does not start with only part of its selection.
+Empty lists, negative IDs, and null elements are invalid.
+Duplicate IDs are normalized and list order does not matter.
+
+New topic partitions outside the selection are ignored.
+Omit `partitionIds` or set it to null to restore discovery of all partitions.
+Selected partitions are assigned to task groups by their position in the sorted selection: `[0, 3, 6]` with three tasks uses three groups.
+
+Submitting a supervisor spec that changes or removes `partitionIds` requests managed readers to finish and publish, then restarts the supervisor with the updated selection.
+Supervisors with an explicit selection also replace incompatible adopted readers on restart.
+Narrowing `partitionIds` does not delete previously ingested rows from partitions removed from the selection.
+Already publishing tasks may finish; the update does not provide an instantaneous cutoff.
+Retained and re-added partitions resume from saved offsets when available.
+Otherwise, the existing `useEarliestOffset` behavior applies.
+
+Scoped reset requests reject IDs outside the selection.
+If an excluded partition's saved offset has expired and automatic offset reset is disabled, first re-add the partition, then issue a scoped reset after the unavailable-offset error, or set an explicitly chosen available offset using `resetOffsets`.
+A full supervisor reset still clears all saved offsets, including those of excluded partitions.
+
+## Deployment notes on Kafka partitions and Druid segments
+
+Druid assigns Kafka partitions to each Kafka indexing task. A task writes the events it consumes from Kafka into a single segment for the segment granularity interval until it reaches one of the following limits: `maxRowsPerSegment`, `maxTotalRows`, or `intermediateHandoffPeriod`. At this point, the task creates a new partition for this segment granularity to contain subsequent events.
+
+The Kafka indexing task also does incremental hand-offs. Therefore, segments become available as they are ready and you don't have to wait for all segments until the end of the task duration. When the task reaches one of `maxRowsPerSegment`, `maxTotalRows`, or `intermediateHandoffPeriod`, it hands off all the segments and creates a new set of segments for further events. This allows the task to run for longer durations without accumulating old segments locally on Middle Manager services.
+
+The Kafka indexing service may still produce some small segments. For example, consider the following scenario:
+- Task duration is 4 hours.
+- Segment granularity is set to an HOUR.
+- The supervisor was started at 9:10.
+After 4 hours at 13:10, Druid starts a new set of tasks. The events for the interval 13:00 - 14:00 may be split across existing tasks and the new set of tasks which could result in small segments. To merge them together into new segments of an ideal size (in the range of ~500-700 MB per segment), you can schedule re-indexing tasks, optionally with a different segment granularity.
+
+For information on how to optimize the segment size, see [Segment size optimization](../operations/segment-optimization.md).
+
+## Learn more
+
+See the following topics for more information:
+
+* [Supervisor API](../api-reference/supervisor-api.md) for how to manage and monitor supervisors using the API.
+* [Supervisor](../ingestion/supervisor.md) for supervisor status and capacity planning.
+* [Loading from Apache Kafka](../tutorials/tutorial-kafka.md) for a tutorial on streaming data from Apache Kafka.
+* [Kafka input format](../ingestion/data-formats.md#kafka) to learn about the `kafka` input format.
