@@ -65,6 +65,10 @@ Some great folks have written their own libraries to interact with Apache Druid.
 
 * [bugzmanov/druid-io-rs](https://github.com/bugzmanov/druid-io-rs) - Fully asynchronous, future-enabled Apache Druid client library for rust programming language.
 
+#### ADBC
+
+* [adbc-drivers/druid](https://github.com/adbc-drivers/druid) - An ADBC (Arrow Database Connectivity) driver for Druid
+
 Other Druid Distributions
 -------------------------
 * [eBay/embedded-druid](https://github.com/eBay/embedded-druid) - Leveraging Druid capabilities in stand alone application
