@@ -1,0 +1,232 @@
+---
+id: iceberg 
+title: "Iceberg extension"
+---
+
+<!--
+  ~ Licensed to the Apache Software Foundation (ASF) under one
+  ~ or more contributor license agreements.  See the NOTICE file
+  ~ distributed with this work for additional information
+  ~ regarding copyright ownership.  The ASF licenses this file
+  ~ to you under the Apache License, Version 2.0 (the
+  ~ "License"); you may not use this file except in compliance
+  ~ with the License.  You may obtain a copy of the License at
+  ~
+  ~   http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an
+  ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~ KIND, either express or implied.  See the License for the
+  ~ specific language governing permissions and limitations
+  ~ under the License.
+  -->
+
+<!-- If the URL changes for this topic, make modifications
+to Apache Iceberg docs: https://github.com/apache/iceberg/blob/main/docs/mkdocs.yml -->
+
+## Iceberg Ingest extension
+
+Apache&circledR; Iceberg is an open table format for large analytic datasets. [IcebergInputSource](../../ingestion/input-sources.md#iceberg-input-source) lets you ingest data stored in the Iceberg table format into Apache Druid. To use the Iceberg extension, add the `druid-iceberg-extensions` to the list of loaded extensions. See [Loading extensions](../../configuration/extensions.md#loading-extensions) for more information.
+
+Iceberg manages most of its metadata in metadata files in the object storage. However, it is still dependent on a metastore to manage a certain amount of metadata.
+Iceberg refers to these metastores as catalogs. The Iceberg extension lets you connect to the following Iceberg catalog types:
+
+* Glue catalog
+* REST-based catalog
+* Hive metastore catalog
+* Local catalog
+
+For a given catalog, Iceberg input source reads the table name from the catalog, applies the filters, and extracts all the underlying live data files up to the latest snapshot.
+The data files can be in Parquet, ORC, or Avro formats. The data files typically reside in a warehouse location, which can be in HDFS, S3, or the local filesystem.
+The `druid-iceberg-extensions` extension relies on the existing input source connectors in Druid to read the data files from the warehouse. Therefore, the Iceberg input source can be considered as an intermediate input source, which provides the file paths for other input source implementations.
+
+## Hive metastore catalog
+
+For Druid to seamlessly talk to the Hive metastore, ensure that the Hive configuration files such as `hive-site.xml` and `core-site.xml` are available in the Druid classpath for peon processes.  
+You can also specify Hive properties under the `catalogProperties` object in the ingestion spec. 
+
+The `druid-iceberg-extensions` extension presently supports HDFS, S3, GCS, and local warehouse directories.
+
+### Read from HDFS warehouse 
+
+To read from a HDFS warehouse, load the `druid-hdfs-storage` extension. Druid extracts data file paths from the Hive metastore catalog and uses [HDFS input source](../../ingestion/input-sources.md#hdfs-input-source) to ingest these files.
+The `warehouseSource` type in the ingestion spec should be `hdfs`.
+
+For authenticating with Kerberized clusters, include `principal` and `keytab` properties in the `catalogProperties` object:
+
+```json
+"catalogProperties": {
+  "principal": "krb_principal",
+  "keytab": "/path/to/keytab"
+}
+```
+Only Kerberos based authentication is supported as of now.
+
+### Read from S3 warehouse
+
+To read from a S3 warehouse, load the `druid-s3-extensions` extension. Druid extracts the data file paths from the Hive metastore catalog and uses `S3InputSource` to ingest these files.
+Set the `type` property of the `warehouseSource` object to `s3` in the ingestion spec. If the S3 endpoint for the warehouse is different from the endpoint configured as the deep storage, include the following properties in the `warehouseSource` object to define the S3 endpoint settings:
+
+```json
+"warehouseSource": {
+  "type": "s3",
+  "endpointConfig": {
+    "url": "S3_ENDPOINT_URL",
+    "signingRegion": "us-east-1"
+  },
+  "clientConfig": {
+    "protocol": "http",
+    "disableChunkedEncoding": true,
+    "enablePathStyleAccess": true,
+    "crossRegionAccessEnabled": false
+  },
+  "properties": {
+    "accessKeyId": {
+      "type": "default",
+      "password": "<ACCESS_KEY_ID"
+    },
+    "secretAccessKey": {
+      "type": "default",
+      "password": "<SECRET_ACCESS_KEY>"
+    }
+  }
+}
+```
+
+This extension uses the [Hadoop AWS module](https://hadoop.apache.org/docs/stable/hadoop-aws/tools/hadoop-aws/) to connect to S3 and retrieve the metadata and data file paths.
+The following properties are required in the `catalogProperties`:
+
+```json
+"catalogProperties": {
+  "fs.s3a.access.key" : "S3_ACCESS_KEY",
+  "fs.s3a.secret.key" : "S3_SECRET_KEY",
+  "fs.s3a.endpoint" : "S3_API_ENDPOINT"
+}
+```
+Since the Hadoop AWS connector uses the `s3a` filesystem client, specify the warehouse path with the `s3a://` protocol instead of `s3://`.
+
+### Read from GCS warehouse
+
+To read from a GCS warehouse, load the `druid-google-extensions` extension. Druid extracts the
+data file paths from the catalog and uses `GoogleCloudStorageInputSource` to ingest these files.
+Set the `type` property of the `warehouseSource` object to `google` in the ingestion spec:
+
+```json
+"warehouseSource": {
+  "type": "google"
+}
+```
+
+For the Iceberg catalog to read its own metadata files from GCS, set `io-impl` to
+`org.apache.iceberg.gcp.gcs.GCSFileIO` in `catalogProperties`:
+
+```json
+"catalogProperties": {
+  "io-impl": "org.apache.iceberg.gcp.gcs.GCSFileIO",
+  "gcs.project-id": "my-gcp-project",
+  "warehouse": "gs://my-bucket/warehouse"
+}
+```
+
+Authentication uses Application Default Credentials (ADC). Ensure that the Druid processes
+have access to valid GCP credentials (e.g., via a service account key file, workload identity,
+or metadata server).
+
+## Local catalog
+
+The local catalog type can be used for catalogs configured on the local filesystem. Set the `icebergCatalog` type to `local`. You can use this catalog for demos or localized tests. It is not recommended for production use cases.
+The `warehouseSource` is set to `local` because this catalog only supports reading from a local filesystem.
+
+## REST catalog
+
+To connect to an Iceberg REST Catalog server, configure the `icebergCatalog` type as `rest`. The Iceberg REST Open API spec gives catalogs greater control over the implementation and in most cases, the `warehousePath` does not have to be provided by the client.
+Security credentials may be provided in the `catalogProperties` object.
+
+## Glue catalog
+
+Configure the `icebergCatalog` type as `glue`.`warehousePath` and properties must be provided in `catalogProperties` object.
+Refer [Iceberg Glue Catalog documentation](https://iceberg.apache.org/docs/1.7.2/aws/#glue-catalog) for setting properties. 
+
+
+## Downloading Iceberg extension
+
+To download `druid-iceberg-extensions`, run the following command after replacing `<VERSION>` with the desired
+Druid version:
+
+```shell
+java \
+  -cp "lib/*" \
+  -Ddruid.extensions.directory="extensions" \
+  org.apache.druid.cli.Main tools pull-deps \
+  -c "org.apache.druid.extensions.contrib:druid-iceberg-extensions:<VERSION>"
+```
+
+See [Loading community extensions](../../configuration/extensions.md#loading-community-extensions) for more information.
+
+## Residual filter handling
+
+When an Iceberg filter is applied on a non-partition column, the filtering happens at the file metadata level only (using column statistics). Files that might contain matching rows are returned, but these files may include "residual" rows that don't actually match the filter. These residual rows would be ingested unless filtered by a `transformSpec` filter on the Druid side.
+
+To control this behavior, you can set the `residualFilterMode` property on the Iceberg input source:
+
+| Mode | Description |
+|------|-------------|
+| `ignore` | Default. Residual rows are ingested with a warning log unless filtered by `transformSpec`. |
+| `fail` | Fail the ingestion job when residual filters are detected. Use this to ensure that filters only target partition columns. |
+
+Example:
+```json
+{
+  "type": "iceberg",
+  "tableName": "events",
+  "namespace": "analytics",
+  "icebergCatalog": { ... },
+  "icebergFilter": {
+    "type": "timeWindow",
+    "filterColumn": "event_time",
+    "lookbackDuration": "P1D"
+  },
+  "residualFilterMode": "fail",
+  "warehouseSource": { ... }
+}
+```
+
+When `residualFilterMode` is set to `fail` and a residual filter is detected, the job will fail with an error message indicating which filter expression produced the residual. This helps ensure data quality by preventing unintended rows from being ingested.
+
+## Arrow vectorized reader
+
+By default the Iceberg input source resolves the snapshot to a list of data file paths and reads them through the `warehouseSource`. Setting `useArrowReader` to `true` reads the table scan directly with Iceberg's vectorized Arrow reader instead, which avoids the per-file input format layer.
+
+| Property | Description | Default |
+|----------|-------------|---------|
+| `useArrowReader` | Read the table with Iceberg's vectorized Arrow reader. | `false` |
+| `arrowBatchSize` | Rows per Arrow batch. Only applies when `useArrowReader` is `true`. | `1024` |
+
+Example:
+```json
+{
+  "type": "iceberg",
+  "tableName": "events",
+  "namespace": "analytics",
+  "icebergCatalog": { ... },
+  "useArrowReader": true,
+  "arrowBatchSize": 2048
+}
+```
+
+Note the following when `useArrowReader` is `true`:
+
+- The table must store its data files as Parquet. Ingestion fails with an error if it finds a data file in any other format.
+- `warehouseSource` is not required and is unused. It is still required when `useArrowReader` is `false`.
+- No `inputFormat` is needed, since the reader works from Iceberg metadata.
+- The input source is not splittable, so the table is read by a single task even in a parallel ingestion. Keep `useArrowReader` set to `false` if you rely on parallel batch ingestion for throughput.
+
+## Known limitations
+
+This section lists the known limitations that apply to the Iceberg extension.
+
+- This extension does not fully utilize the Iceberg features such as snapshotting or schema evolution.
+- The Iceberg input source reads every single live file on the Iceberg table up to the latest snapshot, which makes the table scan less performant. It is recommended to use Iceberg filters on partition columns in the ingestion spec in order to limit the number of data files being retrieved. Since, Druid doesn't store the last ingested iceberg snapshot ID, it cannot identify the files created between that snapshot and the latest snapshot on Iceberg.
+- It does not handle Iceberg [schema evolution](https://iceberg.apache.org/docs/latest/evolution/) yet. In cases where an existing Iceberg table column is deleted and recreated with the same name, ingesting this table into Druid may bring the data for this column before it was deleted.
+- The Hive catalog has not been tested on Hadoop 2.x.x and is not guaranteed to work with Hadoop 2.

@@ -580,7 +580,7 @@ We've finished defining the ingestion spec, it should now look like the followin
 
 ## Submit the task and query the data
 
-From the `apache-druid-38.0.0` package root, run the following command to create a datasource called `ingestion tutorial`:
+From the `apache-druid-39.0.0` package root, run the following command to create a datasource called `ingestion tutorial`:
 
 ```bash
 curl -X POST http://localhost:8081/druid/indexer/v1/task \

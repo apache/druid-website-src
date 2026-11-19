@@ -49,7 +49,7 @@ Don't use the default remote repository, https://repo1.maven.org/maven2/. Only u
 
 `-d` or `--defaultVersion`
 
-Version to use for extension coordinate that doesn't have a version information. For example, if extension coordinate is `org.apache.druid.extensions:mysql-metadata-storage`, and default version is `38.0.0`, then this coordinate will be treated as `org.apache.druid.extensions:mysql-metadata-storage:38.0.0`
+Version to use for extension coordinate that doesn't have a version information. For example, if extension coordinate is `org.apache.druid.extensions:mysql-metadata-storage`, and default version is `39.0.0`, then this coordinate will be treated as `org.apache.druid.extensions:mysql-metadata-storage:39.0.0`
 
 `--use-proxy`
 
@@ -83,10 +83,10 @@ To run `pull-deps`, you should
 
 Example:
 
-Suppose you want to download ```mysql-metadata-storage``` with a specific version, you can run `pull-deps` command with `-c org.apache.druid.extensions:mysql-metadata-storage:38.0.0`, an example command would be:
+Suppose you want to download ```mysql-metadata-storage``` with a specific version, you can run `pull-deps` command with `-c org.apache.druid.extensions:mysql-metadata-storage:39.0.0`, an example command would be:
 
 ```
-java -classpath "/my/druid/lib/*" org.apache.druid.cli.Main tools pull-deps --clean -c org.apache.druid.extensions:mysql-metadata-storage:38.0.0
+java -classpath "/my/druid/lib/*" org.apache.druid.cli.Main tools pull-deps --clean -c org.apache.druid.extensions:mysql-metadata-storage:39.0.0
 ```
 
 Because `--clean` is supplied, this command will first remove the directories specified at `druid.extensions.directory`, then recreate them and start downloading the extensions there. After finishing downloading, if you go to the extension directories you specified, you will see
@@ -95,13 +95,13 @@ Because `--clean` is supplied, this command will first remove the directories sp
 tree extensions
 extensions
 └── mysql-metadata-storage
-    └── mysql-metadata-storage-38.0.0.jar
+    └── mysql-metadata-storage-39.0.0.jar
 ```
 
-Note that if you specify `--defaultVersion`, you don't have to put version information in the coordinate. For example, if you want `mysql-metadata-storage` to use version `38.0.0`,  you can change the command above to
+Note that if you specify `--defaultVersion`, you don't have to put version information in the coordinate. For example, if you want `mysql-metadata-storage` to use version `39.0.0`,  you can change the command above to
 
 ```
-java -classpath "/my/druid/lib/*" org.apache.druid.cli.Main tools pull-deps --defaultVersion 38.0.0 --clean -c org.apache.druid.extensions:mysql-metadata-storage
+java -classpath "/my/druid/lib/*" org.apache.druid.cli.Main tools pull-deps --defaultVersion 39.0.0 --clean -c org.apache.druid.extensions:mysql-metadata-storage
 ```
 
 :::info
