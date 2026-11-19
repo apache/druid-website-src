@@ -46,6 +46,7 @@ module.exports={
           "routeBasePath": "/docs/"+buildVersion,
           "sidebarPath": "./sidebars.json"
         },
+        "blog": false,
         "theme": {
          "customCss": [
           "./src/css/customTheme.css",
@@ -151,5 +152,11 @@ module.exports={
         "src": "img/favicon.png"
       }
     },
+  },
+  future: {
+    v4: {
+      fasterByDefault: true,
+      removeLegacyPostBuildHeadAttribute: true
+    }
   }
 }
