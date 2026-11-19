@@ -60,6 +60,7 @@ Some great folks have written their own libraries to interact with Apache Druid.
 #### .NET
 
 * [raygun/druid4net](https://github.com/MindscapeHQ/druid4net) - A .NET client for Druid written in C#. Supports the .NET full framework and .NET Core.
+* [oskar11120/Apache.Druid.Querying](https://github.com/oskar11120/Apache.Druid.Querying) - Apache Druid client library/micro-orm for dotnet 6+ inspired by EF Core.
 
 #### Rust
 
