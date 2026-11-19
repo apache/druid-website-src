@@ -22,17 +22,17 @@ title: "Release notes"
   ~ under the License.
   -->
 
-<!--Replace 38.0.0 with the correct Druid version.-->
+<!--Replace 39.0.0 with the correct Druid version.-->
 
-Apache Druid 38.0.0 contains over 291 new features, bug fixes, performance enhancements, documentation improvements, and additional test coverage from 38 contributors.
+Apache Druid 39.0.0 contains over 680 new features, bug fixes, performance enhancements, documentation improvements, and additional test coverage from 42 contributors.
 
 <!--
 Replace {{MILESTONE}} with the correct milestone number. For example: https://github.com/apache/druid/issues?q=is%3Aclosed+milestone%3A28.0+sort%3Aupdated-desc+
 -->
 
-See the [complete set of changes](https://github.com/apache/druid/milestone/68?closed=1) for additional details, including bug fixes.
+See the [complete set of changes](https://github.com/apache/druid/milestone/69?closed=1) for additional details, including bug fixes.
 
-Review the [upgrade notes](#upgrade-notes) and [incompatible changes](#incompatible-changes) before you upgrade to Druid 38.0.0.
+Review the [upgrade notes](#upgrade-notes) and [incompatible changes](#incompatible-changes) before you upgrade to Druid 39.0.0.
 If you are upgrading across multiple versions, see the [Upgrade notes](upgrade-notes.md) page, which lists upgrade notes for the most recent Druid versions.
 
 <!-- 
@@ -57,461 +57,397 @@ For tips about how to write a good release note, see [Release notes](https://git
 
 This section contains important information about new and existing features.
 
-#### Java
+### Java
 
-Druid now supports Java 25. While Java 21 is still supported, we recommend you upgrade to Java 25.
+Support for Java 21 has been dropped. You must upgrade to Java 25.
 
-Support for Java 17 has been dropped.
+### DDL statements for the catalog (experimental)
 
-[#19304](https://github.com/apache/druid/pull/19304) [#19336](https://github.com/apache/druid/pull/19336)
+Druid now supports CREATE and ALTER statements to manage metadata in the catalog. Use them to declare a table's columns, time partitioning, clustering, aggregate projections, and physical layout, instead of setting these in each ingestion spec.
 
-#### Historical tier aliases
+This feature is off by default. To enable it, set `druid.sql.planner.enableCatalogDdl` to `true`.
 
-You can map a virtual tier name to a number of real Historical tiers with the `historicalTierAliases` Coordinator dynamic configuration. This creates a single identifier for a group of Historical tiers. When a load/drop rule references the alias, the Coordinator replaces it with the actual tiers. For example, if you map the Historical tiers `hot_1` and `hot_2` to the alias `hot`, the rule `{"hot": 2}` loads 2 replicas of each onto `hot_1` and `hot_2`.
+For more information, see [Catalog](../development/extensions-core/catalog.md).
 
-[#19204](https://github.com/apache/druid/pull/19204) [#19667](https://github.com/apache/druid/pull/19667)
+[#19830](https://github.com/apache/druid/pull/19830) [#20377](https://github.com/apache/druid/pull/20377) [#20452](https://github.com/apache/druid/pull/20452) [#19770](https://github.com/apache/druid/pull/19770) [#19711](https://github.com/apache/druid/pull/19711)
 
-#### Realtime segments mode query context
+### Kafka header-based filtering
 
-The `realtimeSegmentsOnly` query context parameter has been deprecated and replaced with `realtimeSegmentsMode`. 
+Kafka supervisors can now filter records by their headers. This reduces ingestion CPU and memory use when you only need some of a topic's records.
 
-You can set `realtimeSegmentsMode` to one of the following:
+To use the filter, add `headerBasedFilterConfig` to the supervisor's `ioConfig`. Use an `in` filter where `dimension` is the header name and `values` lists the header values to ingest. Records whose header value isn't in the list are dropped, and offsets still advance.
 
-- `include` (default): query all segments, including realtime segments
-- `exclude`: skip realtime segments for the query
-- `exclusive`: query only realtime segments 
+Filtering is permissive: records are ingested if they don't have the header, if the header value is null, empty, or can't be decoded, or if evaluation fails.
 
-This is useful when performing things like blue/green deployments and you only want to query new Historical replica autoscaling groups and not touch any "live" nodes (neither realtime nor historical).
+The new `ingest/events/filtered` metric reports how many records header filtering dropped.
 
-[#19486](https://github.com/apache/druid/pull/19486)
+[#18525](https://github.com/apache/druid/pull/18525)
 
-#### Faster segment metadata search
+### Typed query context parameters
 
-You can set `druid.segment.timeline.fastIntervalSearch` to `true` so that Druid uses an index based on interval trees to store that metadata in memory for faster identification and retrieval.
+Common query context parameters listed in [Query context reference](../querying/query-context-reference.md) and [Scan queries](../querying/scan-query.md) are now typed `QueryContextParameter` descriptors. The following changes apply to the query context handling:
 
-This feature is off by default.
+* Integer and long parameters reject values that aren't exact integers instead of truncating or wrapping them. For example `1.5`, and values out of range. Integral values like 5.0 or "5.0" are still accepted. Invalid values now fail with an error message: "Query context parameter [x] should be ...."
+* A null in the query context, or SET x = NULL, no longer clears a default configured with `druid.query.default.context` or the Broker dynamic configuration. The default applies as if the key were not set. Previously the null reached readers, which used the built-in default. To override a configured default, set an explicit value.
+* `maxSubqueryBytes` is a typed string parameter that accepts auto, disabled or a non-negative number of bytes, as the subquery guardrail does. Invalid values such as `SET maxSubqueryBytes = TRUE` now fail during validation, and numbers such as `1e9` are now accepted.
 
-[#19138](https://github.com/apache/druid/issues/19138) [#19850](https://github.com/apache/druid/issues/19850)
+[#20555](https://github.com/apache/druid/pull/20555/)
 
-#### Fetching files in the background
+### Druid JDBC driver
 
-The MSQ task engine now supports workers fetching input files from cloud storage asynchronously. This overlaps downloading with processing, which generally improves throughput when reading larger numbers of files. Otherwise, workers stream each file directly from cloud storage while processing it.
+Druid now provides its own JDBC driver that uses the `/druid/v2/sql/` endpoint. We recommend that you switch from the Avatica driver to this driver. The new driver provides the following benefits: driver-side connection management that doesn't require sticky load balancing, streaming results, support for SET statements, and support for non-native SQL engines.
 
-This feature is on by default and is controlled by the `backgroundFetchExternalFiles` setting.
+[#19951](https://github.com/apache/druid/pull/19951)
 
-[#19539](https://github.com/apache/druid/pull/19539)
+### Netty 4.2
 
-#### Segment prefetching for Dart
+Druid now uses Netty 4.2 for its HTTP client. Previously, Druid used Netty 3. This is a substantive change in memory characteristics:
 
-Historicals with virtual storage enabled now support the runtime property `druid.msq.dart.worker.segmentLoadAheadCount`, which controls the number of segments that Dart prefetches. If set greater than 0 for a worker, this setting becomes the default `segmentLoadAheadCount` value for the worker. If a query includes the `segmentLoadAheadCount` query context parameter, the query context takes precedence.
+- Direct memory: The HTTP client now consumes some direct memory. Operators running close to their `-XX:MaxDirectMemorySize` budget may need to increase it.
+- Pooled buffers: Buffers are now pooled, so resident memory may appear higher than under Netty 3, even when idle. This is normal for a pooled allocator.
 
-[#19559](https://github.com/apache/druid/pull/19559)
+There are new configs that control the behavior of the HTTP client: `druid.global.http.connectTimeout`, `druid.global.http.allocator`, `druid.broker.http.connectTimeout`, and `druid.broker.http.allocator`. You can also set some Netty configs directly.
 
-#### Improved Convert to SQL in web console
+[#19567](https://github.com/apache/druid/pull/19567)
 
-The web console now supports converting streaming supervisors to SQL-based ingestion queries. This makes it easier for you to run a streaming task as a one-time batch ingestion.
+### Quality of service filtering for Coordinator
 
-Select the **Convert supervisor to SQL** option from the **...** menu in the Query view. You can select from existing supervisors or provide JSON for a new one.
+You can now enable QoS filtering for the Coordinator to prevent a burst of slow API requests from exhausting the thread pool and blocking health checks.
 
-[#19547](https://github.com/apache/druid/pull/19547)
+Use `druid.coordinator.server.maxConcurrentRequests` to configure this feature `(default: max(1, max(serverHttpNumThreads - 4, serverHttpNumThreads * 0.8)))`. Set this property to `0` to turn it off.
 
-#### Deprecate legacy ZSTD frames
+Leader-status endpoints are excluded from the cap so load balancers/monitors stay unaffected.
 
-Druid 38 will be the last major Druid release that supports reading from legacy ZSTD (version 0.4 to 0.7) frames. Support will be removed for these frames in future releases for both batch and streaming ingestion.
-
-The primary reason for this deprecation is that the underlying library `zstd-jni` removes decoding for legacy frames in version `1.5.7-13` onward.
+[#19271](https://github.com/apache/druid/pull/19271)
 
 ## Functional area and related changes
 
 This section contains detailed release notes separated by areas.
 
-### Web console
-
-#### Other web console improvements
-
-- Added the following status details to the **Services** view for Historical services: cloning from another Historical, in turbo loading mode, in decommissioning mode [#19253](https://github.com/apache/druid/pull/19253)
-- Added support for resetting a supervisor to the latest offsets and backfilling [#19533](https://github.com/apache/druid/pull/19533)
-- Improved handling for new tabs [#19483](https://github.com/apache/druid/pull/19483)
-- Improved the Home view's **Services** card. It now reports Overlord, Coordinator, Router, Broker, and Indexer counts on clusters where the web console talks to the Coordinator without SQL access [#19481](https://github.com/apache/druid/pull/19481)  
-
 ### Ingestion
 
-* You can now use the expression aggregator at ingestion time for expressions that produce a LONG or DOUBLE for both fold and combine expressions [#19508](https://github.com/apache/druid/pull/19508)
-* Added `now()` expression function that returns the current system timestamp in milliseconds since epoch. Useful at ingestion time for troubleshooting pipeline delays (e.g., `now() - __time`). Note: `now()` is non-deterministic as it evaluates for every row, so it can break idempotency. This can be added to any column besides `__time` [#19386](https://github.com/apache/druid/pull/19386)
-* Improved resiliency when ingesting from S3. Druid now retries on `SSLException` and transient credential errors instead of failing [#19617](https://github.com/apache/druid/pull/19617) [#19558](https://github.com/apache/druid/pull/19558)
-* Improved S3 performance [#19394](https://github.com/apache/druid/pull/19394)
-* Updated the default S3 connection pool size so that it's computed based on the number of available processors [#19536](https://github.com/apache/druid/pull/19536)
+- Added support for RE2/J regex for the `regex` input format [#19514](https://github.com/apache/druid/pull/19514)
+- Changed the S3 client to use the AWS-recommended standard retry policy. You can customize the retry strategy using `druid.s3.retryMode` and `druid.s3.maxAttempts` [#19892](https://github.com/apache/druid/pull/19892)
+- Protobuf ingestion now keeps the default value of `proto3` fields that are not marked optional. Previously an `int32` field holding `0` (or a string holding "", a `bool` holding false, an `enum` holding its first value) was ingested as null. Such fields now ingest as their actual value. [#20485](https://github.com/apache/druid/pull/20485)
 
 #### SQL-based ingestion
 
-##### EXTERN for S3 now supports role ARN
+-  Workers now only pass the necessary worker context instead of the entire worker context to the task context. [#20650](https://github.com/apache/druid/pull/20650)
 
-You can now include the role ARN when running an INSERT INTO EXTERN query. For example:
-
-```
-INSERT INTO
-EXTERN(
-  s3(bucket => 'test2', prefix => 'export', assumeRoleArn => 'arn:aws:iam::00000:role/test-20260520'))
-AS CSV
-SELECT ...
-```
-
-[#19317](https://github.com/apache/druid/pull/19317)
-
-##### Other SQL-based ingestion improvements
-
-- Added storage counters for the amount of bytes and files written to local and durable storage as well as the state of the local `ByteTracker`. Per-worker storage counters have also been added to the web console [#19316](https://github.com/apache/druid/pull/19316)
 
 #### Streaming ingestion
 
-##### Scaling cool down
+##### Ingesting from selected partitions
 
-You can now configure different cool down durations for scaling up and scaling down streaming task autoscalers.
+Kafka supervisors now accept `ioConfig.partitionIds`, which lets you ingest only selected partitions of a topic. For example, you can use this for independent diagnostic ingestion.
 
-[#19286](https://github.com/apache/druid/pull/19286)
+[#20474](https://github.com/apache/druid/pull/20474)
 
-##### Improved supervisor restarts
+##### Cost-based autoscaler improvements
 
-Supervisors no longer restart for all changes. Based on the type of change, one of the following can occur:
-
-- Druid persists the updated spec without a restart.
-- Druid restarts the supervisor, but running tasks aren't impacted.
-- Druid restarts the supervisor, terminates the current tasks and launches fresh tasks (default behavior in older Druid versions).
-
-For example, cosmetic changes to a supervisor spec no longer trigger a restart.
-
-[#19700](https://github.com/apache/druid/pull/19700) [#19720](https://github.com/apache/druid/pull/19720)
-
-Additionally, the algorithm for determining a change in the spec has been improved. For example, changes to `ioConfig.taskCount` don't trigger a supervisor restart if auto-scaling is enabled.
-
-[#19541](https://github.com/apache/druid/pull/19541)
-
-###### Latest offset and backfill
-
-For Kafka and RabbitMQ, you can now reset a supervisor to the latest offset and start a new bounded backfill supervisor to ingest data from the skipped range. This is a useful feature for operating Druid clusters where the most recent data is the most important, like alerting scenarios.
-
-Note the following requirements:
-
-- The supervisor's `useEarliestSequenceNumber` property must be `false`.
-- The supervisor context must have `useConcurrentLocks` set to `true` to allow the backfill supervisor's tasks to write concurrently with the main supervisor's tasks.
-- The supervisor must be in a `RUNNING` state.
-
-Use `POST` `/druid/indexer/v1/supervisor/{supervisorId}/resetToLatestAndBackfill` or the web console to perform this action.
-
-[#19477](https://github.com/apache/druid/pull/19477)
-
-##### Prunable shard specs for streaming published segments
-
-Kafka ingestion can now publish segments that the Broker prunes at query time without waiting for compaction. Set `tuningConfig.streamingPartitionsSpec.partitionDimensions` to a list of low-to-medium cardinality dimensions; each task records
-the distinct values it observes per dimension and stamps them onto a new `dim_value_set` shard spec. Queries that filter on a declared dimension then skip segments whose values can't match. 
-
-The feature is opt-in, Kafka-only, and disabled by
-default; when unset, behavior is unchanged.
-
-`dim_value_set` is a new core shard spec type with no fallback, so it is not forward-compatible. Upgrade all services before enabling `streamingPartitionsSpec`. Once `dim_value_set` segments are published, downgrade is unsupported
-until they are compacted away or `streamingPartitionsSpec` is removed.
-
-Added `maxValuesPerDimension` (optional) to `streamingPartitionsSpec`.
-  
-[#19571](https://github.com/apache/druid/pull/19571) [#19596](https://github.com/apache/druid/pull/19596)
+- You can now simulate the cost-based autoscaler for Kafka to help determine the optimal task count for different amounts of lag. [#19687](https://github.com/apache/druid/pull/19687)
+- You can now set a critical lag threshold for the cost-based autoscaler. When lag reaches 75% of the threshold, the autoscaler bypasses the scale-up boundary. When lag reaches 100%, the autoscaler scales up to the maximum task count. [#19655](https://github.com/apache/druid/pull/19655)
+- You can now choose to configure cooldown for the cost-based autoscaler for a supervisor in one of 2 ways:
+     - **High sensitivity**: Set `minScaleUpDelay / minScaleDownDelay < taskDuration`. For example if `minScaleUpDelay = taskDuration / 2`, there would be at most 1 scaling event between 2 task rollovers
+     - **Low sensitivity** : Set `minScaleUpDelay / minScaleDownDelay > taskDuration`. In this case, cooldown is effectively ignored and the scaling happens on task rollover only.
+     [#20706](https://github.com/apache/druid/pull/20706)
+- The cost-based autoscaler now uses running averages instead of instantaneous values of task metrics to make decisions for the cost based auto-scaler. This leads to smoother scaling but may sometimes come at the cost of slightly delayed responses to change in metric trends that occur towards the end of the task lifecycle. For higher sensitivity to changing trends, set `minScaleUpDelay` and `minScaleDownDelay` to be smaller than `taskDuration`.
 
 ##### Other streaming ingestion improvements
 
-- Added a property called `boundedStreamConfig` to the `SeekableStreamSupervisorIOConfig`, which allows operators to spin up a Supervisor that consumes only a specified offset range [#19372](https://github.com/apache/druid/pull/19372)
-- Improved the cost-based autoscaler for better throughput [#19646](https://github.com/apache/druid/pull/19646)
+- Fixed a bug where a Kafka indexing task would report a poll-idle-ratio of 1.0 (i.e. fully idle) before any sample was actually available, which could skew the supervisor autoscaler's averaged idle ratio across tasks. [#20783](https://github.com/apache/druid/pull/20783)
 
 ### Querying
 
-#### New query laning strategy
+#### Query planning time
 
-The `weighted` query laning strategy scores queries by how many thresholds they breach (segment count, interval duration, data age, segment range) and assigns them to configurable graduated lanes with different capacity limits, providing more nuanced lane assignment than the existing binary high/low strategy.
+You can now limit how long the Broker spends planning a SQL query with the new `druid.sql.planner.maxPlanningTimeMs` runtime property. You can also set it per query using the `maxPlanningTimeMs` query context parameter. When planning exceeds the configured budget, the query fails with an HTTP 504 Query timeout error instead of tying up a Broker thread. The default value is `0`, which disables the timeout.
 
-The weighted query laning strategy supports optional per-threshold cost weights:
+[#20314](https://github.com/apache/druid/pull/20314)
 
-- `periodWeight`
-- `durationWeight`
-- `segmentCountWeight`
-- `segmentRangeWeight`
+#### Fixed JDK HTTP client failures caused by query response trailers
 
-These threshold weights default to 1.
+Brokers and Historicals now send the `X-Druid-Response-Complete` and `X-Error-Message` HTTP trailers only when the request includes the `TE: trailers` header. Clients that read these trailers must send that header. This fixes query failures (`java.net.ProtocolException: CR expected`) in `java.net.http.HttpClient-based` clients, including the Druid JDBC driver, on JDK 17.0.21, 21.0.13 and 25.0.5.
 
-[#19225](https://github.com/apache/druid/pull/19225) [#19665](https://github.com/apache/druid/pull/19665) [#19696](https://github.com/apache/druid/pull/19696)
+[#20717](https://github.com/apache/druid/pull/20717)
 
 #### Other querying improvements
 
-- Added nullable `minTime/maxTime` Long fields to `ProjectionMetadata` [#19398](https://github.com/apache/druid/pull/19398)
-- Added `getDimensionRangeSet` support to `LikeDimFilter` for equality and prefix cases [#19524](https://github.com/apache/druid/pull/19524)
-- Added support for aggregate projections with clustered segments [#19599](https://github.com/apache/druid/pull/19599)
-- Optimized performance of aggregators for groupBy queries [#19423](https://github.com/apache/druid/pull/19423)
+- You can now use Dart to query metadata tables such as those in the `sys` schema [#19952](https://github.com/apache/druid/pull/19952)
+- `CAST(x AS LONG)` is now accepted as an alias for `CAST(x AS BIGINT)` in Druid SQL [#20402](https://github.com/apache/druid/pull/20402)
+- Added `datasource` filter pushdown to `sys.segments` table [#19718](https://github.com/apache/druid/pull/19718)
+- Added framing support to the FIRST_VALUE and LAST_VALUE window functions [#19301](https://github.com/apache/druid/pull/19301)
+- Improved the performance of timeseries, timeBoundary, and scan queries that run in descending order [#19947](https://github.com/apache/druid/pull/19947)
+- Improved the performance of COALESCE [#18400](https://github.com/apache/druid/pull/18400)
+- Improved S3 API usage efficiency for MSQ tasks using durable storage and MSQ export [#19893](https://github.com/apache/druid/pull/19893)
+- Improved validation for catalog types and parsing for native type strings [#19769](https://github.com/apache/druid/pull/19769)
+- Upgraded to Calcite 1.42.0 [#19976](https://github.com/apache/druid/pull/19976) [#19370](https://github.com/apache/druid/pull/19370)
 
 ### Cluster management
 
-#### Improved `diskNormalized` balancer strategy
+#### Kubernetes node labels
 
-The `diskNormalized` strategy is now more tunable.  The `utilizationThreshold` configuration works more intuitively: increasing the threshold increases the "tolerance" of the strategy while decreasing the threshold pushes nodes' disk utilization closer together.
+The `druid-kubernetes-extensions` extension now supports a `k8sNodeLabel` dynamic config provider, which resolves configuration values from the labels of the Kubernetes node a Druid process runs on.
 
-[#19663](https://github.com/apache/druid/pull/19663)
+[#20404](https://github.com/apache/druid/pull/20404)
 
-#### MiddleManager and Indexer restarts
+#### Peon pod template
 
-MiddleManagers and Indexers now persist their enabled or disabled state across restarts. If you prefer the old behavior, where the server re-enables itself after a restart, set `druid.worker.startAlwaysEnabled = true`.
+You can now retrieve the Peon pod template names currently configured on the Overlord using the new `GET` `/druid/indexer/v1/k8s/taskrunner/podTemplates` endpoint. It returns the name for each configured template. The endpoint requires CONFIG read permission and returns 404 when the Overlord is not using the custom template pod adapter.
 
-[#19373](https://github.com/apache/druid/pull/19373)
+[#19712](https://github.com/apache/druid/pull/19712)
 
-#### Use processing rate for cost-based auto-scaler
+#### Environment variables
 
-Improved the cost-based auto scaler for Kafka. The `poll-idle ratio` only reflected the time spent polling, whether there is spare processing capacity. You can now configure the autoscaler to use a utilization ratio instead: 
+The `environment` dynamic config provider now omits variables that are not set in the environment instead of producing a null value that fails consumers such as the Kafka supervisor with a `NullPointerException`. A skipped variable is logged at info level.
 
-```
-1 - (avgProcessingRate / maxObservedRate)
-```
+[#20381](https://github.com/apache/druid/pull/20381)
 
-Set `useUtilizationRatio` to `true` to use this new ratio for autoscaling. 
+#### Connection pools
 
-[#19622](https://github.com/apache/druid/pull/19622)
+You can now configure how the Druid connection pool tracks connection demand using `druid.global.http.poolImplementation`.
 
+The default is `retaining`. With `retaining`, the pool keeps every connection it opens and replaces each stale or broken connection with a new one, so the pool stays at its high-water mark.
+
+[#20542](https://github.com/apache/druid/pull/20542) [#20273](https://github.com/apache/druid/pull/20273)
+
+#### HTTP response headers
+
+Druid can now optionally return `X-Druid-Server`, `X-Druid-Service`, and `X-Druid-Version` on HTTP responses, allowing operators to identify the process and version that served a direct or Router-proxied request. These headers expose cluster topology and version information, so only enable them if all clients are permitted to receive it. To enable them, set `druid.server.http.enableResponseIdentityHeaders` to `true`.
+
+[#20268](https://github.com/apache/druid/pull/20268)
+
+#### Improved LDAP support
+
+Added support for LDAP group-based authorization on servers that do not return the `memberOf` attribute (such as OpenLDAP). Configure `groupBaseDn` and `groupSearch` on the LDAP credentials validator to enable a reverse group lookup that resolves group memberships automatically.
+
+[#19432](https://github.com/apache/druid/pull/19432)
+
+#### Table visibility
+
+Users who query tables they don't have READ permission for now see a "not found" error instead of a "forbidden" error.
+
+To restore the previous behavior, set `druid.sql.planner.authorizeTableVisibility` to `false`.
+
+Additionally, when set to `true`, INSERT and REPLACE require both READ and WRITE access to the target table. If this property is set to `false`, they only require WRITE permission. Regardless of the value of this property, tables only appear in INFORMATION_SCHEMA if the user has READ access to them.
+
+This is a breaking change that affects the permissions you need. For more information, see [permissions changes for SQL-based ingestion](#permissions-changes-for-sql-based-ingestion).
+
+[#20075](https://github.com/apache/druid/pull/20075)
+
+#### Java home variable
+
+Middle Managers now honor `JAVA_HOME` when using the `bin/java` script, which should be present in the working directory.
+
+Druid uses the following logic
+
+- If you specified a command (such as if `config.getJavaCommand` is not null), use that.
+- If `bin/run-java` exists, use that
+- Use java
+
+[#19709](https://github.com/apache/druid/pull/19709)
+
+#### Add QoS filtering for Coordinator endpoints
+
+Added configurable QoS filtering to the Coordinator to prevent a burst of slow API requests from exhausting the thread pool and blocking health checks .
+Added a new configuration: `druid.coordinator.server.maxConcurrentRequests` (default: `max(1, max(serverHttpNumThreads - 4, serverHttpNumThreads * 0.8))`, set `<= 0` to disable).
+Leader-status endpoints are excluded from the cap so load balancers and monitors remain unaffected.
+
+[#19271](https://github.com/apache/druid/pull/19271)
 
 #### Other cluster management improvements
 
-- Added `datasource` filter pushdown to `sys.segments` table [#19718](https://github.com/apache/druid/pull/19718) [#19731](https://github.com/apache/druid/pull/19731)
-- Added a `restarted` boolean field to the supervisor POST endpoint response to indicate whether the supervisor was actually restarted [#19349](https://github.com/apache/druid/pull/19349)
-- Added `error_message` column to `sys.server_properties` table and made the table resilient to unreachable servers. Previously, the entire query would fail if any server was unreachable; now a row is returned with `error_message` populated. The table also now supports filter and projection pushdown [#19459](https://github.com/apache/druid/pull/19459)
-- Added `druid.expressions.useVectorApi` config to support the incubating JDK Vector API. To use the API, set the config to `true` and start Druid with the `--add-modules=jdk.incubator.vector` flag [#19512](https://github.com/apache/druid/pull/19512)
-- Added debug logging at the INFO level for projections if the debug flag is set [#19613](https://github.com/apache/druid/pull/19613)
-- The MSQ task engine now logs the full stack trace when `debug` is set in the context [#19361](https://github.com/apache/druid/pull/19361)
-- Improved the cost-based autoscaler so that it scales down over-provisioned supervisors running above the ideal idle ratio with low lag [#19562](https://github.com/apache/druid/pull/19562)
-- Improved how Druid handles Java. MiddleManagers now honor `JAVA_HOME` [#19709](https://github.com/apache/druid/pull/19709)
+- Added a `KILL` task lock type that can be used by embedded kill tasks so that the `UnusedSegmentsKiller` does not skip intervals with active ingestions [#19921](https://github.com/apache/druid/pull/19921)
+- Added support for PostgreSQL to the `export-metadata` tool [#19698](https://github.com/apache/druid/pull/19698)
+- Peons running tasks that do not serve queries (for example, batch, compaction, and MSQ tasks) now ignore `druid.server.http.unannouncePropagationDelay` and shut down without waiting. Real-time streaming tasks still honor the delay [#20444](https://github.com/apache/druid/pull/20444)
+- Improved port binding. Druid nodes can now advertise a different plaintext port for peer discovery while binding Jetty to the actual service port [#19598](https://github.com/apache/druid/pull/19598)
+- Reduced the heap footprint of loaded segments [#20467](https://github.com/apache/druid/pull/20467)
+- Fixed the `shutdownAllTasks` Overlord API (`POST /druid/indexer/v1/datasources/{datasource}/shutdownAllTasks`), which returned a 404 error since Druid 32.0.0. [#20824](https://github.com/apache/druid/pull/20824)
 
 ### Data management
 
+#### Skip intervals during compaction
+
+Auto-compaction now supports a `skipIntervals` setting in the datasource compaction config, allowing specific intervals to be excluded from compaction in addition to the existing `skipOffsetFromLatest` behavior. This is useful, for example, to exclude an interval that a backfill job is actively writing to, or one that consistently fails compaction.
+
+[#19792](https://github.com/apache/druid/pull/19792)
+
+#### Better visibility for large segment files
+
+Druid now reports when your range or hash partitioning settings produce overly large segment files (hot partitions) in a time chunk. Native batch ingestion with hash or range partitioning now logs a warning and emits the `ingest/segments/oversized` metric. The metric counts published segments with more than double `maxRowsPerSegment` rows, or more than triple `targetRowsPerSegment` for range partitioning. The task completion report also includes this count as `oversizedSegments`.
+
+[#20173](https://github.com/apache/druid/pull/20173)
+
+#### Faster segment searches
+
+You can now speed up segment searches in the in-memory timeline by enabling fast interval search. This feature uses an [interval tree](https://en.wikipedia.org/wiki/Interval_tree) index to organize the timeline in memory for faster loading and searching of segments.
+
+To use this feature, set `druid.segment.timeline.fastIntervalSearch` to `true`.
+
+[#19138](https://github.com/apache/druid/pull/19138) [#19861](https://github.com/apache/druid/pull/19861)
+
+#### Partial segment loading
+
+Druid now supports partial segment loading for virtual storage (on by default). To turn it off, set either of the following to `false`:
+
+- the runtime property `druid.indexer.task.virtualStoragePartialDownloadsEnabled`
+- the query context parameter `virtualStoragePartialDownloadsEnabled`
+
+[#19739](https://github.com/apache/druid/pull/19739)
+
 #### Other data management improvements
 
-* Improved how compaction supervisor specs start up. They no longer attempt to create tasks with invalid configs [#19223](https://github.com/apache/druid/pull/19223)
-* Changed Historical tiers so that they can only be associated with one tier alias [#19595](https://github.com/apache/druid/pull/19595)
-* Sped up segment metadata cache syncs [#19672](https://github.com/apache/druid/pull/19672)
+- Added support for MD5 request checksums for S3-compatible storage. To enable this feature, set `druid.s3.enableLegacyMd5` to `true` [#20055](https://github.com/apache/druid/pull/20055)
+- Added support for pushing, pulling, and killing segments in Azure and Google Cloud deep storage without zip compression [#20454](https://github.com/apache/druid/pull/20454) [#20327](https://github.com/apache/druid/pull/20327) [#20382](https://github.com/apache/druid/pull/20382) [#20380](https://github.com/apache/druid/pull/20380)
+- Improved the loading algorithm to better disperse requests across Historical tiers when using virtual storage [#20155](https://github.com/apache/druid/pull/20155)
+- Improved the efficiency of embedded kill tasks [#19772](https://github.com/apache/druid/pull/19772)
 
 ### Metrics and monitoring
 
-#### New metadata cache metrics
+#### Tier storage metrics
 
-Added the following metrics for the segment metadata cache:
+The tier storage metrics now provide better observability for Historicals, with or without virtual storage. Two metrics, `tier/required/capacity` and `tier/total/capacity`, are deprecated and will be removed in a future release. Use `tier/storage/required` and `tier/storage/capacity` instead.
 
-- `segment/metadataCache/unused/count`
-- `segment/metadataCache/fetchIds/time`
-- `segment/metadataCache/fetchPayloads/time`
-- `segment/metadataCache/fetchPending/time`
-- `segment/metadataCache/fetchSchemas/time`
-- `segment/metadataCache/fetchIndexingStates/time`
-- `segment/metadataCache/updateIds/time`
-- `segment/metadataCache/updateSnapshot/time`
-- `segment/metadataCache/schema/skipped`
-- `segment/metadataCache/indexingState/added`
-- `segment/metadataCache/indexingState/deleted`
+[#20199](https://github.com/apache/druid/pull/20199)
 
-[#19672](https://github.com/apache/druid/pull/19672)
+#### `task/run/time` metric
 
-#### Changed metrics for cost-based autoscaling
+The `statsd` and `prometheus` emitters now emit the `taskStatus` dimension on `task/run/time`. This is a breaking change. For more information, see [alerts on `task/run/time`](#alerts-on-taskruntime).
 
-Removed the following metrics:
-
-- `task/autoScaler/costBased/lagCost`
-- `task/autoScaler/costBased/idleCost`
-
-Added the following metrics:
-
-- `task/autoScaler/costBased/avgProcessingRate`
-- `task/autoScaler/costBased/avgPollIdleRatio`
-- `task/autoScaler/costBased/lagWeight`
-- `task/autoScaler/costBased/costWeight`
-
-[#19631](https://github.com/apache/druid/pull/19631)
-
-#### Auth metrics
-
-You can now configure Druid to emit metrics for authorization events.
-
-The `auth/forbidden` and `auth/exception` metrics have the following dimensions to support precise alerting on security events:
-
-- `identity`
-- `authorizerName`
-- `resourceName`
-- `resourceType`
-- `action`
-- `errorMessage` where applicable
-
-
-To enable this functionality, set `druid.auth.emitAuthMetrics` to `true`.
-
-[#19552](https://github.com/apache/druid/pull/19552)
-
-#### Storage metrics
-
-The `storage/load/bytes` and `storage/virtual/load/bytes` metrics now measure once the load is complete. Previously, they measured when the load starts.
-
-Additionally, `storage/load/begin/bytes` and `storage/virtual/load/begin/bytes` have been introduced and have the previous function of `storage/load/bytes` and `storage/virtual/load/bytes`.
-
-The `count` metrics have also been updated to reflect this.
-
-[#19451](https://github.com/apache/druid/pull/19451)
-
-#### Concurrent append and replace
-
-Added the following metrics for concurrent append and replace in realtime ingestion tasks:
-
-- `ingest/segmentUpgrade/count`
-- `ingest/segmentUpgrade/notified`
-- `ingest/segmentUpgrade/unmatched`
-- `ingest/segmentUpgrade/sendFailed`
-- `ingest/segmentUpgrade/announced`
-- `ingest/segmentUpgrade/skipped`
-
-[#19651](https://github.com/apache/druid/pull/19651)
+[#20122](https://github.com/apache/druid/pull/20122)
 
 #### Other metrics and monitoring improvements
 
-* Added the metric `segment/allocated/count` to track IDs of allocated pending segments [#19674](https://github.com/apache/druid/pull/19674)
-* Added `remoteAddress` dimension for JDBC/Avatica queries to the following metrics: `sqlQuery/time`, `sqlQuery/bytes`, and `sqlQuery/planningTimeMs` [#19231](https://github.com/apache/druid/pull/19231)
-* Added `identity` dimension on `query/time` metric for the Router [#19342](https://github.com/apache/druid/pull/19342)
-* Added `kafka/consumer/pollIdleRatio`, which corresponds to the Kafka consumer `poll-idle-ratio-avg` [#19366](https://github.com/apache/druid/pull/19366)
-* Added `supervisorId` to Kafka consumer metrics [#19525](https://github.com/apache/druid/pull/19525)
-* Added `tierAlias` dimension to some tiered metrics, making it easier to aggregate across aliases for the monitoring and alerting [#19595](https://github.com/apache/druid/pull/19595)
-* Added the `query/segments/count` metric to data nodes [#19624](https://github.com/apache/druid/pull/19624)
-* Added the following metrics for virtual storage: `storage/virtual/read/count`,  `storage/virtual/read/bytes`, `storage/virtual/read/time ` [#19632](https://github.com/apache/druid/pull/19632)
-* Changed `query/node/{bytes/time}` and backpressure metrics to emit even on query failure to data nodes [#19453](https://github.com/apache/druid/pull/19453)
-* Improved metrics for partial segment loading [#19632](https://github.com/apache/druid/pull/19632)
-* Improved router logging to always include `statusCode` dimension [#19668](https://github.com/apache/druid/pull/19668)
+- Peon task metrics for clusters that use the Kubernetes Overlord extension now include a `podTemplate` dimension. This makes it easier to monitor clusters that map different tasks to different pod templates [#20001](https://github.com/apache/druid/pull/20001)
+- Added `mergeBuffer/maxSpillProximity` which measures how close any single groupBy query came to spilling during the emission period, as a fraction in `[0.0, 1.0]` [#19627](https://github.com/apache/druid/pull/19627)
+- Added `taskType` to the various task count metrics, so you can filter them by task type [#20123](https://github.com/apache/druid/pull/20123)
 
-### Extensions
+### Contributor extensions
 
-#### Redis
+#### Iceberg
 
-You can now enable TLS support for Redis connections.
+Apache Iceberg ingestion now supports an opt-in vectorized reader backed by `iceberg-arrow`. Enable it with `"useArrowReader": true`; tune batching with `arrowBatchSize` (default 1024). The Arrow path supports Parquet data files, dictionary-encoded values, schema evolution, time-travel snapshots, column projection, and predicate pushdown. Snapshots containing positional or equality delete files aren't supported, and Druid rejects them with an error; use the standard delete-aware reader for those snapshots. The Arrow path is not splittable, so keep it disabled where parallel batch throughput is required. The default reader remains unchanged, and both paths coexist under the same Iceberg input-source type.
 
-[#19666](https://github.com/apache/druid/pull/19666)
+[#19510](https://github.com/apache/druid/pull/19510)
 
-#### `pac4j` OIDC authentication
+#### Open Policy Agent
 
-Users of the `druid-pac4j` OIDC authentication extension can now explicitly configure their preferred client authentication method using the new optional `clientAuthenticationMethod` parameter. This resolves compatibility issues introduced with `pac4j` `5.7.3` where OIDC providers advertising `private_key_jwt` would cause authentication failures when the asymmetric JWT method was not configured.
+Added the `druid-opa-authorizer` contributor extension, which enables authorization through Open Policy Agent (OPA). You can write Rego policies to control access to Druid resources based on user identity, action, and resource type. The extension supports both basic authentication and LDAP authentication workflows.
 
-Supported values include: `client_secret_basic`, `client_secret_post`, `client_secret_jwt`, `private_key_jwt`, and `none`. If not specified, `pac4j` will continue to use its auto-detection behavior.
-
-[#19020](https://github.com/apache/druid/pull/19020)
-
-#### Kubernetes
-
-- Added `sys` metrics for k8s peons [#19305](https://github.com/apache/druid/pull/19305)
-- Added experimental support for running Kubernetes indexing tasks across multiple Kubernetes clusters. Set `druid.indexer.runner.type=multik8s` and configure `druid.indexer.runner.clusters` to schedule tasks across multiple Kubernetes clusters from a single Overlord [#19433](https://github.com/apache/druid/pull/19433)
-- `jvm.config` ConfigMaps are now honored by Peons [#19364](https://github.com/apache/druid/pull/19364)
-- You can now set `podTemplateSelectionKey` in a task's context to pick a specific configured pod template (e.g. `druid.indexer.runner.k8s.podTemplate.<selectionKey>`) without configuring a `selectorBased` strategy. The override takes precedence over both the default and `selectorBased` strategies. The feature is controlled by the new runtime property `druid.indexer.runner.allowTaskPodTemplateSelection`, which defaults to `false`. If the named template isn't configured, the task fails to launch. [#19419](https://github.com/apache/druid/pull/19419)
-
-#### T-digest sketch
-
-You can now pin the maximum available compression on T-digest operators to bind resources using the `druid.tdigest.maxCompression` parameter.
-
-[#19310](https://github.com/apache/druid/pull/19310)
-
-#### OpenLineage
-
-Added `extensions-contrib/openlineage-emitter` as a community extension. It uses the `RequestLogger` to transform and send lineage information to any OpenLineage-compatible API.
-
-[#19107](https://github.com/apache/druid/pull/19107)
+[#19670](https://github.com/apache/druid/pull/19670)
 
 ## Upgrade notes and incompatible changes
 
 ### Upgrade notes
 
-#### Java
+#### Netty 4.2
 
-Druid now supports Java 25. While Java 21 is still supported, we recommend you upgrade to Java 25.
+Druid now uses Netty 4.2 for its HTTP client. Previously, Druid used Netty 3. This is a substantive change in memory characteristics:
 
-Support for Java 17 has been dropped.
+- Direct memory: The HTTP client now consumes some direct memory. Operators running close to their `-XX:MaxDirectMemorySize` budget may need to increase it.
+- Pooled buffers: Buffers are now pooled, so resident memory may appear higher than under Netty 3, even when idle. This is normal for a pooled allocator.
 
-[#19304](https://github.com/apache/druid/pull/19304) [#19336](https://github.com/apache/druid/pull/19336)
+There are new configs that control the behavior of the HTTP client: `druid.global.http.connectTimeout`, `druid.global.http.allocator`, `druid.broker.http.connectTimeout`, and `druid.broker.http.allocator`. You can also set some Netty configs directly.
 
-#### `JAVA_HOME`
+[#19567](https://github.com/apache/druid/pull/19567)
 
-When Druid uses the bundled `bin/run-java` script during startup, it honors the `DRUID_JAVA_HOME`/`JAVA_HOME` environment variables. Otherwise, Druid falls back to `java` on the `PATH`.
+#### Dart workers
+
+Dart workers on Historicals are now announced and discovered by the Broker with a new `DartWorkerService` mechanism. If you've enabled Dart, follow the standard rolling upgrade order: during an upgrade, restart Historicals before the Broker; during a downgrade, restart the Broker before Historicals.
+
+[#20508](https://github.com/apache/druid/pull/20508)
+
+#### Protobuf ingestion
+
+- Protobuf ingestion now keeps the default value of `proto3` fields that are not marked optional. Previously an `int32` field holding `0` (or a string holding "", a `bool` holding false, an `enum` holding its first value) was ingested as null. Such fields now ingest as their actual value.
+
+[#20485](https://github.com/apache/druid/pull/20485)
+
+#### Fixed JDK HTTP client failures caused by query response trailers
+
+Brokers and Historicals now send the `X-Druid-Response-Complete` and `X-Error-Message` HTTP trailers only when the request includes the `TE: trailers` header. Clients that read these trailers must send that header. This fixes query failures (`java.net.ProtocolException: CR expected`) in `java.net.http.HttpClient-based` clients, including the Druid JDBC driver, on JDK 17.0.21, 21.0.13 and 25.0.5.
+
+[#20717](https://github.com/apache/druid/pull/20717)
+
+#### Typed query context parameters
+
+Common query context parameters listed in [Query context reference](../querying/query-context-reference.md) and [Scan queries](../querying/scan-query.md) are now typed `QueryContextParameter` descriptors. The following changes apply to the query context handling:
+
+* Integer and long parameters reject values that aren't exact integers instead of truncating or wrapping them. For example `1.5`, and values out of range. Integral values like 5.0 or "5.0" are still accepted. Invalid values now fail with an error message: "Query context parameter [x] should be ...."
+* A null in the query context, or SET x = NULL, no longer clears a default configured with `druid.query.default.context` or the Broker dynamic configuration. The default applies as if the key were not set. Previously the null reached readers, which used the built-in default. To override a configured default, set an explicit value.
+* `maxSubqueryBytes` is a typed string parameter that accepts auto, disabled or a non-negative number of bytes, as the subquery guardrail does. Invalid values such as `SET maxSubqueryBytes = TRUE` now fail during validation, and numbers such as `1e9` are now accepted.
+
+[#20555][https://github.com/apache/druid/pull/20555/]
+
+#### Java home variable
+
+Middle Managers now honor `JAVA_HOME` when using the `bin/java` script, which should be present in the working directory.
+
+Druid uses the following logic
+
+- If you specified a command (such as if `config.getJavaCommand` is not null), use that.
+- If `bin/run-java` exists, use that
+- Use java
 
 [#19709](https://github.com/apache/druid/pull/19709)
 
-#### ZooKeeper-based task runner
+#### Quality of service filtering for Coordinator
 
-The ZooKeeper-based `RemoteTaskRunner` (`druid.indexer.runner.type=remote`) has been removed. The HTTP-based `httpRemote` runner has been the default since Druid 25.0.0 and is now the only supported distributed task runner. `local` (in-process) remains supported for single-process testing, and the `k8s` runner from the Kubernetes extension is unaffected.
+You can now enable QoS filtering for the Coordinator to prevent a burst of slow API requests from exhausting the thread pool and blocking health checks.
 
-If your configuration sets `druid.indexer.runner.type=remote`, startup fails. Remove the property or set it to `httpRemote` (which is the default) to proceed.
+Use `druid.coordinator.server.maxConcurrentRequests` to configure this feature `(default: max(1, max(serverHttpNumThreads - 4, serverHttpNumThreads * 0.8)))`. Set this property to `0` to turn it off.
 
-The following configuration properties are no longer recognized and should be removed from `common.runtime.properties`:
+Leader-status endpoints are excluded from the cap so load balancers/monitors stay unaffected.
 
-- `druid.indexer.runner.maxZnodeBytes`
-- `druid.indexer.runner.taskShutdownLinkTimeout`
-- `druid.indexer.runner.compressZnodes`
-- `druid.zk.paths.indexer.base`
-- `druid.zk.paths.indexer.announcementsPath`
-- `druid.zk.paths.indexer.tasksPath`
-- `druid.zk.paths.indexer.statusPath`
-
-ZooKeeper is still used for Coordinator/Overlord leader election and service (node) announcement and discovery.
-
-[#19500](https://github.com/apache/druid/pull/19500)
-
-#### ZooKeeper-based segment announcement and discovery removed
-
-The ZooKeeper-based segment announcement and inventory view, which have been deprecated and off by default for several releases, have been removed. The HTTP-based path (the default for `druid.serverview.type=http`) is now the only supported option.
-
-If your configuration sets `druid.serverview.type` to anything other than `http`, startup now fails with a clear error message. Remove the property (or set it to `http`, which is the default) to proceed.
-
-The following configuration properties are no longer recognized and should be removed from `common.runtime.properties`:
-
-- `druid.announcer.segmentsPerNode`
-- `druid.announcer.maxBytesPerNode`
-- `druid.announcer.skipLoadSpec`
-- `druid.announcer.skipDimensionsAndMetrics`
-- `druid.announcer.skipSegmentAnnouncementOnZk`
-- `druid.zk.paths.announcementsPath`
-- `druid.zk.paths.liveSegmentsPath`
-- `druid.zk.paths.propertiesPath`
-- `druid.zk.paths.connectorPath`
-
-ZooKeeper is still used for leader election, service (node) announcement and discovery, and Overlord-to-MiddleManager task management.
-
-[#19377](https://github.com/apache/druid/pull/19377)
-
-#### Jackson update
-
-If external code has both `@JacksonInject` and `@JsonProperty` on the same parameter and relies on the JSON value winning when supplied, add the explicit `useInput = OptBoolean.TRUE` to the annotation (or stay on Jackson `2.20.x`). All such sites in Druid itself have been updated.
-
-[#19528](https://github.com/apache/druid/pull/19528)
+[#19271](https://github.com/apache/druid/pull/19271)
 
 ### Incompatible changes
 
-#### Java 17
+#### Permissions changes for SQL-based ingestion
 
-Support for Java 17 has been dropped. [#19304](https://github.com/apache/druid/pull/19304)
+The [table visibility](#table-visibility) changes affect the permissions required for SQL-based ingestion. INSERT and REPLACE now require READ access (in addition to WRITE) on the target table.
+
+To restore the previous behavior, set `druid.sql.planner.authorizeTableVisibility` to `false`.
+
+[#20075](https://github.com/apache/druid/pull/20075)
+
+#### Alerts on `task/run/time`
+
+The `statsd` and `prometheus` emitters now emit the `taskStatus` dimension on `task/run/time`. This is a breaking change for dashboards and alerts on `task/run/time`:
+
+- `statsd` (non-DogStatsD mode): Dimension values are joined into the dotted metric name, so `druid.overlord.task.run.time.DATASOURCE.TASKTYPE` becomes `druid.overlord.task.run.time.DATASOURCE.TASKSTATUS.TASKTYPE`. Queries against the old name stop receiving data.
+- `statsd` (DogStatsD mode): A `taskStatus` tag is added. Existing queries keep working and aggregate over it.
+- `prometheus`: A `taskStatus` label is added. Update any queries that select on an exact label set and any recording rules that assume the old label set.
+
+To keep the previous behavior, pin the old dimension list with `druid.emitter.statsd.dimensionMapPath` or `druid.emitter.prometheus.dimensionMapPath`.
+
+[#20122](https://github.com/apache/druid/pull/20122)
+
+#### `SysMonitor` removed
+
+`SysMonitor` has been removed after being deprecated in Druid 27. Use `OshiSysMonitor` instead.
+
+[#20200](https://github.com/apache/druid/pull/20200)
+
+#### MariaDB Connector/J 3.x changes connection URI behavior
+
+The MariaDB JDBC connector has been upgraded from from 2.7.3 to 3.5.10, which has the following impact:
+
+- For `druid.metadata.storage.connector.connectURI` with `org.mariadb.jdbc.Driver`, use `jdbc:mariadb:`. A legacy `jdbc:mysql:` URI remains usable only if it includes `permitMysqlScheme`. For example, `jdbc:mysql://<host>/druid?permitMysqlScheme`, because metadata storage passes the URI directly to the driver.
+- For MariaDB-backed SQL input sources and JDBC lookups with the default `druid.access.jdbc.enforceAllowedProperties=true`, use `jdbc:mariadb:`. Druid's JDBC property validation does not route `jdbc:mysql:` to the Connector/J 3.x parser, and `permitMysqlScheme` is not in the default `druid.access.jdbc.allowedProperties`, Adding the option alone is not sufficient.
+- Users who continue supplying Connector/J 2.x do not need to change existing `jdbc:mysql:` or `jdbc:mariadb:` URIs. MySQL Connector/J users are unaffected.
+- Images rebuilt from `distribution/docker/Dockerfile.mariadb` now install Connector/J 3.5.10 and must follow the 3.x guidance above.
+
+[#20036](https://github.com/apache/druid/pull/20036)
 
 ### Developer notes
 
-* Changed the shard spec collector to an interface to make extensibility easier [#19744](https://github.com/apache/druid/pull/19744)
-* Changed `iceberg.core.version` in root pom and aligned embedded tests to use `1.10.0`
-* Updated tests in `druid-processing` to use JUnit 5 [#19601](https://github.com/apache/druid/pull/19601)
-* Updated the `apache/druid` and `apache/druid-website-src` repositories to use Docusaurus 3.10 when building the website [#19522](https://github.com/apache/druid/pull/19522)
-* Updated IntelliJ settings to match Druid's supported Java versions [#19661](https://github.com/apache/druid/pull/19661)
+#### Web console code editor
+
+The web console's code editors moved from Ace (`ace-builds` and `react-ace`) to Code Mirror 6. All editors now share a single `CodeEditor` component, including the workbench, the explore view's SQL inputs, JSON inputs, spec and value dialogs, history, and explain. Two Lezer grammars, one for DruidSQL and one for Hjson, drive the highlighting and the completions.
+
+[#20507](https://github.com/apache/druid/pull/20507)
 
 #### Dependency updates
 
-The following dependencies have had their versions bumped:
-
-* `org.apache.logging.log4j` from `2.25.4` to `2.26.0` [#19629](https://github.com/apache/druid/pull/19629)
-* `com.fasterxml.jackson` from `2.21.3` to `2.21.4` [#19618](https://github.com/apache/druid/pull/19618)
-* `io.netty` from `4.2.12.Final` to `4.2.15.Final` [#19566](https://github.com/apache/druid/pull/19566)
-* `caffeine` from `2.9.3` to `3.2.4` [#19527](https://github.com/apache/druid/pull/19527)
-* `errorprone` from `2.41.0` to `2.49.0` [#19527](https://github.com/apache/druid/pull/19527)
-* `jackson` from `2.20.2` to `2.21.3` [#19528](https://github.com/apache/druid/pull/19528)
-* `derby` from `10.14.2.0` to `10.17.1.0` [#19492](https://github.com/apache/druid/pull/19492)
-* `postgres` from `42.7.2` to `42.7.11` [#19474](https://github.com/apache/druid/pull/19474)
-* `org.bouncycastle` from `1.82` to `1.84` [#19473](https://github.com/apache/druid/pull/19473)
-- Apache Kafka client and broker dependencies from `3.9.2` to `4.2.3` [#19441](https://github.com/apache/druid/pull/19441) [#19584](https://github.com/apache/druid/pull/19584)
-- `axios` from 1.15.0 to 1.15.2 [#19430](https://github.com/apache/druid/pull/19430)
-- `pac4j` from `5.7.3` to `5.7.10` [#19388](https://github.com/apache/druid/pull/19388)
-- `jose.jwt` from `9.37.2` to `9.37.3` [#19388](https://github.com/apache/druid/pull/19388)
-- `log4j` from `2.25.3` to `2.25.4` [#19388](https://github.com/apache/druid/pull/19388)
-- `RoaringBitmap` from `1.6.13` to `1.6.14` [#19688](https://github.com/apache/druid/pull/19688)
+Druid 39.0.0 includes a variety of updates to dependencies such as Calcite. For a full list, see the [Area - Dependencies label](https://github.com/apache/druid/milestone/69?closed=1&q=state%3Aclosed+milestone-number%3A69+archived%3Afalse+sort%3Amilestone_prio-desc+label%3A%22Area+-+Dependencies%22) in the milestone.
